@@ -1,0 +1,56 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Flutter Kit",
+  "@appTitle": { "description": "Application name shown in the task switcher" },
+
+  "signIn": "Sign in",
+  "signOut": "Sign out",
+  "createAccount": "Create an account",
+  "username": "Username",
+  "password": "Password",
+  "email": "Email",
+  "confirmPassword": "Confirm password",
+  "signInToContinue": "Sign in to continue",
+  "alreadyHaveAccount": "I already have an account",
+
+  "home": "Home",
+  "products": "Products",
+  "profile": "Profile",
+  "search": "Search products",
+  "categories": "Categories",
+  "featured": "Featured",
+  "seeAll": "See all",
+  "browse": "Browse",
+
+  "greetingMorning": "Good morning",
+  "greetingAfternoon": "Good afternoon",
+  "greetingEvening": "Good evening",
+
+  "inStockCount": "{count, plural, =0{Sold out} =1{1 in stock} other{{count} in stock}}",
+  "@inStockCount": {
+    "description": "Stock level for a product",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "percentOff": "{percent}% off",
+  "@percentOff": {
+    "placeholders": { "percent": { "type": "String" } }
+  },
+
+  "tryAgain": "Try again",
+  "goHome": "Go home",
+  "clearFilters": "Clear filters",
+  "noMatches": "No matches",
+  "noProducts": "No products yet",
+  "showingSavedData": "{message} Showing saved data.",
+  "@showingSavedData": {
+    "placeholders": { "message": { "type": "String" } }
+  },
+
+  "errorNoConnection": "No internet connection.",
+  "errorTimeout": "The request took too long. Please try again.",
+  "errorServer": "Something went wrong on our side.",
+  "errorSessionExpired": "Your session has expired. Please sign in again.",
+  "errorUnknown": "Something went wrong. Please try again."
+}

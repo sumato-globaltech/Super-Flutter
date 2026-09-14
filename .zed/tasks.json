@@ -1,0 +1,76 @@
+[
+  {
+    "label": "Flutter: Select Device & Run",
+    "command": ".zed/flutter_device.sh run",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+  },
+  {
+    "label": "Flutter: Select Device & Debug",
+    "command": ".zed/flutter_device.sh debug",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+  },
+  {
+    "label": "Flutter: Select Device & Profile",
+    "command": ".zed/flutter_device.sh profile",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+  },
+
+  {
+    "label": "Flutter: Devices",
+    "command": "flutter devices",
+    "use_new_terminal": true,
+  },
+  {
+    "label": "Flutter: Analyze",
+    "command": "flutter analyze",
+    "use_new_terminal": true,
+  },
+  {
+    "label": "Flutter: Test",
+    "command": "flutter test",
+    "use_new_terminal": true,
+  },
+  {
+    "label": "Flutter: Format",
+    "command": "dart format .",
+    "use_new_terminal": true,
+  },
+  {
+    "label": "Flutter: Pub Get",
+    "command": "flutter pub get",
+    "use_new_terminal": true,
+  },
+  {
+    "label": "Flutter: Clean",
+    "command": "flutter clean && flutter pub get",
+    "use_new_terminal": true,
+  },
+
+  {
+    "label": "Flutter: Build APK",
+    "command": "flutter build apk",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+  },
+  {
+    "label": "Flutter: Build APK Split",
+    "command": "flutter build apk --split-per-abi",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+  },
+  {
+    "label": "Flutter: Build App Bundle",
+    "command": "flutter build appbundle",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+  },
+  {
+    "label": "Flutter: Build iOS",
+    "command": "flutter build ios",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+  },
+]

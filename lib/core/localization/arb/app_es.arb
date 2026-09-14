@@ -1,0 +1,44 @@
+{
+  "@@locale": "es",
+
+  "appTitle": "Flutter Kit",
+
+  "signIn": "Iniciar sesión",
+  "signOut": "Cerrar sesión",
+  "createAccount": "Crear una cuenta",
+  "username": "Usuario",
+  "password": "Contraseña",
+  "email": "Correo electrónico",
+  "confirmPassword": "Confirmar contraseña",
+  "signInToContinue": "Inicia sesión para continuar",
+  "alreadyHaveAccount": "Ya tengo una cuenta",
+
+  "home": "Inicio",
+  "products": "Productos",
+  "profile": "Perfil",
+  "search": "Buscar productos",
+  "categories": "Categorías",
+  "featured": "Destacados",
+  "seeAll": "Ver todo",
+  "browse": "Explorar",
+
+  "greetingMorning": "Buenos días",
+  "greetingAfternoon": "Buenas tardes",
+  "greetingEvening": "Buenas noches",
+
+  "inStockCount": "{count, plural, =0{Agotado} =1{1 en stock} other{{count} en stock}}",
+  "percentOff": "{percent}% de descuento",
+
+  "tryAgain": "Reintentar",
+  "goHome": "Ir al inicio",
+  "clearFilters": "Quitar filtros",
+  "noMatches": "Sin resultados",
+  "noProducts": "Todavía no hay productos",
+  "showingSavedData": "{message} Mostrando datos guardados.",
+
+  "errorNoConnection": "Sin conexión a internet.",
+  "errorTimeout": "La solicitud tardó demasiado. Inténtalo de nuevo.",
+  "errorServer": "Algo salió mal de nuestro lado.",
+  "errorSessionExpired": "Tu sesión ha expirado. Inicia sesión de nuevo.",
+  "errorUnknown": "Algo salió mal. Inténtalo de nuevo."
+}

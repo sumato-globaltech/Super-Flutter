@@ -1,0 +1,8 @@
+# Localization codegen. Run `flutter gen-l10n` after editing an .arb file
+# (`flutter run` and `flutter build` also run it automatically).
+arb-dir: lib/core/localization/arb
+template-arb-file: app_en.arb
+output-dir: lib/core/localization
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+nullable-getter: false
