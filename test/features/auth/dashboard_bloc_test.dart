@@ -3,8 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:starter/domain/auth/use_cases/logout.dart';
 import 'package:starter/features/auth/presentation/bloc/auth_cubit.dart';
-import 'package:starter/features/auth/presentation/bloc/logout_cubit.dart';
-import 'package:starter/features/auth/presentation/bloc/logout_state.dart';
+import 'package:starter/features/auth/presentation/dashboard/bloc/dashboard_bloc.dart';
+import 'package:starter/features/auth/presentation/dashboard/bloc/dashboard_event.dart';
+import 'package:starter/features/auth/presentation/dashboard/bloc/dashboard_state.dart';
 
 class MockLogout extends Mock implements Logout {}
 
@@ -21,13 +22,13 @@ void main() {
     when(() => authCubit.unauthenticated()).thenReturn(null);
   });
 
-  blocTest<LogoutCubit, LogoutState>(
+  blocTest<DashboardBloc, DashboardState>(
     'calls logout use-case then reflects unauthenticated status',
-    build: () => LogoutCubit(logout, authCubit),
-    act: (c) => c.submit(),
+    build: () => DashboardBloc(logout, authCubit),
+    act: (b) => b.add(const DashboardSignOutRequested()),
     expect: () => [
-      const LogoutState(status: LogoutStatus.submitting),
-      const LogoutState(status: LogoutStatus.success),
+      const DashboardState(status: DashboardStatus.submitting),
+      const DashboardState(status: DashboardStatus.success),
     ],
     verify: (_) {
       verify(() => logout()).called(1);

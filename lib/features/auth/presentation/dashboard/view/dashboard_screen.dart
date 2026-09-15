@@ -4,8 +4,10 @@ import 'package:starter/core/di/injection.dart';
 import 'package:starter/core/localization/app_localizations.dart';
 import 'package:starter/core/ui/layouts/app_scaffold.dart';
 import 'package:starter/core/ui/widgets/app_button.dart';
-import 'package:starter/features/auth/presentation/bloc/logout_cubit.dart';
-import 'package:starter/features/auth/presentation/bloc/logout_state.dart';
+
+import '../bloc/dashboard_bloc.dart';
+import '../bloc/dashboard_event.dart';
+import '../bloc/dashboard_state.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -13,7 +15,7 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<LogoutCubit>(),
+      create: (_) => getIt<DashboardBloc>(),
       child: const _DashboardView(),
     );
   }
@@ -28,7 +30,7 @@ class _DashboardView extends StatelessWidget {
     return AppScaffold(
       title: l10n.home,
       actions: [
-        BlocBuilder<LogoutCubit, LogoutState>(
+        BlocBuilder<DashboardBloc, DashboardState>(
           builder: (context, state) {
             return IconButton(
               tooltip: l10n.signOut,
@@ -41,12 +43,14 @@ class _DashboardView extends StatelessWidget {
                   : const Icon(Icons.logout_outlined),
               onPressed: state.isSubmitting
                   ? null
-                  : () => context.read<LogoutCubit>().submit(),
+                  : () => context.read<DashboardBloc>().add(
+                      const DashboardSignOutRequested(),
+                    ),
             );
           },
         ),
       ],
-      body: BlocBuilder<LogoutCubit, LogoutState>(
+      body: BlocBuilder<DashboardBloc, DashboardState>(
         builder: (context, state) {
           return Center(
             child: Column(
@@ -76,7 +80,9 @@ class _DashboardView extends StatelessWidget {
                   isLoading: state.isSubmitting,
                   onPressed: state.isSubmitting
                       ? null
-                      : () => context.read<LogoutCubit>().submit(),
+                      : () => context.read<DashboardBloc>().add(
+                          const DashboardSignOutRequested(),
+                        ),
                 ),
               ],
             ),

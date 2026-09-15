@@ -32,13 +32,13 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  /// Reflects a completed sign-in. Called by [LoginCubit] on success.
+  /// Reflects a completed sign-in. Called by [LoginBloc] on success.
   void authenticated() {
     emit(const AuthState(status: AuthStatus.authenticated));
   }
 
   /// Reflects a completed sign-out or expired session. Called by
-  /// [LogoutCubit] and [SessionManager] — never performs I/O itself.
+  /// [DashboardBloc] and [SessionManager] — never performs I/O itself.
   void unauthenticated() {
     emit(const AuthState(status: AuthStatus.unauthenticated));
   }

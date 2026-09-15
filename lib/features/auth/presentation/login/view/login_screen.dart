@@ -7,7 +7,8 @@ import 'package:starter/core/ui/theme/app_spacing.dart';
 import 'package:starter/core/ui/widgets/app_button.dart';
 import 'package:starter/core/ui/widgets/app_text_field.dart';
 
-import '../bloc/login_cubit.dart';
+import '../bloc/login_bloc.dart';
+import '../bloc/login_event.dart';
 import '../bloc/login_state.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -18,29 +19,22 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return BlocProvider(
-      create: (_) => getIt<LoginCubit>(),
+      create: (_) => getIt<LoginBloc>(),
       child: AppScaffold(
         title: l10n.signIn,
         constrainWidth: true,
-        body: BlocConsumer<LoginCubit, LoginState>(
+        body: BlocConsumer<LoginBloc, LoginState>(
+          listenWhen: (previous, current) =>
+              previous.status != current.status &&
+              current.status == LoginStatus.failure,
           listener: (context, state) {
-            if (state.status == LoginStatus.failure &&
-                state.errorMessage != null) {
+            if (state.errorMessage != null) {
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
                 ..showSnackBar(SnackBar(content: Text(state.errorMessage!)));
@@ -48,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
             // Success navigates via GoRouter redirect (AuthCubit -> authenticated).
           },
           builder: (context, state) {
+            final bloc = context.read<LoginBloc>();
             return Form(
               key: _formKey,
               child: Column(
@@ -60,27 +55,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   Gap.lg,
                   AppTextField(
                     label: l10n.username,
-                    controller: _usernameController,
+                    initialValue: state.username,
                     hint: 'emilys',
                     prefixIcon: Icons.person_outline,
                     textInputAction: TextInputAction.next,
                     autofillHints: const [AutofillHints.username],
                     enabled: !state.isSubmitting,
+                    onChanged: (v) => bloc.add(LoginUsernameChanged(v)),
                     validator: (v) =>
                         (v == null || v.trim().isEmpty) ? l10n.username : null,
                   ),
                   Gap.md,
                   AppTextField(
                     label: l10n.password,
-                    controller: _passwordController,
                     hint: '••••••••',
                     prefixIcon: Icons.lock_outline,
                     obscureText: true,
                     textInputAction: TextInputAction.done,
                     autofillHints: const [AutofillHints.password],
                     enabled: !state.isSubmitting,
+                    onChanged: (v) => bloc.add(LoginPasswordChanged(v)),
                     onSubmitted: (_) => _submit(context),
-                    validator: (v) => (v == null || v.isEmpty) ? l10n.password : null,
+                    validator: (v) =>
+                        (v == null || v.isEmpty) ? l10n.password : null,
                   ),
                   Gap.lg,
                   AppButton(
@@ -107,10 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _submit(BuildContext context) {
     if (_formKey.currentState?.validate() ?? false) {
-      context.read<LoginCubit>().submit(
-        username: _usernameController.text,
-        password: _passwordController.text,
-      );
+      context.read<LoginBloc>().add(const LoginSubmitted());
     }
   }
 }

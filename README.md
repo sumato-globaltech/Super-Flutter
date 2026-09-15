@@ -124,8 +124,11 @@ lib/
   features/auth/
     routes/                       # auth_route_names.dart, auth_routes.dart (buildAuthRoutes)
     presentation/
-      bloc/                       # auth_cubit.dart (status-only), login/logout cubits + states
-      screens/                    # login_screen.dart, dashboard_screen.dart
+      bloc/                       # auth_cubit.dart + auth_state.dart (status-only, router-owned)
+      login/bloc/                 # login_bloc.dart, login_event.dart, login_state.dart
+      login/view/                 # login_screen.dart
+      dashboard/bloc/             # dashboard_bloc.dart, dashboard_event.dart, dashboard_state.dart
+      dashboard/view/             # dashboard_screen.dart
   features/school/                # pattern for new features (see guide below)
 assets/{images,icons,animations,fonts/}
 test/core/network/
@@ -206,8 +209,8 @@ analysis_options.yaml
 
 - `data/<feature>/` — DTOs (`model/`, `@JsonSerializable`), I/O (`sources/local|remote/`), and `repositories/<feature>_repository_impl.dart` mapping DTOs → entities and exceptions → `AppException`. Depends on `core/network` + `core/storage`.
 - `domain/<feature>/` — pure Dart: `entities/`, `repositories/<feature>_repository.dart` (interface), `use_cases/` (one action per file, `call()`). No Flutter/Dio/Drift imports.
-- `features/<feature>/` — `routes/` (path constants + `build<Feature>Routes()` list, aggregated by app router), `presentation/` (`bloc/` Cubits + States with `Equatable`, `screens/`, `widgets/`). UI talks to Cubits, Cubits talk to use-cases only — never import `data/` directly.
-- Reference: `auth` (`AuthRepository{hasSession,login,logout}`, `CheckAuthStatus`/`Login`/`Logout` use-cases, status-only `AuthCubit{initialize,authenticated,unauthenticated}` + `AuthStatus{…}`, operation cubits `LoginCubit`/`LogoutCubit`, routes in `features/auth/routes/`).
+- `features/<feature>/` — `routes/` (path constants + `build<Feature>Routes()` list, aggregated by app router), `presentation/` (one Bloc per screen: `<screen>/bloc/` events + state + Bloc, `<screen>/view/` widget; plus small shared `bloc/` Cubits like status-only `AuthCubit`). UI dispatches events, Blocs call use-cases only — never import `data/` directly.
+- Reference: `auth` (`AuthRepository{hasSession,login,logout}`, `CheckAuthStatus`/`Login`/`Logout` use-cases, status-only `AuthCubit{initialize,authenticated,unauthenticated}` + `AuthStatus{…}`, screen Blocs `LoginBloc` (`UsernameChanged/PasswordChanged/Submitted`) / `DashboardBloc` (`SignOutRequested`), routes in `features/auth/routes/`).
 
 ## Architecture & conventions
 
@@ -340,27 +343,23 @@ class SchoolRepositoryImpl implements SchoolRepository {
 }
 ```
 
-### 4. Presentation (Bloc + screens + widgets)
+### 4. Presentation (one Bloc per screen)
 
-- `lib/features/school/presentation/bloc/school_state.dart`:
-
-```dart
-enum SchoolStatus { initial, loading, loaded, error }
-class SchoolState extends Equatable {
-  const SchoolState({this.status = SchoolStatus.initial, this.classes = const [], this.message});
-  final SchoolStatus status; final List<SchoolClass> classes; final String? message;
-  // copyWith + props
-}
-```
-
-- `lib/features/school/presentation/bloc/school_cubit.dart`:
+- `lib/features/school/presentation/dashboard/bloc/school_dashboard_event.dart`:
+  `DashboardStarted`, `DashboardRefreshed`, `RetryRequested`.
+- `lib/features/school/presentation/dashboard/bloc/school_dashboard_state.dart`:
+  `SchoolStatus { initial, loading, loaded, error }` + `classes`, `message`, `copyWith`.
+- `lib/features/school/presentation/dashboard/bloc/school_dashboard_bloc.dart`:
 
 ```dart
-@lazySingleton
-class SchoolCubit extends Cubit<SchoolState> {
-  SchoolCubit(this._getDashboard) : super(const SchoolState());
+@injectable
+class SchoolDashboardBloc extends Bloc<SchoolDashboardEvent, SchoolDashboardState> {
+  SchoolDashboardBloc(this._getDashboard) : super(const SchoolDashboardState()) {
+    on<DashboardStarted>(_onStarted);
+    on<DashboardRefreshed>(_onStarted);
+  }
   final GetSchoolDashboard _getDashboard;
-  Future<void> load() async {
+  Future<void> _onStarted(event, emit) async {
     emit(state.copyWith(status: SchoolStatus.loading));
     try {
       emit(state.copyWith(status: SchoolStatus.loaded, classes: await _getDashboard()));
@@ -371,11 +370,12 @@ class SchoolCubit extends Cubit<SchoolState> {
 }
 ```
 
-- `lib/features/school/presentation/screens/school_dashboard_screen.dart` —
-  `AppScaffold(title: context.l10n.schoolTitle, body: BlocBuilder<SchoolCubit, SchoolState>(...))`
-  with `AppLoader` (loading), `AppEmptyView` (empty), error view + `AppButton(label: retry)` (error).
-- Small rows/cards go in `lib/features/school/presentation/widgets/`. Reuse `AppTextStyles`,
+- `lib/features/school/presentation/dashboard/view/school_dashboard_screen.dart` —
+  `AppScaffold(title: context.l10n.schoolTitle, body: BlocBuilder<SchoolDashboardBloc, ...>(...))`
+  with `AppLoader` (loading), `AppEmptyView` (empty), error view + `AppButton(label: retry)` → `add(RetryRequested)`.
+- Small rows/cards go in `lib/features/school/presentation/dashboard/widgets/`. Reuse `AppTextStyles`,
   `AppSpacing`, `AppColors` — no ad-hoc colors, radii, or asset strings.
+- Keep tiny shared tasks (e.g. session status) in `presentation/bloc/` Cubits like `AuthCubit`; main screen work uses Blocs.
 
 ### 5. DI
 
@@ -387,7 +387,7 @@ dart run build_runner build --delete-conflicting-outputs
 ```
 
 Open `lib/core/di/injection.config.dart` and confirm `SchoolRepository`,
-`SchoolRemoteDataSource`, `SchoolCubit`, `GetSchoolDashboard` are registered.
+`SchoolRemoteDataSource`, `SchoolDashboardBloc`, `GetSchoolDashboard` are registered.
 
 ### 6. l10n, assets, theme
 
@@ -398,9 +398,9 @@ Open `lib/core/di/injection.config.dart` and confirm `SchoolRepository`,
 
 ### 7. Tests
 
-- `test/features/school/school_cubit_test.dart` (`bloc_test`: loading→loaded, loading→error on `AppException`).
+- `test/features/school/school_dashboard_bloc_test.dart` (`bloc_test`: started→loading→loaded, loading→error on `AppException`).
 - `test/data/school/school_repository_test.dart` (`mocktail` remote/local data sources).
-- Widget test: dashboard renders list / empty / error + retry calls `cubit.load()`.
+- Widget test: dashboard renders list / empty / error + retry adds `DashboardRefreshed`.
 - Keep `flutter test` green alongside existing `test/core/network/` tests.
 
 ### 8. Verify
@@ -440,30 +440,19 @@ Never hand-edit generated files: `lib/core/di/injection.config.dart`,
 
 ## Tests
 
-- Existing: `test/core/network/refresh_token_interceptor_test.dart` (401 retry behavior),
-  `test/core/network/session_manager_test.dart` (expiry clears session).
-- Missing (contributions welcome): cubit, repository, router redirect, storage,
-  widget/theme/l10n tests. Use `bloc_test` + `mocktail` patterns from the network tests.
+- Existing: `test/core/network/` (401 retry, session expiry), `test/features/auth/` (auth status, login form+submission, sign-out), `test/data/auth/` (repo delegates + token persist).
+- Missing (contributions welcome): router redirect, storage, widget/theme/l10n tests. Use `bloc_test` + `mocktail` patterns from the auth/network tests.
 
-## Known gaps
+## Known gaps (remaining)
 
-1. Network DI is designed but **unwired**: `NetworkModule`/`SessionManager` exist yet are
-   absent from `injection.config.dart`; `DioClient` needs `Environment` but only `AppConfig`
-   is registered — requesting it from GetIt fails until wired + codegen re-run.
-2. Authenticated redirect targets `/dashboard`, but **no dashboard `GoRoute`** is active
-   (shell route is commented out) — authenticated users hit a missing route.
-3. Auth vertical is stubs: `login.dart`/`logout.dart` empty, `AuthRemoteDataSource` empty,
-   `AuthRepositoryImpl.login` throws `UnimplementedError`, `AuthCubit.logout` is a no-op emit,
-   login/dashboard/splash screens are placeholders.
-4. `AppErrorView` is fully commented out (references a non-existent `Failure` model).
-5. `AssetConstants` references 8 image/animation files that don't exist (`assets/*` are `.gitkeep` only).
-6. `AppTheme.light/dark(flavor)` ignores `flavor`; `design_colors.dart` is mostly unused legacy;
+1. `AssetConstants` references image/animation files that don't exist (`assets/*` are `.gitkeep` only) — add files or prune constants.
+2. `AppTheme.light/dark(flavor)` is flavor-independent by design (only banner uses `seedFor`); `design_colors.dart` is mostly unused legacy;
    product/search tunables + `ProductRows` table have no owning feature.
-7. Debug leftovers in `bootstrap()`: `print('MAIN STARTED')` + logger TEST calls + stale todos.
+3. `search`/`account` route names were removed with feature-owned routes; re-add via `features/<f>/routes/` when those features land.
 
 ## FAQ
 
-- **Where do I put business logic?** Use-cases in `domain/<feature>/use_cases/`. Cubits orchestrate use-cases; repositories hide I/O.
+- **Where do I put business logic?** Use-cases in `domain/<feature>/use_cases/`. Screen Blocs orchestrate use-cases (small shared tasks may use Cubits like `AuthCubit`); repositories hide I/O.
 - **Where do API calls live?** Remote data sources in `data/<feature>/sources/remote/` using `DioClient` + `ApiEndpoints`. Map errors with `NetworkExceptionMapper`.
 - **Where do I cache?** `StorageService` (settings/flags/tokens) or Drift `LocalDatabase` (tables). Register keys in `StorageKeys`.
 - **How do I handle errors?** Throw/catch `AppException` subtypes; report unexpected ones via `ErrorReporter`; show `message` in UI with retry.

@@ -10,10 +10,7 @@ import '../startup/splash_screen.dart';
 import 'router_refresh.dart';
 import 'routes_names.dart';
 
-GoRouter createRouter({
-  required AuthCubit authCubit,
-  required AppConfig config,
-}) {
+GoRouter createRouter({required AuthCubit authCubit, required AppConfig config}) {
   final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 
   return GoRouter(

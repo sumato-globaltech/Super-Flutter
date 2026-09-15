@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
-import 'package:starter/features/auth/presentation/screens/dashboard_screen.dart';
-import 'package:starter/features/auth/presentation/screens/login_screen.dart';
+import 'package:starter/features/auth/presentation/dashboard/view/dashboard_screen.dart';
+import 'package:starter/features/auth/presentation/login/view/login_screen.dart';
 
 import 'auth_route_names.dart';
 
