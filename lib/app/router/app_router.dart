@@ -5,6 +5,8 @@ import '../../features/auth/presentation/bloc/auth_cubit.dart';
 import '../../features/auth/presentation/bloc/auth_state.dart';
 import '../../features/auth/routes/auth_route_names.dart';
 import '../../features/auth/routes/auth_routes.dart';
+import '../../features/dashboard/routes/dashboard_route_names.dart';
+import '../../features/dashboard/routes/dashboard_routes.dart';
 import '../config/app_config.dart';
 import '../startup/splash_screen.dart';
 import 'router_refresh.dart';
@@ -38,7 +40,7 @@ GoRouter createRouter({required AuthCubit authCubit, required AppConfig config})
       // User is authenticated.
       if (authStatus == AuthStatus.authenticated) {
         if (isSplash || isLogin) {
-          return AuthRouteNames.dashboard;
+          return DashboardRouteNames.dashboard;
         }
       }
 
@@ -52,6 +54,7 @@ GoRouter createRouter({required AuthCubit authCubit, required AppConfig config})
         builder: (context, state) => const SplashScreen(),
       ),
       ...buildAuthRoutes(),
+      ...buildDashboardRoutes(),
     ],
   );
 }

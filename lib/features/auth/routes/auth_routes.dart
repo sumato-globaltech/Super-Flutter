@@ -1,5 +1,4 @@
 import 'package:go_router/go_router.dart';
-import 'package:starter/features/auth/presentation/dashboard/view/dashboard_screen.dart';
 import 'package:starter/features/auth/presentation/login/view/login_screen.dart';
 
 import 'auth_route_names.dart';
@@ -11,10 +10,5 @@ List<GoRoute> buildAuthRoutes() => [
     path: AuthRouteNames.login,
     name: AuthRouteNames.login,
     builder: (context, state) => const LoginScreen(),
-  ),
-  GoRoute(
-    path: AuthRouteNames.dashboard,
-    name: AuthRouteNames.dashboard,
-    builder: (context, state) => const DashboardScreen(),
   ),
 ];

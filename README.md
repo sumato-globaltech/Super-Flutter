@@ -127,8 +127,11 @@ lib/
       bloc/                       # auth_cubit.dart + auth_state.dart (status-only, router-owned)
       login/bloc/                 # login_bloc.dart, login_event.dart, login_state.dart
       login/view/                 # login_screen.dart
-      dashboard/bloc/             # dashboard_bloc.dart, dashboard_event.dart, dashboard_state.dart
-      dashboard/view/             # dashboard_screen.dart
+  features/dashboard/
+    routes/                       # dashboard_route_names.dart, dashboard_routes.dart
+    presentation/
+      bloc/                       # dashboard_bloc.dart, dashboard_event.dart, dashboard_state.dart
+      screen/                     # dashboard_screen.dart
   features/school/                # pattern for new features (see guide below)
 assets/{images,icons,animations,fonts/}
 test/core/network/
@@ -209,8 +212,8 @@ analysis_options.yaml
 
 - `data/<feature>/` — DTOs (`model/`, `@JsonSerializable`), I/O (`sources/local|remote/`), and `repositories/<feature>_repository_impl.dart` mapping DTOs → entities and exceptions → `AppException`. Depends on `core/network` + `core/storage`.
 - `domain/<feature>/` — pure Dart: `entities/`, `repositories/<feature>_repository.dart` (interface), `use_cases/` (one action per file, `call()`). No Flutter/Dio/Drift imports.
-- `features/<feature>/` — `routes/` (path constants + `build<Feature>Routes()` list, aggregated by app router), `presentation/` (one Bloc per screen: `<screen>/bloc/` events + state + Bloc, `<screen>/view/` widget; plus small shared `bloc/` Cubits like status-only `AuthCubit`). UI dispatches events, Blocs call use-cases only — never import `data/` directly.
-- Reference: `auth` (`AuthRepository{hasSession,login,logout}`, `CheckAuthStatus`/`Login`/`Logout` use-cases, status-only `AuthCubit{initialize,authenticated,unauthenticated}` + `AuthStatus{…}`, screen Blocs `LoginBloc` (`UsernameChanged/PasswordChanged/Submitted`) / `DashboardBloc` (`SignOutRequested`), routes in `features/auth/routes/`).
+- `features/<feature>/` — every feature contains `routes/` (path constants + `build<Feature>Routes()` list, aggregated by app router) and `presentation/` (one Bloc per screen: `<screen>/bloc/` events + state + Bloc, `<screen>/view/` or `screen/` widget; plus small shared `bloc/` Cubits like status-only `AuthCubit`). UI dispatches events, Blocs call use-cases only — never import `data/` directly.
+- Reference: `auth` (login-only routes; `AuthRepository{hasSession,login,logout}`, `CheckAuthStatus`/`Login`/`Logout` use-cases, status-only `AuthCubit{initialize,authenticated,unauthenticated}` + `AuthStatus{…}`, screen Bloc `LoginBloc` (`UsernameChanged/PasswordChanged/Submitted`)), `dashboard` (`DashboardRouteNames`, `DashboardBloc` (`SignOutRequested`)).
 
 ## Architecture & conventions
 
@@ -245,6 +248,9 @@ checklist below; each step names the exact file to create/edit.
 
 ### 1. Route first (feature-owned)
 
+Every feature contains `routes/` + `presentation/`; `presentation/` contains
+`bloc/` + `screen/` (one Bloc per screen).
+
 `lib/features/school/routes/school_route_names.dart`:
 
 ```dart
@@ -271,6 +277,7 @@ List<GoRoute> buildSchoolRoutes() => [
 routes: [
   GoRoute(path: RouteNames.splash, ...),
   ...buildAuthRoutes(),
+  ...buildDashboardRoutes(),
   ...buildSchoolRoutes(),
 ],
 ```
@@ -345,11 +352,11 @@ class SchoolRepositoryImpl implements SchoolRepository {
 
 ### 4. Presentation (one Bloc per screen)
 
-- `lib/features/school/presentation/dashboard/bloc/school_dashboard_event.dart`:
+- `lib/features/school/presentation/bloc/school_dashboard_event.dart`:
   `DashboardStarted`, `DashboardRefreshed`, `RetryRequested`.
-- `lib/features/school/presentation/dashboard/bloc/school_dashboard_state.dart`:
+- `lib/features/school/presentation/bloc/school_dashboard_state.dart`:
   `SchoolStatus { initial, loading, loaded, error }` + `classes`, `message`, `copyWith`.
-- `lib/features/school/presentation/dashboard/bloc/school_dashboard_bloc.dart`:
+- `lib/features/school/presentation/bloc/school_dashboard_bloc.dart`:
 
 ```dart
 @injectable
@@ -370,10 +377,10 @@ class SchoolDashboardBloc extends Bloc<SchoolDashboardEvent, SchoolDashboardStat
 }
 ```
 
-- `lib/features/school/presentation/dashboard/view/school_dashboard_screen.dart` —
+- `lib/features/school/presentation/screen/school_dashboard_screen.dart` —
   `AppScaffold(title: context.l10n.schoolTitle, body: BlocBuilder<SchoolDashboardBloc, ...>(...))`
   with `AppLoader` (loading), `AppEmptyView` (empty), error view + `AppButton(label: retry)` → `add(RetryRequested)`.
-- Small rows/cards go in `lib/features/school/presentation/dashboard/widgets/`. Reuse `AppTextStyles`,
+- Small rows/cards go in `lib/features/school/presentation/screen/widgets/`. Reuse `AppTextStyles`,
   `AppSpacing`, `AppColors` — no ad-hoc colors, radii, or asset strings.
 - Keep tiny shared tasks (e.g. session status) in `presentation/bloc/` Cubits like `AuthCubit`; main screen work uses Blocs.
 
@@ -440,7 +447,7 @@ Never hand-edit generated files: `lib/core/di/injection.config.dart`,
 
 ## Tests
 
-- Existing: `test/core/network/` (401 retry, session expiry), `test/features/auth/` (auth status, login form+submission, sign-out), `test/data/auth/` (repo delegates + token persist).
+- Existing: `test/core/network/` (401 retry, session expiry), `test/features/auth/` (auth status, login form+submission), `test/features/dashboard/` (sign-out), `test/data/auth/` (repo delegates + token persist).
 - Missing (contributions welcome): router redirect, storage, widget/theme/l10n tests. Use `bloc_test` + `mocktail` patterns from the auth/network tests.
 
 ## Known gaps (remaining)
