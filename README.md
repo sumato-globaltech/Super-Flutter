@@ -121,9 +121,12 @@ lib/
     entities/                   # user.dart, auth_token.dart, auth_session.dart
     repositories/               # auth_repository.dart (interface)
     use_cases/                  # check_auth_status.dart, login.dart, logout.dart
-  features/auth/presentation/
-    bloc/                       # auth_cubit.dart, auth_state.dart
-    screens/                    # login_screen.dart, dashboard_screen.dart
+  features/auth/
+    routes/                       # auth_route_names.dart, auth_routes.dart (buildAuthRoutes)
+    presentation/
+      bloc/                       # auth_cubit.dart (status-only), login/logout cubits + states
+      screens/                    # login_screen.dart, dashboard_screen.dart
+  features/school/                # pattern for new features (see guide below)
 assets/{images,icons,animations,fonts/}
 test/core/network/
 l10n.yaml
@@ -140,8 +143,8 @@ analysis_options.yaml
 | `config/flavor.dart` | Build flavor enum. Use for banner color and prod-gating logs. |
 | `config/environment.dart` | Per-flavor URLs, DB name, timeouts, logging flags. Add new env values here. |
 | `config/app_config.dart` | App-wide tunables (`defaultPageSize`, cache TTL, debounce). |
-| `router/app_router.dart` | `createRouter(authCubit, config)`. `initialLocation: /splash`, `refreshListenable` on auth stream, redirect: `unknown→splash`, `unauth→login`, `auth+splash/login→dashboard`. |
-| `router/routes_names.dart` | Single source of path constants (`/splash`, `/login`, `/dashboard`, `/search`, `/account`). Always add routes here first. |
+| `router/app_router.dart` | Aggregates feature routes (`buildAuthRoutes()`, …) + app-owned `splash`. Owns the single auth `redirect` (`unknown→splash`, `unauth→login`, `auth+splash/login→dashboard`) + `refreshListenable` on `AuthCubit.stream`. |
+| `router/routes_names.dart` | App-shell paths (`splash`) + compat re-exports of feature paths. New code should import `features/<f>/routes/*_route_names.dart` directly. |
 | `router/router_refresh.dart` | `GoRouterRefreshStream` — bridges `authCubit.stream` to GoRouter refreshes. |
 | `startup/splash_screen.dart` | Minimal loading gate while `AuthCubit.initialize()` resolves. |
 
@@ -153,7 +156,7 @@ analysis_options.yaml
 ### `core/di/` — dependency injection
 
 - `injection.dart` — `getIt` instance + `configureDependencies(AppConfig)` (registers `AppConfig`, calls generated `init()`).
-- `app_modules.dart` (`CoreModule`) — `AppLogger`, `ErrorReporter → CompositeErrorReporter([LoggerErrorReporter])`.
+- `app_modules.dart` (`CoreModule`) — `AppLogger`, `appEnvironment(AppConfig)` (exposes per-flavor `Environment`), `ErrorReporter → CompositeErrorReporter([LoggerErrorReporter])`.
 - `storage_module.dart` (`StorageModule`) — `SecureStorage`, `LocalDatabase`, `StorageService`.
 - `network_module.dart` (`NetworkModule`) — `DioClient` (needs `Environment`, `SecureStorage`, `AppLogger`, `SessionManager`).
 - `injection.config.dart` — generated. Re-run `build_runner` after adding `@injectable` / `@module` / `@LazySingleton` classes; never hand-edit.
@@ -172,7 +175,7 @@ analysis_options.yaml
 - `interceptors/refresh_token_interceptor.dart` — on 401, refreshes via `tokenClient`, retries once, else calls `onSessionExpired`.
 - `interceptors/error_interceptor.dart` — pass-through hook for error normalization.
 - `interceptors/logging_interceptor.dart` — HTTP logs when `environment.enableHttpLogging`.
-- `session_manager.dart` — `SessionManagerImpl(authCubit, storageService).onSessionExpired()` clears session + emits unauthenticated.
+- `session_manager.dart` — `SessionManagerImpl(storageService).onSessionExpired()` clears session + reflects `AuthCubit.unauthenticated()` via lazy lookup (avoids DI cycle). `AuthCubit` stays status-only.
 - `network_exception_mapper.dart` — Dio/parse errors → `AppException` subtypes.
 - `api_endpoints.dart`, `network_constants.dart` — endpoint paths + header names. Add new endpoints here, not inline in data sources.
 
@@ -203,8 +206,8 @@ analysis_options.yaml
 
 - `data/<feature>/` — DTOs (`model/`, `@JsonSerializable`), I/O (`sources/local|remote/`), and `repositories/<feature>_repository_impl.dart` mapping DTOs → entities and exceptions → `AppException`. Depends on `core/network` + `core/storage`.
 - `domain/<feature>/` — pure Dart: `entities/`, `repositories/<feature>_repository.dart` (interface), `use_cases/` (one action per file, `call()`). No Flutter/Dio/Drift imports.
-- `features/<feature>/presentation/` — `bloc/` (Cubit/Bloc + State with `Equatable`), `screens/`, `widgets/`. UI talks to Cubits, Cubits talk to use-cases only — never import `data/` directly.
-- Reference: `auth` (`AuthRepository{hasSession,login,logout}`, `CheckAuthStatus`, `AuthCubit{initialize,logout,authenticated,unauthenticated}`, `AuthStatus{unknown,authenticated,unauthenticated}`).
+- `features/<feature>/` — `routes/` (path constants + `build<Feature>Routes()` list, aggregated by app router), `presentation/` (`bloc/` Cubits + States with `Equatable`, `screens/`, `widgets/`). UI talks to Cubits, Cubits talk to use-cases only — never import `data/` directly.
+- Reference: `auth` (`AuthRepository{hasSession,login,logout}`, `CheckAuthStatus`/`Login`/`Logout` use-cases, status-only `AuthCubit{initialize,authenticated,unauthenticated}` + `AuthStatus{…}`, operation cubits `LoginCubit`/`LogoutCubit`, routes in `features/auth/routes/`).
 
 ## Architecture & conventions
 
@@ -228,7 +231,7 @@ Rules:
 5. New string → ARB + `flutter gen-l10n`, never hardcoded user-facing text.
 6. New asset → file + `AssetConstants` + `pubspec.yaml` (already declares `images/`, `icons/`, `animations/`).
 7. New injectable → annotation + `build_runner`, verify `injection.config.dart`.
-8. New route → `RouteNames` + `app_router.dart` + redirect case.
+8. New route → `features/<feature>/routes/` (`*_route_names.dart` + `build*Routes()`) + aggregate in `app_router.dart`; redirect stays in app router.
 
 ## Adding a new module — worked example: School Dashboard
 
@@ -237,22 +240,36 @@ Goal: add a `school` feature showing classes, students, and attendance at `/scho
 Suppose the API offers `GET /school/dashboard`, `GET /school/students`. Follow the
 checklist below; each step names the exact file to create/edit.
 
-### 1. Route first
+### 1. Route first (feature-owned)
 
-`lib/app/router/routes_names.dart`:
+`lib/features/school/routes/school_route_names.dart`:
 
 ```dart
-static const schoolDashboard = '/school';
+abstract final class SchoolRouteNames {
+  static const dashboard = '/school';
+}
 ```
 
-`lib/app/router/app_router.dart` — add inside `routes: [...]`:
+`lib/features/school/routes/school_routes.dart`:
 
 ```dart
-GoRoute(
-  path: RouteNames.schoolDashboard,
-  name: RouteNames.schoolDashboard,
-  builder: (context, state) => const SchoolDashboardScreen(),
-),
+List<GoRoute> buildSchoolRoutes() => [
+  GoRoute(
+    path: SchoolRouteNames.dashboard,
+    name: SchoolRouteNames.dashboard,
+    builder: (context, state) => const SchoolDashboardScreen(),
+  ),
+];
+```
+
+`lib/app/router/app_router.dart` — aggregate (guard stays here):
+
+```dart
+routes: [
+  GoRoute(path: RouteNames.splash, ...),
+  ...buildAuthRoutes(),
+  ...buildSchoolRoutes(),
+],
 ```
 
 Extend `redirect` if the page requires auth (mirror the dashboard case). Run and

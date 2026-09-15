@@ -12,7 +12,8 @@ abstract interface class SessionManager {
 class SessionManagerImpl implements SessionManager {
   // NOTE: AuthCubit is looked up lazily (not constructor-injected) to avoid
   // a DI cycle: AuthCubit -> AuthRepository -> AuthRemoteDataSource ->
-  // DioClient -> SessionManager -> AuthCubit.
+  // DioClient -> SessionManager -> AuthCubit. AuthCubit itself is status-only;
+  // this only reflects expiry via unauthenticated().
   SessionManagerImpl({required this._storageService});
 
   final StorageService _storageService;

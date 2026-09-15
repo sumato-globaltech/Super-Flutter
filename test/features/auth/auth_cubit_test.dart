@@ -2,24 +2,18 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:starter/domain/auth/use_cases/check_auth_status.dart';
-import 'package:starter/domain/auth/use_cases/logout.dart';
 import 'package:starter/features/auth/presentation/bloc/auth_cubit.dart';
 import 'package:starter/features/auth/presentation/bloc/auth_state.dart';
 
 class MockCheckAuthStatus extends Mock implements CheckAuthStatus {}
 
-class MockLogout extends Mock implements Logout {}
-
 void main() {
   late MockCheckAuthStatus checkAuthStatus;
-  late MockLogout logout;
   late AuthCubit cubit;
 
   setUp(() {
     checkAuthStatus = MockCheckAuthStatus();
-    logout = MockLogout();
-    when(() => logout()).thenAnswer((_) async {});
-    cubit = AuthCubit(checkAuthStatus, logout);
+    cubit = AuthCubit(checkAuthStatus);
   });
 
   tearDown(() => cubit.close());
@@ -49,10 +43,16 @@ void main() {
   );
 
   blocTest<AuthCubit, AuthState>(
-    'logout calls use-case then emits unauthenticated',
+    'authenticated() reflects an externally completed sign-in',
     build: () => cubit,
-    act: (c) => c.logout(),
+    act: (c) => c.authenticated(),
+    expect: () => [const AuthState(status: AuthStatus.authenticated)],
+  );
+
+  blocTest<AuthCubit, AuthState>(
+    'unauthenticated() reflects sign-out or session expiry',
+    build: () => cubit,
+    act: (c) => c.unauthenticated(),
     expect: () => [const AuthState(status: AuthStatus.unauthenticated)],
-    verify: (_) => verify(() => logout()).called(1),
   );
 }

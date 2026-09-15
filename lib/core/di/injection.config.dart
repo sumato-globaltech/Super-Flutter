@@ -39,6 +39,8 @@ import 'package:starter/features/auth/presentation/bloc/auth_cubit.dart'
     as _i1018;
 import 'package:starter/features/auth/presentation/bloc/login_cubit.dart'
     as _i756;
+import 'package:starter/features/auth/presentation/bloc/logout_cubit.dart'
+    as _i1012;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -100,7 +102,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i412.Login>(() => _i412.Login(gh<_i902.AuthRepository>()));
     gh.factory<_i605.Logout>(() => _i605.Logout(gh<_i902.AuthRepository>()));
     gh.lazySingleton<_i1018.AuthCubit>(
-      () => _i1018.AuthCubit(gh<_i862.CheckAuthStatus>(), gh<_i605.Logout>()),
+      () => _i1018.AuthCubit(gh<_i862.CheckAuthStatus>()),
+    );
+    gh.factory<_i1012.LogoutCubit>(
+      () => _i1012.LogoutCubit(gh<_i605.Logout>(), gh<_i1018.AuthCubit>()),
     );
     gh.factory<_i756.LoginCubit>(
       () => _i756.LoginCubit(gh<_i412.Login>(), gh<_i1018.AuthCubit>()),

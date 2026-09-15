@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:starter/features/auth/presentation/screens/dashboard_screen.dart';
-import 'package:starter/features/auth/presentation/screens/login_screen.dart';
 
 import '../../features/auth/presentation/bloc/auth_cubit.dart';
 import '../../features/auth/presentation/bloc/auth_state.dart';
+import '../../features/auth/routes/auth_route_names.dart';
+import '../../features/auth/routes/auth_routes.dart';
 import '../config/app_config.dart';
 import '../startup/splash_screen.dart';
 import 'router_refresh.dart';
@@ -26,7 +26,7 @@ GoRouter createRouter({
       final location = state.matchedLocation;
 
       final isSplash = location == RouteNames.splash;
-      final isLogin = location == RouteNames.login;
+      final isLogin = location == AuthRouteNames.login;
 
       // Authentication status is still being determined.
       if (authStatus == AuthStatus.unknown) {
@@ -35,13 +35,13 @@ GoRouter createRouter({
 
       // User is not authenticated.
       if (authStatus == AuthStatus.unauthenticated) {
-        return isLogin ? null : RouteNames.login;
+        return isLogin ? null : AuthRouteNames.login;
       }
 
       // User is authenticated.
       if (authStatus == AuthStatus.authenticated) {
         if (isSplash || isLogin) {
-          return RouteNames.dashboard;
+          return AuthRouteNames.dashboard;
         }
       }
 
@@ -49,27 +49,12 @@ GoRouter createRouter({
     },
 
     routes: [
-      // ----------------------------------------------------------------------
-      // Splash
-      // ----------------------------------------------------------------------
-
       GoRoute(
         path: RouteNames.splash,
         name: RouteNames.splash,
         builder: (context, state) => const SplashScreen(),
       ),
-
-      GoRoute(
-        path: RouteNames.login,
-        name: RouteNames.login,
-        builder: (context, state) => const LoginScreen(),
-      ),
-
-      GoRoute(
-        path: RouteNames.dashboard,
-        name: RouteNames.dashboard,
-        builder: (context, state) => const DashboardScreen(),
-      ),
+      ...buildAuthRoutes(),
     ],
   );
 }
