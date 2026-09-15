@@ -1,18 +1,13 @@
-import '../error/app_exception.dart';
 import '../error/exceptions/cache_exception.dart';
 import 'local_storage.dart';
 import 'secure_storage.dart';
 import 'storage_keys.dart';
 
 class StorageService {
-
   const StorageService({
-    required SecureStorage secureStorage,
-    required LocalDatabase database,
-  }) : _secureStorage = secureStorage,
-       _database = database;
-
-
+    required this._secureStorage,
+    required this._database,
+  });
   final SecureStorage _secureStorage;
   final LocalDatabase _database;
 

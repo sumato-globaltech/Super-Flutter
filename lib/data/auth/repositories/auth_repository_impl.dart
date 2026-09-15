@@ -18,9 +18,18 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<User> login({required String email, required String password}) {
-    // TODO: implement login
-    throw UnimplementedError();
+  Future<User> login({required String email, required String password}) async {
+    // The dummyjson backend treats the login identifier as `username`;
+    // the domain interface keeps the generic `email` name.
+    final result = await _remoteDataSource.login(
+      username: email,
+      password: password,
+    );
+    await _localDataSource.saveTokens(
+      accessToken: result.tokens.accessToken,
+      refreshToken: result.tokens.refreshToken,
+    );
+    return result.user.toEntity();
   }
 
   @override

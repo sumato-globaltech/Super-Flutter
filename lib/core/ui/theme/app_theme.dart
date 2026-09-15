@@ -8,8 +8,12 @@ import 'app_text_styles.dart';
 import 'design_colors.dart';
 
 abstract final class AppTheme {
+  /// Flavor is accepted for future per-flavor theming. The base light/dark
+  /// palettes are currently flavor-independent by design; per-flavor
+  /// accents live in [AppColors.seedFor] (debug banner).
   static ThemeData light(Flavor flavor) => _light;
 
+  /// See [light] — [flavor] reserved for future per-flavor dark theming.
   static ThemeData dark(Flavor flavor) => _dark;
 
   static final ThemeData _light = _buildLight();

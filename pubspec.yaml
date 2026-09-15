@@ -18,11 +18,11 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # of the product and file versions while build-number is used as the build suffix.
 version: 1.0.0+1
 
-FLUTTER_BUILD_NAME: 1.2.3
-
-FLUTTER_BUILD_NUMBER: 45
-
-FLUTTER_APP_NAME: "Flutter Starter"
+# Build metadata is passed via flutter build/run flags, e.g.:
+#   flutter run --flavor development -t lib/main_development.dart \
+#     --build-name=1.2.3 --build-number=45 --dart-define=FAKE_AUTH=true
+#   flutter build apk --flavor production -t lib/main_production.dart \
+#     --build-name=1.2.3 --build-number=45
 
 environment:
   sdk: ^3.13.2

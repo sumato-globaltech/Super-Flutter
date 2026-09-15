@@ -11,12 +11,11 @@ import 'interceptors/refresh_token_interceptor.dart';
 
 class DioClient {
   DioClient({
-    required Environment environment,
+    required this._environment,
     required SecureStorage secureStorage,
-    required AppLogger logger,
+    required this._logger,
     required Future<void> Function() onSessionExpired,
-  }) : _environment = environment,
-       _logger = logger {
+  }) {
     _refreshClient = _createDio()..interceptors.addAll(_supportInterceptors());
 
     _dio = _createDio()

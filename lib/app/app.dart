@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -25,19 +24,10 @@ Future<void> bootstrap(AppConfig config) async {
       WidgetsFlutterBinding.ensureInitialized();
 
       await configureDependencies(config);
-      getIt<AppErrorHandler>().initialize();
+      getIt.get<AppErrorHandler>().initialize();
 
-      print('MAIN STARTED');
 
       final appLogger = getIt.get<AppLogger>();
-
-      appLogger.debug('AppLogger DEBUG TEST');
-
-      appLogger.info('AppLogger INFO TEST');
-
-      appLogger.warning('AppLogger WARNING TEST');
-
-      appLogger.error('AppLogger ERROR TEST');
 
       // Bloc activity logger
       if (!config.isProduction) {
@@ -46,15 +36,15 @@ Future<void> bootstrap(AppConfig config) async {
 
       appLogger.info('Starting ${config.appName} (${config.flavor.name})');
 
-      await getIt<StorageService>().restoreSession();
+      await getIt.get<StorageService>().restoreSession();
 
       runApp(MyApp());
 
       // todo auth token checking and refreshing
-      // unawaited(getIt<AuthRepository>().restoreSession());
+      // unawaited(getIt.get<AuthRepository>().restoreSession());
     },
     (error, stack) {
-      getIt<ErrorReporter>().report(
+      getIt.get<ErrorReporter>().report(
         error,
         stack,
         reason: 'Uncaught zone error',
@@ -71,15 +61,15 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late final AppConfig _config = getIt<AppConfig>();
+  late final AppConfig _config = getIt.get<AppConfig>();
   late final GoRouter _router;
-  late final AuthCubit _authCubit = getIt<AuthCubit>();
+  late final AuthCubit _authCubit = getIt.get<AuthCubit>();
 
   @override
   void initState() {
     super.initState();
 
-    _router = createRouter(authCubit: _authCubit, config: getIt<AppConfig>());
+    _router = createRouter(authCubit: _authCubit, config: getIt.get<AppConfig>());
 
     _authCubit.initialize();
   }

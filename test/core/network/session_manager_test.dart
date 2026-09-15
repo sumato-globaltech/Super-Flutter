@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:starter/core/network/session_manager.dart';
 
@@ -19,11 +20,21 @@ void main() {
     authCubit = MockAuthCubit();
 
     when(() => storage.clearSession()).thenAnswer((_) async {});
+    when(() => authCubit.unauthenticated()).thenReturn(null);
 
-    sessionManager = SessionManagerImpl(
-      authCubit: authCubit,
-      storageService: storage,
-    );
+    final getIt = GetIt.instance;
+    if (getIt.isRegistered<AuthCubit>()) {
+      getIt.unregister<AuthCubit>();
+    }
+    getIt.registerSingleton<AuthCubit>(authCubit);
+
+    sessionManager = SessionManagerImpl(storageService: storage);
+  });
+
+  tearDown(() {
+    if (GetIt.instance.isRegistered<AuthCubit>()) {
+      GetIt.instance.unregister<AuthCubit>();
+    }
   });
 
   test('clears session and marks auth as unauthenticated', () async {

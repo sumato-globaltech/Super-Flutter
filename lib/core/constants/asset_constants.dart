@@ -1,3 +1,6 @@
+/// Central asset paths. Add the matching files under assets/ before
+/// referencing a constant in UI — missing files currently fall back to
+/// placeholders at runtime. Prefer these constants over string literals.
 abstract final class AssetConstants {
   static const _images = 'assets/images';
   static const _icons = 'assets/icons';

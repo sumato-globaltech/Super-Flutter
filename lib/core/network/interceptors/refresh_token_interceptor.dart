@@ -1,19 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:starter/core/network/network_constants.dart';
 
-import '../../constants/app_constants.dart';
 import '../../error/exceptions/unauthorized_exception.dart';
 import '../../storage/secure_storage.dart';
 import '../api_endpoints.dart';
 
 class RefreshTokenInterceptor extends QueuedInterceptor {
   RefreshTokenInterceptor({
-    required SecureStorage secureStorage,
-    required Dio tokenClient,
-    required Future<void> Function() onSessionExpired,
-  }) : _secureStorage = secureStorage,
-       _tokenClient = tokenClient,
-       _onSessionExpired = onSessionExpired;
+    required this._secureStorage,
+    required this._tokenClient,
+    required this._onSessionExpired,
+  });
 
   final SecureStorage _secureStorage;
   final Dio _tokenClient;

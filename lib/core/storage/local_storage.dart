@@ -83,7 +83,15 @@ class LocalDatabase extends _$LocalDatabase {
   Future<void> deleteSetting(String key) =>
       (delete(keyValueRows)..where((t) => t.key.equals(key))).go();
 
+  /// Clears cached user content (products + sync markers). App settings
+  /// (theme, locale, onboarding) intentionally survive logout.
   Future<void> clearUserData() => transaction(() async {
     await delete(productRows).go();
+    await (delete(
+      keyValueRows,
+    )..where((t) => t.key.equals('sync.last_synced_at'))).go();
+    await (delete(
+      keyValueRows,
+    )..where((t) => t.key.equals('auth.cached_user'))).go();
   });
 }

@@ -30,6 +30,9 @@ extension DateTimeX on DateTime {
   bool isStalerThan(Duration duration) =>
       DateTime.now().difference(this) > duration;
 
+  /// Correctly-spelled alias for [isStalerThan].
+  bool isStaleThan(Duration duration) => isStalerThan(duration);
+
   bool _isSameDay(DateTime other) =>
       year == other.year && month == other.month && day == other.day;
 }

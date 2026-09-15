@@ -2,6 +2,7 @@
   "@@locale": "es",
 
   "appTitle": "Flutter Kit",
+  "@appTitle": { "description": "Application name shown in the task switcher" },
 
   "signIn": "Iniciar sesión",
   "signOut": "Cerrar sesión",
@@ -27,7 +28,14 @@
   "greetingEvening": "Buenas noches",
 
   "inStockCount": "{count, plural, =0{Agotado} =1{1 en stock} other{{count} en stock}}",
+  "@inStockCount": {
+    "description": "Stock level for a product",
+    "placeholders": { "count": { "type": "int" } }
+  },
   "percentOff": "{percent}% de descuento",
+  "@percentOff": {
+    "placeholders": { "percent": { "type": "String" } }
+  },
 
   "tryAgain": "Reintentar",
   "goHome": "Ir al inicio",
@@ -35,6 +43,9 @@
   "noMatches": "Sin resultados",
   "noProducts": "Todavía no hay productos",
   "showingSavedData": "{message} Mostrando datos guardados.",
+  "@showingSavedData": {
+    "placeholders": { "message": { "type": "String" } }
+  },
 
   "errorNoConnection": "Sin conexión a internet.",
   "errorTimeout": "La solicitud tardó demasiado. Inténtalo de nuevo.",

@@ -1,5 +1,5 @@
-import 'package:injectable/injectable.dart';
-import 'package:starter/core/storage/storage_keys.dart';
+import 'package:injectable/injectable.dart' hide Environment;
+import 'package:starter/app/config/environment.dart';
 
 import '../storage/local_storage.dart';
 import '../storage/secure_storage.dart';
@@ -11,8 +11,8 @@ abstract class StorageModule {
   SecureStorage secureStorage() => SecureStorage();
 
   @lazySingleton
-  LocalDatabase localDatabase() =>
-      LocalDatabase(name: StorageKeys.localDatabase);
+  LocalDatabase localDatabase(Environment environment) =>
+      LocalDatabase(name: environment.databaseName);
 
   @lazySingleton
   StorageService storageService(

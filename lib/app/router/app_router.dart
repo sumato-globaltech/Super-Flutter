@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:starter/features/auth/presentation/screens/dashboard_screen.dart';
 import 'package:starter/features/auth/presentation/screens/login_screen.dart';
 
 import '../../features/auth/presentation/bloc/auth_cubit.dart';
@@ -14,15 +15,6 @@ GoRouter createRouter({
   required AppConfig config,
 }) {
   final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
-  final shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
-
-  // final dashboardNavigatorKey = GlobalKey<NavigatorState>(
-  //   debugLabel: 'dashboard',
-  // );
-  //
-  // final searchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'search');
-  //
-  // final accountNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'account');
 
   return GoRouter(
     navigatorKey: rootNavigatorKey,
@@ -73,60 +65,11 @@ GoRouter createRouter({
         builder: (context, state) => const LoginScreen(),
       ),
 
-      // ----------------------------------------------------------------------
-      // Authentication
-      // ----------------------------------------------------------------------
-      // GoRoute(
-      //   path: RouteNames.login,
-      //   name: RouteNames.login,
-      //   builder: (context, state) => const LoginPage(),
-      // ),
-
-      // ----------------------------------------------------------------------
-      // Main application
-      // ----------------------------------------------------------------------
-      /*StatefulShellRoute.indexedStack(
-        builder: (context, state, navigationShell) {
-          return AppScaffold(navigationShell: navigationShell);
-        },
-        branches: [
-          // Dashboard
-          StatefulShellBranch(
-            navigatorKey: dashboardNavigatorKey,
-            routes: [
-              GoRoute(
-                path: RouteNames.dashboard,
-                name: RouteNames.dashboard,
-                builder: (context, state) => const DashboardPage(),
-              ),
-            ],
-          ),
-
-          // Search
-          StatefulShellBranch(
-            navigatorKey: searchNavigatorKey,
-            routes: [
-              GoRoute(
-                path: RouteNames.search,
-                name: RouteNames.search,
-                builder: (context, state) => const SearchPage(),
-              ),
-            ],
-          ),
-
-          // Account
-          StatefulShellBranch(
-            navigatorKey: accountNavigatorKey,
-            routes: [
-              GoRoute(
-                path: RouteNames.account,
-                name: RouteNames.account,
-                builder: (context, state) => const AccountPage(),
-              ),
-            ],
-          ),
-        ],
-      ),*/
+      GoRoute(
+        path: RouteNames.dashboard,
+        name: RouteNames.dashboard,
+        builder: (context, state) => const DashboardScreen(),
+      ),
     ],
   );
 }

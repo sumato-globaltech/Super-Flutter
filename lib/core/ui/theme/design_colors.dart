@@ -4,7 +4,9 @@ class DesignColor {
   static const Color colorPrimary = Color(0xFF006D37);
   // static const Color colorPrimary = Color(0xFF22C7B8);
   static const Color prepPruple = Color(0xFF2d5dff);
+  static const Color prepPurple = prepPruple;
   static const Color lghtBlue = Color(0xFFd5e0ff);
+  static const Color lightBlue = lghtBlue;
   static const Color orange = Color(0xFFff8d00);
   // static const Color grey = Color(0xFF737875);
   static const Color greenLight1 = Color(0xFF20C2B3);

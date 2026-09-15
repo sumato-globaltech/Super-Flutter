@@ -8,8 +8,9 @@ final getIt = GetIt.instance;
 
 @InjectableInit()
 Future<void> configureDependencies(AppConfig config) async {
-
-  getIt.registerSingleton<AppConfig>(config);
+  if (!getIt.isRegistered<AppConfig>()) {
+    getIt.registerSingleton<AppConfig>(config);
+  }
 
   getIt.init();
 }
