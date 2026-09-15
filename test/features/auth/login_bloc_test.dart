@@ -5,9 +5,9 @@ import 'package:starter/core/error/exceptions/unauthorized_exception.dart';
 import 'package:starter/domain/auth/entities/user.dart';
 import 'package:starter/domain/auth/use_cases/login.dart';
 import 'package:starter/features/auth/presentation/bloc/auth_cubit.dart';
-import 'package:starter/features/auth/presentation/login/bloc/login_bloc.dart';
-import 'package:starter/features/auth/presentation/login/bloc/login_event.dart';
-import 'package:starter/features/auth/presentation/login/bloc/login_state.dart';
+import 'package:starter/features/auth/presentation/bloc/login_bloc.dart';
+import 'package:starter/features/auth/presentation/bloc/login_event.dart';
+import 'package:starter/features/auth/presentation/bloc/login_state.dart';
 
 class MockLogin extends Mock implements Login {}
 

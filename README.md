@@ -124,9 +124,9 @@ lib/
   features/auth/
     routes/                       # auth_route_names.dart, auth_routes.dart (buildAuthRoutes)
     presentation/
-      bloc/                       # auth_cubit.dart + auth_state.dart (status-only, router-owned)
-      login/bloc/                 # login_bloc.dart, login_event.dart, login_state.dart
-      login/view/                 # login_screen.dart
+      bloc/                       # auth_cubit.dart + auth_state.dart (status-only, router-owned),
+                                  # login_bloc.dart, login_event.dart, login_state.dart
+      screen/                     # login_screen.dart
   features/dashboard/
     routes/                       # dashboard_route_names.dart, dashboard_routes.dart
     presentation/
@@ -212,7 +212,7 @@ analysis_options.yaml
 
 - `data/<feature>/` — DTOs (`model/`, `@JsonSerializable`), I/O (`sources/local|remote/`), and `repositories/<feature>_repository_impl.dart` mapping DTOs → entities and exceptions → `AppException`. Depends on `core/network` + `core/storage`.
 - `domain/<feature>/` — pure Dart: `entities/`, `repositories/<feature>_repository.dart` (interface), `use_cases/` (one action per file, `call()`). No Flutter/Dio/Drift imports.
-- `features/<feature>/` — every feature contains `routes/` (path constants + `build<Feature>Routes()` list, aggregated by app router) and `presentation/` (one Bloc per screen: `<screen>/bloc/` events + state + Bloc, `<screen>/view/` or `screen/` widget; plus small shared `bloc/` Cubits like status-only `AuthCubit`). UI dispatches events, Blocs call use-cases only — never import `data/` directly.
+- `features/<feature>/` — every feature contains `routes/` (path constants + `build<Feature>Routes()` list, aggregated by app router) and `presentation/` (`bloc/` events + states + Blocs/Cubits, `screen/` widgets; one Bloc per screen plus small shared Cubits like status-only `AuthCubit`). UI dispatches events, Blocs call use-cases only — never import `data/` directly.
 - Reference: `auth` (login-only routes; `AuthRepository{hasSession,login,logout}`, `CheckAuthStatus`/`Login`/`Logout` use-cases, status-only `AuthCubit{initialize,authenticated,unauthenticated}` + `AuthStatus{…}`, screen Bloc `LoginBloc` (`UsernameChanged/PasswordChanged/Submitted`)), `dashboard` (`DashboardRouteNames`, `DashboardBloc` (`SignOutRequested`)).
 
 ## Architecture & conventions
