@@ -1,6 +1,6 @@
 ---
 name: networking
-description: Work with the Dio networking layer in this Flutter starter. Use when adding API calls, endpoints, interceptors, or error mapping; enforces per-feature endpoints with auth-critical paths kept in core.
+description: Work with the Dio networking layer in this Super Flutter. Use when adding API calls, endpoints, interceptors, or error mapping; enforces per-feature endpoints with auth-critical paths kept in core.
 ---
 
 # Networking

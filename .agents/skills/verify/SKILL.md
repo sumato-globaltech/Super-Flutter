@@ -1,6 +1,6 @@
 ---
 name: verify
-description: Run the mandatory verification pipeline in this Flutter starter. Use after any code change and before handoff or commit; fails the task if any step is red.
+description: Run the mandatory verification pipeline in this Super Flutter. Use after any code change and before handoff or commit; fails the task if any step is red.
 ---
 
 # Verify

@@ -1,6 +1,6 @@
 ---
 name: add-feature
-description: Scaffold a new Clean Architecture feature in this Flutter starter. Use when adding a feature module spanning features/<name> (routes + presentation), domain/<name> (entities, repository interface, use-cases), and data/<name> (models, data sources, repository impl).
+description: Scaffold a new Clean Architecture feature in this Super Flutter. Use when adding a feature module spanning features/<name> (routes + presentation), domain/<name> (entities, repository interface, use-cases), and data/<name> (models, data sources, repository impl).
 ---
 
 # Add Feature

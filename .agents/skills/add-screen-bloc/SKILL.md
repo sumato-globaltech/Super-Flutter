@@ -1,6 +1,6 @@
 ---
 name: add-screen-bloc
-description: Add one event-driven Bloc for one screen in this Flutter starter. Use when creating screen state management (form + submission, loading/loaded/error flows) while keeping AuthCubit-style Cubits for tiny shared tasks only.
+description: Add one event-driven Bloc for one screen in this Super Flutter. Use when creating screen state management (form + submission, loading/loaded/error flows) while keeping AuthCubit-style Cubits for tiny shared tasks only.
 ---
 
 # Add Screen Bloc

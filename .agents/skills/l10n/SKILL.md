@@ -1,6 +1,6 @@
 ---
 name: l10n
-description: Manage EN/ES localization in this Flutter starter. Use when adding or changing any user-facing string; ARB files are the source of truth with flutter gen-l10n codegen.
+description: Manage EN/ES localization in this Super Flutter. Use when adding or changing any user-facing string; ARB files are the source of truth with flutter gen-l10n codegen.
 ---
 
 # Localization

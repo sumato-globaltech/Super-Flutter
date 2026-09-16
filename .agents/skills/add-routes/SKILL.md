@@ -1,6 +1,6 @@
 ---
 name: add-routes
-description: Add feature-owned GoRouter routes in this Flutter starter. Use when exposing a new screen path; each feature owns its route names and GoRoute list, the app router only aggregates them and owns the auth guard.
+description: Add feature-owned GoRouter routes in this Super Flutter. Use when exposing a new screen path; each feature owns its route names and GoRoute list, the app router only aggregates them and owns the auth guard.
 ---
 
 # Add Routes

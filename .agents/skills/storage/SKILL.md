@@ -1,6 +1,6 @@
 ---
 name: storage
-description: Work with persistence in this Flutter starter (SecureStorage, Drift LocalDatabase, StorageService). Use when adding cached data, settings, flags, or session/token handling.
+description: Work with persistence in this Super Flutter (SecureStorage, Drift LocalDatabase, StorageService). Use when adding cached data, settings, flags, or session/token handling.
 ---
 
 # Storage

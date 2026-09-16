@@ -1,6 +1,6 @@
 ---
 name: testing
-description: Write tests in this Flutter starter with bloc_test and mocktail. Use when adding or updating unit, bloc, repository, or widget tests; follows the existing per-layer test layout.
+description: Write tests in this Super Flutter with bloc_test and mocktail. Use when adding or updating unit, bloc, repository, or widget tests; follows the existing per-layer test layout.
 ---
 
 # Testing

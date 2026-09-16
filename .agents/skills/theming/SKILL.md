@@ -1,6 +1,6 @@
 ---
 name: theming
-description: Build UI with the Material 3 design system in this Flutter starter. Use when creating screens, widgets, or layouts; enforces theme tokens, shared components, and asset constants.
+description: Build UI with the Material 3 design system in this Super Flutter. Use when creating screens, widgets, or layouts; enforces theme tokens, shared components, and asset constants.
 ---
 
 # Theming

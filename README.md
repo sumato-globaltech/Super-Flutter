@@ -1,4 +1,4 @@
-# Flutter Starter (`starter`)
+# Super Flutter (`starter`)
 
 A production-grade Flutter boilerplate with multi-flavor config, Clean Architecture
 (feature-first), BLoC state management, GoRouter navigation, GetIt + Injectable DI,

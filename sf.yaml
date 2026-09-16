@@ -1,0 +1,136 @@
+# sf.yaml - Super Flutter CLI configuration.
+# This file is the source of truth for the project's Flutter architecture.
+# Documentation: docs/configuration.md
+version: 1
+project:
+  name: super_flutter
+  organization: tech.sumato
+  type: flutter
+architecture:
+  name: sumato_standard
+  version: 1
+paths:
+  lib: lib
+  feature_roots:
+    data: lib/data
+    domain: lib/domain
+    presentation: lib/features
+  core: lib/core
+  app: lib/app
+  test: test
+components:
+  cubit:
+    scope: feature
+    root: presentation
+    dir: presentation/bloc
+    file_case: snake_case
+    class_case: pascal_case
+    file_suffix: _cubit
+    class_suffix: Cubit
+    template: cubit
+    description: Cubit for feature state management
+  entity:
+    scope: feature
+    root: domain
+    dir: entities
+    file_case: snake_case
+    class_case: pascal_case
+    template: entity
+    description: Immutable domain entity (extends Equatable)
+  local_data_source:
+    scope: feature
+    root: data
+    dir: sources/local
+    file_case: snake_case
+    class_case: pascal_case
+    file_suffix: _local_data_source
+    class_suffix: LocalDataSource
+    template: local_data_source
+    description: Local (cache/database) data source
+  model:
+    scope: feature
+    root: data
+    dir: model
+    file_case: snake_case
+    class_case: pascal_case
+    file_suffix: _model
+    class_suffix: Model
+    template: model
+    description: JSON-serializable data model
+  remote_data_source:
+    scope: feature
+    root: data
+    dir: sources/remote
+    file_case: snake_case
+    class_case: pascal_case
+    file_suffix: _remote_data_source
+    class_suffix: RemoteDataSource
+    template: remote_data_source
+    description: Remote (API) data source
+  repository:
+    scope: feature
+    root: domain
+    dir: repositories
+    file_case: snake_case
+    class_case: pascal_case
+    file_suffix: _repository
+    class_suffix: Repository
+    template: repository
+    description: Repository contract (abstract interface class)
+  repository_impl:
+    scope: feature
+    root: data
+    dir: repositories
+    file_case: snake_case
+    class_case: pascal_case
+    file_suffix: _repository_impl
+    class_suffix: RepositoryImpl
+    template: repository_impl
+    description: Repository implementation registered with injectable
+  screen:
+    scope: feature
+    root: presentation
+    dir: presentation/screens
+    file_case: snake_case
+    class_case: pascal_case
+    file_suffix: _screen
+    class_suffix: Screen
+    template: screen
+    description: Screen widget
+  state:
+    scope: feature
+    root: presentation
+    dir: presentation/bloc
+    file_case: snake_case
+    class_case: pascal_case
+    file_suffix: _state
+    class_suffix: State
+    template: state
+    description: Cubit state class
+  use_case:
+    scope: feature
+    root: domain
+    dir: use_cases
+    file_case: snake_case
+    class_case: pascal_case
+    template: use_case
+    description: Single-purpose domain use case
+  widget:
+    scope: global
+    dir: lib/core/ui/widgets
+    file_case: snake_case
+    class_case: pascal_case
+    template: widget
+    description: Shared UI widget
+generation:
+  format: true
+  analyze: false
+  model:
+    serialization: manual
+    equatable: false
+    nullable: all
+    documentation: true
+    reuse_existing: true
+    skip_null_fields: true
+metadata:
+  dir: .sf
