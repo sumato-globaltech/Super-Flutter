@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:starter/features/dashboard/dashboard/screen/dashboard_screen.dart';
+import 'package:starter/features/dashboard/presentation/dashboard/screen/dashboard_screen.dart';
 
 import 'dashboard_route_names.dart';
 

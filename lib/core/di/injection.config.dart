@@ -35,10 +35,11 @@ import 'package:starter/domain/auth/repositories/auth_repository.dart' as _i902;
 import 'package:starter/domain/auth/use_cases/check_auth_status.dart' as _i862;
 import 'package:starter/domain/auth/use_cases/login.dart' as _i412;
 import 'package:starter/domain/auth/use_cases/logout.dart' as _i605;
-import 'package:starter/features/auth/login/bloc/login_bloc.dart' as _i495;
+import 'package:starter/features/auth/presentation/login/bloc/login_bloc.dart'
+    as _i444;
 import 'package:starter/features/auth/session/bloc/auth_cubit.dart' as _i477;
-import 'package:starter/features/dashboard/dashboard/bloc/dashboard_bloc.dart'
-    as _i861;
+import 'package:starter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart'
+    as _i6;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -102,11 +103,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i477.AuthCubit>(
       () => _i477.AuthCubit(gh<_i862.CheckAuthStatus>()),
     );
-    gh.factory<_i861.DashboardBloc>(
-      () => _i861.DashboardBloc(gh<_i605.Logout>(), gh<_i477.AuthCubit>()),
+    gh.factory<_i6.DashboardBloc>(
+      () => _i6.DashboardBloc(gh<_i605.Logout>(), gh<_i477.AuthCubit>()),
     );
-    gh.factory<_i495.LoginBloc>(
-      () => _i495.LoginBloc(gh<_i412.Login>(), gh<_i477.AuthCubit>()),
+    gh.factory<_i444.LoginBloc>(
+      () => _i444.LoginBloc(gh<_i412.Login>(), gh<_i477.AuthCubit>()),
     );
     return this;
   }
