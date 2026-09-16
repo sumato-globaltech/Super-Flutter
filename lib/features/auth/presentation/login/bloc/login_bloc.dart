@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:starter/core/error/app_exception.dart';
-import 'package:starter/domain/auth/use_cases/login.dart';
-import 'package:starter/features/auth/session/bloc/auth_cubit.dart';
+import 'package:super_flutter/core/error/app_exception.dart';
+import 'package:super_flutter/domain/auth/use_cases/login.dart';
+import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 
 import 'login_event.dart';
 import 'login_state.dart';

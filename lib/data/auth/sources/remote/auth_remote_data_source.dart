@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:starter/core/network/api_endpoints.dart';
-import 'package:starter/core/network/dio_client.dart';
-import 'package:starter/core/network/network_constants.dart';
-import 'package:starter/core/network/network_exception_mapper.dart';
-import 'package:starter/domain/auth/entities/auth_token.dart';
+import 'package:super_flutter/core/network/api_endpoints.dart';
+import 'package:super_flutter/core/network/dio_client.dart';
+import 'package:super_flutter/core/network/network_constants.dart';
+import 'package:super_flutter/core/network/network_exception_mapper.dart';
+import 'package:super_flutter/domain/auth/entities/auth_token.dart';
 
 import '../../model/user_model.dart';
 

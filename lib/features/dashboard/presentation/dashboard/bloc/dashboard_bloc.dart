@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:starter/domain/auth/use_cases/logout.dart';
-import 'package:starter/features/auth/session/bloc/auth_cubit.dart';
+import 'package:super_flutter/domain/auth/use_cases/logout.dart';
+import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 
 import 'dashboard_event.dart';
 import 'dashboard_state.dart';

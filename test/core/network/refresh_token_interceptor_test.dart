@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:starter/core/network/interceptors/refresh_token_interceptor.dart';
-import 'package:starter/core/network/network_constants.dart';
-import 'package:starter/core/storage/secure_storage.dart';
+import 'package:super_flutter/core/network/interceptors/refresh_token_interceptor.dart';
+import 'package:super_flutter/core/network/network_constants.dart';
+import 'package:super_flutter/core/storage/secure_storage.dart';
 
 class MockSecureStorage extends Mock implements SecureStorage {}
 

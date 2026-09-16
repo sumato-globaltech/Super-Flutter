@@ -4,12 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:starter/app/config/app_config.dart';
-import 'package:starter/app/router/app_router.dart';
-import 'package:starter/core/error/app_error_handler.dart';
-import 'package:starter/core/error/error_reporter.dart';
-import 'package:starter/core/logging/app_logger.dart';
-import 'package:starter/core/logging/logging_bloc_observer.dart';
+import 'package:super_flutter/app/config/app_config.dart';
+import 'package:super_flutter/app/router/app_router.dart';
+import 'package:super_flutter/core/error/app_error_handler.dart';
+import 'package:super_flutter/core/error/error_reporter.dart';
+import 'package:super_flutter/core/logging/app_logger.dart';
+import 'package:super_flutter/core/logging/logging_bloc_observer.dart';
 
 import '../core/di/injection.dart';
 import '../core/localization/app_localizations.dart';

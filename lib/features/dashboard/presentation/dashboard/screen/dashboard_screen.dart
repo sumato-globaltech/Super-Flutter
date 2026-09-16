@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:starter/core/di/injection.dart';
-import 'package:starter/core/localization/app_localizations.dart';
-import 'package:starter/core/ui/layouts/app_scaffold.dart';
-import 'package:starter/core/ui/widgets/app_button.dart';
+import 'package:super_flutter/core/di/injection.dart';
+import 'package:super_flutter/core/localization/app_localizations.dart';
+import 'package:super_flutter/core/ui/layouts/app_scaffold.dart';
+import 'package:super_flutter/core/ui/widgets/app_button.dart';
 
 import '../bloc/dashboard_bloc.dart';
 import '../bloc/dashboard_event.dart';

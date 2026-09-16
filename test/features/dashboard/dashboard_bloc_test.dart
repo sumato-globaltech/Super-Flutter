@@ -1,11 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:starter/domain/auth/use_cases/logout.dart';
-import 'package:starter/features/auth/session/bloc/auth_cubit.dart';
-import 'package:starter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart';
-import 'package:starter/features/dashboard/presentation/dashboard/bloc/dashboard_event.dart';
-import 'package:starter/features/dashboard/presentation/dashboard/bloc/dashboard_state.dart';
+import 'package:super_flutter/domain/auth/use_cases/logout.dart';
+import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
+import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart';
+import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_event.dart';
+import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_state.dart';
 
 class MockLogout extends Mock implements Logout {}
 

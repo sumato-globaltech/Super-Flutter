@@ -1,13 +1,13 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:starter/core/error/exceptions/unauthorized_exception.dart';
-import 'package:starter/domain/auth/entities/user.dart';
-import 'package:starter/domain/auth/use_cases/login.dart';
-import 'package:starter/features/auth/session/bloc/auth_cubit.dart';
-import 'package:starter/features/auth/presentation/login/bloc/login_bloc.dart';
-import 'package:starter/features/auth/presentation/login/bloc/login_event.dart';
-import 'package:starter/features/auth/presentation/login/bloc/login_state.dart';
+import 'package:super_flutter/core/error/exceptions/unauthorized_exception.dart';
+import 'package:super_flutter/domain/auth/entities/user.dart';
+import 'package:super_flutter/domain/auth/use_cases/login.dart';
+import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
+import 'package:super_flutter/features/auth/presentation/login/bloc/login_bloc.dart';
+import 'package:super_flutter/features/auth/presentation/login/bloc/login_event.dart';
+import 'package:super_flutter/features/auth/presentation/login/bloc/login_state.dart';
 
 class MockLogin extends Mock implements Login {}
 

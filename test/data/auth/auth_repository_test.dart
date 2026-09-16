@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:starter/core/network/dio_client.dart';
-import 'package:starter/data/auth/model/user_model.dart';
-import 'package:starter/data/auth/repositories/auth_repository_impl.dart';
-import 'package:starter/data/auth/sources/local/auth_local_data_source.dart';
-import 'package:starter/data/auth/sources/remote/auth_remote_data_source.dart';
-import 'package:starter/domain/auth/entities/auth_token.dart';
+import 'package:super_flutter/core/network/dio_client.dart';
+import 'package:super_flutter/data/auth/model/user_model.dart';
+import 'package:super_flutter/data/auth/repositories/auth_repository_impl.dart';
+import 'package:super_flutter/data/auth/sources/local/auth_local_data_source.dart';
+import 'package:super_flutter/data/auth/sources/remote/auth_remote_data_source.dart';
+import 'package:super_flutter/domain/auth/entities/auth_token.dart';
 
 class MockRemoteDataSource extends Mock implements AuthRemoteDataSource {}
 

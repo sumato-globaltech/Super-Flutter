@@ -1,4 +1,4 @@
-package tech.sumato.flutterstarter.starter
+package tech.sumato.superflutter
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:starter/core/di/injection.dart';
-import 'package:starter/core/localization/app_localizations.dart';
-import 'package:starter/core/ui/layouts/app_scaffold.dart';
-import 'package:starter/core/ui/theme/app_spacing.dart';
-import 'package:starter/core/ui/widgets/app_button.dart';
-import 'package:starter/core/ui/widgets/app_text_field.dart';
+import 'package:super_flutter/core/di/injection.dart';
+import 'package:super_flutter/core/localization/app_localizations.dart';
+import 'package:super_flutter/core/ui/layouts/app_scaffold.dart';
+import 'package:super_flutter/core/ui/theme/app_spacing.dart';
+import 'package:super_flutter/core/ui/widgets/app_button.dart';
+import 'package:super_flutter/core/ui/widgets/app_text_field.dart';
 
 import '../bloc/login_bloc.dart';
 import '../bloc/login_event.dart';

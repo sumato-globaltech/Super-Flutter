@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:starter/core/network/session_manager.dart';
+import 'package:super_flutter/core/network/session_manager.dart';
 
-import 'package:starter/core/storage/storage_service.dart';
-import 'package:starter/features/auth/session/bloc/auth_cubit.dart';
+import 'package:super_flutter/core/storage/storage_service.dart';
+import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 
 class MockStorageService extends Mock implements StorageService {}
 

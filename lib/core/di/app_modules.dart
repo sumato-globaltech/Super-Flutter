@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart' hide Environment;
-import 'package:starter/app/config/app_config.dart';
-import 'package:starter/app/config/environment.dart';
+import 'package:super_flutter/app/config/app_config.dart';
+import 'package:super_flutter/app/config/environment.dart';
 
 import '../error/composite_error_reporter.dart';
 import '../error/error_reporter.dart';

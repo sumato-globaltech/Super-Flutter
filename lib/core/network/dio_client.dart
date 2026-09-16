@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:starter/core/network/network_constants.dart';
+import 'package:super_flutter/core/network/network_constants.dart';
 
 import '../../app/config/environment.dart';
 import '../logging/app_logger.dart';

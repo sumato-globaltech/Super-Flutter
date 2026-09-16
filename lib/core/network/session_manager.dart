@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:starter/core/storage/storage_service.dart';
+import 'package:super_flutter/core/storage/storage_service.dart';
 
 import '../../features/auth/session/bloc/auth_cubit.dart';
 

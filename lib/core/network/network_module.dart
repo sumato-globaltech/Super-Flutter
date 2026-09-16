@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart' hide Environment;
-import 'package:starter/core/network/session_manager.dart';
+import 'package:super_flutter/core/network/session_manager.dart';
 
 import '../logging/app_logger.dart';
 import '../storage/secure_storage.dart';

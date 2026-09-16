@@ -1,5 +1,5 @@
-import 'package:starter/features/auth/routes/auth_route_names.dart';
-import 'package:starter/features/dashboard/routes/dashboard_route_names.dart';
+import 'package:super_flutter/features/auth/routes/auth_route_names.dart';
+import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
 
 /// App-shell routes plus compat re-exports for feature-owned paths.
 ///

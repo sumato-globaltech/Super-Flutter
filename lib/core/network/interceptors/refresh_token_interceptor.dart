@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:starter/core/network/network_constants.dart';
+import 'package:super_flutter/core/network/network_constants.dart';
 
 import '../../error/exceptions/unauthorized_exception.dart';
 import '../../storage/secure_storage.dart';

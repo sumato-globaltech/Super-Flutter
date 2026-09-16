@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:starter/core/storage/secure_storage.dart';
+import 'package:super_flutter/core/storage/secure_storage.dart';
 
 import '../network_constants.dart';
 

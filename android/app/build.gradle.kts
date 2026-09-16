@@ -14,7 +14,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "tech.sumato.flutterstarter.starter"
+    namespace = "tech.sumato.superflutter"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -26,7 +26,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "tech.sumato.flutterstarter.starter"
+        applicationId = "tech.sumato.superflutter"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
@@ -60,17 +60,18 @@ android {
     productFlavors {
         create("production") {
             dimension = "default"
-            applicationIdSuffix = "flutter starter"
+            applicationIdSuffix = ""
+            manifestPlaceholders["appName"] = "Super Flutter"
         }
         create("staging") {
             dimension = "default"
             applicationIdSuffix = ".stg"
-            manifestPlaceholders["appName"] = "[STG] flutter starter"
+            manifestPlaceholders["appName"] = "[STG] Super Flutter"
         }
         create("development") {
             dimension = "default"
             applicationIdSuffix = ".dev"
-            manifestPlaceholders["appName"] = "[DEV] flutter starter"
+            manifestPlaceholders["appName"] = "[DEV] Super Flutter"
         }
     }
 

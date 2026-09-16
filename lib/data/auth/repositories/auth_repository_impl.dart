@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
-import 'package:starter/data/auth/sources/local/auth_local_data_source.dart';
-import 'package:starter/data/auth/sources/remote/auth_remote_data_source.dart';
-import 'package:starter/domain/auth/entities/user.dart';
+import 'package:super_flutter/data/auth/sources/local/auth_local_data_source.dart';
+import 'package:super_flutter/data/auth/sources/remote/auth_remote_data_source.dart';
+import 'package:super_flutter/domain/auth/entities/user.dart';
 
 import '../../../domain/auth/repositories/auth_repository.dart';
 

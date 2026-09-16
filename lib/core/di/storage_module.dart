@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart' hide Environment;
-import 'package:starter/app/config/environment.dart';
+import 'package:super_flutter/app/config/environment.dart';
 
 import '../storage/local_storage.dart';
 import '../storage/secure_storage.dart';

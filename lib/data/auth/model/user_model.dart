@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:starter/domain/auth/entities/user.dart';
+import 'package:super_flutter/domain/auth/entities/user.dart';
 
 part 'user_model.g.dart';
 

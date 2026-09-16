@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:starter/core/error/app_exception.dart';
-import 'package:starter/core/error/exceptions/cache_exception.dart';
-import 'package:starter/core/error/exceptions/unauthorized_exception.dart';
-import 'package:starter/core/error/exceptions/unknown_exception.dart';
-import 'package:starter/core/error/exceptions/validation_exception.dart';
-import 'package:starter/core/network/network_exception_mapper.dart';
+import 'package:super_flutter/core/error/app_exception.dart';
+import 'package:super_flutter/core/error/exceptions/cache_exception.dart';
+import 'package:super_flutter/core/error/exceptions/unauthorized_exception.dart';
+import 'package:super_flutter/core/error/exceptions/unknown_exception.dart';
+import 'package:super_flutter/core/error/exceptions/validation_exception.dart';
+import 'package:super_flutter/core/network/network_exception_mapper.dart';
 
 import '../theme/app_dimensions.dart';
 import '../theme/app_spacing.dart';

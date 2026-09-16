@@ -12,33 +12,33 @@
 
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
-import 'package:starter/app/config/app_config.dart' as _i260;
-import 'package:starter/app/config/environment.dart' as _i604;
-import 'package:starter/core/di/app_modules.dart' as _i361;
-import 'package:starter/core/di/storage_module.dart' as _i1056;
-import 'package:starter/core/error/app_error_handler.dart' as _i527;
-import 'package:starter/core/error/error_reporter.dart' as _i982;
-import 'package:starter/core/logging/app_logger.dart' as _i474;
-import 'package:starter/core/network/dio_client.dart' as _i806;
-import 'package:starter/core/network/network_module.dart' as _i217;
-import 'package:starter/core/network/session_manager.dart' as _i708;
-import 'package:starter/core/storage/local_storage.dart' as _i915;
-import 'package:starter/core/storage/secure_storage.dart' as _i733;
-import 'package:starter/core/storage/storage_service.dart' as _i1064;
-import 'package:starter/data/auth/repositories/auth_repository_impl.dart'
+import 'package:super_flutter/app/config/app_config.dart' as _i260;
+import 'package:super_flutter/app/config/environment.dart' as _i604;
+import 'package:super_flutter/core/di/app_modules.dart' as _i361;
+import 'package:super_flutter/core/di/storage_module.dart' as _i1056;
+import 'package:super_flutter/core/error/app_error_handler.dart' as _i527;
+import 'package:super_flutter/core/error/error_reporter.dart' as _i982;
+import 'package:super_flutter/core/logging/app_logger.dart' as _i474;
+import 'package:super_flutter/core/network/dio_client.dart' as _i806;
+import 'package:super_flutter/core/network/network_module.dart' as _i217;
+import 'package:super_flutter/core/network/session_manager.dart' as _i708;
+import 'package:super_flutter/core/storage/local_storage.dart' as _i915;
+import 'package:super_flutter/core/storage/secure_storage.dart' as _i733;
+import 'package:super_flutter/core/storage/storage_service.dart' as _i1064;
+import 'package:super_flutter/data/auth/repositories/auth_repository_impl.dart'
     as _i459;
-import 'package:starter/data/auth/sources/local/auth_local_data_source.dart'
+import 'package:super_flutter/data/auth/sources/local/auth_local_data_source.dart'
     as _i195;
-import 'package:starter/data/auth/sources/remote/auth_remote_data_source.dart'
+import 'package:super_flutter/data/auth/sources/remote/auth_remote_data_source.dart'
     as _i701;
-import 'package:starter/domain/auth/repositories/auth_repository.dart' as _i902;
-import 'package:starter/domain/auth/use_cases/check_auth_status.dart' as _i862;
-import 'package:starter/domain/auth/use_cases/login.dart' as _i412;
-import 'package:starter/domain/auth/use_cases/logout.dart' as _i605;
-import 'package:starter/features/auth/presentation/login/bloc/login_bloc.dart'
+import 'package:super_flutter/domain/auth/repositories/auth_repository.dart' as _i902;
+import 'package:super_flutter/domain/auth/use_cases/check_auth_status.dart' as _i862;
+import 'package:super_flutter/domain/auth/use_cases/login.dart' as _i412;
+import 'package:super_flutter/domain/auth/use_cases/logout.dart' as _i605;
+import 'package:super_flutter/features/auth/presentation/login/bloc/login_bloc.dart'
     as _i444;
-import 'package:starter/features/auth/session/bloc/auth_cubit.dart' as _i477;
-import 'package:starter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart'
+import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart' as _i477;
+import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart'
     as _i6;
 
 extension GetItInjectableX on _i174.GetIt {
