@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:starter/core/network/session_manager.dart';
 
 import 'package:starter/core/storage/storage_service.dart';
-import 'package:starter/features/auth/presentation/bloc/auth_cubit.dart';
+import 'package:starter/features/auth/session/bloc/auth_cubit.dart';
 
 class MockStorageService extends Mock implements StorageService {}
 

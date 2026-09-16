@@ -16,7 +16,7 @@ import '../core/localization/app_localizations.dart';
 import '../core/storage/storage_service.dart';
 import '../core/ui/theme/app_colors.dart';
 import '../core/ui/theme/app_theme.dart';
-import '../features/auth/presentation/bloc/auth_cubit.dart';
+import '../features/auth/session/bloc/auth_cubit.dart';
 
 Future<void> bootstrap(AppConfig config) async {
   await runZonedGuarded(

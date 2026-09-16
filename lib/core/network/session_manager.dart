@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:starter/core/storage/storage_service.dart';
 
-import '../../features/auth/presentation/bloc/auth_cubit.dart';
+import '../../features/auth/session/bloc/auth_cubit.dart';
 
 abstract interface class SessionManager {
   Future<void> onSessionExpired();

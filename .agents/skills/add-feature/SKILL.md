@@ -9,13 +9,20 @@ Scaffold order matters: domain first, then data, then presentation, then routes,
 
 ## Required layout
 
+Every feature contains `routes/` plus one folder per screen; there is no
+`presentation/` level. Shared state gets its own explicitly-named folder.
+
 ```
 lib/features/<name>/
   routes/<name>_route_names.dart
   routes/<name>_routes.dart            # build<Name>Routes()
-  presentation/
-    bloc/                              # shared small cubits only (optional)
-    screen/  (or <screen>/bloc + <screen>/view for multi-screen features)
+  <screen>/
+    screen/<screen>_screen.dart
+    bloc/<screen>_bloc.dart, <screen>_event.dart, <screen>_state.dart
+    widgets/                           # screen-private components (only when needed)
+  <shared-scope>/                      # e.g. session/ — only when needed
+    bloc/<shared>_cubit.dart, <shared>_state.dart
+  widgets/                             # feature-shared components (only when needed)
 lib/domain/<name>/
   entities/ repositories/<name>_repository.dart  use_cases/
 lib/data/<name>/
@@ -24,10 +31,9 @@ lib/data/<name>/
 test/features/<name>/ test/data/<name>/
 ```
 
-Single-screen features use flat `presentation/bloc` + `presentation/screen`
-(like `features/dashboard`). Multi-screen features nest per screen
-(`presentation/login/bloc` + `presentation/login/view`) — either is fine, but
-one Bloc per screen always.
+Live examples: `features/auth` (`login/` screen + `session/` shared Cubit),
+`features/dashboard` (`dashboard/` screen). One Bloc per screen, always nested
+— never a flat shared `bloc/` + `screen/` split.
 
 ## Rules
 

@@ -10,16 +10,18 @@ small shared tasks (e.g. status-only `AuthCubit` consumed by the router).
 
 ## Files (per screen)
 
+The screen lives with its Bloc — no `presentation/` level:
+
 ```
-lib/features/<feature>/presentation/screen/<name>_screen.dart
-lib/features/<feature>/presentation/bloc/<name>_bloc.dart
-lib/features/<feature>/presentation/bloc/<name>_event.dart
-lib/features/<feature>/presentation/bloc/<name>_state.dart
+lib/features/<feature>/<screen>/screen/<name>_screen.dart
+lib/features/<feature>/<screen>/bloc/<name>_bloc.dart
+lib/features/<feature>/<screen>/bloc/<name>_event.dart
+lib/features/<feature>/<screen>/bloc/<name>_state.dart
+lib/features/<feature>/<screen>/widgets/        # screen-private (only when needed)
 ```
 
-Multi-screen features may nest instead:
-`presentation/<screen>/bloc/` + `presentation/<screen>/view/`. Pick one shape
-per feature and stay consistent.
+Shared Cubits (e.g. status-only `AuthCubit`) live in an explicitly-named scope
+such as `features/auth/session/bloc/`, never mixed into a screen's `bloc/`.
 
 ## State shape
 
@@ -76,8 +78,8 @@ operation genuinely changes session status. Never inject `AuthCubit` into
   submit button dispatches `Submitted()` after `Form.validate()`.
 - `BlocConsumer`: listener shows `SnackBar` on `failure` (do not navigate on
   success — GoRouter redirect on `AuthCubit.stream` handles it where relevant).
-- Reference implementations: `features/auth/presentation/screen/login_screen.dart`,
-  `features/dashboard/presentation/screen/dashboard_screen.dart`.
+- Reference implementations: `features/auth/login/screen/login_screen.dart`,
+  `features/dashboard/dashboard/screen/dashboard_screen.dart`.
 
 ## Tests
 

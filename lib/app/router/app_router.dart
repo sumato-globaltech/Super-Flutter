@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/auth/presentation/bloc/auth_cubit.dart';
-import '../../features/auth/presentation/bloc/auth_state.dart';
+import '../../features/auth/session/bloc/auth_cubit.dart';
+import '../../features/auth/session/bloc/auth_state.dart';
 import '../../features/auth/routes/auth_route_names.dart';
 import '../../features/auth/routes/auth_routes.dart';
 import '../../features/dashboard/routes/dashboard_route_names.dart';

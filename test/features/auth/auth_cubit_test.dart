@@ -2,8 +2,8 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:starter/domain/auth/use_cases/check_auth_status.dart';
-import 'package:starter/features/auth/presentation/bloc/auth_cubit.dart';
-import 'package:starter/features/auth/presentation/bloc/auth_state.dart';
+import 'package:starter/features/auth/session/bloc/auth_cubit.dart';
+import 'package:starter/features/auth/session/bloc/auth_state.dart';
 
 class MockCheckAuthStatus extends Mock implements CheckAuthStatus {}
 
