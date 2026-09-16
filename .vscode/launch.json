@@ -8,7 +8,9 @@
       "program": "lib/main_development.dart",
       "args": [
         "--flavor",
-        "development"
+        "development",
+        "--dart-define-from-file",
+        ".env"
       ]
     },
     {

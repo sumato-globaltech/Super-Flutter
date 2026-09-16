@@ -18,7 +18,7 @@ class Environment {
   factory Environment.development() => const Environment(
     flavor: Flavor.development,
     appName: 'Flutter Kit Dev',
-    apiBaseUrl: 'https://dummyjson.com',
+    apiBaseUrl: String.fromEnvironment("BASE_URL", defaultValue: 'https://dummyjson.com'),
     databaseName: 'flutter_kit_dev',
     connectTimeout: Duration(seconds: 30),
     receiveTimeout: Duration(seconds: 30),
