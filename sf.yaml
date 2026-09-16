@@ -18,17 +18,22 @@ paths:
   core: lib/core
   app: lib/app
   test: test
+  extra:
+    di: lib/core/di
+    network: lib/core/network
+    router: lib/app/router
+    ui: lib/core/ui
 components:
-  cubit:
+  bloc:
     scope: feature
     root: presentation
-    dir: presentation/bloc
+    dir: presentation/{name}/bloc
     file_case: snake_case
     class_case: pascal_case
-    file_suffix: _cubit
-    class_suffix: Cubit
-    template: cubit
-    description: Cubit for feature state management
+    file_suffix: _bloc
+    class_suffix: Bloc
+    template: bloc
+    description: Bloc for one screen
   entity:
     scope: feature
     root: domain
@@ -37,6 +42,16 @@ components:
     class_case: pascal_case
     template: entity
     description: Immutable domain entity (extends Equatable)
+  event:
+    scope: feature
+    root: presentation
+    dir: presentation/{name}/bloc
+    file_case: snake_case
+    class_case: pascal_case
+    file_suffix: _event
+    class_suffix: Event
+    template: event
+    description: Bloc event base class
   local_data_source:
     scope: feature
     root: data
@@ -87,26 +102,66 @@ components:
     class_suffix: RepositoryImpl
     template: repository_impl
     description: Repository implementation registered with injectable
+  route_names:
+    scope: feature
+    root: presentation
+    dir: routes
+    file_case: snake_case
+    class_case: pascal_case
+    file_suffix: _route_names
+    class_suffix: RouteNames
+    template: route_names
+    description: Route name constants for the feature
+  routes:
+    scope: feature
+    root: presentation
+    dir: routes
+    file_case: snake_case
+    class_case: pascal_case
+    file_suffix: _routes
+    class_suffix: Routes
+    template: routes
+    description: The feature's go_router routes
   screen:
     scope: feature
     root: presentation
-    dir: presentation/screens
+    dir: presentation/{name}/screen
     file_case: snake_case
     class_case: pascal_case
     file_suffix: _screen
     class_suffix: Screen
     template: screen
     description: Screen widget
-  state:
+  session_cubit:
     scope: feature
     root: presentation
-    dir: presentation/bloc
+    dir: session/bloc
+    file_case: snake_case
+    class_case: pascal_case
+    file_suffix: _cubit
+    class_suffix: Cubit
+    template: cubit
+    description: Feature-wide cubit (session state)
+  session_state:
+    scope: feature
+    root: presentation
+    dir: session/bloc
     file_case: snake_case
     class_case: pascal_case
     file_suffix: _state
     class_suffix: State
     template: state
-    description: Cubit state class
+    description: State class for a feature-wide cubit
+  state:
+    scope: feature
+    root: presentation
+    dir: presentation/{name}/bloc
+    file_case: snake_case
+    class_case: pascal_case
+    file_suffix: _state
+    class_suffix: State
+    template: state
+    description: Bloc state class
   use_case:
     scope: feature
     root: domain
