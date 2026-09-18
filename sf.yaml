@@ -191,11 +191,9 @@ feature:
         - remote_data_source
         - local_data_source
         - repository_impl
-      default: true
     domain:
       kinds:
         - repository
-      default: true
     session:
       kinds:
         - session_cubit
