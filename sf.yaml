@@ -177,6 +177,22 @@ components:
     class_case: pascal_case
     template: widget
     description: Shared UI widget
+feature:
+  components:
+    - repository
+    - remote_data_source
+    - local_data_source
+    - repository_impl
+    - event
+    - state
+    - bloc
+    - screen
+    - route_names
+    - routes
+  optional:
+    session:
+      - session_cubit
+      - session_state
 generation:
   format: true
   analyze: false
