@@ -10,7 +10,8 @@ import 'package:super_flutter/core/error/app_error_handler.dart';
 import 'package:super_flutter/core/error/error_reporter.dart';
 import 'package:super_flutter/core/logging/app_logger.dart';
 import 'package:super_flutter/core/logging/logging_bloc_observer.dart';
-
+// sf:app-bloc-imports:begin
+// sf:app-bloc-imports:end
 import '../core/di/injection.dart';
 import '../core/localization/app_localizations.dart';
 import '../core/storage/storage_service.dart';
