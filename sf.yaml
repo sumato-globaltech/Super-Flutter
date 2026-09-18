@@ -132,6 +132,13 @@ components:
     class_suffix: Screen
     template: screen
     description: Screen widget
+    variants:
+      default: stateless
+      options:
+        - name: stateless
+          description: rebuilds from its inputs; holds nothing
+        - name: stateful
+          description: owns a State object - controllers, keys, animations
   session_cubit:
     scope: feature
     root: presentation
