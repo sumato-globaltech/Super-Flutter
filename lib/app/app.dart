@@ -87,7 +87,10 @@ class _MyAppState extends State<MyApp> {
     return BlocProvider.value(
       value: _authCubit,
       child: MultiBlocProvider(
-        providers: [],
+        providers: [
+          // sf:app-blocs:begin
+          // sf:app-blocs:end
+        ],
         child: MaterialApp.router(
           title: _config.appName,
           debugShowCheckedModeBanner: false,
