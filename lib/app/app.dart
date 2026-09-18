@@ -26,7 +26,6 @@ Future<void> bootstrap(AppConfig config) async {
       await configureDependencies(config);
       getIt.get<AppErrorHandler>().initialize();
 
-
       final appLogger = getIt.get<AppLogger>();
 
       // Bloc activity logger
@@ -69,7 +68,10 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    _router = createRouter(authCubit: _authCubit, config: getIt.get<AppConfig>());
+    _router = createRouter(
+      authCubit: _authCubit,
+      config: getIt.get<AppConfig>(),
+    );
 
     _authCubit.initialize();
   }
@@ -84,29 +86,32 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: _authCubit,
-      child: MaterialApp.router(
-        title: _config.appName,
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.light(_config.flavor),
-        darkTheme: AppTheme.dark(_config.flavor),
-        routerConfig: _router,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: AppLocalizations.supportedLocales,
-        builder: (context, child) {
-          final content = child ?? const SizedBox.shrink();
-          if (!_config.environment.showFlavorBanner) return content;
-          return Banner(
-            message: _config.flavor.label,
-            location: BannerLocation.topEnd,
-            color: AppColors.seedFor(_config.flavor),
-            child: content,
-          );
-        },
+      child: MultiBlocProvider(
+        providers: [],
+        child: MaterialApp.router(
+          title: _config.appName,
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.light(_config.flavor),
+          darkTheme: AppTheme.dark(_config.flavor),
+          routerConfig: _router,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          builder: (context, child) {
+            final content = child ?? const SizedBox.shrink();
+            if (!_config.environment.showFlavorBanner) return content;
+            return Banner(
+              message: _config.flavor.label,
+              location: BannerLocation.topEnd,
+              color: AppColors.seedFor(_config.flavor),
+              child: content,
+            );
+          },
+        ),
       ),
     );
   }
