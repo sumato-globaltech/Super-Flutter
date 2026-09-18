@@ -34,6 +34,16 @@ components:
     class_suffix: Bloc
     template: bloc
     description: Bloc for one screen
+    variants:
+      default: current
+      options:
+        - name: current
+          description: Bloc owned by the current screen
+        - name: global
+          description: Bloc provided globally by the application
+        - name: skip
+          description: Do not generate a bloc
+          generates: false
   entity:
     scope: feature
     root: domain
@@ -101,7 +111,7 @@ components:
     file_suffix: _repository_impl
     class_suffix: RepositoryImpl
     template: repository_impl
-    description: Repository implementation registered with injectable
+    description: Repository implementation
   route_names:
     scope: feature
     root: presentation
@@ -211,6 +221,12 @@ feature:
       imports: sf:feature-routes-imports
       entries: sf:feature-routes
       entry: '...build{{ .ClassName }}(),'
+    - file: lib/app/app.dart
+      component: bloc
+      imports: sf:app-bloc-imports
+      entries: sf:app-blocs
+      entry: 'BlocProvider(create: (_) => {{ .ClassName }}()),'
+      when: bloc=global
 generation:
   format: true
   analyze: false
