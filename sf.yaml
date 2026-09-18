@@ -179,8 +179,6 @@ components:
     description: Shared UI widget
 feature:
   components:
-    - remote_data_source
-    - local_data_source
     - event
     - state
     - bloc
@@ -188,10 +186,15 @@ feature:
     - route_names
     - routes
   optional:
+    data:
+      kinds:
+        - remote_data_source
+        - local_data_source
+        - repository_impl
+      default: true
     domain:
       kinds:
         - repository
-        - repository_impl
       default: true
     session:
       kinds:
