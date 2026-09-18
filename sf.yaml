@@ -198,6 +198,12 @@ feature:
       kinds:
         - session_cubit
         - session_state
+  register:
+    - file: lib/app/router/app_router.dart
+      component: routes
+      imports: sf:feature-routes-imports
+      entries: sf:feature-routes
+      entry: '...build{{ .ClassName }}(),'
 generation:
   format: true
   analyze: false

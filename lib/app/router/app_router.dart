@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+// sf:feature-routes-imports:begin
+import 'package:super_flutter/features/auth/routes/auth_routes.dart';
+import 'package:super_flutter/features/dashboard/routes/dashboard_routes.dart';
+// sf:feature-routes-imports:end
 
 import '../../features/auth/session/bloc/auth_cubit.dart';
 import '../../features/auth/session/bloc/auth_state.dart';
 import '../../features/auth/routes/auth_route_names.dart';
-import '../../features/auth/routes/auth_routes.dart';
 import '../../features/dashboard/routes/dashboard_route_names.dart';
-import '../../features/dashboard/routes/dashboard_routes.dart';
 import '../config/app_config.dart';
 import '../startup/splash_screen.dart';
 import 'router_refresh.dart';
@@ -53,8 +55,10 @@ GoRouter createRouter({required AuthCubit authCubit, required AppConfig config})
         name: RouteNames.splash,
         builder: (context, state) => const SplashScreen(),
       ),
+      // sf:feature-routes:begin
       ...buildAuthRoutes(),
       ...buildDashboardRoutes(),
+      // sf:feature-routes:end
     ],
   );
 }
