@@ -9,7 +9,7 @@ import 'package:super_flutter/features/map/presentation/map/bloc/map_camera_even
 class MapView extends StatefulWidget {
   const MapView({
     super.key,
-    this.initialTarget = const LatLng(37.7749, -122.4194),
+    this.initialTarget = const LatLng(26.115103, 91.703239),
     this.initialZoom = 12,
   });
 
@@ -24,14 +24,17 @@ class _MapViewState extends State<MapView> {
   @override
   Widget build(BuildContext context) {
     return MapLibreMap(
-      initialCameraPosition: CameraPosition(
-        target: widget.initialTarget,
-        zoom: widget.initialZoom,
-      ),
+      styleString: 'https://api.protomaps.com/styles/v5/dark/en.json?key=73c45a97eddd43fb',
+      initialCameraPosition: CameraPosition(target: widget.initialTarget, zoom: widget.initialZoom),
       trackCameraPosition: true,
       onMapCreated: (controller) {
         if (mounted) {
           context.read<MapCameraBloc>().add(MapCameraReady(controller));
+        }
+      },
+      onStyleLoadedCallback: () {
+        if (mounted) {
+          context.read<MapCameraBloc>().add(const MapStyleLoaded());
         }
       },
     );

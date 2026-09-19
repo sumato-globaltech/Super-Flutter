@@ -61,6 +61,16 @@ class MapCameraControls extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             _ControlButton(
+              tooltip: state.globeEnabled
+                  ? 'Switch to flat map'
+                  : 'Switch to globe',
+              icon: Icons.public_outlined,
+              enabled: enabled,
+              selected: state.globeEnabled,
+              onPressed: () => bloc.add(const MapProjectionToggled()),
+            ),
+            const SizedBox(height: 16),
+            _ControlButton(
               tooltip: 'Reset North-up',
               icon: Icons.explore_outlined,
               enabled: enabled,
@@ -79,15 +89,18 @@ class _ControlButton extends StatelessWidget {
     required this.icon,
     required this.enabled,
     required this.onPressed,
+    this.selected = false,
   });
 
   final String tooltip;
   final IconData icon;
   final bool enabled;
   final VoidCallback onPressed;
+  final bool selected;
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
     return Semantics(
       button: true,
       label: tooltip,
@@ -95,6 +108,8 @@ class _ControlButton extends StatelessWidget {
         heroTag: tooltip,
         tooltip: tooltip,
         onPressed: enabled ? onPressed : null,
+        backgroundColor: selected ? scheme.primary : null,
+        foregroundColor: selected ? scheme.onPrimary : null,
         child: Icon(icon),
       ),
     );

@@ -45,6 +45,8 @@ import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/das
     as _i930;
 import 'package:super_flutter/features/map/presentation/map/bloc/map_camera_bloc.dart'
     as _i114;
+import 'package:super_flutter/features/map/presentation/map/style/map_style_enhancer.dart'
+    as _i478;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -56,7 +58,6 @@ extension GetItInjectableX on _i174.GetIt {
     final coreModule = _$CoreModule();
     final storageModule = _$StorageModule();
     final networkModule = _$NetworkModule();
-    gh.factory<_i114.MapCameraBloc>(() => _i114.MapCameraBloc());
     gh.lazySingleton<_i451.AppLogger>(() => coreModule.logger);
     gh.lazySingleton<_i491.SecureStorage>(() => storageModule.secureStorage());
     gh.lazySingleton<_i1067.Environment>(
@@ -64,6 +65,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i635.LocalDatabase>(
       () => storageModule.localDatabase(gh<_i1067.Environment>()),
+    );
+    gh.factory<_i478.MapStyleEnhancer>(
+      () => _i478.MapStyleEnhancer(gh<_i451.AppLogger>()),
     );
     gh.lazySingleton<_i246.ErrorReporter>(
       () => coreModule.errorReporter(gh<_i451.AppLogger>()),
@@ -80,6 +84,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i827.SessionManager>(
       () =>
           _i827.SessionManagerImpl(storageService: gh<_i407.StorageService>()),
+    );
+    gh.factory<_i114.MapCameraBloc>(
+      () => _i114.MapCameraBloc(gh<_i478.MapStyleEnhancer>()),
     );
     gh.lazySingleton<_i396.AppErrorHandler>(
       () => _i396.AppErrorHandler(gh<_i246.ErrorReporter>()),

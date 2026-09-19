@@ -1,16 +1,20 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
+import 'package:super_flutter/features/map/presentation/map/style/map_style_enhancer.dart';
 
 import 'map_camera_event.dart';
 import 'map_camera_state.dart';
 
 /// Screen Bloc for [MapScreen]. Owns animated camera movements (zoom, tilt,
-/// bearing) driven by [MapCameraControls]. No-ops until [MapCameraReady].
+/// bearing), globe/terrain/sky styling and the globe toggle, driven by
+/// [MapCameraControls]. No-ops until [MapCameraReady].
 @injectable
 class MapCameraBloc extends Bloc<MapCameraEvent, MapCameraState> {
-  MapCameraBloc() : super(const MapCameraState()) {
+  MapCameraBloc(this._styleEnhancer) : super(const MapCameraState()) {
     on<MapCameraReady>(_onReady);
+    on<MapStyleLoaded>(_onStyleLoaded);
+    on<MapProjectionToggled>(_onProjectionToggled);
     on<MapZoomInRequested>(
       (e, emit) => _animate(emit, CameraUpdate.zoomIn()),
     );
@@ -30,11 +34,34 @@ class MapCameraBloc extends Bloc<MapCameraEvent, MapCameraState> {
   static const double _maxTilt = 60;
   static const Duration _animationDuration = Duration(milliseconds: 800);
 
+  final MapStyleEnhancer _styleEnhancer;
+
   MapLibreMapController? _controller;
 
   void _onReady(MapCameraReady event, Emitter<MapCameraState> emit) {
     _controller = event.controller as MapLibreMapController;
     emit(state.copyWith(isReady: true));
+  }
+
+  Future<void> _onStyleLoaded(
+    MapStyleLoaded event,
+    Emitter<MapCameraState> emit,
+  ) async {
+    final controller = _controller;
+    if (controller == null) return;
+    final applied = await _styleEnhancer.enhance(controller);
+    if (!isClosed) emit(state.copyWith(globeEnabled: applied));
+  }
+
+  Future<void> _onProjectionToggled(
+    MapProjectionToggled event,
+    Emitter<MapCameraState> emit,
+  ) async {
+    final controller = _controller;
+    if (controller == null) return;
+    final enabled = !state.globeEnabled;
+    emit(state.copyWith(globeEnabled: enabled));
+    await _styleEnhancer.setGlobeEnabled(controller, enabled);
   }
 
   Future<void> _animate(Emitter<MapCameraState> emit, CameraUpdate update) async {

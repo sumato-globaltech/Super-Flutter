@@ -12,11 +12,22 @@ class MapCameraReady extends MapCameraEvent {
   const MapCameraReady(this.controller);
 
   /// Typed as [Object] to keep the event layer decoupled from the map
-  /// package; the Bloc casts it to `MapController` internally.
+  /// package; the Bloc casts it to `MapLibreMapController` internally.
   final Object controller;
 
   @override
   List<Object?> get props => [controller];
+}
+
+/// Fired from [MapView.onStyleLoadedCallback]; triggers globe projection,
+/// 3D terrain and sky (web-only, silently skipped on native).
+class MapStyleLoaded extends MapCameraEvent {
+  const MapStyleLoaded();
+}
+
+/// Toggles the style projection between globe and mercator.
+class MapProjectionToggled extends MapCameraEvent {
+  const MapProjectionToggled();
 }
 
 class MapZoomInRequested extends MapCameraEvent {
