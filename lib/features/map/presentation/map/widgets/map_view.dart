@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:maplibre/maplibre.dart';
+import 'package:maplibre_gl/maplibre_gl.dart';
 import 'package:super_flutter/features/map/presentation/map/bloc/map_camera_bloc.dart';
 import 'package:super_flutter/features/map/presentation/map/bloc/map_camera_event.dart';
 
@@ -9,11 +9,11 @@ import 'package:super_flutter/features/map/presentation/map/bloc/map_camera_even
 class MapView extends StatefulWidget {
   const MapView({
     super.key,
-    this.initialCenter = const Geographic(lon: -122.4194, lat: 37.7749),
+    this.initialTarget = const LatLng(37.7749, -122.4194),
     this.initialZoom = 12,
   });
 
-  final Geographic initialCenter;
+  final LatLng initialTarget;
   final double initialZoom;
 
   @override
@@ -24,10 +24,11 @@ class _MapViewState extends State<MapView> {
   @override
   Widget build(BuildContext context) {
     return MapLibreMap(
-      options: MapOptions(
-        initCenter: widget.initialCenter,
-        initZoom: widget.initialZoom,
+      initialCameraPosition: CameraPosition(
+        target: widget.initialTarget,
+        zoom: widget.initialZoom,
       ),
+      trackCameraPosition: true,
       onMapCreated: (controller) {
         if (mounted) {
           context.read<MapCameraBloc>().add(MapCameraReady(controller));

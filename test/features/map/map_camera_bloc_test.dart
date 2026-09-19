@@ -1,27 +1,28 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:maplibre/maplibre.dart';
+import 'package:maplibre_gl/maplibre_gl.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:super_flutter/features/map/presentation/map/bloc/map_camera_bloc.dart';
 import 'package:super_flutter/features/map/presentation/map/bloc/map_camera_event.dart';
 import 'package:super_flutter/features/map/presentation/map/bloc/map_camera_state.dart';
 
-class MockMapController extends Mock implements MapController {}
+class MockMapController extends Mock implements MapLibreMapController {}
 
-MapCamera _camera({
+CameraPosition _position({
   double zoom = 12,
   double bearing = 0,
-  double pitch = 0,
-}) => MapCamera(
-  center: const Geographic(lon: -122.4194, lat: 37.7749),
+  double tilt = 0,
+}) => CameraPosition(
+  target: const LatLng(37.7749, -122.4194),
   zoom: zoom,
   bearing: bearing,
-  pitch: pitch,
+  tilt: tilt,
 );
 
 void main() {
   setUpAll(() {
-    registerFallbackValue(Duration.zero);
+    registerFallbackValue(CameraUpdate.zoomIn());
+    registerFallbackValue(const Duration(milliseconds: 800));
   });
 
   late MockMapController controller;
@@ -29,16 +30,8 @@ void main() {
   setUp(() {
     controller = MockMapController();
     when(
-      () => controller.animateCamera(
-        center: any(named: 'center'),
-        zoom: any(named: 'zoom'),
-        bearing: any(named: 'bearing'),
-        pitch: any(named: 'pitch'),
-        nativeDuration: any(named: 'nativeDuration'),
-        webSpeed: any(named: 'webSpeed'),
-        webMaxDuration: any(named: 'webMaxDuration'),
-      ),
-    ).thenAnswer((_) async {});
+      () => controller.animateCamera(any(), duration: any(named: 'duration')),
+    ).thenAnswer((_) async => true);
   });
 
   blocTest<MapCameraBloc, MapCameraState>(
@@ -47,24 +40,13 @@ void main() {
     act: (b) => b.add(const MapZoomInRequested()),
     expect: () => [],
     verify: (_) => verifyNever(
-      () => controller.animateCamera(
-        center: any(named: 'center'),
-        zoom: any(named: 'zoom'),
-        bearing: any(named: 'bearing'),
-        pitch: any(named: 'pitch'),
-        nativeDuration: any(named: 'nativeDuration'),
-        webSpeed: any(named: 'webSpeed'),
-        webMaxDuration: any(named: 'webMaxDuration'),
-      ),
+      () => controller.animateCamera(any(), duration: any(named: 'duration')),
     ),
   );
 
   blocTest<MapCameraBloc, MapCameraState>(
-    'zooms in by one level with animation',
-    build: () {
-      when(() => controller.getCamera()).thenReturn(_camera());
-      return MapCameraBloc();
-    },
+    'zooms in with animation',
+    build: () => MapCameraBloc(),
     seed: () => const MapCameraState(isReady: true),
     act: (b) => b
       ..add(MapCameraReady(controller))
@@ -73,61 +55,64 @@ void main() {
       const MapCameraState(isReady: true, isMoving: true),
       const MapCameraState(isReady: true),
     ],
-    verify: (_) => verify(
-      () => controller.animateCamera(
-        zoom: 13,
-        bearing: 0,
-        pitch: 0,
-        nativeDuration: const Duration(milliseconds: 800),
-      ),
-    ).called(1),
+    verify: (_) {
+      final captured = verify(
+        () => controller.animateCamera(
+          captureAny(),
+          duration: const Duration(milliseconds: 800),
+        ),
+      ).captured;
+      expect((captured.single as CameraUpdate).toJson(), ['zoomIn']);
+    },
   );
 
   blocTest<MapCameraBloc, MapCameraState>(
-    'tilts up and clamps pitch at 60 degrees',
+    'tilts up and clamps tilt at 60 degrees',
     build: () {
-      when(() => controller.getCamera()).thenReturn(_camera(pitch: 50));
+      when(() => controller.cameraPosition).thenReturn(_position(tilt: 50));
       return MapCameraBloc();
     },
     seed: () => const MapCameraState(isReady: true),
     act: (b) => b
       ..add(MapCameraReady(controller))
       ..add(const MapTiltUpRequested()),
-    verify: (_) => verify(
-      () => controller.animateCamera(
-        zoom: 12,
-        bearing: 0,
-        pitch: 60,
-        nativeDuration: const Duration(milliseconds: 800),
-      ),
-    ).called(1),
+    verify: (_) {
+      final captured = verify(
+        () => controller.animateCamera(
+          captureAny(),
+          duration: any(named: 'duration'),
+        ),
+      ).captured;
+      expect((captured.single as CameraUpdate).toJson(), ['tiltTo', 60.0]);
+    },
   );
 
   blocTest<MapCameraBloc, MapCameraState>(
     'rotates right and wraps bearing at 360 degrees',
     build: () {
-      when(() => controller.getCamera()).thenReturn(_camera(bearing: 350));
+      when(() => controller.cameraPosition).thenReturn(_position(bearing: 350));
       return MapCameraBloc();
     },
     seed: () => const MapCameraState(isReady: true),
     act: (b) => b
       ..add(MapCameraReady(controller))
       ..add(const MapRotateRightRequested()),
-    verify: (_) => verify(
-      () => controller.animateCamera(
-        zoom: 12,
-        bearing: 5,
-        pitch: 0,
-        nativeDuration: const Duration(milliseconds: 800),
-      ),
-    ).called(1),
+    verify: (_) {
+      final captured = verify(
+        () => controller.animateCamera(
+          captureAny(),
+          duration: any(named: 'duration'),
+        ),
+      ).captured;
+      expect((captured.single as CameraUpdate).toJson(), ['bearingTo', 5.0]);
+    },
   );
 
   blocTest<MapCameraBloc, MapCameraState>(
-    'resets to North-up keeping center and zoom',
+    'resets to North-up keeping target and zoom',
     build: () {
-      when(() => controller.getCamera()).thenReturn(
-        _camera(zoom: 14, bearing: 120, pitch: 45),
+      when(() => controller.cameraPosition).thenReturn(
+        _position(zoom: 14, bearing: 120, tilt: 45),
       );
       return MapCameraBloc();
     },
@@ -135,12 +120,20 @@ void main() {
     act: (b) => b
       ..add(MapCameraReady(controller))
       ..add(const MapNorthUpRequested()),
-    verify: (_) => verify(
-      () => controller.animateCamera(
-        bearing: 0,
-        pitch: 0,
-        nativeDuration: const Duration(milliseconds: 800),
-      ),
-    ).called(1),
+    verify: (_) {
+      final captured = verify(
+        () => controller.animateCamera(
+          captureAny(),
+          duration: any(named: 'duration'),
+        ),
+      ).captured;
+      final json = (captured.single as CameraUpdate).toJson() as List;
+      expect(json.first, 'newCameraPosition');
+      final position = CameraPosition.fromMap(json[1])!;
+      expect(position.bearing, 0);
+      expect(position.tilt, 0);
+      expect(position.zoom, 14);
+      expect(position.target.latitude, 37.7749);
+    },
   );
 }

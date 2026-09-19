@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:maplibre/maplibre.dart';
+import 'package:maplibre_gl/maplibre_gl.dart';
 
 import 'map_camera_event.dart';
 import 'map_camera_state.dart';
@@ -11,53 +11,52 @@ import 'map_camera_state.dart';
 class MapCameraBloc extends Bloc<MapCameraEvent, MapCameraState> {
   MapCameraBloc() : super(const MapCameraState()) {
     on<MapCameraReady>(_onReady);
-    on<MapZoomInRequested>((e, emit) => _move(emit, zoomDelta: _zoomStep));
-    on<MapZoomOutRequested>((e, emit) => _move(emit, zoomDelta: -_zoomStep));
-    on<MapTiltUpRequested>((e, emit) => _move(emit, pitchDelta: _tiltStep));
-    on<MapTiltDownRequested>((e, emit) => _move(emit, pitchDelta: -_tiltStep));
-    on<MapRotateLeftRequested>((e, emit) => _move(emit, bearingDelta: -_rotateStep));
-    on<MapRotateRightRequested>(
-      (e, emit) => _move(emit, bearingDelta: _rotateStep),
+    on<MapZoomInRequested>(
+      (e, emit) => _animate(emit, CameraUpdate.zoomIn()),
     );
+    on<MapZoomOutRequested>(
+      (e, emit) => _animate(emit, CameraUpdate.zoomOut()),
+    );
+    on<MapTiltUpRequested>((e, emit) => _tiltBy(emit, _tiltStep));
+    on<MapTiltDownRequested>((e, emit) => _tiltBy(emit, -_tiltStep));
+    on<MapRotateLeftRequested>((e, emit) => _rotateBy(emit, -_rotateStep));
+    on<MapRotateRightRequested>((e, emit) => _rotateBy(emit, _rotateStep));
     on<MapNorthUpRequested>(_onNorthUp);
   }
 
-  static const double _zoomStep = 1;
   static const double _tiltStep = 15;
   static const double _rotateStep = 15;
-  static const double _minPitch = 0;
-  static const double _maxPitch = 60;
+  static const double _minTilt = 0;
+  static const double _maxTilt = 60;
   static const Duration _animationDuration = Duration(milliseconds: 800);
 
-  MapController? _controller;
+  MapLibreMapController? _controller;
 
   void _onReady(MapCameraReady event, Emitter<MapCameraState> emit) {
-    _controller = event.controller as MapController;
+    _controller = event.controller as MapLibreMapController;
     emit(state.copyWith(isReady: true));
   }
 
-  Future<void> _move(
-    Emitter<MapCameraState> emit, {
-    double zoomDelta = 0,
-    double pitchDelta = 0,
-    double bearingDelta = 0,
-  }) async {
+  Future<void> _animate(Emitter<MapCameraState> emit, CameraUpdate update) async {
     final controller = _controller;
     if (controller == null || state.isMoving) return;
-    final camera = controller.getCamera();
-    final pitch = (camera.pitch + pitchDelta).clamp(_minPitch, _maxPitch);
-    final bearing = (camera.bearing + bearingDelta) % 360;
     emit(state.copyWith(isMoving: true));
     try {
-      await controller.animateCamera(
-        zoom: camera.zoom + zoomDelta,
-        bearing: bearing,
-        pitch: pitch,
-        nativeDuration: _animationDuration,
-      );
+      await controller.animateCamera(update, duration: _animationDuration);
     } finally {
       if (!isClosed) emit(state.copyWith(isMoving: false));
     }
+  }
+
+  Future<void> _tiltBy(Emitter<MapCameraState> emit, double delta) async {
+    final currentTilt = _controller?.cameraPosition?.tilt ?? 0;
+    final tilt = (currentTilt + delta).clamp(_minTilt, _maxTilt);
+    await _animate(emit, CameraUpdate.tiltTo(tilt));
+  }
+
+  Future<void> _rotateBy(Emitter<MapCameraState> emit, double delta) async {
+    final bearing = ((_controller?.cameraPosition?.bearing ?? 0) + delta) % 360;
+    await _animate(emit, CameraUpdate.bearingTo(bearing));
   }
 
   Future<void> _onNorthUp(
@@ -66,12 +65,19 @@ class MapCameraBloc extends Bloc<MapCameraEvent, MapCameraState> {
   ) async {
     final controller = _controller;
     if (controller == null || state.isMoving) return;
+    final camera = controller.cameraPosition;
     emit(state.copyWith(isMoving: true));
     try {
       await controller.animateCamera(
-        bearing: 0,
-        pitch: 0,
-        nativeDuration: _animationDuration,
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: camera?.target ?? const LatLng(37.7749, -122.4194),
+            zoom: camera?.zoom ?? 12,
+            bearing: 0,
+            tilt: 0,
+          ),
+        ),
+        duration: _animationDuration,
       );
     } finally {
       if (!isClosed) emit(state.copyWith(isMoving: false));
