@@ -45,7 +45,6 @@ GoRouter createRouter({required AuthCubit authCubit, required AppConfig config})
           return DashboardRouteNames.dashboard;
         }
       }
-
       return null;
     },
 
