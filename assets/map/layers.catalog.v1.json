@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "variables": {
+    "tileHost": "http://64.227.134.64"
+  },
+  "layers": [
+    {
+      "id": "satellite_layer",
+      "sourceId": "satellite_source",
+      "group": "base",
+      "kind": "raster",
+      "eager": true,
+      "visible": true,
+      "source": {
+        "type": "rasterTiles",
+        "tiles": ["https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"],
+        "tileSize": 256
+      },
+      "paint": { "rasterOpacity": 1.0 }
+    },
+    {
+      "id": "nh_layer",
+      "sourceId": "nh",
+      "group": "overlays",
+      "kind": "line",
+      "eager": false,
+      "visible": true,
+      "source": {
+        "type": "vectorUrl",
+        "url": "{tileHost}/pmtiles.php?file=nagaland_NH.pmtiles"
+      },
+      "sourceLayer": "nagaland",
+      "paint": { "lineColor": "#E03F4F", "lineWidth": 8.0 }
+    },
+    {
+      "id": "villages_layer",
+      "sourceId": "villages_source",
+      "group": "overlays",
+      "kind": "circle",
+      "eager": false,
+      "visible": false,
+      "source": {
+        "type": "geojson",
+        "data": "{tileHost}/nagaland_vill.geojson"
+      },
+      "paint": {
+        "circleRadius": 8.0,
+        "circleColor": "#11b4da",
+        "circleStrokeColor": "#000000",
+        "circleStrokeWidth": 2.0
+      }
+    }
+  ]
+}

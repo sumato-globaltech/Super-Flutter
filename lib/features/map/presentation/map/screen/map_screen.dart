@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 import 'package:super_flutter/core/di/injection.dart';
-import 'package:super_flutter/core/logging/app_logger.dart';
+import 'package:super_flutter/core/ui/widgets/app_button.dart';
+import 'package:super_flutter/core/ui/widgets/app_loader.dart';
 import 'package:super_flutter/features/map/presentation/map/bloc/map_screen_cubit.dart';
 import 'package:super_flutter/features/map/presentation/map/bloc/map_screen_state.dart';
 import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_view.dart';
 
 class MapScreenNew extends StatefulWidget {
-  const new({super.key});
+  const MapScreenNew({super.key});
 
   @override
   State<MapScreenNew> createState() => _MapScreenState();
@@ -16,8 +17,7 @@ class MapScreenNew extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreenNew> {
   late MapScreenCubit cubit;
-  late MapLibreMapController mapController;
-  final AppLogger appLogger = getIt.get<AppLogger>();
+  MapLibreMapController? mapController;
 
   @override
   void initState() {
@@ -43,16 +43,10 @@ class _MapScreenState extends State<MapScreenNew> {
               body: Stack(
                 children: [
                   MapView(
-                    onMapInitialized: (controller) async {
-                      // mapController = controller;
-                    },
-                    onMapReady: (controller) async {
-                      appLogger.debug(
-                        name: 'mridx',
-                        'on map ready getting called ${DateTime.now()}!',
-                      );
+                    onMapInitialized: (controller) {},
+                    onMapReady: (controller) {
                       mapController = controller;
-                      // await addMapLayers(controller);
+                      cubit.ensureBaseLayers(controller);
                     },
                     mapViewState: state.mapViewState,
                     mapCommand: cubit.mapCommand,
@@ -60,6 +54,27 @@ class _MapScreenState extends State<MapScreenNew> {
                       cubit.mapViewStateChanged(mapViewState);
                     },
                   ),
+                  if (state.layersLoading)
+                    const Positioned.fill(
+                      child: IgnorePointer(
+                        child: Center(child: AppLoader(message: 'Loading map layers')),
+                      ),
+                    ),
+                  if (state.layersPartialFailure)
+                    Positioned(
+                      left: 16,
+                      right: 16,
+                      bottom: 32,
+                      child: _LayersRetryBanner(
+                        failed: state.layersFailed,
+                        onRetry: () {
+                          final controller = mapController;
+                          if (controller != null) {
+                            cubit.refreshLayers(controller);
+                          }
+                        },
+                      ),
+                    ),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
@@ -135,29 +150,37 @@ class _MapScreenState extends State<MapScreenNew> {
       ),
     );
   }
+}
 
-  Future<void> addMapLayers(MapLibreMapController controller) async {
-    final sources = await controller.getSourceIds();
-    if (!sources.contains('villages_source')) {
-      await controller.addSource(
-        'villages_source',
-        GeojsonSourceProperties(data: 'http://64.227.134.64/nagaland_vill.geojson'),
-      );
-    }
+class _LayersRetryBanner extends StatelessWidget {
+  const _LayersRetryBanner({required this.failed, required this.onRetry});
 
-    final layers = await controller.getLayerIds();
-    if (!layers.contains('villages_layer')) {
-      await controller.addCircleLayer(
-        'villages_source',
-        'villages_layer',
-        const CircleLayerProperties(
-          circleRadius: 4.0,
-          circleColor: '#fb923c',
-          circleStrokeColor: '000000',
-          circleStrokeWidth: 2.0,
+  final List<String> failed;
+  final VoidCallback onRetry;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                'Some map layers failed to load (${failed.length}).',
+                style: theme.textTheme.bodyMedium,
+              ),
+            ),
+            AppButton.outlined(
+              label: 'Retry',
+              onPressed: onRetry,
+              isExpanded: false,
+            ),
+          ],
         ),
-      );
-    }
+      ),
+    );
   }
 }
 
@@ -167,18 +190,15 @@ class _ControlButton extends StatelessWidget {
     required this.icon,
     required this.enabled,
     required this.onPressed,
-    this.selected = false,
   });
 
   final String tooltip;
   final IconData icon;
   final bool enabled;
   final VoidCallback onPressed;
-  final bool selected;
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
     return Semantics(
       button: true,
       label: tooltip,
@@ -186,8 +206,6 @@ class _ControlButton extends StatelessWidget {
         heroTag: tooltip,
         tooltip: tooltip,
         onPressed: enabled ? onPressed : null,
-        backgroundColor: selected ? scheme.primary : null,
-        foregroundColor: selected ? scheme.onPrimary : null,
         child: Icon(icon),
       ),
     );

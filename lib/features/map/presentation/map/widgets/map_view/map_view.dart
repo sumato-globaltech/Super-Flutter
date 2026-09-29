@@ -1,17 +1,18 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
-import 'package:super_flutter/core/di/injection.dart';
-import 'package:super_flutter/core/logging/app_logger.dart';
 import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_commands.dart';
 import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_point.dart';
 import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_view_state.dart';
 
 typedef MapInitialized = void Function(MapLibreMapController controller);
-typedef MapReady = void Function(MapLibreMapController controller);
 
+/// Raw MapLibre view: owns the native controller, translates the inbound
+/// [MapCommand] stream into camera moves, and reports camera state outward.
+///
+/// Layer setup lives in [MapLayerService] (driven by the screen Cubit), not
+/// here — this widget only forwards `onMapReady` once the style loads.
 class MapView extends StatefulWidget {
   final String styleString;
   final MapInitialized? onMapInitialized;
@@ -22,9 +23,9 @@ class MapView extends StatefulWidget {
   final double minZoom;
   final double maxZoom;
 
-  final MapReady? onMapReady;
+  final MapInitialized? onMapReady;
 
-  const new({
+  const MapView({
     super.key,
     this.styleString = "https://api.protomaps.com/styles/v5/dark/en.json?key=73c45a97eddd43fb",
     this.onMapInitialized,
@@ -45,8 +46,6 @@ class _MapViewState extends State<MapView> {
 
   StreamSubscription<MapCommand>? _mapCommand;
 
-  final AppLogger appLogger = getIt.get<AppLogger>();
-
   @override
   void initState() {
     super.initState();
@@ -62,20 +61,12 @@ class _MapViewState extends State<MapView> {
   @override
   Widget build(BuildContext context) {
     return MapLibreMap(
-      // styleString: widget.styleString,
-      styleString: MapLibreStyles.demo,
+      styleString: widget.styleString,
       onMapCreated: (controller) {
         _mapController = controller;
         widget.onMapInitialized?.call(controller);
       },
-      onStyleLoadedCallback: () {
-        appLogger.debug("style loaded ${DateTime.now()}", name: "mridx");
-        // if (_mapController != null) {
-        //   widget.onMapReady?.call(_mapController!);
-        //   addMapLayers(_mapController!);
-        // }
-        _onStyleLoaded();
-      },
+      onStyleLoadedCallback: _onStyleLoaded,
       minMaxZoomPreference: MinMaxZoomPreference(widget.minZoom, widget.maxZoom),
       initialCameraPosition: CameraPosition(
         target: widget.mapViewState.center.latLng,
@@ -83,78 +74,12 @@ class _MapViewState extends State<MapView> {
         tilt: widget.mapViewState.tilt,
         bearing: widget.mapViewState.bearing,
       ),
-      onCameraIdle: () {
-        _onCameraChanged();
-      },
+      onCameraIdle: _onCameraChanged,
       trackCameraPosition: true,
       tiltGesturesEnabled: true,
       rotateGesturesEnabled: true,
       logoEnabled: false,
-      attributionButtonMargins: Point(-100, 100),
     );
-  }
-
-  Future<void> addMapLayers(MapLibreMapController controller) async {
-    final sources = await controller.getSourceIds();
-    final layers = await controller.getLayerIds();
-
-    if (!sources.contains('satellite_source')) {
-      await controller.addSource(
-        'satellite_source',
-        const RasterSourceProperties(
-          tiles: ['https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}'],
-          tileSize: 256,
-          volatile: true,
-        ),
-      );
-    }
-
-    if (!layers.contains('satellite_layer')) {
-      await controller.addRasterLayer(
-        'satellite_source',
-        'satellite_layer',
-        RasterLayerProperties(rasterOpacity: 1.0),
-      );
-    }
-
-    if (!sources.contains('nh')) {
-      await controller.addSource(
-        "nh",
-        VectorSourceProperties(
-          url: "pmtiles://http://64.227.134.64/pmtiles.php?file=nagaland_NH.pmtiles",
-        ),
-      );
-    }
-
-    if (!layers.contains('nh_layer')) {
-      await controller.addLayer(
-        'nh',
-        'nh_layer',
-        LineLayerProperties(lineColor: "#E03F4F", lineWidth: 8.0),
-        sourceLayer: 'nagaland',
-      );
-    }
-
-    if (!sources.contains('villages_source')) {
-      await controller.addSource(
-        'villages_source',
-        GeojsonSourceProperties(data: 'http://64.227.134.64/nagaland_vill.geojson'),
-      );
-    }
-
-    if (!layers.contains('villages_layer')) {
-      await controller.addCircleLayer(
-        'villages_source',
-        'villages_layer',
-        const CircleLayerProperties(
-          circleRadius: 8.0,
-          circleColor: "#11b4da",
-          circleStrokeColor: "000000",
-          circleStrokeWidth: 2.0,
-          visibility: 'none',
-        ),
-      );
-    }
   }
 
   Future<void> _handleMapCommands(MapCommand mapCommand) async {
@@ -169,45 +94,42 @@ class _MapViewState extends State<MapView> {
               target: mapCommand.target.latLng,
               zoom: mapCommand.zoom,
               tilt: mapCommand.tilt ?? controller.cameraPosition?.tilt ?? 0.0,
-              bearing: mapCommand.bearing ?? controller.cameraPosition?.bearing ?? 0.0,
+              bearing:
+                  mapCommand.bearing ?? controller.cameraPosition?.bearing ?? 0.0,
             ),
           ),
         );
 
       case MoveTo():
-        await controller.moveCamera(CameraUpdate.newLatLng(mapCommand.target.latLng));
+        await controller.moveCamera(
+          CameraUpdate.newLatLng(mapCommand.target.latLng),
+        );
 
       case ControlChanges():
+        // TODO: read live tilt/bearing/zoom from controller.cameraPosition
+        // instead of the widget snapshot to avoid stale mid-glide targets.
         await controller.animateCamera(
           CameraUpdate.newCameraPosition(
             CameraPosition(
               target: widget.mapViewState.center.latLng,
-              tilt: mapCommand.tilt ?? controller.cameraPosition?.tilt ?? widget.mapViewState.tilt,
-              zoom: mapCommand.zoom ?? controller.cameraPosition?.zoom ?? widget.mapViewState.zoom,
-              bearing:
-                  mapCommand.bearing ??
-                  controller.cameraPosition?.bearing ??
-                  widget.mapViewState.bearing,
+              tilt: mapCommand.tilt ?? widget.mapViewState.tilt,
+              zoom: mapCommand.zoom ?? widget.mapViewState.zoom,
+              bearing: mapCommand.bearing ?? widget.mapViewState.bearing,
             ),
           ),
         );
       case ResetCamera():
-      //
+        // TODO: implement via MapScreenCubit.resetCamera() + handler here.
+        break;
     }
   }
 
   Future<void> _onCameraChanged() async {
     final controller = _mapController;
-    if (controller == null) {
-      appLogger.debug(name: "mridx", " controller is null");
-      return;
-    }
+    if (controller == null) return;
     final cameraPosition = controller.cameraPosition;
 
-    if (cameraPosition?.target == null) {
-      appLogger.debug(name: "mridx", "camera position is null");
-      return;
-    }
+    if (cameraPosition?.target == null) return;
 
     final newState = MapViewState(
       center: MapPoint(
@@ -232,46 +154,7 @@ class _MapViewState extends State<MapView> {
 
   Future<void> _setupStyle() async {
     final controller = _mapController;
-
-    if (controller == null) {
-      return;
-    }
-
-    // await _ensureVillageSource(controller);
-    // await _ensureVillageLayer(controller);
-    await addMapLayers(controller);
+    if (controller == null) return;
     widget.onMapReady?.call(controller);
-  }
-
-  Future<void> _ensureVillageSource(MapLibreMapController controller) async {
-    final sources = await controller.getSourceIds();
-
-    if (sources.contains('villages_source')) {
-      return;
-    }
-
-    await controller.addSource(
-      'villages_source',
-      GeojsonSourceProperties(data: 'http://64.227.134.64/nagaland_vill.geojson'),
-    );
-  }
-
-  Future<void> _ensureVillageLayer(MapLibreMapController controller) async {
-    final layers = await controller.getLayerIds();
-
-    if (layers.contains('villages_layer')) {
-      return;
-    }
-
-    await controller.addCircleLayer(
-      'villages_source',
-      'villages_layer',
-      const CircleLayerProperties(
-        circleRadius: 4.0,
-        circleColor: '#fb923c',
-        circleStrokeColor: '#000000',
-        circleStrokeWidth: 2.0,
-      ),
-    );
   }
 }

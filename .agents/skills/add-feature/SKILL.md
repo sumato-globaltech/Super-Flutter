@@ -49,6 +49,10 @@ screen, always nested under `presentation/` — never a flat shared `bloc/` +
    goes in `data/<name>/sources/remote/<name>_endpoints.dart` (auth-critical
    `login`/`refresh` stay mirrored in `core/network/api_endpoints.dart`).
 5. New user-facing string goes in ARB first, then `flutter gen-l10n`.
+6. Map layers (map feature only): definitions live in the versioned JSON
+   catalog (`assets/map/layers.catalog.v1.json`, groups + `{tileHost}`
+   templating), applied via `MapLayerService` — never hardcode tile URLs in
+   widgets. See the `verify` skill before handoff.
 
 ## Workflow
 

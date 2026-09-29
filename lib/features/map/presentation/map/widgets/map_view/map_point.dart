@@ -4,12 +4,12 @@ class MapPoint extends Equatable {
   final double latitude;
   final double longitude;
 
-  const new({required this.latitude, required this.longitude});
+  const MapPoint({required this.latitude, required this.longitude});
 
   @override
   List<Object?> get props => [latitude, longitude];
 
-  MapPoint fromLatLong(double latitiude, double longitude) {
+  static MapPoint fromLatLong(double latitude, double longitude) {
     return MapPoint(latitude: latitude, longitude: longitude);
   }
 

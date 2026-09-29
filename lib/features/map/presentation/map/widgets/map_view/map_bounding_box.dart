@@ -6,7 +6,7 @@ class MapBoundingBox extends Equatable {
   final double east;
   final double north;
 
-  const new({required this.west, required this.south, required this.east, required this.north});
+  const MapBoundingBox({required this.west, required this.south, required this.east, required this.north});
 
   @override
   List<Object?> get props => [west, south, east, north];

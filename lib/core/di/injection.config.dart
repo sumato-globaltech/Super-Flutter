@@ -45,6 +45,12 @@ import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/das
     as _i930;
 import 'package:super_flutter/features/map/presentation/map/bloc/map_screen_cubit.dart'
     as _i679;
+import 'package:super_flutter/features/map/presentation/map/layers/asset_layer_catalog.dart'
+    as _i819;
+import 'package:super_flutter/features/map/presentation/map/layers/layer_catalog.dart'
+    as _i841;
+import 'package:super_flutter/features/map/presentation/map/layers/map_layer_service.dart'
+    as _i840;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -56,7 +62,6 @@ extension GetItInjectableX on _i174.GetIt {
     final coreModule = _$CoreModule();
     final storageModule = _$StorageModule();
     final networkModule = _$NetworkModule();
-    gh.factory<_i679.MapScreenCubit>(() => _i679.MapScreenCubit());
     gh.lazySingleton<_i451.AppLogger>(() => coreModule.logger);
     gh.lazySingleton<_i491.SecureStorage>(() => storageModule.secureStorage());
     gh.lazySingleton<_i1067.Environment>(
@@ -64,6 +69,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i635.LocalDatabase>(
       () => storageModule.localDatabase(gh<_i1067.Environment>()),
+    );
+    gh.lazySingleton<_i841.LayerCatalog>(
+      () => _i819.AssetLayerCatalog(
+        assetPath: gh<String>(),
+        variables: gh<Map<String, String>>(),
+      ),
     );
     gh.lazySingleton<_i246.ErrorReporter>(
       () => coreModule.errorReporter(gh<_i451.AppLogger>()),
@@ -81,6 +92,12 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i827.SessionManagerImpl(storageService: gh<_i407.StorageService>()),
     );
+    gh.factory<_i840.MapLayerService>(
+      () => _i840.MapLayerService(
+        gh<_i841.LayerCatalog>(),
+        gh<_i451.AppLogger>(),
+      ),
+    );
     gh.lazySingleton<_i396.AppErrorHandler>(
       () => _i396.AppErrorHandler(gh<_i246.ErrorReporter>()),
     );
@@ -94,6 +111,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i234.AuthRemoteDataSource>(
       () => _i234.AuthRemoteDataSource(gh<_i42.DioClient>()),
+    );
+    gh.factory<_i679.MapScreenCubit>(
+      () => _i679.MapScreenCubit(gh<_i840.MapLayerService>()),
     );
     gh.lazySingleton<_i631.AuthRepository>(
       () => _i227.AuthRepositoryImpl(

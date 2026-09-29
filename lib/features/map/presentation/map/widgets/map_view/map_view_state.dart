@@ -12,7 +12,7 @@ class MapViewState extends Equatable {
   final double tilt;
   final int resetVersion;
 
-  const new({
+  const MapViewState({
     // this.center = const MapPoint(latitude: 26.115103, longitude: 91.703239),
     this.center = const MapPoint(latitude: 25.55711865, longitude: 93.7520957),
     this.boundingBox,
