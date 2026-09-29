@@ -6,6 +6,6 @@ List<GoRoute> buildMapRoutes() => [
   GoRoute(
     path: MapRouteNames.mapScreen,
     name: MapRouteNames.mapScreen,
-    builder: (context, state) => const MapScreen(),
+    builder: (context, state) => const MapScreenNew(),
   ),
 ];

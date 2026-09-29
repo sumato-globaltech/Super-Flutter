@@ -54,6 +54,9 @@ dependencies:
   intl: ^0.20.2
   injectable: ^3.0.0
   equatable: ^2.1.0
+  # maplibre: ^0.3.3+2
+  maplibre_gl: ^0.27.1
+  # maplibre_webview: ^0.3.5
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +83,9 @@ flutter:
   # Generates AppLocalizations from lib/core/localization/arb/*.arb
   # (configured by l10n.yaml).
   generate: true
+
+  config:
+    enable-swift-package-manager: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

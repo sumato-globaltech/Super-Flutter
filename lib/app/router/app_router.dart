@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:super_flutter/features/map/routes/map_route_names.dart';
+import 'package:super_flutter/features/map/routes/map_routes.dart';
 
-import '../../features/auth/session/bloc/auth_cubit.dart';
-import '../../features/auth/session/bloc/auth_state.dart';
 import '../../features/auth/routes/auth_route_names.dart';
 import '../../features/auth/routes/auth_routes.dart';
+import '../../features/auth/session/bloc/auth_cubit.dart';
+import '../../features/auth/session/bloc/auth_state.dart';
 import '../../features/dashboard/routes/dashboard_route_names.dart';
 import '../../features/dashboard/routes/dashboard_routes.dart';
 import '../config/app_config.dart';
@@ -34,7 +36,8 @@ GoRouter createRouter({required AuthCubit authCubit, required AppConfig config})
 
       // User is not authenticated.
       if (authStatus == AuthStatus.unauthenticated) {
-        return isLogin ? null : AuthRouteNames.login;
+        // return isLogin ? null : AuthRouteNames.login;
+        return isLogin ? null : MapRouteNames.mapScreen;
       }
 
       // User is authenticated.
@@ -55,6 +58,7 @@ GoRouter createRouter({required AuthCubit authCubit, required AppConfig config})
       ),
       ...buildAuthRoutes(),
       ...buildDashboardRoutes(),
+      ...buildMapRoutes(),
     ],
   );
 }
