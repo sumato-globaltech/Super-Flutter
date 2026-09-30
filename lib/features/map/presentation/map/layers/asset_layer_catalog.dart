@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:injectable/injectable.dart';
 
 import 'layer_catalog.dart';
 import 'layer_definition.dart';
@@ -12,7 +11,7 @@ import 'layer_definition.dart';
 /// `{tileHost}` (and future `{apiKey}`-style variables) are substituted from
 /// [variables], so environments differ by one value, not thirty URLs. A
 /// remote catalog can replace this class later behind the same interface.
-@LazySingleton(as: LayerCatalog)
+
 class AssetLayerCatalog implements LayerCatalog {
   AssetLayerCatalog({
     this.assetPath = 'assets/map/layers.catalog.v1.json',
@@ -37,9 +36,7 @@ class AssetLayerCatalog implements LayerCatalog {
     if (layers is! List) {
       throw const FormatException('Layer catalog is missing "layers"');
     }
-    final defs = layers
-        .map((e) => _parse(_substitute(e)))
-        .toList(growable: false);
+    final defs = layers.map((e) => _parse(_substitute(e))).toList(growable: false);
     _assertUniqueIds(defs);
     _assertBelowRefsExist(defs);
     _cache = defs;
@@ -137,9 +134,7 @@ class AssetLayerCatalog implements LayerCatalog {
     for (final def in defs) {
       final below = def.belowLayerId;
       if (below != null && !ids.contains(below)) {
-        throw FormatException(
-          'Layer "${def.id}" references unknown belowLayerId "$below"',
-        );
+        throw FormatException('Layer "${def.id}" references unknown belowLayerId "$below"');
       }
     }
   }

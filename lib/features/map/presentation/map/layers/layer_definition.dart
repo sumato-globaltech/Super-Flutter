@@ -61,11 +61,13 @@ class LayerDefinition extends Equatable {
     // Line paint.
     this.lineColor,
     this.lineWidth,
+    this.lineOpacity,
     // Circle paint.
     this.circleRadius,
     this.circleColor,
     this.circleStrokeColor,
     this.circleStrokeWidth,
+    this.circleOpacity,
     // Raster paint.
     this.rasterOpacity,
   });
@@ -99,13 +101,46 @@ class LayerDefinition extends Equatable {
 
   final String? lineColor;
   final double? lineWidth;
+  final double? lineOpacity;
 
   final double? circleRadius;
   final String? circleColor;
   final String? circleStrokeColor;
   final double? circleStrokeWidth;
+  final double? circleOpacity;
 
   final double? rasterOpacity;
+
+  /// Copy with overridden paint. Used by opacity updates, which re-add the
+  /// layer since the plugin exposes no paint setters.
+  LayerDefinition copyWith({
+    double? lineOpacity,
+    double? circleOpacity,
+    double? rasterOpacity,
+  }) {
+    return LayerDefinition(
+      id: id,
+      sourceId: sourceId,
+      group: group,
+      kind: kind,
+      source: source,
+      eager: eager,
+      visible: visible,
+      belowLayerId: belowLayerId,
+      sourceLayer: sourceLayer,
+      minzoom: minzoom,
+      maxzoom: maxzoom,
+      lineColor: lineColor,
+      lineWidth: lineWidth,
+      lineOpacity: lineOpacity ?? this.lineOpacity,
+      circleRadius: circleRadius,
+      circleColor: circleColor,
+      circleStrokeColor: circleStrokeColor,
+      circleStrokeWidth: circleStrokeWidth,
+      circleOpacity: circleOpacity ?? this.circleOpacity,
+      rasterOpacity: rasterOpacity ?? this.rasterOpacity,
+    );
+  }
 
   @override
   List<Object?> get props => [

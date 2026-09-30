@@ -45,6 +45,29 @@ class MapLayerService {
     return controller.setLayerVisibility(layerId, visible);
   }
 
+  /// Applies a new opacity to an already-added layer. The plugin exposes no
+  /// paint setters, so the layer is removed and re-added with overridden
+  /// paint (its source is untouched, nothing refetches). [visible] restores
+  /// the pre-update visibility afterwards.
+  Future<void> updateOpacity(
+    MapLibreMapController controller,
+    LayerDefinition def,
+    double opacity, {
+    bool visible = true,
+  }) async {
+    final clamped = opacity.clamp(0.0, 1.0);
+    final updated = switch (def.kind) {
+      LayerKind.raster => def.copyWith(rasterOpacity: clamped),
+      LayerKind.line => def.copyWith(lineOpacity: clamped),
+      LayerKind.circle => def.copyWith(circleOpacity: clamped),
+    };
+    await controller.removeLayer(def.id);
+    await _addLayer(controller, updated);
+    if (!visible) {
+      await controller.setLayerVisibility(def.id, false);
+    }
+  }
+
   Future<MapLayersResult> _ensureAll(
     MapLibreMapController controller,
     List<LayerDefinition> defs,
@@ -73,6 +96,16 @@ class MapLayerService {
     }
     final layers = await controller.getLayerIds();
     if (layers.contains(def.id)) return;
+    await _addLayer(controller, def);
+    if (!def.visible) {
+      await controller.setLayerVisibility(def.id, false);
+    }
+  }
+
+  Future<void> _addLayer(
+    MapLibreMapController controller,
+    LayerDefinition def,
+  ) async {
     switch (def.kind) {
       case LayerKind.raster:
         await controller.addRasterLayer(
@@ -90,6 +123,7 @@ class MapLayerService {
           LineLayerProperties(
             lineColor: def.lineColor ?? '#000000',
             lineWidth: def.lineWidth ?? 2.0,
+            lineOpacity: def.lineOpacity ?? 1.0,
           ),
           sourceLayer: def.sourceLayer,
           belowLayerId: def.belowLayerId,
@@ -105,14 +139,12 @@ class MapLayerService {
             circleColor: def.circleColor ?? '#ffffff',
             circleStrokeColor: def.circleStrokeColor ?? '#000000',
             circleStrokeWidth: def.circleStrokeWidth ?? 1.0,
+            circleOpacity: def.circleOpacity ?? 1.0,
           ),
           belowLayerId: def.belowLayerId,
           minzoom: def.minzoom,
           maxzoom: def.maxzoom,
         );
-    }
-    if (!def.visible) {
-      await controller.setLayerVisibility(def.id, false);
     }
   }
 

@@ -18,6 +18,7 @@ class MapScreenNew extends StatefulWidget {
 class _MapScreenState extends State<MapScreenNew> {
   late MapScreenCubit cubit;
   MapLibreMapController? mapController;
+  bool _layersOpen = false;
 
   @override
   void initState() {
@@ -75,6 +76,16 @@ class _MapScreenState extends State<MapScreenNew> {
                         },
                       ),
                     ),
+                  Positioned(
+                    right: 16,
+                    top: 16,
+                    child: _LayersPanel(
+                      open: _layersOpen,
+                      onToggleOpen: () => setState(
+                        () => _layersOpen = !_layersOpen,
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
@@ -147,6 +158,171 @@ class _MapScreenState extends State<MapScreenNew> {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class _LayersPanel extends StatelessWidget {
+  const _LayersPanel({required this.open, required this.onToggleOpen});
+
+  final bool open;
+  final VoidCallback onToggleOpen;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        FloatingActionButton.small(
+          heroTag: 'layers-panel-toggle',
+          tooltip: open ? 'Hide layers' : 'Show layers',
+          onPressed: onToggleOpen,
+          child: const Icon(Icons.layers_outlined),
+        ),
+        if (open) ...[
+          const SizedBox(height: 8),
+          const _LayersCard(),
+        ],
+      ],
+    );
+  }
+}
+
+class _LayersCard extends StatelessWidget {
+  const _LayersCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<MapScreenCubit>();
+    final state = context.watch<MapScreenCubit>().state;
+    final screenState = context
+        .findAncestorStateOfType<_MapScreenState>();
+    final controller = screenState?.mapController;
+    final defs = cubit.layerDefinitions;
+    return Card(
+      child: Container(
+        width: 248,
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: defs.isEmpty
+            ? const Padding(
+                padding: EdgeInsets.all(16),
+                child: Text('Layers load with the map style.'),
+              )
+            : Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  for (final def in defs)
+                    _LayerRow(
+                      key: ValueKey(def.id),
+                      layerId: def.id,
+                      group: def.group,
+                      visible:
+                          state.layerVisibility[def.id] ?? def.visible,
+                      opacity:
+                          state.layerOpacity[def.id] ?? 1.0,
+                      enabled:
+                          controller != null && !state.layersLoading,
+                      onToggle: controller == null
+                          ? null
+                          : () => cubit.toggleLayer(controller, def),
+                      onOpacityCommitted: controller == null
+                          ? null
+                          : (value) => cubit.setLayerOpacity(
+                              controller,
+                              def,
+                              value,
+                            ),
+                    ),
+                ],
+              ),
+      ),
+    );
+  }
+}
+
+class _LayerRow extends StatefulWidget {
+  const _LayerRow({
+    super.key,
+    required this.layerId,
+    required this.group,
+    required this.visible,
+    required this.opacity,
+    required this.enabled,
+    required this.onToggle,
+    required this.onOpacityCommitted,
+  });
+
+  final String layerId;
+  final String group;
+  final bool visible;
+  final double opacity;
+  final bool enabled;
+  final VoidCallback? onToggle;
+  final ValueChanged<double>? onOpacityCommitted;
+
+  @override
+  State<_LayerRow> createState() => _LayerRowState();
+}
+
+class _LayerRowState extends State<_LayerRow> {
+  double? _dragValue;
+
+  @override
+  void didUpdateWidget(covariant _LayerRow oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.opacity != widget.opacity) _dragValue = null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Semantics(
+      label: 'Layer ${widget.layerId}',
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.layerId,
+                        style: theme.textTheme.bodyMedium,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        widget.group,
+                        style: theme.textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                ),
+                Switch(
+                  value: widget.visible,
+                  onChanged: widget.enabled && widget.onToggle != null
+                      ? (_) => widget.onToggle!()
+                      : null,
+                ),
+              ],
+            ),
+            Slider(
+              value: (_dragValue ?? widget.opacity).clamp(0.0, 1.0),
+              onChanged: widget.enabled && widget.onOpacityCommitted != null
+                  ? (v) => setState(() => _dragValue = v)
+                  : null,
+              onChangeEnd: (v) {
+                setState(() => _dragValue = null);
+                widget.onOpacityCommitted?.call(v);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

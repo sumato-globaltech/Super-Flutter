@@ -10,10 +10,19 @@ class MapScreenState {
   /// Layer ids that failed to apply (empty = all ready).
   final List<String> layersFailed;
 
+  /// Per-layer visibility keyed by layer id. Populated from the catalog when
+  /// base layers load; toggles update it optimistically.
+  final Map<String, bool> layerVisibility;
+
+  /// Per-layer opacity (0–1) keyed by layer id. Defaults to 1.0.
+  final Map<String, double> layerOpacity;
+
   const MapScreenState({
     required this.mapViewState,
     this.layersLoading = false,
     this.layersFailed = const [],
+    this.layerVisibility = const {},
+    this.layerOpacity = const {},
   });
 
   factory MapScreenState.initial() {
@@ -27,11 +36,15 @@ class MapScreenState {
     MapViewState? mapViewState,
     bool? layersLoading,
     List<String>? layersFailed,
+    Map<String, bool>? layerVisibility,
+    Map<String, double>? layerOpacity,
   }) {
     return MapScreenState(
       mapViewState: mapViewState ?? this.mapViewState,
       layersLoading: layersLoading ?? this.layersLoading,
       layersFailed: layersFailed ?? this.layersFailed,
+      layerVisibility: layerVisibility ?? this.layerVisibility,
+      layerOpacity: layerOpacity ?? this.layerOpacity,
     );
   }
 }

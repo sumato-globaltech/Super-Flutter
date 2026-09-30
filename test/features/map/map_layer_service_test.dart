@@ -122,4 +122,45 @@ void main() {
     expect(result.applied, ['satellite_layer']);
     verifyNever(() => controller.addSource('nh', any()));
   });
+
+  test('updateOpacity re-adds the layer with new paint', () async {
+    when(() => controller.removeLayer(any())).thenAnswer((_) async {});
+    when(
+      () => controller.addCircleLayer(any(), any(), any(),
+          belowLayerId: any(named: 'belowLayerId'),
+          minzoom: any(named: 'minzoom'),
+          maxzoom: any(named: 'maxzoom')),
+    ).thenAnswer((_) async {});
+    const circle = LayerDefinition(
+      id: 'villages_layer',
+      sourceId: 'villages_source',
+      group: 'overlays',
+      kind: LayerKind.circle,
+      source: GeoJsonSource(data: 'https://tiles.example/v.geojson'),
+    );
+    final service = MapLayerService(
+      FakeCatalog([circle]),
+      _silentLogger(),
+    );
+
+    await service.updateOpacity(controller, circle, 0.4, visible: false);
+
+    verify(() => controller.removeLayer('villages_layer')).called(1);
+    final captured = verify(
+      () => controller.addCircleLayer(
+        'villages_source',
+        'villages_layer',
+        captureAny(),
+        belowLayerId: any(named: 'belowLayerId'),
+        minzoom: any(named: 'minzoom'),
+        maxzoom: any(named: 'maxzoom'),
+      ),
+    ).captured;
+    expect(
+      (captured.single as CircleLayerProperties).toJson()['circle-opacity'],
+      0.4,
+    );
+    verify(() => controller.setLayerVisibility('villages_layer', false))
+        .called(1);
+  });
 }
