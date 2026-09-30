@@ -55,24 +55,39 @@ void main() {
 
   late MockMapController controller;
 
+  /// Sources/layers the mock has "added", so concurrent ensures observe
+  /// each other's work like the real platform controller would.
+  late Set<String> addedSources;
+  late Set<String> addedLayers;
+
   setUp(() {
     controller = MockMapController();
-    when(() => controller.getSourceIds()).thenAnswer((_) async => []);
-    when(() => controller.getLayerIds()).thenAnswer((_) async => []);
-    when(() => controller.addSource(any(), any())).thenAnswer((_) async {});
+    addedSources = {};
+    addedLayers = {};
+    when(() => controller.getSourceIds())
+        .thenAnswer((_) async => addedSources.toList());
+    when(() => controller.getLayerIds())
+        .thenAnswer((_) async => addedLayers.toList());
+    when(() => controller.addSource(any(), any())).thenAnswer((invocation) async {
+      addedSources.add(invocation.positionalArguments[0] as String);
+    });
     when(
       () => controller.addRasterLayer(any(), any(), any(),
           belowLayerId: any(named: 'belowLayerId'),
           minzoom: any(named: 'minzoom'),
           maxzoom: any(named: 'maxzoom')),
-    ).thenAnswer((_) async {});
+    ).thenAnswer((invocation) async {
+      addedLayers.add(invocation.positionalArguments[1] as String);
+    });
     when(
       () => controller.addLayer(any(), any(), any(),
           belowLayerId: any(named: 'belowLayerId'),
           sourceLayer: any(named: 'sourceLayer'),
           minzoom: any(named: 'minzoom'),
           maxzoom: any(named: 'maxzoom')),
-    ).thenAnswer((_) async {});
+    ).thenAnswer((invocation) async {
+      addedLayers.add(invocation.positionalArguments[1] as String);
+    });
     when(
       () => controller.setLayerVisibility(any(), any()),
     ).thenAnswer((_) async {});
@@ -162,5 +177,39 @@ void main() {
     );
     verify(() => controller.setLayerVisibility('villages_layer', false))
         .called(1);
+  });
+
+  test('concurrent ensures serialize instead of double-adding', () async {
+    final service = MapLayerService(
+      FakeCatalog([_raster]),
+      _silentLogger(),
+    );
+
+    final results = await Future.wait([
+      service.ensureGroup(controller, 'base'),
+      service.ensureGroup(controller, 'base'),
+    ]);
+
+    for (final result in results) {
+      expect(result.applied, ['satellite_layer']);
+      expect(result.failed, isEmpty);
+    }
+    // Second ensure observes the layer added by the first and skips it.
+    verify(() => controller.addSource('satellite_source', any())).called(1);
+  });
+
+  test('already-exists races are treated as success', () async {
+    when(() => controller.addSource('satellite_source', any())).thenThrow(
+      Exception('Source satellite_source already exists'),
+    );
+    final service = MapLayerService(
+      FakeCatalog([_raster]),
+      _silentLogger(),
+    );
+
+    final result = await service.ensureGroup(controller, 'base');
+
+    expect(result.applied, ['satellite_layer']);
+    expect(result.failed, isEmpty);
   });
 }

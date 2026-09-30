@@ -8,8 +8,11 @@ import 'layer_definition.dart';
 /// Owns map layer setup: loads a [LayerCatalog], adds missing sources/layers
 /// in catalog order with explicit z-order, and isolates per-layer failures.
 ///
-/// Call [ensureEagerLayers] once at style setup; load the rest on demand with
-/// [ensureGroup] (e.g. when a category toggles on).
+/// All mutating operations are serialized through an internal gate: native
+/// add/remove calls are check-then-act, so concurrent ensures (e.g. a toggle
+/// racing style setup) would otherwise interleave between the existence
+/// check and the add and fail with "already exists". As defense in depth,
+/// already-exists races are also swallowed where the end state is correct.
 @injectable
 class MapLayerService {
   MapLayerService(this._catalog, this._logger);
@@ -17,12 +20,31 @@ class MapLayerService {
   final LayerCatalog _catalog;
   final AppLogger _logger;
 
+  /// Serial gate for every mutating operation. Errors never break the chain.
+  Future<void> _gate = Future.value();
+
+  Future<T> _serialize<T>(Future<T> Function() operation) {
+    final result = _gate.then((_) => operation());
+    _gate = result.then<void>((_) {}, onError: (_) {});
+    return result;
+  }
+
+  /// Matches native "already there" failures (wording varies by platform).
+  static bool _isAlreadyExists(Object e) {
+    final message = e.toString().toLowerCase();
+    return message.contains('already exists') ||
+        message.contains('already added') ||
+        message.contains('duplicate');
+  }
+
   /// Adds every `eager` layer definition. Returns applied/failed ids.
   Future<MapLayersResult> ensureEagerLayers(
     MapLibreMapController controller,
-  ) async {
-    final defs = (await _catalog.load()).where((d) => d.eager).toList();
-    return _ensureAll(controller, defs);
+  ) {
+    return _serialize(() async {
+      final defs = (await _catalog.load()).where((d) => d.eager).toList();
+      return _ensureAll(controller, defs);
+    });
   }
 
   /// Adds one catalog group (e.g. `overlays`). Already-present layers are
@@ -30,11 +52,13 @@ class MapLayerService {
   Future<MapLayersResult> ensureGroup(
     MapLibreMapController controller,
     String group,
-  ) async {
-    final defs = (await _catalog.load())
-        .where((d) => d.group == group)
-        .toList();
-    return _ensureAll(controller, defs);
+  ) {
+    return _serialize(() async {
+      final defs = (await _catalog.load())
+          .where((d) => d.group == group)
+          .toList();
+      return _ensureAll(controller, defs);
+    });
   }
 
   Future<void> setVisible(
@@ -42,7 +66,9 @@ class MapLayerService {
     String layerId,
     bool visible,
   ) {
-    return controller.setLayerVisibility(layerId, visible);
+    return _serialize(
+      () => controller.setLayerVisibility(layerId, visible),
+    );
   }
 
   /// Applies a new opacity to an already-added layer. The plugin exposes no
@@ -54,18 +80,26 @@ class MapLayerService {
     LayerDefinition def,
     double opacity, {
     bool visible = true,
-  }) async {
-    final clamped = opacity.clamp(0.0, 1.0);
-    final updated = switch (def.kind) {
-      LayerKind.raster => def.copyWith(rasterOpacity: clamped),
-      LayerKind.line => def.copyWith(lineOpacity: clamped),
-      LayerKind.circle => def.copyWith(circleOpacity: clamped),
-    };
-    await controller.removeLayer(def.id);
-    await _addLayer(controller, updated);
-    if (!visible) {
-      await controller.setLayerVisibility(def.id, false);
-    }
+  }) {
+    return _serialize(() async {
+      final clamped = opacity.clamp(0.0, 1.0);
+      final updated = switch (def.kind) {
+        LayerKind.raster => def.copyWith(rasterOpacity: clamped),
+        LayerKind.line => def.copyWith(lineOpacity: clamped),
+        LayerKind.circle => def.copyWith(circleOpacity: clamped),
+      };
+      try {
+        await controller.removeLayer(def.id);
+      } catch (e) {
+        // Lost a race with a concurrent ensure: the layer is already gone,
+        // which is exactly the state remove wanted. Re-add below heals it.
+        _logger.info('Layer ${def.id} already removed: $e', name: 'map');
+      }
+      await _addLayer(controller, updated);
+      if (!visible) {
+        await controller.setLayerVisibility(def.id, false);
+      }
+    });
   }
 
   Future<MapLayersResult> _ensureAll(
@@ -92,11 +126,21 @@ class MapLayerService {
   ) async {
     final sources = await controller.getSourceIds();
     if (!sources.contains(def.sourceId)) {
-      await controller.addSource(def.sourceId, _sourceProperties(def.source));
+      try {
+        await controller.addSource(def.sourceId, _sourceProperties(def.source));
+      } catch (e) {
+        if (!_isAlreadyExists(e)) rethrow;
+        _logger.info('Source ${def.sourceId} already exists', name: 'map');
+      }
     }
     final layers = await controller.getLayerIds();
     if (layers.contains(def.id)) return;
-    await _addLayer(controller, def);
+    try {
+      await _addLayer(controller, def);
+    } catch (e) {
+      if (!_isAlreadyExists(e)) rethrow;
+      _logger.info('Layer ${def.id} already exists', name: 'map');
+    }
     if (!def.visible) {
       await controller.setLayerVisibility(def.id, false);
     }
