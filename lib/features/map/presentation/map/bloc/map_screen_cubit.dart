@@ -33,18 +33,23 @@ class MapScreenCubit extends Cubit<MapScreenState> {
   static const double _minTilt = 0;
   static const double _maxTilt = 60;
 
+  /// Reflects the live camera snapshot reported by [MapView] after each
+  /// camera-idle event, so zoom/tilt/bearing buttons compute from fresh state.
   void mapViewStateChanged(MapViewState mapViewState) {
     emit(state.copyWith(mapViewState: mapViewState));
   }
 
+  /// Jumps the camera to [position], keeping the current zoom.
   void moveToLocation(MapPoint position) {
     _mapCommandsController.add(MoveTo(target: position));
   }
 
+  /// Glides the camera to [position] at [zoom], keeping tilt and bearing.
   void animateToLocation({required MapPoint position, required double zoom}) {
     _mapCommandsController.add(AnimateTo(target: position, zoom: zoom));
   }
 
+  /// Zooms one level in from the current live zoom.
   void makeZoomIn() {
     _mapCommandsController.add(
       ControlChanges(
@@ -55,6 +60,7 @@ class MapScreenCubit extends Cubit<MapScreenState> {
     );
   }
 
+  /// Zooms one level out from the current live zoom.
   void makeZoomOut() {
     _mapCommandsController.add(
       ControlChanges(
@@ -65,14 +71,17 @@ class MapScreenCubit extends Cubit<MapScreenState> {
     );
   }
 
+  /// Tilts the camera up by one step (15°), clamped to 60°.
   void tiltUp() {
     _makeTilt(_tiltStep);
   }
 
+  /// Tilts the camera down by one step (15°), clamped to 0° (top-down).
   void tiltDown() {
     _makeTilt(-_tiltStep);
   }
 
+  /// Applies a clamped tilt delta around the current live tilt.
   void _makeTilt(double delta) {
     final currentTilt = state.mapViewState.tilt;
     final tilt = (currentTilt + delta).clamp(_minTilt, _maxTilt);
@@ -85,14 +94,18 @@ class MapScreenCubit extends Cubit<MapScreenState> {
     );
   }
 
+  /// Rotates the camera counter-clockwise by one step (15°).
   void rotateLeft() {
     _rotateBy(-_rotateStep);
   }
 
+  /// Rotates the camera clockwise by one step (15°).
   void rotateRight() {
     _rotateBy(_rotateStep);
   }
 
+  /// Applies a bearing delta around the current live bearing, wrapped to
+  /// the 0–360° range the style spec expects.
   void _rotateBy(double delta) {
     final bearing = ((state.mapViewState.bearing) + delta) % 360;
     _mapCommandsController.add(
@@ -203,6 +216,8 @@ class MapScreenCubit extends Cubit<MapScreenState> {
     );
   }
 
+  /// Closes the command bus before the Bloc itself, so no camera command can
+  /// be dispatched into a disposed [MapView] subscription.
   @override
   Future<void> close() {
     _mapCommandsController.close();

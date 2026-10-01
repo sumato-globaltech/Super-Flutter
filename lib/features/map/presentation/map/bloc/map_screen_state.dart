@@ -29,13 +29,18 @@ class MapScreenState {
     this.layerExaggeration = const {},
   });
 
+  /// Initial state: default camera snapshot, no layer work in flight.
   factory MapScreenState.initial() {
     return const MapScreenState(mapViewState: MapViewState());
   }
 
+  /// True when layer setup finished with at least one failure. Drives the
+  /// retry banner; an empty failure list means every layer is ready.
   bool get layersPartialFailure =>
       !layersLoading && layersFailed.isNotEmpty;
 
+  /// Returns a copy with the given fields replaced. Maps are replaced
+  /// wholesale, so callers must spread the previous map (`{...state.x, ...}`).
   MapScreenState copyWith({
     MapViewState? mapViewState,
     bool? layersLoading,

@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+/// Geographic bounds (west/south/east/north) for viewport fitting. Reserved
+/// for a future fit-bounds command; currently carried but unread.
 class MapBoundingBox extends Equatable {
   final double west;
   final double south;

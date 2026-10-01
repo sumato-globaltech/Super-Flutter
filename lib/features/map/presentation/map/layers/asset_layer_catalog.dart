@@ -23,6 +23,9 @@ class AssetLayerCatalog implements LayerCatalog {
 
   List<LayerDefinition>? _cache;
 
+  /// Loads both JSON assets, substitutes variables, and returns the joined
+  /// definitions. The result is cached for the process lifetime; catalog
+  /// edits require an app restart to take effect.
   @override
   Future<List<LayerDefinition>> load() async {
     final cached = _cache;
@@ -73,6 +76,8 @@ class AssetLayerCatalog implements LayerCatalog {
     return defs;
   }
 
+  /// Reads the `variables` map out of a catalog document. Returns empty when
+  /// absent, so layers files can stay variable-free if they need no templating.
   static Map<String, String> _variablesOf(Map<String, dynamic> doc) {
     final variables = doc['variables'];
     if (variables is! Map) return const {};
@@ -102,6 +107,9 @@ class AssetLayerCatalog implements LayerCatalog {
     return node;
   }
 
+  /// Parses one layer entry and joins it to its shared [LayerSource] from
+  /// the sources catalog. Throws [FormatException] on unknown kinds or on a
+  /// `sourceId` with no matching source (except sourceless `background`).
   static LayerDefinition _parseLayer(
     dynamic node,
     Map<String, LayerSource> sources,
@@ -191,6 +199,9 @@ class AssetLayerCatalog implements LayerCatalog {
     );
   }
 
+  /// Parses one sources-catalog entry into its typed [LayerSource].
+  /// Wraps structural problems in [FormatException] naming the offending
+  /// [sourceId], so a broken catalog entry points at itself in logs.
   static LayerSource _parseSource(Map<String, dynamic> source,
       {required String sourceId}) {
     try {
@@ -216,6 +227,8 @@ class AssetLayerCatalog implements LayerCatalog {
     }
   }
 
+  /// Rejects duplicate layer ids, which would otherwise make toggles and
+  /// opacity updates address the wrong layer.
   static void _assertUniqueIds(List<LayerDefinition> defs) {
     final ids = defs.map((d) => d.id).toList();
     if (ids.toSet().length != ids.length) {
@@ -223,6 +236,8 @@ class AssetLayerCatalog implements LayerCatalog {
     }
   }
 
+  /// Rejects `belowLayerId` references to layers that do not exist, since a
+  /// dangling z-order anchor would silently mis-stack the map.
   static void _assertBelowRefsExist(List<LayerDefinition> defs) {
     final ids = defs.map((d) => d.id).toSet();
     for (final def in defs) {

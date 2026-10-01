@@ -3,6 +3,8 @@ import 'package:maplibre_gl/maplibre_gl.dart';
 import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_bounding_box.dart';
 import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_point.dart';
 
+/// Immutable camera snapshot shared between [MapView] and [MapScreenCubit].
+/// The view publishes it on camera-idle; the Cubit publishes it to buttons.
 class MapViewState extends Equatable {
   final MapPoint center;
   final MapBoundingBox? boundingBox;
@@ -26,6 +28,8 @@ class MapViewState extends Equatable {
   @override
   List<Object?> get props => [center, boundingBox, focusPoint, zoom, bearing, tilt, resetVersion];
 
+  /// Returns a copy with the given fields replaced. Callers must spread
+  /// previous maps/objects explicitly — no deep merging is performed.
   MapViewState copyWith({
     MapPoint? center,
     MapBoundingBox? boundingBox,
@@ -46,6 +50,7 @@ class MapViewState extends Equatable {
     );
   }
 
+  /// Compact rendering for the on-screen debug overlay.
   @override
   String toString() {
     StringBuffer buffer = StringBuffer();
@@ -59,10 +64,12 @@ class MapViewState extends Equatable {
   }
 }
 
+/// Converts a [MapPoint] to the plugin's [LatLng] for camera calls.
 extension MapPointX on MapPoint {
   LatLng get latLng => LatLng(latitude, longitude);
 }
 
+/// Builds a plugin [CameraPosition] from a snapshot, for animate/move calls.
 extension MapViewStateX on MapViewState {
   CameraPosition get cameraPosition =>
       CameraPosition(target: center.latLng, zoom: zoom, bearing: bearing, tilt: tilt);

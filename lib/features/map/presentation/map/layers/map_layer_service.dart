@@ -56,6 +56,9 @@ class MapLayerService {
     });
   }
 
+  /// Toggles a layer's runtime visibility without touching its source.
+  /// Serialized with the other mutations so a toggle cannot interleave with
+  /// an in-flight ensure or opacity repaint of the same layer.
   Future<void> setVisible(MapLibreMapController controller, String layerId, bool visible) {
     return _serialize(() => controller.setLayerVisibility(layerId, visible));
   }
@@ -79,6 +82,9 @@ class MapLayerService {
     );
   }
 
+  /// Applies [defs] in order, collecting per-layer outcomes. One layer's
+  /// failure is recorded in [MapLayersResult.failed] and never aborts its
+  /// siblings, so a single offline tile host cannot take down the whole map.
   Future<MapLayersResult> _ensureAll(
     MapLibreMapController controller,
     List<LayerDefinition> defs,
@@ -99,6 +105,10 @@ class MapLayerService {
     return MapLayersResult(applied: applied, failed: failed);
   }
 
+  /// Ensures a single definition end to end: adds the source unless present,
+  /// registers bundled icon assets, adds the layer unless present, then
+  /// applies the catalog's initial visibility. Already-exists races lost to
+  /// a concurrent ensure are swallowed because the end state is correct.
   Future<void> _ensureOne(MapLibreMapController controller, LayerDefinition def) async {
     final source = def.source;
     if (source != null) {
@@ -127,6 +137,9 @@ class MapLayerService {
     }
   }
 
+  /// Dispatches on [LayerDefinition.kind] to the matching typed
+  /// controller add-method, forwarding zoom bounds, source-layer selector,
+  /// and explicit z-order ([LayerDefinition.belowLayerId]).
   Future<void> _addLayer(MapLibreMapController controller, LayerDefinition def) async {
     switch (def.kind) {
       case LayerKind.raster:
@@ -286,6 +299,8 @@ class MapLayerService {
     }
   }
 
+  /// Converts a catalog [LayerSource] into the plugin's typed source
+  /// properties. `background` layers never reach here (see [needsSource]).
   SourceProperties _sourceProperties(LayerSource source) {
     return switch (source) {
       RasterTilesSource() => RasterSourceProperties(

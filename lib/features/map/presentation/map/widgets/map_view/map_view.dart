@@ -82,6 +82,9 @@ class _MapViewState extends State<MapView> {
     );
   }
 
+  /// Translates one [MapCommand] from the Cubit's broadcast stream into a
+  /// native camera call. Silently drops commands arriving before
+  /// `onMapCreated` has supplied a controller.
   Future<void> _handleMapCommands(MapCommand mapCommand) async {
     final controller = _mapController;
     if (controller == null) return;
@@ -124,6 +127,9 @@ class _MapViewState extends State<MapView> {
     }
   }
 
+  /// Reads the live native camera position on every camera-idle event and
+  /// forwards it as [MapViewState], keeping the Cubit's snapshot (and hence
+  /// the zoom/tilt/bearing buttons) in sync with gesture-driven moves.
   Future<void> _onCameraChanged() async {
     final controller = _mapController;
     if (controller == null) return;
@@ -146,12 +152,17 @@ class _MapViewState extends State<MapView> {
 
   Future<void>? _styleSetupFuture;
 
+  /// Coalesces rapid style-loaded callbacks: only one [_setupStyle] runs at
+  /// a time, and the guard resets when it completes so later reloads re-run.
   void _onStyleLoaded() {
     _styleSetupFuture ??= _setupStyle().whenComplete(() {
       _styleSetupFuture = null;
     });
   }
 
+  /// Forwards the ready controller to the parent exactly once per style
+  /// load. Layer setup itself is the Cubit's job (see `ensureBaseLayers`),
+  /// triggered from the parent's `onMapReady` callback.
   Future<void> _setupStyle() async {
     final controller = _mapController;
     if (controller == null) return;

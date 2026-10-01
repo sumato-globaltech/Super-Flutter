@@ -8,6 +8,8 @@ import 'package:super_flutter/features/map/presentation/map/bloc/map_screen_cubi
 import 'package:super_flutter/features/map/presentation/map/bloc/map_screen_state.dart';
 import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_view.dart';
 
+/// Map feature entry screen: native [MapView] plus camera buttons, layer
+/// panel, loading overlay, and retry banner — all driven by [MapScreenCubit].
 class MapScreenNew extends StatefulWidget {
   const MapScreenNew({super.key});
 
@@ -162,10 +164,10 @@ class _MapScreenState extends State<MapScreenNew> {
   }
 }
 
+/// Expandable layers entry point docked at the top-right. The toggle button
+/// is always visible; the [_LayersCard] below it only mounts while open.
 class _LayersPanel extends StatelessWidget {
-  const _LayersPanel({required this.open, required this.onToggleOpen});
-
-  final bool open;
+  const _LayersPanel({required this.open, required this.onToggleOpen});  final bool open;
   final VoidCallback onToggleOpen;
 
   @override
@@ -186,6 +188,9 @@ class _LayersPanel extends StatelessWidget {
   }
 }
 
+/// Lists one [_LayerRow] per catalog definition from the Cubit. Reads the
+/// native controller from the ancestor screen state, so rows disable
+/// themselves before the style is ready instead of crashing on null.
 class _LayersCard extends StatelessWidget {
   const _LayersCard();
 
@@ -243,6 +248,9 @@ class _LayersCard extends StatelessWidget {
   }
 }
 
+/// One layer's controls: visibility switch plus an opacity and/or
+/// exaggeration slider, shown only for kinds that support them
+/// ([LayerDefinition.supportsOpacity]/[supportsExaggeration]).
 class _LayerRow extends StatefulWidget {
   const _LayerRow({
     super.key,
@@ -288,6 +296,9 @@ class _LayerRowState extends State<_LayerRow> {
     }
   }
 
+  /// True only when sliders may commit: panel enabled, controller ready,
+  /// and at least one slider has a commit callback. Drag previews still work
+  /// while disabled via local [_dragValue] state.
   bool get _interactive =>
       widget.enabled &&
       (widget.onOpacityCommitted != null ||
@@ -359,6 +370,9 @@ class _LayerRowState extends State<_LayerRow> {
   }
 }
 
+/// Label + slider pair used for opacity (0–1) and exaggeration (0–5).
+/// Drags preview locally in [_LayerRowState]; only `onChangeEnd` commits to
+/// the Cubit, since every commit re-adds the native layer.
 class _LabeledSlider extends StatelessWidget {
   const _LabeledSlider({
     required this.label,
@@ -401,6 +415,8 @@ class _LabeledSlider extends StatelessWidget {
   }
 }
 
+/// Bottom banner shown when layer setup finished with failures. Retry
+/// re-runs the base pipeline via [MapScreenCubit.refreshLayers].
 class _LayersRetryBanner extends StatelessWidget {
   const _LayersRetryBanner({required this.failed, required this.onRetry});
 
@@ -429,6 +445,8 @@ class _LayersRetryBanner extends StatelessWidget {
   }
 }
 
+/// Small round camera button (zoom/tilt/rotate) with tooltip and
+/// accessibility label. `heroTag: tooltip` keeps tags unique per button.
 class _ControlButton extends StatelessWidget {
   const _ControlButton({
     required this.tooltip,
