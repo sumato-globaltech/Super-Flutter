@@ -83,7 +83,7 @@ class LayerDefinition extends Equatable {
     required this.sourceId,
     required this.group,
     required this.kind,
-    required this.source,
+    this.source,
     this.eager = false,
     this.visible = true,
     this.belowLayerId,
@@ -148,7 +148,10 @@ class LayerDefinition extends Equatable {
   final String group;
 
   final LayerKind kind;
-  final LayerSource source;
+
+  /// Resolved data origin, joined from the sources catalog by [sourceId].
+  /// Null for sourceless kinds ([LayerKind.background]).
+  final LayerSource? source;
 
   /// Load with [MapLayerService.ensureEagerLayers] at style setup.
   final bool eager;
@@ -227,7 +230,7 @@ class LayerDefinition extends Equatable {
   bool get supportsExaggeration => kind == LayerKind.hillshade;
 
   /// Sourceless kinds skip the source step entirely.
-  bool get needsSource => kind != LayerKind.background;
+  bool get needsSource => source != null;
 
   /// Copy with overridden paint. Used by opacity updates, which re-add the
   /// layer since the plugin exposes no paint setters.

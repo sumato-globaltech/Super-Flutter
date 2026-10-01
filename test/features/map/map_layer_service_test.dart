@@ -114,7 +114,9 @@ void main() {
           sourceLayer: any(named: 'sourceLayer'),
           belowLayerId: any(named: 'belowLayerId'),
           minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom')),
+          maxzoom: any(named: 'maxzoom'),
+          filter: any(named: 'filter'),
+          enableInteraction: any(named: 'enableInteraction')),
     ).thenAnswer((invocation) async {
       addedLayers.add(invocation.positionalArguments[1] as String);
     });
@@ -123,7 +125,9 @@ void main() {
           sourceLayer: any(named: 'sourceLayer'),
           belowLayerId: any(named: 'belowLayerId'),
           minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom')),
+          maxzoom: any(named: 'maxzoom'),
+          filter: any(named: 'filter'),
+          enableInteraction: any(named: 'enableInteraction')),
     ).thenAnswer((invocation) async {
       addedLayers.add(invocation.positionalArguments[1] as String);
     });
@@ -132,7 +136,9 @@ void main() {
           sourceLayer: any(named: 'sourceLayer'),
           belowLayerId: any(named: 'belowLayerId'),
           minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom')),
+          maxzoom: any(named: 'maxzoom'),
+          filter: any(named: 'filter'),
+          enableInteraction: any(named: 'enableInteraction')),
     ).thenAnswer((invocation) async {
       addedLayers.add(invocation.positionalArguments[1] as String);
     });
@@ -330,7 +336,6 @@ void main() {
         sourceId: '',
         group: 'g',
         kind: LayerKind.background,
-        source: GeoJsonSource(data: 'https://x.example/p.geojson'),
       ),
     ];
     final service = MapLayerService(FakeCatalog(defs), _silentLogger());
@@ -344,7 +349,9 @@ void main() {
           sourceLayer: any(named: 'sourceLayer'),
           belowLayerId: any(named: 'belowLayerId'),
           minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom')),
+          maxzoom: any(named: 'maxzoom'),
+          filter: any(named: 'filter'),
+          enableInteraction: any(named: 'enableInteraction')),
     ).called(1);
     verify(
       () => controller.addHillshadeLayer(any(), any(), any(),

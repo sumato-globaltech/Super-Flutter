@@ -5,21 +5,21 @@ import 'package:flutter/services.dart';
 import 'layer_catalog.dart';
 import 'layer_definition.dart';
 
-/// [LayerCatalog] backed by a bundled JSON asset. Adding layer #31 is one
-/// JSON entry — no Dart or config-plumbing change.
+/// [LayerCatalog] backed by two bundled JSON assets: `sources` (tile/data
+/// origins, defined once) joined with `layers` (which reference them by
+/// `sourceId`). Adding layer #31 is one JSON entry — no Dart change.
 ///
-/// `{tileHost}` (and future `{apiKey}`-style variables) are substituted from
-/// [variables], so environments differ by one value, not thirty URLs. A
+/// `{tileHost}`-style variables declared in the sources file are substituted
+/// everywhere, so environments differ by one value, not thirty URLs. A
 /// remote catalog can replace this class later behind the same interface.
-
 class AssetLayerCatalog implements LayerCatalog {
   AssetLayerCatalog({
-    this.assetPath = 'assets/map/layers.catalog.v1.json',
-    // this.variables = const {'tileHost': 'http://64.227.134.64'},
+    this.sourcesPath = 'assets/map/sources.catalog.v1.json',
+    this.layersPath = 'assets/map/layers.catalog.v1.json',
   });
 
-  final String assetPath;
-  late Map<String, dynamic> variables;
+  final String sourcesPath;
+  final String layersPath;
 
   List<LayerDefinition>? _cache;
 
@@ -27,26 +27,63 @@ class AssetLayerCatalog implements LayerCatalog {
   Future<List<LayerDefinition>> load() async {
     final cached = _cache;
     if (cached != null) return cached;
-    final raw = await rootBundle.loadString(assetPath);
-    final decoded = jsonDecode(raw);
-    if (decoded is! Map<String, dynamic>) {
-      throw const FormatException('Layer catalog root must be an object');
-    }
-    variables = decoded['variables'];
-
-    final layers = decoded['layers'];
-    if (layers is! List) {
-      throw const FormatException('Layer catalog is missing "layers"');
-    }
-    final defs = layers.map((e) => _parse(_substitute(e))).toList(growable: false);
-    _assertUniqueIds(defs);
-    _assertBelowRefsExist(defs);
+    final sourcesRaw = await rootBundle.loadString(sourcesPath);
+    final layersRaw = await rootBundle.loadString(layersPath);
+    final defs = joinCatalog(
+      sourcesDoc: jsonDecode(sourcesRaw),
+      layersDoc: jsonDecode(layersRaw),
+    );
     _cache = defs;
     return defs;
   }
 
+  /// Joins raw decoded JSON documents into validated definitions. Pure and
+  /// directly unit-testable (no asset bundle needed).
+  static List<LayerDefinition> joinCatalog({
+    required dynamic sourcesDoc,
+    required dynamic layersDoc,
+  }) {
+    if (sourcesDoc is! Map<String, dynamic>) {
+      throw const FormatException('Sources catalog root must be an object');
+    }
+    if (layersDoc is! Map<String, dynamic>) {
+      throw const FormatException('Layers catalog root must be an object');
+    }
+    final variables = _variablesOf(sourcesDoc);
+    final sourcesNode = sourcesDoc['sources'];
+    if (sourcesNode is! Map<String, dynamic>) {
+      throw const FormatException('Sources catalog is missing "sources"');
+    }
+    final sources = <String, LayerSource>{
+      for (final entry in sourcesNode.entries)
+        entry.key: _parseSource(
+          _substitute(entry.value, variables) as Map<String, dynamic>,
+          sourceId: entry.key,
+        ),
+    };
+    final layers = layersDoc['layers'];
+    if (layers is! List) {
+      throw const FormatException('Layers catalog is missing "layers"');
+    }
+    final defs = layers
+        .map((e) => _parseLayer(_substitute(e, variables), sources))
+        .toList(growable: false);
+    _assertUniqueIds(defs);
+    _assertBelowRefsExist(defs);
+    return defs;
+  }
+
+  static Map<String, String> _variablesOf(Map<String, dynamic> doc) {
+    final variables = doc['variables'];
+    if (variables is! Map) return const {};
+    return {
+      for (final e in variables.entries)
+        '${e.key}': '${e.value}',
+    };
+  }
+
   /// Recursively substitutes `{variable}` placeholders in strings.
-  dynamic _substitute(dynamic node) {
+  static dynamic _substitute(dynamic node, Map<String, String> variables) {
     if (node is String) {
       var out = node;
       variables.forEach((key, value) {
@@ -56,14 +93,19 @@ class AssetLayerCatalog implements LayerCatalog {
     }
     if (node is Map) {
       return Map<String, dynamic>.fromEntries(
-        node.entries.map((e) => MapEntry('${e.key}', _substitute(e.value))),
+        node.entries.map(
+          (e) => MapEntry('${e.key}', _substitute(e.value, variables)),
+        ),
       );
     }
-    if (node is List) return node.map(_substitute).toList();
+    if (node is List) return node.map((e) => _substitute(e, variables)).toList();
     return node;
   }
 
-  LayerDefinition _parse(dynamic node) {
+  static LayerDefinition _parseLayer(
+    dynamic node,
+    Map<String, LayerSource> sources,
+  ) {
     if (node is! Map<String, dynamic>) {
       throw const FormatException('Layer entry must be an object');
     }
@@ -88,20 +130,24 @@ class AssetLayerCatalog implements LayerCatalog {
       'heatmap' => LayerKind.heatmap,
       final other => throw FormatException('Unknown layer kind "$other"'),
     };
-    final source = map['source'];
-    if (source is! Map<String, dynamic>) {
-      throw FormatException('Layer "${map['id']}" is missing "source"');
-    }
     final paint = map['paint'];
     final paintMap = paint is Map<String, dynamic> ? paint : {};
     double? paintNum(String key) => (paintMap[key] as num?)?.toDouble();
 
+    final sourceId = str('sourceId');
+    final source = sources[sourceId];
+    if (source == null && kind != LayerKind.background) {
+      throw FormatException(
+        'Layer "${map['id']}" references unknown source "$sourceId"',
+      );
+    }
+
     return LayerDefinition(
       id: str('id'),
-      sourceId: str('sourceId'),
-      group: map['group'] is String ? node['group'] as String : 'overlays',
+      sourceId: sourceId,
+      group: map['group'] is String ? map['group'] as String : 'overlays',
       kind: kind,
-      source: _parseSource(source),
+      source: source,
       eager: map['eager'] == true,
       visible: map['visible'] != false,
       belowLayerId: map['belowLayerId'] as String?,
@@ -145,39 +191,46 @@ class AssetLayerCatalog implements LayerCatalog {
     );
   }
 
-  LayerSource _parseSource(Map<String, dynamic> source) {
-    return switch (source['type']) {
-      'rasterTiles' => RasterTilesSource(
-        tiles: (source['tiles'] as List).map((e) => '$e').toList(),
-        tileSize: (source['tileSize'] as num?)?.toDouble(),
-        attribution: source['attribution'] as String?,
-      ),
-      'rasterDem' => RasterDemSource(
-        tiles: (source['tiles'] as List).map((e) => '$e').toList(),
-        encoding: source['encoding'] as String? ?? 'mapbox',
-        tileSize: (source['tileSize'] as num?)?.toDouble() ?? 512,
-        maxzoom: (source['maxzoom'] as num?)?.toDouble() ?? 15,
-        attribution: source['attribution'] as String?,
-      ),
-      'vectorUrl' => VectorUrlSource(url: source['url'] as String),
-      'geojson' => GeoJsonSource(data: source['data']),
-      final other => throw FormatException('Unknown source type "$other"'),
-    };
+  static LayerSource _parseSource(Map<String, dynamic> source,
+      {required String sourceId}) {
+    try {
+      return switch (source['type']) {
+        'rasterTiles' => RasterTilesSource(
+          tiles: (source['tiles'] as List).map((e) => '$e').toList(),
+          tileSize: (source['tileSize'] as num?)?.toDouble(),
+          attribution: source['attribution'] as String?,
+        ),
+        'rasterDem' => RasterDemSource(
+          tiles: (source['tiles'] as List).map((e) => '$e').toList(),
+          encoding: source['encoding'] as String? ?? 'mapbox',
+          tileSize: (source['tileSize'] as num?)?.toDouble() ?? 512,
+          maxzoom: (source['maxzoom'] as num?)?.toDouble() ?? 15,
+          attribution: source['attribution'] as String?,
+        ),
+        'vectorUrl' => VectorUrlSource(url: source['url'] as String),
+        'geojson' => GeoJsonSource(data: source['data']),
+        final other => throw FormatException('Unknown source type "$other"'),
+      };
+    } catch (e) {
+      throw FormatException('Invalid source "$sourceId": $e');
+    }
   }
 
-  void _assertUniqueIds(List<LayerDefinition> defs) {
+  static void _assertUniqueIds(List<LayerDefinition> defs) {
     final ids = defs.map((d) => d.id).toList();
     if (ids.toSet().length != ids.length) {
       throw FormatException('Duplicate layer ids in catalog: $ids');
     }
   }
 
-  void _assertBelowRefsExist(List<LayerDefinition> defs) {
+  static void _assertBelowRefsExist(List<LayerDefinition> defs) {
     final ids = defs.map((d) => d.id).toSet();
     for (final def in defs) {
       final below = def.belowLayerId;
       if (below != null && !ids.contains(below)) {
-        throw FormatException('Layer "${def.id}" references unknown belowLayerId "$below"');
+        throw FormatException(
+          'Layer "${def.id}" references unknown belowLayerId "$below"',
+        );
       }
     }
   }

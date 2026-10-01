@@ -52,4 +52,75 @@ void main() {
     final heatmap = byId['villages_heatmap']!;
     expect(heatmap.heatmapRadius, 30.0);
   });
+
+  test('sources are defined once and shared by reference', () async {
+    final defs = await AssetLayerCatalog().load();
+    final villagesUsers = defs
+        .where((d) => d.sourceId == 'villages_source')
+        .toList();
+    expect(villagesUsers.length, greaterThan(1));
+    for (final def in villagesUsers) {
+      expect(def.source, isNotNull);
+    }
+  });
+
+  group('joinCatalog', () {
+    Map<String, dynamic> sourcesDoc() => {
+      'variables': {'tileHost': 'https://tiles.example'},
+      'sources': {
+        'shared': {
+          'type': 'geojson',
+          'data': '{tileHost}/data.geojson',
+        },
+      },
+    };
+
+    Map<String, dynamic> layer(String id, String sourceId) => {
+      'id': id,
+      'sourceId': sourceId,
+      'group': 'overlays',
+      'kind': 'circle',
+      'paint': {'circleRadius': 4.0},
+    };
+
+    test('joins layers with their shared source', () {
+      final defs = AssetLayerCatalog.joinCatalog(
+        sourcesDoc: sourcesDoc(),
+        layersDoc: {
+          'layers': [layer('a', 'shared'), layer('b', 'shared')],
+        },
+      );
+
+      expect(defs.map((d) => d.id), ['a', 'b']);
+      expect(defs[0].source, defs[1].source);
+      expect(
+        (defs[0].source as dynamic).toString(),
+        contains('https://tiles.example/data.geojson'),
+      );
+    });
+
+    test('rejects layers referencing unknown sources', () {
+      expect(
+        () => AssetLayerCatalog.joinCatalog(
+          sourcesDoc: sourcesDoc(),
+          layersDoc: {
+            'layers': [layer('a', 'missing')],
+          },
+        ),
+        throwsA(isA<FormatException>()),
+      );
+    });
+
+    test('rejects duplicate layer ids', () {
+      expect(
+        () => AssetLayerCatalog.joinCatalog(
+          sourcesDoc: sourcesDoc(),
+          layersDoc: {
+            'layers': [layer('a', 'shared'), layer('a', 'shared')],
+          },
+        ),
+        throwsA(isA<FormatException>()),
+      );
+    });
+  });
 }

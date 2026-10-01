@@ -100,12 +100,13 @@ class MapLayerService {
   }
 
   Future<void> _ensureOne(MapLibreMapController controller, LayerDefinition def) async {
-    if (def.needsSource) {
+    final source = def.source;
+    if (source != null) {
       final sources = await controller.getSourceIds();
       if (!sources.contains(def.sourceId)) {
         debugPrint(def.id);
         try {
-          await controller.addSource(def.sourceId, _sourceProperties(def.source));
+          await controller.addSource(def.sourceId, _sourceProperties(source));
         } catch (e) {
           if (!_isAlreadyExists(e)) rethrow;
           _logger.info('Source ${def.sourceId} already exists', name: 'map');

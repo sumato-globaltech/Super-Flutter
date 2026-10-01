@@ -1,9 +1,5 @@
 {
   "version": 1,
-  "variables": {
-    "tileHost": "http://64.227.134.64",
-    "pmtiles": "pmtiles://"
-  },
   "layers": [
     {
       "id": "satellite_layer",
@@ -12,13 +8,6 @@
       "kind": "raster",
       "eager": true,
       "visible": true,
-      "source": {
-        "type": "rasterTiles",
-        "tiles": [
-          "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
-        ],
-        "tileSize": 256
-      },
       "paint": {
         "rasterOpacity": 1.0
       }
@@ -30,10 +19,6 @@
       "kind": "line",
       "eager": false,
       "visible": true,
-      "source": {
-        "type": "vectorUrl",
-        "url": "{pmtiles}{tileHost}/pmtiles.php?file=nagaland_NH.pmtiles"
-      },
       "sourceLayer": "nagaland",
       "paint": {
         "lineColor": "#E03F4F",
@@ -47,10 +32,6 @@
       "kind": "circle",
       "eager": false,
       "visible": false,
-      "source": {
-        "type": "geojson",
-        "data": "{tileHost}/nagaland_vill.geojson"
-      },
       "paint": {
         "circleRadius": 8.0,
         "circleColor": "#11b4da",
@@ -65,10 +46,6 @@
       "kind": "symbol",
       "eager": false,
       "visible": false,
-      "source": {
-        "type": "geojson",
-        "data": "{tileHost}/nagaland_vill.geojson"
-      },
       "paint": {
         "textField": "{Vill_Name}",
         "textSize": 12.0,
@@ -82,10 +59,6 @@
       "kind": "symbol",
       "eager": false,
       "visible": false,
-      "source": {
-        "type": "geojson",
-        "data": "{tileHost}/nagaland_vill.geojson"
-      },
       "paint": {
         "iconImage": "village-marker",
         "iconSize": 1.0,
@@ -99,30 +72,6 @@
       "kind": "fill",
       "eager": false,
       "visible": false,
-      "source": {
-        "type": "geojson",
-        "data": {
-          "type": "FeatureCollection",
-          "features": [
-            {
-              "type": "Feature",
-              "properties": { "name": "Kohima district demo" },
-              "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                  [
-                    [94.05, 25.60],
-                    [94.14, 25.60],
-                    [94.14, 25.70],
-                    [94.05, 25.70],
-                    [94.05, 25.60]
-                  ]
-                ]
-              }
-            }
-          ]
-        }
-      },
       "paint": {
         "fillColor": "#22c55e",
         "fillOpacity": 0.25
@@ -135,13 +84,6 @@
       "kind": "hillshade",
       "eager": false,
       "visible": false,
-      "source": {
-        "type": "rasterDem",
-        "tiles": ["https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"],
-        "encoding": "terrarium",
-        "tileSize": 256,
-        "maxzoom": 15
-      },
       "paint": {
         "hillshadeExaggeration": 1.5
       }
@@ -153,10 +95,6 @@
       "kind": "heatmap",
       "eager": false,
       "visible": false,
-      "source": {
-        "type": "geojson",
-        "data": "{tileHost}/nagaland_vill.geojson"
-      },
       "paint": {
         "heatmapRadius": 30.0,
         "heatmapOpacity": 0.8
