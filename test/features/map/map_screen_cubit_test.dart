@@ -179,4 +179,37 @@ void main() {
       () => layers.updateOpacity(controller, _defs.first, 0.5, visible: true),
     ).called(1),
   );
+
+  blocTest<MapScreenCubit, MapScreenState>(
+    'exaggeration commit delegates to the service and updates state',
+    build: () {
+      when(() => layers.ensureEagerLayers(any())).thenAnswer(
+        (_) async => const MapLayersResult(applied: ['satellite_layer']),
+      );
+      when(() => layers.updateExaggeration(any(), any(), any(),
+              visible: any(named: 'visible'))).thenAnswer((_) async {});
+      return buildCubit();
+    },
+    act: (c) async {
+      await c.ensureBaseLayers(controller);
+      clearInteractions(layers);
+      await c.setHillshadeExaggeration(
+        controller,
+        _defs.first,
+        2.5,
+      );
+    },
+    skip: 2,
+    expect: () => [
+      isA<MapScreenState>().having(
+        (s) => s.layerExaggeration['satellite_layer'],
+        'exaggeration',
+        2.5,
+      ),
+    ],
+    verify: (_) => verify(
+      () => layers.updateExaggeration(
+          controller, _defs.first, 2.5, visible: true),
+    ).called(1),
+  );
 }

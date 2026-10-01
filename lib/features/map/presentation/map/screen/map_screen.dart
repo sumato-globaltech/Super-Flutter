@@ -215,6 +215,12 @@ class _LayersCard extends StatelessWidget {
                       group: def.group,
                       visible: state.layerVisibility[def.id] ?? def.visible,
                       opacity: state.layerOpacity[def.id] ?? 1.0,
+                      exaggeration:
+                          state.layerExaggeration[def.id] ??
+                          def.hillshadeExaggeration ??
+                          1.0,
+                      showOpacity: def.supportsOpacity,
+                      showExaggeration: def.supportsExaggeration,
                       enabled: controller != null && !state.layersLoading,
                       onToggle: controller == null
                           ? null
@@ -222,6 +228,13 @@ class _LayersCard extends StatelessWidget {
                       onOpacityCommitted: controller == null
                           ? null
                           : (value) => cubit.setLayerOpacity(controller, def, value),
+                      onExaggerationCommitted: controller == null
+                          ? null
+                          : (value) => cubit.setHillshadeExaggeration(
+                              controller,
+                              def,
+                              value,
+                            ),
                     ),
                 ],
               ),
@@ -237,18 +250,26 @@ class _LayerRow extends StatefulWidget {
     required this.group,
     required this.visible,
     required this.opacity,
+    required this.exaggeration,
+    required this.showOpacity,
+    required this.showExaggeration,
     required this.enabled,
     required this.onToggle,
     required this.onOpacityCommitted,
+    required this.onExaggerationCommitted,
   });
 
   final String layerId;
   final String group;
   final bool visible;
   final double opacity;
+  final double exaggeration;
+  final bool showOpacity;
+  final bool showExaggeration;
   final bool enabled;
   final VoidCallback? onToggle;
   final ValueChanged<double>? onOpacityCommitted;
+  final ValueChanged<double>? onExaggerationCommitted;
 
   @override
   State<_LayerRow> createState() => _LayerRowState();
@@ -256,12 +277,21 @@ class _LayerRow extends StatefulWidget {
 
 class _LayerRowState extends State<_LayerRow> {
   double? _dragValue;
+  double? _dragExaggeration;
 
   @override
   void didUpdateWidget(covariant _LayerRow oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.opacity != widget.opacity) _dragValue = null;
+    if (oldWidget.exaggeration != widget.exaggeration) {
+      _dragExaggeration = null;
+    }
   }
+
+  bool get _interactive =>
+      widget.enabled &&
+      (widget.onOpacityCommitted != null ||
+          widget.onExaggerationCommitted != null);
 
   @override
   Widget build(BuildContext context) {
@@ -296,19 +326,77 @@ class _LayerRowState extends State<_LayerRow> {
                 ),
               ],
             ),
-            Slider(
-              value: (_dragValue ?? widget.opacity).clamp(0.0, 1.0),
-              onChanged: widget.enabled && widget.onOpacityCommitted != null
-                  ? (v) => setState(() => _dragValue = v)
-                  : null,
-              onChangeEnd: (v) {
-                setState(() => _dragValue = null);
-                widget.onOpacityCommitted?.call(v);
-              },
-            ),
+            if (widget.showOpacity)
+              _LabeledSlider(
+                label: 'Opacity',
+                value: (_dragValue ?? widget.opacity).clamp(0.0, 1.0),
+                min: 0,
+                max: 1,
+                enabled: _interactive,
+                onChanged: (v) => setState(() => _dragValue = v),
+                onChangeEnd: (v) {
+                  setState(() => _dragValue = null);
+                  widget.onOpacityCommitted?.call(v);
+                },
+              ),
+            if (widget.showExaggeration)
+              _LabeledSlider(
+                label: 'Exaggeration',
+                value: (_dragExaggeration ?? widget.exaggeration).clamp(0.0, 5.0),
+                min: 0,
+                max: 5,
+                enabled: _interactive,
+                onChanged: (v) => setState(() => _dragExaggeration = v),
+                onChangeEnd: (v) {
+                  setState(() => _dragExaggeration = null);
+                  widget.onExaggerationCommitted?.call(v);
+                },
+              ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _LabeledSlider extends StatelessWidget {
+  const _LabeledSlider({
+    required this.label,
+    required this.value,
+    required this.min,
+    required this.max,
+    required this.enabled,
+    required this.onChanged,
+    required this.onChangeEnd,
+  });
+
+  final String label;
+  final double value;
+  final double min;
+  final double max;
+  final bool enabled;
+  final ValueChanged<double> onChanged;
+  final ValueChanged<double> onChangeEnd;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Row(
+      children: [
+        SizedBox(
+          width: 96,
+          child: Text(label, style: theme.textTheme.bodySmall),
+        ),
+        Expanded(
+          child: Slider(
+            value: value.clamp(min, max),
+            min: min,
+            max: max,
+            onChanged: enabled ? onChanged : null,
+            onChangeEnd: onChangeEnd,
+          ),
+        ),
+      ],
     );
   }
 }

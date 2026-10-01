@@ -17,12 +17,16 @@ class MapScreenState {
   /// Per-layer opacity (0–1) keyed by layer id. Defaults to 1.0.
   final Map<String, double> layerOpacity;
 
+  /// Per-layer hillshade exaggeration keyed by layer id.
+  final Map<String, double> layerExaggeration;
+
   const MapScreenState({
     required this.mapViewState,
     this.layersLoading = false,
     this.layersFailed = const [],
     this.layerVisibility = const {},
     this.layerOpacity = const {},
+    this.layerExaggeration = const {},
   });
 
   factory MapScreenState.initial() {
@@ -38,6 +42,7 @@ class MapScreenState {
     List<String>? layersFailed,
     Map<String, bool>? layerVisibility,
     Map<String, double>? layerOpacity,
+    Map<String, double>? layerExaggeration,
   }) {
     return MapScreenState(
       mapViewState: mapViewState ?? this.mapViewState,
@@ -45,6 +50,7 @@ class MapScreenState {
       layersFailed: layersFailed ?? this.layersFailed,
       layerVisibility: layerVisibility ?? this.layerVisibility,
       layerOpacity: layerOpacity ?? this.layerOpacity,
+      layerExaggeration: layerExaggeration ?? this.layerExaggeration,
     );
   }
 }

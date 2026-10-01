@@ -51,6 +51,27 @@ void main() {
     registerFallbackValue(
       const CircleLayerProperties(circleRadius: 1.0),
     );
+    registerFallbackValue(
+      const SymbolLayerProperties(),
+    );
+    registerFallbackValue(
+      const FillLayerProperties(),
+    );
+    registerFallbackValue(
+      const FillExtrusionLayerProperties(),
+    );
+    registerFallbackValue(
+      const HillshadeLayerProperties(),
+    );
+    registerFallbackValue(
+      const ColorReliefLayerProperties(),
+    );
+    registerFallbackValue(
+      const BackgroundLayerProperties(),
+    );
+    registerFallbackValue(
+      const HeatmapLayerProperties(),
+    );
   });
 
   late MockMapController controller;
@@ -83,6 +104,66 @@ void main() {
       () => controller.addLayer(any(), any(), any(),
           belowLayerId: any(named: 'belowLayerId'),
           sourceLayer: any(named: 'sourceLayer'),
+          minzoom: any(named: 'minzoom'),
+          maxzoom: any(named: 'maxzoom')),
+    ).thenAnswer((invocation) async {
+      addedLayers.add(invocation.positionalArguments[1] as String);
+    });
+    when(
+      () => controller.addSymbolLayer(any(), any(), any(),
+          sourceLayer: any(named: 'sourceLayer'),
+          belowLayerId: any(named: 'belowLayerId'),
+          minzoom: any(named: 'minzoom'),
+          maxzoom: any(named: 'maxzoom')),
+    ).thenAnswer((invocation) async {
+      addedLayers.add(invocation.positionalArguments[1] as String);
+    });
+    when(
+      () => controller.addFillLayer(any(), any(), any(),
+          sourceLayer: any(named: 'sourceLayer'),
+          belowLayerId: any(named: 'belowLayerId'),
+          minzoom: any(named: 'minzoom'),
+          maxzoom: any(named: 'maxzoom')),
+    ).thenAnswer((invocation) async {
+      addedLayers.add(invocation.positionalArguments[1] as String);
+    });
+    when(
+      () => controller.addFillExtrusionLayer(any(), any(), any(),
+          sourceLayer: any(named: 'sourceLayer'),
+          belowLayerId: any(named: 'belowLayerId'),
+          minzoom: any(named: 'minzoom'),
+          maxzoom: any(named: 'maxzoom')),
+    ).thenAnswer((invocation) async {
+      addedLayers.add(invocation.positionalArguments[1] as String);
+    });
+    when(
+      () => controller.addHillshadeLayer(any(), any(), any(),
+          belowLayerId: any(named: 'belowLayerId'),
+          minzoom: any(named: 'minzoom'),
+          maxzoom: any(named: 'maxzoom')),
+    ).thenAnswer((invocation) async {
+      addedLayers.add(invocation.positionalArguments[1] as String);
+    });
+    when(
+      () => controller.addColorReliefLayer(any(), any(), any(),
+          belowLayerId: any(named: 'belowLayerId'),
+          minzoom: any(named: 'minzoom'),
+          maxzoom: any(named: 'maxzoom')),
+    ).thenAnswer((invocation) async {
+      addedLayers.add(invocation.positionalArguments[1] as String);
+    });
+    when(
+      () => controller.addBackgroundLayer(any(), any(),
+          belowLayerId: any(named: 'belowLayerId'),
+          minzoom: any(named: 'minzoom'),
+          maxzoom: any(named: 'maxzoom')),
+    ).thenAnswer((invocation) async {
+      addedLayers.add(invocation.positionalArguments[0] as String);
+    });
+    when(
+      () => controller.addHeatmapLayer(any(), any(), any(),
+          sourceLayer: any(named: 'sourceLayer'),
+          belowLayerId: any(named: 'belowLayerId'),
           minzoom: any(named: 'minzoom'),
           maxzoom: any(named: 'maxzoom')),
     ).thenAnswer((invocation) async {
@@ -211,5 +292,103 @@ void main() {
 
     expect(result.applied, ['satellite_layer']);
     expect(result.failed, isEmpty);
+  });
+
+  test('each new layer kind calls its typed add-method', () async {
+    const defs = [
+      LayerDefinition(
+        id: 'labels',
+        sourceId: 's',
+        group: 'g',
+        kind: LayerKind.symbol,
+        source: GeoJsonSource(data: 'https://x.example/p.geojson'),
+        textField: '{name}',
+      ),
+      LayerDefinition(
+        id: 'fill',
+        sourceId: 's',
+        group: 'g',
+        kind: LayerKind.fill,
+        source: GeoJsonSource(data: 'https://x.example/p.geojson'),
+      ),
+      LayerDefinition(
+        id: 'hill',
+        sourceId: 'dem',
+        group: 'g',
+        kind: LayerKind.hillshade,
+        source: RasterDemSource(tiles: ['https://x.example/{z}/{x}/{y}.png']),
+      ),
+      LayerDefinition(
+        id: 'heat',
+        sourceId: 's',
+        group: 'g',
+        kind: LayerKind.heatmap,
+        source: GeoJsonSource(data: 'https://x.example/p.geojson'),
+      ),
+      LayerDefinition(
+        id: 'bg',
+        sourceId: '',
+        group: 'g',
+        kind: LayerKind.background,
+        source: GeoJsonSource(data: 'https://x.example/p.geojson'),
+      ),
+    ];
+    final service = MapLayerService(FakeCatalog(defs), _silentLogger());
+
+    final result = await service.ensureGroup(controller, 'g');
+
+    expect(result.failed, isEmpty);
+    expect(result.applied, ['labels', 'fill', 'hill', 'heat', 'bg']);
+    verify(
+      () => controller.addSymbolLayer(any(), any(), any(),
+          sourceLayer: any(named: 'sourceLayer'),
+          belowLayerId: any(named: 'belowLayerId'),
+          minzoom: any(named: 'minzoom'),
+          maxzoom: any(named: 'maxzoom')),
+    ).called(1);
+    verify(
+      () => controller.addHillshadeLayer(any(), any(), any(),
+          belowLayerId: any(named: 'belowLayerId'),
+          minzoom: any(named: 'minzoom'),
+          maxzoom: any(named: 'maxzoom')),
+    ).called(1);
+    verify(
+      () => controller.addBackgroundLayer(any(), any(),
+          belowLayerId: any(named: 'belowLayerId'),
+          minzoom: any(named: 'minzoom'),
+          maxzoom: any(named: 'maxzoom')),
+    ).called(1);
+    // Background skips the source step entirely.
+    verifyNever(() => controller.addSource('', any()));
+  });
+
+  test('hillshade exaggeration re-adds with new paint', () async {
+    when(() => controller.removeLayer(any())).thenAnswer((_) async {});
+    const def = LayerDefinition(
+      id: 'hill',
+      sourceId: 'dem',
+      group: 'g',
+      kind: LayerKind.hillshade,
+      source: RasterDemSource(tiles: ['https://x.example/{z}/{x}/{y}.png']),
+    );
+    final service = MapLayerService(FakeCatalog([def]), _silentLogger());
+
+    await service.updateExaggeration(controller, def, 2.5);
+
+    final captured = verify(
+      () => controller.addHillshadeLayer(
+        'dem',
+        'hill',
+        captureAny(),
+        belowLayerId: any(named: 'belowLayerId'),
+        minzoom: any(named: 'minzoom'),
+        maxzoom: any(named: 'maxzoom'),
+      ),
+    ).captured;
+    expect(
+      (captured.single as HillshadeLayerProperties)
+          .toJson()['hillshade-exaggeration'],
+      2.5,
+    );
   });
 }

@@ -27,4 +27,29 @@ void main() {
     final villages = defs.firstWhere((d) => d.id == 'villages_layer');
     expect(villages.visible, false);
   });
+
+  test('new layer kinds parse with paint and flags', () async {
+    final defs = await AssetLayerCatalog().load();
+    final byId = {for (final d in defs) d.id: d};
+
+    final labels = byId['village_labels']!;
+    expect(labels.textField, '{Vill_Name}');
+    expect(labels.supportsOpacity, true);
+    expect(labels.supportsExaggeration, false);
+
+    final markers = byId['poi_markers']!;
+    expect(markers.iconImage, 'village-marker');
+    expect(markers.iconAsset, 'assets/map/icons/marker.png');
+
+    final fill = byId['district_fill']!;
+    expect(fill.fillColor, '#22c55e');
+
+    final hillshade = byId['terrain_hillshade']!;
+    expect(hillshade.supportsOpacity, false);
+    expect(hillshade.supportsExaggeration, true);
+    expect(hillshade.hillshadeExaggeration, 1.5);
+
+    final heatmap = byId['villages_heatmap']!;
+    expect(heatmap.heatmapRadius, 30.0);
+  });
 }

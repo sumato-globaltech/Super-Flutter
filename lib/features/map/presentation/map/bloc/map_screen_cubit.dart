@@ -119,6 +119,10 @@ class MapScreenCubit extends Cubit<MapScreenState> {
         layersFailed: result.failed,
         layerVisibility: {for (final d in _definitions) d.id: d.visible},
         layerOpacity: {for (final d in _definitions) d.id: 1.0},
+        layerExaggeration: {
+          for (final d in _definitions)
+            if (d.supportsExaggeration) d.id: d.hillshadeExaggeration ?? 1.0,
+        },
       ),
     );
   }
@@ -173,6 +177,28 @@ class MapScreenCubit extends Cubit<MapScreenState> {
     emit(
       state.copyWith(
         layerOpacity: {...state.layerOpacity, def.id: clamped},
+      ),
+    );
+  }
+
+  /// Commits a hillshade exaggeration change (0–5). Re-adds the layer, so
+  /// call on slider release, not per drag tick.
+  Future<void> setHillshadeExaggeration(
+    MapLibreMapController controller,
+    LayerDefinition def,
+    double exaggeration,
+  ) async {
+    final clamped = exaggeration.clamp(0.0, 5.0);
+    await _layers.updateExaggeration(
+      controller,
+      def,
+      clamped,
+      visible: state.layerVisibility[def.id] ?? def.visible,
+    );
+    if (isClosed) return;
+    emit(
+      state.copyWith(
+        layerExaggeration: {...state.layerExaggeration, def.id: clamped},
       ),
     );
   }
