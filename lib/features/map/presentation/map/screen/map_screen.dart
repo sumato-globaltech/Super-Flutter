@@ -45,9 +45,10 @@ class _MapScreenState extends State<MapScreenNew> {
                 children: [
                   MapView(
                     onMapInitialized: (controller) {},
-                    onMapReady: (controller) {
+                    onMapReady: (controller) async {
                       mapController = controller;
-                      cubit.ensureBaseLayers(controller);
+                      await cubit.ensureBaseLayers(controller);
+                      await cubit.ensureOverlayGroup(controller);
                     },
                     mapViewState: state.mapViewState,
                     mapCommand: cubit.mapCommand,
@@ -81,9 +82,7 @@ class _MapScreenState extends State<MapScreenNew> {
                     top: 16,
                     child: _LayersPanel(
                       open: _layersOpen,
-                      onToggleOpen: () => setState(
-                        () => _layersOpen = !_layersOpen,
-                      ),
+                      onToggleOpen: () => setState(() => _layersOpen = !_layersOpen),
                     ),
                   ),
                   Padding(
@@ -181,10 +180,7 @@ class _LayersPanel extends StatelessWidget {
           onPressed: onToggleOpen,
           child: const Icon(Icons.layers_outlined),
         ),
-        if (open) ...[
-          const SizedBox(height: 8),
-          const _LayersCard(),
-        ],
+        if (open) ...[const SizedBox(height: 8), const _LayersCard()],
       ],
     );
   }
@@ -197,8 +193,7 @@ class _LayersCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<MapScreenCubit>();
     final state = context.watch<MapScreenCubit>().state;
-    final screenState = context
-        .findAncestorStateOfType<_MapScreenState>();
+    final screenState = context.findAncestorStateOfType<_MapScreenState>();
     final controller = screenState?.mapController;
     final defs = cubit.layerDefinitions;
     return Card(
@@ -218,22 +213,15 @@ class _LayersCard extends StatelessWidget {
                       key: ValueKey(def.id),
                       layerId: def.id,
                       group: def.group,
-                      visible:
-                          state.layerVisibility[def.id] ?? def.visible,
-                      opacity:
-                          state.layerOpacity[def.id] ?? 1.0,
-                      enabled:
-                          controller != null && !state.layersLoading,
+                      visible: state.layerVisibility[def.id] ?? def.visible,
+                      opacity: state.layerOpacity[def.id] ?? 1.0,
+                      enabled: controller != null && !state.layersLoading,
                       onToggle: controller == null
                           ? null
                           : () => cubit.toggleLayer(controller, def),
                       onOpacityCommitted: controller == null
                           ? null
-                          : (value) => cubit.setLayerOpacity(
-                              controller,
-                              def,
-                              value,
-                            ),
+                          : (value) => cubit.setLayerOpacity(controller, def, value),
                     ),
                 ],
               ),
@@ -296,10 +284,7 @@ class _LayerRowState extends State<_LayerRow> {
                         style: theme.textTheme.bodyMedium,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      Text(
-                        widget.group,
-                        style: theme.textTheme.bodySmall,
-                      ),
+                      Text(widget.group, style: theme.textTheme.bodySmall),
                     ],
                   ),
                 ),
@@ -348,11 +333,7 @@ class _LayersRetryBanner extends StatelessWidget {
                 style: theme.textTheme.bodyMedium,
               ),
             ),
-            AppButton.outlined(
-              label: 'Retry',
-              onPressed: onRetry,
-              isExpanded: false,
-            ),
+            AppButton.outlined(label: 'Retry', onPressed: onRetry, isExpanded: false),
           ],
         ),
       ),

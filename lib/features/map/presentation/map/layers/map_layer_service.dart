@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 import 'package:super_flutter/core/logging/app_logger.dart';
@@ -38,9 +39,7 @@ class MapLayerService {
   }
 
   /// Adds every `eager` layer definition. Returns applied/failed ids.
-  Future<MapLayersResult> ensureEagerLayers(
-    MapLibreMapController controller,
-  ) {
+  Future<MapLayersResult> ensureEagerLayers(MapLibreMapController controller) {
     return _serialize(() async {
       final defs = (await _catalog.load()).where((d) => d.eager).toList();
       return _ensureAll(controller, defs);
@@ -49,26 +48,15 @@ class MapLayerService {
 
   /// Adds one catalog group (e.g. `overlays`). Already-present layers are
   /// skipped, so toggles can safely re-invoke this.
-  Future<MapLayersResult> ensureGroup(
-    MapLibreMapController controller,
-    String group,
-  ) {
+  Future<MapLayersResult> ensureGroup(MapLibreMapController controller, String group) {
     return _serialize(() async {
-      final defs = (await _catalog.load())
-          .where((d) => d.group == group)
-          .toList();
+      final defs = (await _catalog.load()).where((d) => d.group == group).toList();
       return _ensureAll(controller, defs);
     });
   }
 
-  Future<void> setVisible(
-    MapLibreMapController controller,
-    String layerId,
-    bool visible,
-  ) {
-    return _serialize(
-      () => controller.setLayerVisibility(layerId, visible),
-    );
+  Future<void> setVisible(MapLibreMapController controller, String layerId, bool visible) {
+    return _serialize(() => controller.setLayerVisibility(layerId, visible));
   }
 
   /// Applies a new opacity to an already-added layer. The plugin exposes no
@@ -106,9 +94,11 @@ class MapLayerService {
     MapLibreMapController controller,
     List<LayerDefinition> defs,
   ) async {
+    debugPrint("mridx");
     final applied = <String>[];
     final failed = <String>[];
     for (final def in defs) {
+      debugPrint(def.id);
       try {
         await _ensureOne(controller, def);
         applied.add(def.id);
@@ -120,12 +110,10 @@ class MapLayerService {
     return MapLayersResult(applied: applied, failed: failed);
   }
 
-  Future<void> _ensureOne(
-    MapLibreMapController controller,
-    LayerDefinition def,
-  ) async {
+  Future<void> _ensureOne(MapLibreMapController controller, LayerDefinition def) async {
     final sources = await controller.getSourceIds();
     if (!sources.contains(def.sourceId)) {
+      debugPrint(def.id);
       try {
         await controller.addSource(def.sourceId, _sourceProperties(def.source));
       } catch (e) {
@@ -146,10 +134,7 @@ class MapLayerService {
     }
   }
 
-  Future<void> _addLayer(
-    MapLibreMapController controller,
-    LayerDefinition def,
-  ) async {
+  Future<void> _addLayer(MapLibreMapController controller, LayerDefinition def) async {
     switch (def.kind) {
       case LayerKind.raster:
         await controller.addRasterLayer(

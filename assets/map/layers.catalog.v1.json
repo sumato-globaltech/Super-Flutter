@@ -1,7 +1,8 @@
 {
   "version": 1,
   "variables": {
-    "tileHost": "http://64.227.134.64"
+    "tileHost": "http://64.227.134.64",
+    "pmtiles": "pmtiles://"
   },
   "layers": [
     {
@@ -13,24 +14,31 @@
       "visible": true,
       "source": {
         "type": "rasterTiles",
-        "tiles": ["https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"],
+        "tiles": [
+          "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+        ],
         "tileSize": 256
       },
-      "paint": { "rasterOpacity": 1.0 }
+      "paint": {
+        "rasterOpacity": 1.0
+      }
     },
     {
       "id": "nh_layer",
-      "sourceId": "nh",
+      "sourceId": "nh_source",
       "group": "overlays",
       "kind": "line",
       "eager": false,
       "visible": true,
       "source": {
         "type": "vectorUrl",
-        "url": "{tileHost}/pmtiles.php?file=nagaland_NH.pmtiles"
+        "url": "{pmtiles}{tileHost}/pmtiles.php?file=nagaland_NH.pmtiles"
       },
       "sourceLayer": "nagaland",
-      "paint": { "lineColor": "#E03F4F", "lineWidth": 8.0 }
+      "paint": {
+        "lineColor": "#E03F4F",
+        "lineWidth": 8.0
+      }
     },
     {
       "id": "villages_layer",

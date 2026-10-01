@@ -15,11 +15,11 @@ import 'layer_definition.dart';
 class AssetLayerCatalog implements LayerCatalog {
   AssetLayerCatalog({
     this.assetPath = 'assets/map/layers.catalog.v1.json',
-    this.variables = const {'tileHost': 'http://64.227.134.64'},
+    // this.variables = const {'tileHost': 'http://64.227.134.64'},
   });
 
   final String assetPath;
-  final Map<String, String> variables;
+  late Map<String, dynamic> variables;
 
   List<LayerDefinition>? _cache;
 
@@ -32,6 +32,8 @@ class AssetLayerCatalog implements LayerCatalog {
     if (decoded is! Map<String, dynamic>) {
       throw const FormatException('Layer catalog root must be an object');
     }
+    variables = decoded['variables'];
+
     final layers = decoded['layers'];
     if (layers is! List) {
       throw const FormatException('Layer catalog is missing "layers"');

@@ -26,7 +26,6 @@ Future<void> bootstrap(AppConfig config) async {
       await configureDependencies(config);
       getIt.get<AppErrorHandler>().initialize();
 
-
       final appLogger = getIt.get<AppLogger>();
 
       // Bloc activity logger
@@ -44,11 +43,7 @@ Future<void> bootstrap(AppConfig config) async {
       // unawaited(getIt.get<AuthRepository>().restoreSession());
     },
     (error, stack) {
-      getIt.get<ErrorReporter>().report(
-        error,
-        stack,
-        reason: 'Uncaught zone error',
-      );
+      getIt.get<ErrorReporter>().report(error, stack, reason: 'Uncaught zone error');
     },
   );
 }
@@ -69,7 +64,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    _router = createRouter(authCubit: _authCubit, config: getIt.get<AppConfig>());
+    _router = createRouter(authCubit: _authCubit, config: _config);
 
     _authCubit.initialize();
   }
