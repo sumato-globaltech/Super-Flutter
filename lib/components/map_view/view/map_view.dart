@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
-import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_commands.dart';
-import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_point.dart';
-import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_view_state.dart';
+
+import '../commands/map_commands.dart';
+import '../models/map_point.dart';
+import '../state/map_view_state.dart';
 
 typedef MapInitialized = void Function(MapLibreMapController controller);
 
@@ -27,7 +28,8 @@ class MapView extends StatefulWidget {
 
   const MapView({
     super.key,
-    this.styleString = "https://api.protomaps.com/styles/v5/dark/en.json?key=73c45a97eddd43fb",
+    // this.styleString = "https://api.protomaps.com/styles/v5/dark/en.json?key=73c45a97eddd43fb",
+    this.styleString = "https://demotiles.maplibre.org/style.json",
     this.onMapInitialized,
     this.onMapReady,
     required this.mapViewState,
@@ -109,20 +111,26 @@ class _MapViewState extends State<MapView> {
         );
 
       case ControlChanges():
-        // TODO: read live tilt/bearing/zoom from controller.cameraPosition
         // instead of the widget snapshot to avoid stale mid-glide targets.
         await controller.animateCamera(
           CameraUpdate.newCameraPosition(
             CameraPosition(
-              target: widget.mapViewState.center.latLng,
-              tilt: mapCommand.tilt ?? widget.mapViewState.tilt,
-              zoom: mapCommand.zoom ?? widget.mapViewState.zoom,
-              bearing: mapCommand.bearing ?? widget.mapViewState.bearing,
+              target: _mapController?.cameraPosition?.target ?? widget.mapViewState.center.latLng,
+              tilt: mapCommand.tilt ?? _mapController?.cameraPosition?.tilt ?? widget.mapViewState.tilt,
+              zoom: mapCommand.zoom ?? _mapController?.cameraPosition?.zoom ?? widget.mapViewState.zoom,
+              bearing: mapCommand.bearing ?? _mapController?.cameraPosition?.bearing ?? widget.mapViewState.bearing,
             ),
           ),
         );
       case ResetCamera():
-        // TODO: implement via MapScreenCubit.resetCamera() + handler here.
+        await controller.moveCamera(CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: mapCommand.mapViewState.center.latLng,
+            tilt: mapCommand.mapViewState.tilt,
+            zoom: mapCommand.mapViewState.zoom,
+            bearing: mapCommand.mapViewState.bearing
+          )
+        ));
         break;
     }
   }

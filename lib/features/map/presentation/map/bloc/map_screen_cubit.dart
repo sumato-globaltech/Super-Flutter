@@ -7,9 +7,10 @@ import 'package:super_flutter/features/map/presentation/map/bloc/map_screen_stat
 import 'package:super_flutter/features/map/presentation/map/layers/layer_catalog.dart';
 import 'package:super_flutter/features/map/presentation/map/layers/layer_definition.dart';
 import 'package:super_flutter/features/map/presentation/map/layers/map_layer_service.dart';
-import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_commands.dart';
-import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_point.dart';
-import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_view_state.dart';
+
+import 'package:super_flutter/components/map_view/commands/map_commands.dart';
+import 'package:super_flutter/components/map_view/models/map_point.dart';
+import 'package:super_flutter/components/map_view/state/map_view_state.dart';
 
 @injectable
 class MapScreenCubit extends Cubit<MapScreenState> {

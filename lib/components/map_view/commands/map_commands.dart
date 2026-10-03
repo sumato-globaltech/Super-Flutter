@@ -1,4 +1,7 @@
-import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_point.dart';
+
+
+import '../models/map_point.dart';
+import '../state/map_view_state.dart';
 
 /// Camera intent sent from [MapScreenCubit] to [MapView] over a broadcast
 /// stream, keeping the Cubit free of any MapLibre controller reference.
@@ -35,7 +38,7 @@ class ControlChanges extends MapCommand {
 /// Return the camera to its home position. Currently unhandled by the view
 /// and unsent by the Cubit — implement or delete together with its handler.
 class ResetCamera extends MapCommand {
-  final MapPoint target;
+  final MapViewState mapViewState;
 
-  const ResetCamera({required this.target});
+  const ResetCamera({required this.mapViewState});
 }

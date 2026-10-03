@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
-import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_bounding_box.dart';
-import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_point.dart';
+
+import '../models/map_bounding_box.dart';
+import '../models/map_point.dart';
 
 /// Immutable camera snapshot shared between [MapView] and [MapScreenCubit].
 /// The view publishes it on camera-idle; the Cubit publishes it to buttons.

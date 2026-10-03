@@ -6,7 +6,8 @@ import 'package:super_flutter/core/ui/widgets/app_button.dart';
 import 'package:super_flutter/core/ui/widgets/app_loader.dart';
 import 'package:super_flutter/features/map/presentation/map/bloc/map_screen_cubit.dart';
 import 'package:super_flutter/features/map/presentation/map/bloc/map_screen_state.dart';
-import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_view.dart';
+
+import 'package:super_flutter/components/map_view/view/map_view.dart';
 
 /// Map feature entry screen: native [MapView] plus camera buttons, layer
 /// panel, loading overlay, and retry banner — all driven by [MapScreenCubit].

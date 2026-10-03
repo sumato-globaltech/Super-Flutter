@@ -1,4 +1,6 @@
-import 'package:super_flutter/features/map/presentation/map/widgets/map_view/map_view_state.dart';
+
+
+import 'package:super_flutter/components/map_view/state/map_view_state.dart';
 
 /// Screen-level state: live camera snapshot plus layer pipeline status.
 class MapScreenState {
