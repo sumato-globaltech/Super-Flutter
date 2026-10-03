@@ -80,6 +80,8 @@ operation genuinely changes session status. Never inject `AuthCubit` into
   success — GoRouter redirect on `AuthCubit.stream` handles it where relevant).
 - Reference implementations: `features/auth/presentation/login/screen/login_screen.dart`,
   `features/dashboard/presentation/dashboard/screen/dashboard_screen.dart`.
+  For a reusable view + command-stream pattern, see `lib/components/map_view/`
+  and its `README.md` reuse contract.
 
 ## Tests
 

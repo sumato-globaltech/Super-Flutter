@@ -37,6 +37,13 @@ Cubit), `features/dashboard` (`presentation/dashboard/` screen). One Bloc per
 screen, always nested under `presentation/` — never a flat shared `bloc/` +
 `screen/` split.
 
+Reusable domain components shared by 2+ features (worked example:
+`lib/components/map_view/` with its own `README.md` reuse contract) live in
+`lib/components/<name>/`, never inside a feature. Extract on the second
+consumer or for clearly planned reuse — not speculatively. Component rules:
+imports Flutter, `core/`, and third-party SDKs only, never `features/`;
+styling, data sources, and screen UI stay in the owning feature.
+
 ## Rules
 
 1. `domain/` is pure Dart: no Flutter, Dio, Drift, GetIt imports. One action per

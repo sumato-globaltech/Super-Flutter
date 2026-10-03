@@ -113,6 +113,8 @@ lib/
                                 # app_text_styles.dart, app_dimensions.dart, app_spacing.dart
       widgets/                  # app_button/text_field/loader/empty/error/network_image
       layouts/                  # app_scaffold.dart, responsive_layout.dart
+  components/map_view/          # reusable domain component (view/state/commands/models)
+                                # + README.md reuse contract; imports core/SDKs only
   data/auth/
     model/                      # user_model.dart (+.g.dart)
     sources/local+remote/       # auth_local_data_source.dart, auth_remote_data_source.dart
@@ -217,6 +219,10 @@ analysis_options.yaml
 - `domain/<feature>/` — pure Dart: `entities/`, `repositories/<feature>_repository.dart` (interface), `use_cases/` (one action per file, `call()`). No Flutter/Dio/Drift imports.
 - `features/<feature>/` — every feature contains `routes/` (path constants + `build<Feature>Routes()` list, aggregated by app router), `presentation/` (one folder per screen with `screen/` + `bloc/` + optional `widgets/`), plus explicitly-named shared scopes (e.g. `session/bloc/`). UI dispatches events, Blocs call use-cases only — never import `data/` directly.
 - Reference: `auth` (login-only routes; `AuthRepository{hasSession,login,logout}`, `CheckAuthStatus`/`Login`/`Logout` use-cases, status-only `AuthCubit{initialize,authenticated,unauthenticated}` + `AuthStatus{…}`, screen Bloc `LoginBloc` (`UsernameChanged/PasswordChanged/Submitted`)), `dashboard` (`DashboardRouteNames`, `DashboardBloc` (`SignOutRequested`)).
+
+### `lib/components/` — reusable domain components
+
+One bounded context usable by 2+ features (worked example: `components/map_view/` with its own `README.md` reuse contract). Rules: imports Flutter, `core/`, and third-party SDKs only — **never `features/`**; styling, tile sources, and layer setup stay in the owning feature; extract on the second consumer or for clearly planned reuse, never speculatively.
 
 ## Architecture & conventions
 
