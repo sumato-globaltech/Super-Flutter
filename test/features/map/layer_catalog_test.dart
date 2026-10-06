@@ -65,14 +65,18 @@ void main() {
   });
 
   group('joinCatalog', () {
-    Map<String, dynamic> sourcesDoc() => {
+    Map<String, dynamic> doc({
+      Map<String, dynamic> sharedSources = const {},
+      Map<String, dynamic>? featureSections,
+    }) => {
       'variables': {'tileHost': 'https://tiles.example'},
-      'sources': {
-        'shared': {
-          'type': 'geojson',
-          'data': '{tileHost}/data.geojson',
-        },
-      },
+      'shared': {'sources': sharedSources},
+      'features': featureSections ?? {},
+    };
+
+    Map<String, dynamic> geojsonSource() => {
+      'type': 'geojson',
+      'data': '{tileHost}/data.geojson',
     };
 
     Map<String, dynamic> layer(String id, String sourceId) => {
@@ -83,12 +87,25 @@ void main() {
       'paint': {'circleRadius': 4.0},
     };
 
-    test('joins layers with their shared source', () {
+    Map<String, dynamic> featureSection({
+      Map<String, dynamic> sources = const {},
+      required List<Map<String, dynamic>> layers,
+    }) => {
+      'sources': sources,
+      'layers': layers,
+    };
+
+    test('joins feature layers with shared sources', () {
       final defs = AssetLayerCatalog.joinCatalog(
-        sourcesDoc: sourcesDoc(),
-        layersDoc: {
-          'layers': [layer('a', 'shared'), layer('b', 'shared')],
-        },
+        catalogDoc: doc(
+          sharedSources: {'shared': geojsonSource()},
+          featureSections: {
+            'map': featureSection(layers: [
+              layer('a', 'shared'),
+              layer('b', 'shared'),
+            ]),
+          },
+        ),
       );
 
       expect(defs.map((d) => d.id), ['a', 'b']);
@@ -99,13 +116,71 @@ void main() {
       );
     });
 
+    test('two features share one villages-like source object', () {
+      final defs = AssetLayerCatalog.joinCatalog(
+        catalogDoc: doc(
+          sharedSources: {'villages': geojsonSource()},
+          featureSections: {
+            'map': featureSection(layers: [layer('circles', 'villages')]),
+            'school': featureSection(layers: [layer('labels', 'villages')]),
+          },
+        ),
+      );
+
+      expect(defs.map((d) => d.id), ['circles', 'labels']);
+      expect(defs[0].source, same(defs[1].source));
+    });
+
+    test('rejects cross-feature source references', () {
+      expect(
+        () => AssetLayerCatalog.joinCatalog(
+          catalogDoc: doc(
+            featureSections: {
+              'map': featureSection(
+                sources: {'nh': geojsonSource()},
+                layers: [layer('line', 'nh')],
+              ),
+              'school': featureSection(
+                layers: [layer('sneaky', 'nh')],
+              ),
+            },
+          ),
+        ),
+        throwsA(
+          isA<FormatException>().having(
+            (e) => e.message,
+            'message',
+            contains('school'),
+          ),
+        ),
+      );
+    });
+
+    test('rejects sources shadowing shared ids', () {
+      expect(
+        () => AssetLayerCatalog.joinCatalog(
+          catalogDoc: doc(
+            sharedSources: {'shared': geojsonSource()},
+            featureSections: {
+              'map': featureSection(
+                sources: {'shared': geojsonSource()},
+                layers: [layer('a', 'shared')],
+              ),
+            },
+          ),
+        ),
+        throwsA(isA<FormatException>()),
+      );
+    });
+
     test('rejects layers referencing unknown sources', () {
       expect(
         () => AssetLayerCatalog.joinCatalog(
-          sourcesDoc: sourcesDoc(),
-          layersDoc: {
-            'layers': [layer('a', 'missing')],
-          },
+          catalogDoc: doc(
+            featureSections: {
+              'map': featureSection(layers: [layer('a', 'missing')]),
+            },
+          ),
         ),
         throwsA(isA<FormatException>()),
       );
@@ -114,10 +189,13 @@ void main() {
     test('rejects duplicate layer ids', () {
       expect(
         () => AssetLayerCatalog.joinCatalog(
-          sourcesDoc: sourcesDoc(),
-          layersDoc: {
-            'layers': [layer('a', 'shared'), layer('a', 'shared')],
-          },
+          catalogDoc: doc(
+            sharedSources: {'shared': geojsonSource()},
+            featureSections: {
+              'map': featureSection(layers: [layer('a', 'shared')]),
+              'school': featureSection(layers: [layer('a', 'shared')]),
+            },
+          ),
         ),
         throwsA(isA<FormatException>()),
       );

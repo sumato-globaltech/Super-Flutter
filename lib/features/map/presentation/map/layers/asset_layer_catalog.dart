@@ -5,79 +5,125 @@ import 'package:flutter/services.dart';
 import 'layer_catalog.dart';
 import 'layer_definition.dart';
 
-/// [LayerCatalog] backed by two bundled JSON assets: `sources` (tile/data
-/// origins, defined once) joined with `layers` (which reference them by
-/// `sourceId`). Adding layer #31 is one JSON entry — no Dart change.
+/// [LayerCatalog] backed by one grouped JSON asset: `shared` sources
+/// (tile/data origins defined once) plus per-feature sections holding their
+/// own sources and layers. Adding layer #31 is one JSON entry under its
+/// feature — no Dart change.
 ///
-/// `{tileHost}`-style variables declared in the sources file are substituted
+/// `{tileHost}`-style variables declared at the document root are substituted
 /// everywhere, so environments differ by one value, not thirty URLs. A
 /// remote catalog can replace this class later behind the same interface.
 class AssetLayerCatalog implements LayerCatalog {
   AssetLayerCatalog({
-    this.sourcesPath = 'assets/map/sources.catalog.v1.json',
-    this.layersPath = 'assets/map/layers.catalog.v1.json',
+    this.catalogPath = 'assets/map/catalog.v1.json',
   });
 
-  final String sourcesPath;
-  final String layersPath;
+  final String catalogPath;
 
   List<LayerDefinition>? _cache;
 
-  /// Loads both JSON assets, substitutes variables, and returns the joined
+  /// Loads the JSON asset, substitutes variables, and returns the joined
   /// definitions. The result is cached for the process lifetime; catalog
   /// edits require an app restart to take effect.
   @override
   Future<List<LayerDefinition>> load() async {
     final cached = _cache;
     if (cached != null) return cached;
-    final sourcesRaw = await rootBundle.loadString(sourcesPath);
-    final layersRaw = await rootBundle.loadString(layersPath);
-    final defs = joinCatalog(
-      sourcesDoc: jsonDecode(sourcesRaw),
-      layersDoc: jsonDecode(layersRaw),
-    );
+    final raw = await rootBundle.loadString(catalogPath);
+    final defs = joinCatalog(catalogDoc: jsonDecode(raw));
     _cache = defs;
     return defs;
   }
 
-  /// Joins raw decoded JSON documents into validated definitions. Pure and
-  /// directly unit-testable (no asset bundle needed).
+  /// Joins a raw decoded catalog document into validated definitions. Pure
+  /// and directly unit-testable (no asset bundle needed).
   static List<LayerDefinition> joinCatalog({
-    required dynamic sourcesDoc,
-    required dynamic layersDoc,
+    required dynamic catalogDoc,
   }) {
-    if (sourcesDoc is! Map<String, dynamic>) {
-      throw const FormatException('Sources catalog root must be an object');
+    if (catalogDoc is! Map<String, dynamic>) {
+      throw const FormatException('Catalog root must be an object');
     }
-    if (layersDoc is! Map<String, dynamic>) {
-      throw const FormatException('Layers catalog root must be an object');
+    final variables = _variablesOf(catalogDoc);
+    final sources = <String, LayerSource>{};
+    final sourceScopes = <String, String>{};
+
+    // Shared sources first: every feature section may reference them, and a
+    // per-feature section must never shadow one (duplicate = fail fast).
+    final shared = catalogDoc['shared'];
+    if (shared is Map<String, dynamic>) {
+      _parseSourcesInto(
+        shared['sources'],
+        variables,
+        sources,
+        sourceScopes,
+        scope: 'shared',
+      );
     }
-    final variables = _variablesOf(sourcesDoc);
-    final sourcesNode = sourcesDoc['sources'];
-    if (sourcesNode is! Map<String, dynamic>) {
-      throw const FormatException('Sources catalog is missing "sources"');
+
+    final features = catalogDoc['features'];
+    if (features is! Map<String, dynamic> || features.isEmpty) {
+      throw const FormatException('Catalog is missing "features"');
     }
-    final sources = <String, LayerSource>{
-      for (final entry in sourcesNode.entries)
-        entry.key: _parseSource(
-          _substitute(entry.value, variables) as Map<String, dynamic>,
-          sourceId: entry.key,
-        ),
-    };
-    final layers = layersDoc['layers'];
-    if (layers is! List) {
-      throw const FormatException('Layers catalog is missing "layers"');
+    final defs = <LayerDefinition>[];
+    for (final feature in features.entries) {
+      final name = feature.key;
+      if (feature.value is! Map<String, dynamic>) {
+        throw FormatException('Feature "$name" must be an object');
+      }
+      final section = feature.value as Map<String, dynamic>;
+      final sectionSources = section['sources'];
+      if (sectionSources is Map<String, dynamic>) {
+        _parseSourcesInto(sectionSources, variables, sources, sourceScopes,
+            scope: name);
+      }
+      final layers = section['layers'];
+      if (layers is! List) {
+        throw FormatException('Feature "$name" is missing "layers"');
+      }
+      for (final layer in layers) {
+        defs.add(
+          _parseLayer(
+            _substitute(layer, variables),
+            sources,
+            sourceScopes,
+            feature: name,
+          ),
+        );
+      }
     }
-    final defs = layers
-        .map((e) => _parseLayer(_substitute(e, variables), sources))
-        .toList(growable: false);
     _assertUniqueIds(defs);
     _assertBelowRefsExist(defs);
     return defs;
   }
 
-  /// Reads the `variables` map out of a catalog document. Returns empty when
-  /// absent, so layers files can stay variable-free if they need no templating.
+  /// Parses one sources node into [sources], keyed by source id. A redeclared
+  /// id fails fast: shadowing a shared source from a feature section (or
+  /// vice versa) would silently change which tiles other layers read.
+  static void _parseSourcesInto(
+    dynamic node,
+    Map<String, String> variables,
+    Map<String, LayerSource> sources,
+    Map<String, String> sourceScopes, {
+    required String scope,
+  }) {
+    if (node is! Map<String, dynamic>) {
+      throw FormatException('Scope "$scope" is missing "sources"');
+    }
+    for (final entry in node.entries) {
+      if (sources.containsKey(entry.key)) {
+        throw FormatException(
+          'Duplicate source id "${entry.key}" in scope "$scope"',
+        );
+      }
+      sources[entry.key] = _parseSource(
+        _substitute(entry.value, variables) as Map<String, dynamic>,
+        sourceId: entry.key,
+      );
+      sourceScopes[entry.key] = scope;
+    }
+  }
+  /// Reads the `variables` map out of the catalog document. Returns empty
+  /// when absent, so variable-free catalogs stay valid.
   static Map<String, String> _variablesOf(Map<String, dynamic> doc) {
     final variables = doc['variables'];
     if (variables is! Map) return const {};
@@ -107,13 +153,17 @@ class AssetLayerCatalog implements LayerCatalog {
     return node;
   }
 
-  /// Parses one layer entry and joins it to its shared [LayerSource] from
-  /// the sources catalog. Throws [FormatException] on unknown kinds or on a
-  /// `sourceId` with no matching source (except sourceless `background`).
+  /// Parses one layer entry and joins it to its [LayerSource] (shared or
+  /// same-feature). Throws [FormatException] on unknown kinds or on a
+  /// `sourceId` with no match — naming the feature, so a cross-feature
+  /// reference typo points at the offending section. Sourceless `background`
+  /// layers are exempt.
   static LayerDefinition _parseLayer(
     dynamic node,
     Map<String, LayerSource> sources,
-  ) {
+    Map<String, String> sourceScopes, {
+    required String feature,
+  }) {
     if (node is! Map<String, dynamic>) {
       throw const FormatException('Layer entry must be an object');
     }
@@ -144,9 +194,17 @@ class AssetLayerCatalog implements LayerCatalog {
 
     final sourceId = str('sourceId');
     final source = sources[sourceId];
-    if (source == null && kind != LayerKind.background) {
+    final scope = sourceScopes[sourceId];
+    // A layer may use shared sources or its own feature's sources — never
+    // another feature's. Cross-feature references fail naming the feature.
+    // Sourceless `background` layers skip the lookup entirely.
+    final resolvedSource = kind == LayerKind.background
+        ? null
+        : (scope == 'shared' || scope == feature ? source : null);
+    if (resolvedSource == null && kind != LayerKind.background) {
       throw FormatException(
-        'Layer "${map['id']}" references unknown source "$sourceId"',
+        'Feature "$feature", layer "${map['id']}": unknown source "$sourceId". '
+        'Sources must live in "shared" or the same feature section.',
       );
     }
 
@@ -155,7 +213,7 @@ class AssetLayerCatalog implements LayerCatalog {
       sourceId: sourceId,
       group: map['group'] is String ? map['group'] as String : 'overlays',
       kind: kind,
-      source: source,
+      source: resolvedSource,
       eager: map['eager'] == true,
       visible: map['visible'] != false,
       belowLayerId: map['belowLayerId'] as String?,

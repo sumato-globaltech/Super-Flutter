@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "variables": {
+    "tileHost": "http://64.227.134.64",
+    "pmtiles": "pmtiles://"
+  },
+  "shared": {
+    "sources": {
+      "villages_source": {
+        "type": "geojson",
+        "data": "{tileHost}/nagaland_vill.geojson"
+      },
+      "terrain-dem": {
+        "type": "rasterDem",
+        "tiles": ["https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"],
+        "encoding": "terrarium",
+        "tileSize": 256,
+        "maxzoom": 15
+      }
+    }
+  },
+  "features": {
+    "map": {
+      "sources": {
+        "satellite_source": {
+          "type": "rasterTiles",
+          "tiles": [
+            "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+          ],
+          "tileSize": 256
+        },
+        "nh_source": {
+          "type": "vectorUrl",
+          "url": "{pmtiles}{tileHost}/pmtiles.php?file=nagaland_NH.pmtiles"
+        },
+        "district_source": {
+          "type": "geojson",
+          "data": {
+            "type": "FeatureCollection",
+            "features": [
+              {
+                "type": "Feature",
+                "properties": { "name": "Kohima district demo" },
+                "geometry": {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [
+                      [94.05, 25.60],
+                      [94.14, 25.60],
+                      [94.14, 25.70],
+                      [94.05, 25.70],
+                      [94.05, 25.60]
+                    ]
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      },
+      "layers": [
+        {
+          "id": "satellite_layer",
+          "sourceId": "satellite_source",
+          "group": "base",
+          "kind": "raster",
+          "eager": true,
+          "visible": true,
+          "paint": {
+            "rasterOpacity": 1.0
+          }
+        },
+        {
+          "id": "nh_layer",
+          "sourceId": "nh_source",
+          "group": "overlays",
+          "kind": "line",
+          "eager": false,
+          "visible": true,
+          "sourceLayer": "nagaland",
+          "paint": {
+            "lineColor": "#E03F4F",
+            "lineWidth": 8.0
+          }
+        },
+        {
+          "id": "villages_layer",
+          "sourceId": "villages_source",
+          "group": "overlays",
+          "kind": "circle",
+          "eager": false,
+          "visible": false,
+          "paint": {
+            "circleRadius": 8.0,
+            "circleColor": "#11b4da",
+            "circleStrokeColor": "#000000",
+            "circleStrokeWidth": 2.0
+          }
+        },
+        {
+          "id": "village_labels",
+          "sourceId": "villages_source",
+          "group": "overlays",
+          "kind": "symbol",
+          "eager": false,
+          "visible": false,
+          "paint": {
+            "textField": "{Vill_Name}",
+            "textSize": 12.0,
+            "textColor": "#ffffff"
+          }
+        },
+        {
+          "id": "poi_markers",
+          "sourceId": "villages_source",
+          "group": "overlays",
+          "kind": "symbol",
+          "eager": false,
+          "visible": false,
+          "paint": {
+            "iconImage": "village-marker",
+            "iconSize": 1.0,
+            "iconAsset": "assets/map/icons/marker.png"
+          }
+        },
+        {
+          "id": "district_fill",
+          "sourceId": "district_source",
+          "group": "overlays",
+          "kind": "fill",
+          "eager": false,
+          "visible": false,
+          "paint": {
+            "fillColor": "#22c55e",
+            "fillOpacity": 0.25
+          }
+        },
+        {
+          "id": "terrain_hillshade",
+          "sourceId": "terrain-dem",
+          "group": "overlays",
+          "kind": "hillshade",
+          "eager": false,
+          "visible": false,
+          "paint": {
+            "hillshadeExaggeration": 1.5
+          }
+        },
+        {
+          "id": "villages_heatmap",
+          "sourceId": "villages_source",
+          "group": "overlays",
+          "kind": "heatmap",
+          "eager": false,
+          "visible": false,
+          "paint": {
+            "heatmapRadius": 30.0,
+            "heatmapOpacity": 0.8
+          }
+        }
+      ]
+    }
+  }
+}
