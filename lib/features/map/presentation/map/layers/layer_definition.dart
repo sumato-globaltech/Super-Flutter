@@ -82,6 +82,7 @@ class LayerDefinition extends Equatable {
     required this.id,
     required this.sourceId,
     required this.group,
+    required this.feature,
     required this.kind,
     this.source,
     this.eager = false,
@@ -146,6 +147,11 @@ class LayerDefinition extends Equatable {
 
   /// Catalog group, e.g. `base` (loaded at startup) or `overlays` (lazy).
   final String group;
+
+  /// Owning feature section from the catalog (`map`, `school`, …). Stamped by
+  /// the parser — never hand-written — so loading and panels can scope to one
+  /// feature without leaking another's layers.
+  final String feature;
 
   final LayerKind kind;
 
@@ -251,6 +257,7 @@ class LayerDefinition extends Equatable {
       id: id,
       sourceId: sourceId,
       group: group,
+      feature: feature,
       kind: kind,
       source: source,
       eager: eager,
@@ -282,7 +289,8 @@ class LayerDefinition extends Equatable {
       fillExtrusionHeight: fillExtrusionHeight,
       fillExtrusionBase: fillExtrusionBase,
       fillExtrusionOpacity: fillExtrusionOpacity ?? this.fillExtrusionOpacity,
-      hillshadeExaggeration: hillshadeExaggeration ?? this.hillshadeExaggeration,
+      hillshadeExaggeration:
+          hillshadeExaggeration ?? this.hillshadeExaggeration,
       hillshadeShadowColor: hillshadeShadowColor,
       hillshadeHighlightColor: hillshadeHighlightColor,
       hillshadeAccentColor: hillshadeAccentColor,
@@ -301,6 +309,7 @@ class LayerDefinition extends Equatable {
     id,
     sourceId,
     group,
+    feature,
     kind,
     source,
     eager,

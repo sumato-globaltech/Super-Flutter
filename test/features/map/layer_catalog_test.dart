@@ -7,11 +7,10 @@ void main() {
   test('bundled catalog parses, substitutes variables, stays valid', () async {
     final defs = await AssetLayerCatalog().load();
 
-    expect(defs.map((d) => d.id), containsAll([
-      'satellite_layer',
-      'nh_layer',
-      'villages_layer',
-    ]));
+    expect(
+      defs.map((d) => d.id),
+      containsAll(['satellite_layer', 'nh_layer', 'villages_layer']),
+    );
     // No unsubstituted placeholders survive in data URLs.
     for (final def in defs) {
       final source = def.source.toString();
@@ -19,10 +18,9 @@ void main() {
     }
     // One eager base group; overlays lazy.
     expect(defs.where((d) => d.eager).map((d) => d.id), ['satellite_layer']);
-    expect(
-      defs.where((d) => !d.eager).map((d) => d.group).toSet(),
-      {'overlays'},
-    );
+    expect(defs.where((d) => !d.eager).map((d) => d.group).toSet(), {
+      'overlays',
+    });
     // Villages load hidden; the toggle reveals them without refetch.
     final villages = defs.firstWhere((d) => d.id == 'villages_layer');
     expect(villages.visible, false);
@@ -90,20 +88,16 @@ void main() {
     Map<String, dynamic> featureSection({
       Map<String, dynamic> sources = const {},
       required List<Map<String, dynamic>> layers,
-    }) => {
-      'sources': sources,
-      'layers': layers,
-    };
+    }) => {'sources': sources, 'layers': layers};
 
     test('joins feature layers with shared sources', () {
       final defs = AssetLayerCatalog.joinCatalog(
         catalogDoc: doc(
           sharedSources: {'shared': geojsonSource()},
           featureSections: {
-            'map': featureSection(layers: [
-              layer('a', 'shared'),
-              layer('b', 'shared'),
-            ]),
+            'map': featureSection(
+              layers: [layer('a', 'shared'), layer('b', 'shared')],
+            ),
           },
         ),
       );
@@ -114,6 +108,19 @@ void main() {
         (defs[0].source as dynamic).toString(),
         contains('https://tiles.example/data.geojson'),
       );
+    });
+
+    test('stamps the owning feature on each definition', () {
+      final defs = AssetLayerCatalog.joinCatalog(
+        catalogDoc: doc(
+          sharedSources: {'shared': geojsonSource()},
+          featureSections: {
+            'map': featureSection(layers: [layer('a', 'shared')]),
+          },
+        ),
+      );
+
+      expect(defs.single.feature, 'map');
     });
 
     test('two features share one villages-like source object', () {
@@ -140,9 +147,7 @@ void main() {
                 sources: {'nh': geojsonSource()},
                 layers: [layer('line', 'nh')],
               ),
-              'school': featureSection(
-                layers: [layer('sneaky', 'nh')],
-              ),
+              'school': featureSection(layers: [layer('sneaky', 'nh')]),
             },
           ),
         ),

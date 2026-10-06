@@ -62,7 +62,9 @@ class _MapScreenState extends State<MapScreenNew> {
                   if (state.layersLoading)
                     const Positioned.fill(
                       child: IgnorePointer(
-                        child: Center(child: AppLoader(message: 'Loading map layers')),
+                        child: Center(
+                          child: AppLoader(message: 'Loading map layers'),
+                        ),
                       ),
                     ),
                   if (state.layersPartialFailure)
@@ -85,7 +87,8 @@ class _MapScreenState extends State<MapScreenNew> {
                     top: 16,
                     child: _LayersPanel(
                       open: _layersOpen,
-                      onToggleOpen: () => setState(() => _layersOpen = !_layersOpen),
+                      onToggleOpen: () =>
+                          setState(() => _layersOpen = !_layersOpen),
                     ),
                   ),
                   Padding(
@@ -97,7 +100,9 @@ class _MapScreenState extends State<MapScreenNew> {
                         Text("Tilt - ${state.mapViewState.tilt}"),
                         Text("Zoom - ${state.mapViewState.zoom}"),
                         Text("Bearing - ${state.mapViewState.bearing}"),
-                        Text("Center - ${state.mapViewState.center.toString()}"),
+                        Text(
+                          "Center - ${state.mapViewState.center.toString()}",
+                        ),
                         SizedBox(height: 24),
                         _ControlButton(
                           tooltip: 'Zoom in',
@@ -168,7 +173,8 @@ class _MapScreenState extends State<MapScreenNew> {
 /// Expandable layers entry point docked at the top-right. The toggle button
 /// is always visible; the [_LayersCard] below it only mounts while open.
 class _LayersPanel extends StatelessWidget {
-  const _LayersPanel({required this.open, required this.onToggleOpen});  final bool open;
+  const _LayersPanel({required this.open, required this.onToggleOpen});
+  final bool open;
   final VoidCallback onToggleOpen;
 
   @override
@@ -233,7 +239,8 @@ class _LayersCard extends StatelessWidget {
                           : () => cubit.toggleLayer(controller, def),
                       onOpacityCommitted: controller == null
                           ? null
-                          : (value) => cubit.setLayerOpacity(controller, def, value),
+                          : (value) =>
+                                cubit.setLayerOpacity(controller, def, value),
                       onExaggerationCommitted: controller == null
                           ? null
                           : (value) => cubit.setHillshadeExaggeration(
@@ -354,7 +361,10 @@ class _LayerRowState extends State<_LayerRow> {
             if (widget.showExaggeration)
               _LabeledSlider(
                 label: 'Exaggeration',
-                value: (_dragExaggeration ?? widget.exaggeration).clamp(0.0, 5.0),
+                value: (_dragExaggeration ?? widget.exaggeration).clamp(
+                  0.0,
+                  5.0,
+                ),
                 min: 0,
                 max: 5,
                 enabled: _interactive,
@@ -438,7 +448,11 @@ class _LayersRetryBanner extends StatelessWidget {
                 style: theme.textTheme.bodyMedium,
               ),
             ),
-            AppButton.outlined(label: 'Retry', onPressed: onRetry, isExpanded: false),
+            AppButton.outlined(
+              label: 'Retry',
+              onPressed: onRetry,
+              isExpanded: false,
+            ),
           ],
         ),
       ),

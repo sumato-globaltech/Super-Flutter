@@ -14,9 +14,7 @@ import 'layer_definition.dart';
 /// everywhere, so environments differ by one value, not thirty URLs. A
 /// remote catalog can replace this class later behind the same interface.
 class AssetLayerCatalog implements LayerCatalog {
-  AssetLayerCatalog({
-    this.catalogPath = 'assets/map/catalog.v1.json',
-  });
+  AssetLayerCatalog({this.catalogPath = 'assets/map/catalog.v1.json'});
 
   final String catalogPath;
 
@@ -37,9 +35,7 @@ class AssetLayerCatalog implements LayerCatalog {
 
   /// Joins a raw decoded catalog document into validated definitions. Pure
   /// and directly unit-testable (no asset bundle needed).
-  static List<LayerDefinition> joinCatalog({
-    required dynamic catalogDoc,
-  }) {
+  static List<LayerDefinition> joinCatalog({required dynamic catalogDoc}) {
     if (catalogDoc is! Map<String, dynamic>) {
       throw const FormatException('Catalog root must be an object');
     }
@@ -73,8 +69,13 @@ class AssetLayerCatalog implements LayerCatalog {
       final section = feature.value as Map<String, dynamic>;
       final sectionSources = section['sources'];
       if (sectionSources is Map<String, dynamic>) {
-        _parseSourcesInto(sectionSources, variables, sources, sourceScopes,
-            scope: name);
+        _parseSourcesInto(
+          sectionSources,
+          variables,
+          sources,
+          sourceScopes,
+          scope: name,
+        );
       }
       final layers = section['layers'];
       if (layers is! List) {
@@ -122,15 +123,13 @@ class AssetLayerCatalog implements LayerCatalog {
       sourceScopes[entry.key] = scope;
     }
   }
+
   /// Reads the `variables` map out of the catalog document. Returns empty
   /// when absent, so variable-free catalogs stay valid.
   static Map<String, String> _variablesOf(Map<String, dynamic> doc) {
     final variables = doc['variables'];
     if (variables is! Map) return const {};
-    return {
-      for (final e in variables.entries)
-        '${e.key}': '${e.value}',
-    };
+    return {for (final e in variables.entries) '${e.key}': '${e.value}'};
   }
 
   /// Recursively substitutes `{variable}` placeholders in strings.
@@ -149,7 +148,9 @@ class AssetLayerCatalog implements LayerCatalog {
         ),
       );
     }
-    if (node is List) return node.map((e) => _substitute(e, variables)).toList();
+    if (node is List) {
+      return node.map((e) => _substitute(e, variables)).toList();
+    }
     return node;
   }
 
@@ -212,6 +213,7 @@ class AssetLayerCatalog implements LayerCatalog {
       id: str('id'),
       sourceId: sourceId,
       group: map['group'] is String ? map['group'] as String : 'overlays',
+      feature: feature,
       kind: kind,
       source: resolvedSource,
       eager: map['eager'] == true,
@@ -260,8 +262,10 @@ class AssetLayerCatalog implements LayerCatalog {
   /// Parses one sources-catalog entry into its typed [LayerSource].
   /// Wraps structural problems in [FormatException] naming the offending
   /// [sourceId], so a broken catalog entry points at itself in logs.
-  static LayerSource _parseSource(Map<String, dynamic> source,
-      {required String sourceId}) {
+  static LayerSource _parseSource(
+    Map<String, dynamic> source, {
+    required String sourceId,
+  }) {
     try {
       return switch (source['type']) {
         'rasterTiles' => RasterTilesSource(

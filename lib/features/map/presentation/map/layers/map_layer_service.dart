@@ -39,19 +39,36 @@ class MapLayerService {
         message.contains('duplicate');
   }
 
-  /// Adds every `eager` layer definition. Returns applied/failed ids.
-  Future<MapLayersResult> ensureEagerLayers(MapLibreMapController controller) {
+  /// Adds every `eager` layer definition. When [feature] is provided, only
+  /// that feature's definitions load — otherwise every feature's eager
+  /// layers load together.
+  Future<MapLayersResult> ensureEagerLayers(
+    MapLibreMapController controller, {
+    String? feature,
+  }) {
     return _serialize(() async {
-      final defs = (await _catalog.load()).where((d) => d.eager).toList();
+      final defs = (await _catalog.load())
+          .where((d) => d.eager && (feature == null || d.feature == feature))
+          .toList();
       return _ensureAll(controller, defs);
     });
   }
 
   /// Adds one catalog group (e.g. `overlays`). Already-present layers are
-  /// skipped, so toggles can safely re-invoke this.
-  Future<MapLayersResult> ensureGroup(MapLibreMapController controller, String group) {
+  /// skipped, so toggles can safely re-invoke this. When [feature] is
+  /// provided, only that feature's group members load.
+  Future<MapLayersResult> ensureGroup(
+    MapLibreMapController controller,
+    String group, {
+    String? feature,
+  }) {
     return _serialize(() async {
-      final defs = (await _catalog.load()).where((d) => d.group == group).toList();
+      final defs = (await _catalog.load())
+          .where(
+            (d) =>
+                d.group == group && (feature == null || d.feature == feature),
+          )
+          .toList();
       return _ensureAll(controller, defs);
     });
   }
@@ -59,7 +76,11 @@ class MapLayerService {
   /// Toggles a layer's runtime visibility without touching its source.
   /// Serialized with the other mutations so a toggle cannot interleave with
   /// an in-flight ensure or opacity repaint of the same layer.
-  Future<void> setVisible(MapLibreMapController controller, String layerId, bool visible) {
+  Future<void> setVisible(
+    MapLibreMapController controller,
+    String layerId,
+    bool visible,
+  ) {
     return _serialize(() => controller.setLayerVisibility(layerId, visible));
   }
 
@@ -109,7 +130,10 @@ class MapLayerService {
   /// registers bundled icon assets, adds the layer unless present, then
   /// applies the catalog's initial visibility. Already-exists races lost to
   /// a concurrent ensure are swallowed because the end state is correct.
-  Future<void> _ensureOne(MapLibreMapController controller, LayerDefinition def) async {
+  Future<void> _ensureOne(
+    MapLibreMapController controller,
+    LayerDefinition def,
+  ) async {
     final source = def.source;
     if (source != null) {
       final sources = await controller.getSourceIds();
@@ -140,7 +164,10 @@ class MapLayerService {
   /// Dispatches on [LayerDefinition.kind] to the matching typed
   /// controller add-method, forwarding zoom bounds, source-layer selector,
   /// and explicit z-order ([LayerDefinition.belowLayerId]).
-  Future<void> _addLayer(MapLibreMapController controller, LayerDefinition def) async {
+  Future<void> _addLayer(
+    MapLibreMapController controller,
+    LayerDefinition def,
+  ) async {
     switch (def.kind) {
       case LayerKind.raster:
         await controller.addRasterLayer(

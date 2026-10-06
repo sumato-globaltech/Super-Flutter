@@ -1,5 +1,3 @@
-
-
 import 'package:super_flutter/components/map_view/state/map_view_state.dart';
 
 /// Screen-level state: live camera snapshot plus layer pipeline status.
@@ -38,8 +36,7 @@ class MapScreenState {
 
   /// True when layer setup finished with at least one failure. Drives the
   /// retry banner; an empty failure list means every layer is ready.
-  bool get layersPartialFailure =>
-      !layersLoading && layersFailed.isNotEmpty;
+  bool get layersPartialFailure => !layersLoading && layersFailed.isNotEmpty;
 
   /// Returns a copy with the given fields replaced. Maps are replaced
   /// wholesale, so callers must spread the previous map (`{...state.x, ...}`).

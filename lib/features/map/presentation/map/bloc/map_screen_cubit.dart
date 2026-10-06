@@ -20,6 +20,11 @@ class MapScreenCubit extends Cubit<MapScreenState> {
   final MapLayerService _layers;
   final LayerCatalog _catalog;
 
+  /// Catalog section this screen loads and lists. Hardcoded per cubit (DI
+  /// cannot inject string literals cleanly) so a second feature's layers
+  /// never leak into this map's pipeline or panel.
+  static const String feature = 'map';
+
   List<LayerDefinition> _definitions = const [];
 
   /// Catalog definitions for the layer panel. Loaded once with base layers.
@@ -124,8 +129,12 @@ class MapScreenCubit extends Cubit<MapScreenState> {
   Future<void> ensureBaseLayers(MapLibreMapController controller) async {
     if (state.layersLoading) return;
     emit(state.copyWith(layersLoading: true, layersFailed: const []));
-    _definitions = await _catalog.load();
-    final result = await _layers.ensureEagerLayers(controller);
+    final all = await _catalog.load();
+    _definitions = all.where((d) => d.feature == feature).toList();
+    final result = await _layers.ensureEagerLayers(
+      controller,
+      feature: feature,
+    );
     if (isClosed) return;
     emit(
       state.copyWith(
@@ -146,7 +155,11 @@ class MapScreenCubit extends Cubit<MapScreenState> {
     MapLibreMapController controller, [
     String group = 'overlays',
   ]) async {
-    final result = await _layers.ensureGroup(controller, group);
+    final result = await _layers.ensureGroup(
+      controller,
+      group,
+      feature: feature,
+    );
     if (isClosed) return;
     emit(state.copyWith(layersFailed: result.failed));
   }
@@ -162,7 +175,7 @@ class MapScreenCubit extends Cubit<MapScreenState> {
   ) async {
     final visible = !(state.layerVisibility[def.id] ?? def.visible);
     if (visible) {
-      await _layers.ensureGroup(controller, def.group);
+      await _layers.ensureGroup(controller, def.group, feature: feature);
     }
     await _layers.setVisible(controller, def.id, visible);
     if (isClosed) return;
@@ -189,9 +202,7 @@ class MapScreenCubit extends Cubit<MapScreenState> {
     );
     if (isClosed) return;
     emit(
-      state.copyWith(
-        layerOpacity: {...state.layerOpacity, def.id: clamped},
-      ),
+      state.copyWith(layerOpacity: {...state.layerOpacity, def.id: clamped}),
     );
   }
 

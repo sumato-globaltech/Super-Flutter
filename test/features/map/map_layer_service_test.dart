@@ -23,6 +23,7 @@ const _raster = LayerDefinition(
   id: 'satellite_layer',
   sourceId: 'satellite_source',
   group: 'base',
+  feature: 'map',
   kind: LayerKind.raster,
   source: RasterTilesSource(tiles: ['https://tiles.example/{z}/{x}/{y}.png']),
   eager: true,
@@ -32,6 +33,7 @@ const _line = LayerDefinition(
   id: 'nh_layer',
   sourceId: 'nh',
   group: 'overlays',
+  feature: 'map',
   kind: LayerKind.line,
   source: VectorUrlSource(url: 'pmtiles://https://tiles.example/nh.pmtiles'),
   sourceLayer: 'roads',
@@ -48,30 +50,14 @@ void main() {
     registerFallbackValue(
       const LineLayerProperties(lineColor: '#000000', lineWidth: 1.0),
     );
-    registerFallbackValue(
-      const CircleLayerProperties(circleRadius: 1.0),
-    );
-    registerFallbackValue(
-      const SymbolLayerProperties(),
-    );
-    registerFallbackValue(
-      const FillLayerProperties(),
-    );
-    registerFallbackValue(
-      const FillExtrusionLayerProperties(),
-    );
-    registerFallbackValue(
-      const HillshadeLayerProperties(),
-    );
-    registerFallbackValue(
-      const ColorReliefLayerProperties(),
-    );
-    registerFallbackValue(
-      const BackgroundLayerProperties(),
-    );
-    registerFallbackValue(
-      const HeatmapLayerProperties(),
-    );
+    registerFallbackValue(const CircleLayerProperties(circleRadius: 1.0));
+    registerFallbackValue(const SymbolLayerProperties());
+    registerFallbackValue(const FillLayerProperties());
+    registerFallbackValue(const FillExtrusionLayerProperties());
+    registerFallbackValue(const HillshadeLayerProperties());
+    registerFallbackValue(const ColorReliefLayerProperties());
+    registerFallbackValue(const BackgroundLayerProperties());
+    registerFallbackValue(const HeatmapLayerProperties());
   });
 
   late MockMapController controller;
@@ -89,95 +75,142 @@ void main() {
         .thenAnswer((_) async => addedSources.toList());
     when(() => controller.getLayerIds())
         .thenAnswer((_) async => addedLayers.toList());
-    when(() => controller.addSource(any(), any())).thenAnswer((invocation) async {
-      addedSources.add(invocation.positionalArguments[0] as String);
-    });
+    when(() => controller.addSource(any(), any()))
+        .thenAnswer((invocation) async {
+          addedSources.add(invocation.positionalArguments[0] as String);
+        });
     when(
-      () => controller.addRasterLayer(any(), any(), any(),
-          belowLayerId: any(named: 'belowLayerId'),
-          minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom')),
+      () => controller.addRasterLayer(
+        any(),
+        any(),
+        any(),
+        belowLayerId: any(named: 'belowLayerId'),
+        minzoom: any(named: 'minzoom'),
+        maxzoom: any(named: 'maxzoom'),
+      ),
     ).thenAnswer((invocation) async {
       addedLayers.add(invocation.positionalArguments[1] as String);
     });
     when(
-      () => controller.addLayer(any(), any(), any(),
-          belowLayerId: any(named: 'belowLayerId'),
-          sourceLayer: any(named: 'sourceLayer'),
-          minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom')),
+      () => controller.addLayer(
+        any(),
+        any(),
+        any(),
+        belowLayerId: any(named: 'belowLayerId'),
+        sourceLayer: any(named: 'sourceLayer'),
+        minzoom: any(named: 'minzoom'),
+        maxzoom: any(named: 'maxzoom'),
+      ),
     ).thenAnswer((invocation) async {
       addedLayers.add(invocation.positionalArguments[1] as String);
     });
     when(
-      () => controller.addSymbolLayer(any(), any(), any(),
-          sourceLayer: any(named: 'sourceLayer'),
-          belowLayerId: any(named: 'belowLayerId'),
-          minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom'),
-          filter: any(named: 'filter'),
-          enableInteraction: any(named: 'enableInteraction')),
+      () => controller.addSymbolLayer(
+        any(),
+        any(),
+        any(),
+        sourceLayer: any(named: 'sourceLayer'),
+        belowLayerId: any(named: 'belowLayerId'),
+        minzoom: any(named: 'minzoom'),
+        maxzoom: any(named: 'maxzoom'),
+        filter: any(named: 'filter'),
+        enableInteraction: any(named: 'enableInteraction'),
+      ),
     ).thenAnswer((invocation) async {
       addedLayers.add(invocation.positionalArguments[1] as String);
     });
     when(
-      () => controller.addFillLayer(any(), any(), any(),
-          sourceLayer: any(named: 'sourceLayer'),
-          belowLayerId: any(named: 'belowLayerId'),
-          minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom'),
-          filter: any(named: 'filter'),
-          enableInteraction: any(named: 'enableInteraction')),
+      () => controller.addCircleLayer(
+        any(),
+        any(),
+        any(),
+        belowLayerId: any(named: 'belowLayerId'),
+        minzoom: any(named: 'minzoom'),
+        maxzoom: any(named: 'maxzoom'),
+      ),
     ).thenAnswer((invocation) async {
       addedLayers.add(invocation.positionalArguments[1] as String);
     });
     when(
-      () => controller.addFillExtrusionLayer(any(), any(), any(),
-          sourceLayer: any(named: 'sourceLayer'),
-          belowLayerId: any(named: 'belowLayerId'),
-          minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom'),
-          filter: any(named: 'filter'),
-          enableInteraction: any(named: 'enableInteraction')),
+      () => controller.addFillLayer(
+        any(),
+        any(),
+        any(),
+        sourceLayer: any(named: 'sourceLayer'),
+        belowLayerId: any(named: 'belowLayerId'),
+        minzoom: any(named: 'minzoom'),
+        maxzoom: any(named: 'maxzoom'),
+        filter: any(named: 'filter'),
+        enableInteraction: any(named: 'enableInteraction'),
+      ),
     ).thenAnswer((invocation) async {
       addedLayers.add(invocation.positionalArguments[1] as String);
     });
     when(
-      () => controller.addHillshadeLayer(any(), any(), any(),
-          belowLayerId: any(named: 'belowLayerId'),
-          minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom')),
+      () => controller.addFillExtrusionLayer(
+        any(),
+        any(),
+        any(),
+        sourceLayer: any(named: 'sourceLayer'),
+        belowLayerId: any(named: 'belowLayerId'),
+        minzoom: any(named: 'minzoom'),
+        maxzoom: any(named: 'maxzoom'),
+        filter: any(named: 'filter'),
+        enableInteraction: any(named: 'enableInteraction'),
+      ),
     ).thenAnswer((invocation) async {
       addedLayers.add(invocation.positionalArguments[1] as String);
     });
     when(
-      () => controller.addColorReliefLayer(any(), any(), any(),
-          belowLayerId: any(named: 'belowLayerId'),
-          minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom')),
+      () => controller.addHillshadeLayer(
+        any(),
+        any(),
+        any(),
+        belowLayerId: any(named: 'belowLayerId'),
+        minzoom: any(named: 'minzoom'),
+        maxzoom: any(named: 'maxzoom'),
+      ),
     ).thenAnswer((invocation) async {
       addedLayers.add(invocation.positionalArguments[1] as String);
     });
     when(
-      () => controller.addBackgroundLayer(any(), any(),
-          belowLayerId: any(named: 'belowLayerId'),
-          minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom')),
+      () => controller.addColorReliefLayer(
+        any(),
+        any(),
+        any(),
+        belowLayerId: any(named: 'belowLayerId'),
+        minzoom: any(named: 'minzoom'),
+        maxzoom: any(named: 'maxzoom'),
+      ),
+    ).thenAnswer((invocation) async {
+      addedLayers.add(invocation.positionalArguments[1] as String);
+    });
+    when(
+      () => controller.addBackgroundLayer(
+        any(),
+        any(),
+        belowLayerId: any(named: 'belowLayerId'),
+        minzoom: any(named: 'minzoom'),
+        maxzoom: any(named: 'maxzoom'),
+      ),
     ).thenAnswer((invocation) async {
       addedLayers.add(invocation.positionalArguments[0] as String);
     });
     when(
-      () => controller.addHeatmapLayer(any(), any(), any(),
-          sourceLayer: any(named: 'sourceLayer'),
-          belowLayerId: any(named: 'belowLayerId'),
-          minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom')),
+      () => controller.addHeatmapLayer(
+        any(),
+        any(),
+        any(),
+        sourceLayer: any(named: 'sourceLayer'),
+        belowLayerId: any(named: 'belowLayerId'),
+        minzoom: any(named: 'minzoom'),
+        maxzoom: any(named: 'maxzoom'),
+      ),
     ).thenAnswer((invocation) async {
       addedLayers.add(invocation.positionalArguments[1] as String);
     });
-    when(
-      () => controller.setLayerVisibility(any(), any()),
-    ).thenAnswer((_) async {});
+    when(() => controller.setLayerVisibility(any(), any()))
+        .thenAnswer((_) async {});
   });
 
   test('skips sources and layers that already exist', () async {
@@ -185,10 +218,7 @@ void main() {
         .thenAnswer((_) async => ['satellite_source']);
     when(() => controller.getLayerIds())
         .thenAnswer((_) async => ['satellite_layer']);
-    final service = MapLayerService(
-      FakeCatalog([_raster]),
-      _silentLogger(),
-    );
+    final service = MapLayerService(FakeCatalog([_raster]), _silentLogger());
 
     final result = await service.ensureEagerLayers(controller);
 
@@ -198,9 +228,8 @@ void main() {
   });
 
   test('one failing layer does not block its siblings', () async {
-    when(() => controller.addSource('nh', any())).thenThrow(
-      Exception('offline tile host'),
-    );
+    when(() => controller.addSource('nh', any()))
+        .thenThrow(Exception('offline tile host'));
     final service = MapLayerService(
       FakeCatalog([_raster, _line]),
       _silentLogger(),
@@ -228,22 +257,24 @@ void main() {
   test('updateOpacity re-adds the layer with new paint', () async {
     when(() => controller.removeLayer(any())).thenAnswer((_) async {});
     when(
-      () => controller.addCircleLayer(any(), any(), any(),
-          belowLayerId: any(named: 'belowLayerId'),
-          minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom')),
+      () => controller.addCircleLayer(
+        any(),
+        any(),
+        any(),
+        belowLayerId: any(named: 'belowLayerId'),
+        minzoom: any(named: 'minzoom'),
+        maxzoom: any(named: 'maxzoom'),
+      ),
     ).thenAnswer((_) async {});
     const circle = LayerDefinition(
       id: 'villages_layer',
       sourceId: 'villages_source',
       group: 'overlays',
+      feature: 'map',
       kind: LayerKind.circle,
       source: GeoJsonSource(data: 'https://tiles.example/v.geojson'),
     );
-    final service = MapLayerService(
-      FakeCatalog([circle]),
-      _silentLogger(),
-    );
+    final service = MapLayerService(FakeCatalog([circle]), _silentLogger());
 
     await service.updateOpacity(controller, circle, 0.4, visible: false);
 
@@ -267,10 +298,7 @@ void main() {
   });
 
   test('concurrent ensures serialize instead of double-adding', () async {
-    final service = MapLayerService(
-      FakeCatalog([_raster]),
-      _silentLogger(),
-    );
+    final service = MapLayerService(FakeCatalog([_raster]), _silentLogger());
 
     final results = await Future.wait([
       service.ensureGroup(controller, 'base'),
@@ -286,13 +314,9 @@ void main() {
   });
 
   test('already-exists races are treated as success', () async {
-    when(() => controller.addSource('satellite_source', any())).thenThrow(
-      Exception('Source satellite_source already exists'),
-    );
-    final service = MapLayerService(
-      FakeCatalog([_raster]),
-      _silentLogger(),
-    );
+    when(() => controller.addSource('satellite_source', any()))
+        .thenThrow(Exception('Source satellite_source already exists'));
+    final service = MapLayerService(FakeCatalog([_raster]), _silentLogger());
 
     final result = await service.ensureGroup(controller, 'base');
 
@@ -300,12 +324,48 @@ void main() {
     expect(result.failed, isEmpty);
   });
 
+  test('scoped ensures ignore other features layers', () async {
+    const schoolCircle = LayerDefinition(
+      id: 'school_dots',
+      sourceId: 's',
+      group: 'overlays',
+      feature: 'school',
+      kind: LayerKind.circle,
+      source: GeoJsonSource(data: 'https://x.example/s.geojson'),
+    );
+    final service = MapLayerService(
+      FakeCatalog([_raster, schoolCircle]),
+      _silentLogger(),
+    );
+
+    final result = await service.ensureGroup(
+      controller,
+      'overlays',
+      feature: 'school',
+    );
+
+    expect(result.applied, ['school_dots']);
+    verifyNever(() => controller.addSource('satellite_source', any()));
+  });
+
+  test(
+    'unscoped ensures keep loading every feature (legacy behavior)',
+    () async {
+      final service = MapLayerService(FakeCatalog([_raster]), _silentLogger());
+
+      final result = await service.ensureGroup(controller, 'base');
+
+      expect(result.applied, ['satellite_layer']);
+    },
+  );
+
   test('each new layer kind calls its typed add-method', () async {
     const defs = [
       LayerDefinition(
         id: 'labels',
         sourceId: 's',
         group: 'g',
+        feature: 'map',
         kind: LayerKind.symbol,
         source: GeoJsonSource(data: 'https://x.example/p.geojson'),
         textField: '{name}',
@@ -314,6 +374,7 @@ void main() {
         id: 'fill',
         sourceId: 's',
         group: 'g',
+        feature: 'map',
         kind: LayerKind.fill,
         source: GeoJsonSource(data: 'https://x.example/p.geojson'),
       ),
@@ -321,6 +382,7 @@ void main() {
         id: 'hill',
         sourceId: 'dem',
         group: 'g',
+        feature: 'map',
         kind: LayerKind.hillshade,
         source: RasterDemSource(tiles: ['https://x.example/{z}/{x}/{y}.png']),
       ),
@@ -328,6 +390,7 @@ void main() {
         id: 'heat',
         sourceId: 's',
         group: 'g',
+        feature: 'map',
         kind: LayerKind.heatmap,
         source: GeoJsonSource(data: 'https://x.example/p.geojson'),
       ),
@@ -335,6 +398,7 @@ void main() {
         id: 'bg',
         sourceId: '',
         group: 'g',
+        feature: 'map',
         kind: LayerKind.background,
       ),
     ];
@@ -345,25 +409,36 @@ void main() {
     expect(result.failed, isEmpty);
     expect(result.applied, ['labels', 'fill', 'hill', 'heat', 'bg']);
     verify(
-      () => controller.addSymbolLayer(any(), any(), any(),
-          sourceLayer: any(named: 'sourceLayer'),
-          belowLayerId: any(named: 'belowLayerId'),
-          minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom'),
-          filter: any(named: 'filter'),
-          enableInteraction: any(named: 'enableInteraction')),
+      () => controller.addSymbolLayer(
+        any(),
+        any(),
+        any(),
+        sourceLayer: any(named: 'sourceLayer'),
+        belowLayerId: any(named: 'belowLayerId'),
+        minzoom: any(named: 'minzoom'),
+        maxzoom: any(named: 'maxzoom'),
+        filter: any(named: 'filter'),
+        enableInteraction: any(named: 'enableInteraction'),
+      ),
     ).called(1);
     verify(
-      () => controller.addHillshadeLayer(any(), any(), any(),
-          belowLayerId: any(named: 'belowLayerId'),
-          minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom')),
+      () => controller.addHillshadeLayer(
+        any(),
+        any(),
+        any(),
+        belowLayerId: any(named: 'belowLayerId'),
+        minzoom: any(named: 'minzoom'),
+        maxzoom: any(named: 'maxzoom'),
+      ),
     ).called(1);
     verify(
-      () => controller.addBackgroundLayer(any(), any(),
-          belowLayerId: any(named: 'belowLayerId'),
-          minzoom: any(named: 'minzoom'),
-          maxzoom: any(named: 'maxzoom')),
+      () => controller.addBackgroundLayer(
+        any(),
+        any(),
+        belowLayerId: any(named: 'belowLayerId'),
+        minzoom: any(named: 'minzoom'),
+        maxzoom: any(named: 'maxzoom'),
+      ),
     ).called(1);
     // Background skips the source step entirely.
     verifyNever(() => controller.addSource('', any()));
@@ -375,6 +450,7 @@ void main() {
       id: 'hill',
       sourceId: 'dem',
       group: 'g',
+      feature: 'map',
       kind: LayerKind.hillshade,
       source: RasterDemSource(tiles: ['https://x.example/{z}/{x}/{y}.png']),
     );

@@ -21,6 +21,7 @@ const _defs = [
     id: 'satellite_layer',
     sourceId: 'satellite_source',
     group: 'base',
+    feature: 'map',
     kind: LayerKind.raster,
     source: RasterTilesSource(tiles: ['https://tiles.example/{z}/{x}/{y}.png']),
     eager: true,
@@ -29,6 +30,7 @@ const _defs = [
     id: 'villages_layer',
     sourceId: 'villages_source',
     group: 'overlays',
+    feature: 'map',
     kind: LayerKind.circle,
     source: GeoJsonSource(data: 'https://tiles.example/villages.geojson'),
     visible: false,
@@ -43,6 +45,7 @@ void main() {
         id: 'x',
         sourceId: 'x',
         group: 'base',
+        feature: 'map',
         kind: LayerKind.raster,
         source: RasterTilesSource(tiles: ['https://x.example']),
       ),
@@ -65,7 +68,7 @@ void main() {
   blocTest<MapScreenCubit, MapScreenState>(
     'reports loading then ready when base layers apply',
     build: () {
-      when(() => layers.ensureEagerLayers(any())).thenAnswer(
+      when(() => layers.ensureEagerLayers(any(), feature: any(named: 'feature'))).thenAnswer(
         (_) async => const MapLayersResult(applied: ['satellite_layer']),
       );
       return buildCubit();
@@ -82,7 +85,7 @@ void main() {
   blocTest<MapScreenCubit, MapScreenState>(
     'reports failed layer ids for retry',
     build: () {
-      when(() => layers.ensureEagerLayers(any())).thenAnswer(
+      when(() => layers.ensureEagerLayers(any(), feature: any(named: 'feature'))).thenAnswer(
         (_) async => const MapLayersResult(failed: ['satellite_layer']),
       );
       return buildCubit();
@@ -99,7 +102,7 @@ void main() {
   blocTest<MapScreenCubit, MapScreenState>(
     'ignores duplicate ensure calls while loading',
     build: () {
-      when(() => layers.ensureEagerLayers(any())).thenAnswer(
+      when(() => layers.ensureEagerLayers(any(), feature: any(named: 'feature'))).thenAnswer(
         (_) async => const MapLayersResult(applied: ['satellite_layer']),
       );
       return buildCubit();
@@ -109,16 +112,16 @@ void main() {
       c.ensureBaseLayers(controller);
       await c.ensureBaseLayers(controller);
     },
-    verify: (_) => verify(() => layers.ensureEagerLayers(any())).called(1),
+    verify: (_) => verify(() => layers.ensureEagerLayers(any(), feature: any(named: 'feature'))).called(1),
   );
 
   blocTest<MapScreenCubit, MapScreenState>(
     'toggle loads the lazy group on first enable then flips visibility',
     build: () {
-      when(() => layers.ensureEagerLayers(any())).thenAnswer(
+      when(() => layers.ensureEagerLayers(any(), feature: any(named: 'feature'))).thenAnswer(
         (_) async => const MapLayersResult(applied: ['satellite_layer']),
       );
-      when(() => layers.ensureGroup(any(), any())).thenAnswer(
+      when(() => layers.ensureGroup(any(), any(), feature: any(named: 'feature'))).thenAnswer(
         (_) async => const MapLayersResult(applied: ['villages_layer']),
       );
       when(() => layers.setVisible(any(), any(), any()))
@@ -142,7 +145,10 @@ void main() {
       ),
     ],
     verify: (_) {
-      verify(() => layers.ensureGroup(controller, 'overlays')).called(1);
+      verify(
+        () => layers.ensureGroup(controller, 'overlays',
+            feature: any(named: 'feature')),
+      ).called(1);
       verify(() => layers.setVisible(controller, 'villages_layer', true))
           .called(1);
     },
@@ -151,11 +157,17 @@ void main() {
   blocTest<MapScreenCubit, MapScreenState>(
     'opacity commit delegates to the service and updates state',
     build: () {
-      when(() => layers.ensureEagerLayers(any())).thenAnswer(
+      when(() => layers.ensureEagerLayers(any(), feature: any(named: 'feature'))).thenAnswer(
         (_) async => const MapLayersResult(applied: ['satellite_layer']),
       );
-      when(() => layers.updateOpacity(any(), any(), any(),
-              visible: any(named: 'visible'))).thenAnswer((_) async {});
+      when(
+        () => layers.updateOpacity(
+          any(),
+          any(),
+          any(),
+          visible: any(named: 'visible'),
+        ),
+      ).thenAnswer((_) async {});
       return buildCubit();
     },
     act: (c) async {
@@ -183,21 +195,23 @@ void main() {
   blocTest<MapScreenCubit, MapScreenState>(
     'exaggeration commit delegates to the service and updates state',
     build: () {
-      when(() => layers.ensureEagerLayers(any())).thenAnswer(
+      when(() => layers.ensureEagerLayers(any(), feature: any(named: 'feature'))).thenAnswer(
         (_) async => const MapLayersResult(applied: ['satellite_layer']),
       );
-      when(() => layers.updateExaggeration(any(), any(), any(),
-              visible: any(named: 'visible'))).thenAnswer((_) async {});
+      when(
+        () => layers.updateExaggeration(
+          any(),
+          any(),
+          any(),
+          visible: any(named: 'visible'),
+        ),
+      ).thenAnswer((_) async {});
       return buildCubit();
     },
     act: (c) async {
       await c.ensureBaseLayers(controller);
       clearInteractions(layers);
-      await c.setHillshadeExaggeration(
-        controller,
-        _defs.first,
-        2.5,
-      );
+      await c.setHillshadeExaggeration(controller, _defs.first, 2.5);
     },
     skip: 2,
     expect: () => [
@@ -209,7 +223,11 @@ void main() {
     ],
     verify: (_) => verify(
       () => layers.updateExaggeration(
-          controller, _defs.first, 2.5, visible: true),
+        controller,
+        _defs.first,
+        2.5,
+        visible: true,
+      ),
     ).called(1),
   );
 }

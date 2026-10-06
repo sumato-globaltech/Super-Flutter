@@ -10,6 +10,10 @@
         "type": "geojson",
         "data": "{tileHost}/nagaland_vill.geojson"
       },
+      "nh_source": {
+        "type": "vectorUrl",
+        "url": "{pmtiles}{tileHost}/pmtiles.php?file=nagaland_NH.pmtiles"
+      },
       "terrain-dem": {
         "type": "rasterDem",
         "tiles": ["https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"],
@@ -28,10 +32,6 @@
             "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
           ],
           "tileSize": 256
-        },
-        "nh_source": {
-          "type": "vectorUrl",
-          "url": "{pmtiles}{tileHost}/pmtiles.php?file=nagaland_NH.pmtiles"
         },
         "district_source": {
           "type": "geojson",
@@ -68,19 +68,6 @@
           "visible": true,
           "paint": {
             "rasterOpacity": 1.0
-          }
-        },
-        {
-          "id": "nh_layer",
-          "sourceId": "nh_source",
-          "group": "overlays",
-          "kind": "line",
-          "eager": false,
-          "visible": true,
-          "sourceLayer": "nagaland",
-          "paint": {
-            "lineColor": "#E03F4F",
-            "lineWidth": 8.0
           }
         },
         {
@@ -156,6 +143,23 @@
           "paint": {
             "heatmapRadius": 30.0,
             "heatmapOpacity": 0.8
+          }
+        }
+      ]
+    },
+    "school": {
+      "layers": [
+        {
+          "id": "nh_layer",
+          "sourceId": "nh_source",
+          "group": "overlays",
+          "kind": "line",
+          "eager": false,
+          "visible": true,
+          "sourceLayer": "nagaland",
+          "paint": {
+            "lineColor": "#E03F4F",
+            "lineWidth": 8.0
           }
         }
       ]
