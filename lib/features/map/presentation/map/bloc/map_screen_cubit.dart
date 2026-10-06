@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
+import 'package:super_flutter/core/logging/app_logger.dart';
 import 'package:super_flutter/features/map/presentation/map/bloc/map_screen_state.dart';
 import 'package:super_flutter/features/map/presentation/map/layers/layer_catalog.dart';
 import 'package:super_flutter/features/map/presentation/map/layers/layer_definition.dart';
@@ -14,11 +15,12 @@ import 'package:super_flutter/components/map_view/state/map_view_state.dart';
 
 @injectable
 class MapScreenCubit extends Cubit<MapScreenState> {
-  MapScreenCubit(this._layers, this._catalog)
+  MapScreenCubit(this._layers, this._catalog, this._appLogger)
     : super(MapScreenState(mapViewState: MapViewState()));
 
   final MapLayerService _layers;
   final LayerCatalog _catalog;
+  final AppLogger _appLogger;
 
   /// Catalog section this screen loads and lists. Hardcoded per cubit (DI
   /// cannot inject string literals cleanly) so a second feature's layers
@@ -131,6 +133,10 @@ class MapScreenCubit extends Cubit<MapScreenState> {
     emit(state.copyWith(layersLoading: true, layersFailed: const []));
     final all = await _catalog.load();
     _definitions = all.where((d) => d.feature == feature).toList();
+    _appLogger.debug("mridx jbjbvjrehvbrevje");
+    for (var e in _definitions) {
+      _appLogger.debug(e.feature);
+    }
     final result = await _layers.ensureEagerLayers(
       controller,
       feature: feature,

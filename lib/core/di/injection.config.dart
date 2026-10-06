@@ -98,6 +98,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i679.MapScreenCubit(
         gh<_i840.MapLayerService>(),
         gh<_i841.LayerCatalog>(),
+        gh<_i451.AppLogger>(),
       ),
     );
     gh.lazySingleton<_i396.AppErrorHandler>(
