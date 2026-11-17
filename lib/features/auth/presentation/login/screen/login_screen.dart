@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:super_flutter/core/constants/assets_names.dart';
 import 'package:super_flutter/core/constants/constants.dart';
 import 'package:super_flutter/core/di/injection.dart';
 import 'package:super_flutter/core/extensions/extensions.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/core/ui/theme/app_spacing.dart';
+import 'package:super_flutter/core/ui/theme/design_colors.dart';
 import 'package:super_flutter/core/ui/widgets/app_text_field.dart';
 import 'package:super_flutter/core/ui/widgets/gradient_background.dart';
 import 'package:super_flutter/core/ui/widgets/progress_circle.dart';
 import 'package:super_flutter/core/utils/utils.dart';
-
 import '../bloc/login_bloc.dart';
 import '../bloc/login_event.dart';
 import '../bloc/login_state.dart';
@@ -25,8 +26,10 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   bool isloading = false;
+  bool obscureText = true;
   final _email = TextEditingController();
-  
+  final _password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -60,13 +63,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Hero(
-                          tag: AssetsName.appLogo,
-                          child: ClipRRect(
-                            borderRadius: .circular(08),
-                            child: Image.asset(AssetsName.appLogo, width: 100),
-                          ),
-                        ),
+                        // Hero(
+                        //   tag: AssetsName.appLogo,
+                        //   child: ClipRRect(
+                        //     borderRadius: .circular(08),
+                        //     child: Image.asset(AssetsName.appLogo, width: 100),
+                        //   ),
+                        // ),
                         12.height,
                         const Text(Constants.appFullName, textAlign: .center),
                         10.height,
@@ -75,11 +78,44 @@ class _LoginScreenState extends State<LoginScreen> {
                           keyboardType: TextInputType.emailAddress,
                           decoration: const InputDecoration(
                             labelText: 'Email *',
+                            hintText: "Type your email",
                             prefixIcon: Icon(Icons.email_outlined),
                           ),
                           validator: Utils.validateEmail,
                           onTapOutside: (_) =>
                               FocusManager.instance.primaryFocus?.unfocus(),
+                        ),
+                        12.height,
+                        TextFormField(
+                          controller: _password,
+                          textCapitalization: TextCapitalization.words,
+                          decoration: InputDecoration(
+                            labelText: 'Password *',
+                            prefixIcon: const Icon(PhosphorIconsBold.lock),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                obscureText = !obscureText;
+                                setState(() {});
+                              },
+                              padding: EdgeInsets.zero,
+                              constraints: const BoxConstraints(),
+                              splashRadius: 16,
+                              visualDensity: VisualDensity.compact,
+                              icon: Icon(
+                                obscureText
+                                    ? PhosphorIconsBold.eyeClosed
+                                    : PhosphorIconsBold.eye,
+                                color: DesignColor.grey900,
+                                size: 18,
+                              ),
+                            ),
+                          ),
+                          validator: (v) => (v == null || v.trim().isEmpty)
+                              ? 'Password is required'
+                              : null,
+                          onTapOutside: (_) =>
+                              FocusManager.instance.primaryFocus?.unfocus(),
+                          obscureText: obscureText,
                         ),
                         SizedBox(
                           width: double.infinity,
