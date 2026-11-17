@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_flutter/core/constants/assets_names.dart';
+import 'package:super_flutter/core/constants/constants.dart';
 import 'package:super_flutter/core/di/injection.dart';
+import 'package:super_flutter/core/extensions/extensions.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
-import 'package:super_flutter/core/ui/layouts/app_scaffold.dart';
 import 'package:super_flutter/core/ui/theme/app_spacing.dart';
-import 'package:super_flutter/core/ui/widgets/app_button.dart';
 import 'package:super_flutter/core/ui/widgets/app_text_field.dart';
+import 'package:super_flutter/core/ui/widgets/gradient_background.dart';
+import 'package:super_flutter/core/ui/widgets/progress_circle.dart';
+import 'package:super_flutter/core/utils/utils.dart';
 
 import '../bloc/login_bloc.dart';
 import '../bloc/login_event.dart';
@@ -20,16 +24,17 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-
+  bool isloading = false;
+  final _email = TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return BlocProvider(
-      create: (_) => getIt<LoginBloc>(),
-      child: AppScaffold(
-        title: l10n.signIn,
-        constrainWidth: true,
-        body: BlocConsumer<LoginBloc, LoginState>(
+    final theme = Theme.of(context);
+    return GradientBackground(
+      child: BlocProvider(
+        create: (_) => getIt<LoginBloc>(),
+        child: BlocConsumer<LoginBloc, LoginState>(
           listenWhen: (previous, current) =>
               previous.status != current.status &&
               current.status == LoginStatus.failure,
@@ -45,55 +50,55 @@ class _LoginScreenState extends State<LoginScreen> {
             final bloc = context.read<LoginBloc>();
             return Form(
               key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    l10n.signInToContinue,
-                    style: Theme.of(context).textTheme.titleMedium,
+              child: Scaffold(
+                backgroundColor: Colors.transparent,
+                appBar: AppBar(),
+                body: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Hero(
+                          tag: AssetsName.appLogo,
+                          child: ClipRRect(
+                            borderRadius: .circular(08),
+                            child: Image.asset(AssetsName.appLogo, width: 100),
+                          ),
+                        ),
+                        12.height,
+                        const Text(Constants.appFullName, textAlign: .center),
+                        10.height,
+                        TextFormField(
+                          controller: _email,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: const InputDecoration(
+                            labelText: 'Email *',
+                            prefixIcon: Icon(Icons.email_outlined),
+                          ),
+                          validator: Utils.validateEmail,
+                          onTapOutside: (_) =>
+                              FocusManager.instance.primaryFocus?.unfocus(),
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: Hero(
+                            tag: Constants.keyLoginButton,
+                            child: ElevatedButton(
+                              onPressed: isloading ? null : () async {},
+                              child: isloading
+                                  ? DesignProgress(
+                                      color: theme.colorScheme.primary,
+                                    )
+                                  : const Text('Login'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  Gap.lg,
-                  AppTextField(
-                    label: l10n.username,
-                    initialValue: state.username,
-                    hint: 'emilys',
-                    prefixIcon: Icons.person_outline,
-                    textInputAction: TextInputAction.next,
-                    autofillHints: const [AutofillHints.username],
-                    enabled: !state.isSubmitting,
-                    onChanged: (v) => bloc.add(LoginUsernameChanged(v)),
-                    validator: (v) =>
-                        (v == null || v.trim().isEmpty) ? l10n.username : null,
-                  ),
-                  Gap.md,
-                  AppTextField(
-                    label: l10n.password,
-                    hint: '••••••••',
-                    prefixIcon: Icons.lock_outline,
-                    obscureText: true,
-                    textInputAction: TextInputAction.done,
-                    autofillHints: const [AutofillHints.password],
-                    enabled: !state.isSubmitting,
-                    onChanged: (v) => bloc.add(LoginPasswordChanged(v)),
-                    onSubmitted: (_) => _submit(context),
-                    validator: (v) =>
-                        (v == null || v.isEmpty) ? l10n.password : null,
-                  ),
-                  Gap.lg,
-                  AppButton(
-                    label: l10n.signIn,
-                    isLoading: state.isSubmitting,
-                    onPressed: state.isSubmitting
-                        ? null
-                        : () => _submit(context),
-                  ),
-                  Gap.sm,
-                  Text(
-                    'Demo backend: dummyjson.com (try emilys / emilyspass)',
-                    style: Theme.of(context).textTheme.bodySmall,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+                ),
               ),
             );
           },

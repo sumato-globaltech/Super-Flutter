@@ -53,11 +53,11 @@ class AppEmptyView extends StatelessWidget {
             ],
             if (actionLabel != null && onAction != null) ...[
               Gap.xl,
-              AppButton.outlined(
-                label: actionLabel!,
-                onPressed: onAction,
-                isExpanded: false,
-              ),
+              // AppButton.outlined(
+              //   label: actionLabel!,
+              //   onPressed: onAction,
+              //   isExpanded: false,
+              // ),
             ],
           ],
         ),

@@ -89,12 +89,12 @@ class AppErrorView extends StatelessWidget {
             ),
             if (onRetry != null) ...[
               Gap.xl,
-              AppButton.outlined(
-                label: retryLabel,
-                onPressed: onRetry,
-                icon: Icons.refresh,
-                isExpanded: false,
-              ),
+              // AppButton.outlined(
+              //   label: retryLabel,
+              //   onPressed: onRetry,
+              //   icon: Icons.refresh,
+              //   isExpanded: false,
+              // ),
             ],
           ],
         ),
