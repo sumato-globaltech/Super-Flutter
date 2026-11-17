@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -11,11 +10,12 @@ import 'package:super_flutter/core/error/error_reporter.dart';
 import 'package:super_flutter/core/logging/app_logger.dart';
 import 'package:super_flutter/core/logging/logging_bloc_observer.dart';
 // sf:app-bloc-imports:begin
+import 'package:super_flutter/features/super_awesome/presentation/super_awesome/bloc/super_awesome_bloc.dart';
+
 // sf:app-bloc-imports:end
 import '../core/di/injection.dart';
 import '../core/localization/app_localizations.dart';
 import '../core/storage/storage_service.dart';
-import '../core/ui/theme/app_colors.dart';
 import '../core/ui/theme/app_theme.dart';
 import '../features/auth/session/bloc/auth_cubit.dart';
 
@@ -90,6 +90,7 @@ class _MyAppState extends State<MyApp> {
       child: MultiBlocProvider(
         providers: [
           // sf:app-blocs:begin
+          BlocProvider(create: (_) => SuperAwesomeBloc()),
           // sf:app-blocs:end
         ],
         child: MaterialApp.router(
@@ -98,6 +99,9 @@ class _MyAppState extends State<MyApp> {
           theme: AppTheme.light(_config.flavor),
           darkTheme: AppTheme.dark(_config.flavor),
           routerConfig: _router,
+          // themeMode: ThemeMode.system,
+          // theme: theme,
+          // darkTheme: darkTheme,
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
@@ -111,7 +115,7 @@ class _MyAppState extends State<MyApp> {
             return Banner(
               message: _config.flavor.label,
               location: BannerLocation.topEnd,
-              color: AppColors.seedFor(_config.flavor),
+              // color: AppColors.seedFor(_config.flavor),
               child: content,
             );
           },

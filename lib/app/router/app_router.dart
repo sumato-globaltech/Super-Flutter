@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 // sf:feature-routes-imports:begin
 import 'package:super_flutter/features/auth/routes/auth_routes.dart';
 import 'package:super_flutter/features/dashboard/routes/dashboard_routes.dart';
+import 'package:super_flutter/features/super_awesome/routes/super_awesome_routes.dart';
 // sf:feature-routes-imports:end
 
 import '../../features/auth/session/bloc/auth_cubit.dart';
@@ -57,6 +58,7 @@ GoRouter createRouter({required AuthCubit authCubit, required AppConfig config})
       // sf:feature-routes:begin
       ...buildAuthRoutes(),
       ...buildDashboardRoutes(),
+      ...buildSuperAwesomeRoutes(),
       // sf:feature-routes:end
     ],
   );

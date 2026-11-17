@@ -1,0 +1,17 @@
+# SF model registry.
+# Generated and maintained by SF. Commit this file: it is how SF avoids
+# creating duplicate models and how it safely evolves existing ones.
+version: 1
+models:
+  - name: SuperBoyModel
+    kind: model
+    feature: auth
+    path: lib/data/auth/model/super_boy_model.dart
+    import: package:super_flutter/data/auth/model/super_boy_model.dart
+    fingerprint: '{sff:int}'
+    fields:
+      - name: sff
+        json_key: sff
+        type: int
+        nullable: true
+    origin: generated
