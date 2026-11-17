@@ -11,7 +11,6 @@ import 'package:super_flutter/core/logging/app_logger.dart';
 import 'package:super_flutter/core/logging/logging_bloc_observer.dart';
 // sf:app-bloc-imports:begin
 import 'package:super_flutter/features/super_awesome/presentation/super_awesome/bloc/super_awesome_bloc.dart';
-
 // sf:app-bloc-imports:end
 import '../core/di/injection.dart';
 import '../core/localization/app_localizations.dart';
