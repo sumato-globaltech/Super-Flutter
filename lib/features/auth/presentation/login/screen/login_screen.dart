@@ -71,7 +71,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             tag: AssetsName.appLogo,
                             child: ClipRRect(
                               borderRadius: .circular(08),
-                              child: Image.asset(AssetsName.appLogo, width: 100),
+                              child: Image.asset(
+                                AssetsName.appLogo,
+                                width: 100,
+                              ),
                             ),
                           ),
                           12.height,
@@ -82,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             keyboardType: TextInputType.emailAddress,
                             decoration: const InputDecoration(
                               labelText: 'Email *',
-                              hintText: "Type your email",
+                              hintText: "Type your Email",
                               prefixIcon: Icon(Icons.email_outlined),
                             ),
                             validator: Utils.validateEmail,
@@ -95,6 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             textCapitalization: TextCapitalization.words,
                             decoration: InputDecoration(
                               labelText: 'Password *',
+                              hintText: "Type your Password",
                               prefixIcon: const Icon(PhosphorIconsBold.lock),
                               suffixIcon: IconButton(
                                 onPressed: () {
