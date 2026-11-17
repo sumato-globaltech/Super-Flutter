@@ -30,13 +30,13 @@ class Constants {
   //   // deviceIpAddress = await Utils.getDeviceIpAddress();
   // }
 
-  static const String appName = 'Ino Irrigation';
+  static const String appName = 'UDAE';
   // key
   static const String keyLoginButton = "keyLoginButton";
   static const int otpResendSeconds = 120;
   // key
   static const String appFullName =
-      'Ino Irrigation - Smart Irrigation System for Efficient Water Management';
+      'Unified Digital Agriculture Ecosystem';
   static const double elevation = 0;
 
   static const String companyName = 'Sumato Globaltech Pvt. Ltd.';
