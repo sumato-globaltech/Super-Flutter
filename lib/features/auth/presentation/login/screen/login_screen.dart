@@ -34,38 +34,27 @@ class _LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<LoginBloc>();
-    return BlocListener<LoginBloc, LoginState>(
-      listenWhen: (prev, curr) =>
-          prev.status != curr.status && curr.status == LoginStatus.failure,
-      listener: (context, state) {
-        final message = state.errorMessage;
-        if (message == null) return;
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(SnackBar(content: Text(message)));
-      },
-      child: GradientBackground(
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(),
-          body: Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-              child: Form(
-                key: bloc.formKey,
-                child: Column(
-                  children: [
-                    const _LoginHeader(),
-                    10.height,
-                    const _EmailField(),
-                    12.height,
-                    const _PasswordField(),
-                    12.height,
-                    const _LoginButton(),
-                    12.height,
-                    const _TermsText(),
-                  ],
-                ),
+    return GradientBackground(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(),
+        body: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+            child: Form(
+              key: bloc.formKey,
+              child: Column(
+                children: [
+                  const _LoginHeader(),
+                  10.height,
+                  const _EmailField(),
+                  12.height,
+                  const _PasswordField(),
+                  12.height,
+                  const _LoginButton(),
+                  12.height,
+                  const _TermsText(),
+                ],
               ),
             ),
           ),
