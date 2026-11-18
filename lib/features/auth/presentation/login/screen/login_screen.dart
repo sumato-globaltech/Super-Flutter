@@ -77,6 +77,7 @@ class _LoginHeader extends StatelessWidget {
         ),
         12.height,
         const Text(Constants.appFullName, textAlign: TextAlign.center),
+        12.height,
       ],
     );
   }
