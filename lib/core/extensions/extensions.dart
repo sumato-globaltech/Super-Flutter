@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 extension SizedBoxExtensions on int {
   SizedBox get height => SizedBox(height: toDouble());

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
 // sf:feature-routes-imports:begin
 import 'package:super_flutter/features/auth/routes/auth_routes.dart';

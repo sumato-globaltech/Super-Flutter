@@ -1,7 +1,8 @@
 import 'dart:async';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart' hide GlobalMaterialLocalizations, GlobalCupertinoLocalizations;
+import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
 import 'package:super_flutter/app/config/app_config.dart';
 import 'package:super_flutter/app/router/app_router.dart';
@@ -101,7 +102,7 @@ class _MyAppState extends State<MyApp> {
           // themeMode: ThemeMode.system,
           // theme: theme,
           // darkTheme: darkTheme,
-          localizationsDelegates: const [
+          localizationsDelegates: [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
