@@ -737,9 +737,9 @@
       "file_type": "rationale",
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Flutter/ephemeral/flutter_lldb_helper.py",
       "source_location": "L8",
-      "id": "flutter_lldb_helper_rationale_8",
       "community": 27,
-      "norm_label": "intercept notify_debugger_about_rx_pages and touch the pages."
+      "norm_label": "intercept notify_debugger_about_rx_pages and touch the pages.",
+      "id": "flutter_lldb_helper_rationale_8"
     },
     {
       "label": "Package.swift",
@@ -15273,8 +15273,8 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/main.cpp",
       "source_location": "L13",
       "weight": 1.0,
-      "_src": "main_wwinmain",
-      "_tgt": "utils_createandattachconsole",
+      "_src": "utils_createandattachconsole",
+      "_tgt": "main_wwinmain",
       "source": "utils_createandattachconsole",
       "target": "main_wwinmain"
     },
@@ -15297,8 +15297,8 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/main.cpp",
       "source_location": "L23",
       "weight": 1.0,
-      "_src": "main_wwinmain",
-      "_tgt": "utils_getcommandlinearguments",
+      "_src": "utils_getcommandlinearguments",
+      "_tgt": "main_wwinmain",
       "source": "utils_getcommandlinearguments",
       "target": "main_wwinmain"
     },
@@ -15645,8 +15645,8 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/main.cpp",
       "source_location": "L30",
       "weight": 1.0,
-      "_src": "main_wwinmain",
-      "_tgt": "win32_window_create",
+      "_src": "win32_window_create",
+      "_tgt": "main_wwinmain",
       "source": "win32_window_create",
       "target": "main_wwinmain"
     },
@@ -15741,8 +15741,8 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/main.cpp",
       "source_location": "L33",
       "weight": 1.0,
-      "_src": "main_wwinmain",
-      "_tgt": "win32_window_setquitonclose",
+      "_src": "win32_window_setquitonclose",
+      "_tgt": "main_wwinmain",
       "source": "win32_window_setquitonclose",
       "target": "main_wwinmain"
     },

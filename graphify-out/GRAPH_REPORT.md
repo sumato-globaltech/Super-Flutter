@@ -1,7 +1,7 @@
 # Graph Report - /Users/deepjyotibaishya/Projects/App/Super-Flutter  (2026-11-18)
 
 ## Corpus Check
-- 146 files · ~58,351 words
+- 146 files · ~100,774 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -95,10 +95,10 @@
   /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/flutter_window.cpp → /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/flutter/generated_plugin_registrant.cc
 - `OnCreate()` --calls--> `Show()`  [INFERRED]
   /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/flutter_window.cpp → /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/win32_window.cpp
-- `wWinMain()` --calls--> `CreateAndAttachConsole()`  [INFERRED]
-  /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/main.cpp → /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/utils.cpp
-- `wWinMain()` --calls--> `SetQuitOnClose()`  [INFERRED]
-  /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/main.cpp → /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/win32_window.cpp
+- `CreateAndAttachConsole()` --calls--> `wWinMain()`  [INFERRED]
+  /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/utils.cpp → /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/main.cpp
+- `SetQuitOnClose()` --calls--> `wWinMain()`  [INFERRED]
+  /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/win32_window.cpp → /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/main.cpp
 - `main()` --calls--> `my_application_new()`  [INFERRED]
   /Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/main.cc → /Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/my_application.cc
 

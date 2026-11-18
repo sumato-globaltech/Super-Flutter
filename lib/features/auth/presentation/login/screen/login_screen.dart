@@ -43,7 +43,6 @@ class _LoginView extends StatelessWidget {
         ScaffoldMessenger.of(context)
           ..hideCurrentSnackBar()
           ..showSnackBar(SnackBar(content: Text(message)));
-        // Success navigates via GoRouter redirect (AuthCubit -> authenticated).
       },
       child: GradientBackground(
         child: Scaffold(

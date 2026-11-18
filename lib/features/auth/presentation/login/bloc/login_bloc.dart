@@ -8,11 +8,6 @@ import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 
-/// Form + submission Bloc for [LoginScreen].
-///
-/// Owns the form key and text controllers so the screen stays stateless.
-/// Keeps [AuthCubit] status-only: on success it reflects the new session via
-/// `authenticated()`.
 @injectable
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc(this._login, this._authCubit) : super(const LoginState()) {
@@ -77,12 +72,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginSubmitted event,
     Emitter<LoginState> emit,
   ) async {
-    if (state.isSubmitting) return;
-
-    // Field-level errors are shown by the form validators when mounted.
     final formValid = formKey.currentState?.validate() ?? true;
     if (!formValid) return;
-
+    if (state.isSubmitting) return;
     if (!state.isValid) {
       emit(
         state.copyWith(
@@ -92,7 +84,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
       return;
     }
-
     emit(state.copyWith(status: LoginStatus.submitting));
     try {
       await _login(email: state.username.trim(), password: state.password);
