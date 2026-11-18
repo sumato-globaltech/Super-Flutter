@@ -7,7 +7,6 @@ import 'package:super_flutter/core/constants/constants.dart';
 import 'package:super_flutter/core/di/injection.dart';
 import 'package:super_flutter/core/extensions/extensions.dart';
 import 'package:super_flutter/core/ui/theme/app_theme.dart';
-import 'package:super_flutter/core/ui/theme/design_colors.dart';
 import 'package:super_flutter/core/ui/widgets/gradient_background.dart';
 import 'package:super_flutter/core/ui/widgets/progress_circle.dart';
 import 'package:super_flutter/core/utils/utils.dart';
@@ -127,7 +126,6 @@ class _PasswordField extends StatelessWidget {
           visualDensity: VisualDensity.compact,
           icon: Icon(
             obscure ? PhosphorIconsBold.eyeClosed : PhosphorIconsBold.eye,
-            color: DesignColor.grey900,
             size: 18,
           ),
         ),
