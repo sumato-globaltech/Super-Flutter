@@ -33,7 +33,7 @@ class _LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<LoginBloc>();
+    final bloc = context.watch<LoginBloc>();
     return GradientBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
