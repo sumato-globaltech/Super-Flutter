@@ -14,6 +14,8 @@ class MockLogin extends Mock implements Login {}
 class MockAuthCubit extends Mock implements AuthCubit {}
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   late MockLogin login;
   late MockAuthCubit authCubit;
 
