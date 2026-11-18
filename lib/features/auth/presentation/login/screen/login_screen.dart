@@ -112,7 +112,6 @@ class _PasswordField extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = context.read<LoginBloc>();
     final obscure = context.select((LoginBloc b) => b.state.obscurePassword);
-
     return TextFormField(
       controller: bloc.passwordController,
       obscureText: obscure,
