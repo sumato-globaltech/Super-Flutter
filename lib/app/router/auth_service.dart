@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:super_flutter/core/constants/constants.dart';
 import 'package:super_flutter/core/service/remote_service.dart';
-import 'package:super_flutter/core/services/remote_service.dart';
 import 'package:super_flutter/core/storage/secure_storage.dart';
 import 'package:super_flutter/core/utils/enums.dart';
 import 'package:super_flutter/core/utils/utils.dart';
