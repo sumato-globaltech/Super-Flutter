@@ -16,6 +16,7 @@ import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 // sf:app-bloc-imports:begin
 import 'package:super_flutter/features/super_awesome/presentation/super_awesome/bloc/super_awesome_bloc.dart';
 // sf:app-bloc-imports:end
+import '../core/constants/assets_names.dart';
 import '../core/di/injection.dart';
 import '../core/localization/app_localizations.dart';
 import '../core/ui/theme/app_theme.dart';
@@ -67,6 +68,13 @@ class _MyAppState extends State<MyApp> {
       config: _config,
       refreshListenable: _authRefresh,
     );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Decode the logo before the first screen paints it.
+    precacheImage(const AssetImage(AssetsName.appLogo), context);
   }
 
   @override
