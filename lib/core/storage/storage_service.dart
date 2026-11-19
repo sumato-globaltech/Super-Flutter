@@ -31,10 +31,12 @@ class StorageService {
 
   Future<void> saveTokens({
     required String accessToken,
-    required String refreshToken,
+    String? refreshToken,
+    DateTime? expiresAt,
   }) => _secureStorage.saveTokens(
     accessToken: accessToken,
     refreshToken: refreshToken,
+    expiresAt: expiresAt,
   );
 
   Future<String?> getSetting(String key) => _database.readSetting(key);

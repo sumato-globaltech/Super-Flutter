@@ -1,5 +1,5 @@
 abstract final class ApiEndpoints {
-  static const login = '/auth/login';
+  static const login = '/api/v1/login';
   static const refresh = '/auth/refresh';
   static const currentUser = '/auth/me';
 

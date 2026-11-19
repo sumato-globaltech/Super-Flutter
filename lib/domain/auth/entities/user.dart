@@ -1,31 +1,55 @@
 import 'package:equatable/equatable.dart';
 
+class UserRole extends Equatable {
+  const UserRole({required this.value, required this.label});
+
+  final String value;
+  final String label;
+
+  @override
+  List<Object?> get props => [value, label];
+}
+
 class User extends Equatable {
   const User({
     required this.id,
-    required this.username,
+    required this.name,
     required this.email,
-    this.firstName = '',
-    this.lastName = '',
-    this.image = '',
+    this.phone,
+    this.designation,
+    this.role,
+    this.photoUrl,
+    this.emailVerified = false,
+    this.passwordChangeRequired = false,
+    this.createdAt,
   });
 
-  static const empty = User(id: 0, username: '', email: '');
+  static const empty = User(id: '', name: '', email: '');
 
-  final int id;
-  final String username;
+  final String id;
+  final String name;
   final String email;
-  final String firstName;
-  final String lastName;
-  final String image;
+  final String? phone;
+  final String? designation;
+  final UserRole? role;
+  final String? photoUrl;
+  final bool emailVerified;
+  final bool passwordChangeRequired;
+  final DateTime? createdAt;
 
   bool get isEmpty => this == empty;
 
-  String get fullName {
-    final name = '$firstName $lastName'.trim();
-    return name.isEmpty ? username : name;
-  }
-
   @override
-  List<Object?> get props => [id, username, email, firstName, lastName, image];
+  List<Object?> get props => [
+    id,
+    name,
+    email,
+    phone,
+    designation,
+    role,
+    photoUrl,
+    emailVerified,
+    passwordChangeRequired,
+    createdAt,
+  ];
 }

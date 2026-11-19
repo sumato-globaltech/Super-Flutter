@@ -79,16 +79,24 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(
         state.copyWith(
           status: LoginStatus.failure,
-          errorMessage: 'Please enter your username and password.',
+          errorMessage: 'Please enter your email and password.',
         ),
       );
       return;
     }
     emit(state.copyWith(status: LoginStatus.submitting));
     try {
-      await _login(email: state.username.trim(), password: state.password);
+      final session = await _login(
+        email: state.username.trim(),
+        password: state.password,
+      );
       _authCubit.authenticated();
-      emit(state.copyWith(status: LoginStatus.success));
+      emit(
+        state.copyWith(
+          status: LoginStatus.success,
+          passwordChangeRequired: session.passwordChangeRequired,
+        ),
+      );
     } on AppException catch (e) {
       emit(
         state.copyWith(status: LoginStatus.failure, errorMessage: e.message),

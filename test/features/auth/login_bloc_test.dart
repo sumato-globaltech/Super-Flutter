@@ -2,6 +2,8 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:super_flutter/core/error/exceptions/unauthorized_exception.dart';
+import 'package:super_flutter/domain/auth/entities/auth_session.dart';
+import 'package:super_flutter/domain/auth/entities/auth_token.dart';
 import 'package:super_flutter/domain/auth/entities/user.dart';
 import 'package:super_flutter/domain/auth/use_cases/login.dart';
 import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
@@ -19,7 +21,10 @@ void main() {
   late MockLogin login;
   late MockAuthCubit authCubit;
 
-  const user = User(id: 1, username: 'emilys', email: 'emily@test.com');
+  const session = AuthSession(
+    user: User(id: 'u1', name: 'Emily', email: 'emily@test.com'),
+    tokens: AuthTokens(accessToken: 'a'),
+  );
 
   setUp(() {
     login = MockLogin();
@@ -46,7 +51,7 @@ void main() {
     expect: () => [
       const LoginState(
         status: LoginStatus.failure,
-        errorMessage: 'Please enter your username and password.',
+        errorMessage: 'Please enter your email and password.',
       ),
     ],
     verify: (_) => verifyNever(
@@ -60,7 +65,7 @@ void main() {
       when(
         () =>
             login(email: any(named: 'email'), password: any(named: 'password')),
-      ).thenAnswer((_) async => user);
+      ).thenAnswer((_) async => session);
       return LoginBloc(login, authCubit);
     },
     seed: () => const LoginState(username: 'emilys', password: 'emilyspass'),

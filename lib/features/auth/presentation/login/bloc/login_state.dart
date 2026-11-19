@@ -9,6 +9,7 @@ class LoginState extends Equatable {
     this.obscurePassword = true,
     this.status = LoginStatus.initial,
     this.errorMessage,
+    this.passwordChangeRequired = false,
   });
 
   final String username;
@@ -16,6 +17,7 @@ class LoginState extends Equatable {
   final bool obscurePassword;
   final LoginStatus status;
   final String? errorMessage;
+  final bool passwordChangeRequired;
 
   bool get isSubmitting => status == LoginStatus.submitting;
 
@@ -29,6 +31,7 @@ class LoginState extends Equatable {
     bool? obscurePassword,
     LoginStatus? status,
     String? errorMessage,
+    bool? passwordChangeRequired,
   }) {
     return LoginState(
       username: username ?? this.username,
@@ -36,6 +39,8 @@ class LoginState extends Equatable {
       obscurePassword: obscurePassword ?? this.obscurePassword,
       status: status ?? this.status,
       errorMessage: errorMessage,
+      passwordChangeRequired:
+          passwordChangeRequired ?? this.passwordChangeRequired,
     );
   }
 
@@ -46,5 +51,6 @@ class LoginState extends Equatable {
     obscurePassword,
     status,
     errorMessage,
+    passwordChangeRequired,
   ];
 }

@@ -3,6 +3,52 @@
 # creating duplicate models and how it safely evolves existing ones.
 version: 1
 models:
+  - name: LoginModel
+    kind: model
+    feature: auth
+    path: lib/data/auth/model/login_model.dart
+    import: package:super_flutter/data/auth/model/login_model.dart
+    fingerprint: '{access_token:string,expires_at:datetime,password_change_required:bool,token_type:string,user:{created_at:datetime,designation:string,email:string,email_verified:bool,id:string,name:string,password_change_required:bool,phone:string,photo_url:string,role:{label:string,value:string}}}'
+    fields:
+      - name: tokenType
+        json_key: token_type
+        type: String
+        nullable: true
+      - name: accessToken
+        json_key: access_token
+        type: String
+        nullable: true
+      - name: expiresAt
+        json_key: expires_at
+        type: DateTime
+        nullable: true
+      - name: passwordChangeRequired
+        json_key: password_change_required
+        type: bool
+        nullable: true
+      - name: user
+        json_key: user
+        type: UserModel
+        nullable: true
+    nested:
+      - UserModel
+    origin: generated
+  - name: RoleModel
+    kind: model
+    feature: auth
+    path: lib/data/auth/model/user_model.dart
+    import: package:super_flutter/data/auth/model/user_model.dart
+    fingerprint: '{label:string,value:string}'
+    fields:
+      - name: value
+        json_key: value
+        type: String
+        nullable: true
+      - name: label
+        json_key: label
+        type: String
+        nullable: true
+    origin: generated
   - name: SuperBoyModel
     kind: model
     feature: auth
@@ -14,4 +60,54 @@ models:
         json_key: sff
         type: int
         nullable: true
+    origin: generated
+  - name: UserModel
+    kind: model
+    feature: auth
+    path: lib/data/auth/model/user_model.dart
+    import: package:super_flutter/data/auth/model/user_model.dart
+    fingerprint: '{created_at:datetime,designation:string,email:string,email_verified:bool,id:string,name:string,password_change_required:bool,phone:string,photo_url:string,role:{label:string,value:string}}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+      - name: email
+        json_key: email
+        type: String
+        nullable: true
+      - name: phone
+        json_key: phone
+        type: String
+        nullable: true
+      - name: designation
+        json_key: designation
+        type: String
+        nullable: true
+      - name: role
+        json_key: role
+        type: RoleModel
+        nullable: true
+      - name: photoUrl
+        json_key: photo_url
+        type: String
+        nullable: true
+      - name: emailVerified
+        json_key: email_verified
+        type: bool
+        nullable: true
+      - name: passwordChangeRequired
+        json_key: password_change_required
+        type: bool
+        nullable: true
+      - name: createdAt
+        json_key: created_at
+        type: DateTime
+        nullable: true
+    nested:
+      - RoleModel
     origin: generated

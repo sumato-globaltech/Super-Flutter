@@ -1,19 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:super_flutter/core/error/app_exception.dart';
+import 'package:super_flutter/core/error/exceptions/parse_exception.dart';
 import 'package:super_flutter/core/network/api_endpoints.dart';
 import 'package:super_flutter/core/network/dio_client.dart';
-import 'package:super_flutter/core/network/network_constants.dart';
 import 'package:super_flutter/core/network/network_exception_mapper.dart';
-import 'package:super_flutter/domain/auth/entities/auth_token.dart';
 
-import '../../model/user_model.dart';
-
-class LoginResult {
-  const LoginResult({required this.user, required this.tokens});
-
-  final UserModel user;
-  final AuthTokens tokens;
-}
+import '../../model/login_model.dart';
 
 @lazySingleton
 class AuthRemoteDataSource {
@@ -21,47 +14,44 @@ class AuthRemoteDataSource {
 
   final DioClient _dioClient;
 
-  /// dummyjson: POST /auth/login {username, password, expiresInMins}
-  /// -> {accessToken, refreshToken, id, username, email, firstName, lastName, image, ...}
-  Future<LoginResult> login({
-    required String username,
+  Future<LoginModel> login({
+    required String email,
     required String password,
   }) async {
     try {
       final response = await _dioClient.dio.post<dynamic>(
         ApiEndpoints.login,
-        data: {
-          'username': username,
-          'password': password,
-          'expiresInMins': NetworkConstants.accessTokenLifetimeMinutes,
-        },
+        data: {'email': email, 'password': password},
       );
+
       final body = response.data;
       if (body is! Map) {
-        throw const NetworkException('Unexpected login response.');
+        throw const ParseException('Unexpected login response.');
       }
-      final json = Map<String, dynamic>.from(body);
-      final accessToken = json['accessToken'];
-      final refreshToken = json['refreshToken'];
-      if (accessToken is! String ||
-          accessToken.isEmpty ||
-          refreshToken is! String ||
-          refreshToken.isEmpty) {
-        throw const NetworkException('Login response is missing tokens.');
+      if (body['success'] == false) {
+        throw BadRequestException(
+          (body['message'] as String?) ?? 'Login failed.',
+          statusCode: response.statusCode,
+        );
       }
-      return LoginResult(
-        user: UserModel.fromJson(json),
-        tokens: AuthTokens(
-          accessToken: accessToken,
-          refreshToken: refreshToken,
-        ),
-      );
+
+      final data = body['data'];
+      if (data is! Map) {
+        throw const ParseException('Login response is missing data.');
+      }
+
+      final result = LoginModel.fromJson(Map<String, dynamic>.from(data));
+      final token = result.accessToken;
+      if (token == null || token.isEmpty || result.user == null) {
+        throw const ParseException('Login response is missing the token.');
+      }
+      return result;
     } on DioException catch (e) {
       throw NetworkException.fromDioException(e);
-    } on NetworkException {
+    } on AppException {
       rethrow;
     } catch (e) {
-      throw NetworkException('Could not process login response.', cause: e);
+      throw ParseException('Could not process login response.', e);
     }
   }
 }

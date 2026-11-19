@@ -3,6 +3,8 @@ abstract final class StorageKeys {
 
   static const refreshToken = 'auth.refresh_token';
 
+  static const tokenExpiresAt = 'auth.token_expires_at';
+
   static const secureNamespace = 'flutter_kit_secure';
 
   static const cachedUser = 'auth.cached_user';
