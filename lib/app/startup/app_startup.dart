@@ -23,7 +23,10 @@ class AppStartup {
 
   static const _remoteConfigTimeout = Duration(seconds: 5);
 
+  RemoteAppSettings _settings = const RemoteAppSettings();
   bool _updateRequired = false;
+
+  RemoteAppSettings get settings => _settings;
 
   bool get updateRequired => _updateRequired;
 
@@ -32,18 +35,18 @@ class AppStartup {
 
     await _storage.restoreSession();
 
-    final remote = await _loadRemoteSettings();
-    _applyApiBaseUrl(remote.apiBaseUrl);
-    _updateRequired = Constants.buildNumber < remote.minBuildNumber;
+    _settings = await _loadRemoteSettings();
+    _applyApiBaseUrl(_settings.apiBaseUrl);
+    _updateRequired = Constants.buildNumber < _settings.minBuildNumber;
 
     await _authCubit.initialize();
   }
 
   Future<RemoteAppSettings> _loadRemoteSettings() async {
     try {
-      final config = await RemoteConfigService.instance
-          .getConfigJson()
-          .timeout(_remoteConfigTimeout);
+      final config = await RemoteConfigService.instance.getConfigJson().timeout(
+        _remoteConfigTimeout,
+      );
       return RemoteAppSettings.fromConfig(
         config,
         packageName: Constants.packageInfo?.packageName ?? '',

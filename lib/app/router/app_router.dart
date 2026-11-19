@@ -42,7 +42,8 @@ GoRouter createRouter({
       GoRoute(
         path: RouteNames.forceUpdate,
         name: RouteNames.forceUpdate,
-        builder: (context, state) => const ForceUpdateScreen(),
+        builder: (context, state) =>
+            ForceUpdateScreen(storeLink: startup.settings.storeLink),
       ),
       // sf:feature-routes:begin
       ...buildAuthRoutes(),

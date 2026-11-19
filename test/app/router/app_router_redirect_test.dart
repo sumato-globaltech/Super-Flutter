@@ -18,10 +18,18 @@ void main() {
 
   group('resolveRedirect', () {
     test('force update wins over everything', () {
-      expect(redirect(dashboard, AuthStatus.authenticated, update: true),
-          RouteNames.forceUpdate);
-      expect(redirect(RouteNames.forceUpdate, AuthStatus.authenticated,
-          update: true), isNull);
+      expect(
+        redirect(dashboard, AuthStatus.authenticated, update: true),
+        RouteNames.forceUpdate,
+      );
+      expect(
+        redirect(
+          RouteNames.forceUpdate,
+          AuthStatus.authenticated,
+          update: true,
+        ),
+        isNull,
+      );
     });
 
     test('app launch opens login or dashboard directly', () {
