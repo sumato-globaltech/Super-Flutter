@@ -20,9 +20,7 @@ class RemoteAppSettings {
     );
   }
 
-  /// Full API base URL that overrides [Environment.apiBaseUrl], if set.
   final String? apiBaseUrl;
 
-  /// Lowest build number allowed to run; older builds must update.
   final int minBuildNumber;
 }
