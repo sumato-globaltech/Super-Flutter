@@ -32,7 +32,7 @@ class Environment {
   factory Environment.staging() => const Environment(
     flavor: Flavor.staging,
     appName: 'Flutter Kit Staging',
-    apiBaseUrl: 'http://dam.test',
+    apiBaseUrl: 'https://agri-erp.sumato.tech',
     databaseName: 'flutter_kit_staging',
     enableHttpLogging: true,
     showFlavorBanner: true,
@@ -42,7 +42,7 @@ class Environment {
   factory Environment.production() => const Environment(
     flavor: Flavor.production,
     appName: 'Flutter Kit',
-    apiBaseUrl: 'http://dam.test',
+    apiBaseUrl: 'https://agri-erp.sumato.tech',
     databaseName: 'flutter_kit',
   );
 
