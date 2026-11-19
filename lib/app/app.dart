@@ -19,7 +19,6 @@ import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 import 'package:super_flutter/features/super_awesome/presentation/super_awesome/bloc/super_awesome_bloc.dart';
 
 // sf:app-bloc-imports:end
-import '../core/constants/assets_names.dart';
 import '../core/di/injection.dart';
 import '../core/localization/app_localizations.dart';
 import '../core/ui/theme/app_theme.dart';
