@@ -39,7 +39,7 @@ Future<void> bootstrap(AppConfig config) async {
         getIt.get<AppStartup>().run(),
         StartupImages.precache(),
       ]);
-      runApp(const MyApp());
+      runApp(const App());
     },
     (error, stack) {
       getIt.get<ErrorReporter>().report(
@@ -51,14 +51,14 @@ Future<void> bootstrap(AppConfig config) async {
   );
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class App extends StatefulWidget {
+  const App({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<App> createState() => _AppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _AppState extends State<App> {
   late final AppConfig _config = getIt.get<AppConfig>();
   late final GoRouterRefreshStream _authRefresh;
   late final GoRouter _router;
