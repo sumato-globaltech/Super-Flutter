@@ -1,11 +1,11 @@
 # Graph Report - /Users/deepjyotibaishya/Projects/App/Super-Flutter  (2026-11-19)
 
 ## Corpus Check
-- 152 files · ~101,738 words
+- 152 files · ~103,951 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 755 nodes · 826 edges · 67 communities detected
+- 757 nodes · 828 edges · 67 communities detected
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 12 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
@@ -105,8 +105,8 @@
 ## Communities
 
 ### Community 0 - "Community 0"
-Cohesion: 0.04
-Nodes (67): ../core/di/injection.dart, ../core/localization/app_localizations.dart, ../core/ui/theme/app_theme.dart, dashboard_event.dart, dashboard_state.dart, ../../features/auth/session/bloc/auth_cubit.dart, injection.config.dart, package:bloc_test/bloc_test.dart (+59 more)
+Cohesion: 0.03
+Nodes (69): ../core/constants/assets_names.dart, ../core/di/injection.dart, ../core/localization/app_localizations.dart, ../core/ui/theme/app_theme.dart, dashboard_event.dart, dashboard_state.dart, ../../features/auth/session/bloc/auth_cubit.dart, injection.config.dart (+61 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.04
@@ -373,7 +373,7 @@ Cohesion: 1.0
 Nodes (0): 
 
 ## Knowledge Gaps
-- **471 isolated node(s):** `MockStorageService`, `MockAuthCubit`, `main`, `main`, `package:super_flutter/app/router/routes_names.dart` (+466 more)
+- **473 isolated node(s):** `MockStorageService`, `MockAuthCubit`, `main`, `main`, `package:super_flutter/app/router/routes_names.dart` (+468 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **Thin community `Community 33`** (2 nodes): `PodsDummy_Pods_Runner`, `Pods-Runner-dummy.m`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
@@ -450,13 +450,13 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `package:material_ui/material_ui.dart` connect `Community 3` to `Community 0`, `Community 1`, `Community 2`, `Community 4`, `Community 5`, `Community 6`?**
   _High betweenness centrality (0.236) - this node is a cross-community bridge._
 - **Why does `package:injectable/injectable.dart` connect `Community 6` to `Community 0`, `Community 7`, `Community 12`, `Community 14`, `Community 17`?**
-  _High betweenness centrality (0.112) - this node is a cross-community bridge._
+  _High betweenness centrality (0.111) - this node is a cross-community bridge._
 - **Why does `package:super_flutter/features/auth/session/bloc/auth_cubit.dart` connect `Community 0` to `Community 13`, `Community 6`?**
-  _High betweenness centrality (0.060) - this node is a cross-community bridge._
+  _High betweenness centrality (0.061) - this node is a cross-community bridge._
 - **What connects `MockStorageService`, `MockAuthCubit`, `main` to the rest of the system?**
-  _471 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _473 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.04 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.03 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.04 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**

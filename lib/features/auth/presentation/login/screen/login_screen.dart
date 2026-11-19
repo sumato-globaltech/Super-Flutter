@@ -73,7 +73,14 @@ class _LoginHeader extends StatelessWidget {
           tag: AssetsName.appLogo,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.asset(AssetsName.appLogo, width: 100, height: 100),
+            child: Image.asset(
+              AssetsName.appLogo,
+              width: 100,
+              height: 100,
+              // Keep the last frame while the image re-resolves instead of
+              // painting an empty box for a frame.
+              gaplessPlayback: true,
+            ),
           ),
         ),
         12.height,

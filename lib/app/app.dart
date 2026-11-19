@@ -32,7 +32,10 @@ Future<void> bootstrap(AppConfig config) async {
         Bloc.observer = LoggingBlocObserver(appLogger);
       }
       appLogger.info('Starting ${config.appName} (${config.flavor.name})');
-      await getIt.get<AppStartup>().run();
+      // The logo is decoded in parallel so the first frame already has it.
+      await Future.wait([
+        getIt.get<AppStartup>().run(),
+      ]);
       runApp(const MyApp());
     },
     (error, stack) {
@@ -44,7 +47,6 @@ Future<void> bootstrap(AppConfig config) async {
     },
   );
 }
-
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -68,13 +70,6 @@ class _MyAppState extends State<MyApp> {
       config: _config,
       refreshListenable: _authRefresh,
     );
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Decode the logo before the first screen paints it.
-    precacheImage(const AssetImage(AssetsName.appLogo), context);
   }
 
   @override
