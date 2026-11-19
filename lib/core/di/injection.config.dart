@@ -23,6 +23,7 @@ import 'package:super_flutter/core/logging/app_logger.dart' as _i451;
 import 'package:super_flutter/core/network/dio_client.dart' as _i42;
 import 'package:super_flutter/core/network/network_module.dart' as _i468;
 import 'package:super_flutter/core/network/session_manager.dart' as _i827;
+import 'package:super_flutter/core/service/device_info_service.dart' as _i686;
 import 'package:super_flutter/core/storage/local_storage.dart' as _i635;
 import 'package:super_flutter/core/storage/secure_storage.dart' as _i491;
 import 'package:super_flutter/core/storage/storage_service.dart' as _i407;
@@ -57,6 +58,7 @@ extension GetItInjectableX on _i174.GetIt {
     final networkModule = _$NetworkModule();
     gh.lazySingleton<_i451.AppLogger>(() => coreModule.logger);
     gh.lazySingleton<_i491.SecureStorage>(() => storageModule.secureStorage());
+    gh.lazySingleton<_i686.DeviceInfoService>(() => _i686.DeviceInfoService());
     gh.lazySingleton<_i1067.Environment>(
       () => coreModule.appEnvironment(gh<_i65.AppConfig>()),
     );
@@ -91,7 +93,10 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
     gh.lazySingleton<_i234.AuthRemoteDataSource>(
-      () => _i234.AuthRemoteDataSource(gh<_i42.DioClient>()),
+      () => _i234.AuthRemoteDataSource(
+        gh<_i42.DioClient>(),
+        gh<_i686.DeviceInfoService>(),
+      ),
     );
     gh.lazySingleton<_i631.AuthRepository>(
       () => _i227.AuthRepositoryImpl(

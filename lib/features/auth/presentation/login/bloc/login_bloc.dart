@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:super_flutter/core/error/app_exception.dart';
+import 'package:super_flutter/core/error/exceptions/validation_exception.dart';
 import 'package:super_flutter/domain/auth/use_cases/login.dart';
 import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 
@@ -44,14 +45,31 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginUsernameChanged event,
     Emitter<LoginState> emit,
   ) {
-    emit(state.copyWith(username: event.username, status: LoginStatus.initial));
+    emit(
+      state.copyWith(
+        username: event.username,
+        status: LoginStatus.initial,
+        fieldErrors: _without('email'),
+      ),
+    );
   }
 
   void _onPasswordChanged(
     LoginPasswordChanged event,
     Emitter<LoginState> emit,
   ) {
-    emit(state.copyWith(password: event.password, status: LoginStatus.initial));
+    emit(
+      state.copyWith(
+        password: event.password,
+        status: LoginStatus.initial,
+        fieldErrors: _without('password'),
+      ),
+    );
+  }
+
+  Map<String, String> _without(String field) {
+    if (!state.fieldErrors.containsKey(field)) return state.fieldErrors;
+    return Map.of(state.fieldErrors)..remove(field);
   }
 
   void _onPasswordVisibilityToggled(
@@ -84,7 +102,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
       return;
     }
-    emit(state.copyWith(status: LoginStatus.submitting));
+    emit(state.copyWith(status: LoginStatus.submitting, fieldErrors: const {}));
     try {
       final session = await _login(
         email: state.username.trim(),
@@ -95,6 +113,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         state.copyWith(
           status: LoginStatus.success,
           passwordChangeRequired: session.passwordChangeRequired,
+        ),
+      );
+    } on ValidationException catch (e) {
+      emit(
+        state.copyWith(
+          status: LoginStatus.failure,
+          errorMessage: e.message,
+          fieldErrors: e.fieldErrors,
         ),
       );
     } on AppException catch (e) {

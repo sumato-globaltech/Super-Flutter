@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:super_flutter/core/error/exceptions/unauthorized_exception.dart';
+import 'package:super_flutter/core/error/exceptions/validation_exception.dart';
 import 'package:super_flutter/domain/auth/entities/auth_session.dart';
 import 'package:super_flutter/domain/auth/entities/auth_token.dart';
 import 'package:super_flutter/domain/auth/entities/user.dart';
@@ -113,5 +114,38 @@ void main() {
       ),
     ],
     verify: (_) => verifyNever(() => authCubit.authenticated()),
+  );
+
+  blocTest<LoginBloc, LoginState>(
+    'maps server field errors and clears email error when typing',
+    build: () {
+      when(
+        () =>
+            login(email: any(named: 'email'), password: any(named: 'password')),
+      ).thenThrow(
+        const ValidationException(
+          'These credentials do not match our records.',
+          fieldErrors: {'email': 'These credentials do not match our records.'},
+        ),
+      );
+      return LoginBloc(login, authCubit);
+    },
+    seed: () => const LoginState(username: 'a@b.com', password: 'wrong'),
+    act: (b) async {
+      b.add(const LoginSubmitted());
+      await Future<void>.delayed(Duration.zero);
+      b.add(const LoginUsernameChanged('a@b.co'));
+    },
+    skip: 1,
+    expect: () => [
+      const LoginState(
+        username: 'a@b.com',
+        password: 'wrong',
+        status: LoginStatus.failure,
+        errorMessage: 'These credentials do not match our records.',
+        fieldErrors: {'email': 'These credentials do not match our records.'},
+      ),
+      const LoginState(username: 'a@b.co', password: 'wrong'),
+    ],
   );
 }

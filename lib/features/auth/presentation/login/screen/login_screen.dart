@@ -5,13 +5,16 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:super_flutter/core/constants/assets_names.dart';
 import 'package:super_flutter/core/constants/constants.dart';
 import 'package:super_flutter/core/di/injection.dart';
+import 'package:super_flutter/core/extensions/context_extensions.dart';
 import 'package:super_flutter/core/extensions/extensions.dart';
 import 'package:super_flutter/core/ui/theme/app_theme.dart';
 import 'package:super_flutter/core/ui/widgets/gradient_background.dart';
 import 'package:super_flutter/core/ui/widgets/progress_circle.dart';
 import 'package:super_flutter/core/utils/utils.dart';
+
 import '../bloc/login_bloc.dart';
 import '../bloc/login_event.dart';
+import '../bloc/login_state.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String route = "/LoginScreen";
@@ -32,27 +35,37 @@ class _LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<LoginBloc>();
-    return GradientBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        // appBar: AppBar(),
-        body: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-            child: Form(
-              key: bloc.formKey,
-              child: Column(
-                children: [
-                  const _LoginHeader(),
-                  10.height,
-                  const _EmailField(),
-                  12.height,
-                  const _PasswordField(),
-                  12.height,
-                  const _LoginButton(),
-                  12.height,
-                  const _TermsText(),
-                ],
+    return BlocListener<LoginBloc, LoginState>(
+      listenWhen: (prev, curr) =>
+          prev.status != curr.status && curr.status == LoginStatus.failure,
+      listener: (context, state) {
+        final message = state.errorMessage;
+        if (state.fieldErrors.isEmpty && message != null) {
+          context.showSnackBar(message, isError: true);
+        }
+      },
+      child: GradientBackground(
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          // appBar: AppBar(),
+          body: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+              child: Form(
+                key: bloc.formKey,
+                child: Column(
+                  children: [
+                    const _LoginHeader(),
+                    10.height,
+                    const _EmailField(),
+                    12.height,
+                    const _PasswordField(),
+                    12.height,
+                    const _LoginButton(),
+                    12.height,
+                    const _TermsText(),
+                  ],
+                ),
               ),
             ),
           ),
@@ -95,8 +108,10 @@ class _EmailField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<LoginBloc>();
+    final error = context.select((LoginBloc b) => b.state.emailError);
     return TextFormField(
       controller: bloc.emailController,
+      forceErrorText: error,
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
       autofillHints: const [AutofillHints.email],
@@ -118,8 +133,10 @@ class _PasswordField extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = context.read<LoginBloc>();
     final obscure = context.select((LoginBloc b) => b.state.obscurePassword);
+    final error = context.select((LoginBloc b) => b.state.passwordError);
     return TextFormField(
       controller: bloc.passwordController,
+      forceErrorText: error,
       obscureText: obscure,
       textInputAction: TextInputAction.done,
       autofillHints: const [AutofillHints.password],

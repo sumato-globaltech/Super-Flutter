@@ -25,8 +25,8 @@ class LoggingInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     _logger.debug(
       '--> ${options.method} ${options.uri}\n'
-          'headers: ${_redact(options.headers)}\n'
-          'body: ${_body(options.data)}',
+      'headers: ${_redact(options.headers)}\n'
+      'body: ${_body(options.data)}',
       name: 'http',
     );
     handler.next(options);
@@ -34,13 +34,13 @@ class LoggingInterceptor extends Interceptor {
 
   @override
   void onResponse(
-      Response<dynamic> response,
-      ResponseInterceptorHandler handler,
-      ) {
+    Response<dynamic> response,
+    ResponseInterceptorHandler handler,
+  ) {
     final options = response.requestOptions;
     _logger.debug(
       '<-- ${response.statusCode} ${options.method} ${options.uri}\n'
-          'body: ${_body(response.data)}',
+      'body: ${_body(response.data)}',
       name: 'http',
     );
     handler.next(response);
@@ -51,9 +51,9 @@ class LoggingInterceptor extends Interceptor {
     final options = err.requestOptions;
     _logger.warning(
       '<-- ERROR ${err.response?.statusCode ?? err.type.name} '
-          '${options.method} ${options.uri}\n'
-          'message: ${err.message}\n'
-          'body: ${_body(err.response?.data)}',
+      '${options.method} ${options.uri}\n'
+      'message: ${err.message}\n'
+      'body: ${_body(err.response?.data)}',
       name: 'http',
     );
     handler.next(err);

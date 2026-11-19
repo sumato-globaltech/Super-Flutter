@@ -40,6 +40,14 @@ class NetworkException extends AppException {
     final response = error.response;
     final status = response?.statusCode ?? 0;
     final message = _extractMessage(response?.data);
+    final fieldErrors = fieldErrorsFrom(response?.data);
+
+    if (status >= 400 && status < 500 && fieldErrors.isNotEmpty) {
+      return ValidationException(
+        message ?? 'Please correct the highlighted fields.',
+        fieldErrors: fieldErrors,
+      );
+    }
 
     if (status == 401 || status == 403) {
       return UnauthorizedException(
@@ -61,13 +69,6 @@ class NetworkException extends AppException {
       );
     }
     if (status >= 400) {
-      final fieldErrors = _extractFieldErrors(response?.data);
-      if (fieldErrors.isNotEmpty) {
-        return ValidationException(
-          message ?? 'Please correct the highlighted fields.',
-          fieldErrors: fieldErrors,
-        );
-      }
       return BadRequestException(
         message ?? 'The request could not be completed.',
         statusCode: status,
@@ -90,13 +91,13 @@ class NetworkException extends AppException {
       if (value is String && value.trim().isNotEmpty) return value;
     }
 
-    final fieldErrors = _extractFieldErrors(data);
+    final fieldErrors = fieldErrorsFrom(data);
     if (fieldErrors.isNotEmpty) return fieldErrors.values.first;
 
     return null;
   }
 
-  static Map<String, String> _extractFieldErrors(Object? data) {
+  static Map<String, String> fieldErrorsFrom(Object? data) {
     if (data is! Map) return const {};
 
     final errors = data['errors'];

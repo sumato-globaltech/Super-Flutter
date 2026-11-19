@@ -10,6 +10,7 @@ class LoginState extends Equatable {
     this.status = LoginStatus.initial,
     this.errorMessage,
     this.passwordChangeRequired = false,
+    this.fieldErrors = const {},
   });
 
   final String username;
@@ -18,6 +19,11 @@ class LoginState extends Equatable {
   final LoginStatus status;
   final String? errorMessage;
   final bool passwordChangeRequired;
+  final Map<String, String> fieldErrors;
+
+  String? get emailError => fieldErrors['email'];
+
+  String? get passwordError => fieldErrors['password'];
 
   bool get isSubmitting => status == LoginStatus.submitting;
 
@@ -32,6 +38,7 @@ class LoginState extends Equatable {
     LoginStatus? status,
     String? errorMessage,
     bool? passwordChangeRequired,
+    Map<String, String>? fieldErrors,
   }) {
     return LoginState(
       username: username ?? this.username,
@@ -41,6 +48,7 @@ class LoginState extends Equatable {
       errorMessage: errorMessage,
       passwordChangeRequired:
           passwordChangeRequired ?? this.passwordChangeRequired,
+      fieldErrors: fieldErrors ?? this.fieldErrors,
     );
   }
 
@@ -52,5 +60,6 @@ class LoginState extends Equatable {
     status,
     errorMessage,
     passwordChangeRequired,
+    fieldErrors,
   ];
 }
