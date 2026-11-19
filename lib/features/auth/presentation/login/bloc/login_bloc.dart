@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -20,6 +21,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     emailController.addListener(_emailListener);
     passwordController.addListener(_passwordListener);
+    if (kDebugMode) {
+      emailController.text = "super-admin@test.test"; 
+      passwordController.text = "sumato@1234";
+    }
   }
 
   final Login _login;
