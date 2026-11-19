@@ -55,8 +55,6 @@ class DioClient {
 
   Dio get dio => _dio;
 
-  /// Points both the main and refresh clients at [baseUrl], e.g. a Remote
-  /// Config override applied at startup before any request is sent.
   void setBaseUrl(String baseUrl) {
     _dio.options.baseUrl = baseUrl;
     _refreshClient.options.baseUrl = baseUrl;
