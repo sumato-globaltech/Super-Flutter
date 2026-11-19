@@ -9,7 +9,9 @@ class RemoteConfigService {
   static final RemoteConfigService instance = RemoteConfigService._();
   static const String loginFormKey = 'login_form';
 
-  final FirebaseRemoteConfig _remoteConfig = FirebaseRemoteConfig.instance;
+  // Resolved lazily so creating the service never throws when Firebase is
+  // not initialized; callers handle the failure instead.
+  FirebaseRemoteConfig get _remoteConfig => FirebaseRemoteConfig.instance;
   Future<void>? _initializeFuture;
 
   Future<void> fetchConfig() {

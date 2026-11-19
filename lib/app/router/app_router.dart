@@ -1,8 +1,9 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
-import 'package:super_flutter/app/router/auth_service.dart';
-import 'package:super_flutter/core/di/injection.dart';
-import 'package:super_flutter/core/utils/enums.dart';
+import 'package:super_flutter/features/auth/routes/auth_route_names.dart';
+import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
+import 'package:super_flutter/features/auth/session/bloc/auth_state.dart';
+import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
 // sf:feature-routes-imports:begin
 import 'package:super_flutter/features/auth/routes/auth_routes.dart';
 import 'package:super_flutter/features/dashboard/routes/dashboard_routes.dart';
@@ -10,49 +11,71 @@ import 'package:super_flutter/features/super_awesome/routes/super_awesome_routes
 
 // sf:feature-routes-imports:end
 import '../config/app_config.dart';
+import '../startup/app_startup.dart';
+import '../startup/force_update_screen.dart';
 import '../startup/splash_screen.dart';
-import 'routes.dart';
+import 'navigator_keys.dart';
 import 'routes_names.dart';
 
-final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(
-  debugLabel: 'root',
-);
-final AppConfig _config = getIt.get<AppConfig>();
-
-final GoRouter goRouter = GoRouter(
-  navigatorKey: rootNavigatorKey,
-  initialLocation: RouteNames.splash,
-  debugLogDiagnostics: !_config.isProduction,
-  // refreshListenable: GoRouterRefreshStream(authCubit.stream),
-  redirect: (context, state) {
-    final authService = AuthService.instance;
-    final location = state.matchedLocation;
-    if (location == Routes.main) {
-      // if (authService.authStatus == AuthStatus.authenticated) {
-      //   if (authService.userRole == UserRole.engineer) {
-      //     return Routes.homeEngineer;
-      //   }
-      //   if (authService.userRole == UserRole.contractor) {
-      //     return Routes.homeContractor;
-      //   }
-      //   return Routes.homeEngineer;
-      // } else if (authService.authStatus == AuthStatus.update) {
-      //   return Routes.newUpdate;
-      // }
-      return Routes.login;
-    }
-    return null;
-  },
-  routes: [
-    GoRoute(
-      path: RouteNames.splash,
-      name: RouteNames.splash,
-      builder: (context, state) => const SplashScreen(),
+GoRouter createRouter({
+  required AuthCubit authCubit,
+  required AppStartup startup,
+  required AppConfig config,
+  required Listenable refreshListenable,
+}) {
+  return GoRouter(
+    navigatorKey: rootNavigatorKey,
+    initialLocation: RouteNames.splash,
+    debugLogDiagnostics: !config.isProduction,
+    refreshListenable: refreshListenable,
+    redirect: (context, state) => resolveRedirect(
+      location: state.matchedLocation,
+      status: authCubit.state.status,
+      updateRequired: startup.updateRequired,
     ),
-    // sf:feature-routes:begin
-    ...buildAuthRoutes(),
-    ...buildDashboardRoutes(),
-    ...buildSuperAwesomeRoutes(),
-    // sf:feature-routes:end
-  ],
-);
+    routes: [
+      GoRoute(
+        path: RouteNames.splash,
+        name: RouteNames.splash,
+        builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: RouteNames.forceUpdate,
+        name: RouteNames.forceUpdate,
+        builder: (context, state) => const ForceUpdateScreen(),
+      ),
+      // sf:feature-routes:begin
+      ...buildAuthRoutes(),
+      ...buildDashboardRoutes(),
+      ...buildSuperAwesomeRoutes(),
+      // sf:feature-routes:end
+    ],
+  );
+}
+
+/// Route guard. Returns the location to redirect to, or `null` to stay.
+///
+/// Kept pure so it can be unit tested without a widget tree.
+@visibleForTesting
+String? resolveRedirect({
+  required String location,
+  required AuthStatus status,
+  required bool updateRequired,
+}) {
+  if (updateRequired) {
+    return location == RouteNames.forceUpdate ? null : RouteNames.forceUpdate;
+  }
+
+  final isEntryRoute =
+      location == RouteNames.splash || location == RouteNames.forceUpdate;
+  final isAuthRoute = location == AuthRouteNames.login;
+
+  switch (status) {
+    case AuthStatus.unknown:
+      return location == RouteNames.splash ? null : RouteNames.splash;
+    case AuthStatus.unauthenticated:
+      return isAuthRoute ? null : AuthRouteNames.login;
+    case AuthStatus.authenticated:
+      return isEntryRoute || isAuthRoute ? DashboardRouteNames.dashboard : null;
+  }
+}

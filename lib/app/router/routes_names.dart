@@ -11,6 +11,8 @@ import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.da
 abstract final class RouteNames {
   static const splash = '/splash';
 
+  static const forceUpdate = '/force-update';
+
   static const login = AuthRouteNames.login;
 
   static const dashboard = DashboardRouteNames.dashboard;
