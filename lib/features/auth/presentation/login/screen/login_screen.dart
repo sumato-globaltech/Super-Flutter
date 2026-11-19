@@ -14,6 +14,7 @@ import '../bloc/login_bloc.dart';
 import '../bloc/login_event.dart';
 
 class LoginScreen extends StatelessWidget {
+  static const String route = "/LoginScreen";
   const LoginScreen({super.key});
 
   @override

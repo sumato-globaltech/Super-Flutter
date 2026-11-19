@@ -1,4 +1,6 @@
 
+import 'package:package_info_plus/package_info_plus.dart';
+
 class Constants {
   static final Constants _instance = Constants._internal();
   Constants._internal();
@@ -19,16 +21,16 @@ class Constants {
   static const String googleWebClientId = '';
   static const String googleIosClientId = '';
 
-  // static PackageInfo? packageInfo;
+  static PackageInfo? packageInfo;
   static int buildNumber = 0;
   // static String? deviceIpAddress;
 
-  // static setAppInfo() async {
-  //   PackageInfo pi = await PackageInfo.fromPlatform();
-  //   packageInfo = pi;
-  //   buildNumber = int.parse(pi.buildNumber);
-  //   // deviceIpAddress = await Utils.getDeviceIpAddress();
-  // }
+  static setAppInfo() async {
+    PackageInfo pi = await PackageInfo.fromPlatform();
+    packageInfo = pi;
+    buildNumber = int.parse(pi.buildNumber);
+    // deviceIpAddress = await Utils.getDeviceIpAddress();
+  }
 
   static const String appName = 'UDAE';
   // key

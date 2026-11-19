@@ -62,64 +62,61 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late final AppConfig _config = getIt.get<AppConfig>();
-  late final GoRouter _router;
-  late final AuthCubit _authCubit = getIt.get<AuthCubit>();
+  // late final GoRouter _router;
+  // late final AuthCubit _authCubit = getIt.get<AuthCubit>();
 
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
 
-    _router = createRouter(
-      authCubit: _authCubit,
-      config: getIt.get<AppConfig>(),
-    );
+  //   _router = createRouter(
+  //     authCubit: _authCubit,
+  //     config: getIt.get<AppConfig>(),
+  //   );
 
-    _authCubit.initialize();
-  }
+  //   _authCubit.initialize();
+  // }
 
-  @override
-  void dispose() {
-    _router.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _router.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: _authCubit,
-      child: MultiBlocProvider(
-        providers: [
-          // sf:app-blocs:begin
-          BlocProvider(create: (_) => SuperAwesomeBloc()),
-          // sf:app-blocs:end
+    return MultiBlocProvider(
+      providers: [
+        // sf:app-blocs:begin
+        BlocProvider(create: (_) => SuperAwesomeBloc()),
+        // sf:app-blocs:end
+      ],
+      child: MaterialApp.router(
+        title: _config.appName,
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.light(_config.flavor),
+        darkTheme: AppTheme.dark(_config.flavor),
+        routerConfig: _router,
+        // themeMode: ThemeMode.system,
+        // theme: theme,
+        // darkTheme: darkTheme,
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
         ],
-        child: MaterialApp.router(
-          title: _config.appName,
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.light(_config.flavor),
-          darkTheme: AppTheme.dark(_config.flavor),
-          routerConfig: _router,
-          // themeMode: ThemeMode.system,
-          // theme: theme,
-          // darkTheme: darkTheme,
-          localizationsDelegates: [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: AppLocalizations.supportedLocales,
-          builder: (context, child) {
-            final content = child ?? const SizedBox.shrink();
-            if (!_config.environment.showFlavorBanner) return content;
-            return Banner(
-              message: _config.flavor.label,
-              location: BannerLocation.topEnd,
-              // color: AppColors.seedFor(_config.flavor),
-              child: content,
-            );
-          },
-        ),
+        supportedLocales: AppLocalizations.supportedLocales,
+        builder: (context, child) {
+          final content = child ?? const SizedBox.shrink();
+          if (!_config.environment.showFlavorBanner) return content;
+          return Banner(
+            message: _config.flavor.label,
+            location: BannerLocation.topEnd,
+            // color: AppColors.seedFor(_config.flavor),
+            child: content,
+          );
+        },
       ),
     );
   }
