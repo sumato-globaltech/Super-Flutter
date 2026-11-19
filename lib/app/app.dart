@@ -1,8 +1,10 @@
 import 'dart:async';
+
 import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_localizations/flutter_localizations.dart' hide GlobalMaterialLocalizations, GlobalCupertinoLocalizations;
+import 'package:flutter_localizations/flutter_localizations.dart'
+    hide GlobalMaterialLocalizations, GlobalCupertinoLocalizations;
 import 'package:material_ui/material_ui.dart';
 import 'package:super_flutter/app/config/app_config.dart';
 import 'package:super_flutter/app/router/app_router.dart';
@@ -15,6 +17,7 @@ import 'package:super_flutter/core/logging/logging_bloc_observer.dart';
 import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 // sf:app-bloc-imports:begin
 import 'package:super_flutter/features/super_awesome/presentation/super_awesome/bloc/super_awesome_bloc.dart';
+
 // sf:app-bloc-imports:end
 import '../core/constants/assets_names.dart';
 import '../core/di/injection.dart';
@@ -33,9 +36,7 @@ Future<void> bootstrap(AppConfig config) async {
       }
       appLogger.info('Starting ${config.appName} (${config.flavor.name})');
       // The logo is decoded in parallel so the first frame already has it.
-      await Future.wait([
-        getIt.get<AppStartup>().run(),
-      ]);
+      await Future.wait([getIt.get<AppStartup>().run()]);
       runApp(const MyApp());
     },
     (error, stack) {
@@ -47,6 +48,7 @@ Future<void> bootstrap(AppConfig config) async {
     },
   );
 }
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
