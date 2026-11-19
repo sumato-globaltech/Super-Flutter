@@ -4,7 +4,7 @@ enum LoginStatus { initial, submitting, success, failure }
 
 class LoginState extends Equatable {
   const LoginState({
-    this.username = '',
+    this.email = '',
     this.password = '',
     this.obscurePassword = true,
     this.status = LoginStatus.initial,
@@ -13,7 +13,7 @@ class LoginState extends Equatable {
     this.fieldErrors = const {},
   });
 
-  final String username;
+  final String email;
   final String password;
   final bool obscurePassword;
   final LoginStatus status;
@@ -27,12 +27,12 @@ class LoginState extends Equatable {
 
   bool get isSubmitting => status == LoginStatus.submitting;
 
-  bool get isValid => username.trim().isNotEmpty && password.isNotEmpty;
+  bool get isValid => email.trim().isNotEmpty && password.isNotEmpty;
 
   bool get canSubmit => isValid && !isSubmitting;
 
   LoginState copyWith({
-    String? username,
+    String? email,
     String? password,
     bool? obscurePassword,
     LoginStatus? status,
@@ -41,7 +41,7 @@ class LoginState extends Equatable {
     Map<String, String>? fieldErrors,
   }) {
     return LoginState(
-      username: username ?? this.username,
+      email: email ?? this.email,
       password: password ?? this.password,
       obscurePassword: obscurePassword ?? this.obscurePassword,
       status: status ?? this.status,
@@ -54,7 +54,7 @@ class LoginState extends Equatable {
 
   @override
   List<Object?> get props => [
-    username,
+    email,
     password,
     obscurePassword,
     status,

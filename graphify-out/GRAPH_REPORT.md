@@ -1,7 +1,7 @@
 # Graph Report - /Users/deepjyotibaishya/Projects/App/Super-Flutter  (2026-11-19)
 
 ## Corpus Check
-- 158 files · ~107,343 words
+- 158 files · ~107,369 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -139,7 +139,7 @@ Nodes (25): FlutterWindow(), OnCreate(), RegisterPlugins(), wWinMain(), CreateAn
 
 ### Community 8 - "Community 8"
 Cohesion: 0.06
-Nodes (24): auth_token.dart, package:equatable/equatable.dart, user.dart, AuthSession, toString, User, UserRole, LoginEvent (+16 more)
+Nodes (24): auth_token.dart, package:equatable/equatable.dart, user.dart, AuthSession, toString, User, UserRole, LoginEmailChanged (+16 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.06

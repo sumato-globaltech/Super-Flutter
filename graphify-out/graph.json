@@ -5674,13 +5674,13 @@
       "norm_label": "_passwordlistener"
     },
     {
-      "label": "_onUsernameChanged",
+      "label": "_onEmailChanged",
       "file_type": "code",
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/presentation/login/bloc/login_bloc.dart",
       "source_location": null,
-      "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_bloc_dart_onusernamechanged",
+      "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_bloc_dart_onemailchanged",
       "community": 13,
-      "norm_label": "_onusernamechanged"
+      "norm_label": "_onemailchanged"
     },
     {
       "label": "_onPasswordChanged",
@@ -5737,13 +5737,13 @@
       "norm_label": "login_event.dart"
     },
     {
-      "label": "LoginUsernameChanged",
+      "label": "LoginEmailChanged",
       "file_type": "code",
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/presentation/login/bloc/login_event.dart",
       "source_location": null,
-      "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_event_dart_loginusernamechanged",
+      "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_event_dart_loginemailchanged",
       "community": 8,
-      "norm_label": "loginusernamechanged"
+      "norm_label": "loginemailchanged"
     },
     {
       "label": "LoginPasswordChanged",
@@ -15736,9 +15736,9 @@
       "source_location": null,
       "weight": 1.0,
       "_src": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_bloc_dart",
-      "_tgt": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_bloc_dart_onusernamechanged",
+      "_tgt": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_bloc_dart_onemailchanged",
       "source": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_bloc_dart",
-      "target": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_bloc_dart_onusernamechanged"
+      "target": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_bloc_dart_onemailchanged"
     },
     {
       "relation": "defines",
@@ -15808,9 +15808,9 @@
       "source_location": null,
       "weight": 1.0,
       "_src": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_event_dart",
-      "_tgt": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_event_dart_loginusernamechanged",
+      "_tgt": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_event_dart_loginemailchanged",
       "source": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_event_dart",
-      "target": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_event_dart_loginusernamechanged"
+      "target": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_event_dart_loginemailchanged"
     },
     {
       "relation": "defines",

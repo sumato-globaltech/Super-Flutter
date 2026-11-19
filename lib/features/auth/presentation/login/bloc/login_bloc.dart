@@ -12,7 +12,7 @@ import 'login_state.dart';
 @injectable
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc(this._login, this._authCubit) : super(const LoginState()) {
-    on<LoginUsernameChanged>(_onUsernameChanged);
+    on<LoginEmailChanged>(_onEmailChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
     on<LoginPasswordVisibilityToggled>(_onPasswordVisibilityToggled);
     on<LoginSubmitted>(_onSubmitted);
@@ -30,8 +30,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final passwordController = TextEditingController();
 
   void _emailListener() {
-    if (emailController.text != state.username) {
-      add(LoginUsernameChanged(emailController.text));
+    if (emailController.text != state.email) {
+      add(LoginEmailChanged(emailController.text));
     }
   }
 
@@ -41,13 +41,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
-  void _onUsernameChanged(
-    LoginUsernameChanged event,
-    Emitter<LoginState> emit,
-  ) {
+  void _onEmailChanged(LoginEmailChanged event, Emitter<LoginState> emit) {
     emit(
       state.copyWith(
-        username: event.username,
+        email: event.email,
         status: LoginStatus.initial,
         fieldErrors: _without('email'),
       ),
@@ -105,7 +102,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(status: LoginStatus.submitting, fieldErrors: const {}));
     try {
       final session = await _login(
-        email: state.username.trim(),
+        email: state.email.trim(),
         password: state.password,
       );
       _authCubit.authenticated();
