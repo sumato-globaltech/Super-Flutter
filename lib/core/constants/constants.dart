@@ -25,7 +25,7 @@ class Constants {
   static int buildNumber = 0;
   // static String? deviceIpAddress;
 
-  static setAppInfo() async {
+  static Future<void> setAppInfo() async {
     PackageInfo pi = await PackageInfo.fromPlatform();
     packageInfo = pi;
     buildNumber = int.parse(pi.buildNumber);
