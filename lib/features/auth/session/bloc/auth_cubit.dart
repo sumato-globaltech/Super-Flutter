@@ -7,13 +7,11 @@ import 'auth_state.dart';
 @lazySingleton
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this._checkAuthStatus) : super(const AuthState());
-
   final CheckAuthStatus _checkAuthStatus;
 
   Future<void> initialize() async {
     try {
       final isAuthenticated = await _checkAuthStatus();
-
       emit(
         AuthState(
           status: isAuthenticated
