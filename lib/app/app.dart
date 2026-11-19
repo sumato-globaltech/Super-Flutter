@@ -10,6 +10,7 @@ import 'package:super_flutter/app/config/app_config.dart';
 import 'package:super_flutter/app/router/app_router.dart';
 import 'package:super_flutter/app/router/router_refresh.dart';
 import 'package:super_flutter/app/startup/app_startup.dart';
+import 'package:super_flutter/app/startup/startup_images.dart';
 import 'package:super_flutter/core/error/app_error_handler.dart';
 import 'package:super_flutter/core/error/error_reporter.dart';
 import 'package:super_flutter/core/logging/app_logger.dart';
@@ -34,8 +35,10 @@ Future<void> bootstrap(AppConfig config) async {
         Bloc.observer = LoggingBlocObserver(appLogger);
       }
       appLogger.info('Starting ${config.appName} (${config.flavor.name})');
-      // The logo is decoded in parallel so the first frame already has it.
-      await Future.wait([getIt.get<AppStartup>().run()]);
+      await Future.wait([
+        getIt.get<AppStartup>().run(),
+        StartupImages.precache(),
+      ]);
       runApp(const MyApp());
     },
     (error, stack) {
