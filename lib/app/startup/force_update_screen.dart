@@ -1,6 +1,5 @@
 import 'package:material_ui/material_ui.dart';
 
-/// Shown when the installed build is below the Remote Config minimum.
 class ForceUpdateScreen extends StatelessWidget {
   const ForceUpdateScreen({super.key});
 
