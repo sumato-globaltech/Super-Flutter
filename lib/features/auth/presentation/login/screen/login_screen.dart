@@ -11,7 +11,6 @@ import 'package:super_flutter/core/ui/theme/app_theme.dart';
 import 'package:super_flutter/core/ui/widgets/gradient_background.dart';
 import 'package:super_flutter/core/ui/widgets/progress_circle.dart';
 import 'package:super_flutter/core/utils/utils.dart';
-
 import '../bloc/login_bloc.dart';
 import '../bloc/login_event.dart';
 import '../bloc/login_state.dart';
