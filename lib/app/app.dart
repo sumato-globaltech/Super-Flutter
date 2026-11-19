@@ -3,7 +3,6 @@ import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart' hide GlobalMaterialLocalizations, GlobalCupertinoLocalizations;
 import 'package:material_ui/material_ui.dart';
-import 'package:go_router/go_router.dart';
 import 'package:super_flutter/app/config/app_config.dart';
 import 'package:super_flutter/app/router/app_router.dart';
 import 'package:super_flutter/core/error/app_error_handler.dart';
@@ -15,33 +14,20 @@ import 'package:super_flutter/features/super_awesome/presentation/super_awesome/
 // sf:app-bloc-imports:end
 import '../core/di/injection.dart';
 import '../core/localization/app_localizations.dart';
-import '../core/storage/storage_service.dart';
 import '../core/ui/theme/app_theme.dart';
-import '../features/auth/session/bloc/auth_cubit.dart';
 
 Future<void> bootstrap(AppConfig config) async {
   await runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
-
       await configureDependencies(config);
       getIt.get<AppErrorHandler>().initialize();
-
       final appLogger = getIt.get<AppLogger>();
-
-      // Bloc activity logger
       if (!config.isProduction) {
         Bloc.observer = LoggingBlocObserver(appLogger);
       }
-
       appLogger.info('Starting ${config.appName} (${config.flavor.name})');
-
-      await getIt.get<StorageService>().restoreSession();
-
       runApp(MyApp());
-
-      // todo auth token checking and refreshing
-      // unawaited(getIt.get<AuthRepository>().restoreSession());
     },
     (error, stack) {
       getIt.get<ErrorReporter>().report(
@@ -96,7 +82,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light(_config.flavor),
         darkTheme: AppTheme.dark(_config.flavor),
-        routerConfig: _router,
+        routerConfig: goRouter,
         // themeMode: ThemeMode.system,
         // theme: theme,
         // darkTheme: darkTheme,

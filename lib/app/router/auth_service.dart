@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:super_flutter/core/constants/constants.dart';
+import 'package:super_flutter/core/service/remote_service.dart';
 import 'package:super_flutter/core/services/remote_service.dart';
 import 'package:super_flutter/core/storage/secure_storage.dart';
 import 'package:super_flutter/core/utils/enums.dart';
+import 'package:super_flutter/core/utils/utils.dart';
 
 class AuthService {
   AuthService._internal();
@@ -24,7 +26,7 @@ class AuthService {
     // if (apiBaseUrl != null) {
     //   Constants.apiUrl = apiBaseUrl;
     // }
-    final token = SecureStorage().accessToken;
+    final token = await TokenHandler.getToken();
     final int installedBuild =
         int.tryParse(Constants.packageInfo?.buildNumber ?? '0') ?? 0;
     final int minRequiredBuild =

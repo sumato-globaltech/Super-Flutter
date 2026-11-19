@@ -13,8 +13,6 @@ abstract class CoreModule {
   @lazySingleton
   AppLogger get logger => AppLogger();
 
-  /// Exposes the active [Environment] from the manually-registered [AppConfig]
-  /// so generated providers (storage, network) can depend on it.
   @lazySingleton
   Environment appEnvironment(AppConfig config) => config.environment;
 
