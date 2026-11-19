@@ -10,8 +10,8 @@ class Constants {
   static Constants get instance => _instance;
   // For api Start
   // static String apiUrl = "http://ino-irrigation.test";
-  static String apiUrl = "https://irrigationassam.in";
-  static const String apiVersion = "/api/";
+  // static String apiUrl = "https://irrigationassam.in";
+  // static const String apiVersion = "/api/";
   // For api End
 
   // Supabase Start
