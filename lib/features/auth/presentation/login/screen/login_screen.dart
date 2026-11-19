@@ -77,9 +77,7 @@ class _LoginHeader extends StatelessWidget {
               AssetsName.appLogo,
               width: 100,
               height: 100,
-              // Keep the last frame while the image re-resolves instead of
-              // painting an empty box for a frame.
-              gaplessPlayback: true,
+              // gaplessPlayback: true,
             ),
           ),
         ),
