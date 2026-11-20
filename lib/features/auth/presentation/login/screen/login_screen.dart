@@ -41,11 +41,10 @@ class _LoginViewState extends State<LoginView> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-
-@override
+  @override
   void initState() {
     super.initState();
-    if(kDebugMode){
+    if (kDebugMode) {
       _emailController.text = 'super-admin@test.test';
       _passwordController.text = 'sumato@1234';
     }
@@ -72,8 +71,8 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    final loginBloc = context.watch<LoginBloc>();
-    // final state = context.watch<LoginBloc>().state;
+    final loginBloc = context.read<LoginBloc>();
+    final state = context.watch<LoginBloc>().state;
     final textStyle = Theme.of(context).textTheme.bodySmall
         ?.copyWith(color: Colors.grey, height: 1.5);
     final linkStyle = textStyle?.copyWith(
@@ -120,7 +119,7 @@ class _LoginViewState extends State<LoginView> {
                     22.height,
                     TextFormField(
                       controller: _emailController,
-                      forceErrorText: loginBloc.state.emailError,
+                      forceErrorText: state.emailError,
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
                       autofillHints: const [AutofillHints.email],
@@ -136,8 +135,8 @@ class _LoginViewState extends State<LoginView> {
                     12.height,
                     TextFormField(
                       controller: _passwordController,
-                      forceErrorText: loginBloc.state.passwordError,
-                      obscureText: loginBloc.state.obscurePassword,
+                      forceErrorText: state.passwordError,
+                      obscureText: state.obscurePassword,
                       textInputAction: TextInputAction.done,
                       autofillHints: const [AutofillHints.password],
                       decoration: InputDecoration(
@@ -151,7 +150,7 @@ class _LoginViewState extends State<LoginView> {
                           splashRadius: 16,
                           visualDensity: VisualDensity.compact,
                           icon: Icon(
-                            loginBloc.state.obscurePassword
+                            state.obscurePassword
                                 ? PhosphorIconsBold.eyeClosed
                                 : PhosphorIconsBold.eye,
                             size: 18,
@@ -171,8 +170,8 @@ class _LoginViewState extends State<LoginView> {
                       child: Hero(
                         tag: Constants.keyLoginButton,
                         child: ElevatedButton(
-                          onPressed: loginBloc.state.isSubmitting ? null : _submit,
-                          child: loginBloc.state.isSubmitting
+                          onPressed: state.isSubmitting ? null : _submit,
+                          child: state.isSubmitting
                               ? DesignProgress(
                                   color: Theme.of(context).colorScheme.primary,
                                 )

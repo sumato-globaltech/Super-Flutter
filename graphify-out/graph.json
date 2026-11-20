@@ -9,7 +9,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/macos/RunnerTests/RunnerTests.swift",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_macos_runnertests_runnertests_swift",
-      "community": 24,
+      "community": 25,
       "norm_label": "runnertests.swift"
     },
     {
@@ -18,7 +18,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/RunnerTests/RunnerTests.swift",
       "source_location": "L5",
       "id": "runnertests_runnertests",
-      "community": 24,
+      "community": 25,
       "norm_label": "runnertests"
     },
     {
@@ -27,7 +27,7 @@
       "source_file": "",
       "source_location": "",
       "id": "xctestcase",
-      "community": 24,
+      "community": 25,
       "norm_label": "xctestcase"
     },
     {
@@ -36,7 +36,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/RunnerTests/RunnerTests.swift",
       "source_location": "L7",
       "id": "runnertests_runnertests_testexample",
-      "community": 24,
+      "community": 25,
       "norm_label": ".testexample()"
     },
     {
@@ -45,7 +45,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/macos/Runner/MainFlutterWindow.swift",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_macos_runner_mainflutterwindow_swift",
-      "community": 23,
+      "community": 24,
       "norm_label": "mainflutterwindow.swift"
     },
     {
@@ -54,7 +54,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/macos/Runner/MainFlutterWindow.swift",
       "source_location": "L4",
       "id": "mainflutterwindow_mainflutterwindow",
-      "community": 23,
+      "community": 24,
       "norm_label": "mainflutterwindow"
     },
     {
@@ -63,7 +63,7 @@
       "source_file": "",
       "source_location": "",
       "id": "nswindow",
-      "community": 23,
+      "community": 24,
       "norm_label": "nswindow"
     },
     {
@@ -72,7 +72,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/macos/Runner/MainFlutterWindow.swift",
       "source_location": "L5",
       "id": "mainflutterwindow_mainflutterwindow_awakefromnib",
-      "community": 23,
+      "community": 24,
       "norm_label": ".awakefromnib()"
     },
     {
@@ -81,7 +81,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/macos/Runner/AppDelegate.swift",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_macos_runner_appdelegate_swift",
-      "community": 19,
+      "community": 20,
       "norm_label": "appdelegate.swift"
     },
     {
@@ -90,7 +90,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Runner/AppDelegate.swift",
       "source_location": "L4",
       "id": "appdelegate_appdelegate",
-      "community": 19,
+      "community": 20,
       "norm_label": "appdelegate"
     },
     {
@@ -99,7 +99,7 @@
       "source_file": "",
       "source_location": "",
       "id": "flutterappdelegate",
-      "community": 19,
+      "community": 20,
       "norm_label": "flutterappdelegate"
     },
     {
@@ -108,7 +108,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/macos/Runner/AppDelegate.swift",
       "source_location": "L6",
       "id": "appdelegate_appdelegate_applicationshouldterminateafterlastwindowclosed",
-      "community": 19,
+      "community": 20,
       "norm_label": ".applicationshouldterminateafterlastwindowclosed()"
     },
     {
@@ -117,7 +117,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/macos/Runner/AppDelegate.swift",
       "source_location": "L10",
       "id": "appdelegate_appdelegate_applicationsupportssecurerestorablestate",
-      "community": 19,
+      "community": 20,
       "norm_label": ".applicationsupportssecurerestorablestate()"
     },
     {
@@ -126,7 +126,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/macos/Flutter/GeneratedPluginRegistrant.swift",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_macos_flutter_generatedpluginregistrant_swift",
-      "community": 23,
+      "community": 24,
       "norm_label": "generatedpluginregistrant.swift"
     },
     {
@@ -135,7 +135,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/macos/Flutter/GeneratedPluginRegistrant.swift",
       "source_location": "L16",
       "id": "generatedpluginregistrant_registergeneratedplugins",
-      "community": 23,
+      "community": 24,
       "norm_label": "registergeneratedplugins()"
     },
     {
@@ -144,7 +144,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/macos/Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage/Package.swift",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_macos_flutter_ephemeral_packages_fluttergeneratedpluginswiftpackage_package_swift",
-      "community": 41,
+      "community": 42,
       "norm_label": "package.swift"
     },
     {
@@ -153,7 +153,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/macos/Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage/Sources/FlutterGeneratedPluginSwiftPackage/FlutterGeneratedPluginSwiftPackage.swift",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_macos_flutter_ephemeral_packages_fluttergeneratedpluginswiftpackage_sources_fluttergeneratedpluginswiftpackage_fluttergeneratedpluginswiftpackage_swift",
-      "community": 42,
+      "community": 43,
       "norm_label": "fluttergeneratedpluginswiftpackage.swift"
     },
     {
@@ -162,7 +162,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/core/network/session_manager_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_core_network_session_manager_test_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "session_manager_test.dart"
     },
     {
@@ -171,7 +171,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/core/network/session_manager_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_core_network_session_manager_test_dart_mockstorageservice",
-      "community": 0,
+      "community": 3,
       "norm_label": "mockstorageservice"
     },
     {
@@ -180,7 +180,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/core/network/session_manager_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_core_network_session_manager_test_dart_main",
-      "community": 0,
+      "community": 3,
       "norm_label": "main"
     },
     {
@@ -189,7 +189,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/data/auth/auth_repository_test.dart",
       "source_location": null,
       "id": "package_flutter_test_flutter_test_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "package:flutter_test/flutter_test.dart"
     },
     {
@@ -198,7 +198,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/data/auth/auth_repository_test.dart",
       "source_location": null,
       "id": "package_mocktail_mocktail_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "package:mocktail/mocktail.dart"
     },
     {
@@ -207,7 +207,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/repositories/auth_repository_impl.dart",
       "source_location": null,
       "id": "package_super_flutter_core_network_session_manager_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "package:super_flutter/core/network/session_manager.dart"
     },
     {
@@ -216,7 +216,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/session_manager.dart",
       "source_location": null,
       "id": "package_super_flutter_core_storage_storage_service_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "package:super_flutter/core/storage/storage_service.dart"
     },
     {
@@ -225,7 +225,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/core/utils/image_precache_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_core_utils_image_precache_test_dart",
-      "community": 13,
+      "community": 14,
       "norm_label": "image_precache_test.dart"
     },
     {
@@ -234,7 +234,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/core/utils/image_precache_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_core_utils_image_precache_test_dart_main",
-      "community": 13,
+      "community": 14,
       "norm_label": "main"
     },
     {
@@ -243,7 +243,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/core/utils/image_precache_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_core_utils_image_precache_test_dart_expectlater",
-      "community": 13,
+      "community": 14,
       "norm_label": "expectlater"
     },
     {
@@ -252,7 +252,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/core/utils/image_precache_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_core_utils_image_precache_test_dart_assetimage",
-      "community": 13,
+      "community": 14,
       "norm_label": "assetimage"
     },
     {
@@ -261,7 +261,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/core/utils/image_precache_test.dart",
       "source_location": null,
       "id": "dart_typed_data",
-      "community": 13,
+      "community": 14,
       "norm_label": "dart:typed_data"
     },
     {
@@ -270,7 +270,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/router/navigator_keys.dart",
       "source_location": null,
       "id": "package_flutter_widgets_dart",
-      "community": 13,
+      "community": 14,
       "norm_label": "package:flutter/widgets.dart"
     },
     {
@@ -279,7 +279,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/core/utils/image_precache_test.dart",
       "source_location": null,
       "id": "package_super_flutter_core_utils_image_precache_dart",
-      "community": 13,
+      "community": 14,
       "norm_label": "package:super_flutter/core/utils/image_precache.dart"
     },
     {
@@ -288,7 +288,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/app/startup/remote_app_settings_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_app_startup_remote_app_settings_test_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "remote_app_settings_test.dart"
     },
     {
@@ -297,7 +297,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/app/startup/remote_app_settings_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_app_startup_remote_app_settings_test_dart_main",
-      "community": 0,
+      "community": 3,
       "norm_label": "main"
     },
     {
@@ -306,7 +306,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/app/startup/remote_app_settings_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_app_startup_remote_app_settings_test_dart_parsefrom",
-      "community": 0,
+      "community": 3,
       "norm_label": "parsefrom"
     },
     {
@@ -315,7 +315,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/app/startup/remote_app_settings_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_app_startup_remote_app_settings_test_dart_parse",
-      "community": 0,
+      "community": 3,
       "norm_label": "parse"
     },
     {
@@ -324,7 +324,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/app/startup/remote_app_settings_test.dart",
       "source_location": null,
       "id": "package_super_flutter_app_startup_remote_app_settings_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "package:super_flutter/app/startup/remote_app_settings.dart"
     },
     {
@@ -396,7 +396,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/auth/login_bloc_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_features_auth_login_bloc_test_dart",
-      "community": 6,
+      "community": 3,
       "norm_label": "login_bloc_test.dart"
     },
     {
@@ -405,7 +405,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/auth/login_bloc_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_features_auth_login_bloc_test_dart_mocklogin",
-      "community": 6,
+      "community": 3,
       "norm_label": "mocklogin"
     },
     {
@@ -414,7 +414,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/auth/login_bloc_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_features_auth_login_bloc_test_dart_main",
-      "community": 6,
+      "community": 3,
       "norm_label": "main"
     },
     {
@@ -423,7 +423,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/auth/login_bloc_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_features_auth_login_bloc_test_dart_loginstate",
-      "community": 6,
+      "community": 3,
       "norm_label": "loginstate"
     },
     {
@@ -432,7 +432,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/auth/login_bloc_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_features_auth_login_bloc_test_dart_loginbloc",
-      "community": 6,
+      "community": 3,
       "norm_label": "loginbloc"
     },
     {
@@ -441,7 +441,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/auth/login_bloc_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_features_auth_login_bloc_test_dart_validationexception",
-      "community": 6,
+      "community": 3,
       "norm_label": "validationexception"
     },
     {
@@ -450,7 +450,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/dashboard/dashboard_bloc_test.dart",
       "source_location": null,
       "id": "package_bloc_test_bloc_test_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:bloc_test/bloc_test.dart"
     },
     {
@@ -459,7 +459,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_error_view.dart",
       "source_location": null,
       "id": "package_super_flutter_core_error_exceptions_unauthorized_exception_dart",
-      "community": 6,
+      "community": 13,
       "norm_label": "package:super_flutter/core/error/exceptions/unauthorized_exception.dart"
     },
     {
@@ -468,7 +468,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/sources/remote/auth_remote_data_source.dart",
       "source_location": null,
       "id": "package_super_flutter_core_error_exceptions_validation_exception_dart",
-      "community": 6,
+      "community": 13,
       "norm_label": "package:super_flutter/core/error/exceptions/validation_exception.dart"
     },
     {
@@ -477,7 +477,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/mappers/auth_mappers.dart",
       "source_location": null,
       "id": "package_super_flutter_domain_auth_entities_auth_session_dart",
-      "community": 6,
+      "community": 3,
       "norm_label": "package:super_flutter/domain/auth/entities/auth_session.dart"
     },
     {
@@ -486,7 +486,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/mappers/auth_mappers.dart",
       "source_location": null,
       "id": "package_super_flutter_domain_auth_entities_auth_token_dart",
-      "community": 6,
+      "community": 3,
       "norm_label": "package:super_flutter/domain/auth/entities/auth_token.dart"
     },
     {
@@ -495,7 +495,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/mappers/auth_mappers.dart",
       "source_location": null,
       "id": "package_super_flutter_domain_auth_entities_user_dart",
-      "community": 6,
+      "community": 3,
       "norm_label": "package:super_flutter/domain/auth/entities/user.dart"
     },
     {
@@ -504,7 +504,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/presentation/login/bloc/login_bloc.dart",
       "source_location": null,
       "id": "package_super_flutter_domain_auth_use_cases_login_dart",
-      "community": 6,
+      "community": 13,
       "norm_label": "package:super_flutter/domain/auth/use_cases/login.dart"
     },
     {
@@ -513,7 +513,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/injection.config.dart",
       "source_location": null,
       "id": "package_super_flutter_features_auth_presentation_login_bloc_login_bloc_dart",
-      "community": 6,
+      "community": 3,
       "norm_label": "package:super_flutter/features/auth/presentation/login/bloc/login_bloc.dart"
     },
     {
@@ -522,7 +522,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/auth/login_bloc_test.dart",
       "source_location": null,
       "id": "package_super_flutter_features_auth_presentation_login_bloc_login_event_dart",
-      "community": 6,
+      "community": 3,
       "norm_label": "package:super_flutter/features/auth/presentation/login/bloc/login_event.dart"
     },
     {
@@ -531,7 +531,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/auth/login_bloc_test.dart",
       "source_location": null,
       "id": "package_super_flutter_features_auth_presentation_login_bloc_login_state_dart",
-      "community": 6,
+      "community": 3,
       "norm_label": "package:super_flutter/features/auth/presentation/login/bloc/login_state.dart"
     },
     {
@@ -540,7 +540,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/auth/auth_cubit_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_features_auth_auth_cubit_test_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "auth_cubit_test.dart"
     },
     {
@@ -549,7 +549,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/auth/auth_cubit_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_features_auth_auth_cubit_test_dart_mockcheckauthstatus",
-      "community": 0,
+      "community": 1,
       "norm_label": "mockcheckauthstatus"
     },
     {
@@ -558,7 +558,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/auth/auth_cubit_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_features_auth_auth_cubit_test_dart_mockwatchauthstatus",
-      "community": 0,
+      "community": 1,
       "norm_label": "mockwatchauthstatus"
     },
     {
@@ -567,7 +567,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/auth/auth_cubit_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_features_auth_auth_cubit_test_dart_main",
-      "community": 0,
+      "community": 1,
       "norm_label": "main"
     },
     {
@@ -576,7 +576,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/auth/auth_cubit_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_features_auth_auth_cubit_test_dart_build",
-      "community": 0,
+      "community": 1,
       "norm_label": "build"
     },
     {
@@ -585,7 +585,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/auth/auth_cubit_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_features_auth_auth_cubit_test_dart_authstate",
-      "community": 0,
+      "community": 1,
       "norm_label": "authstate"
     },
     {
@@ -594,7 +594,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/repositories/auth_repository_impl.dart",
       "source_location": null,
       "id": "dart_async",
-      "community": 0,
+      "community": 3,
       "norm_label": "dart:async"
     },
     {
@@ -603,7 +603,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/injection.config.dart",
       "source_location": null,
       "id": "package_super_flutter_domain_auth_use_cases_check_auth_status_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/domain/auth/use_cases/check_auth_status.dart"
     },
     {
@@ -612,7 +612,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/injection.config.dart",
       "source_location": null,
       "id": "package_super_flutter_domain_auth_use_cases_watch_auth_status_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/domain/auth/use_cases/watch_auth_status.dart"
     },
     {
@@ -621,7 +621,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/router/app_router.dart",
       "source_location": null,
       "id": "package_super_flutter_features_auth_session_bloc_auth_cubit_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/features/auth/session/bloc/auth_cubit.dart"
     },
     {
@@ -630,7 +630,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/dashboard/dashboard_bloc_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_features_dashboard_dashboard_bloc_test_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "dashboard_bloc_test.dart"
     },
     {
@@ -639,7 +639,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/dashboard/dashboard_bloc_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_features_dashboard_dashboard_bloc_test_dart_mocklogout",
-      "community": 0,
+      "community": 1,
       "norm_label": "mocklogout"
     },
     {
@@ -648,7 +648,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/dashboard/dashboard_bloc_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_features_dashboard_dashboard_bloc_test_dart_main",
-      "community": 0,
+      "community": 1,
       "norm_label": "main"
     },
     {
@@ -657,7 +657,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/dashboard/dashboard_bloc_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_features_dashboard_dashboard_bloc_test_dart_dashboardstate",
-      "community": 0,
+      "community": 1,
       "norm_label": "dashboardstate"
     },
     {
@@ -666,7 +666,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart",
       "source_location": null,
       "id": "package_super_flutter_domain_auth_use_cases_logout_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/domain/auth/use_cases/logout.dart"
     },
     {
@@ -675,7 +675,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/injection.config.dart",
       "source_location": null,
       "id": "package_super_flutter_features_dashboard_presentation_dashboard_bloc_dashboard_bloc_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart"
     },
     {
@@ -684,7 +684,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/dashboard/dashboard_bloc_test.dart",
       "source_location": null,
       "id": "package_super_flutter_features_dashboard_presentation_dashboard_bloc_dashboard_event_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_event.dart"
     },
     {
@@ -693,7 +693,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/features/dashboard/dashboard_bloc_test.dart",
       "source_location": null,
       "id": "package_super_flutter_features_dashboard_presentation_dashboard_bloc_dashboard_state_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_state.dart"
     },
     {
@@ -702,7 +702,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/data/auth/auth_repository_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_data_auth_auth_repository_test_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "auth_repository_test.dart"
     },
     {
@@ -711,7 +711,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/data/auth/auth_repository_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_data_auth_auth_repository_test_dart_mockremotedatasource",
-      "community": 0,
+      "community": 3,
       "norm_label": "mockremotedatasource"
     },
     {
@@ -720,7 +720,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/data/auth/auth_repository_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_data_auth_auth_repository_test_dart_mocklocaldatasource",
-      "community": 0,
+      "community": 3,
       "norm_label": "mocklocaldatasource"
     },
     {
@@ -729,7 +729,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/data/auth/auth_repository_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_data_auth_auth_repository_test_dart_mocksessionmanager",
-      "community": 0,
+      "community": 3,
       "norm_label": "mocksessionmanager"
     },
     {
@@ -738,7 +738,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/data/auth/auth_repository_test.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_test_data_auth_auth_repository_test_dart_main",
-      "community": 0,
+      "community": 3,
       "norm_label": "main"
     },
     {
@@ -747,7 +747,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/test/data/auth/auth_repository_test.dart",
       "source_location": null,
       "id": "package_super_flutter_data_auth_model_login_model_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "package:super_flutter/data/auth/model/login_model.dart"
     },
     {
@@ -756,7 +756,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/model/login_model.dart",
       "source_location": null,
       "id": "package_super_flutter_data_auth_model_user_model_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "package:super_flutter/data/auth/model/user_model.dart"
     },
     {
@@ -765,7 +765,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/injection.config.dart",
       "source_location": null,
       "id": "package_super_flutter_data_auth_repositories_auth_repository_impl_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "package:super_flutter/data/auth/repositories/auth_repository_impl.dart"
     },
     {
@@ -774,7 +774,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/repositories/auth_repository_impl.dart",
       "source_location": null,
       "id": "package_super_flutter_data_auth_sources_local_auth_local_data_source_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "package:super_flutter/data/auth/sources/local/auth_local_data_source.dart"
     },
     {
@@ -783,7 +783,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/repositories/auth_repository_impl.dart",
       "source_location": null,
       "id": "package_super_flutter_data_auth_sources_remote_auth_remote_data_source_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "package:super_flutter/data/auth/sources/remote/auth_remote_data_source.dart"
     },
     {
@@ -792,7 +792,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/repositories/auth_repository_impl.dart",
       "source_location": null,
       "id": "package_super_flutter_domain_auth_entities_auth_status_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "package:super_flutter/domain/auth/entities/auth_status.dart"
     },
     {
@@ -801,7 +801,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/RunnerTests/RunnerTests.swift",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_ios_runnertests_runnertests_swift",
-      "community": 24,
+      "community": 25,
       "norm_label": "runnertests.swift"
     },
     {
@@ -810,7 +810,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Runner/Runner-Bridging-Header.h",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_ios_runner_runner_bridging_header_h",
-      "community": 43,
+      "community": 44,
       "norm_label": "runner-bridging-header.h"
     },
     {
@@ -819,7 +819,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Runner/GeneratedPluginRegistrant.h",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_ios_runner_generatedpluginregistrant_h",
-      "community": 44,
+      "community": 45,
       "norm_label": "generatedpluginregistrant.h"
     },
     {
@@ -828,7 +828,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Runner/AppDelegate.swift",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_ios_runner_appdelegate_swift",
-      "community": 19,
+      "community": 20,
       "norm_label": "appdelegate.swift"
     },
     {
@@ -837,7 +837,7 @@
       "source_file": "",
       "source_location": "",
       "id": "flutterimplicitenginedelegate",
-      "community": 19,
+      "community": 20,
       "norm_label": "flutterimplicitenginedelegate"
     },
     {
@@ -846,7 +846,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Runner/AppDelegate.swift",
       "source_location": "L6",
       "id": "appdelegate_appdelegate_application",
-      "community": 19,
+      "community": 20,
       "norm_label": ".application()"
     },
     {
@@ -855,7 +855,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Runner/AppDelegate.swift",
       "source_location": "L13",
       "id": "appdelegate_appdelegate_didinitializeimplicitflutterengine",
-      "community": 19,
+      "community": 20,
       "norm_label": ".didinitializeimplicitflutterengine()"
     },
     {
@@ -864,7 +864,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Runner/GeneratedPluginRegistrant.m",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_ios_runner_generatedpluginregistrant_m",
-      "community": 25,
+      "community": 26,
       "norm_label": "generatedpluginregistrant.m"
     },
     {
@@ -873,7 +873,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java",
       "source_location": "L14",
       "id": "generatedpluginregistrant_generatedpluginregistrant",
-      "community": 25,
+      "community": 26,
       "norm_label": "generatedpluginregistrant"
     },
     {
@@ -882,7 +882,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Runner/GeneratedPluginRegistrant.m",
       "source_location": "L53",
       "id": "generatedpluginregistrant_generatedpluginregistrant_registerwithregistry",
-      "community": 25,
+      "community": 26,
       "norm_label": "-registerwithregistry"
     },
     {
@@ -891,7 +891,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Runner/SceneDelegate.swift",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_ios_runner_scenedelegate_swift",
-      "community": 28,
+      "community": 29,
       "norm_label": "scenedelegate.swift"
     },
     {
@@ -900,7 +900,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Runner/SceneDelegate.swift",
       "source_location": "L4",
       "id": "scenedelegate_scenedelegate",
-      "community": 28,
+      "community": 29,
       "norm_label": "scenedelegate"
     },
     {
@@ -909,7 +909,7 @@
       "source_file": "",
       "source_location": "",
       "id": "flutterscenedelegate",
-      "community": 28,
+      "community": 29,
       "norm_label": "flutterscenedelegate"
     },
     {
@@ -918,7 +918,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Flutter/ephemeral/flutter_lldb_helper.py",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_ios_flutter_ephemeral_flutter_lldb_helper_py",
-      "community": 27,
+      "community": 28,
       "norm_label": "flutter_lldb_helper.py"
     },
     {
@@ -927,7 +927,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Flutter/ephemeral/flutter_lldb_helper.py",
       "source_location": "L7",
       "id": "flutter_lldb_helper_handle_new_rx_page",
-      "community": 27,
+      "community": 28,
       "norm_label": "handle_new_rx_page()"
     },
     {
@@ -936,7 +936,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Flutter/ephemeral/flutter_lldb_helper.py",
       "source_location": "L24",
       "id": "flutter_lldb_helper_lldb_init_module",
-      "community": 27,
+      "community": 28,
       "norm_label": "__lldb_init_module()"
     },
     {
@@ -944,7 +944,7 @@
       "file_type": "rationale",
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Flutter/ephemeral/flutter_lldb_helper.py",
       "source_location": "L8",
-      "community": 27,
+      "community": 28,
       "norm_label": "intercept notify_debugger_about_rx_pages and touch the pages.",
       "id": "flutter_lldb_helper_rationale_8"
     },
@@ -954,7 +954,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage/Package.swift",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_ios_flutter_ephemeral_packages_fluttergeneratedpluginswiftpackage_package_swift",
-      "community": 45,
+      "community": 46,
       "norm_label": "package.swift"
     },
     {
@@ -963,7 +963,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage/Sources/FlutterGeneratedPluginSwiftPackage/FlutterGeneratedPluginSwiftPackage.swift",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_ios_flutter_ephemeral_packages_fluttergeneratedpluginswiftpackage_sources_fluttergeneratedpluginswiftpackage_fluttergeneratedpluginswiftpackage_swift",
-      "community": 46,
+      "community": 47,
       "norm_label": "fluttergeneratedpluginswiftpackage.swift"
     },
     {
@@ -972,7 +972,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Pods/Target Support Files/Pods-Runner/Pods-Runner-umbrella.h",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_ios_pods_target_support_files_pods_runner_pods_runner_umbrella_h",
-      "community": 47,
+      "community": 48,
       "norm_label": "pods-runner-umbrella.h"
     },
     {
@@ -981,7 +981,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Pods/Target Support Files/Pods-Runner/Pods-Runner-dummy.m",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_ios_pods_target_support_files_pods_runner_pods_runner_dummy_m",
-      "community": 33,
+      "community": 34,
       "norm_label": "pods-runner-dummy.m"
     },
     {
@@ -990,7 +990,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Pods/Target Support Files/Pods-Runner/Pods-Runner-dummy.m",
       "source_location": "L2",
       "id": "pods_runner_dummy_podsdummy_pods_runner",
-      "community": 33,
+      "community": 34,
       "norm_label": "podsdummy_pods_runner"
     },
     {
@@ -999,7 +999,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Pods/Target Support Files/Pods-RunnerTests/Pods-RunnerTests-dummy.m",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_ios_pods_target_support_files_pods_runnertests_pods_runnertests_dummy_m",
-      "community": 34,
+      "community": 35,
       "norm_label": "pods-runnertests-dummy.m"
     },
     {
@@ -1008,7 +1008,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Pods/Target Support Files/Pods-RunnerTests/Pods-RunnerTests-dummy.m",
       "source_location": "L2",
       "id": "pods_runnertests_dummy_podsdummy_pods_runnertests",
-      "community": 34,
+      "community": 35,
       "norm_label": "podsdummy_pods_runnertests"
     },
     {
@@ -1017,7 +1017,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/ios/Pods/Target Support Files/Pods-RunnerTests/Pods-RunnerTests-umbrella.h",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_ios_pods_target_support_files_pods_runnertests_pods_runnertests_umbrella_h",
-      "community": 48,
+      "community": 49,
       "norm_label": "pods-runnertests-umbrella.h"
     },
     {
@@ -1026,7 +1026,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/main.cc",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_linux_runner_main_cc",
-      "community": 14,
+      "community": 15,
       "norm_label": "main.cc"
     },
     {
@@ -1035,7 +1035,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/main.cc",
       "source_location": "L3",
       "id": "main_main",
-      "community": 14,
+      "community": 15,
       "norm_label": "main()"
     },
     {
@@ -1044,7 +1044,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/my_application.h",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_linux_runner_my_application_h",
-      "community": 49,
+      "community": 50,
       "norm_label": "my_application.h"
     },
     {
@@ -1053,7 +1053,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/my_application.cc",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_linux_runner_my_application_cc",
-      "community": 14,
+      "community": 15,
       "norm_label": "my_application.cc"
     },
     {
@@ -1062,7 +1062,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/my_application.cc",
       "source_location": "L18",
       "id": "my_application_first_frame_cb",
-      "community": 14,
+      "community": 15,
       "norm_label": "first_frame_cb()"
     },
     {
@@ -1071,7 +1071,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/my_application.cc",
       "source_location": "L23",
       "id": "my_application_my_application_activate",
-      "community": 14,
+      "community": 15,
       "norm_label": "my_application_activate()"
     },
     {
@@ -1080,7 +1080,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/my_application.cc",
       "source_location": "L82",
       "id": "my_application_my_application_local_command_line",
-      "community": 14,
+      "community": 15,
       "norm_label": "my_application_local_command_line()"
     },
     {
@@ -1089,7 +1089,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/my_application.cc",
       "source_location": "L103",
       "id": "my_application_my_application_startup",
-      "community": 14,
+      "community": 15,
       "norm_label": "my_application_startup()"
     },
     {
@@ -1098,7 +1098,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/my_application.cc",
       "source_location": "L112",
       "id": "my_application_my_application_shutdown",
-      "community": 14,
+      "community": 15,
       "norm_label": "my_application_shutdown()"
     },
     {
@@ -1107,7 +1107,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/my_application.cc",
       "source_location": "L121",
       "id": "my_application_my_application_dispose",
-      "community": 14,
+      "community": 15,
       "norm_label": "my_application_dispose()"
     },
     {
@@ -1116,7 +1116,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/my_application.cc",
       "source_location": "L127",
       "id": "my_application_my_application_class_init",
-      "community": 14,
+      "community": 15,
       "norm_label": "my_application_class_init()"
     },
     {
@@ -1125,7 +1125,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/my_application.cc",
       "source_location": "L136",
       "id": "my_application_my_application_init",
-      "community": 14,
+      "community": 15,
       "norm_label": "my_application_init()"
     },
     {
@@ -1134,7 +1134,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/my_application.cc",
       "source_location": "L138",
       "id": "my_application_my_application_new",
-      "community": 14,
+      "community": 15,
       "norm_label": "my_application_new()"
     },
     {
@@ -1143,7 +1143,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/flutter/generated_plugin_registrant.cc",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_linux_flutter_generated_plugin_registrant_cc",
-      "community": 14,
+      "community": 15,
       "norm_label": "generated_plugin_registrant.cc"
     },
     {
@@ -1152,7 +1152,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/flutter/generated_plugin_registrant.cc",
       "source_location": "L12",
       "id": "generated_plugin_registrant_fl_register_plugins",
-      "community": 14,
+      "community": 15,
       "norm_label": "fl_register_plugins()"
     },
     {
@@ -1161,7 +1161,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/flutter/generated_plugin_registrant.h",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_linux_flutter_generated_plugin_registrant_h",
-      "community": 50,
+      "community": 51,
       "norm_label": "generated_plugin_registrant.h"
     },
     {
@@ -1170,7 +1170,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/android/build.gradle.kts",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_android_build_gradle_kts",
-      "community": 51,
+      "community": 52,
       "norm_label": "build.gradle.kts"
     },
     {
@@ -1179,7 +1179,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/android/settings.gradle.kts",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_android_settings_gradle_kts",
-      "community": 52,
+      "community": 53,
       "norm_label": "settings.gradle.kts"
     },
     {
@@ -1188,7 +1188,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/android/app/build.gradle.kts",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_android_app_build_gradle_kts",
-      "community": 53,
+      "community": 54,
       "norm_label": "build.gradle.kts"
     },
     {
@@ -1197,7 +1197,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_android_app_src_main_java_io_flutter_plugins_generatedpluginregistrant_java",
-      "community": 25,
+      "community": 26,
       "norm_label": "generatedpluginregistrant.java"
     },
     {
@@ -1206,7 +1206,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java",
       "source_location": "L17",
       "id": "generatedpluginregistrant_generatedpluginregistrant_registerwith",
-      "community": 25,
+      "community": 26,
       "norm_label": ".registerwith()"
     },
     {
@@ -1215,7 +1215,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/android/app/src/main/kotlin/tech/sumato/superflutter/MainActivity.kt",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_android_app_src_main_kotlin_tech_sumato_superflutter_mainactivity_kt",
-      "community": 35,
+      "community": 36,
       "norm_label": "mainactivity.kt"
     },
     {
@@ -1224,7 +1224,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/android/app/src/main/kotlin/tech/sumato/superflutter/MainActivity.kt",
       "source_location": "L5",
       "id": "mainactivity_mainactivity",
-      "community": 35,
+      "community": 36,
       "norm_label": "mainactivity"
     },
     {
@@ -1233,7 +1233,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/main_development.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_main_development_dart",
-      "community": 20,
+      "community": 21,
       "norm_label": "main_development.dart"
     },
     {
@@ -1242,7 +1242,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/main_development.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_main_development_dart_main",
-      "community": 20,
+      "community": 21,
       "norm_label": "main"
     },
     {
@@ -1251,7 +1251,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/main_staging.dart",
       "source_location": null,
       "id": "app_app_dart",
-      "community": 20,
+      "community": 21,
       "norm_label": "app/app.dart"
     },
     {
@@ -1260,7 +1260,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/main_staging.dart",
       "source_location": null,
       "id": "app_config_app_config_dart",
-      "community": 20,
+      "community": 21,
       "norm_label": "app/config/app_config.dart"
     },
     {
@@ -1269,7 +1269,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/main_production.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_main_production_dart",
-      "community": 20,
+      "community": 21,
       "norm_label": "main_production.dart"
     },
     {
@@ -1278,7 +1278,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/main_production.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_main_production_dart_main",
-      "community": 20,
+      "community": 21,
       "norm_label": "main"
     },
     {
@@ -1287,7 +1287,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/main.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_main_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "main.dart"
     },
     {
@@ -1296,7 +1296,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/main.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_main_dart_main",
-      "community": 1,
+      "community": 0,
       "norm_label": "main"
     },
     {
@@ -1305,7 +1305,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/main.dart",
       "source_location": null,
       "id": "package_firebase_messaging_firebase_messaging_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "package:firebase_messaging/firebase_messaging.dart"
     },
     {
@@ -1314,7 +1314,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/super_awesome/presentation/super_awesome/screen/super_awesome_screen.dart",
       "source_location": null,
       "id": "package_material_ui_material_ui_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "package:material_ui/material_ui.dart"
     },
     {
@@ -1323,7 +1323,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/main.dart",
       "source_location": null,
       "id": "main_production_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "main_production.dart"
     },
     {
@@ -1332,7 +1332,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/main_staging.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_main_staging_dart",
-      "community": 20,
+      "community": 21,
       "norm_label": "main_staging.dart"
     },
     {
@@ -1341,7 +1341,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/main_staging.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_main_staging_dart_main",
-      "community": 20,
+      "community": 21,
       "norm_label": "main"
     },
     {
@@ -1350,7 +1350,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/layouts/responsive_layout.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_layouts_responsive_layout_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "responsive_layout.dart"
     },
     {
@@ -1359,7 +1359,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/layouts/responsive_layout.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_layouts_responsive_layout_dart_responsivelayout",
-      "community": 1,
+      "community": 0,
       "norm_label": "responsivelayout"
     },
     {
@@ -1368,7 +1368,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/layouts/responsive_layout.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_layouts_responsive_layout_dart_constrainedcontent",
-      "community": 1,
+      "community": 0,
       "norm_label": "constrainedcontent"
     },
     {
@@ -1377,7 +1377,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/layouts/responsive_layout.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_layouts_responsive_layout_dart_sizeof",
-      "community": 1,
+      "community": 0,
       "norm_label": "sizeof"
     },
     {
@@ -1386,7 +1386,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/layouts/responsive_layout.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_layouts_responsive_layout_dart_build",
-      "community": 1,
+      "community": 0,
       "norm_label": "build"
     },
     {
@@ -1395,7 +1395,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/layouts/responsive_layout.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_layouts_responsive_layout_dart_layoutbuilder",
-      "community": 1,
+      "community": 0,
       "norm_label": "layoutbuilder"
     },
     {
@@ -1404,7 +1404,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/layouts/responsive_layout.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_layouts_responsive_layout_dart_center",
-      "community": 1,
+      "community": 0,
       "norm_label": "center"
     },
     {
@@ -1413,7 +1413,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/layouts/responsive_layout.dart",
       "source_location": null,
       "id": "core_constants_app_constants_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "../../../core/constants/app_constants.dart"
     },
     {
@@ -1422,7 +1422,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_loader.dart",
       "source_location": null,
       "id": "theme_app_dimensions_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "../theme/app_dimensions.dart"
     },
     {
@@ -1431,7 +1431,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_dimensions.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_dimensions_dart",
-      "community": 13,
+      "community": 14,
       "norm_label": "app_dimensions.dart"
     },
     {
@@ -1440,7 +1440,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_text_styles.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_text_styles_dart",
-      "community": 3,
+      "community": 4,
       "norm_label": "app_text_styles.dart"
     },
     {
@@ -1449,7 +1449,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_text_styles.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_text_styles_dart_font",
-      "community": 3,
+      "community": 4,
       "norm_label": "font"
     },
     {
@@ -1458,7 +1458,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_text_styles.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_text_styles_dart_textstyle",
-      "community": 3,
+      "community": 4,
       "norm_label": "textstyle"
     },
     {
@@ -1467,7 +1467,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_text_styles.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_text_styles_dart_textthemefor",
-      "community": 3,
+      "community": 4,
       "norm_label": "textthemefor"
     },
     {
@@ -1476,7 +1476,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_text_styles.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_text_styles_dart_texttheme",
-      "community": 3,
+      "community": 4,
       "norm_label": "texttheme"
     },
     {
@@ -1485,7 +1485,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_text_styles.dart",
       "source_location": null,
       "id": "app_colors_dart",
-      "community": 3,
+      "community": 4,
       "norm_label": "app_colors.dart"
     },
     {
@@ -1494,7 +1494,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_colors.dart",
       "source_location": null,
       "id": "design_colors_dart",
-      "community": 3,
+      "community": 4,
       "norm_label": "design_colors.dart"
     },
     {
@@ -1503,7 +1503,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart",
-      "community": 3,
+      "community": 4,
       "norm_label": "app_theme.dart"
     },
     {
@@ -1512,7 +1512,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_appcolors",
-      "community": 3,
+      "community": 4,
       "norm_label": "appcolors"
     },
     {
@@ -1521,7 +1521,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_appdarkcolors",
-      "community": 3,
+      "community": 4,
       "norm_label": "appdarkcolors"
     },
     {
@@ -1530,7 +1530,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_appgradients",
-      "community": 3,
+      "community": 4,
       "norm_label": "appgradients"
     },
     {
@@ -1539,7 +1539,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_appsizes",
-      "community": 3,
+      "community": 4,
       "norm_label": "appsizes"
     },
     {
@@ -1548,7 +1548,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_appfontsizes",
-      "community": 3,
+      "community": 4,
       "norm_label": "appfontsizes"
     },
     {
@@ -1557,7 +1557,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_appshadows",
-      "community": 3,
+      "community": 4,
       "norm_label": "appshadows"
     },
     {
@@ -1566,7 +1566,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_appcolorsext",
-      "community": 3,
+      "community": 4,
       "norm_label": "appcolorsext"
     },
     {
@@ -1575,7 +1575,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_font",
-      "community": 3,
+      "community": 4,
       "norm_label": "_font"
     },
     {
@@ -1584,7 +1584,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_textstyle",
-      "community": 3,
+      "community": 4,
       "norm_label": "textstyle"
     },
     {
@@ -1593,7 +1593,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_copywith",
-      "community": 3,
+      "community": 4,
       "norm_label": "copywith"
     },
     {
@@ -1602,7 +1602,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_lerp",
-      "community": 3,
+      "community": 4,
       "norm_label": "lerp"
     },
     {
@@ -1611,7 +1611,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_buildtexttheme",
-      "community": 3,
+      "community": 4,
       "norm_label": "_buildtexttheme"
     },
     {
@@ -1620,7 +1620,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_texttheme",
-      "community": 3,
+      "community": 4,
       "norm_label": "texttheme"
     },
     {
@@ -1629,7 +1629,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_elevatedbuttontheme",
-      "community": 3,
+      "community": 4,
       "norm_label": "_elevatedbuttontheme"
     },
     {
@@ -1638,7 +1638,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_elevatedbuttonthemedata",
-      "community": 3,
+      "community": 4,
       "norm_label": "elevatedbuttonthemedata"
     },
     {
@@ -1647,7 +1647,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_filledbuttontheme",
-      "community": 3,
+      "community": 4,
       "norm_label": "_filledbuttontheme"
     },
     {
@@ -1656,7 +1656,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_filledbuttonthemedata",
-      "community": 3,
+      "community": 4,
       "norm_label": "filledbuttonthemedata"
     },
     {
@@ -1665,7 +1665,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_outlinedbuttontheme",
-      "community": 3,
+      "community": 4,
       "norm_label": "_outlinedbuttontheme"
     },
     {
@@ -1674,7 +1674,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_outlinedbuttonthemedata",
-      "community": 3,
+      "community": 4,
       "norm_label": "outlinedbuttonthemedata"
     },
     {
@@ -1683,7 +1683,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_borderside",
-      "community": 3,
+      "community": 4,
       "norm_label": "borderside"
     },
     {
@@ -1692,7 +1692,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_textbuttontheme",
-      "community": 3,
+      "community": 4,
       "norm_label": "_textbuttontheme"
     },
     {
@@ -1701,7 +1701,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_textbuttonthemedata",
-      "community": 3,
+      "community": 4,
       "norm_label": "textbuttonthemedata"
     },
     {
@@ -1710,7 +1710,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_inputdecorationtheme",
-      "community": 3,
+      "community": 4,
       "norm_label": "_inputdecorationtheme"
     },
     {
@@ -1719,7 +1719,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_buildborder",
-      "community": 3,
+      "community": 4,
       "norm_label": "buildborder"
     },
     {
@@ -1728,7 +1728,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_outlineinputborder",
-      "community": 3,
+      "community": 4,
       "norm_label": "outlineinputborder"
     },
     {
@@ -1737,7 +1737,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_light",
-      "community": 3,
+      "community": 4,
       "norm_label": "light"
     },
     {
@@ -1746,7 +1746,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_theme_dart_dark",
-      "community": 3,
+      "community": 4,
       "norm_label": "dark"
     },
     {
@@ -1755,7 +1755,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_text_field.dart",
       "source_location": null,
       "id": "package_flutter_services_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "package:flutter/services.dart"
     },
     {
@@ -1764,7 +1764,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_colors.dart",
       "source_location": null,
       "id": "app_config_flavor_dart",
-      "community": 3,
+      "community": 4,
       "norm_label": "../../../app/config/flavor.dart"
     },
     {
@@ -1773,7 +1773,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_theme.dart",
       "source_location": null,
       "id": "package_super_flutter_core_ui_theme_design_colors_dart",
-      "community": 3,
+      "community": 4,
       "norm_label": "package:super_flutter/core/ui/theme/design_colors.dart"
     },
     {
@@ -1782,7 +1782,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_colors.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_colors_dart",
-      "community": 3,
+      "community": 4,
       "norm_label": "app_colors.dart"
     },
     {
@@ -1791,7 +1791,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_colors.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_colors_dart_appcolorsext",
-      "community": 3,
+      "community": 4,
       "norm_label": "appcolorsext"
     },
     {
@@ -1800,7 +1800,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_colors.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_colors_dart_seedfor",
-      "community": 3,
+      "community": 4,
       "norm_label": "seedfor"
     },
     {
@@ -1809,7 +1809,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_colors.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_colors_dart_copywith",
-      "community": 3,
+      "community": 4,
       "norm_label": "copywith"
     },
     {
@@ -1818,7 +1818,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_colors.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_colors_dart_lerp",
-      "community": 3,
+      "community": 4,
       "norm_label": "lerp"
     },
     {
@@ -1827,7 +1827,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/app_spacing.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_app_spacing_dart",
-      "community": 13,
+      "community": 14,
       "norm_label": "app_spacing.dart"
     },
     {
@@ -1836,7 +1836,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/design_colors.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_design_colors_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "design_colors.dart"
     },
     {
@@ -1845,7 +1845,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/theme/design_colors.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_theme_design_colors_dart_designcolor",
-      "community": 1,
+      "community": 0,
       "norm_label": "designcolor"
     },
     {
@@ -1854,7 +1854,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_text_field.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_text_field_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "app_text_field.dart"
     },
     {
@@ -1863,7 +1863,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_text_field.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_text_field_dart_apptextfield",
-      "community": 1,
+      "community": 0,
       "norm_label": "apptextfield"
     },
     {
@@ -1872,7 +1872,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_text_field.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_text_field_dart_apptextfieldstate",
-      "community": 1,
+      "community": 0,
       "norm_label": "_apptextfieldstate"
     },
     {
@@ -1881,7 +1881,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_text_field.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_text_field_dart_build",
-      "community": 1,
+      "community": 0,
       "norm_label": "build"
     },
     {
@@ -1890,7 +1890,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_text_field.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_text_field_dart_textformfield",
-      "community": 1,
+      "community": 0,
       "norm_label": "textformfield"
     },
     {
@@ -1899,7 +1899,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_text_field.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_text_field_dart_iconbutton",
-      "community": 1,
+      "community": 0,
       "norm_label": "iconbutton"
     },
     {
@@ -1908,7 +1908,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_network_image.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_network_image_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "app_network_image.dart"
     },
     {
@@ -1917,7 +1917,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_network_image.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_network_image_dart_appnetworkimage",
-      "community": 1,
+      "community": 0,
       "norm_label": "appnetworkimage"
     },
     {
@@ -1926,7 +1926,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_network_image.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_network_image_dart_placeholder",
-      "community": 1,
+      "community": 0,
       "norm_label": "_placeholder"
     },
     {
@@ -1935,7 +1935,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_network_image.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_network_image_dart_build",
-      "community": 1,
+      "community": 0,
       "norm_label": "build"
     },
     {
@@ -1944,7 +1944,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_network_image.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_network_image_dart_cliprrect",
-      "community": 1,
+      "community": 0,
       "norm_label": "cliprrect"
     },
     {
@@ -1953,7 +1953,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_network_image.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_network_image_dart_coloredbox",
-      "community": 1,
+      "community": 0,
       "norm_label": "coloredbox"
     },
     {
@@ -1962,7 +1962,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_network_image.dart",
       "source_location": null,
       "id": "theme_app_colors_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "../theme/app_colors.dart"
     },
     {
@@ -1971,7 +1971,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_empty_view.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_empty_view_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "app_empty_view.dart"
     },
     {
@@ -1980,7 +1980,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_empty_view.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_empty_view_dart_appemptyview",
-      "community": 1,
+      "community": 0,
       "norm_label": "appemptyview"
     },
     {
@@ -1989,7 +1989,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_empty_view.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_empty_view_dart_build",
-      "community": 1,
+      "community": 0,
       "norm_label": "build"
     },
     {
@@ -1998,7 +1998,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_empty_view.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_empty_view_dart_center",
-      "community": 1,
+      "community": 0,
       "norm_label": "center"
     },
     {
@@ -2007,7 +2007,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_loader.dart",
       "source_location": null,
       "id": "theme_app_spacing_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "../theme/app_spacing.dart"
     },
     {
@@ -2016,7 +2016,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_error_view.dart",
       "source_location": null,
       "id": "app_button_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "app_button.dart"
     },
     {
@@ -2025,7 +2025,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/progress_circle.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_progress_circle_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "progress_circle.dart"
     },
     {
@@ -2034,7 +2034,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/progress_circle.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_progress_circle_dart_designprogressanimation",
-      "community": 1,
+      "community": 0,
       "norm_label": "designprogressanimation"
     },
     {
@@ -2043,7 +2043,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/progress_circle.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_progress_circle_dart_designprogressanimationstate",
-      "community": 1,
+      "community": 0,
       "norm_label": "_designprogressanimationstate"
     },
     {
@@ -2052,7 +2052,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/progress_circle.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_progress_circle_dart_designprogress",
-      "community": 1,
+      "community": 0,
       "norm_label": "designprogress"
     },
     {
@@ -2061,7 +2061,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/progress_circle.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_progress_circle_dart_initstate",
-      "community": 1,
+      "community": 0,
       "norm_label": "initstate"
     },
     {
@@ -2070,7 +2070,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/progress_circle.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_progress_circle_dart_didupdatewidget",
-      "community": 1,
+      "community": 0,
       "norm_label": "didupdatewidget"
     },
     {
@@ -2079,7 +2079,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/progress_circle.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_progress_circle_dart_dispose",
-      "community": 1,
+      "community": 0,
       "norm_label": "dispose"
     },
     {
@@ -2088,7 +2088,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/progress_circle.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_progress_circle_dart_build",
-      "community": 1,
+      "community": 0,
       "norm_label": "build"
     },
     {
@@ -2097,7 +2097,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/progress_circle.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_progress_circle_dart_sizedbox",
-      "community": 1,
+      "community": 0,
       "norm_label": "sizedbox"
     },
     {
@@ -2106,7 +2106,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_error_view.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_error_view_dart",
-      "community": 6,
+      "community": 13,
       "norm_label": "app_error_view.dart"
     },
     {
@@ -2115,7 +2115,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_error_view.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_error_view_dart_apperrorview",
-      "community": 6,
+      "community": 13,
       "norm_label": "apperrorview"
     },
     {
@@ -2124,7 +2124,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_error_view.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_error_view_dart_build",
-      "community": 6,
+      "community": 13,
       "norm_label": "build"
     },
     {
@@ -2133,7 +2133,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_error_view.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_error_view_dart_center",
-      "community": 6,
+      "community": 13,
       "norm_label": "center"
     },
     {
@@ -2142,7 +2142,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/sources/remote/auth_remote_data_source.dart",
       "source_location": null,
       "id": "package_super_flutter_core_error_app_exception_dart",
-      "community": 6,
+      "community": 13,
       "norm_label": "package:super_flutter/core/error/app_exception.dart"
     },
     {
@@ -2151,7 +2151,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_error_view.dart",
       "source_location": null,
       "id": "package_super_flutter_core_error_exceptions_cache_exception_dart",
-      "community": 6,
+      "community": 13,
       "norm_label": "package:super_flutter/core/error/exceptions/cache_exception.dart"
     },
     {
@@ -2160,7 +2160,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_error_view.dart",
       "source_location": null,
       "id": "package_super_flutter_core_error_exceptions_unknown_exception_dart",
-      "community": 6,
+      "community": 13,
       "norm_label": "package:super_flutter/core/error/exceptions/unknown_exception.dart"
     },
     {
@@ -2169,7 +2169,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/sources/remote/auth_remote_data_source.dart",
       "source_location": null,
       "id": "package_super_flutter_core_network_network_exception_mapper_dart",
-      "community": 6,
+      "community": 13,
       "norm_label": "package:super_flutter/core/network/network_exception_mapper.dart"
     },
     {
@@ -2178,7 +2178,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/gradient_background.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_gradient_background_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "gradient_background.dart"
     },
     {
@@ -2187,7 +2187,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/gradient_background.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_gradient_background_dart_gradientbackground",
-      "community": 1,
+      "community": 0,
       "norm_label": "gradientbackground"
     },
     {
@@ -2196,7 +2196,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/gradient_background.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_gradient_background_dart_build",
-      "community": 1,
+      "community": 0,
       "norm_label": "build"
     },
     {
@@ -2205,7 +2205,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/gradient_background.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_gradient_background_dart_decoratedbox",
-      "community": 1,
+      "community": 0,
       "norm_label": "decoratedbox"
     },
     {
@@ -2214,7 +2214,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/gradient_background.dart",
       "source_location": null,
       "id": "package_super_flutter_core_ui_theme_app_colors_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "package:super_flutter/core/ui/theme/app_colors.dart"
     },
     {
@@ -2223,7 +2223,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_loader.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_loader_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "app_loader.dart"
     },
     {
@@ -2232,7 +2232,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_loader.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_loader_dart_apploader",
-      "community": 1,
+      "community": 0,
       "norm_label": "apploader"
     },
     {
@@ -2241,7 +2241,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_loader.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_loader_dart_appinlineloader",
-      "community": 1,
+      "community": 0,
       "norm_label": "appinlineloader"
     },
     {
@@ -2250,7 +2250,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_loader.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_loader_dart_appskeleton",
-      "community": 1,
+      "community": 0,
       "norm_label": "appskeleton"
     },
     {
@@ -2259,7 +2259,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_loader.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_loader_dart_build",
-      "community": 1,
+      "community": 0,
       "norm_label": "build"
     },
     {
@@ -2268,7 +2268,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_loader.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_loader_dart_center",
-      "community": 1,
+      "community": 0,
       "norm_label": "center"
     },
     {
@@ -2277,7 +2277,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_loader.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_loader_dart_circularprogressindicator",
-      "community": 1,
+      "community": 0,
       "norm_label": "circularprogressindicator"
     },
     {
@@ -2286,7 +2286,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_loader.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_loader_dart_container",
-      "community": 1,
+      "community": 0,
       "norm_label": "container"
     },
     {
@@ -2295,7 +2295,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/ui/widgets/app_button.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_ui_widgets_app_button_dart",
-      "community": 54,
+      "community": 55,
       "norm_label": "app_button.dart"
     },
     {
@@ -2304,7 +2304,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/app_modules.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_di_app_modules_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "app_modules.dart"
     },
     {
@@ -2313,7 +2313,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/app_modules.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_di_app_modules_dart_coremodule",
-      "community": 4,
+      "community": 6,
       "norm_label": "coremodule"
     },
     {
@@ -2322,7 +2322,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/app_modules.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_di_app_modules_dart_appenvironment",
-      "community": 4,
+      "community": 6,
       "norm_label": "appenvironment"
     },
     {
@@ -2331,7 +2331,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/app_modules.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_di_app_modules_dart_errorreporter",
-      "community": 4,
+      "community": 6,
       "norm_label": "errorreporter"
     },
     {
@@ -2340,7 +2340,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/app_modules.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_di_app_modules_dart_compositeerrorreporter",
-      "community": 4,
+      "community": 6,
       "norm_label": "compositeerrorreporter"
     },
     {
@@ -2358,7 +2358,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "package_super_flutter_app_config_app_config_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/app/config/app_config.dart"
     },
     {
@@ -2367,7 +2367,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/injection.config.dart",
       "source_location": null,
       "id": "package_super_flutter_app_config_environment_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "package:super_flutter/app/config/environment.dart"
     },
     {
@@ -2376,7 +2376,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/app_modules.dart",
       "source_location": null,
       "id": "error_composite_error_reporter_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "../error/composite_error_reporter.dart"
     },
     {
@@ -2385,7 +2385,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/app_modules.dart",
       "source_location": null,
       "id": "error_error_reporter_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "../error/error_reporter.dart"
     },
     {
@@ -2394,7 +2394,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/app_modules.dart",
       "source_location": null,
       "id": "error_logger_error_reporter_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "../error/logger_error_reporter.dart"
     },
     {
@@ -2403,7 +2403,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/logger_error_reporter.dart",
       "source_location": null,
       "id": "logging_app_logger_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "../logging/app_logger.dart"
     },
     {
@@ -2412,7 +2412,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/storage_module.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_di_storage_module_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "storage_module.dart"
     },
     {
@@ -2421,7 +2421,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/storage_module.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_di_storage_module_dart_storagemodule",
-      "community": 4,
+      "community": 6,
       "norm_label": "storagemodule"
     },
     {
@@ -2430,7 +2430,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/storage_module.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_di_storage_module_dart_securestorage",
-      "community": 4,
+      "community": 6,
       "norm_label": "securestorage"
     },
     {
@@ -2439,7 +2439,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/storage_module.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_di_storage_module_dart_localdatabase",
-      "community": 4,
+      "community": 6,
       "norm_label": "localdatabase"
     },
     {
@@ -2448,7 +2448,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/storage_module.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_di_storage_module_dart_storageservice",
-      "community": 4,
+      "community": 6,
       "norm_label": "storageservice"
     },
     {
@@ -2457,7 +2457,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/storage_module.dart",
       "source_location": null,
       "id": "storage_local_storage_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "../storage/local_storage.dart"
     },
     {
@@ -2466,7 +2466,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/network_module.dart",
       "source_location": null,
       "id": "storage_secure_storage_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "../storage/secure_storage.dart"
     },
     {
@@ -2475,7 +2475,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/storage_module.dart",
       "source_location": null,
       "id": "storage_storage_service_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "../storage/storage_service.dart"
     },
     {
@@ -2484,7 +2484,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/injection.config.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_di_injection_config_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "_"
     },
     {
@@ -2493,7 +2493,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/injection.dart",
       "source_location": null,
       "id": "package_get_it_get_it_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:get_it/get_it.dart"
     },
     {
@@ -2502,7 +2502,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "package_super_flutter_app_startup_app_startup_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/app/startup/app_startup.dart"
     },
     {
@@ -2511,7 +2511,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/injection.config.dart",
       "source_location": null,
       "id": "package_super_flutter_core_di_app_modules_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/core/di/app_modules.dart"
     },
     {
@@ -2520,7 +2520,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/injection.config.dart",
       "source_location": null,
       "id": "package_super_flutter_core_di_storage_module_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/core/di/storage_module.dart"
     },
     {
@@ -2529,7 +2529,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "package_super_flutter_core_error_app_error_handler_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/core/error/app_error_handler.dart"
     },
     {
@@ -2538,7 +2538,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "package_super_flutter_core_error_error_reporter_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/core/error/error_reporter.dart"
     },
     {
@@ -2547,7 +2547,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "package_super_flutter_core_logging_app_logger_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/core/logging/app_logger.dart"
     },
     {
@@ -2556,7 +2556,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/sources/remote/auth_remote_data_source.dart",
       "source_location": null,
       "id": "package_super_flutter_core_network_dio_client_dart",
-      "community": 6,
+      "community": 13,
       "norm_label": "package:super_flutter/core/network/dio_client.dart"
     },
     {
@@ -2565,7 +2565,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/injection.config.dart",
       "source_location": null,
       "id": "package_super_flutter_core_network_network_module_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/core/network/network_module.dart"
     },
     {
@@ -2574,7 +2574,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/sources/remote/auth_remote_data_source.dart",
       "source_location": null,
       "id": "package_super_flutter_core_service_device_info_service_dart",
-      "community": 6,
+      "community": 13,
       "norm_label": "package:super_flutter/core/service/device_info_service.dart"
     },
     {
@@ -2583,7 +2583,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/injection.config.dart",
       "source_location": null,
       "id": "package_super_flutter_core_storage_local_storage_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/core/storage/local_storage.dart"
     },
     {
@@ -2601,7 +2601,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/injection.config.dart",
       "source_location": null,
       "id": "package_super_flutter_domain_auth_repositories_auth_repository_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/domain/auth/repositories/auth_repository.dart"
     },
     {
@@ -2610,7 +2610,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/injection.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_di_injection_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "injection.dart"
     },
     {
@@ -2619,7 +2619,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/di/injection.dart",
       "source_location": null,
       "id": "injection_config_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "injection.config.dart"
     },
     {
@@ -2628,7 +2628,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/constants/app_constants.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_constants_app_constants_dart",
-      "community": 55,
+      "community": 56,
       "norm_label": "app_constants.dart"
     },
     {
@@ -2637,7 +2637,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/constants/assets_names.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_constants_assets_names_dart",
-      "community": 36,
+      "community": 37,
       "norm_label": "assets_names.dart"
     },
     {
@@ -2646,7 +2646,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/constants/assets_names.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_constants_assets_names_dart_assetsname",
-      "community": 36,
+      "community": 37,
       "norm_label": "assetsname"
     },
     {
@@ -2655,7 +2655,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/constants/asset_constants.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_constants_asset_constants_dart",
-      "community": 56,
+      "community": 57,
       "norm_label": "asset_constants.dart"
     },
     {
@@ -2664,7 +2664,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/constants/constants.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_constants_constants_dart",
-      "community": 29,
+      "community": 30,
       "norm_label": "constants.dart"
     },
     {
@@ -2673,7 +2673,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/constants/constants.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_constants_constants_dart_constants",
-      "community": 29,
+      "community": 30,
       "norm_label": "constants"
     },
     {
@@ -2682,7 +2682,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/constants/constants.dart",
       "source_location": null,
       "id": "package_package_info_plus_package_info_plus_dart",
-      "community": 29,
+      "community": 30,
       "norm_label": "package:package_info_plus/package_info_plus.dart"
     },
     {
@@ -2691,7 +2691,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/constants/design_colors.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_constants_design_colors_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "design_colors.dart"
     },
     {
@@ -2700,7 +2700,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/constants/design_colors.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_constants_design_colors_dart_designcolor",
-      "community": 1,
+      "community": 0,
       "norm_label": "designcolor"
     },
     {
@@ -2709,7 +2709,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/network_constants.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_network_constants_dart",
-      "community": 37,
+      "community": 38,
       "norm_label": "network_constants.dart"
     },
     {
@@ -2718,7 +2718,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/network_constants.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_network_constants_dart_bearertoken",
-      "community": 37,
+      "community": 38,
       "norm_label": "bearertoken"
     },
     {
@@ -2727,7 +2727,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/dio_client.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_dio_client_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "dio_client.dart"
     },
     {
@@ -2736,7 +2736,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/dio_client.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_dio_client_dart_dioclient",
-      "community": 4,
+      "community": 6,
       "norm_label": "dioclient"
     },
     {
@@ -2745,7 +2745,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/dio_client.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_dio_client_dart_createdio",
-      "community": 4,
+      "community": 6,
       "norm_label": "_createdio"
     },
     {
@@ -2754,7 +2754,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/dio_client.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_dio_client_dart_setbaseurl",
-      "community": 4,
+      "community": 6,
       "norm_label": "setbaseurl"
     },
     {
@@ -2763,7 +2763,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/dio_client.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_dio_client_dart_errorinterceptor",
-      "community": 4,
+      "community": 6,
       "norm_label": "errorinterceptor"
     },
     {
@@ -2772,7 +2772,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/dio_client.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_dio_client_dart_close",
-      "community": 4,
+      "community": 6,
       "norm_label": "close"
     },
     {
@@ -2790,7 +2790,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/dio_client.dart",
       "source_location": null,
       "id": "package_super_flutter_core_network_network_constants_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "package:super_flutter/core/network/network_constants.dart"
     },
     {
@@ -2799,7 +2799,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/network_module.dart",
       "source_location": null,
       "id": "app_config_environment_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "../../app/config/environment.dart"
     },
     {
@@ -2808,7 +2808,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/dio_client.dart",
       "source_location": null,
       "id": "interceptors_auth_interceptor_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "interceptors/auth_interceptor.dart"
     },
     {
@@ -2817,7 +2817,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/dio_client.dart",
       "source_location": null,
       "id": "interceptors_error_interceptor_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "interceptors/error_interceptor.dart"
     },
     {
@@ -2826,7 +2826,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/dio_client.dart",
       "source_location": null,
       "id": "interceptors_logging_interceptor_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "interceptors/logging_interceptor.dart"
     },
     {
@@ -2835,7 +2835,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/dio_client.dart",
       "source_location": null,
       "id": "interceptors_refresh_token_interceptor_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "interceptors/refresh_token_interceptor.dart"
     },
     {
@@ -2844,7 +2844,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/api_endpoints.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_api_endpoints_dart",
-      "community": 26,
+      "community": 27,
       "norm_label": "api_endpoints.dart"
     },
     {
@@ -2853,7 +2853,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/api_endpoints.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_api_endpoints_dart_productbyid",
-      "community": 26,
+      "community": 27,
       "norm_label": "productbyid"
     },
     {
@@ -2862,7 +2862,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/api_endpoints.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_api_endpoints_dart_productsbycategory",
-      "community": 26,
+      "community": 27,
       "norm_label": "productsbycategory"
     },
     {
@@ -2871,7 +2871,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/api_endpoints.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_api_endpoints_dart_userbyid",
-      "community": 26,
+      "community": 27,
       "norm_label": "userbyid"
     },
     {
@@ -2880,7 +2880,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/api_endpoints.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_api_endpoints_dart_ispublic",
-      "community": 26,
+      "community": 27,
       "norm_label": "ispublic"
     },
     {
@@ -2889,7 +2889,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/session_manager.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_session_manager_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "session_manager.dart"
     },
     {
@@ -2898,7 +2898,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/session_manager.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_session_manager_dart_sessionmanagerimpl",
-      "community": 0,
+      "community": 3,
       "norm_label": "sessionmanagerimpl"
     },
     {
@@ -2907,7 +2907,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/network_module.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_network_module_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "network_module.dart"
     },
     {
@@ -2916,7 +2916,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/network_module.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_network_module_dart_networkmodule",
-      "community": 4,
+      "community": 6,
       "norm_label": "networkmodule"
     },
     {
@@ -2925,7 +2925,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/network_module.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_network_network_module_dart_dioclient",
-      "community": 4,
+      "community": 6,
       "norm_label": "dioclient"
     },
     {
@@ -2934,7 +2934,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/network/network_module.dart",
       "source_location": null,
       "id": "dio_client_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "dio_client.dart"
     },
     {
@@ -3528,7 +3528,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/utils/image_precache.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_utils_image_precache_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "image_precache.dart"
     },
     {
@@ -3537,7 +3537,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/utils/image_precache.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_utils_image_precache_dart_done",
-      "community": 0,
+      "community": 3,
       "norm_label": "done"
     },
     {
@@ -3546,7 +3546,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.g.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_g_dart",
-      "community": 15,
+      "community": 16,
       "norm_label": "_"
     },
     {
@@ -3555,7 +3555,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.g.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_g_dart_productrow",
-      "community": 15,
+      "community": 16,
       "norm_label": "productrow"
     },
     {
@@ -3564,7 +3564,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.g.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_g_dart_productrowscompanion",
-      "community": 15,
+      "community": 16,
       "norm_label": "productrowscompanion"
     },
     {
@@ -3573,7 +3573,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.g.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_g_dart_keyvaluerow",
-      "community": 15,
+      "community": 16,
       "norm_label": "keyvaluerow"
     },
     {
@@ -3582,7 +3582,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.g.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_g_dart_keyvaluerowscompanion",
-      "community": 15,
+      "community": 16,
       "norm_label": "keyvaluerowscompanion"
     },
     {
@@ -3591,7 +3591,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.g.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_g_dart_verificationmeta",
-      "community": 15,
+      "community": 16,
       "norm_label": "verificationmeta"
     },
     {
@@ -3600,7 +3600,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.g.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_g_dart_validateintegrity",
-      "community": 15,
+      "community": 16,
       "norm_label": "validateintegrity"
     },
     {
@@ -3609,7 +3609,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.g.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_g_dart_map",
-      "community": 15,
+      "community": 16,
       "norm_label": "map"
     },
     {
@@ -3618,7 +3618,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.g.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_g_dart_tocompanion",
-      "community": 15,
+      "community": 16,
       "norm_label": "tocompanion"
     },
     {
@@ -3627,7 +3627,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.g.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_g_dart_copywith",
-      "community": 15,
+      "community": 16,
       "norm_label": "copywith"
     },
     {
@@ -3636,7 +3636,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.g.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_g_dart_copywithcompanion",
-      "community": 15,
+      "community": 16,
       "norm_label": "copywithcompanion"
     },
     {
@@ -3645,7 +3645,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.g.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_g_dart_tostring",
-      "community": 15,
+      "community": 16,
       "norm_label": "tostring"
     },
     {
@@ -3654,7 +3654,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.g.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_g_dart_rawvaluesinsertable",
-      "community": 15,
+      "community": 16,
       "norm_label": "rawvaluesinsertable"
     },
     {
@@ -3663,7 +3663,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.g.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_g_dart_function",
-      "community": 15,
+      "community": 16,
       "norm_label": "function"
     },
     {
@@ -3672,7 +3672,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/storage_keys.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_storage_keys_dart",
-      "community": 57,
+      "community": 58,
       "norm_label": "storage_keys.dart"
     },
     {
@@ -3681,7 +3681,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/secure_storage.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_secure_storage_dart",
-      "community": 18,
+      "community": 19,
       "norm_label": "secure_storage.dart"
     },
     {
@@ -3690,7 +3690,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/secure_storage.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_secure_storage_dart_securestorage",
-      "community": 18,
+      "community": 19,
       "norm_label": "securestorage"
     },
     {
@@ -3699,7 +3699,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/secure_storage.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_secure_storage_dart_cacheexception",
-      "community": 18,
+      "community": 19,
       "norm_label": "cacheexception"
     },
     {
@@ -3708,7 +3708,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/secure_storage.dart",
       "source_location": null,
       "id": "package_flutter_secure_storage_flutter_secure_storage_dart",
-      "community": 18,
+      "community": 19,
       "norm_label": "package:flutter_secure_storage/flutter_secure_storage.dart"
     },
     {
@@ -3717,7 +3717,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/storage_service.dart",
       "source_location": null,
       "id": "error_exceptions_cache_exception_dart",
-      "community": 18,
+      "community": 19,
       "norm_label": "../error/exceptions/cache_exception.dart"
     },
     {
@@ -3726,7 +3726,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/storage_service.dart",
       "source_location": null,
       "id": "storage_keys_dart",
-      "community": 18,
+      "community": 19,
       "norm_label": "storage_keys.dart"
     },
     {
@@ -3735,7 +3735,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/storage_service.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_storage_service_dart",
-      "community": 18,
+      "community": 19,
       "norm_label": "storage_service.dart"
     },
     {
@@ -3744,7 +3744,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/storage_service.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_storage_service_dart_storageservice",
-      "community": 18,
+      "community": 19,
       "norm_label": "storageservice"
     },
     {
@@ -3753,7 +3753,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/storage_service.dart",
       "source_location": null,
       "id": "local_storage_dart",
-      "community": 18,
+      "community": 19,
       "norm_label": "local_storage.dart"
     },
     {
@@ -3762,7 +3762,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/storage_service.dart",
       "source_location": null,
       "id": "secure_storage_dart",
-      "community": 18,
+      "community": 19,
       "norm_label": "secure_storage.dart"
     },
     {
@@ -3771,7 +3771,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_dart",
-      "community": 21,
+      "community": 22,
       "norm_label": "local_storage.dart"
     },
     {
@@ -3780,7 +3780,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_dart_productrows",
-      "community": 21,
+      "community": 22,
       "norm_label": "productrows"
     },
     {
@@ -3789,7 +3789,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_dart_keyvaluerows",
-      "community": 21,
+      "community": 22,
       "norm_label": "keyvaluerows"
     },
     {
@@ -3798,7 +3798,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_dart_localdatabase",
-      "community": 21,
+      "community": 22,
       "norm_label": "localdatabase"
     },
     {
@@ -3807,7 +3807,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_dart_customstatement",
-      "community": 21,
+      "community": 22,
       "norm_label": "customstatement"
     },
     {
@@ -3816,7 +3816,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_storage_local_storage_dart_delete",
-      "community": 21,
+      "community": 22,
       "norm_label": "delete"
     },
     {
@@ -3825,7 +3825,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.dart",
       "source_location": null,
       "id": "package_drift_drift_dart",
-      "community": 21,
+      "community": 22,
       "norm_label": "package:drift/drift.dart"
     },
     {
@@ -3834,7 +3834,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/storage/local_storage.dart",
       "source_location": null,
       "id": "package_drift_flutter_drift_flutter_dart",
-      "community": 21,
+      "community": 22,
       "norm_label": "package:drift_flutter/drift_flutter.dart"
     },
     {
@@ -3879,7 +3879,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/extensions/extensions.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_extensions_extensions_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "extensions.dart"
     },
     {
@@ -3888,7 +3888,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/extensions/extensions.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_extensions_extensions_dart_split",
-      "community": 1,
+      "community": 0,
       "norm_label": "split"
     },
     {
@@ -3897,7 +3897,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/extensions/context_extensions.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_extensions_context_extensions_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "context_extensions.dart"
     },
     {
@@ -3906,7 +3906,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/extensions/context_extensions.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_extensions_context_extensions_dart_showsnackbar",
-      "community": 1,
+      "community": 0,
       "norm_label": "showsnackbar"
     },
     {
@@ -3915,7 +3915,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/extensions/context_extensions.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_extensions_context_extensions_dart_hidekeyboard",
-      "community": 1,
+      "community": 0,
       "norm_label": "hidekeyboard"
     },
     {
@@ -3924,7 +3924,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/extensions/context_extensions.dart",
       "source_location": null,
       "id": "constants_app_constants_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "../constants/app_constants.dart"
     },
     {
@@ -3933,7 +3933,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/extensions/string_extensions.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_extensions_string_extensions_dart",
-      "community": 30,
+      "community": 31,
       "norm_label": "string_extensions.dart"
     },
     {
@@ -3942,7 +3942,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/extensions/string_extensions.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_extensions_string_extensions_dart_truncate",
-      "community": 30,
+      "community": 31,
       "norm_label": "truncate"
     },
     {
@@ -3951,7 +3951,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/extensions/string_extensions.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_extensions_string_extensions_dart_orempty",
-      "community": 30,
+      "community": 31,
       "norm_label": "orempty"
     },
     {
@@ -4077,7 +4077,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/logger_error_reporter.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_logger_error_reporter_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "logger_error_reporter.dart"
     },
     {
@@ -4086,7 +4086,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/logger_error_reporter.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_logger_error_reporter_dart_loggererrorreporter",
-      "community": 4,
+      "community": 6,
       "norm_label": "loggererrorreporter"
     },
     {
@@ -4095,7 +4095,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/logger_error_reporter.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_logger_error_reporter_dart_report",
-      "community": 4,
+      "community": 6,
       "norm_label": "report"
     },
     {
@@ -4104,7 +4104,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/app_error_handler.dart",
       "source_location": null,
       "id": "error_reporter_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "error_reporter.dart"
     },
     {
@@ -4113,7 +4113,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/composite_error_reporter.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_composite_error_reporter_dart",
-      "community": 4,
+      "community": 6,
       "norm_label": "composite_error_reporter.dart"
     },
     {
@@ -4122,7 +4122,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/composite_error_reporter.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_composite_error_reporter_dart_compositeerrorreporter",
-      "community": 4,
+      "community": 6,
       "norm_label": "compositeerrorreporter"
     },
     {
@@ -4131,7 +4131,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/composite_error_reporter.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_composite_error_reporter_dart_report",
-      "community": 4,
+      "community": 6,
       "norm_label": "report"
     },
     {
@@ -4185,7 +4185,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/app_exception.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_app_exception_dart",
-      "community": 31,
+      "community": 32,
       "norm_label": "app_exception.dart"
     },
     {
@@ -4194,7 +4194,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/app_exception.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_app_exception_dart_appexception",
-      "community": 31,
+      "community": 32,
       "norm_label": "appexception"
     },
     {
@@ -4203,7 +4203,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/app_exception.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_app_exception_dart_tostring",
-      "community": 31,
+      "community": 32,
       "norm_label": "tostring"
     },
     {
@@ -4212,7 +4212,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/error_reporter.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_error_reporter_dart",
-      "community": 38,
+      "community": 39,
       "norm_label": "error_reporter.dart"
     },
     {
@@ -4221,7 +4221,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/error_reporter.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_error_reporter_dart_report",
-      "community": 38,
+      "community": 39,
       "norm_label": "report"
     },
     {
@@ -4230,7 +4230,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/exceptions/unknown_exception.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_exceptions_unknown_exception_dart",
-      "community": 17,
+      "community": 18,
       "norm_label": "unknown_exception.dart"
     },
     {
@@ -4239,7 +4239,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/exceptions/unknown_exception.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_exceptions_unknown_exception_dart_unknownexception",
-      "community": 17,
+      "community": 18,
       "norm_label": "unknownexception"
     },
     {
@@ -4248,7 +4248,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/exceptions/parse_exception.dart",
       "source_location": null,
       "id": "app_exception_dart",
-      "community": 17,
+      "community": 18,
       "norm_label": "../app_exception.dart"
     },
     {
@@ -4257,7 +4257,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/exceptions/cache_exception.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_exceptions_cache_exception_dart",
-      "community": 17,
+      "community": 18,
       "norm_label": "cache_exception.dart"
     },
     {
@@ -4266,7 +4266,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/exceptions/cache_exception.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_exceptions_cache_exception_dart_cacheexception",
-      "community": 17,
+      "community": 18,
       "norm_label": "cacheexception"
     },
     {
@@ -4275,7 +4275,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/exceptions/unauthorized_exception.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_exceptions_unauthorized_exception_dart",
-      "community": 17,
+      "community": 18,
       "norm_label": "unauthorized_exception.dart"
     },
     {
@@ -4284,7 +4284,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/exceptions/unauthorized_exception.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_exceptions_unauthorized_exception_dart_unauthorizedexception",
-      "community": 17,
+      "community": 18,
       "norm_label": "unauthorizedexception"
     },
     {
@@ -4293,7 +4293,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/exceptions/validation_exception.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_exceptions_validation_exception_dart",
-      "community": 17,
+      "community": 18,
       "norm_label": "validation_exception.dart"
     },
     {
@@ -4302,7 +4302,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/exceptions/validation_exception.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_exceptions_validation_exception_dart_validationexception",
-      "community": 17,
+      "community": 18,
       "norm_label": "validationexception"
     },
     {
@@ -4311,7 +4311,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/exceptions/parse_exception.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_exceptions_parse_exception_dart",
-      "community": 17,
+      "community": 18,
       "norm_label": "parse_exception.dart"
     },
     {
@@ -4320,7 +4320,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/error/exceptions/parse_exception.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_error_exceptions_parse_exception_dart_parseexception",
-      "community": 17,
+      "community": 18,
       "norm_label": "parseexception"
     },
     {
@@ -4401,7 +4401,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/logging/logging_bloc_observer.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_logging_logging_bloc_observer_dart",
-      "community": 16,
+      "community": 17,
       "norm_label": "logging_bloc_observer.dart"
     },
     {
@@ -4410,7 +4410,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/logging/logging_bloc_observer.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_logging_logging_bloc_observer_dart_loggingblocobserver",
-      "community": 16,
+      "community": 17,
       "norm_label": "loggingblocobserver"
     },
     {
@@ -4419,7 +4419,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/logging/logging_bloc_observer.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_logging_logging_bloc_observer_dart_oncreate",
-      "community": 16,
+      "community": 17,
       "norm_label": "oncreate"
     },
     {
@@ -4428,7 +4428,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/logging/logging_bloc_observer.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_logging_logging_bloc_observer_dart_onchange",
-      "community": 16,
+      "community": 17,
       "norm_label": "onchange"
     },
     {
@@ -4437,7 +4437,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/logging/logging_bloc_observer.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_logging_logging_bloc_observer_dart_onerror",
-      "community": 16,
+      "community": 17,
       "norm_label": "onerror"
     },
     {
@@ -4446,7 +4446,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/logging/logging_bloc_observer.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_core_logging_logging_bloc_observer_dart_onclose",
-      "community": 16,
+      "community": 17,
       "norm_label": "onclose"
     },
     {
@@ -4455,7 +4455,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/session/bloc/auth_cubit.dart",
       "source_location": null,
       "id": "package_bloc_bloc_dart",
-      "community": 16,
+      "community": 17,
       "norm_label": "package:bloc/bloc.dart"
     },
     {
@@ -4464,7 +4464,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/core/logging/logging_bloc_observer.dart",
       "source_location": null,
       "id": "app_logger_dart",
-      "community": 16,
+      "community": 17,
       "norm_label": "app_logger.dart"
     },
     {
@@ -4716,7 +4716,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_app_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "app.dart"
     },
     {
@@ -4725,7 +4725,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_app_dart_app",
-      "community": 0,
+      "community": 1,
       "norm_label": "app"
     },
     {
@@ -4734,7 +4734,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_app_dart_appstate",
-      "community": 0,
+      "community": 1,
       "norm_label": "_appstate"
     },
     {
@@ -4743,7 +4743,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_app_dart_runzonedguarded",
-      "community": 0,
+      "community": 1,
       "norm_label": "runzonedguarded"
     },
     {
@@ -4752,7 +4752,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_app_dart_configuredependencies",
-      "community": 0,
+      "community": 1,
       "norm_label": "configuredependencies"
     },
     {
@@ -4761,7 +4761,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_app_dart_initstate",
-      "community": 0,
+      "community": 1,
       "norm_label": "initstate"
     },
     {
@@ -4770,7 +4770,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_app_dart_dispose",
-      "community": 0,
+      "community": 1,
       "norm_label": "dispose"
     },
     {
@@ -4779,7 +4779,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_app_dart_build",
-      "community": 0,
+      "community": 1,
       "norm_label": "build"
     },
     {
@@ -4788,7 +4788,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_app_dart_multiblocprovider",
-      "community": 0,
+      "community": 1,
       "norm_label": "multiblocprovider"
     },
     {
@@ -4797,7 +4797,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_app_dart_banner",
-      "community": 0,
+      "community": 1,
       "norm_label": "banner"
     },
     {
@@ -4806,7 +4806,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "package_cupertino_ui_cupertino_ui_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:cupertino_ui/cupertino_ui.dart"
     },
     {
@@ -4833,7 +4833,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "package_super_flutter_app_router_router_refresh_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/app/router/router_refresh.dart"
     },
     {
@@ -4842,7 +4842,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "package_super_flutter_app_startup_startup_images_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/app/startup/startup_images.dart"
     },
     {
@@ -4851,7 +4851,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "package_super_flutter_core_logging_logging_bloc_observer_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/core/logging/logging_bloc_observer.dart"
     },
     {
@@ -4860,7 +4860,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "package_super_flutter_features_super_awesome_presentation_super_awesome_bloc_super_awesome_bloc_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:super_flutter/features/super_awesome/presentation/super_awesome/bloc/super_awesome_bloc.dart"
     },
     {
@@ -4869,7 +4869,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "core_di_injection_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "../core/di/injection.dart"
     },
     {
@@ -4878,7 +4878,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "core_localization_app_localizations_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "../core/localization/app_localizations.dart"
     },
     {
@@ -4887,7 +4887,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/app.dart",
       "source_location": null,
       "id": "core_ui_theme_app_theme_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "../core/ui/theme/app_theme.dart"
     },
     {
@@ -4896,7 +4896,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/config/app_config.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_config_app_config_dart",
-      "community": 22,
+      "community": 23,
       "norm_label": "app_config.dart"
     },
     {
@@ -4905,7 +4905,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/config/app_config.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_config_app_config_dart_appconfig",
-      "community": 22,
+      "community": 23,
       "norm_label": "appconfig"
     },
     {
@@ -4914,7 +4914,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/config/app_config.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_config_app_config_dart_tostring",
-      "community": 22,
+      "community": 23,
       "norm_label": "tostring"
     },
     {
@@ -4923,7 +4923,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/config/app_config.dart",
       "source_location": null,
       "id": "environment_dart",
-      "community": 22,
+      "community": 23,
       "norm_label": "environment.dart"
     },
     {
@@ -4932,7 +4932,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/config/environment.dart",
       "source_location": null,
       "id": "flavor_dart",
-      "community": 22,
+      "community": 23,
       "norm_label": "flavor.dart"
     },
     {
@@ -4941,7 +4941,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/config/environment.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_config_environment_dart",
-      "community": 22,
+      "community": 23,
       "norm_label": "environment.dart"
     },
     {
@@ -4950,7 +4950,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/config/environment.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_config_environment_dart_environment",
-      "community": 22,
+      "community": 23,
       "norm_label": "environment"
     },
     {
@@ -4959,7 +4959,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/config/environment.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_config_environment_dart_tostring",
-      "community": 22,
+      "community": 23,
       "norm_label": "tostring"
     },
     {
@@ -4968,7 +4968,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/config/flavor.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_config_flavor_dart",
-      "community": 58,
+      "community": 59,
       "norm_label": "flavor.dart"
     },
     {
@@ -4977,7 +4977,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/force_update_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_startup_force_update_screen_dart",
-      "community": 13,
+      "community": 14,
       "norm_label": "force_update_screen.dart"
     },
     {
@@ -4986,7 +4986,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/force_update_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_startup_force_update_screen_dart_forceupdatescreen",
-      "community": 13,
+      "community": 14,
       "norm_label": "forceupdatescreen"
     },
     {
@@ -4995,7 +4995,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/force_update_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_startup_force_update_screen_dart_launchurl",
-      "community": 13,
+      "community": 14,
       "norm_label": "launchurl"
     },
     {
@@ -5004,7 +5004,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/force_update_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_startup_force_update_screen_dart_snackbar",
-      "community": 13,
+      "community": 14,
       "norm_label": "snackbar"
     },
     {
@@ -5013,7 +5013,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/force_update_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_startup_force_update_screen_dart_build",
-      "community": 13,
+      "community": 14,
       "norm_label": "build"
     },
     {
@@ -5022,7 +5022,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/force_update_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_startup_force_update_screen_dart_scaffold",
-      "community": 13,
+      "community": 14,
       "norm_label": "scaffold"
     },
     {
@@ -5031,7 +5031,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/force_update_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_startup_force_update_screen_dart_sizedbox",
-      "community": 13,
+      "community": 14,
       "norm_label": "sizedbox"
     },
     {
@@ -5040,7 +5040,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/force_update_screen.dart",
       "source_location": null,
       "id": "package_url_launcher_url_launcher_dart",
-      "community": 13,
+      "community": 14,
       "norm_label": "package:url_launcher/url_launcher.dart"
     },
     {
@@ -5049,7 +5049,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/startup_images.dart",
       "source_location": null,
       "id": "core_constants_assets_names_dart",
-      "community": 13,
+      "community": 14,
       "norm_label": "../../core/constants/assets_names.dart"
     },
     {
@@ -5058,7 +5058,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/force_update_screen.dart",
       "source_location": null,
       "id": "core_constants_design_colors_dart",
-      "community": 13,
+      "community": 14,
       "norm_label": "../../core/constants/design_colors.dart"
     },
     {
@@ -5067,7 +5067,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/startup_images.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_startup_startup_images_dart",
-      "community": 13,
+      "community": 14,
       "norm_label": "startup_images.dart"
     },
     {
@@ -5076,7 +5076,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/startup_images.dart",
       "source_location": null,
       "id": "core_utils_image_precache_dart",
-      "community": 13,
+      "community": 14,
       "norm_label": "../../core/utils/image_precache.dart"
     },
     {
@@ -5085,7 +5085,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/remote_app_settings.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_startup_remote_app_settings_dart",
-      "community": 39,
+      "community": 40,
       "norm_label": "remote_app_settings.dart"
     },
     {
@@ -5094,7 +5094,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/remote_app_settings.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_startup_remote_app_settings_dart_remoteappsettings",
-      "community": 39,
+      "community": 40,
       "norm_label": "remoteappsettings"
     },
     {
@@ -5211,7 +5211,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/splash_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_startup_splash_screen_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "splash_screen.dart"
     },
     {
@@ -5220,7 +5220,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/splash_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_startup_splash_screen_dart_splashscreen",
-      "community": 1,
+      "community": 0,
       "norm_label": "splashscreen"
     },
     {
@@ -5229,7 +5229,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/splash_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_startup_splash_screen_dart_build",
-      "community": 1,
+      "community": 0,
       "norm_label": "build"
     },
     {
@@ -5238,7 +5238,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/startup/splash_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_startup_splash_screen_dart_scaffold",
-      "community": 1,
+      "community": 0,
       "norm_label": "scaffold"
     },
     {
@@ -5364,7 +5364,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/router/router_refresh.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_router_router_refresh_dart",
-      "community": 14,
+      "community": 15,
       "norm_label": "router_refresh.dart"
     },
     {
@@ -5373,7 +5373,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/router/router_refresh.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_router_router_refresh_dart_gorouterrefreshstream",
-      "community": 14,
+      "community": 15,
       "norm_label": "gorouterrefreshstream"
     },
     {
@@ -5382,7 +5382,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/router/router_refresh.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_router_router_refresh_dart_dispose",
-      "community": 14,
+      "community": 15,
       "norm_label": "dispose"
     },
     {
@@ -5391,7 +5391,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/router/navigator_keys.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_app_router_navigator_keys_dart",
-      "community": 13,
+      "community": 14,
       "norm_label": "navigator_keys.dart"
     },
     {
@@ -5449,6 +5449,15 @@
       "norm_label": "blocprovider"
     },
     {
+      "label": "initState",
+      "file_type": "code",
+      "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/presentation/login/screen/login_screen.dart",
+      "source_location": null,
+      "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_screen_login_screen_dart_initstate",
+      "community": 5,
+      "norm_label": "initstate"
+    },
+    {
       "label": "_submit",
       "file_type": "code",
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/presentation/login/screen/login_screen.dart",
@@ -5463,7 +5472,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/presentation/login/screen/login_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_screen_login_screen_dart_dispose",
-      "community": 14,
+      "community": 15,
       "norm_label": "dispose"
     },
     {
@@ -5607,7 +5616,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/presentation/login/bloc/login_bloc.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_bloc_dart",
-      "community": 6,
+      "community": 13,
       "norm_label": "login_bloc.dart"
     },
     {
@@ -5616,7 +5625,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/presentation/login/bloc/login_bloc.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_bloc_dart_loginbloc",
-      "community": 6,
+      "community": 13,
       "norm_label": "loginbloc"
     },
     {
@@ -5625,7 +5634,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/presentation/login/bloc/login_bloc.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_bloc_login_bloc_dart_onpasswordvisibilitytoggled",
-      "community": 6,
+      "community": 13,
       "norm_label": "_onpasswordvisibilitytoggled"
     },
     {
@@ -5634,7 +5643,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart",
       "source_location": null,
       "id": "package_bloc_concurrency_bloc_concurrency_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "package:bloc_concurrency/bloc_concurrency.dart"
     },
     {
@@ -5643,7 +5652,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/presentation/login/bloc/login_bloc.dart",
       "source_location": null,
       "id": "login_event_dart",
-      "community": 6,
+      "community": 13,
       "norm_label": "login_event.dart"
     },
     {
@@ -5652,7 +5661,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/presentation/login/bloc/login_bloc.dart",
       "source_location": null,
       "id": "login_state_dart",
-      "community": 6,
+      "community": 13,
       "norm_label": "login_state.dart"
     },
     {
@@ -5769,7 +5778,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/routes/auth_route_names.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_routes_auth_route_names_dart",
-      "community": 59,
+      "community": 60,
       "norm_label": "auth_route_names.dart"
     },
     {
@@ -5778,7 +5787,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/session/bloc/auth_cubit.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_session_bloc_auth_cubit_dart",
-      "community": 16,
+      "community": 17,
       "norm_label": "auth_cubit.dart"
     },
     {
@@ -5787,7 +5796,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/session/bloc/auth_cubit.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_session_bloc_auth_cubit_dart_authcubit",
-      "community": 16,
+      "community": 17,
       "norm_label": "authcubit"
     },
     {
@@ -5796,7 +5805,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/session/bloc/auth_cubit.dart",
       "source_location": null,
       "id": "domain_auth_use_cases_check_auth_status_dart",
-      "community": 16,
+      "community": 17,
       "norm_label": "../../../../domain/auth/use_cases/check_auth_status.dart"
     },
     {
@@ -5805,7 +5814,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/session/bloc/auth_cubit.dart",
       "source_location": null,
       "id": "domain_auth_use_cases_watch_auth_status_dart",
-      "community": 16,
+      "community": 17,
       "norm_label": "../../../../domain/auth/use_cases/watch_auth_status.dart"
     },
     {
@@ -5814,7 +5823,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/session/bloc/auth_cubit.dart",
       "source_location": null,
       "id": "auth_state_dart",
-      "community": 16,
+      "community": 17,
       "norm_label": "auth_state.dart"
     },
     {
@@ -5976,7 +5985,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_dashboard_presentation_dashboard_bloc_dashboard_bloc_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "dashboard_bloc.dart"
     },
     {
@@ -5985,7 +5994,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_dashboard_presentation_dashboard_bloc_dashboard_bloc_dart_dashboardbloc",
-      "community": 0,
+      "community": 1,
       "norm_label": "dashboardbloc"
     },
     {
@@ -5994,7 +6003,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_dashboard_presentation_dashboard_bloc_dashboard_bloc_dart_logout",
-      "community": 0,
+      "community": 1,
       "norm_label": "_logout"
     },
     {
@@ -6003,7 +6012,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart",
       "source_location": null,
       "id": "dashboard_event_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "dashboard_event.dart"
     },
     {
@@ -6012,7 +6021,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart",
       "source_location": null,
       "id": "dashboard_state_dart",
-      "community": 0,
+      "community": 1,
       "norm_label": "dashboard_state.dart"
     },
     {
@@ -6075,7 +6084,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/dashboard/routes/dashboard_route_names.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_dashboard_routes_dashboard_route_names_dart",
-      "community": 60,
+      "community": 61,
       "norm_label": "dashboard_route_names.dart"
     },
     {
@@ -6111,7 +6120,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/super_awesome/presentation/super_awesome/screen/super_awesome_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_super_awesome_presentation_super_awesome_screen_super_awesome_screen_dart",
-      "community": 1,
+      "community": 0,
       "norm_label": "super_awesome_screen.dart"
     },
     {
@@ -6120,7 +6129,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/super_awesome/presentation/super_awesome/screen/super_awesome_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_super_awesome_presentation_super_awesome_screen_super_awesome_screen_dart_superawesomescreen",
-      "community": 1,
+      "community": 0,
       "norm_label": "superawesomescreen"
     },
     {
@@ -6129,7 +6138,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/super_awesome/presentation/super_awesome/screen/super_awesome_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_super_awesome_presentation_super_awesome_screen_super_awesome_screen_dart_superawesomescreenstate",
-      "community": 1,
+      "community": 0,
       "norm_label": "_superawesomescreenstate"
     },
     {
@@ -6138,7 +6147,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/super_awesome/presentation/super_awesome/screen/super_awesome_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_super_awesome_presentation_super_awesome_screen_super_awesome_screen_dart_build",
-      "community": 1,
+      "community": 0,
       "norm_label": "build"
     },
     {
@@ -6147,7 +6156,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/super_awesome/presentation/super_awesome/screen/super_awesome_screen.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_super_awesome_presentation_super_awesome_screen_super_awesome_screen_dart_placeholder",
-      "community": 1,
+      "community": 0,
       "norm_label": "placeholder"
     },
     {
@@ -6246,7 +6255,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/super_awesome/routes/super_awesome_route_names.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_super_awesome_routes_super_awesome_route_names_dart",
-      "community": 61,
+      "community": 62,
       "norm_label": "super_awesome_route_names.dart"
     },
     {
@@ -6282,7 +6291,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/repositories/auth_repository_impl.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_repositories_auth_repository_impl_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "auth_repository_impl.dart"
     },
     {
@@ -6291,7 +6300,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/repositories/auth_repository_impl.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_repositories_auth_repository_impl_dart_authrepositoryimpl",
-      "community": 0,
+      "community": 3,
       "norm_label": "authrepositoryimpl"
     },
     {
@@ -6300,7 +6309,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/repositories/auth_repository_impl.dart",
       "source_location": null,
       "id": "package_super_flutter_data_auth_mappers_auth_mappers_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "package:super_flutter/data/auth/mappers/auth_mappers.dart"
     },
     {
@@ -6309,7 +6318,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/repositories/auth_repository_impl.dart",
       "source_location": null,
       "id": "domain_auth_repositories_auth_repository_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "../../../domain/auth/repositories/auth_repository.dart"
     },
     {
@@ -6318,7 +6327,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/model/super_boy_model.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_model_super_boy_model_dart",
-      "community": 40,
+      "community": 41,
       "norm_label": "super_boy_model.dart"
     },
     {
@@ -6327,7 +6336,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/model/super_boy_model.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_model_super_boy_model_dart_superboymodel",
-      "community": 40,
+      "community": 41,
       "norm_label": "superboymodel"
     },
     {
@@ -6336,7 +6345,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/model/user_model.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_model_user_model_dart",
-      "community": 32,
+      "community": 33,
       "norm_label": "user_model.dart"
     },
     {
@@ -6345,7 +6354,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/model/user_model.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_model_user_model_dart_usermodel",
-      "community": 32,
+      "community": 33,
       "norm_label": "usermodel"
     },
     {
@@ -6354,7 +6363,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/model/user_model.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_model_user_model_dart_rolemodel",
-      "community": 32,
+      "community": 33,
       "norm_label": "rolemodel"
     },
     {
@@ -6363,7 +6372,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/model/login_model.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_model_login_model_dart",
-      "community": 0,
+      "community": 3,
       "norm_label": "login_model.dart"
     },
     {
@@ -6372,7 +6381,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/model/login_model.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_model_login_model_dart_loginmodel",
-      "community": 0,
+      "community": 3,
       "norm_label": "loginmodel"
     },
     {
@@ -6426,7 +6435,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/sources/remote/auth_remote_data_source.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_sources_remote_auth_remote_data_source_dart",
-      "community": 6,
+      "community": 13,
       "norm_label": "auth_remote_data_source.dart"
     },
     {
@@ -6435,7 +6444,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/sources/remote/auth_remote_data_source.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_sources_remote_auth_remote_data_source_dart_authremotedatasource",
-      "community": 6,
+      "community": 13,
       "norm_label": "authremotedatasource"
     },
     {
@@ -6444,7 +6453,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/sources/remote/auth_remote_data_source.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_sources_remote_auth_remote_data_source_dart_parseexception",
-      "community": 6,
+      "community": 13,
       "norm_label": "parseexception"
     },
     {
@@ -6453,7 +6462,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/sources/remote/auth_remote_data_source.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_sources_remote_auth_remote_data_source_dart_validationexception",
-      "community": 6,
+      "community": 13,
       "norm_label": "validationexception"
     },
     {
@@ -6462,7 +6471,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/sources/remote/auth_remote_data_source.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_sources_remote_auth_remote_data_source_dart_badrequestexception",
-      "community": 6,
+      "community": 13,
       "norm_label": "badrequestexception"
     },
     {
@@ -6471,7 +6480,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/sources/remote/auth_remote_data_source.dart",
       "source_location": null,
       "id": "package_super_flutter_core_error_exceptions_parse_exception_dart",
-      "community": 6,
+      "community": 13,
       "norm_label": "package:super_flutter/core/error/exceptions/parse_exception.dart"
     },
     {
@@ -6480,7 +6489,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/sources/remote/auth_remote_data_source.dart",
       "source_location": null,
       "id": "package_super_flutter_core_network_api_endpoints_dart",
-      "community": 6,
+      "community": 13,
       "norm_label": "package:super_flutter/core/network/api_endpoints.dart"
     },
     {
@@ -6489,7 +6498,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/mappers/auth_mappers.dart",
       "source_location": null,
       "id": "model_login_model_dart",
-      "community": 6,
+      "community": 3,
       "norm_label": "../model/login_model.dart"
     },
     {
@@ -6498,7 +6507,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/mappers/auth_mappers.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_mappers_auth_mappers_dart",
-      "community": 6,
+      "community": 3,
       "norm_label": "auth_mappers.dart"
     },
     {
@@ -6507,7 +6516,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/mappers/auth_mappers.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_mappers_auth_mappers_dart_totokens",
-      "community": 6,
+      "community": 3,
       "norm_label": "totokens"
     },
     {
@@ -6516,7 +6525,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/data/auth/mappers/auth_mappers.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_data_auth_mappers_auth_mappers_dart_toentity",
-      "community": 6,
+      "community": 3,
       "norm_label": "toentity"
     },
     {
@@ -6687,7 +6696,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/domain/auth/entities/auth_status.dart",
       "source_location": null,
       "id": "users_deepjyotibaishya_projects_app_super_flutter_lib_domain_auth_entities_auth_status_dart",
-      "community": 62,
+      "community": 63,
       "norm_label": "auth_status.dart"
     },
     {
@@ -6768,7 +6777,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/utils.h",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_windows_runner_utils_h",
-      "community": 63,
+      "community": 64,
       "norm_label": "utils.h"
     },
     {
@@ -6813,7 +6822,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/win32_window.h",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_windows_runner_win32_window_h",
-      "community": 64,
+      "community": 65,
       "norm_label": "win32_window.h"
     },
     {
@@ -7011,7 +7020,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/resource.h",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_windows_runner_resource_h",
-      "community": 65,
+      "community": 66,
       "norm_label": "resource.h"
     },
     {
@@ -7065,7 +7074,7 @@
       "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/flutter/generated_plugin_registrant.h",
       "source_location": "L1",
       "id": "users_deepjyotibaishya_projects_app_super_flutter_windows_flutter_generated_plugin_registrant_h",
-      "community": 66,
+      "community": 67,
       "norm_label": "generated_plugin_registrant.h"
     }
   ],
@@ -15409,6 +15418,18 @@
       "_tgt": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_screen_login_screen_dart_blocprovider",
       "source": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_screen_login_screen_dart",
       "target": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_screen_login_screen_dart_blocprovider"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/features/auth/presentation/login/screen/login_screen.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_screen_login_screen_dart",
+      "_tgt": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_screen_login_screen_dart_initstate",
+      "source": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_screen_login_screen_dart",
+      "target": "users_deepjyotibaishya_projects_app_super_flutter_lib_features_auth_presentation_login_screen_login_screen_dart_initstate"
     },
     {
       "relation": "defines",
