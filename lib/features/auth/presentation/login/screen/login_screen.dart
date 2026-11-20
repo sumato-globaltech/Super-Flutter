@@ -97,7 +97,6 @@ class _LoginViewState extends State<LoginView> {
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child: Form(
                 key: _formKey,
-                autovalidateMode: .onUserInteraction,
                 child: Column(
                   children: [
                     Hero(
@@ -123,6 +122,11 @@ class _LoginViewState extends State<LoginView> {
                       builder: (context, emailError) => TextFormField(
                         controller: _emailController,
                         forceErrorText: emailError,
+                        onChanged: emailError == null
+                            ? null
+                            : (_) => _loginBloc.add(
+                                const LoginFieldErrorCleared('email'),
+                              ),
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
                         autofillHints: const [AutofillHints.email],
@@ -149,6 +153,11 @@ class _LoginViewState extends State<LoginView> {
                       builder: (context, password) => TextFormField(
                         controller: _passwordController,
                         forceErrorText: password.error,
+                        onChanged: password.error == null
+                            ? null
+                            : (_) => _loginBloc.add(
+                                const LoginFieldErrorCleared('password'),
+                              ),
                         obscureText: password.obscure,
                         textInputAction: TextInputAction.done,
                         autofillHints: const [AutofillHints.password],
@@ -193,7 +202,7 @@ class _LoginViewState extends State<LoginView> {
                                         .colorScheme
                                         .primary,
                                   )
-                                :   Text('Login'),
+                                : Text('Login'),
                           ),
                         ),
                       ),

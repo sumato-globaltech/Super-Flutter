@@ -11,6 +11,15 @@ class LoginPasswordVisibilityToggled extends LoginEvent {
   const LoginPasswordVisibilityToggled();
 }
 
+class LoginFieldErrorCleared extends LoginEvent {
+  const LoginFieldErrorCleared(this.field);
+
+  final String field;
+
+  @override
+  List<Object?> get props => [field];
+}
+
 class LoginSubmitted extends LoginEvent {
   const LoginSubmitted({required this.email, required this.password});
 

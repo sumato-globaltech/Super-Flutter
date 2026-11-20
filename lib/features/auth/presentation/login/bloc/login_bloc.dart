@@ -12,6 +12,7 @@ import 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc(this._login) : super(const LoginState()) {
     on<LoginPasswordVisibilityToggled>(_onPasswordVisibilityToggled);
+    on<LoginFieldErrorCleared>(_onFieldErrorCleared);
     on<LoginSubmitted>(_onSubmitted, transformer: droppable());
   }
 
@@ -22,6 +23,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     Emitter<LoginState> emit,
   ) {
     emit(state.copyWith(obscurePassword: !state.obscurePassword));
+  }
+
+  void _onFieldErrorCleared(
+    LoginFieldErrorCleared event,
+    Emitter<LoginState> emit,
+  ) {
+    if (!state.fieldErrors.containsKey(event.field)) return;
+    emit(
+      state.copyWith(
+        fieldErrors: Map.of(state.fieldErrors)..remove(event.field),
+      ),
+    );
   }
 
   Future<void> _onSubmitted(

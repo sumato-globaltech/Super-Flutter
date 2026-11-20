@@ -127,4 +127,22 @@ void main() {
       ),
     ],
   );
+
+  blocTest<LoginBloc, LoginState>(
+    'editing a field clears only that field server error',
+    build: () => LoginBloc(login),
+    seed: () => const LoginState(
+      status: LoginStatus.failure,
+      fieldErrors: {'email': 'Bad email', 'password': 'Bad password'},
+    ),
+    act: (b) => b
+      ..add(const LoginFieldErrorCleared('email'))
+      ..add(const LoginFieldErrorCleared('email')),
+    expect: () => [
+      const LoginState(
+        status: LoginStatus.failure,
+        fieldErrors: {'password': 'Bad password'},
+      ),
+    ],
+  );
 }
