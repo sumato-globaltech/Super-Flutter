@@ -54,7 +54,8 @@ class _LoginViewState extends State<LoginView> {
 
   void _submit() {
     FocusManager.instance.primaryFocus?.unfocus();
-    if (!(_formKey.currentState?.validate() ?? false)) return;
+    final ddd = !(_formKey.currentState?.validate() ?? false);
+    if (ddd) return;
     _loginBloc.add(
       LoginSubmitted(
         email: _emailController.text,
@@ -96,6 +97,7 @@ class _LoginViewState extends State<LoginView> {
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child: Form(
                 key: _formKey,
+                autovalidateMode: .onUserInteraction,
                 child: Column(
                   children: [
                     Hero(
@@ -191,7 +193,7 @@ class _LoginViewState extends State<LoginView> {
                                         .colorScheme
                                         .primary,
                                   )
-                                : const Text('Login'),
+                                :   Text('Login'),
                           ),
                         ),
                       ),
