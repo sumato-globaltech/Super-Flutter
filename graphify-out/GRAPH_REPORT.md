@@ -1,7 +1,7 @@
 # Graph Report - /Users/deepjyotibaishya/Projects/App/Super-Flutter  (2026-11-20)
 
 ## Corpus Check
-- 160 files · ~106,868 words
+- 160 files · ~107,000 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary

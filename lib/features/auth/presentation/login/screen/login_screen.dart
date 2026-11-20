@@ -72,7 +72,6 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<LoginBloc>().state;
     final textStyle = Theme.of(context).textTheme.bodySmall
         ?.copyWith(color: Colors.grey, height: 1.5);
     final linkStyle = textStyle?.copyWith(
@@ -117,65 +116,83 @@ class _LoginViewState extends State<LoginView> {
                       textAlign: TextAlign.center,
                     ),
                     22.height,
-                    TextFormField(
-                      controller: _emailController,
-                      forceErrorText: state.emailError,
-                      keyboardType: TextInputType.emailAddress,
-                      textInputAction: TextInputAction.next,
-                      autofillHints: const [AutofillHints.email],
-                      decoration: const InputDecoration(
-                        labelText: 'Email *',
-                        hintText: 'Type your Email',
-                        prefixIcon: Icon(Icons.email_outlined),
+                    BlocSelector<LoginBloc, LoginState, String?>(
+                      selector: (state) => state.emailError,
+                      builder: (context, emailError) => TextFormField(
+                        controller: _emailController,
+                        forceErrorText: emailError,
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                        autofillHints: const [AutofillHints.email],
+                        decoration: const InputDecoration(
+                          labelText: 'Email *',
+                          hintText: 'Type your Email',
+                          prefixIcon: Icon(Icons.email_outlined),
+                        ),
+                        validator: Utils.validateEmail,
+                        onTapOutside: (_) =>
+                            FocusManager.instance.primaryFocus?.unfocus(),
                       ),
-                      validator: Utils.validateEmail,
-                      onTapOutside: (_) =>
-                          FocusManager.instance.primaryFocus?.unfocus(),
                     ),
                     12.height,
-                    TextFormField(
-                      controller: _passwordController,
-                      forceErrorText: state.passwordError,
-                      obscureText: state.obscurePassword,
-                      textInputAction: TextInputAction.done,
-                      autofillHints: const [AutofillHints.password],
-                      decoration: InputDecoration(
-                        labelText: 'Password *',
-                        hintText: 'Type your Password',
-                        prefixIcon: const Icon(PhosphorIconsBold.lock),
-                        suffixIcon: IconButton(
-                          onPressed: () => _loginBloc.add(
-                            const LoginPasswordVisibilityToggled(),
-                          ),
-                          splashRadius: 16,
-                          visualDensity: VisualDensity.compact,
-                          icon: Icon(
-                            state.obscurePassword
-                                ? PhosphorIconsBold.eyeClosed
-                                : PhosphorIconsBold.eye,
-                            size: 18,
+                    BlocSelector<
+                      LoginBloc,
+                      LoginState,
+                      ({String? error, bool obscure})
+                    >(
+                      selector: (state) => (
+                        error: state.passwordError,
+                        obscure: state.obscurePassword,
+                      ),
+                      builder: (context, password) => TextFormField(
+                        controller: _passwordController,
+                        forceErrorText: password.error,
+                        obscureText: password.obscure,
+                        textInputAction: TextInputAction.done,
+                        autofillHints: const [AutofillHints.password],
+                        decoration: InputDecoration(
+                          labelText: 'Password *',
+                          hintText: 'Type your Password',
+                          prefixIcon: const Icon(PhosphorIconsBold.lock),
+                          suffixIcon: IconButton(
+                            onPressed: () => _loginBloc.add(
+                              const LoginPasswordVisibilityToggled(),
+                            ),
+                            splashRadius: 16,
+                            visualDensity: VisualDensity.compact,
+                            icon: Icon(
+                              password.obscure
+                                  ? PhosphorIconsBold.eyeClosed
+                                  : PhosphorIconsBold.eye,
+                              size: 18,
+                            ),
                           ),
                         ),
+                        validator: (v) => (v == null || v.trim().isEmpty)
+                            ? 'Password is required'
+                            : null,
+                        onFieldSubmitted: (_) => _submit(),
+                        onTapOutside: (_) =>
+                            FocusManager.instance.primaryFocus?.unfocus(),
                       ),
-                      validator: (v) => (v == null || v.trim().isEmpty)
-                          ? 'Password is required'
-                          : null,
-                      onFieldSubmitted: (_) => _submit(),
-                      onTapOutside: (_) =>
-                          FocusManager.instance.primaryFocus?.unfocus(),
                     ),
                     12.height,
-                    SizedBox(
-                      width: double.infinity,
-                      child: Hero(
-                        tag: Constants.keyLoginButton,
-                        child: ElevatedButton(
-                          onPressed: state.isSubmitting ? null : _submit,
-                          child: state.isSubmitting
-                              ? DesignProgress(
-                                  color: Theme.of(context).colorScheme.primary,
-                                )
-                              : const Text('Login'),
+                    BlocSelector<LoginBloc, LoginState, bool>(
+                      selector: (state) => state.isSubmitting,
+                      builder: (context, isSubmitting) => SizedBox(
+                        width: double.infinity,
+                        child: Hero(
+                          tag: Constants.keyLoginButton,
+                          child: ElevatedButton(
+                            onPressed: isSubmitting ? null : _submit,
+                            child: isSubmitting
+                                ? DesignProgress(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .primary,
+                                  )
+                                : const Text('Login'),
+                          ),
                         ),
                       ),
                     ),
