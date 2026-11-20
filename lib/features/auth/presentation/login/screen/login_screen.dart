@@ -38,14 +38,18 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController(
-    text: kDebugMode ? const String.fromEnvironment('DEV_LOGIN_EMAIL') : null,
-  );
-  final TextEditingController _passwordController = TextEditingController(
-    text: kDebugMode
-        ? const String.fromEnvironment('DEV_LOGIN_PASSWORD')
-        : null,
-  );
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+
+@override
+  void initState() {
+    super.initState();
+    if(kDebugMode){
+      _emailController.text = 'super-admin@test.test';
+      _passwordController.text = 'sumato@1234';
+    }
+  }
 
   void _submit() {
     FocusManager.instance.primaryFocus?.unfocus();
