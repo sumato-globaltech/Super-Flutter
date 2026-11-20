@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
+
 abstract final class ImagePrecache {
   static const _defaultTimeout = Duration(seconds: 2);
 

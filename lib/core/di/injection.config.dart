@@ -39,6 +39,8 @@ import 'package:super_flutter/domain/auth/use_cases/check_auth_status.dart'
     as _i236;
 import 'package:super_flutter/domain/auth/use_cases/login.dart' as _i489;
 import 'package:super_flutter/domain/auth/use_cases/logout.dart' as _i239;
+import 'package:super_flutter/domain/auth/use_cases/watch_auth_status.dart'
+    as _i729;
 import 'package:super_flutter/features/auth/presentation/login/bloc/login_bloc.dart'
     as _i386;
 import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart'
@@ -102,6 +104,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i227.AuthRepositoryImpl(
         gh<_i234.AuthRemoteDataSource>(),
         gh<_i538.AuthLocalDataSource>(),
+        gh<_i827.SessionManager>(),
       ),
     );
     gh.factory<_i236.CheckAuthStatus>(
@@ -109,9 +112,19 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i489.Login>(() => _i489.Login(gh<_i631.AuthRepository>()));
     gh.factory<_i239.Logout>(() => _i239.Logout(gh<_i631.AuthRepository>()));
-    gh.lazySingleton<_i828.AuthCubit>(
-      () => _i828.AuthCubit(gh<_i236.CheckAuthStatus>()),
+    gh.factory<_i729.WatchAuthStatus>(
+      () => _i729.WatchAuthStatus(gh<_i631.AuthRepository>()),
     );
+    gh.lazySingleton<_i828.AuthCubit>(
+      () => _i828.AuthCubit(
+        gh<_i236.CheckAuthStatus>(),
+        gh<_i729.WatchAuthStatus>(),
+      ),
+    );
+    gh.factory<_i930.DashboardBloc>(
+      () => _i930.DashboardBloc(gh<_i239.Logout>()),
+    );
+    gh.factory<_i386.LoginBloc>(() => _i386.LoginBloc(gh<_i489.Login>()));
     gh.lazySingleton<_i1066.AppStartup>(
       () => _i1066.AppStartup(
         gh<_i407.StorageService>(),
@@ -119,12 +132,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i42.DioClient>(),
         gh<_i451.AppLogger>(),
       ),
-    );
-    gh.factory<_i386.LoginBloc>(
-      () => _i386.LoginBloc(gh<_i489.Login>(), gh<_i828.AuthCubit>()),
-    );
-    gh.factory<_i930.DashboardBloc>(
-      () => _i930.DashboardBloc(gh<_i239.Logout>(), gh<_i828.AuthCubit>()),
     );
     return this;
   }

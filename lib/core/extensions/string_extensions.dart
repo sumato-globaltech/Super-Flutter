@@ -8,9 +8,11 @@ extension StringX on String {
     return '${this[0].toUpperCase()}${substring(1)}';
   }
 
-  String get titleCased => split(
-    RegExp(r'[\s_-]+'),
-  ).where((word) => word.isNotEmpty).map((word) => word.capitalized).join(' ');
+  String get titleCased =>
+      split(RegExp(r'[\s_-]+'))
+          .where((word) => word.isNotEmpty)
+          .map((word) => word.capitalized)
+          .join(' ');
 
   String get initials {
     final words = trim().split(RegExp(r'\s+')).where((w) => w.isNotEmpty);

@@ -7,7 +7,6 @@ import '../error/error_reporter.dart';
 import '../error/logger_error_reporter.dart';
 import '../logging/app_logger.dart';
 
-
 @module
 abstract class CoreModule {
   @lazySingleton

@@ -24,7 +24,7 @@ extension StringExtension on String {
     return (words[0].isNotEmpty ? words[0][0] : '') +
         (words[1].isNotEmpty ? words[1][0] : '');
   }
-  
+
   Color? get toColor {
     var hex = trim().replaceFirst('#', '');
     if (hex.length == 6) hex = 'FF$hex';

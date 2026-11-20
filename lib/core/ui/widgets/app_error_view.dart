@@ -30,8 +30,10 @@ class AppErrorView extends StatelessWidget {
         : UnknownException('$error');
     final (icon, title) = switch (exception) {
       NoInternetException() => (Icons.wifi_off_outlined, 'No connection'),
-      RequestTimeoutException() =>
-        (Icons.schedule_outlined, 'This is taking a while'),
+      RequestTimeoutException() => (
+        Icons.schedule_outlined,
+        'This is taking a while',
+      ),
       ServerException() => (Icons.cloud_off_outlined, 'Server unavailable'),
       UnauthorizedException() => (Icons.lock_outline, 'Session expired'),
       NotFoundException() => (Icons.search_off_outlined, 'Not found'),

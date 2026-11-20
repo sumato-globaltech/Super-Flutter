@@ -3,7 +3,6 @@ import 'dart:developer' as developer;
 enum LogLevel { debug, info, warning, error }
 
 class AppLogger {
-
   AppLogger({this.enabled = true, this.minimumLevel = LogLevel.debug});
 
   final bool enabled;

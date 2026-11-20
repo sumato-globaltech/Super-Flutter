@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 
-enum AuthStatus { unknown, authenticated, unauthenticated }
+import '../../../../domain/auth/entities/auth_status.dart';
+
+export '../../../../domain/auth/entities/auth_status.dart';
 
 class AuthState extends Equatable {
   const AuthState({this.status = AuthStatus.unknown});

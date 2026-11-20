@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -15,9 +14,7 @@ class AppErrorHandler {
     PlatformDispatcher.instance.onError = _handlePlatformError;
   }
 
-  void _handleFlutterError(
-      FlutterErrorDetails details,
-      ) {
+  void _handleFlutterError(FlutterErrorDetails details) {
     // Keep Flutter's default error presentation.
     FlutterError.presentError(details);
 
@@ -28,15 +25,8 @@ class AppErrorHandler {
     );
   }
 
-  bool _handlePlatformError(
-      Object error,
-      StackTrace stack,
-      ) {
-    reporter.report(
-      error,
-      stack,
-      reason: 'Unhandled platform error',
-    );
+  bool _handlePlatformError(Object error, StackTrace stack) {
+    reporter.report(error, stack, reason: 'Unhandled platform error');
 
     return true;
   }

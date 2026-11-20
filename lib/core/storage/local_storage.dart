@@ -76,9 +76,9 @@ class LocalDatabase extends _$LocalDatabase {
     return row?.value;
   }
 
-  Future<void> writeSetting(String key, String value) => into(
-    keyValueRows,
-  ).insertOnConflictUpdate(KeyValueRow(key: key, value: value));
+  Future<void> writeSetting(String key, String value) =>
+      into(keyValueRows)
+          .insertOnConflictUpdate(KeyValueRow(key: key, value: value));
 
   Future<void> deleteSetting(String key) =>
       (delete(keyValueRows)..where((t) => t.key.equals(key))).go();

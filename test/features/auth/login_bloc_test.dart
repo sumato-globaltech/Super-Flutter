@@ -7,18 +7,14 @@ import 'package:super_flutter/domain/auth/entities/auth_session.dart';
 import 'package:super_flutter/domain/auth/entities/auth_token.dart';
 import 'package:super_flutter/domain/auth/entities/user.dart';
 import 'package:super_flutter/domain/auth/use_cases/login.dart';
-import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 import 'package:super_flutter/features/auth/presentation/login/bloc/login_bloc.dart';
 import 'package:super_flutter/features/auth/presentation/login/bloc/login_event.dart';
 import 'package:super_flutter/features/auth/presentation/login/bloc/login_state.dart';
 
 class MockLogin extends Mock implements Login {}
 
-class MockAuthCubit extends Mock implements AuthCubit {}
-
 void main() {
   late MockLogin login;
-  late MockAuthCubit authCubit;
 
   const session = AuthSession(
     user: User(id: 'u1', name: 'Emily', email: 'emily@test.com'),
@@ -27,8 +23,6 @@ void main() {
 
   setUp(() {
     login = MockLogin();
-    authCubit = MockAuthCubit();
-    when(() => authCubit.authenticated()).thenReturn(null);
   });
 
   const submitted = LoginSubmitted(
@@ -38,7 +32,7 @@ void main() {
 
   blocTest<LoginBloc, LoginState>(
     'emits failure when submitting blank form',
-    build: () => LoginBloc(login, authCubit),
+    build: () => LoginBloc(login),
     act: (b) => b.add(const LoginSubmitted(email: '  ', password: '')),
     expect: () => [
       const LoginState(
@@ -55,7 +49,7 @@ void main() {
   );
 
   blocTest<LoginBloc, LoginState>(
-    'sends trimmed event values to login and marks session authenticated',
+    'sends trimmed event values to login',
     build: () {
       when(
         () => login(
@@ -63,7 +57,7 @@ void main() {
           password: any(named: 'password'),
         ),
       ).thenAnswer((_) async => session);
-      return LoginBloc(login, authCubit);
+      return LoginBloc(login);
     },
     act: (b) => b.add(submitted),
     expect: () => [
@@ -73,7 +67,6 @@ void main() {
     verify: (_) {
       verify(() => login(email: 'emily@test.com', password: 'emilyspass'))
           .called(1);
-      verify(() => authCubit.authenticated()).called(1);
     },
   );
 
@@ -86,7 +79,7 @@ void main() {
           password: any(named: 'password'),
         ),
       ).thenThrow(const UnauthorizedException('Invalid credentials.'));
-      return LoginBloc(login, authCubit);
+      return LoginBloc(login);
     },
     act: (b) => b.add(submitted),
     expect: () => [
@@ -96,7 +89,6 @@ void main() {
         errorMessage: 'Invalid credentials.',
       ),
     ],
-    verify: (_) => verifyNever(() => authCubit.authenticated()),
   );
 
   blocTest<LoginBloc, LoginState>(
@@ -113,7 +105,7 @@ void main() {
           fieldErrors: {'email': 'These credentials do not match our records.'},
         ),
       );
-      return LoginBloc(login, authCubit);
+      return LoginBloc(login);
     },
     act: (b) async {
       b.add(submitted);

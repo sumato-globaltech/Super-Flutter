@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:developer' as developer;
 import 'dart:math';
+
 // import 'package:device_info_plus/device_info_plus.dart';
 // import 'package:file_picker/file_picker.dart';
 import 'package:material_ui/material_ui.dart';
@@ -16,6 +17,7 @@ import 'package:path_provider/path_provider.dart';
 // import 'package:uuid/uuid.dart';
 import 'package:path/path.dart' as p;
 import 'package:super_flutter/core/constants/constants.dart';
+
 // import 'package:permission_handler/permission_handler.dart';
 
 class Utils {
@@ -477,7 +479,7 @@ class Utils {
   }
 
   static String? validateEmail(String? email) {
-    String emailPattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+    String emailPattern = r'^[\w.+-]+@([\w-]+\.)+[\w-]{2,}$';
     RegExp regExp = RegExp(emailPattern);
     if (email == null || email.isEmpty) {
       return 'Please enter an email address.';
@@ -566,9 +568,8 @@ class Utils {
     if (dateTime == null) {
       return "";
     }
-    dateTime = DateFormat(
-      "dd MMM yyyy, h:m a",
-    ).format(DateTime.parse(dateTime).toLocal());
+    dateTime = DateFormat("dd MMM yyyy, h:m a")
+        .format(DateTime.parse(dateTime).toLocal());
     return dateTime;
   }
 

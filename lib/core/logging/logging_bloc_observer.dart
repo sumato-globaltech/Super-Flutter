@@ -11,31 +11,18 @@ class LoggingBlocObserver extends BlocObserver {
   void onCreate(BlocBase<dynamic> bloc) {
     super.onCreate(bloc);
 
-    _logger.debug(
-      '${bloc.runtimeType} created',
-      name: 'bloc',
-    );
+    _logger.debug('${bloc.runtimeType} created', name: 'bloc');
   }
 
   @override
-  void onChange(
-      BlocBase<dynamic> bloc,
-      Change<dynamic> change,
-      ) {
+  void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
     super.onChange(bloc, change);
 
-    _logger.debug(
-      '${bloc.runtimeType}: $change',
-      name: 'bloc',
-    );
+    _logger.debug('${bloc.runtimeType}: $change', name: 'bloc');
   }
 
   @override
-  void onError(
-      BlocBase<dynamic> bloc,
-      Object error,
-      StackTrace stackTrace,
-      ) {
+  void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
     _logger.error(
       '${bloc.runtimeType} failed',
       name: 'bloc',
@@ -48,10 +35,7 @@ class LoggingBlocObserver extends BlocObserver {
 
   @override
   void onClose(BlocBase<dynamic> bloc) {
-    _logger.debug(
-      '${bloc.runtimeType} closed',
-      name: 'bloc',
-    );
+    _logger.debug('${bloc.runtimeType} closed', name: 'bloc');
 
     super.onClose(bloc);
   }

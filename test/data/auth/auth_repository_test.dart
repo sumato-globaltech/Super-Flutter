@@ -1,19 +1,27 @@
+import 'dart:async';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:super_flutter/core/network/session_manager.dart';
 import 'package:super_flutter/data/auth/model/login_model.dart';
 import 'package:super_flutter/data/auth/model/user_model.dart';
 import 'package:super_flutter/data/auth/repositories/auth_repository_impl.dart';
 import 'package:super_flutter/data/auth/sources/local/auth_local_data_source.dart';
 import 'package:super_flutter/data/auth/sources/remote/auth_remote_data_source.dart';
+import 'package:super_flutter/domain/auth/entities/auth_status.dart';
 import 'package:super_flutter/domain/auth/entities/auth_token.dart';
 
 class MockRemoteDataSource extends Mock implements AuthRemoteDataSource {}
 
 class MockLocalDataSource extends Mock implements AuthLocalDataSource {}
 
+class MockSessionManager extends Mock implements SessionManager {}
+
 void main() {
   late MockRemoteDataSource remote;
   late MockLocalDataSource local;
+  late MockSessionManager sessionManager;
+  late StreamController<void> expired;
   late AuthRepositoryImpl repository;
 
   setUpAll(() {
@@ -24,7 +32,15 @@ void main() {
   setUp(() {
     remote = MockRemoteDataSource();
     local = MockLocalDataSource();
-    repository = AuthRepositoryImpl(remote, local);
+    sessionManager = MockSessionManager();
+    expired = StreamController<void>.broadcast();
+    when(() => sessionManager.expired).thenAnswer((_) => expired.stream);
+    repository = AuthRepositoryImpl(remote, local, sessionManager);
+  });
+
+  tearDown(() async {
+    await repository.dispose();
+    await expired.close();
   });
 
   test('hasSession delegates to local data source', () async {
@@ -75,6 +91,11 @@ void main() {
     when(() => local.saveTokens(any())).thenAnswer((_) async {});
     when(() => local.saveUser(any())).thenAnswer((_) async {});
 
+    final statuses = expectLater(
+      repository.status,
+      emits(AuthStatus.authenticated),
+    );
+
     final session = await repository.login(
       email: 'emily@test.com',
       password: 'secret',
@@ -82,18 +103,35 @@ void main() {
 
     expect(session.user.email, 'emily@test.com');
     expect(session.tokens.accessToken, 'a');
-    verify(
-      () => remote.login(email: 'emily@test.com', password: 'secret'),
-    ).called(1);
-    verify(() => local.saveTokens(const AuthTokens(accessToken: 'a'))).called(1);
+    verify(() => remote.login(email: 'emily@test.com', password: 'secret'))
+        .called(1);
+    verify(() => local.saveTokens(const AuthTokens(accessToken: 'a')))
+        .called(1);
     verify(() => local.saveUser(response.user!)).called(1);
+    await statuses;
   });
 
   test('logout clears local session', () async {
     when(() => local.clearSession()).thenAnswer((_) async {});
+    final statuses = expectLater(
+      repository.status,
+      emits(AuthStatus.unauthenticated),
+    );
 
     await repository.logout();
+    await statuses;
 
     verify(() => local.clearSession()).called(1);
+  });
+
+  test('session expiry is reported as unauthenticated', () async {
+    final statuses = expectLater(
+      repository.status,
+      emits(AuthStatus.unauthenticated),
+    );
+
+    expired.add(null);
+
+    await statuses;
   });
 }

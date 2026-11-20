@@ -1,10 +1,11 @@
-import 'package:get_it/get_it.dart';
+import 'dart:async';
+
 import 'package:injectable/injectable.dart';
 import 'package:super_flutter/core/storage/storage_service.dart';
 
-import '../../features/auth/session/bloc/auth_cubit.dart';
-
 abstract interface class SessionManager {
+  Stream<void> get expired;
+
   Future<void> onSessionExpired();
 }
 
@@ -13,12 +14,14 @@ class SessionManagerImpl implements SessionManager {
   SessionManagerImpl({required this._storageService});
 
   final StorageService _storageService;
+  final _expired = StreamController<void>.broadcast();
+
+  @override
+  Stream<void> get expired => _expired.stream;
 
   @override
   Future<void> onSessionExpired() async {
     await _storageService.clearSession();
-    if (GetIt.instance.isRegistered<AuthCubit>()) {
-      GetIt.instance<AuthCubit>().unauthenticated();
-    }
+    _expired.add(null);
   }
 }

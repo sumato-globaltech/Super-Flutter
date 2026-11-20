@@ -14,7 +14,5 @@ abstract final class StorageKeys {
   static const onboardingSeen = 'settings.onboarding_seen';
   static const lastSyncedAt = 'sync.last_synced_at';
 
-
   static const localDatabase = 'app_db';
-
 }

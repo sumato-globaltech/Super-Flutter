@@ -4,10 +4,7 @@ import 'secure_storage.dart';
 import 'storage_keys.dart';
 
 class StorageService {
-  const StorageService({
-    required this._secureStorage,
-    required this._database,
-  });
+  const StorageService({required this._secureStorage, required this._database});
   final SecureStorage _secureStorage;
   final LocalDatabase _database;
 

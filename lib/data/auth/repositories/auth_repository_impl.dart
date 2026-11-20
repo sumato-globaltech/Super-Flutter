@@ -1,18 +1,35 @@
+import 'dart:async';
+
 import 'package:injectable/injectable.dart';
+import 'package:super_flutter/core/network/session_manager.dart';
 import 'package:super_flutter/data/auth/mappers/auth_mappers.dart';
 import 'package:super_flutter/data/auth/sources/local/auth_local_data_source.dart';
 import 'package:super_flutter/data/auth/sources/remote/auth_remote_data_source.dart';
 import 'package:super_flutter/domain/auth/entities/auth_session.dart';
+import 'package:super_flutter/domain/auth/entities/auth_status.dart';
 import 'package:super_flutter/domain/auth/entities/user.dart';
 
 import '../../../domain/auth/repositories/auth_repository.dart';
 
 @LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {
-  AuthRepositoryImpl(this._remoteDataSource, this._localDataSource);
+  AuthRepositoryImpl(
+    this._remoteDataSource,
+    this._localDataSource,
+    SessionManager sessionManager,
+  ) {
+    _expiredSubscription = sessionManager.expired.listen(
+      (_) => _status.add(AuthStatus.unauthenticated),
+    );
+  }
 
   final AuthRemoteDataSource _remoteDataSource;
   final AuthLocalDataSource _localDataSource;
+  final _status = StreamController<AuthStatus>.broadcast();
+  late final StreamSubscription<void> _expiredSubscription;
+
+  @override
+  Stream<AuthStatus> get status => _status.stream;
 
   @override
   Future<bool> hasSession() async {
@@ -30,6 +47,7 @@ class AuthRepositoryImpl implements AuthRepository {
     );
     await _localDataSource.saveTokens(result.toTokens());
     await _localDataSource.saveUser(result.user!);
+    _status.add(AuthStatus.authenticated);
     return result.toEntity();
   }
 
@@ -41,6 +59,15 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<void> logout() async {
-    await _localDataSource.clearSession();
+    try {
+      await _localDataSource.clearSession();
+    } finally {
+      _status.add(AuthStatus.unauthenticated);
+    }
+  }
+
+  Future<void> dispose() async {
+    await _expiredSubscription.cancel();
+    await _status.close();
   }
 }

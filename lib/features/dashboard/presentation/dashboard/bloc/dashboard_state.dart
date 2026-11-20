@@ -3,7 +3,10 @@ import 'package:equatable/equatable.dart';
 enum DashboardStatus { initial, submitting, success, failure }
 
 class DashboardState extends Equatable {
-  const DashboardState({this.status = DashboardStatus.initial, this.errorMessage});
+  const DashboardState({
+    this.status = DashboardStatus.initial,
+    this.errorMessage,
+  });
 
   final DashboardStatus status;
   final String? errorMessage;

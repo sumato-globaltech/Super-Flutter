@@ -47,7 +47,7 @@ class _LoginViewState extends State<LoginView> {
         : null,
   );
 
-  void submit() {
+  void _submit() {
     FocusManager.instance.primaryFocus?.unfocus();
     if (!(_formKey.currentState?.validate() ?? false)) return;
     final loginBloc = context.read<LoginBloc>();
@@ -157,7 +157,7 @@ class _LoginViewState extends State<LoginView> {
                       validator: (v) => (v == null || v.trim().isEmpty)
                           ? 'Password is required'
                           : null,
-                      onFieldSubmitted: (_) => submit(),
+                      onFieldSubmitted: (_) => _submit(),
                       onTapOutside: (_) =>
                           FocusManager.instance.primaryFocus?.unfocus(),
                     ),
@@ -167,7 +167,7 @@ class _LoginViewState extends State<LoginView> {
                       child: Hero(
                         tag: Constants.keyLoginButton,
                         child: ElevatedButton(
-                          onPressed: state.isSubmitting ? null : submit,
+                          onPressed: state.isSubmitting ? null : _submit,
                           child: state.isSubmitting
                               ? DesignProgress(
                                   color: Theme.of(context).colorScheme.primary,

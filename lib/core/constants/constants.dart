@@ -1,4 +1,3 @@
-
 import 'package:package_info_plus/package_info_plus.dart';
 
 class Constants {
@@ -37,8 +36,7 @@ class Constants {
   static const String keyLoginButton = "keyLoginButton";
   static const int otpResendSeconds = 120;
   // key
-  static const String appFullName =
-      'Unified Digital Agriculture Ecosystem';
+  static const String appFullName = 'Unified Digital Agriculture Ecosystem';
   static const double elevation = 0;
 
   static const String companyName = 'Sumato Globaltech Pvt. Ltd.';

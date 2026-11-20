@@ -70,14 +70,9 @@ class _DesignProgressAnimationState extends State<DesignProgressAnimation>
   }
 }
 
-
 class DesignProgress extends StatelessWidget {
-  const DesignProgress({
-    Key? key,
-    this.color,
-    this.size,
-    this.value,
-  }) : super(key: key);
+  const DesignProgress({Key? key, this.color, this.size, this.value})
+    : super(key: key);
 
   final Color? color;
   final double? size;
