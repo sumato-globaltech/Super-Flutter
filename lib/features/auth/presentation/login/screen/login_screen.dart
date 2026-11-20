@@ -72,8 +72,8 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    final loginBloc = context.read<LoginBloc>();
-    final state = context.watch<LoginBloc>().state;
+    final loginBloc = context.watch<LoginBloc>();
+    // final state = context.watch<LoginBloc>().state;
     final textStyle = Theme.of(context).textTheme.bodySmall
         ?.copyWith(color: Colors.grey, height: 1.5);
     final linkStyle = textStyle?.copyWith(
@@ -120,7 +120,7 @@ class _LoginViewState extends State<LoginView> {
                     22.height,
                     TextFormField(
                       controller: _emailController,
-                      forceErrorText: state.emailError,
+                      forceErrorText: loginBloc.state.emailError,
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
                       autofillHints: const [AutofillHints.email],
@@ -136,8 +136,8 @@ class _LoginViewState extends State<LoginView> {
                     12.height,
                     TextFormField(
                       controller: _passwordController,
-                      forceErrorText: state.passwordError,
-                      obscureText: state.obscurePassword,
+                      forceErrorText: loginBloc.state.passwordError,
+                      obscureText: loginBloc.state.obscurePassword,
                       textInputAction: TextInputAction.done,
                       autofillHints: const [AutofillHints.password],
                       decoration: InputDecoration(
@@ -151,7 +151,7 @@ class _LoginViewState extends State<LoginView> {
                           splashRadius: 16,
                           visualDensity: VisualDensity.compact,
                           icon: Icon(
-                            state.obscurePassword
+                            loginBloc.state.obscurePassword
                                 ? PhosphorIconsBold.eyeClosed
                                 : PhosphorIconsBold.eye,
                             size: 18,
@@ -171,8 +171,8 @@ class _LoginViewState extends State<LoginView> {
                       child: Hero(
                         tag: Constants.keyLoginButton,
                         child: ElevatedButton(
-                          onPressed: state.isSubmitting ? null : _submit,
-                          child: state.isSubmitting
+                          onPressed: loginBloc.state.isSubmitting ? null : _submit,
+                          child: loginBloc.state.isSubmitting
                               ? DesignProgress(
                                   color: Theme.of(context).colorScheme.primary,
                                 )
