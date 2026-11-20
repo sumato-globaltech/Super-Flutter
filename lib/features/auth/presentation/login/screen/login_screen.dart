@@ -40,10 +40,12 @@ class _LoginViewState extends State<LoginView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  late final LoginBloc _loginBloc;
 
   @override
   void initState() {
     super.initState();
+    _loginBloc = context.read<LoginBloc>();
     if (kDebugMode) {
       _emailController.text = 'super-admin@test.test';
       _passwordController.text = 'sumato@1234';
@@ -53,8 +55,7 @@ class _LoginViewState extends State<LoginView> {
   void _submit() {
     FocusManager.instance.primaryFocus?.unfocus();
     if (!(_formKey.currentState?.validate() ?? false)) return;
-    final loginBloc = context.read<LoginBloc>();
-    loginBloc.add(
+    _loginBloc.add(
       LoginSubmitted(
         email: _emailController.text,
         password: _passwordController.text,
@@ -71,7 +72,7 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    final loginBloc = context.read<LoginBloc>();
+    // final loginBloc = context.read<LoginBloc>();
     final state = context.watch<LoginBloc>().state;
     final textStyle = Theme.of(context).textTheme.bodySmall
         ?.copyWith(color: Colors.grey, height: 1.5);
@@ -144,7 +145,7 @@ class _LoginViewState extends State<LoginView> {
                         hintText: 'Type your Password',
                         prefixIcon: const Icon(PhosphorIconsBold.lock),
                         suffixIcon: IconButton(
-                          onPressed: () => loginBloc.add(
+                          onPressed: () => _loginBloc.add(
                             const LoginPasswordVisibilityToggled(),
                           ),
                           splashRadius: 16,
