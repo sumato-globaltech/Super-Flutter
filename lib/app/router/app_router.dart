@@ -54,9 +54,6 @@ GoRouter createRouter({
   );
 }
 
-/// Route guard. Returns the location to redirect to, or `null` to stay.
-///
-/// Kept pure so it can be unit tested without a widget tree.
 @visibleForTesting
 String? resolveRedirect({
   required String location,
@@ -66,11 +63,9 @@ String? resolveRedirect({
   if (updateRequired) {
     return location == RouteNames.forceUpdate ? null : RouteNames.forceUpdate;
   }
-
   final isEntryRoute =
       location == RouteNames.splash || location == RouteNames.forceUpdate;
   final isAuthRoute = location == AuthRouteNames.login;
-
   switch (status) {
     case AuthStatus.unknown:
       return location == RouteNames.splash ? null : RouteNames.splash;
