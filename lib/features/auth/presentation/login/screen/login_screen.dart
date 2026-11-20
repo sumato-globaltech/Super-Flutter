@@ -72,7 +72,6 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    // final loginBloc = context.read<LoginBloc>();
     final state = context.watch<LoginBloc>().state;
     final textStyle = Theme.of(context).textTheme.bodySmall
         ?.copyWith(color: Colors.grey, height: 1.5);
