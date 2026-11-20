@@ -17,8 +17,6 @@ class MockLogin extends Mock implements Login {}
 class MockAuthCubit extends Mock implements AuthCubit {}
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
-
   late MockLogin login;
   late MockAuthCubit authCubit;
 
@@ -33,22 +31,15 @@ void main() {
     when(() => authCubit.authenticated()).thenReturn(null);
   });
 
-  blocTest<LoginBloc, LoginState>(
-    'stores field changes and stays initial',
-    build: () => LoginBloc(login, authCubit),
-    act: (b) => b
-      ..add(const LoginEmailChanged('emily@test.com'))
-      ..add(const LoginPasswordChanged('emilyspass')),
-    expect: () => [
-      const LoginState(email: 'emily@test.com'),
-      const LoginState(email: 'emily@test.com', password: 'emilyspass'),
-    ],
+  const submitted = LoginSubmitted(
+    email: ' emily@test.com ',
+    password: 'emilyspass',
   );
 
   blocTest<LoginBloc, LoginState>(
     'emits failure when submitting blank form',
     build: () => LoginBloc(login, authCubit),
-    act: (b) => b.add(const LoginSubmitted()),
+    act: (b) => b.add(const LoginSubmitted(email: '  ', password: '')),
     expect: () => [
       const LoginState(
         status: LoginStatus.failure,
@@ -64,7 +55,7 @@ void main() {
   );
 
   blocTest<LoginBloc, LoginState>(
-    'emits submitting then success and marks session authenticated',
+    'sends trimmed event values to login and marks session authenticated',
     build: () {
       when(
         () => login(
@@ -74,20 +65,10 @@ void main() {
       ).thenAnswer((_) async => session);
       return LoginBloc(login, authCubit);
     },
-    seed: () =>
-        const LoginState(email: 'emily@test.com', password: 'emilyspass'),
-    act: (b) => b.add(const LoginSubmitted()),
+    act: (b) => b.add(submitted),
     expect: () => [
-      const LoginState(
-        email: 'emily@test.com',
-        password: 'emilyspass',
-        status: LoginStatus.submitting,
-      ),
-      const LoginState(
-        email: 'emily@test.com',
-        password: 'emilyspass',
-        status: LoginStatus.success,
-      ),
+      const LoginState(status: LoginStatus.submitting),
+      const LoginState(status: LoginStatus.success),
     ],
     verify: (_) {
       verify(() => login(email: 'emily@test.com', password: 'emilyspass'))
@@ -107,17 +88,10 @@ void main() {
       ).thenThrow(const UnauthorizedException('Invalid credentials.'));
       return LoginBloc(login, authCubit);
     },
-    seed: () => const LoginState(email: 'emily@test.com', password: 'wrong'),
-    act: (b) => b.add(const LoginSubmitted()),
+    act: (b) => b.add(submitted),
     expect: () => [
+      const LoginState(status: LoginStatus.submitting),
       const LoginState(
-        email: 'emily@test.com',
-        password: 'wrong',
-        status: LoginStatus.submitting,
-      ),
-      const LoginState(
-        email: 'emily@test.com',
-        password: 'wrong',
         status: LoginStatus.failure,
         errorMessage: 'Invalid credentials.',
       ),
@@ -126,7 +100,7 @@ void main() {
   );
 
   blocTest<LoginBloc, LoginState>(
-    'maps server field errors and clears email error when typing',
+    'maps server field errors and clears them on the next submit',
     build: () {
       when(
         () => login(
@@ -141,22 +115,24 @@ void main() {
       );
       return LoginBloc(login, authCubit);
     },
-    seed: () => const LoginState(email: 'a@b.com', password: 'wrong'),
     act: (b) async {
-      b.add(const LoginSubmitted());
+      b.add(submitted);
       await Future<void>.delayed(Duration.zero);
-      b.add(const LoginEmailChanged('a@b.co'));
+      b.add(submitted);
     },
-    skip: 1,
     expect: () => [
+      const LoginState(status: LoginStatus.submitting),
       const LoginState(
-        email: 'a@b.com',
-        password: 'wrong',
         status: LoginStatus.failure,
         errorMessage: 'These credentials do not match our records.',
         fieldErrors: {'email': 'These credentials do not match our records.'},
       ),
-      const LoginState(email: 'a@b.co', password: 'wrong'),
+      const LoginState(status: LoginStatus.submitting),
+      const LoginState(
+        status: LoginStatus.failure,
+        errorMessage: 'These credentials do not match our records.',
+        fieldErrors: {'email': 'These credentials do not match our records.'},
+      ),
     ],
   );
 }

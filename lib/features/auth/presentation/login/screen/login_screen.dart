@@ -1,4 +1,4 @@
-import 'package:flutter/gestures.dart';
+import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
@@ -11,6 +11,7 @@ import 'package:super_flutter/core/ui/theme/app_theme.dart';
 import 'package:super_flutter/core/ui/widgets/gradient_background.dart';
 import 'package:super_flutter/core/ui/widgets/progress_circle.dart';
 import 'package:super_flutter/core/utils/utils.dart';
+
 import '../bloc/login_bloc.dart';
 import '../bloc/login_event.dart';
 import '../bloc/login_state.dart';
@@ -23,17 +24,59 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => getIt<LoginBloc>(),
-      child: const _LoginView(),
+      child: const LoginView(),
     );
   }
 }
 
-class _LoginView extends StatelessWidget {
-  const _LoginView();
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController(
+    text: kDebugMode ? const String.fromEnvironment('DEV_LOGIN_EMAIL') : null,
+  );
+  final TextEditingController _passwordController = TextEditingController(
+    text: kDebugMode
+        ? const String.fromEnvironment('DEV_LOGIN_PASSWORD')
+        : null,
+  );
+
+  void submit() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    if (!(_formKey.currentState?.validate() ?? false)) return;
+    final loginBloc = context.read<LoginBloc>();
+    loginBloc.add(
+      LoginSubmitted(
+        email: _emailController.text,
+        password: _passwordController.text,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<LoginBloc>();
+    final loginBloc = context.read<LoginBloc>();
+    final state = context.watch<LoginBloc>().state;
+    final textStyle = Theme.of(context).textTheme.bodySmall
+        ?.copyWith(color: Colors.grey, height: 1.5);
+    final linkStyle = textStyle?.copyWith(
+      color: AppColors.secondary,
+      fontWeight: FontWeight.w500,
+      decoration: TextDecoration.underline,
+    );
     return BlocListener<LoginBloc, LoginState>(
       listenWhen: (prev, curr) =>
           prev.status != curr.status && curr.status == LoginStatus.failure,
@@ -46,23 +89,123 @@ class _LoginView extends StatelessWidget {
       child: GradientBackground(
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          // appBar: AppBar(),
           body: Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child: Form(
-                key: bloc.formKey,
+                key: _formKey,
                 child: Column(
                   children: [
-                    const _LoginHeader(),
-                    10.height,
-                    const _EmailField(),
+                    Hero(
+                      tag: AssetsName.appLogo,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          AssetsName.appLogo,
+                          width: 100,
+                          height: 100,
+                          gaplessPlayback: true,
+                        ),
+                      ),
+                    ),
                     12.height,
-                    const _PasswordField(),
+                    const Text(
+                      Constants.appFullName,
+                      textAlign: TextAlign.center,
+                    ),
+                    22.height,
+                    TextFormField(
+                      controller: _emailController,
+                      forceErrorText: state.emailError,
+                      keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
+                      autofillHints: const [AutofillHints.email],
+                      decoration: const InputDecoration(
+                        labelText: 'Email *',
+                        hintText: 'Type your Email',
+                        prefixIcon: Icon(Icons.email_outlined),
+                      ),
+                      validator: Utils.validateEmail,
+                      onTapOutside: (_) =>
+                          FocusManager.instance.primaryFocus?.unfocus(),
+                    ),
                     12.height,
-                    const _LoginButton(),
+                    TextFormField(
+                      controller: _passwordController,
+                      forceErrorText: state.passwordError,
+                      obscureText: state.obscurePassword,
+                      textInputAction: TextInputAction.done,
+                      autofillHints: const [AutofillHints.password],
+                      decoration: InputDecoration(
+                        labelText: 'Password *',
+                        hintText: 'Type your Password',
+                        prefixIcon: const Icon(PhosphorIconsBold.lock),
+                        suffixIcon: IconButton(
+                          onPressed: () => loginBloc.add(
+                            const LoginPasswordVisibilityToggled(),
+                          ),
+                          splashRadius: 16,
+                          visualDensity: VisualDensity.compact,
+                          icon: Icon(
+                            state.obscurePassword
+                                ? PhosphorIconsBold.eyeClosed
+                                : PhosphorIconsBold.eye,
+                            size: 18,
+                          ),
+                        ),
+                      ),
+                      validator: (v) => (v == null || v.trim().isEmpty)
+                          ? 'Password is required'
+                          : null,
+                      onFieldSubmitted: (_) => submit(),
+                      onTapOutside: (_) =>
+                          FocusManager.instance.primaryFocus?.unfocus(),
+                    ),
                     12.height,
-                    const _TermsText(),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Hero(
+                        tag: Constants.keyLoginButton,
+                        child: ElevatedButton(
+                          onPressed: state.isSubmitting ? null : submit,
+                          child: state.isSubmitting
+                              ? DesignProgress(
+                                  color: Theme.of(context).colorScheme.primary,
+                                )
+                              : const Text('Login'),
+                        ),
+                      ),
+                    ),
+                    12.height,
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          const TextSpan(
+                            text: 'By continuing, you agree to our ',
+                          ),
+                          WidgetSpan(
+                            alignment: PlaceholderAlignment.baseline,
+                            baseline: TextBaseline.alphabetic,
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Text('Terms of Use', style: linkStyle),
+                            ),
+                          ),
+                          const TextSpan(text: ' and '),
+                          WidgetSpan(
+                            alignment: PlaceholderAlignment.baseline,
+                            baseline: TextBaseline.alphabetic,
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Text('Privacy Policy', style: linkStyle),
+                            ),
+                          ),
+                          const TextSpan(text: '.'),
+                        ],
+                      ),
+                      textAlign: TextAlign.center,
+                      style: textStyle,
+                    ),
                   ],
                 ),
               ),
@@ -70,167 +213,6 @@ class _LoginView extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class _LoginHeader extends StatelessWidget {
-  const _LoginHeader();
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Hero(
-          tag: AssetsName.appLogo,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.asset(
-              AssetsName.appLogo,
-              width: 100,
-              height: 100,
-              gaplessPlayback: true,
-            ),
-          ),
-        ),
-        12.height,
-        const Text(Constants.appFullName, textAlign: TextAlign.center),
-        12.height,
-      ],
-    );
-  }
-}
-
-class _EmailField extends StatelessWidget {
-  const _EmailField();
-
-  @override
-  Widget build(BuildContext context) {
-    final bloc = context.read<LoginBloc>();
-    final error = context.select((LoginBloc b) => b.state.emailError);
-    return TextFormField(
-      controller: bloc.emailController,
-      forceErrorText: error,
-      keyboardType: TextInputType.emailAddress,
-      textInputAction: TextInputAction.next,
-      autofillHints: const [AutofillHints.email],
-      decoration: const InputDecoration(
-        labelText: 'Email *',
-        hintText: 'Type your Email',
-        prefixIcon: Icon(Icons.email_outlined),
-      ),
-      validator: Utils.validateEmail,
-      onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
-    );
-  }
-}
-
-class _PasswordField extends StatelessWidget {
-  const _PasswordField();
-
-  @override
-  Widget build(BuildContext context) {
-    final bloc = context.read<LoginBloc>();
-    final obscure = context.select((LoginBloc b) => b.state.obscurePassword);
-    final error = context.select((LoginBloc b) => b.state.passwordError);
-    return TextFormField(
-      controller: bloc.passwordController,
-      forceErrorText: error,
-      obscureText: obscure,
-      textInputAction: TextInputAction.done,
-      autofillHints: const [AutofillHints.password],
-      decoration: InputDecoration(
-        labelText: 'Password *',
-        hintText: 'Type your Password',
-        prefixIcon: const Icon(PhosphorIconsBold.lock),
-        suffixIcon: IconButton(
-          onPressed: () => bloc.add(const LoginPasswordVisibilityToggled()),
-          splashRadius: 16,
-          visualDensity: VisualDensity.compact,
-          icon: Icon(
-            obscure ? PhosphorIconsBold.eyeClosed : PhosphorIconsBold.eye,
-            size: 18,
-          ),
-        ),
-      ),
-      validator: (v) =>
-          (v == null || v.trim().isEmpty) ? 'Password is required' : null,
-      onFieldSubmitted: (_) => bloc.add(const LoginSubmitted()),
-      onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
-    );
-  }
-}
-
-class _LoginButton extends StatelessWidget {
-  const _LoginButton();
-
-  @override
-  Widget build(BuildContext context) {
-    final isSubmitting = context.select((LoginBloc b) => b.state.isSubmitting);
-    return SizedBox(
-      width: double.infinity,
-      child: Hero(
-        tag: Constants.keyLoginButton,
-        child: ElevatedButton(
-          onPressed: isSubmitting
-              ? null
-              : () => context.read<LoginBloc>().add(const LoginSubmitted()),
-          child: isSubmitting
-              ? DesignProgress(color: Theme.of(context).colorScheme.primary)
-              : const Text('Login'),
-        ),
-      ),
-    );
-  }
-}
-
-class _TermsText extends StatefulWidget {
-  const _TermsText();
-
-  @override
-  State<_TermsText> createState() => _TermsTextState();
-}
-
-class _TermsTextState extends State<_TermsText> {
-  late final _termsTap = TapGestureRecognizer()..onTap = () {};
-  late final _privacyTap = TapGestureRecognizer()..onTap = () {};
-
-  static const _linkStyle = TextStyle(
-    color: AppColors.secondary,
-    fontWeight: FontWeight.w500,
-    decoration: TextDecoration.underline,
-  );
-
-  @override
-  void dispose() {
-    _termsTap.dispose();
-    _privacyTap.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Text.rich(
-      TextSpan(
-        children: [
-          const TextSpan(text: 'By continuing, you agree to our '),
-          TextSpan(
-            text: 'Terms of Use',
-            style: _linkStyle,
-            recognizer: _termsTap,
-          ),
-          const TextSpan(text: ' and '),
-          TextSpan(
-            text: 'Privacy Policy',
-            style: _linkStyle,
-            recognizer: _privacyTap,
-          ),
-          const TextSpan(text: '.'),
-        ],
-      ),
-      textAlign: TextAlign.center,
-      style: Theme.of(context).textTheme.bodySmall
-          ?.copyWith(color: Colors.grey, height: 1.5),
     );
   }
 }
