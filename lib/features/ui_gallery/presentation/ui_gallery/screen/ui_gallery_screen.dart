@@ -264,7 +264,7 @@ class _UiGalleryScreenState extends State<UiGalleryScreen> {
           Gap.xl,
           Text('TitleDetailsCard', style: heading),
           Gap.md,
-          Card(
+          DesignCard(
             child: Padding(
               padding: AppSpacing.cardPadding,
               child: Column(
