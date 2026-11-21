@@ -7,40 +7,76 @@ Rules: generate through `sf` CLI · official Flutter / go_router patterns · str
 
 **Done when:** `dart analyze` clean · `flutter test` green · `go test ./...` green (if CLI changed) · verified in running app · `graphify update .`
 
+## Access model (from `dam`)
+Nothing is hardcoded per role. Every screen and tab is shown only if the signed-in user may use it.
+
+- **Roles** (`App\Enums\UserRole`): `super-admin`, `admin`, `state_officer`, `district_officer`, `call_center_agent`, `farmer`, `vendor`, `driver`
+- **Permissions** (`config/access.php`): `<module>.<feature>`, e.g. `markets.view`, `schemes.review`, `shipments.drive`, `helpdesk.manage`
+  - Effective = role permissions (editable in admin) + user `grant` − user `deny`; `super-admin` has all
+- **Profile gates:** `farmer/*` needs an active farmer profile; `vendor|driver/shipments` need role + active party profile
+- **Public (API key only):** crops, markets, schemes, notices, alerts, banners, publications, meetings, facilities, master data
+- **App rule:** each feature registers `AppFeature { id, tab?, rule }`, where the rule is a role, a permission, `any`/`all`, or public
+  - Tabs are built from the allowed features, in order; Material `NavigationBar` takes 3–5, extras go to a "More" tab
+  - The router redirects away from features the user isn't allowed
+  - Access is recomputed after login, `/me` refresh and app resume
+
+| Feature | Rule | Tab |
+|---|---|---|
+| Home | any signed-in user | ✓ |
+| Market | public (favourites: signed in) | ✓ |
+| Crops / advisory | public | More |
+| Farms, IoT, Farmer profile, Help desk tickets, Scheme apply | role `farmer` + profile | ✓ (Farms) |
+| Schemes | public; officer list needs `schemes.view` | ✓ |
+| Shipments (farmer) | `shipments.request` | ✓ |
+| Shipments (vendor) | `shipments.handle` | ✓ |
+| Shipments (driver) | `shipments.drive` | ✓ |
+| Production insights | `production.view` or `production.manage` | ✓ |
+| Help desk queue | `helpdesk.manage` | ✓ |
+| Manage notices / alerts | `notices.manage` / `alerts.manage` | More |
+| Notices, publications, meetings, facilities | public | More |
+| Profile | any signed-in user | ✓ (always last) |
+
 ## Open questions
-- [ ] Roles: farmer only, or vendor / driver / officer too?
-- [ ] Login: email/password, OTP, or both?
-- [ ] Bottom tabs: Home · Market · Farms · Schemes · Profile?
-- [x] Local base URL + API key header/value — `http://dam.test`, header `X-Api-Key`, value in `dart_defines/dev.json` (gitignored)
+- [x] Roles: all roles, decided at runtime by permissions (see Access model)
+- [x] Login: email/password **and** phone OTP (`otp/request` → `otp/verify`)
+- [x] Bottom tabs: dynamic per user (see Access model)
+- [x] Local base URL + API key header/value: `http://dam.test`, header `X-Api-Key`, value in `dart_defines/dev.json` (gitignored)
 - [ ] CLI kits embedded in `sf` binary (`go:embed`)?
+- [ ] OK to change backend (T0.3): add effective `permissions` to `UserResource`?
 
 ## Phase 0 — Foundation fixes
 - [x] **T0.1** Align `ApiEndpoints` with `api.php` (`/api/v1/me`, `/api/v1/token/refresh`, …), add API-key interceptor (`--dart-define`), verify login sends `device_name`
   - Sanctum refresh: proactive refresh inside 1 day of `expires_at`; a 401 ends the session
   - Regenerated stale `injection.config.dart` (referenced deleted `new_post_feature_dep`)
 - [ ] **T0.2** Update `sf make api` templates for correct endpoints/headers + Go tests
+- [ ] **T0.3** Backend (`dam`): return effective `permissions` (and `has_profile`) in `UserResource`, so login, OTP verify and `/me` all carry them, + Pest test
 
 ## Phase 1 — CLI commands
-- [ ] **T1.1** `sf make screen <feature> <name>` — event/state/bloc/screen in existing feature, route registration, l10n keys in `app_en.arb`
-- [ ] **T1.2** `sf make widget <name>` — shared widget in `lib/core/ui/widgets`
-- [ ] **T1.3** `sf install <kit>` — `bottom-bar`, `app-bar`, `confirm-sheet`, `title-details-card` (+ l10n keys)
-- [ ] **T1.4** `sf install shell` + `sf make tab <feature>` — `StatefulShellRoute.indexedStack` home shell, add/remove tabs
-- [ ] **T1.5** Extend `sf make api` — path params, query params, pagination (`meta`/`links`), multipart upload, 422 `errors` → field errors
+- [ ] **T1.1** `sf make screen <feature> <name>`: event/state/bloc/screen in existing feature, route registration, l10n keys in `app_en.arb`
+- [ ] **T1.2** `sf make widget <name>`: shared widget in `lib/core/ui/widgets`
+- [ ] **T1.3** `sf install <kit>`: `bottom-bar`, `app-bar`, `confirm-sheet`, `title-details-card` (+ l10n keys)
+- [ ] **T1.4** `sf install shell`: dynamic `StatefulShellRoute.indexedStack` home shell built from allowed features
+- [ ] **T1.5** `sf make feature/screen --access <rule> [--tab]`: registers the feature's access rule and tab in the feature registry
+- [ ] **T1.6** Extend `sf make api`: path params, query params, pagination (`meta`/`links`), multipart upload, 422 `errors` → field errors
 
-## Phase 2 — Shared UI
+## Phase 2 — Shared UI & access
 - [ ] **T2.1** Install confirm sheet + title/details card, widget tests
 - [ ] **T2.2** Install app bar + bottom bar, widget tests
-- [ ] **T2.3** Home shell with tabs + router redirect test
+- [ ] **T2.3** Access layer: `Permission`/`Role` value types, `AccessPolicy` from user, `FeatureRegistry`, unit tests per role
+- [ ] **T2.4** Dynamic home shell: tabs from allowed features, "More" overflow, router guard, rebuild on access change + tests (farmer / vendor / driver / officer / agent)
 
 ## Phase 3 — Features
-- [ ] **T3.1** Auth — login, OTP request/verify, me, logout, logout-all, token refresh
-- [ ] **T3.2** Home — banners, alerts, notices, quick actions
-- [ ] **T3.3** Markets — list, summary, price history, favourites
-- [ ] **T3.4** Crops — list, detail, advisory, calendar, fertilizers, economics, recommendations
-- [ ] **T3.5** Farms — CRUD, archive/unarchive, farm crops, transactions + summary, photos
-- [ ] **T3.6** IoT — devices, sync, soil-sensor account, readings
-- [ ] **T3.7** Schemes — list, detail, apply, applications, document upload, withdraw
-- [ ] **T3.8** Help desk — call centre, call-back, tickets
-- [ ] **T3.9** Profile — show/update, change password
-- [ ] **T3.10** Communication — notices, publications, meetings, facilities + stats
-- [ ] **T3.11** Device registration (FCM) — after Firebase setup
+- [ ] **T3.1** Auth: email/password login, phone OTP request/verify (resend timer from `meta.expires_in`), `/me`, logout, logout-all, forced change password when `password_change_required`
+- [ ] **T3.2** Home: banners, alerts, notices, quick actions (only allowed features)
+- [ ] **T3.3** Markets: list, summary, price history, favourites
+- [ ] **T3.4** Crops: list, detail, advisory, calendar, fertilizers, economics, recommendations
+- [ ] **T3.5** Farms *(farmer)*: CRUD, archive/unarchive, farm crops, transactions + summary, photos
+- [ ] **T3.6** IoT *(farmer)*: devices, sync, soil-sensor account, readings
+- [ ] **T3.7** Schemes: list, detail; farmer apply/applications/documents/withdraw; officer list (`schemes.view`)
+- [ ] **T3.8** Help desk: farmer call centre/call-back/tickets; agent queue summary (`helpdesk.manage`)
+- [ ] **T3.9** Shipments: farmer request/cancel; vendor accept/reject/assign/receive/reweigh; driver picked/pickup/reach
+- [ ] **T3.10** Production insights (`production.view|manage`)
+- [ ] **T3.11** Admin notices & alerts (`notices.manage`, `alerts.manage`): list, create, edit, publish/archive/restore, activate/cancel
+- [ ] **T3.12** Profile: user info, farmer profile show/update, change password
+- [ ] **T3.13** Communication: notices, publications, meetings, facilities + stats
+- [ ] **T3.14** Device registration (FCM): after Firebase setup
