@@ -62,7 +62,9 @@ Nothing is hardcoded per role. Every screen and tab is shown only if the signed-
   - `AppConfirmSheet` (`confirm` / `choose` / `show`, async action with spinner + inline error + retry), `TitleDetailsCard` (icon chip, link, loading, copy, read more, blockquote, align end, thumbnails)
   - Demo: `ui_gallery` feature (generated with `sf make feature`), dashboard button outside production
   - 20 widget tests; sf fix: `bloc=skip` no longer leaves orphan event/state files
-- [ ] **T1.2** App bar + bottom bar in `lib/core/ui/widgets`, widget tests
+- [x] **T1.2** App bar + bottom bar in `lib/core/ui/widgets`, widget tests
+  - `AppBottomBar` (2–5 items, active icon, badge count/dot, re-tap reported, theme colours, safe area, clamped text scale) + `AppTopBar` / `AppSliverTopBar` (title + subtitle, actions, bottom, auto back)
+  - In UI gallery with a 2/3/5-tab switch; 16 widget tests
 - [ ] **T1.3** Access layer: `Permission`/`Role` value types, `AccessPolicy` from user, `FeatureRegistry`, unit tests per role
 - [ ] **T1.4** Dynamic home shell: tabs from allowed features, "More" overflow, router guard, rebuild on access change + tests (farmer / vendor / driver / officer / agent)
 - [ ] **T1.5** 🔒 **Review gate: you approve the UI and architecture.** Nothing in Phase 2 starts until this is ticked

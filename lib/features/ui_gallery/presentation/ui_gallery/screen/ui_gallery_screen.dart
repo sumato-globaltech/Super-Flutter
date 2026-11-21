@@ -4,13 +4,53 @@ import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/core/network/network_exception_mapper.dart';
 import 'package:super_flutter/core/ui/theme/app_colors.dart';
 import 'package:super_flutter/core/ui/theme/app_spacing.dart';
+import 'package:super_flutter/core/ui/widgets/app_bottom_bar.dart';
 import 'package:super_flutter/core/ui/widgets/app_confirm_sheet.dart';
+import 'package:super_flutter/core/ui/widgets/app_top_bar.dart';
 import 'package:super_flutter/core/ui/widgets/title_details_card.dart';
 
 // Developer gallery of the shared widgets. Sample data is illustrative and
 // deliberately not localised.
-class UiGalleryScreen extends StatelessWidget {
+class UiGalleryScreen extends StatefulWidget {
   const UiGalleryScreen({super.key});
+
+  @override
+  State<UiGalleryScreen> createState() => _UiGalleryScreenState();
+}
+
+class _UiGalleryScreenState extends State<UiGalleryScreen> {
+  int _tab = 0;
+  int _tabCount = 5;
+
+  static const _tabs = [
+    AppBottomBarItem(
+      icon: PhosphorIconsRegular.house,
+      activeIcon: PhosphorIconsFill.house,
+      label: 'Home',
+    ),
+    AppBottomBarItem(
+      icon: PhosphorIconsRegular.storefront,
+      activeIcon: PhosphorIconsFill.storefront,
+      label: 'Market',
+    ),
+    AppBottomBarItem(
+      icon: PhosphorIconsRegular.plant,
+      activeIcon: PhosphorIconsFill.plant,
+      label: 'Farms',
+      badgeCount: 3,
+    ),
+    AppBottomBarItem(
+      icon: PhosphorIconsRegular.scroll,
+      activeIcon: PhosphorIconsFill.scroll,
+      label: 'Schemes',
+      showDot: true,
+    ),
+    AppBottomBarItem(
+      icon: PhosphorIconsRegular.user,
+      activeIcon: PhosphorIconsFill.user,
+      label: 'Profile',
+    ),
+  ];
 
   static const _advisory =
       'Apply 20 kg of urea per hectare after the first weeding, then irrigate '
@@ -29,11 +69,86 @@ class UiGalleryScreen extends StatelessWidget {
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(content: Text(message)));
 
+    final tabs = switch (_tabCount) {
+      2 => [_tabs.first, _tabs.last],
+      3 => [_tabs[0], _tabs[1], _tabs[4]],
+      _ => _tabs,
+    };
+
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.uiGallery)),
+      appBar: AppTopBar(
+        title: l10n.uiGallery,
+        subtitle: 'Shared widgets',
+        actions: [
+          IconButton(
+            tooltip: 'Notifications',
+            icon: Badge(
+              smallSize: 8,
+              child: const Icon(PhosphorIconsRegular.bell),
+            ),
+            onPressed: () => show('notifications'),
+          ),
+        ],
+      ),
+      bottomNavigationBar: AppBottomBar(
+        items: tabs,
+        selectedIndex: _tab.clamp(0, tabs.length - 1),
+        onSelected: (index) {
+          if (index == _tab) show('${tabs[index].label} tapped again');
+          setState(() => _tab = index);
+        },
+      ),
       body: ListView(
         padding: AppSpacing.pagePadding,
         children: [
+          Text('AppBottomBar', style: heading),
+          Gap.md,
+          SegmentedButton<int>(
+            segments: const [
+              ButtonSegment(value: 2, label: Text('2 tabs')),
+              ButtonSegment(value: 3, label: Text('3 tabs')),
+              ButtonSegment(value: 5, label: Text('5 tabs')),
+            ],
+            selected: {_tabCount},
+            onSelectionChanged: (value) => setState(() {
+              _tabCount = value.first;
+              _tab = 0;
+            }),
+          ),
+          Gap.xl,
+          Text('AppTopBar', style: heading),
+          Gap.md,
+          Card(
+            child: Column(
+              children: [
+                AppTopBar(
+                  title: 'Farms',
+                  automaticallyImplyLeading: false,
+                  actions: [
+                    IconButton(
+                      tooltip: 'Add',
+                      icon: const Icon(PhosphorIconsRegular.plus),
+                      onPressed: () => show('add'),
+                    ),
+                  ],
+                ),
+                const Divider(height: 1),
+                AppTopBar(
+                  title: 'East field',
+                  subtitle: 'Kohima · 2.5 ha',
+                  leading: const BackButton(),
+                  actions: [
+                    IconButton(
+                      tooltip: 'More',
+                      icon: const Icon(PhosphorIconsRegular.info),
+                      onPressed: () => show('info'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Gap.xl,
           Text('AppConfirmSheet', style: heading),
           Gap.md,
           Wrap(
