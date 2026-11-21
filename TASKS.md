@@ -41,7 +41,7 @@ Nothing is hardcoded per role. Every screen and tab is shown only if the signed-
 - [x] Login: email/password **and** phone OTP (`otp/request` → `otp/verify`)
 - [x] Bottom tabs: dynamic per user (see Access model)
 - [x] Local base URL + API key header/value: `http://dam.test`, header `X-Api-Key`, value in `dart_defines/dev.json` (gitignored)
-- [ ] CLI kits embedded in `sf` binary (`go:embed`)?
+- [x] CLI kits: embedded with `go:embed`, built only after you approve the UI (T1.5)
 - [ ] OK to change backend (T0.3): add effective `permissions` to `UserResource`?
 
 ## Phase 0 — Foundation fixes
@@ -51,21 +51,23 @@ Nothing is hardcoded per role. Every screen and tab is shown only if the signed-
 - [ ] **T0.2** Update `sf make api` templates for correct endpoints/headers + Go tests
 - [ ] **T0.3** Backend (`dam`): return effective `permissions` (and `has_profile`) in `UserResource`, so login, OTP verify and `/me` all carry them, + Pest test
 
-## Phase 1 — CLI commands
-- [ ] **T1.1** `sf make screen <feature> <name>`: event/state/bloc/screen in existing feature, route registration, l10n keys in `app_en.arb`
-- [ ] **T1.2** `sf make widget <name>`: shared widget in `lib/core/ui/widgets`
-- [ ] **T1.3** `sf install <kit>`: `bottom-bar`, `app-bar`, `confirm-sheet`, `title-details-card` (+ l10n keys)
-- [ ] **T1.4** `sf install shell`: dynamic `StatefulShellRoute.indexedStack` home shell built from allowed features
-- [ ] **T1.5** `sf make feature/screen --access <rule> [--tab]`: registers the feature's access rule and tab in the feature registry
-- [ ] **T1.6** Extend `sf make api`: path params, query params, pagination (`meta`/`links`), multipart upload, 422 `errors` → field errors
+## Phase 1 — Shared UI & access (built in this project, for your review)
+- [ ] **T1.1** Confirm sheet + title/details card in `lib/core/ui/widgets`, widget tests, shown on a demo screen
+- [ ] **T1.2** App bar + bottom bar in `lib/core/ui/widgets`, widget tests
+- [ ] **T1.3** Access layer: `Permission`/`Role` value types, `AccessPolicy` from user, `FeatureRegistry`, unit tests per role
+- [ ] **T1.4** Dynamic home shell: tabs from allowed features, "More" overflow, router guard, rebuild on access change + tests (farmer / vendor / driver / officer / agent)
+- [ ] **T1.5** 🔒 **Review gate: you approve the UI and architecture.** Nothing in Phase 2 starts until this is ticked
 
-## Phase 2 — Shared UI & access
-- [ ] **T2.1** Install confirm sheet + title/details card, widget tests
-- [ ] **T2.2** Install app bar + bottom bar, widget tests
-- [ ] **T2.3** Access layer: `Permission`/`Role` value types, `AccessPolicy` from user, `FeatureRegistry`, unit tests per role
-- [ ] **T2.4** Dynamic home shell: tabs from allowed features, "More" overflow, router guard, rebuild on access change + tests (farmer / vendor / driver / officer / agent)
+## Phase 2 — CLI (only after T1.5 is approved)
+Kits are copied from the approved Phase 1 code. Reinstalling a kit into this project must produce no diff.
+- [ ] **T2.1** `sf make screen <feature> <name>`: event/state/bloc/screen in existing feature, route registration, l10n keys in `app_en.arb`
+- [ ] **T2.2** `sf make widget <name>`: shared widget in `lib/core/ui/widgets`
+- [ ] **T2.3** `sf install <kit>`: kits embedded in the `sf` binary (`go:embed`): `bottom-bar`, `app-bar`, `confirm-sheet`, `title-details-card` (+ l10n keys)
+- [ ] **T2.4** `sf install shell`: dynamic home shell + access layer kit
+- [ ] **T2.5** `sf make feature/screen --access <rule> [--tab]`: registers the feature's access rule and tab in the feature registry
+- [ ] **T2.6** Extend `sf make api`: path params, query params, pagination (`meta`/`links`), multipart upload, 422 `errors` → field errors
 
-## Phase 3 — Features
+## Phase 3 — Features (built with the Phase 2 CLI)
 - [ ] **T3.1** Auth: email/password login, phone OTP request/verify (resend timer from `meta.expires_in`), `/me`, logout, logout-all, forced change password when `password_change_required`
 - [ ] **T3.2** Home: banners, alerts, notices, quick actions (only allowed features)
 - [ ] **T3.3** Markets: list, summary, price history, favourites
