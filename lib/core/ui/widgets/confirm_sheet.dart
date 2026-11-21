@@ -36,8 +36,6 @@ class ConfirmSheet extends StatefulWidget {
   final List<SheetAction> actions;
   final Widget? child;
 
-  /// Opens [sheet] the way every ConfirmSheet is shown: full height allowed,
-  /// transparent so the close button floats above the rounded sheet.
   static Future<T?> show<T>(BuildContext context, ConfirmSheet sheet) {
     return showModalBottomSheet<T>(
       context: context,
@@ -50,10 +48,7 @@ class ConfirmSheet extends StatefulWidget {
       builder: (_) => sheet,
     );
   }
-
-  /// Asks a yes/no question. [onConfirm] runs with the button spinning; the
-  /// sheet closes with true once it completes, and stays open with the error
-  /// when it throws.
+ 
   static Future<bool> confirm(
     BuildContext context, {
     required String title,
@@ -80,7 +75,6 @@ class ConfirmSheet extends StatefulWidget {
     return confirmed ?? false;
   }
 
-  /// Lets the user pick one of [actions]; returns its value.
   static Future<T?> choose<T>(
     BuildContext context, {
     required String title,
