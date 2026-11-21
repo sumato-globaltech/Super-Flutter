@@ -38,6 +38,19 @@
     "placeholders": { "percent": { "type": "String" } }
   },
 
+  "market": "Market",
+  "farms": "Farms",
+  "schemes": "Schemes",
+  "shipments": "Shipments",
+  "production": "Production",
+  "helpDesk": "Help desk",
+  "crops": "Crops",
+  "notices": "Notices",
+  "manageNotices": "Manage notices",
+  "manageAlerts": "Manage alerts",
+  "more": "More",
+  "@more": { "description": "Bottom bar tab that lists the destinations that do not fit" },
+
   "confirm": "Confirm",
   "cancel": "Cancel",
   "copy": "Copy",

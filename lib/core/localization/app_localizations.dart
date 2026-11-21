@@ -236,6 +236,72 @@ abstract class AppLocalizations {
   /// **'{percent}% off'**
   String percentOff(String percent);
 
+  /// No description provided for @market.
+  ///
+  /// In en, this message translates to:
+  /// **'Market'**
+  String get market;
+
+  /// No description provided for @farms.
+  ///
+  /// In en, this message translates to:
+  /// **'Farms'**
+  String get farms;
+
+  /// No description provided for @schemes.
+  ///
+  /// In en, this message translates to:
+  /// **'Schemes'**
+  String get schemes;
+
+  /// No description provided for @shipments.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get shipments;
+
+  /// No description provided for @production.
+  ///
+  /// In en, this message translates to:
+  /// **'Production'**
+  String get production;
+
+  /// No description provided for @helpDesk.
+  ///
+  /// In en, this message translates to:
+  /// **'Help desk'**
+  String get helpDesk;
+
+  /// No description provided for @crops.
+  ///
+  /// In en, this message translates to:
+  /// **'Crops'**
+  String get crops;
+
+  /// No description provided for @notices.
+  ///
+  /// In en, this message translates to:
+  /// **'Notices'**
+  String get notices;
+
+  /// No description provided for @manageNotices.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage notices'**
+  String get manageNotices;
+
+  /// No description provided for @manageAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage alerts'**
+  String get manageAlerts;
+
+  /// Bottom bar tab that lists the destinations that do not fit
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get more;
+
   /// No description provided for @confirm.
   ///
   /// In en, this message translates to:

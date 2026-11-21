@@ -34,7 +34,7 @@ Nothing is hardcoded per role. Every screen and tab is shown only if the signed-
 | Help desk queue | `helpdesk.manage` | ✓ |
 | Manage notices / alerts | `notices.manage` / `alerts.manage` | More |
 | Notices, publications, meetings, facilities | public | More |
-| Profile | any signed-in user | ✓ (always last) |
+| Profile | any signed-in user | — account button in the top bar (decided in T1.3, confirm at T1.5) |
 
 ## Open questions
 - [x] Roles: all roles, decided at runtime by permissions (see Access model)
@@ -65,7 +65,11 @@ Nothing is hardcoded per role. Every screen and tab is shown only if the signed-
 - [x] **T1.2** App bar + bottom bar in `lib/core/ui/widgets`, widget tests
   - `AppBottomBar` (2–5 items, active icon, badge count/dot, re-tap reported, theme colours, safe area, clamped text scale) + `AppTopBar` / `AppSliverTopBar` (title + subtitle, actions, bottom, auto back)
   - In UI gallery with a 2/3/5-tab switch; 16 widget tests
-- [ ] **T1.3** Access layer: `Permission`/`Role` value types, `AccessPolicy` from user, `FeatureRegistry`, unit tests per role
+- [x] **T1.3** Access layer: `Permission`/`Role` value types, `AccessPolicy` from user, `FeatureRegistry`, unit tests per role
+  - Domain: `AccessRule` (public / signedIn / role / permission / profile / any / all), `AccessPolicy`, `Roles`, `Permissions`, `GetCurrentUser`; `User` carries permissions + profileActive
+  - `AuthState` carries the user and exposes `access`; `AuthCubit.refreshUser()` for after `/me`
+  - `lib/app/access/`: `FeatureRegistry` (tabs by priority, one per path, "More" over 5, secondary list, route guard) + `app_features.dart` table
+  - Shipments also need role + active profile (API `shipment.party`), so admins don't get three shipment tabs
 - [ ] **T1.4** Dynamic home shell: tabs from allowed features, "More" overflow, router guard, rebuild on access change + tests (farmer / vendor / driver / officer / agent)
 - [ ] **T1.5** 🔒 **Review gate: you approve the UI and architecture.** Nothing in Phase 2 starts until this is ticked
 

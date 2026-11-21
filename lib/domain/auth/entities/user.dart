@@ -22,6 +22,8 @@ class User extends Equatable {
     this.emailVerified = false,
     this.passwordChangeRequired = false,
     this.createdAt,
+    this.permissions = const {},
+    this.profileActive = false,
   });
 
   static const empty = User(id: '', name: '', email: '');
@@ -36,6 +38,8 @@ class User extends Equatable {
   final bool emailVerified;
   final bool passwordChangeRequired;
   final DateTime? createdAt;
+  final Set<String> permissions;
+  final bool profileActive;
 
   bool get isEmpty => this == empty;
 
@@ -51,5 +55,7 @@ class User extends Equatable {
     emailVerified,
     passwordChangeRequired,
     createdAt,
+    permissions,
+    profileActive,
   ];
 }

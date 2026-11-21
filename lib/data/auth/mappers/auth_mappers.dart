@@ -31,6 +31,8 @@ extension UserModelMapper on UserModel {
     emailVerified: emailVerified ?? false,
     passwordChangeRequired: passwordChangeRequired ?? false,
     createdAt: createdAt,
+    permissions: permissions?.toSet() ?? const {},
+    profileActive: profileActive ?? false,
   );
 }
 

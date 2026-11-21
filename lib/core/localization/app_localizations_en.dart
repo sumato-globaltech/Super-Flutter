@@ -90,6 +90,39 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get market => 'Market';
+
+  @override
+  String get farms => 'Farms';
+
+  @override
+  String get schemes => 'Schemes';
+
+  @override
+  String get shipments => 'Shipments';
+
+  @override
+  String get production => 'Production';
+
+  @override
+  String get helpDesk => 'Help desk';
+
+  @override
+  String get crops => 'Crops';
+
+  @override
+  String get notices => 'Notices';
+
+  @override
+  String get manageNotices => 'Manage notices';
+
+  @override
+  String get manageAlerts => 'Manage alerts';
+
+  @override
+  String get more => 'More';
+
+  @override
   String get confirm => 'Confirm';
 
   @override

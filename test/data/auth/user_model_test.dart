@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:super_flutter/data/auth/mappers/auth_mappers.dart';
 import 'package:super_flutter/data/auth/model/user_model.dart';
 
 void main() {
@@ -33,6 +34,14 @@ void main() {
     expect(cached.profileActive, isTrue);
   });
 
+  test('maps access into the domain user', () {
+    final user = UserModel.fromJson(json).toEntity();
+
+    expect(user.role?.value, 'farmer');
+    expect(user.permissions, {'shipments.request'});
+    expect(user.profileActive, isTrue);
+  });
+
   test('an older cached user without access fields still reads', () {
     final legacy = Map<String, dynamic>.from(json)
       ..remove('permissions')
@@ -42,5 +51,7 @@ void main() {
 
     expect(user.permissions, isNull);
     expect(user.profileActive, isNull);
+    expect(user.toEntity().permissions, isEmpty);
+    expect(user.toEntity().profileActive, isFalse);
   });
 }
