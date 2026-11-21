@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:material_ui/material_ui.dart';
@@ -377,20 +378,24 @@ class TitleDetailsCard extends StatelessWidget {
     TextStyle valueStyle,
     TextStyle blockquoteStyle,
   ) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final accent = accentColor == null
+        ? null
+        : _readableOn(accentColor!, theme.appColors.cardContent, isDark);
     final chip = Container(
       width: 30,
       height: 30,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color:
-            accentColor?.withValues(alpha: isDark ? 0.22 : 0.12) ??
+            accent?.withValues(alpha: isDark ? 0.22 : 0.12) ??
             DesignColor.slate700.withValues(alpha: isDark ? 0.22 : 0.12),
         borderRadius: BorderRadius.circular(9),
       ),
       child:
           icon ??
-          Icon(iconData, size: 16, color: accentColor?.withValues(alpha: 0.95)),
+          Icon(iconData, size: 16, color: accent?.withValues(alpha: 0.95)),
     );
     final linkonClick = title.isNotEmpty
         ? <Widget>[
@@ -606,4 +611,22 @@ class TitleDetailsCard extends StatelessWidget {
     //   );
     // }
   }
+}
+
+/// [accent] lightened (dark mode) or darkened (light mode) just enough to
+/// reach the WCAG 3:1 contrast icons need on [background]; an accent that
+/// already reads is returned unchanged.
+Color _readableOn(Color accent, Color background, bool isDark) {
+  double contrast(Color a, Color b) {
+    final la = a.computeLuminance();
+    final lb = b.computeLuminance();
+    return (math.max(la, lb) + 0.05) / (math.min(la, lb) + 0.05);
+  }
+
+  final target = isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
+  var color = accent;
+  for (var t = 0.1; contrast(color, background) < 3 && t <= 1; t += 0.1) {
+    color = Color.lerp(accent, target, t)!;
+  }
+  return color;
 }

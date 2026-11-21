@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:super_flutter/core/ui/theme/app_colors.dart';
 import 'package:super_flutter/core/ui/widgets/image_preview.dart';
 import 'package:super_flutter/core/ui/widgets/shimmer_card.dart';
 import 'package:super_flutter/core/ui/widgets/title_details_card.dart';
@@ -195,6 +196,61 @@ void main() {
     );
 
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('a faint accent is adjusted to 3:1, a readable one is kept', (
+    tester,
+  ) async {
+    double contrast(Color a, Color b) {
+      final la = a.computeLuminance();
+      final lb = b.computeLuminance();
+      final hi = la > lb ? la : lb;
+      final lo = la > lb ? lb : la;
+      return (hi + 0.05) / (lo + 0.05);
+    }
+
+    const faint = Color(0xFF014737);
+    const readable = Color(0xFFFF9F0A);
+    for (final dark in [true, false]) {
+      await pumpCard(
+        tester,
+        const Column(
+          children: [
+            TitleDetailsCard(
+              title: 'Devices',
+              text: 'x',
+              iconData: PhosphorIconsRegular.wifiHigh,
+              accentColor: faint,
+              isFirstItem: true,
+            ),
+            TitleDetailsCard(
+              title: 'Direction',
+              text: 'y',
+              iconData: PhosphorIconsRegular.mapPin,
+              accentColor: readable,
+            ),
+          ],
+        ),
+        dark: dark,
+      );
+      final card = Theme.of(tester.element(find.text('Devices')))
+          .appColors
+          .cardContent;
+      final faintIcon = tester
+          .widget<Icon>(find.byIcon(PhosphorIconsRegular.wifiHigh))
+          .color!
+          .withValues(alpha: 1);
+      final readableIcon = tester
+          .widget<Icon>(find.byIcon(PhosphorIconsRegular.mapPin))
+          .color!
+          .withValues(alpha: 1);
+
+      expect(contrast(faintIcon, card), greaterThanOrEqualTo(3));
+      if (dark) {
+        expect(faintIcon, isNot(faint));
+        expect(readableIcon, readable);
+      }
+    }
   });
 
   testWidgets('aligns to the end', (tester) async {

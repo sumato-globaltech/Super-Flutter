@@ -11,7 +11,7 @@ abstract final class AppSpacing {
   static const xxl = 32.0;
   static const xxxl = 48.0;
 
-  static const pagePadding = EdgeInsets.all(lg);
+  static const pagePadding = EdgeInsets.all(sm);
 
   static const listPadding = EdgeInsets.symmetric(horizontal: lg, vertical: sm);
 

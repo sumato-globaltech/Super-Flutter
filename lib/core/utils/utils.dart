@@ -13,7 +13,7 @@ import 'package:intl/intl.dart';
 import 'package:ntp/ntp.dart';
 // import 'package:ntp/ntp.dart';
 import 'package:path_provider/path_provider.dart';
-// import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 // import 'package:uuid/uuid.dart';
 import 'package:path/path.dart' as p;
 import 'package:super_flutter/app/router/navigator_keys.dart';
@@ -74,18 +74,18 @@ class Utils {
       );
   }
 
-  // static Future<void> launchUrl2({
-  //   required String url,
-  //   Uri? uri,
-  //   LaunchMode? launchMode,
-  // }) async {
-  //   if (!await launchUrl(
-  //     uri ?? Uri.parse(url),
-  //     mode: launchMode ?? LaunchMode.externalApplication,
-  //   )) {
-  //     throw Exception('Could not launch $url');
-  //   }
-  // }
+  static Future<void> launchUrl2({
+    required String url,
+    Uri? uri,
+    LaunchMode? launchMode,
+  }) async {
+    if (!await launchUrl(
+      uri ?? Uri.parse(url),
+      mode: launchMode ?? LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   static String getSignalFlag(String signalFlag) {
     if (signalFlag == "Y") {
@@ -1215,15 +1215,16 @@ class Utils {
   //   }
   // }
 
-  // static Future<void> navigateToMapLocation(
-  //   String latitude,
-  //   String longitude,
-  // ) async {
-  //   try {
-  //     final url =
-  //         'https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}';
-  //     final uri = Uri.parse(url);
-  //     launchUrl2(uri: uri, url: url);
-  //   } catch (e) {}
-  // }
+  static Future<void> navigateToMapLocation(
+    String latitude,
+    String longitude,
+  ) async {
+    final url =
+        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+    try {
+      await launchUrl2(uri: Uri.parse(url), url: url);
+    } catch (error) {
+      logPrint('Could not open the map: $error');
+    }
+  }
 }

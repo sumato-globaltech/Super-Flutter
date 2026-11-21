@@ -3,9 +3,13 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/core/network/network_exception_mapper.dart';
 import 'package:super_flutter/core/ui/theme/app_colors.dart';
+import 'package:super_flutter/core/extensions/extensions.dart';
 import 'package:super_flutter/core/ui/theme/app_spacing.dart';
+import 'package:super_flutter/core/ui/theme/design_colors.dart';
+import 'package:super_flutter/core/utils/utils.dart';
 import 'package:super_flutter/core/ui/widgets/app_bottom_bar.dart';
 import 'package:super_flutter/core/ui/widgets/confirm_sheet.dart';
+import 'package:super_flutter/core/ui/widgets/design_card.dart';
 import 'package:super_flutter/core/ui/widgets/app_top_bar.dart';
 import 'package:super_flutter/core/ui/widgets/title_details_card.dart';
 
@@ -262,97 +266,181 @@ class _UiGalleryScreenState extends State<UiGalleryScreen> {
             ],
           ),
           Gap.xl,
-          Text('TitleDetailsCard', style: heading),
+          Text('DesignCard + TitleDetailsCard', style: heading),
           Gap.md,
           DesignCard(
-            child: Padding(
-              padding: AppSpacing.cardPadding,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const TitleDetailsCard(
-                    title: 'Farm area',
-                    text: '2.5 ha',
-                    isFirstItem: true,
-                  ),
-                  TitleDetailsCard(
-                    title: 'District',
-                    text: 'Kohima',
-                    iconData: PhosphorIconsRegular.mapPin,
-                    accentColor: appColors.accent,
-                    onTap: () => show('district tapped'),
-                  ),
-                  TitleDetailsCard(
-                    title: 'Status',
-                    text: 'Verified',
-                    iconData: PhosphorIconsRegular.checkCircle,
-                    accentColor: appColors.success,
-                  ),
-                  const TitleDetailsCard(
-                    title: 'Farmer ID',
-                    text: 'FRM-2026-0042',
-                    iconData: PhosphorIconsRegular.identificationCard,
-                    isCopyable: true,
-                  ),
-                  TitleDetailsCard(
-                    title: 'Advisory',
-                    text: _advisory,
-                    iconData: PhosphorIconsRegular.textAlignLeft,
-                    accentColor: appColors.warning,
-                    isReadMore: true,
-                  ),
-                  const TitleDetailsCard(
-                    title: 'Farmer note',
-                    text: 'Water logging after heavy rain near the east field.',
-                    isBlockquote: true,
-                  ),
-                  const TitleDetailsCard(
-                    title: 'Balance',
-                    text: '',
-                    isTextLoading: true,
-                  ),
-                  const TitleDetailsCard(
-                    title: 'Photos',
-                    imagePreviewUrls: [
-                      'https://picsum.photos/id/1084/400',
-                      'https://picsum.photos/id/292/400',
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Gap.md,
-          Card(
-            child: Padding(
-              padding: AppSpacing.cardPadding,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Expanded(
-                    child: TitleDetailsCard(
-                      title: 'Sown',
-                      text: '12 Jun 2026',
-                      isFirstItem: true,
-                    ),
-                  ),
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.topRight,
+            title: 'Farm Details',
+            paddingChild: const .fromLTRB(14, 14, 14, 16),
+            child: Column(
+              crossAxisAlignment: .start,
+              children: [
+                const TitleDetailsCard(
+                  title: 'Farm',
+                  text: 'East field',
+                  isFirstItem: true,
+                  iconData: PhosphorIconsRegular.plant,
+                  accentColor: DesignColor.accentName,
+                  isColumn: true,
+                ),
+                const TitleDetailsCard(
+                  title: 'Area',
+                  text: '2.5 ha',
+                  iconData: PhosphorIconsRegular.mapPinArea,
+                  accentColor: DesignColor.accentEnergy,
+                ),
+                const TitleDetailsCard(
+                  title: 'Balance',
+                  text: '',
+                  iconData: PhosphorIconsRegular.hash,
+                  accentColor: DesignColor.accentPoints,
+                  isTextLoading: true,
+                ),
+                const Row(
+                  crossAxisAlignment: .start,
+                  mainAxisAlignment: .spaceBetween,
+                  children: [
+                    Flexible(
                       child: TitleDetailsCard(
-                        title: 'Expected yield',
-                        text: '4.2 t',
-                        isFirstItem: true,
-                        isCrossAxisAlignmentStart: false,
-                        iconData: PhosphorIconsRegular.plant,
-                        accentColor: appColors.success,
+                        title: 'Crop',
+                        text: 'Paddy',
+                        iconData: PhosphorIconsRegular.shapes,
+                        accentColor: DesignColor.accentType,
                       ),
                     ),
+                    Flexible(
+                      child: TitleDetailsCard(
+                        title: 'UIN',
+                        text: 'NL-0042',
+                        isCrossAxisAlignmentStart: false,
+                        iconData: PhosphorIconsRegular.identificationCard,
+                        accentColor: DesignColor.accentUin,
+                      ),
+                    ),
+                  ],
+                ),
+                const TitleDetailsCard(
+                  title: 'Farmer ID',
+                  text: 'FRM-2026-0042',
+                  iconData: PhosphorIconsRegular.identificationCard,
+                  accentColor: DesignColor.accentUin,
+                  isCopyable: true,
+                ),
+                TitleDetailsCard(
+                  title: 'Location',
+                  text: '25.6751, 94.1086',
+                  iconData: PhosphorIconsRegular.mapPin,
+                  accentColor: DesignColor.accentLocation,
+                  onTap: () =>
+                      Utils.navigateToMapLocation('25.6751', '94.1086'),
+                ),
+                const TitleDetailsCard(
+                  title: 'Advisory',
+                  text: _advisory,
+                  iconData: PhosphorIconsRegular.textAlignLeft,
+                  accentColor: DesignColor.accentEnergy,
+                  isReadMore: true,
+                ),
+                const TitleDetailsCard(
+                  title: 'Farmer note',
+                  text: 'Water logging after heavy rain near the east field.',
+                  isBlockquote: true,
+                ),
+                const TitleDetailsCard(
+                  title: 'Photos',
+                  imagePreviewUrls: [
+                    'https://picsum.photos/id/1084/400',
+                    'https://picsum.photos/id/292/400',
+                  ],
+                ),
+              ],
+            ),
+          ),
+          20.height,
+          DesignCard(
+            title: 'Contact Person Details',
+            paddingChild: const .fromLTRB(14, 14, 14, 0),
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: .start,
+                  mainAxisAlignment: .spaceBetween,
+                  children: [
+                    const Flexible(
+                      child: TitleDetailsCard(
+                        title: 'Name',
+                        isFirstItem: true,
+                        text: 'Vizo Kense',
+                        iconData: PhosphorIconsRegular.identificationCard,
+                        accentColor: DesignColor.accentType,
+                      ),
+                    ),
+                    Flexible(
+                      child: TitleDetailsCard(
+                        title: 'Phone',
+                        text: '9876543210',
+                        isFirstItem: true,
+                        isCrossAxisAlignmentStart: false,
+                        iconData: PhosphorIconsRegular.phone,
+                        accentColor: DesignColor.accentUin,
+                        onTap: () => Utils.launchUrl2(
+                          url: '',
+                          uri: Uri(scheme: 'tel', path: '9876543210'),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                16.height,
+              ],
+            ),
+          ),
+          20.height,
+          for (final (title, text, icon, accent) in const [
+            (
+              'Farm Devices',
+              'Soil sensors and devices on this farm',
+              PhosphorIconsRegular.wifiHigh,
+              DesignColor.tealDeep,
+            ),
+            (
+              'Direction',
+              'Direction to the farm location',
+              PhosphorIconsRegular.mapPin,
+              DesignColor.accentEnergy,
+            ),
+            (
+              'Transactions',
+              'Income and expenses of this farm',
+              PhosphorIconsRegular.listBullets,
+              DesignColor.accentName,
+            ),
+            (
+              'Crop Calendar',
+              'Sowing to harvest schedule',
+              PhosphorIconsRegular.calendar,
+              DesignColor.accentUin,
+            ),
+          ]) ...[
+            DesignCard(
+              paddingChild: const .fromLTRB(14, 14, 14, 16),
+              onTap: () => show('$title tapped'),
+              child: Row(
+                children: [
+                  Flexible(
+                    child: TitleDetailsCard(
+                      title: title,
+                      text: text,
+                      isFirstItem: true,
+                      iconData: icon,
+                      accentColor: accent,
+                      showNavigateIcon: true,
+                    ),
                   ),
                 ],
               ),
             ),
-          ),
+            8.height,
+          ],
         ],
       ),
     );
