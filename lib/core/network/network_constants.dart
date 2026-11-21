@@ -17,7 +17,9 @@ abstract final class NetworkConstants {
 
   static const maxLoggedBodyLength = 2000;
 
-  static const accessTokenLifetimeMinutes = 30;
+  static const apiKeyHeader = 'X-Api-Key';
+
+  static const tokenRefreshWindow = Duration(days: 1);
 
   static String bearerToken(String token) {
     return '$bearerPrefix $token';

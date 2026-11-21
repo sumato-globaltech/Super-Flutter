@@ -4,6 +4,7 @@ import 'package:super_flutter/core/network/network_constants.dart';
 import '../../app/config/environment.dart';
 import '../logging/app_logger.dart';
 import '../storage/secure_storage.dart';
+import 'interceptors/api_key_interceptor.dart';
 import 'interceptors/auth_interceptor.dart';
 import 'interceptors/error_interceptor.dart';
 import 'interceptors/logging_interceptor.dart';
@@ -61,6 +62,7 @@ class DioClient {
   }
 
   List<Interceptor> _supportInterceptors() => [
+    ApiKeyInterceptor(apiKey: _environment.apiKey),
     if (_environment.enableHttpLogging) LoggingInterceptor(logger: _logger),
     const ErrorInterceptor(),
   ];

@@ -6,6 +6,7 @@ class Environment {
     required this.appName,
     required this.apiBaseUrl,
     required this.databaseName,
+    this.apiKey = const String.fromEnvironment('API_KEY'),
     this.connectTimeout = const Duration(seconds: 15),
     this.receiveTimeout = const Duration(seconds: 20),
     this.sendTimeout = const Duration(seconds: 20),
@@ -49,6 +50,7 @@ class Environment {
   final Flavor flavor;
   final String appName;
   final String apiBaseUrl;
+  final String apiKey;
 
   final String databaseName;
 

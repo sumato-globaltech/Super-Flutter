@@ -11,11 +11,13 @@ Rules: generate through `sf` CLI · official Flutter / go_router patterns · str
 - [ ] Roles: farmer only, or vendor / driver / officer too?
 - [ ] Login: email/password, OTP, or both?
 - [ ] Bottom tabs: Home · Market · Farms · Schemes · Profile?
-- [ ] Local base URL + API key header/value
+- [x] Local base URL + API key header/value — `http://dam.test`, header `X-Api-Key`, value in `dart_defines/dev.json` (gitignored)
 - [ ] CLI kits embedded in `sf` binary (`go:embed`)?
 
 ## Phase 0 — Foundation fixes
-- [ ] **T0.1** Align `ApiEndpoints` with `api.php` (`/api/v1/me`, `/api/v1/token/refresh`, …), add API-key interceptor (`--dart-define`), verify login sends `device_name`
+- [x] **T0.1** Align `ApiEndpoints` with `api.php` (`/api/v1/me`, `/api/v1/token/refresh`, …), add API-key interceptor (`--dart-define`), verify login sends `device_name`
+  - Sanctum refresh: proactive refresh inside 1 day of `expires_at`; a 401 ends the session
+  - Regenerated stale `injection.config.dart` (referenced deleted `new_post_feature_dep`)
 - [ ] **T0.2** Update `sf make api` templates for correct endpoints/headers + Go tests
 
 ## Phase 1 — CLI commands

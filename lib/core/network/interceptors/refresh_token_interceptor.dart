@@ -10,13 +10,30 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
     required this._secureStorage,
     required this._tokenClient,
     required this._onSessionExpired,
-  });
+    DateTime Function()? clock,
+  }) : _clock = clock ?? DateTime.now;
 
   final SecureStorage _secureStorage;
   final Dio _tokenClient;
   final Future<void> Function() _onSessionExpired;
+  final DateTime Function() _clock;
 
   static const _retriedKey = 'auth_retried';
+
+  @override
+  Future<void> onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
+    if (!ApiEndpoints.isPublic(options.path) && _isNearExpiry()) {
+      final token = await _refreshToken();
+      if (token != null) {
+        options.headers[NetworkConstants.authorizationHeader] =
+            NetworkConstants.bearerToken(token);
+      }
+    }
+    handler.next(options);
+  }
 
   @override
   Future<void> onError(
@@ -25,84 +42,81 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
   ) async {
     final options = err.requestOptions;
 
-    final isUnauthorized = err.response?.statusCode == 401;
-    final alreadyRetried = options.extra[_retriedKey] == true;
-
-    if (!isUnauthorized ||
-        alreadyRetried ||
+    if (err.response?.statusCode != 401 ||
+        options.extra[_retriedKey] == true ||
         ApiEndpoints.isPublic(options.path)) {
       handler.next(err);
       return;
     }
 
     final sentToken = options.headers[NetworkConstants.authorizationHeader];
-
     final storedToken = _secureStorage.accessToken;
 
     if (storedToken != null &&
+        storedToken.isNotEmpty &&
         sentToken != NetworkConstants.bearerToken(storedToken)) {
-      await _resolveReplay(options, storedToken, handler);
+      await _replay(options, storedToken, handler);
       return;
     }
 
-    final refreshedToken = await _refreshTokens();
-
-    if (refreshedToken == null) {
-      await _secureStorage.clearTokens();
-      await _onSessionExpired();
-
-      handler.next(
-        err.copyWith(error: UnauthorizedException('Session expired.', err)),
-      );
-      return;
-    }
-
-    await _resolveReplay(options, refreshedToken, handler);
+    await _secureStorage.clearTokens();
+    await _onSessionExpired();
+    handler.next(
+      err.copyWith(error: UnauthorizedException('Session expired.', err)),
+    );
   }
 
-  Future<String?> _refreshTokens() async {
-    final refreshToken = _secureStorage.refreshToken;
+  bool _isNearExpiry() {
+    final token = _secureStorage.accessToken;
+    final expiresAt = _secureStorage.expiresAt;
+    if (token == null || token.isEmpty || expiresAt == null) {
+      return false;
+    }
+    final now = _clock();
+    return now.isBefore(expiresAt) &&
+        !now.isBefore(expiresAt.subtract(NetworkConstants.tokenRefreshWindow));
+  }
 
-    if (refreshToken == null || refreshToken.isEmpty) {
+  Future<String?> _refreshToken() async {
+    final current = _secureStorage.accessToken;
+    if (current == null || current.isEmpty) {
       return null;
     }
 
     try {
       final response = await _tokenClient.post<dynamic>(
-        ApiEndpoints.refresh,
-        data: {
-          'refreshToken': refreshToken,
-          'expiresInMins': NetworkConstants.accessTokenLifetimeMinutes,
-        },
+        ApiEndpoints.tokenRefresh,
+        options: Options(
+          headers: {
+            NetworkConstants.authorizationHeader: NetworkConstants.bearerToken(
+              current,
+            ),
+          },
+        ),
       );
 
       final body = response.data;
-
-      if (body is! Map) {
+      final data = body is Map ? body['data'] : null;
+      if (data is! Map) {
         return null;
       }
 
-      final accessToken = body['accessToken'];
-      final newRefreshToken = body['refreshToken'];
-
-      if (accessToken is! String || newRefreshToken is! String) {
+      final accessToken = data['access_token'];
+      if (accessToken is! String || accessToken.isEmpty) {
         return null;
       }
 
       await _secureStorage.saveTokens(
         accessToken: accessToken,
-        refreshToken: newRefreshToken,
+        expiresAt: DateTime.tryParse('${data['expires_at']}'),
       );
-
       return accessToken;
     } on DioException {
-      return null;
-    } on FormatException {
       return null;
     }
   }
 
-  Future<void> _resolveReplay(
+  Future<void> _replay(
     RequestOptions options,
     String accessToken,
     ErrorInterceptorHandler handler,
