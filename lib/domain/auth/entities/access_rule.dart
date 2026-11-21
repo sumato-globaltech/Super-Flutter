@@ -2,9 +2,6 @@ import 'package:equatable/equatable.dart';
 
 import 'access_policy.dart';
 
-/// What a feature needs before the user may see or open it. Rules mirror the
-/// backend: a role (`App\Enums\UserRole`), a permission (`config/access.php`)
-/// or an active farmer/vendor/driver profile (`profile_active`).
 sealed class AccessRule extends Equatable {
   const AccessRule();
 
