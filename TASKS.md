@@ -52,9 +52,9 @@ Nothing is hardcoded per role. Every screen and tab is shown only if the signed-
   - `sf create` starter is this repo (`sumato-globaltech/Super-Flutter@main`), so T0.1 reaches new projects once pushed
   - `sf make api`/`sf make model` sample fetch sends the project API key (`NetworkConstants.apiKeyHeader` + `dart_defines/dev.json`) to the dev host only, and shows the backend's error message
   - App: 403 → `ForbiddenException` ("Access denied"), no longer treated as an expired session
-- [ ] **T0.3** Backend (`dam`): return effective `permissions` (and `has_profile`) in `UserResource`, so login, OTP verify and `/me` all carry them, + Pest test
+- [x] **T0.3** Backend (`dam`): return effective `permissions` and `profile_active` in `UserResource`, so login, OTP verify and `/me` all carry them, + PHPUnit tests
   - `user.permissions` (sorted, effective) + `user.profile_active` (farmer/vendor/driver profile active), on login, OTP verify and `/me`
-  - `tests/Feature/Api/UserAccessApiTest.php` (8 tests); `AuthApiTest` helper updated
+  - `tests/Feature/Api/UserAccessApiTest.php` (8 tests); `AuthApiTest` helper updated; full suite 4260 passed, 2 pre-existing web failures (accessibility audit, vendored asset versions)
   - App `UserModel` updated with `sf make model --update`; fixed sf bug that deleted nested classes (`RoleModel`) on `--update`
 
 ## Phase 1 — Shared UI & access (built in this project, for your review)
