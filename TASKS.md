@@ -53,6 +53,9 @@ Nothing is hardcoded per role. Every screen and tab is shown only if the signed-
   - `sf make api`/`sf make model` sample fetch sends the project API key (`NetworkConstants.apiKeyHeader` + `dart_defines/dev.json`) to the dev host only, and shows the backend's error message
   - App: 403 → `ForbiddenException` ("Access denied"), no longer treated as an expired session
 - [ ] **T0.3** Backend (`dam`): return effective `permissions` (and `has_profile`) in `UserResource`, so login, OTP verify and `/me` all carry them, + Pest test
+  - `user.permissions` (sorted, effective) + `user.profile_active` (farmer/vendor/driver profile active), on login, OTP verify and `/me`
+  - `tests/Feature/Api/UserAccessApiTest.php` (8 tests); `AuthApiTest` helper updated
+  - App `UserModel` updated with `sf make model --update`; fixed sf bug that deleted nested classes (`RoleModel`) on `--update`
 
 ## Phase 1 — Shared UI & access (built in this project, for your review)
 - [ ] **T1.1** Confirm sheet + title/details card in `lib/core/ui/widgets`, widget tests, shown on a demo screen

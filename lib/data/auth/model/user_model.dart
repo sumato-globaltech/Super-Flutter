@@ -10,6 +10,8 @@ class UserModel {
   bool? emailVerified;
   bool? passwordChangeRequired;
   DateTime? createdAt;
+  List<String>? permissions;
+  bool? profileActive;
 
   UserModel({
     this.id,
@@ -22,6 +24,8 @@ class UserModel {
     this.emailVerified,
     this.passwordChangeRequired,
     this.createdAt,
+    this.permissions,
+    this.profileActive,
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
@@ -37,6 +41,8 @@ class UserModel {
     createdAt = json['created_at'] != null
         ? DateTime.tryParse(json['created_at'].toString())
         : null;
+    permissions = json['permissions']?.cast<String>();
+    profileActive = json['profile_active'];
   }
 
   // sf:custom:begin UserModel
@@ -58,6 +64,8 @@ class UserModel {
     data['email_verified'] = emailVerified;
     data['password_change_required'] = passwordChangeRequired;
     data['created_at'] = createdAt?.toIso8601String();
+    data['permissions'] = permissions;
+    data['profile_active'] = profileActive;
     return data;
   }
 }

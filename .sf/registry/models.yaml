@@ -66,7 +66,7 @@ models:
     feature: auth
     path: lib/data/auth/model/user_model.dart
     import: package:super_flutter/data/auth/model/user_model.dart
-    fingerprint: '{created_at:datetime,designation:string,email:string,email_verified:bool,id:string,name:string,password_change_required:bool,phone:string,photo_url:string,role:{label:string,value:string}}'
+    fingerprint: '{created_at:datetime,email:string,email_verified:bool,id:string,name:string,password_change_required:bool,permissions:[string],phone:string,profile_active:bool,role:{label:string,value:string}}'
     fields:
       - name: id
         json_key: id
@@ -107,6 +107,14 @@ models:
       - name: createdAt
         json_key: created_at
         type: DateTime
+        nullable: true
+      - name: permissions
+        json_key: permissions
+        type: List<String>
+        nullable: true
+      - name: profileActive
+        json_key: profile_active
+        type: bool
         nullable: true
     nested:
       - RoleModel
