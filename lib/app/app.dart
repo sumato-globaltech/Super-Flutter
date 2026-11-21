@@ -87,6 +87,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<AuthCubit>.value(value: getIt.get<AuthCubit>()),
         // sf:app-blocs:begin
         BlocProvider(create: (_) => SuperAwesomeBloc()),
         // sf:app-blocs:end

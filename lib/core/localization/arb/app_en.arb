@@ -48,6 +48,8 @@
   "notices": "Notices",
   "manageNotices": "Manage notices",
   "manageAlerts": "Manage alerts",
+  "comingSoon": "Coming soon",
+  "comingSoonMessage": "This section is being built and will be available soon.",
   "more": "More",
   "@more": { "description": "Bottom bar tab that lists the destinations that do not fit" },
 

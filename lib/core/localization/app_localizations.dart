@@ -296,6 +296,18 @@ abstract class AppLocalizations {
   /// **'Manage alerts'**
   String get manageAlerts;
 
+  /// No description provided for @comingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming soon'**
+  String get comingSoon;
+
+  /// No description provided for @comingSoonMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This section is being built and will be available soon.'**
+  String get comingSoonMessage;
+
   /// Bottom bar tab that lists the destinations that do not fit
   ///
   /// In en, this message translates to:

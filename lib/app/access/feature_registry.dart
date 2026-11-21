@@ -9,11 +9,8 @@ class AppTab {
     required this.activeIcon,
     this.priority = 50,
   });
-
   final IconData icon;
   final IconData activeIcon;
-
-  /// Lower comes first in the bottom bar.
   final int priority;
 }
 
@@ -33,7 +30,6 @@ class AppFeature {
   final String Function(AppLocalizations l10n) title;
   final IconData icon;
 
-  /// Set when the feature is a bottom bar destination.
   final AppTab? tab;
 
   bool allowedFor(AccessPolicy policy) => rule.allows(policy);
@@ -47,7 +43,6 @@ class NavigationLayout {
 
   final List<AppFeature> tabs;
 
-  /// Destinations that did not fit, shown behind a "More" tab.
   final List<AppFeature> overflow;
 
   bool get hasMore => overflow.isNotEmpty;
@@ -62,11 +57,23 @@ class FeatureRegistry {
 
   final List<AppFeature> features;
 
+  List<String> get tabPaths => [
+    ...{
+      for (final f in features)
+        if (f.tab != null) f.path,
+    },
+  ];
+
+  AppFeature? featureAt(String path) {
+    for (final f in features) {
+      if (f.path == path) return f;
+    }
+    return null;
+  }
+
   List<AppFeature> allowed(AccessPolicy policy) =>
       features.where((f) => f.allowedFor(policy)).toList(growable: false);
 
-  /// The bottom bar for [policy]: every allowed tab by priority, one tab per
-  /// path, and when they exceed [maxTabs] the last slot becomes "More".
   NavigationLayout navigationFor(AccessPolicy policy, {int maxTabs = 5}) {
     assert(maxTabs >= 2);
     final indexed = allowed(policy).indexed
@@ -88,15 +95,9 @@ class FeatureRegistry {
     );
   }
 
-  /// Allowed features that are not bottom bar tabs, for quick actions and
-  /// menus.
   List<AppFeature> secondary(AccessPolicy policy) =>
       allowed(policy).where((f) => f.tab == null).toList(growable: false);
 
-  /// Whether [location] may be opened. Routes no feature claims (sign in,
-  /// splash, developer screens) are not this registry's concern and pass; a
-  /// claimed route passes when any feature owning its most specific path
-  /// allows the user.
   bool canOpen(String location, AccessPolicy policy) {
     final path = Uri.parse(location).path;
     final owners = features.where(

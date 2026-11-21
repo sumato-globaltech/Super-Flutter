@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:super_flutter/app/router/app_router.dart';
 import 'package:super_flutter/app/router/routes_names.dart';
+import 'package:super_flutter/domain/auth/entities/access_policy.dart';
 import 'package:super_flutter/features/auth/routes/auth_route_names.dart';
 import 'package:super_flutter/features/auth/session/bloc/auth_state.dart';
 import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
@@ -46,6 +47,51 @@ void main() {
       expect(redirect(login, AuthStatus.authenticated), dashboard);
       expect(redirect(dashboard, AuthStatus.authenticated), isNull);
       expect(redirect('/anything', AuthStatus.authenticated), isNull);
+    });
+
+    group('access', () {
+      const farmer = AccessPolicy(
+        isSignedIn: true,
+        role: Roles.farmer,
+        permissions: {Permissions.shipmentsRequest},
+        profileActive: true,
+      );
+      const driver = AccessPolicy(
+        isSignedIn: true,
+        role: Roles.driver,
+        permissions: {Permissions.shipmentsDrive},
+        profileActive: true,
+      );
+
+      String? open(String location, AccessPolicy access) => resolveRedirect(
+        location: location,
+        status: AuthStatus.authenticated,
+        updateRequired: false,
+        access: access,
+      );
+
+      test('allowed routes open', () {
+        expect(open('/farms', farmer), isNull);
+        expect(open('/farms/01ABC', farmer), isNull);
+        expect(open('/shipments', driver), isNull);
+        expect(open('/market', driver), isNull);
+      });
+
+      test('a route the user may not use goes home', () {
+        expect(open('/farms', driver), dashboard);
+        expect(open('/help-desk', farmer), dashboard);
+        expect(open('/admin/notices', farmer), dashboard);
+      });
+
+      test('home never redirects, even without user details', () {
+        expect(open(dashboard, AccessPolicy.signedInWithoutDetails), isNull);
+        expect(open(dashboard, const AccessPolicy(isSignedIn: true)), isNull);
+      });
+
+      test('without details only public and signed-in routes open', () {
+        expect(open('/market', AccessPolicy.signedInWithoutDetails), isNull);
+        expect(open('/farms', AccessPolicy.signedInWithoutDetails), dashboard);
+      });
     });
 
     test('unknown status waits on splash', () {

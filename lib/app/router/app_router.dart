@@ -3,15 +3,20 @@ import 'package:go_router/go_router.dart';
 import 'package:super_flutter/features/auth/routes/auth_route_names.dart';
 import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 import 'package:super_flutter/features/auth/session/bloc/auth_state.dart';
+import 'package:super_flutter/domain/auth/entities/access_policy.dart';
 import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
+import 'package:super_flutter/features/dashboard/routes/dashboard_routes.dart';
 // sf:feature-routes-imports:begin
 import 'package:super_flutter/features/auth/routes/auth_routes.dart';
-import 'package:super_flutter/features/dashboard/routes/dashboard_routes.dart';
 import 'package:super_flutter/features/super_awesome/routes/super_awesome_routes.dart';
 import 'package:super_flutter/features/ui_gallery/routes/ui_gallery_routes.dart';
 
 // sf:feature-routes-imports:end
+import '../access/app_features.dart';
+import '../access/feature_registry.dart';
 import '../config/app_config.dart';
+import '../shell/app_shell.dart';
+import '../shell/tab_placeholder_screen.dart';
 import '../startup/app_startup.dart';
 import '../startup/force_update_screen.dart';
 import '../startup/splash_screen.dart';
@@ -33,6 +38,7 @@ GoRouter createRouter({
       location: state.matchedLocation,
       status: authCubit.state.status,
       updateRequired: startup.updateRequired,
+      access: authCubit.state.access,
     ),
     routes: [
       GoRoute(
@@ -46,12 +52,46 @@ GoRouter createRouter({
         builder: (context, state) =>
             ForceUpdateScreen(storeLink: startup.settings.storeLink),
       ),
+      buildAppShellRoute(),
       // sf:feature-routes:begin
       ...buildAuthRoutes(),
-      ...buildDashboardRoutes(),
       ...buildSuperAwesomeRoutes(),
       ...buildUiGalleryRoutes(),
       // sf:feature-routes:end
+    ],
+  );
+}
+
+/// Routes of the features that are bottom bar tabs, by tab path. A tab
+/// without an entry shows [TabPlaceholderScreen] until its feature is built.
+Map<String, List<RouteBase>> _tabRoutes() => {
+  DashboardRouteNames.dashboard: buildDashboardRoutes(),
+};
+
+/// The signed-in shell: one branch per tab path of [registry], each with
+/// its feature's routes or a placeholder.
+StatefulShellRoute buildAppShellRoute({
+  FeatureRegistry? registry,
+  Map<String, List<RouteBase>>? tabRoutes,
+}) {
+  final features = registry ?? appFeatures;
+  final routes = tabRoutes ?? _tabRoutes();
+  return StatefulShellRoute.indexedStack(
+    builder: (context, state, navigationShell) =>
+        AppShell(navigationShell: navigationShell, registry: features),
+    branches: [
+      for (final path in features.tabPaths)
+        StatefulShellBranch(
+          routes:
+              routes[path] ??
+              [
+                GoRoute(
+                  path: path,
+                  builder: (context, state) =>
+                      TabPlaceholderScreen(feature: features.featureAt(path)),
+                ),
+              ],
+        ),
     ],
   );
 }
@@ -61,6 +101,8 @@ String? resolveRedirect({
   required String location,
   required AuthStatus status,
   required bool updateRequired,
+  AccessPolicy? access,
+  FeatureRegistry? registry,
 }) {
   if (updateRequired) {
     return location == RouteNames.forceUpdate ? null : RouteNames.forceUpdate;
@@ -74,6 +116,13 @@ String? resolveRedirect({
     case AuthStatus.unauthenticated:
       return isAuthRoute ? null : AuthRouteNames.login;
     case AuthStatus.authenticated:
-      return isEntryRoute || isAuthRoute ? DashboardRouteNames.dashboard : null;
+      const home = DashboardRouteNames.dashboard;
+      if (isEntryRoute || isAuthRoute) return home;
+      if (location == home) return null;
+      final allowed = (registry ?? appFeatures).canOpen(
+        location,
+        access ?? AccessPolicy.signedInWithoutDetails,
+      );
+      return allowed ? null : home;
   }
 }

@@ -120,6 +120,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get manageAlerts => 'Manage alerts';
 
   @override
+  String get comingSoon => 'Coming soon';
+
+  @override
+  String get comingSoonMessage =>
+      'This section is being built and will be available soon.';
+
+  @override
   String get more => 'More';
 
   @override
