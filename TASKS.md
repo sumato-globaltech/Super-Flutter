@@ -42,7 +42,7 @@ Nothing is hardcoded per role. Every screen and tab is shown only if the signed-
 - [x] Bottom tabs: dynamic per user (see Access model)
 - [x] Local base URL + API key header/value: `http://dam.test`, header `X-Api-Key`, value in `dart_defines/dev.json` (gitignored)
 - [x] CLI kits: embedded with `go:embed`, built only after you approve the UI (T1.5)
-- [ ] OK to change backend (T0.3): add effective `permissions` to `UserResource`?
+- [x] Backend changes allowed at **API level only** (resources, API controllers, API tests). No web/admin/DB schema changes
 
 ## Phase 0 — Foundation fixes
 - [x] **T0.1** Align `ApiEndpoints` with `api.php` (`/api/v1/me`, `/api/v1/token/refresh`, …), add API-key interceptor (`--dart-define`), verify login sends `device_name`
