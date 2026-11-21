@@ -88,7 +88,11 @@ Every hand-written screen and every screen `sf` generates follows these. The UI 
   - `AuthState` carries the user and exposes `access`; `AuthCubit.refreshUser()` for after `/me`
   - `lib/app/access/`: `FeatureRegistry` (tabs by priority, one per path, "More" over 5, secondary list, route guard) + `app_features.dart` table
   - Shipments also need role + active profile (API `shipment.party`), so admins don't get three shipment tabs
-- [ ] **T1.4** Dynamic home shell: tabs from allowed features, "More" overflow, router guard, rebuild on access change + tests (farmer / vendor / driver / officer / agent)
+- [x] **T1.4** Dynamic home shell: tabs from allowed features, "More" overflow, router guard, rebuild on access change + tests (farmer / vendor / driver / officer / agent)
+  - `StatefulShellRoute.indexedStack` with one fixed branch per tab path (`buildAppShellRoute`); `AppShell` shows only allowed tabs, "More" sheet over 5, back returns to Home first
+  - Guard in `resolveRedirect`: routes the user may not open go Home; Home never redirects (no loops)
+  - Unbuilt tabs show `TabPlaceholderScreen`; dashboard routes moved from the top-level `sf` block into the Home branch (`_tabRoutes`)
+  - `AuthCubit` provided in `app.dart`; 11 new tests
 - [ ] **T1.5** 🔒 **Review gate: you approve the UI and architecture.** Nothing in Phase 2 starts until this is ticked
 
 ## Phase 2 — CLI (only after T1.5 is approved)
@@ -103,7 +107,7 @@ Kits are copied from the approved Phase 1 code. Reinstalling a kit into this pro
   - `confirm-sheet`, `title-details-card` (+ `shimmer-card`, `image-preview`, adds `shimmer`, `cached_network_image`), `design-card`, `bottom-bar`, `app-bar`
   - a kit that needs another kit installs it first; reinstall into this project = no diff
 - [ ] **T2.4** `sf install shell`: dynamic home shell + access layer kit
-- [ ] **T2.5** `sf make feature/screen --access <rule> [--tab]`: registers the feature's access rule and tab in the feature registry
+- [ ] **T2.5** `sf make feature/screen --access <rule> [--tab]`: registers the feature's access rule and tab in `app_features.dart`; a `--tab` feature's routes go into `_tabRoutes` (shell branch), not the top-level `sf:feature-routes` block
 - [ ] **T2.6** Extend `sf make api`: path params, query params, pagination (`meta`/`links`), multipart upload, 422 `errors` → field errors
 - [ ] **T2.7** `sf make api` GET → view UI (`--view detail|list|none`)
   - **detail** (object response): a `DesignCard` of `TitleDetailsCard`s, one row per model field, in response order
