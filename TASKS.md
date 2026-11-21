@@ -62,6 +62,8 @@ Nothing is hardcoded per role. Every screen and tab is shown only if the signed-
   - `AppConfirmSheet` (`confirm` / `choose` / `show`, async action with spinner + inline error + retry), `TitleDetailsCard` (icon chip, link, loading, copy, read more, blockquote, align end, thumbnails)
   - Demo: `ui_gallery` feature (generated with `sf make feature`), dashboard button outside production
   - 20 widget tests; sf fix: `bloc=skip` no longer leaves orphan event/state files
+  - Revised on review: `ConfirmSheet` + `TitleDetailsCard` now copied 1:1 from `ino_irrigation` (with `ShimmerCard`, `ImagePreview`; added `shimmer`, `cached_network_image`). Fixes on top: l10n, `isLoading` honoured, no double submit, close respects dismissible/busy, errors shown not thrown, invisible light-mode tick, read-more font, long-title overflow, null thumbnail URLs
+  - Theme fix: duplicate `AppColorsExt` in `app_theme.dart` made `theme.appColors` return light colours in dark mode everywhere
 - [x] **T1.2** App bar + bottom bar in `lib/core/ui/widgets`, widget tests
   - `AppBottomBar` (2–5 items, active icon, badge count/dot, re-tap reported, theme colours, safe area, clamped text scale) + `AppTopBar` / `AppSliverTopBar` (title + subtitle, actions, bottom, auto back)
   - In UI gallery with a 2/3/5-tab switch; 16 widget tests

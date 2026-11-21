@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 import '../../../app/config/flavor.dart';
 import 'design_colors.dart';
 
-import 'package:material_ui/material_ui.dart';
-import 'package:flutter/services.dart';
-import 'package:super_flutter/core/ui/theme/design_colors.dart';
+import 'app_colors.dart' show AppColorsExt;
+
+export 'app_colors.dart' show AppColorsExt, AppThemeX;
 
 const String appFontFamily = 'Inter';
 
@@ -209,106 +209,6 @@ class AppShadows {
       spreadRadius: -6,
     ),
   ];
-}
-
-@immutable
-class AppColorsExt extends ThemeExtension<AppColorsExt> {
-  final Color success;
-  final Color successContainer;
-  final Color warning;
-  final Color border;
-  final Color field;
-  final Color textSecondary;
-  final Color cardShadow;
-
-  final Color cardWrapper;
-
-  final Color cardContent;
-
-  final Color cardRing;
-
-  final Color accent;
-  final List<Color> chartCategories;
-
-  const AppColorsExt({
-    required this.success,
-    required this.successContainer,
-    required this.warning,
-    required this.border,
-    required this.field,
-    required this.textSecondary,
-    required this.cardShadow,
-    required this.cardWrapper,
-    required this.cardContent,
-    required this.cardRing,
-    required this.accent,
-    required this.chartCategories,
-  });
-
-  @override
-  AppColorsExt copyWith({
-    Color? success,
-    Color? successContainer,
-    Color? warning,
-    Color? border,
-    Color? field,
-    Color? textSecondary,
-    Color? cardShadow,
-    Color? cardWrapper,
-    Color? cardContent,
-    Color? cardRing,
-    Color? accent,
-    List<Color>? chartCategories,
-  }) {
-    return AppColorsExt(
-      success: success ?? this.success,
-      successContainer: successContainer ?? this.successContainer,
-      warning: warning ?? this.warning,
-      border: border ?? this.border,
-      field: field ?? this.field,
-      textSecondary: textSecondary ?? this.textSecondary,
-      cardShadow: cardShadow ?? this.cardShadow,
-      cardWrapper: cardWrapper ?? this.cardWrapper,
-      cardContent: cardContent ?? this.cardContent,
-      cardRing: cardRing ?? this.cardRing,
-      accent: accent ?? this.accent,
-      chartCategories: chartCategories ?? this.chartCategories,
-    );
-  }
-
-  @override
-  AppColorsExt lerp(ThemeExtension<AppColorsExt>? other, double t) {
-    if (other is! AppColorsExt) return this;
-    return AppColorsExt(
-      success: Color.lerp(success, other.success, t)!,
-      successContainer: Color.lerp(
-        successContainer,
-        other.successContainer,
-        t,
-      )!,
-      warning: Color.lerp(warning, other.warning, t)!,
-      border: Color.lerp(border, other.border, t)!,
-      field: Color.lerp(field, other.field, t)!,
-      textSecondary: Color.lerp(textSecondary, other.textSecondary, t)!,
-      cardShadow: Color.lerp(cardShadow, other.cardShadow, t)!,
-      cardWrapper: Color.lerp(cardWrapper, other.cardWrapper, t)!,
-      cardContent: Color.lerp(cardContent, other.cardContent, t)!,
-      cardRing: Color.lerp(cardRing, other.cardRing, t)!,
-      accent: Color.lerp(accent, other.accent, t)!,
-      chartCategories: [
-        for (var i = 0; i < chartCategories.length; i++)
-          Color.lerp(
-            chartCategories[i],
-            other.chartCategories[i % other.chartCategories.length],
-            t,
-          )!,
-      ],
-    );
-  }
-}
-
-extension AppThemeX on ThemeData {
-  AppColorsExt get appColors => extension<AppColorsExt>() ?? _lightAppColors;
 }
 
 extension AppTextThemeX on TextTheme {

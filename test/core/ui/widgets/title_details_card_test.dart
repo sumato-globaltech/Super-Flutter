@@ -181,6 +181,22 @@ void main() {
     expect(find.text('Photos'), findsNothing);
   });
 
+  testWidgets('a long title wraps instead of overflowing', (tester) async {
+    await pumpCard(
+      tester,
+      TitleDetailsCard(
+        title: 'Expected yield for the current kharif season',
+        text: '4.2 t',
+        iconData: PhosphorIconsRegular.plant,
+        onTap: () {},
+        isCrossAxisAlignmentStart: false,
+      ),
+      width: 160,
+    );
+
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('aligns to the end', (tester) async {
     await pumpCard(
       tester,

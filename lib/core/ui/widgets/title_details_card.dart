@@ -107,7 +107,8 @@ class _ReadMoreValueState extends State<_ReadMoreValue> {
     final textDirection = Directionality.of(context);
     final textAlign = widget.isStart ? TextAlign.start : TextAlign.end;
     final linkLabel = AppLocalizations.of(context).readMore;
-    final linkStyle = widget.style.copyWith(
+    final style = DefaultTextStyle.of(context).style.merge(widget.style);
+    final linkStyle = style.copyWith(
       color: theme.appColors.accent,
       fontWeight: FontWeight.w600,
     );
@@ -116,7 +117,8 @@ class _ReadMoreValueState extends State<_ReadMoreValue> {
       builder: (context, constraints) {
         final maxWidth = constraints.maxWidth;
         final textPainter = TextPainter(
-          text: TextSpan(text: widget.text, style: widget.style),
+          text: TextSpan(text: widget.text, style: style),
+          textScaler: MediaQuery.textScalerOf(context),
           textDirection: textDirection,
           textAlign: textAlign,
           maxLines: widget.trimLines,
@@ -129,6 +131,7 @@ class _ReadMoreValueState extends State<_ReadMoreValue> {
         final linkPainter = TextPainter(
           text: TextSpan(text: '$_ellipsis$linkLabel', style: linkStyle),
           textDirection: textDirection,
+          textScaler: MediaQuery.textScalerOf(context),
           maxLines: 1,
         )..layout();
 
@@ -143,11 +146,11 @@ class _ReadMoreValueState extends State<_ReadMoreValue> {
                     cutPosition.offset)
                 .clamp(0, widget.text.length);
 
-        return RichText(
+        return Text.rich(
           textAlign: textAlign,
           textDirection: textDirection,
           maxLines: widget.trimLines,
-          text: TextSpan(
+          TextSpan(
             style: widget.style,
             children: [
               TextSpan(
@@ -391,12 +394,17 @@ class TitleDetailsCard extends StatelessWidget {
     );
     final linkonClick = title.isNotEmpty
         ? <Widget>[
-            Text(
-              title,
-              style: titleStyle.copyWith(
-                fontSize: titleFontSize ?? 11,
-                color: colorTitle ?? ShadTextColors.mutedForeground(context),
-                letterSpacing: 0.2,
+            Flexible(
+              child: Text(
+                title,
+                textAlign: isCrossAxisAlignmentStart
+                    ? TextAlign.start
+                    : TextAlign.end,
+                style: titleStyle.copyWith(
+                  fontSize: titleFontSize ?? 11,
+                  color: colorTitle ?? ShadTextColors.mutedForeground(context),
+                  letterSpacing: 0.2,
+                ),
               ),
             ),
             if (onTap != null || showNavigateIcon) ...[
