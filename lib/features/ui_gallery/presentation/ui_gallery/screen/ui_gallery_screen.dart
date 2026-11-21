@@ -5,7 +5,7 @@ import 'package:super_flutter/core/network/network_exception_mapper.dart';
 import 'package:super_flutter/core/ui/theme/app_colors.dart';
 import 'package:super_flutter/core/ui/theme/app_spacing.dart';
 import 'package:super_flutter/core/ui/widgets/app_bottom_bar.dart';
-import 'package:super_flutter/core/ui/widgets/app_confirm_sheet.dart';
+import 'package:super_flutter/core/ui/widgets/confirm_sheet.dart';
 import 'package:super_flutter/core/ui/widgets/app_top_bar.dart';
 import 'package:super_flutter/core/ui/widgets/title_details_card.dart';
 
@@ -149,7 +149,7 @@ class _UiGalleryScreenState extends State<UiGalleryScreen> {
             ),
           ),
           Gap.xl,
-          Text('AppConfirmSheet', style: heading),
+          Text('ConfirmSheet', style: heading),
           Gap.md,
           Wrap(
             spacing: AppSpacing.sm,
@@ -157,11 +157,17 @@ class _UiGalleryScreenState extends State<UiGalleryScreen> {
             children: [
               OutlinedButton(
                 onPressed: () async {
-                  final ok = await AppConfirmSheet.confirm(
+                  final ok = await ConfirmSheet.confirm(
                     context,
                     title: 'Sign out?',
-                    message: 'You will need to sign in again on this device.',
-                    icon: PhosphorIconsRegular.signOut,
+                    description:
+                        'You will need to sign in again on this device.',
+                    icon: Icon(
+                      PhosphorIconsRegular.signOut,
+                      size: 35,
+                      color: appColors.accent,
+                    ),
+                    confirmText: 'Sign out',
                   );
                   show('confirm → $ok');
                 },
@@ -169,13 +175,18 @@ class _UiGalleryScreenState extends State<UiGalleryScreen> {
               ),
               OutlinedButton(
                 onPressed: () async {
-                  final ok = await AppConfirmSheet.confirm(
+                  final ok = await ConfirmSheet.confirm(
                     context,
                     title: 'Delete farm?',
-                    message: 'Its crops, photos and transactions go with it.',
-                    icon: PhosphorIconsRegular.trash,
-                    confirmLabel: 'Delete',
-                    isDestructive: true,
+                    description:
+                        'Its crops, photos and transactions go with it.',
+                    icon: Icon(
+                      PhosphorIconsRegular.trash,
+                      size: 35,
+                      color: theme.colorScheme.error,
+                    ),
+                    confirmText: 'Delete',
+                    confirmColor: theme.colorScheme.error,
                   );
                   show('destructive → $ok');
                 },
@@ -183,26 +194,29 @@ class _UiGalleryScreenState extends State<UiGalleryScreen> {
               ),
               OutlinedButton(
                 onPressed: () async {
-                  final ok = await AppConfirmSheet.confirm(
+                  final ok = await ConfirmSheet.confirm(
                     context,
                     title: 'Sync devices?',
-                    message: 'Reads the latest sensors from the provider.',
-                    icon: PhosphorIconsRegular.info,
+                    description: 'Reads the latest sensors from the provider.',
                     onConfirm: () =>
                         Future<void>.delayed(const Duration(seconds: 2)),
                   );
-                  show('async → $ok');
+                  show('async (app logo) → $ok');
                 },
-                child: const Text('Async action'),
+                child: const Text('Async + logo'),
               ),
               OutlinedButton(
                 onPressed: () async {
                   var attempts = 0;
-                  final ok = await AppConfirmSheet.confirm(
+                  final ok = await ConfirmSheet.confirm(
                     context,
                     title: 'Cancel shipment?',
-                    icon: PhosphorIconsRegular.warningCircle,
-                    isDestructive: true,
+                    icon: Icon(
+                      PhosphorIconsRegular.warningCircle,
+                      size: 35,
+                      color: theme.colorScheme.error,
+                    ),
+                    confirmColor: theme.colorScheme.error,
                     onConfirm: () async {
                       await Future<void>.delayed(const Duration(seconds: 1));
                       if (++attempts == 1) {
@@ -218,7 +232,7 @@ class _UiGalleryScreenState extends State<UiGalleryScreen> {
               ),
               OutlinedButton(
                 onPressed: () async {
-                  final picked = await AppConfirmSheet.choose<String>(
+                  final picked = await ConfirmSheet.choose<String>(
                     context,
                     title: 'Sort markets by',
                     actions: const [
@@ -256,55 +270,53 @@ class _UiGalleryScreenState extends State<UiGalleryScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const TitleDetailsCard(title: 'Farm area', text: '2.5 ha'),
-                  Gap.lg,
+                  const TitleDetailsCard(
+                    title: 'Farm area',
+                    text: '2.5 ha',
+                    isFirstItem: true,
+                  ),
                   TitleDetailsCard(
                     title: 'District',
                     text: 'Kohima',
-                    icon: PhosphorIconsRegular.info,
+                    iconData: PhosphorIconsRegular.mapPin,
+                    accentColor: appColors.accent,
                     onTap: () => show('district tapped'),
                   ),
-                  Gap.lg,
                   TitleDetailsCard(
                     title: 'Status',
-                    icon: PhosphorIconsRegular.check,
-                    accentColor: appColors.success,
                     text: 'Verified',
+                    iconData: PhosphorIconsRegular.checkCircle,
+                    accentColor: appColors.success,
                   ),
-                  Gap.lg,
                   const TitleDetailsCard(
                     title: 'Farmer ID',
                     text: 'FRM-2026-0042',
+                    iconData: PhosphorIconsRegular.identificationCard,
                     isCopyable: true,
                   ),
-                  Gap.lg,
-                  const TitleDetailsCard(
+                  TitleDetailsCard(
                     title: 'Advisory',
                     text: _advisory,
-                    icon: PhosphorIconsRegular.textAlignLeft,
-                    readMoreLines: 2,
+                    iconData: PhosphorIconsRegular.textAlignLeft,
+                    accentColor: appColors.warning,
+                    isReadMore: true,
                   ),
-                  Gap.lg,
                   const TitleDetailsCard(
                     title: 'Farmer note',
                     text: 'Water logging after heavy rain near the east field.',
                     isBlockquote: true,
                   ),
-                  Gap.lg,
                   const TitleDetailsCard(
                     title: 'Balance',
                     text: '',
-                    isLoading: true,
+                    isTextLoading: true,
                   ),
-                  Gap.lg,
-                  TitleDetailsCard(
+                  const TitleDetailsCard(
                     title: 'Photos',
-                    imageUrls: const [
-                      'https://picsum.photos/id/1084/200',
-                      'https://picsum.photos/id/292/200',
-                      '',
+                    imagePreviewUrls: [
+                      'https://picsum.photos/id/1084/400',
+                      'https://picsum.photos/id/292/400',
                     ],
-                    onImageTap: (index) => show('photo $index tapped'),
                   ),
                 ],
               ),
@@ -315,19 +327,25 @@ class _UiGalleryScreenState extends State<UiGalleryScreen> {
             child: Padding(
               padding: AppSpacing.cardPadding,
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Expanded(
-                    child: TitleDetailsCard(title: 'Sown', text: '12 Jun 2026'),
+                    child: TitleDetailsCard(
+                      title: 'Sown',
+                      text: '12 Jun 2026',
+                      isFirstItem: true,
+                    ),
                   ),
                   Expanded(
                     child: Align(
-                      alignment: Alignment.centerRight,
+                      alignment: Alignment.topRight,
                       child: TitleDetailsCard(
                         title: 'Expected yield',
                         text: '4.2 t',
-                        alignEnd: true,
-                        icon: PhosphorIconsRegular.info,
-                        accentColor: appColors.warning,
+                        isFirstItem: true,
+                        isCrossAxisAlignmentStart: false,
+                        iconData: PhosphorIconsRegular.plant,
+                        accentColor: appColors.success,
                       ),
                     ),
                   ),

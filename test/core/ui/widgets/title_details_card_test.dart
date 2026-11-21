@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
-import 'package:super_flutter/core/ui/widgets/app_network_image.dart';
+import 'package:super_flutter/core/ui/widgets/image_preview.dart';
+import 'package:super_flutter/core/ui/widgets/shimmer_card.dart';
 import 'package:super_flutter/core/ui/widgets/title_details_card.dart';
 
 import 'widget_harness.dart';
@@ -14,7 +16,7 @@ const _long =
 
 Future<void> pumpCard(
   WidgetTester tester,
-  TitleDetailsCard card, {
+  Widget card, {
   double width = 360,
   bool dark = false,
 }) {
@@ -30,65 +32,67 @@ Future<void> pumpCard(
 }
 
 void main() {
-  testWidgets('shows the title and value', (tester) async {
+  testWidgets('shows title and value, with top spacing unless first', (
+    tester,
+  ) async {
     await pumpCard(
       tester,
-      const TitleDetailsCard(title: 'Farm area', text: '2.5 ha'),
+      const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TitleDetailsCard(
+            title: 'Farm area',
+            text: '2.5 ha',
+            isFirstItem: true,
+          ),
+          TitleDetailsCard(title: 'District', text: 'Kohima'),
+        ],
+      ),
     );
 
     expect(find.text('Farm area'), findsOneWidget);
     expect(find.text('2.5 ha'), findsOneWidget);
-    expect(find.byIcon(PhosphorIconsBold.link), findsNothing);
-    expect(find.byType(InkWell), findsNothing);
+    expect(tester.getTopLeft(find.text('Farm area')).dy, 0);
+    final gap =
+        tester.getTopLeft(find.text('District')).dy -
+        tester.getBottomLeft(find.text('2.5 ha')).dy;
+    expect(gap, greaterThanOrEqualTo(12));
   });
 
-  testWidgets('a tappable card shows the link mark and calls back', (
-    tester,
-  ) async {
+  testWidgets('icon chip and link mark when tappable', (tester) async {
     var taps = 0;
     await pumpCard(
       tester,
       TitleDetailsCard(
         title: 'District',
         text: 'Kohima',
-        icon: PhosphorIconsRegular.info,
+        iconData: PhosphorIconsRegular.mapPin,
+        accentColor: Colors.blue,
         onTap: () => taps++,
       ),
     );
 
+    expect(find.byIcon(PhosphorIconsRegular.mapPin), findsOneWidget);
     expect(find.byIcon(PhosphorIconsBold.link), findsOneWidget);
-    expect(find.byIcon(PhosphorIconsRegular.info), findsOneWidget);
     await tester.tap(find.text('Kohima'));
     expect(taps, 1);
   });
 
-  testWidgets('loading shows a skeleton instead of the value', (tester) async {
+  testWidgets('loading shows a shimmer instead of the value', (tester) async {
     await pumpCard(
       tester,
       const TitleDetailsCard(
         title: 'Balance',
         text: '₹ 1,200',
-        isLoading: true,
+        isTextLoading: true,
       ),
     );
 
-    expect(find.text('Balance'), findsOneWidget);
+    expect(find.byType(ShimmerCard), findsOneWidget);
     expect(find.text('₹ 1,200'), findsNothing);
   });
 
-  testWidgets('child is shown when there is no text', (tester) async {
-    await pumpCard(
-      tester,
-      const TitleDetailsCard(
-        title: 'Status',
-        child: Chip(label: Text('Active')),
-      ),
-    );
-
-    expect(find.text('Active'), findsOneWidget);
-  });
-
-  testWidgets('copies the value and confirms it', (tester) async {
+  testWidgets('copies the value and confirms with a tick', (tester) async {
     String? clipboard;
     tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
       SystemChannels.platform,
@@ -115,83 +119,96 @@ void main() {
       ),
     );
 
-    expect(find.byTooltip('Copy'), findsOneWidget);
     await tester.tap(find.byIcon(PhosphorIconsRegular.copy));
     await tester.pumpAndSettle();
-
     expect(clipboard, 'FRM-2026-0042');
     expect(find.byIcon(PhosphorIconsBold.check), findsOneWidget);
-    expect(find.byTooltip('Copied'), findsOneWidget);
 
     await tester.pump(const Duration(seconds: 2));
     await tester.pumpAndSettle();
     expect(find.byIcon(PhosphorIconsRegular.copy), findsOneWidget);
   });
 
-  testWidgets('long text is cut with "more" that opens the full text', (
+  testWidgets('read more cuts long text and opens it in a ConfirmSheet', (
     tester,
   ) async {
     await pumpCard(
       tester,
-      const TitleDetailsCard(title: 'Advisory', text: _long, readMoreLines: 2),
+      const TitleDetailsCard(title: 'Advisory', text: _long, isReadMore: true),
       width: 260,
     );
 
-    expect(find.textContaining('more', findRichText: true), findsOneWidget);
     expect(find.text(_long), findsNothing);
-
     await tester.tapOnText(find.textRange.ofSubstring('more'));
     await tester.pumpAndSettle();
 
-    expect(find.byType(BottomSheet), findsOneWidget);
+    expect(find.byIcon(Icons.close), findsOneWidget);
     expect(find.text(_long), findsOneWidget);
   });
 
   testWidgets('short text with read more is shown whole', (tester) async {
     await pumpCard(
       tester,
-      const TitleDetailsCard(title: 'Crop', text: 'Paddy', readMoreLines: 2),
+      const TitleDetailsCard(title: 'Crop', text: 'Paddy', isReadMore: true),
     );
 
     expect(find.text('Paddy'), findsOneWidget);
-    expect(find.textContaining('more', findRichText: true), findsNothing);
   });
 
-  testWidgets('thumbnails report which image was tapped', (tester) async {
-    final tapped = <int>[];
+  testWidgets('thumbnails open the full-screen preview', (tester) async {
     await pumpCard(
       tester,
-      TitleDetailsCard(
+      const TitleDetailsCard(
         title: 'Photos',
-        imageUrls: const ['', ''],
-        onImageTap: tapped.add,
+        imagePreviewUrls: ['https://example.test/a.jpg', null, ''],
       ),
     );
 
-    expect(find.byType(AppNetworkImage), findsNWidgets(2));
-    await tester.tap(find.byType(AppNetworkImage).last);
-    expect(tapped, [1]);
+    final thumbnails = find.byType(CachedNetworkImage);
+    expect(thumbnails, findsOneWidget);
+    await tester.tap(thumbnails);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.byType(ImagePreview), findsOneWidget);
+  });
+
+  testWidgets('an empty photo list hides the card', (tester) async {
+    await pumpCard(
+      tester,
+      const TitleDetailsCard(title: 'Photos', imagePreviewUrls: []),
+    );
+
+    expect(find.text('Photos'), findsNothing);
   });
 
   testWidgets('aligns to the end', (tester) async {
     await pumpCard(
       tester,
-      const TitleDetailsCard(title: 'Total', text: '₹ 4,500', alignEnd: true),
+      const TitleDetailsCard(
+        title: 'Total',
+        text: '₹ 4,500',
+        isCrossAxisAlignmentStart: false,
+      ),
     );
 
-    final value = tester.widget<Text>(find.text('₹ 4,500'));
-    expect(value.textAlign, TextAlign.end);
+    expect(tester.widget<Text>(find.text('₹ 4,500')).textAlign, TextAlign.end);
   });
 
   testWidgets('renders every variant in dark mode', (tester) async {
     await pumpCard(
       tester,
-      const TitleDetailsCard(
-        title: 'Advisory',
-        text: _long,
-        icon: PhosphorIconsRegular.info,
-        readMoreLines: 2,
-        isCopyable: true,
+      const Column(
+        children: [
+          TitleDetailsCard(
+            title: 'Advisory',
+            text: _long,
+            iconData: PhosphorIconsRegular.info,
+            isReadMore: true,
+            isFirstItem: true,
+          ),
+          TitleDetailsCard(title: 'ID', text: 'X-1', isCopyable: true),
+          TitleDetailsCard(title: 'Balance', text: '', isTextLoading: true),
+        ],
       ),
       dark: true,
     );

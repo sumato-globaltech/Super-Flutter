@@ -302,6 +302,18 @@ abstract class AppLocalizations {
   /// **'More'**
   String get more;
 
+  /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// No description provided for @imageUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Image unavailable'**
+  String get imageUnavailable;
+
   /// No description provided for @confirm.
   ///
   /// In en, this message translates to:

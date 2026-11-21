@@ -51,6 +51,8 @@
   "more": "More",
   "@more": { "description": "Bottom bar tab that lists the destinations that do not fit" },
 
+  "done": "Done",
+  "imageUnavailable": "Image unavailable",
   "confirm": "Confirm",
   "cancel": "Cancel",
   "copy": "Copy",

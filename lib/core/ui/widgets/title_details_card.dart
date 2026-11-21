@@ -1,238 +1,99 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:super_flutter/core/extensions/extensions.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
 
 import '../theme/app_colors.dart';
-import '../theme/app_dimensions.dart';
-import '../theme/app_spacing.dart';
-import 'app_confirm_sheet.dart';
-import 'app_network_image.dart';
+import '../theme/design_colors.dart';
+import 'confirm_sheet.dart';
+import 'image_preview.dart';
+import 'shimmer_card.dart';
 
-class TitleDetailsCard extends StatelessWidget {
-  const TitleDetailsCard({
-    required this.title,
-    this.text,
-    this.child,
-    this.icon,
-    this.accentColor,
-    this.onTap,
-    this.isLoading = false,
-    this.alignEnd = false,
-    this.isBlockquote = false,
-    this.isCopyable = false,
-    this.readMoreLines,
-    this.imageUrls,
-    this.onImageTap,
-    this.imageSize = 44,
-    super.key,
-  }) : assert(text == null || child == null, 'Give text or child, not both.');
-
-  final String title;
-  final String? text;
-  final Widget? child;
-  final IconData? icon;
-  final Color? accentColor;
-  final VoidCallback? onTap;
-  final bool isLoading;
-  final bool alignEnd;
-  final bool isBlockquote;
-  final bool isCopyable;
-  final int? readMoreLines;
-  final List<String>? imageUrls;
-  final ValueChanged<int>? onImageTap;
-  final double imageSize;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colors = theme.colorScheme;
-    final appColors = theme.appColors;
-    final isDark = theme.brightness == Brightness.dark;
-    final accent = accentColor ?? colors.primary;
-    final cross = alignEnd ? CrossAxisAlignment.end : CrossAxisAlignment.start;
-    final textAlign = alignEnd ? TextAlign.end : TextAlign.start;
-
-    final titleStyle = theme.textTheme.bodySmall?.copyWith(
-      color: appColors.textSecondary,
-      letterSpacing: 0.2,
-    );
-    final base = theme.textTheme.bodyMedium ?? const TextStyle();
-    final valueStyle = isBlockquote
-        ? base.copyWith(fontStyle: FontStyle.italic, color: colors.onSurface)
-        : base.copyWith(fontWeight: FontWeight.w600, color: colors.onSurface);
-
-    final value = text;
-    final Widget? body = isLoading
-        ? Padding(
-            padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
-            child: Container(
-              width: 72,
-              height: AppSpacing.md,
-              decoration: BoxDecoration(
-                color: colors.skeleton,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(AppDimensions.radiusXs),
-                ),
-              ),
-            ),
-          )
-        : value != null
-        ? readMoreLines != null && value.isNotEmpty
-              ? _ReadMoreText(
-                  title: title,
-                  text: value,
-                  style: valueStyle,
-                  textAlign: textAlign,
-                  maxLines: readMoreLines!,
-                  icon: icon,
-                )
-              : Text(value, style: valueStyle, textAlign: textAlign)
-        : child;
-
-    final urls = imageUrls ?? const <String>[];
-    final labels = Column(
-      crossAxisAlignment: cross,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (title.isNotEmpty)
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            textDirection: alignEnd ? TextDirection.rtl : null,
-            children: [
-              Flexible(child: Text(title, style: titleStyle)),
-              if (onTap != null) ...[
-                Gap.xs,
-                Icon(
-                  PhosphorIconsBold.link,
-                  size: AppDimensions.iconXs - 2,
-                  color: appColors.accent,
-                ),
-              ],
-            ],
-          ),
-        if (title.isNotEmpty && body != null) Gap.xxs,
-        if (body != null)
-          isCopyable && !isLoading && (value?.isNotEmpty ?? false)
-              ? Row(
-                  mainAxisSize: MainAxisSize.min,
-                  textDirection: alignEnd ? TextDirection.rtl : null,
-                  children: [
-                    Flexible(child: body),
-                    Gap.xs,
-                    _CopyButton(text: value!),
-                  ],
-                )
-              : body,
-        if (urls.isNotEmpty) ...[
-          Gap.sm,
-          SizedBox(
-            height: imageSize,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              reverse: alignEnd,
-              itemCount: urls.length,
-              separatorBuilder: (_, _) => Gap.sm,
-              itemBuilder: (context, index) => InkWell(
-                borderRadius: AppDimensions.borderRadiusSm,
-                onTap: onImageTap == null ? null : () => onImageTap!(index),
-                child: AppNetworkImage(
-                  url: urls[index],
-                  width: imageSize,
-                  height: imageSize,
-                  fallbackIcon: PhosphorIconsRegular.imageBroken,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ],
-    );
-
-    final content = Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      textDirection: alignEnd ? TextDirection.rtl : null,
-      children: [
-        if (icon != null) ...[
-          Container(
-            width: AppDimensions.avatarSm,
-            height: AppDimensions.avatarSm,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: accent.withValues(alpha: isDark ? 0.22 : 0.12),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(AppSpacing.sm + 1),
-              ),
-            ),
-            child: Icon(icon, size: AppDimensions.iconXs + 2, color: accent),
-          ),
-          Gap.md,
-        ],
-        Flexible(child: labels),
-      ],
-    );
-
-    if (onTap == null) return content;
-    return InkWell(
-      onTap: onTap,
-      borderRadius: AppDimensions.borderRadiusSm,
-      child: content,
-    );
-  }
+class ShadTextColors {
+  ShadTextColors._();
+  static const Color foregroundLight = Color(0xFF020817);
+  static const Color foregroundDark = Color(0xFFF8FAFC);
+  static const Color mutedForegroundLight = Color(0xFF64748B);
+  static const Color mutedForegroundDark = Color(0xFF94A3B8);
+  static Color foreground(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+      ? foregroundDark
+      : foregroundLight;
+  static Color mutedForeground(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+      ? mutedForegroundDark
+      : mutedForegroundLight;
 }
 
-class _ReadMoreText extends StatefulWidget {
-  const _ReadMoreText({
+class _ReadMoreValue extends StatefulWidget {
+  const _ReadMoreValue({
     required this.title,
     required this.text,
     required this.style,
-    required this.textAlign,
-    required this.maxLines,
-    this.icon,
+    required this.isStart,
+    required this.trimLines,
+    this.iconData,
+    this.accentColor,
   });
 
   final String title;
   final String text;
   final TextStyle style;
-  final TextAlign textAlign;
-  final int maxLines;
-  final IconData? icon;
+  final bool isStart;
+  final int trimLines;
+  final IconData? iconData;
+  final Color? accentColor;
 
   @override
-  State<_ReadMoreText> createState() => _ReadMoreTextState();
+  State<_ReadMoreValue> createState() => _ReadMoreValueState();
 }
 
-class _ReadMoreTextState extends State<_ReadMoreText> {
-  late final TapGestureRecognizer _recognizer = TapGestureRecognizer()
-    ..onTap = _openFullText;
+class _ReadMoreValueState extends State<_ReadMoreValue> {
+  late final TapGestureRecognizer _tapRecognizer = TapGestureRecognizer()
+    ..onTap = _openSheet;
 
-  static const _ellipsis = '… ';
+  static const String _ellipsis = '… ';
 
   @override
   void dispose() {
-    _recognizer.dispose();
+    _tapRecognizer.dispose();
     super.dispose();
   }
 
-  void _openFullText() {
-    AppConfirmSheet.show<void>(
-      context,
-      AppConfirmSheet<void>(
+  void _openSheet() {
+    final theme = Theme.of(context);
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(6)),
+      ),
+      builder: (sheetContext) => ConfirmSheet(
         title: widget.title,
-        icon: widget.icon ?? PhosphorIconsRegular.textAlignLeft,
+        description: '',
+        icon: Icon(
+          widget.iconData ?? PhosphorIconsRegular.textAlignLeft,
+          size: 35,
+          color: widget.accentColor ?? theme.colorScheme.primary,
+        ),
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            maxHeight: MediaQuery.sizeOf(context).height * 0.5,
+            maxHeight: MediaQuery.sizeOf(sheetContext).height * 0.5,
           ),
           child: SingleChildScrollView(
-            child: SelectableText(
-              widget.text,
-              style: Theme.of(context).textTheme.bodyLarge,
+            child: SizedBox(
+              width: double.infinity,
+              child: SelectableText(
+                widget.text,
+                textAlign: TextAlign.start,
+                // style: theme.textTheme.bodyLarge?.copyWith(height: 1.5),
+              ),
             ),
           ),
         ),
@@ -242,10 +103,10 @@ class _ReadMoreTextState extends State<_ReadMoreText> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
-    final direction = Directionality.of(context);
-    final scaler = MediaQuery.textScalerOf(context);
+    final textDirection = Directionality.of(context);
+    final textAlign = widget.isStart ? TextAlign.start : TextAlign.end;
+    final linkLabel = AppLocalizations.of(context).readMore;
     final linkStyle = widget.style.copyWith(
       color: theme.appColors.accent,
       fontWeight: FontWeight.w600,
@@ -253,62 +114,53 @@ class _ReadMoreTextState extends State<_ReadMoreText> {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final full = TextPainter(
+        final maxWidth = constraints.maxWidth;
+        final textPainter = TextPainter(
           text: TextSpan(text: widget.text, style: widget.style),
-          textDirection: direction,
-          textAlign: widget.textAlign,
-          textScaler: scaler,
-          maxLines: widget.maxLines,
-        )..layout(maxWidth: constraints.maxWidth);
+          textDirection: textDirection,
+          textAlign: textAlign,
+          maxLines: widget.trimLines,
+        )..layout(maxWidth: maxWidth);
 
-        if (!full.didExceedMaxLines) {
-          full.dispose();
-          return Text(
-            widget.text,
-            style: widget.style,
-            textAlign: widget.textAlign,
-          );
+        if (!textPainter.didExceedMaxLines) {
+          return Text(widget.text, style: widget.style, textAlign: textAlign);
         }
 
-        final link = TextPainter(
-          text: TextSpan(text: '$_ellipsis${l10n.readMore}', style: linkStyle),
-          textDirection: direction,
-          textScaler: scaler,
+        final linkPainter = TextPainter(
+          text: TextSpan(text: '$_ellipsis$linkLabel', style: linkStyle),
+          textDirection: textDirection,
           maxLines: 1,
         )..layout();
-        final cut = full.getPositionForOffset(
+
+        final cutPosition = textPainter.getPositionForOffset(
           Offset(
-            full.width - link.width,
-            full.height - full.preferredLineHeight / 2,
+            textPainter.width - linkPainter.width,
+            textPainter.height - textPainter.preferredLineHeight / 2,
           ),
         );
-        final end = (full.getOffsetBefore(cut.offset) ?? cut.offset).clamp(
-          0,
-          widget.text.length,
-        );
-        full.dispose();
-        link.dispose();
+        final endIndex =
+            (textPainter.getOffsetBefore(cutPosition.offset) ??
+                    cutPosition.offset)
+                .clamp(0, widget.text.length);
 
-        return Semantics(
-          button: true,
-          onTapHint: l10n.readMore,
-          child: Text.rich(
-            TextSpan(
-              style: widget.style,
-              children: [
-                TextSpan(
-                  text:
-                      '${widget.text.substring(0, end).trimRight()}$_ellipsis',
-                ),
-                TextSpan(
-                  text: l10n.readMore,
-                  style: linkStyle,
-                  recognizer: _recognizer,
-                ),
-              ],
-            ),
-            textAlign: widget.textAlign,
-            maxLines: widget.maxLines,
+        return RichText(
+          textAlign: textAlign,
+          textDirection: textDirection,
+          maxLines: widget.trimLines,
+          text: TextSpan(
+            style: widget.style,
+            children: [
+              TextSpan(
+                text:
+                    '${widget.text.substring(0, endIndex).trimRight()}'
+                    '$_ellipsis',
+              ),
+              TextSpan(
+                text: linkLabel,
+                style: linkStyle,
+                recognizer: _tapRecognizer,
+              ),
+            ],
           ),
         );
       },
@@ -316,22 +168,29 @@ class _ReadMoreTextState extends State<_ReadMoreText> {
   }
 }
 
-class _CopyButton extends StatefulWidget {
-  const _CopyButton({required this.text});
+class _CopyableValue extends StatefulWidget {
+  const _CopyableValue({
+    required this.text,
+    required this.child,
+    required this.isStart,
+  });
 
   final String text;
 
+  final Widget child;
+  final bool isStart;
+
   @override
-  State<_CopyButton> createState() => _CopyButtonState();
+  State<_CopyableValue> createState() => _CopyableValueState();
 }
 
-class _CopyButtonState extends State<_CopyButton> {
+class _CopyableValueState extends State<_CopyableValue> {
   bool _copied = false;
-  Timer? _reset;
+  Timer? _resetTimer;
 
   @override
   void dispose() {
-    _reset?.cancel();
+    _resetTimer?.cancel();
     super.dispose();
   }
 
@@ -339,40 +198,404 @@ class _CopyButtonState extends State<_CopyButton> {
     await Clipboard.setData(ClipboardData(text: widget.text));
     if (!mounted) return;
     setState(() => _copied = true);
-    _reset?.cancel();
-    _reset = Timer(const Duration(milliseconds: 1600), () {
+    _resetTimer?.cancel();
+    _resetTimer = Timer(const Duration(milliseconds: 1600), () {
       if (mounted) setState(() => _copied = false);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final appColors = Theme.of(context).appColors;
-
-    return IconButton(
-      onPressed: _copy,
-      tooltip: _copied ? l10n.copied : l10n.copy,
-      visualDensity: VisualDensity.compact,
-      style: const ButtonStyle(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-      constraints: const BoxConstraints(
-        minWidth: AppSpacing.xl,
-        minHeight: AppSpacing.xl - AppSpacing.xs,
-      ),
-      padding: EdgeInsets.zero,
-      iconSize: AppDimensions.iconXs,
-      icon: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 220),
-        transitionBuilder: (child, animation) => ScaleTransition(
-          scale: CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
-          child: FadeTransition(opacity: animation, child: child),
+    final theme = Theme.of(context);
+    final children = <Widget>[
+      Flexible(child: widget.child),
+      6.width,
+      GestureDetector(
+        onTap: _copy,
+        behavior: HitTestBehavior.opaque,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 220),
+            transitionBuilder: (child, animation) => ScaleTransition(
+              scale: Tween<double>(begin: 0.6, end: 1).animate(
+                CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
+              ),
+              child: FadeTransition(opacity: animation, child: child),
+            ),
+            child: Icon(
+              _copied ? PhosphorIconsBold.check : PhosphorIconsRegular.copy,
+              key: ValueKey<bool>(_copied),
+              size: 14,
+              color: _copied
+                  ? theme.appColors.success
+                  : ShadTextColors.mutedForeground(context),
+            ),
+          ),
         ),
-        child: Icon(
-          _copied ? PhosphorIconsBold.check : PhosphorIconsRegular.copy,
-          key: ValueKey(_copied),
-          color: _copied ? appColors.success : appColors.textSecondary,
+      ),
+    ];
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: widget.isStart
+          ? children
+          : children.reversed.toList(growable: false),
+    );
+  }
+}
+
+class _Thumbnails extends StatelessWidget {
+  const _Thumbnails({required this.urls, required this.size, this.title});
+
+  final List<String?> urls;
+  final String? title;
+  final double size;
+  // final GestureTapCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final appColors = theme.appColors;
+    final radius = BorderRadius.circular(9);
+
+    return SizedBox(
+      height: size,
+      child: SingleChildScrollView(
+        scrollDirection: .horizontal,
+        child: Row(
+          children: urls
+              .whereType<String>()
+              .where((url) => url.isNotEmpty)
+              .map(
+                (e) => Padding(
+                  padding: const EdgeInsets.only(right: 6),
+                  child: GestureDetector(
+                    onTap: () =>
+                        ImagePreview.show(context, imageUrl: e, title: title),
+                    child: Container(
+                      width: size,
+                      height: size,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                        color: appColors.cardWrapper,
+                        borderRadius: radius,
+                        border: Border.all(color: appColors.cardRing),
+                      ),
+                      child: CachedNetworkImage(
+                        imageUrl: e,
+                        fit: BoxFit.cover,
+                        placeholder: (_, _) => Center(
+                          child: SizedBox(
+                            width: size * 0.35,
+                            height: size * 0.35,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 1.5,
+                              color: appColors.textSecondary,
+                            ),
+                          ),
+                        ),
+                        errorWidget: (_, _, _) => Icon(
+                          PhosphorIconsRegular.imageBroken,
+                          size: size * 0.4,
+                          color: appColors.textSecondary,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
         ),
       ),
     );
+  }
+}
+
+class TitleDetailsCard extends StatelessWidget {
+  const TitleDetailsCard({
+    super.key,
+    required this.title,
+    this.text,
+    this.child,
+    this.isTextLoading,
+    this.isCrossAxisAlignmentStart = true,
+    this.color,
+    this.colorTitle,
+    this.titleFontSize,
+    this.textFontSize,
+    this.colorBGHighlight,
+    this.isColumn = true,
+    this.isBlockquote = false,
+    this.isFirstItem = false,
+    this.icon,
+    this.iconData,
+    this.accentColor,
+    this.onTap,
+    this.imagePreviewUrls,
+    this.imageSize = 44,
+    this.isCopyable = false,
+    this.isReadMore = false,
+    this.readMoreLines = 2,
+    this.showNavigateIcon = false,
+  });
+
+  final String title;
+  final String? text;
+  final Widget? child;
+  final bool? isTextLoading;
+  final bool isCrossAxisAlignmentStart;
+  final Color? color;
+  final Color? colorTitle;
+  final Color? colorBGHighlight;
+  final double? titleFontSize;
+  final double? textFontSize;
+  final bool isColumn;
+  final Widget? icon;
+  final bool isBlockquote;
+  final bool isFirstItem;
+  final bool showNavigateIcon;
+  final GestureTapCallback? onTap;
+  final IconData? iconData;
+  final Color? accentColor;
+
+  final List<String?>? imagePreviewUrls;
+  final double imageSize;
+
+  final bool isCopyable;
+
+  final bool isReadMore;
+  final int readMoreLines;
+
+  Widget _accentLayout(
+    BuildContext context,
+    TextStyle titleStyle,
+    TextStyle valueStyle,
+    TextStyle blockquoteStyle,
+  ) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final chip = Container(
+      width: 30,
+      height: 30,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color:
+            accentColor?.withValues(alpha: isDark ? 0.22 : 0.12) ??
+            DesignColor.slate700.withValues(alpha: isDark ? 0.22 : 0.12),
+        borderRadius: BorderRadius.circular(9),
+      ),
+      child:
+          icon ??
+          Icon(iconData, size: 16, color: accentColor?.withValues(alpha: 0.95)),
+    );
+    final linkonClick = title.isNotEmpty
+        ? <Widget>[
+            Text(
+              title,
+              style: titleStyle.copyWith(
+                fontSize: titleFontSize ?? 11,
+                color: colorTitle ?? ShadTextColors.mutedForeground(context),
+                letterSpacing: 0.2,
+              ),
+            ),
+            if (onTap != null || showNavigateIcon) ...[
+              4.width,
+              const Icon(
+                PhosphorIconsBold.link,
+                size: 12,
+                color: Colors.blueAccent,
+              ),
+            ],
+          ]
+        : <Widget>[];
+
+    final resolvedValueStyle = isBlockquote
+        ? blockquoteStyle
+        : valueStyle.copyWith(fontWeight: FontWeight.w600);
+
+    final value = (isTextLoading != null && isTextLoading == true)
+        ? SizedBox(
+            height: 16,
+            child: Column(
+              children: [7.height, const ShimmerCard(height: 8.5, width: 60)],
+            ),
+          )
+        : text != null
+        ? (isReadMore && text?.isNotEmpty == true
+              ? _ReadMoreValue(
+                  title: title,
+                  text: text!,
+                  style: resolvedValueStyle,
+                  isStart: isCrossAxisAlignmentStart,
+                  trimLines: readMoreLines,
+                  iconData: iconData,
+                  accentColor: accentColor,
+                )
+              : Text(
+                  text ?? "",
+                  style: resolvedValueStyle,
+                  textAlign: isCrossAxisAlignmentStart
+                      ? TextAlign.start
+                      : TextAlign.end,
+                ))
+        : child;
+
+    final labels = Column(
+      crossAxisAlignment: isCrossAxisAlignmentStart
+          ? CrossAxisAlignment.start
+          : CrossAxisAlignment.end,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: isCrossAxisAlignmentStart
+              ? linkonClick
+              : linkonClick.reversed.toList(growable: false),
+        ),
+        if (title.isNotEmpty) 2.height,
+        if (value != null && isCopyable && text?.isNotEmpty == true)
+          _CopyableValue(
+            text: text!,
+            isStart: isCrossAxisAlignmentStart,
+            child: value,
+          )
+        else if (value != null)
+          value,
+        if (imagePreviewUrls?.isNotEmpty ?? false) ...[
+          _Thumbnails(urls: imagePreviewUrls!, size: imageSize, title: title),
+        ],
+      ],
+    );
+
+    final parts = <Widget>[
+      if (iconData != null) ...[chip, 10.width],
+      Flexible(child: labels),
+    ];
+    if (imagePreviewUrls != null && (imagePreviewUrls?.isEmpty ?? true)) {
+      return const SizedBox.shrink();
+    }
+    return GestureDetector(
+      onTap: onTap,
+      child: Padding(
+        padding: EdgeInsets.only(top: isFirstItem ? 0 : 12),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: isCrossAxisAlignmentStart
+              ? parts
+              : parts.reversed.toList(growable: false),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final foreground = ShadTextColors.foreground(context);
+    final titleStyle = TextStyle(
+      fontSize: titleFontSize ?? 12,
+      fontWeight: FontWeight.w400,
+      // height: 20 / 14,
+      height: 0,
+      letterSpacing: 0,
+      color: colorTitle ?? foreground,
+    );
+
+    final valueStyle = TextStyle(
+      fontSize: textFontSize ?? 14,
+      fontWeight: FontWeight.w500,
+      // height: 14 / 14,
+      height: 0,
+      letterSpacing: 0,
+      color: color ?? foreground,
+    );
+
+    final blockquoteStyle = TextStyle(
+      fontSize: textFontSize ?? 15,
+      fontWeight: FontWeight.w400,
+      fontStyle: FontStyle.italic,
+      // height: 24 / 16,
+      height: 0,
+      letterSpacing: 0,
+      color: color ?? foreground,
+    );
+
+    // if ((iconData != null )) {
+    return _accentLayout(context, titleStyle, valueStyle, blockquoteStyle);
+    // }
+    // // if (isColumn) {
+    // return Column(
+    //   crossAxisAlignment: isCrossAxisAlignmentStart
+    //       ? CrossAxisAlignment.start
+    //       : CrossAxisAlignment.end,
+    //   mainAxisAlignment: MainAxisAlignment.start,
+    //   mainAxisSize: MainAxisSize.min,
+    //   children: [
+    //     if (title.isNotEmpty && !isFirstItem) 8.height,
+    //     if (title.isNotEmpty) Text(title, style: titleStyle),
+    //     Container(
+    //       decoration: colorBGHighlight != null
+    //           ? BoxDecoration(
+    //               color: colorBGHighlight,
+    //               borderRadius: BorderRadius.circular(4),
+    //             )
+    //           : null,
+    //       child: Padding(
+    //         padding: colorBGHighlight != null
+    //             ? const EdgeInsets.fromLTRB(3, 0, 3, 0)
+    //             : EdgeInsets.zero,
+    //         child: Row(
+    //           mainAxisSize: MainAxisSize.min,
+    //           crossAxisAlignment: CrossAxisAlignment.center,
+    //           mainAxisAlignment: MainAxisAlignment.center,
+    //           children: [
+    //             if (icon != null) icon!,
+    //             if (icon != null) 6.width,
+    //             Flexible(
+    //               child: Text(
+    //                 text ?? "",
+    //                 style: isBlockquote ? blockquoteStyle : valueStyle,
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ),
+    //   ],
+    // );
+    // } else {
+    //   return Row(
+    //     crossAxisAlignment: CrossAxisAlignment.start,
+    //     mainAxisAlignment: MainAxisAlignment.start,
+    //     children: [
+    //       Text("$title: ", style: TextStyle(color: foreground)),
+    //       Container(
+    //         decoration: colorBGHighlight != null
+    //             ? BoxDecoration(
+    //                 color: colorBGHighlight,
+    //                 borderRadius: BorderRadius.circular(4),
+    //               )
+    //             : null,
+    //         child: Padding(
+    //           padding: colorBGHighlight != null
+    //               ? const EdgeInsets.fromLTRB(3, 0, 3, 0)
+    //               : EdgeInsets.zero,
+    //           child: Row(
+    //             mainAxisSize: MainAxisSize.min,
+    //             crossAxisAlignment: CrossAxisAlignment.center,
+    //             mainAxisAlignment: MainAxisAlignment.center,
+    //             children: [
+    //               if (icon != null) icon!,
+    //               if (icon != null) 6.width,
+    //               Text(text ?? "", style: TextStyle(color: foreground)),
+    //             ],
+    //           ),
+    //         ),
+    //       ),
+    //     ],
+    //   );
+    // }
   }
 }

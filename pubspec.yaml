@@ -65,6 +65,8 @@ dependencies:
   url_launcher: ^6.3.3
   device_info_plus: ^13.3.0
   bloc_concurrency: ^0.3.0
+  shimmer: ^3.0.0
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:

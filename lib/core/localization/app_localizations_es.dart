@@ -123,6 +123,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get more => 'More';
 
   @override
+  String get done => 'Done';
+
+  @override
+  String get imageUnavailable => 'Image unavailable';
+
+  @override
   String get confirm => 'Confirm';
 
   @override
