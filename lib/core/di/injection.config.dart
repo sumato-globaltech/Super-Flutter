@@ -33,6 +33,12 @@ import 'package:super_flutter/data/auth/sources/local/auth_local_data_source.dar
     as _i538;
 import 'package:super_flutter/data/auth/sources/remote/auth_remote_data_source.dart'
     as _i234;
+import 'package:super_flutter/data/new_post_feature_dep/repositories/new_post_feature_dep_repository_impl.dart'
+    as _i435;
+import 'package:super_flutter/data/new_post_feature_dep/sources/local/new_post_feature_dep_local_data_source.dart'
+    as _i1071;
+import 'package:super_flutter/data/new_post_feature_dep/sources/remote/new_post_feature_dep_remote_data_source.dart'
+    as _i664;
 import 'package:super_flutter/domain/auth/repositories/auth_repository.dart'
     as _i631;
 import 'package:super_flutter/domain/auth/use_cases/check_auth_status.dart'
@@ -47,6 +53,8 @@ import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart'
     as _i828;
 import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart'
     as _i930;
+import 'package:super_flutter/features/new_post_feature_dep/presentation/deep_post/bloc/deep_post_bloc.dart'
+    as _i95;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -61,6 +69,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i451.AppLogger>(() => coreModule.logger);
     gh.lazySingleton<_i491.SecureStorage>(() => storageModule.secureStorage());
     gh.lazySingleton<_i686.DeviceInfoService>(() => _i686.DeviceInfoService());
+    gh.lazySingleton<_i1071.NewPostFeatureDepLocalDataSource>(
+      () => _i1071.NewPostFeatureDepLocalDataSource(),
+    );
     gh.lazySingleton<_i1067.Environment>(
       () => coreModule.appEnvironment(gh<_i65.AppConfig>()),
     );
@@ -100,12 +111,24 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i686.DeviceInfoService>(),
       ),
     );
+    gh.lazySingleton<_i664.NewPostFeatureDepRemoteDataSource>(
+      () => _i664.NewPostFeatureDepRemoteDataSource(gh<_i42.DioClient>()),
+    );
     gh.lazySingleton<_i631.AuthRepository>(
       () => _i227.AuthRepositoryImpl(
         gh<_i234.AuthRemoteDataSource>(),
         gh<_i538.AuthLocalDataSource>(),
         gh<_i827.SessionManager>(),
       ),
+    );
+    gh.lazySingleton<_i435.NewPostFeatureDepRepositoryImpl>(
+      () => _i435.NewPostFeatureDepRepositoryImpl(
+        gh<_i664.NewPostFeatureDepRemoteDataSource>(),
+        gh<_i1071.NewPostFeatureDepLocalDataSource>(),
+      ),
+    );
+    gh.factory<_i95.DeepPostBloc>(
+      () => _i95.DeepPostBloc(gh<_i664.NewPostFeatureDepRemoteDataSource>()),
     );
     gh.factory<_i236.CheckAuthStatus>(
       () => _i236.CheckAuthStatus(gh<_i631.AuthRepository>()),

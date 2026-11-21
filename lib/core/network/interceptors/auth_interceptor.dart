@@ -11,10 +11,10 @@ class AuthInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final accessToken = _secureStorage.accessToken;
-
+    options.headers["X-API-Key"] = "sdsdsdsdsdsddsdsd";
     if (accessToken != null && accessToken.isNotEmpty) {
       options.headers[NetworkConstants.authorizationHeader] =
-          NetworkConstants.bearerToken(accessToken);
+          NetworkConstants.bearerToken(accessToken); 
     }
 
     handler.next(options);

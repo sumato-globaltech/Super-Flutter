@@ -19,4 +19,8 @@ abstract final class ApiEndpoints {
 
   static bool isPublic(String path) =>
       publicPaths.any((public) => path.endsWith(public));
+
+  static const deepPost = '/api/v1/deepPost';
+
+  static const districts = '/api/v1/districts';
 }

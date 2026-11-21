@@ -16,6 +16,7 @@ import 'package:path_provider/path_provider.dart';
 // import 'package:url_launcher/url_launcher.dart';
 // import 'package:uuid/uuid.dart';
 import 'package:path/path.dart' as p;
+import 'package:super_flutter/app/router/navigator_keys.dart';
 import 'package:super_flutter/core/constants/constants.dart';
 
 // import 'package:permission_handler/permission_handler.dart';
@@ -54,24 +55,24 @@ class Utils {
   //     ),
   //   );
   // }
-  // static void flutterToast(String msg) {
-  //   final context = navigatorKey.currentContext!;
-  //   ScaffoldMessenger.of(context)
-  //     ..clearSnackBars()
-  //     ..showSnackBar(
-  //       SnackBar(
-  //         content: Text(msg),
-  //         duration: const Duration(seconds: 3),
-  //         persist: false,
-  //         action: SnackBarAction(
-  //           label: 'Close',
-  //           onPressed: () {
-  //             ScaffoldMessenger.of(context).hideCurrentSnackBar();
-  //           },
-  //         ),
-  //       ),
-  //     );
-  // }
+  static void flutterToast(String msg) {
+    final context = rootNavigatorKey.currentContext!;
+    ScaffoldMessenger.of(context)
+      ..clearSnackBars()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(msg),
+          duration: const Duration(seconds: 3),
+          persist: false,
+          action: SnackBarAction(
+            label: 'Close',
+            onPressed: () {
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            },
+          ),
+        ),
+      );
+  }
 
   // static Future<void> launchUrl2({
   //   required String url,

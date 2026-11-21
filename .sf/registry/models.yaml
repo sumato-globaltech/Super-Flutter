@@ -111,3 +111,53 @@ models:
     nested:
       - RoleModel
     origin: generated
+  - name: DistrictModel
+    kind: model
+    feature: newPostFeatureDep
+    path: lib/data/new_post_feature_dep/model/district_model.dart
+    import: package:super_flutter/data/new_post_feature_dep/model/district_model.dart
+    fingerprint: '{code:string,id:string,name:string,state:{code:string,id:string,name:string},state_id:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+      - name: code
+        json_key: code
+        type: String
+        nullable: true
+      - name: stateId
+        json_key: state_id
+        type: String
+        nullable: true
+      - name: state
+        json_key: state
+        type: StateModel
+        nullable: true
+    nested:
+      - StateModel
+    origin: generated
+  - name: StateModel
+    kind: model
+    feature: newPostFeatureDep
+    path: lib/data/new_post_feature_dep/model/district_model.dart
+    import: package:super_flutter/data/new_post_feature_dep/model/district_model.dart
+    fingerprint: '{code:string,id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+      - name: code
+        json_key: code
+        type: String
+        nullable: true
+    origin: generated

@@ -7,6 +7,8 @@ import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.da
 // sf:feature-routes-imports:begin
 import 'package:super_flutter/features/auth/routes/auth_routes.dart';
 import 'package:super_flutter/features/dashboard/routes/dashboard_routes.dart';
+import 'package:super_flutter/features/new_post_feature_dep/routes/new_post_feature_dep_route_names.dart';
+import 'package:super_flutter/features/new_post_feature_dep/routes/new_post_feature_dep_routes.dart';
 import 'package:super_flutter/features/super_awesome/routes/super_awesome_routes.dart';
 
 // sf:feature-routes-imports:end
@@ -48,6 +50,7 @@ GoRouter createRouter({
       // sf:feature-routes:begin
       ...buildAuthRoutes(),
       ...buildDashboardRoutes(),
+      ...buildNewPostFeatureDepRoutes(),
       ...buildSuperAwesomeRoutes(),
       // sf:feature-routes:end
     ],
@@ -72,6 +75,6 @@ String? resolveRedirect({
     case AuthStatus.unauthenticated:
       return isAuthRoute ? null : AuthRouteNames.login;
     case AuthStatus.authenticated:
-      return isEntryRoute || isAuthRoute ? DashboardRouteNames.dashboard : null;
+      return isEntryRoute || isAuthRoute ? NewPostFeatureDepRouteNames.root : null;
   }
 }
