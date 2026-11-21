@@ -1,7 +1,11 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:super_flutter/app/config/app_config.dart';
 import 'package:super_flutter/core/di/injection.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
+import 'package:super_flutter/features/ui_gallery/routes/ui_gallery_route_names.dart';
 
 import '../bloc/dashboard_bloc.dart';
 import '../bloc/dashboard_event.dart';
@@ -29,6 +33,12 @@ class _DashboardView extends StatelessWidget {
       appBar: AppBar(
         title: Text(l10n.home),
         actions: [
+          if (!getIt<AppConfig>().isProduction)
+            IconButton(
+              tooltip: l10n.uiGallery,
+              icon: const Icon(PhosphorIconsRegular.squaresFour),
+              onPressed: () => context.push(UiGalleryRouteNames.root),
+            ),
           BlocBuilder<DashboardBloc, DashboardState>(
             builder: (context, state) {
               return IconButton(

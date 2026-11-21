@@ -236,6 +236,42 @@ abstract class AppLocalizations {
   /// **'{percent}% off'**
   String percentOff(String percent);
 
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @copy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get copy;
+
+  /// No description provided for @copied.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied'**
+  String get copied;
+
+  /// Link after a shortened text that opens the full text
+  ///
+  /// In en, this message translates to:
+  /// **'more'**
+  String get readMore;
+
+  /// Developer screen that shows the shared widgets
+  ///
+  /// In en, this message translates to:
+  /// **'UI gallery'**
+  String get uiGallery;
+
   /// No description provided for @tryAgain.
   ///
   /// In en, this message translates to:

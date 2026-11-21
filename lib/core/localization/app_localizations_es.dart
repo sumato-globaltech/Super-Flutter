@@ -90,6 +90,24 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get copy => 'Copy';
+
+  @override
+  String get copied => 'Copied';
+
+  @override
+  String get readMore => 'more';
+
+  @override
+  String get uiGallery => 'UI gallery';
+
+  @override
   String get tryAgain => 'Reintentar';
 
   @override

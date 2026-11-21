@@ -38,6 +38,15 @@
     "placeholders": { "percent": { "type": "String" } }
   },
 
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "copy": "Copy",
+  "copied": "Copied",
+  "readMore": "more",
+  "@readMore": { "description": "Link after a shortened text that opens the full text" },
+  "uiGallery": "UI gallery",
+  "@uiGallery": { "description": "Developer screen that shows the shared widgets" },
+
   "tryAgain": "Try again",
   "goHome": "Go home",
   "clearFilters": "Clear filters",

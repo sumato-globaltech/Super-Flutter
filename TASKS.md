@@ -58,7 +58,10 @@ Nothing is hardcoded per role. Every screen and tab is shown only if the signed-
   - App `UserModel` updated with `sf make model --update`; fixed sf bug that deleted nested classes (`RoleModel`) on `--update`
 
 ## Phase 1 — Shared UI & access (built in this project, for your review)
-- [ ] **T1.1** Confirm sheet + title/details card in `lib/core/ui/widgets`, widget tests, shown on a demo screen
+- [x] **T1.1** Confirm sheet + title/details card in `lib/core/ui/widgets`, widget tests, shown on a demo screen
+  - `AppConfirmSheet` (`confirm` / `choose` / `show`, async action with spinner + inline error + retry), `TitleDetailsCard` (icon chip, link, loading, copy, read more, blockquote, align end, thumbnails)
+  - Demo: `ui_gallery` feature (generated with `sf make feature`), dashboard button outside production
+  - 20 widget tests; sf fix: `bloc=skip` no longer leaves orphan event/state files
 - [ ] **T1.2** App bar + bottom bar in `lib/core/ui/widgets`, widget tests
 - [ ] **T1.3** Access layer: `Permission`/`Role` value types, `AccessPolicy` from user, `FeatureRegistry`, unit tests per role
 - [ ] **T1.4** Dynamic home shell: tabs from allowed features, "More" overflow, router guard, rebuild on access change + tests (farmer / vendor / driver / officer / agent)
