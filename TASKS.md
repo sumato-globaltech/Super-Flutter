@@ -44,6 +44,21 @@ Nothing is hardcoded per role. Every screen and tab is shown only if the signed-
 - [x] CLI kits: embedded with `go:embed`, built only after you approve the UI (T1.5)
 - [x] Backend changes allowed at **API level only** (resources, API controllers, API tests). No web/admin/DB schema changes
 
+## UI conventions (approved in the UI gallery)
+Every hand-written screen and every screen `sf` generates follows these. The UI gallery (`lib/features/ui_gallery`) is the reference.
+
+- **Strings:** `final l10n = AppLocalizations.of(context);`, keys in `app_en.arb`, English only for now. Sample/mock data is the only exception.
+- **Page body:** `SingleChildScrollView` → `SafeArea` → `Padding(AppSpacing.pagePadding.copyWith(bottom: 0))` → `Column(crossAxisAlignment: .stretch)`. No fixed bottom padding: `SafeArea` handles the notch, home indicator, Android system bars and landscape cut-outs. Sliver pages use `SliverSafeArea`; forms add `maintainBottomViewPadding: true`.
+- **Top bar:** `AppTopBar` (or `AppSliverTopBar` on scrolling home screens), title from l10n.
+- **Detail data:** `DesignCard(title:, paddingChild: .fromLTRB(14, 14, 14, 16))` holding `TitleDetailsCard`s, as in `ino_irrigation/scheme_details.dart`:
+  - first row `isFirstItem: true`; every row gets `iconData` + a `DesignColor.accent*` colour
+  - two short values side by side: `Row` of two `Flexible`, the right one `isCrossAxisAlignmentStart: false`
+  - loading → `isTextLoading`; long text → `isReadMore`; IDs → `isCopyable`; links (phone, map) → `onTap` with `Utils.launchUrl2` / `Utils.navigateToMapLocation`; photos → `imagePreviewUrls`
+- **List / navigation rows:** one `DesignCard(onTap:)` per item wrapping a `TitleDetailsCard(isFirstItem: true, showNavigateIcon: true)`, cards separated by `8.height`.
+- **Confirm / choose:** `ConfirmSheet.confirm` / `ConfirmSheet.choose`; never a raw `AlertDialog`.
+- **States:** loading = shimmer rows (`isTextLoading`), error = `AppErrorView.fromException` with retry, empty = `AppEmptyView`, pull-to-refresh on lists.
+- **Colour:** only theme tokens (`theme.appColors`, `colorScheme`, `DesignColor`). Avoid `colorScheme.secondary` for foreground: it is white in light mode.
+
 ## Phase 0 — Foundation fixes
 - [x] **T0.1** Align `ApiEndpoints` with `api.php` (`/api/v1/me`, `/api/v1/token/refresh`, …), add API-key interceptor (`--dart-define`), verify login sends `device_name`
   - Sanctum refresh: proactive refresh inside 1 day of `expires_at`; a 401 ends the session
@@ -77,15 +92,30 @@ Nothing is hardcoded per role. Every screen and tab is shown only if the signed-
 - [ ] **T1.5** 🔒 **Review gate: you approve the UI and architecture.** Nothing in Phase 2 starts until this is ticked
 
 ## Phase 2 — CLI (only after T1.5 is approved)
-Kits are copied from the approved Phase 1 code. Reinstalling a kit into this project must produce no diff.
-- [ ] **T2.1** `sf make screen <feature> <name>`: event/state/bloc/screen in existing feature, route registration, l10n keys in `app_en.arb`
+Kits are copied from the approved Phase 1 code. Reinstalling a kit into this project must produce no diff. Generated screens follow the **UI conventions** above.
+- [ ] **T2.1** Screen template + `sf make screen <feature> <name>`
+  - template body is `SingleChildScrollView` → `SafeArea` → `Padding(pagePadding, bottom 0)` → `Column`, with `AppTopBar`
+  - title as an l10n key written to `app_en.arb` and read with `final l10n = AppLocalizations.of(context);` (today the template hardcodes `'UI gallery'`)
+  - new screen in an existing feature: event/state/bloc/screen + route registration
+  - fix existing `sf make feature` output to the same template; golden tests for the template
 - [ ] **T2.2** `sf make widget <name>`: shared widget in `lib/core/ui/widgets`
-- [ ] **T2.3** `sf install <kit>`: kits embedded in the `sf` binary (`go:embed`): `bottom-bar`, `app-bar`, `confirm-sheet`, `title-details-card` (+ l10n keys)
+- [ ] **T2.3** `sf install <kit>`: kits embedded in the `sf` binary (`go:embed`), each with its l10n keys and package dependencies
+  - `confirm-sheet`, `title-details-card` (+ `shimmer-card`, `image-preview`, adds `shimmer`, `cached_network_image`), `design-card`, `bottom-bar`, `app-bar`
+  - a kit that needs another kit installs it first; reinstall into this project = no diff
 - [ ] **T2.4** `sf install shell`: dynamic home shell + access layer kit
 - [ ] **T2.5** `sf make feature/screen --access <rule> [--tab]`: registers the feature's access rule and tab in the feature registry
 - [ ] **T2.6** Extend `sf make api`: path params, query params, pagination (`meta`/`links`), multipart upload, 422 `errors` → field errors
+- [ ] **T2.7** `sf make api` GET → view UI (`--view detail|list|none`)
+  - **detail** (object response): a `DesignCard` of `TitleDetailsCard`s, one row per model field, in response order
+  - **list** (list response): one `DesignCard(onTap:)` + `TitleDetailsCard(showNavigateIcon: true)` per item, pull-to-refresh, empty state, "load more" when `meta` has pages
+  - field → row mapping: label = l10n key from the JSON key (`land_area_ha` → "Land area ha", editable before writing); icon + `DesignColor.accent*` by name/type (`phone` → phone + `onTap` call, `email` → envelope, `*_at`/date → calendar + formatted date, `latitude`+`longitude` → one "Location" row with map `onTap`, `id`/`uin`/`code` → `isCopyable`, long text → `isReadMore`, URL list → `imagePreviewUrls`, bool → Yes/No, nested object → its own `DesignCard`)
+  - two consecutive short fields may be paired into one `Row` (asked, or `--pair`)
+  - bloc gets loading/success/failure; loading renders `isTextLoading` rows, failure renders `AppErrorView` with retry
+  - fields are asked as a checklist so hidden/internal fields can be left out; choices saved so `sf refresh` can regenerate
+  - Go tests + golden Dart output; generated screen passes `dart analyze` and a widget test
 
 ## Phase 3 — Features (built with the Phase 2 CLI)
+Each GET screen starts from `sf make api --view`, then is adjusted by hand where the design needs it.
 - [ ] **T3.1** Auth: email/password login, phone OTP request/verify (resend timer from `meta.expires_in`), `/me`, logout, logout-all, forced change password when `password_change_required`
 - [ ] **T3.2** Home: banners, alerts, notices, quick actions (only allowed features)
 - [ ] **T3.3** Markets: list, summary, price history, favourites
