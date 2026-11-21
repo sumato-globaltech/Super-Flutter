@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:super_flutter/core/error/app_exception.dart';
 import 'package:super_flutter/core/error/exceptions/cache_exception.dart';
+import 'package:super_flutter/core/error/exceptions/forbidden_exception.dart';
 import 'package:super_flutter/core/error/exceptions/unauthorized_exception.dart';
 import 'package:super_flutter/core/error/exceptions/unknown_exception.dart';
 import 'package:super_flutter/core/error/exceptions/validation_exception.dart';
@@ -36,6 +37,7 @@ class AppErrorView extends StatelessWidget {
       ),
       ServerException() => (Icons.cloud_off_outlined, 'Server unavailable'),
       UnauthorizedException() => (Icons.lock_outline, 'Session expired'),
+      ForbiddenException() => (Icons.block_outlined, 'Access denied'),
       NotFoundException() => (Icons.search_off_outlined, 'Not found'),
       CacheException() => (Icons.storage_outlined, 'Storage problem'),
       ValidationException() => (Icons.rule_outlined, 'Check your details'),

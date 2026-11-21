@@ -48,7 +48,10 @@ Nothing is hardcoded per role. Every screen and tab is shown only if the signed-
 - [x] **T0.1** Align `ApiEndpoints` with `api.php` (`/api/v1/me`, `/api/v1/token/refresh`, …), add API-key interceptor (`--dart-define`), verify login sends `device_name`
   - Sanctum refresh: proactive refresh inside 1 day of `expires_at`; a 401 ends the session
   - Regenerated stale `injection.config.dart` (referenced deleted `new_post_feature_dep`)
-- [ ] **T0.2** Update `sf make api` templates for correct endpoints/headers + Go tests
+- [x] **T0.2** Update `sf make api` templates for correct endpoints/headers + Go tests
+  - `sf create` starter is this repo (`sumato-globaltech/Super-Flutter@main`), so T0.1 reaches new projects once pushed
+  - `sf make api`/`sf make model` sample fetch sends the project API key (`NetworkConstants.apiKeyHeader` + `dart_defines/dev.json`) to the dev host only, and shows the backend's error message
+  - App: 403 → `ForbiddenException` ("Access denied"), no longer treated as an expired session
 - [ ] **T0.3** Backend (`dam`): return effective `permissions` (and `has_profile`) in `UserResource`, so login, OTP verify and `/me` all carry them, + Pest test
 
 ## Phase 1 — Shared UI & access (built in this project, for your review)

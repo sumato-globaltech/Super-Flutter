@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../error/app_exception.dart';
+import '../error/exceptions/forbidden_exception.dart';
 import '../error/exceptions/unauthorized_exception.dart';
 import '../error/exceptions/validation_exception.dart';
 
@@ -49,9 +50,15 @@ class NetworkException extends AppException {
       );
     }
 
-    if (status == 401 || status == 403) {
+    if (status == 401) {
       return UnauthorizedException(
         message ?? 'Your session has expired. Please sign in again.',
+        error,
+      );
+    }
+    if (status == 403) {
+      return ForbiddenException(
+        message ?? 'You do not have access to this.',
         error,
       );
     }
