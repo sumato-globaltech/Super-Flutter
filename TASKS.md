@@ -34,7 +34,7 @@ Nothing is hardcoded per role. Every screen and tab is shown only if the signed-
 | Help desk queue | `helpdesk.manage` | ✓ |
 | Manage notices / alerts | `notices.manage` / `alerts.manage` | More |
 | Notices, publications, meetings, facilities | public | More |
-| Profile | any signed-in user | — account button in the top bar (decided in T1.3, confirm at T1.5) |
+| Profile | any signed-in user | — account button in the top bar (approved at T1.5) |
 
 ## Open questions
 - [x] Roles: all roles, decided at runtime by permissions (see Access model)
@@ -93,7 +93,9 @@ Every hand-written screen and every screen `sf` generates follows these. The UI 
   - Guard in `resolveRedirect`: routes the user may not open go Home; Home never redirects (no loops)
   - Unbuilt tabs show `TabPlaceholderScreen`; dashboard routes moved from the top-level `sf` block into the Home branch (`_tabRoutes`)
   - `AuthCubit` provided in `app.dart`; 11 new tests
-- [ ] **T1.5** 🔒 **Review gate: you approve the UI and architecture.** Nothing in Phase 2 starts until this is ticked
+- [x] **T1.5** 🔒 **Review gate: you approve the UI and architecture.** Nothing in Phase 2 starts until this is ticked
+  - Approved: Phase 1 widgets, UI conventions, access model, dynamic shell
+  - Profile = account button in the top bar (built with T3.12); tab order = Home → role work → Market → Schemes
 
 ## Phase 2 — CLI (only after T1.5 is approved)
 Kits are copied from the approved Phase 1 code. Reinstalling a kit into this project must produce no diff. Generated screens follow the **UI conventions** above.
