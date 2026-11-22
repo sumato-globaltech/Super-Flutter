@@ -62,14 +62,10 @@ GoRouter createRouter({
   );
 }
 
-/// Routes of the features that are bottom bar tabs, by tab path. A tab
-/// without an entry shows [TabPlaceholderScreen] until its feature is built.
 Map<String, List<RouteBase>> _tabRoutes() => {
   DashboardRouteNames.dashboard: buildDashboardRoutes(),
 };
 
-/// The signed-in shell: one branch per tab path of [registry], each with
-/// its feature's routes or a placeholder.
 StatefulShellRoute buildAppShellRoute({
   FeatureRegistry? registry,
   Map<String, List<RouteBase>>? tabRoutes,

@@ -6,8 +6,6 @@ import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.da
 
 import 'feature_registry.dart';
 
-/// Every destination of the app and who may use it. Mirrors the access model
-/// in TASKS.md and the `dam` API's middleware.
 final appFeatures = FeatureRegistry([
   const AppFeature(
     id: 'home',

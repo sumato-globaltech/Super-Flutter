@@ -10,9 +10,6 @@ import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 import '../access/app_features.dart';
 import '../access/feature_registry.dart';
 
-/// The signed-in frame: the current tab's screen above a bottom bar built
-/// from the features this user may use. Branches are fixed (one per
-/// [FeatureRegistry.tabPaths]); only which of them show changes with access.
 class AppShell extends StatelessWidget {
   AppShell({
     required this.navigationShell,
