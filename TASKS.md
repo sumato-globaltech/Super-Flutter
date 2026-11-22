@@ -124,12 +124,13 @@ Kits are copied from the approved Phase 1 code. Reinstalling a kit into this pro
   - Verified on a copy: router untouched, `flutter analyze` 0 errors/warnings; 7 new tests
 - [ ] **T2.6** Extend `sf make api` (split into sub-tasks, one per "next")
   - [x] **T2.6a** Path parameters: ids (number, hex/UUID, **ULID**) or `{name}` / `:name` become parameters; `ApiEndpoints` gets `static String farmCrops(String farm) => ...`; call takes `String farm`; same route reused; names follow the path (`scheme`, `farm_crops`); calls needing ids print the bloc snippet instead of wiring. Verified against dam.test (`/schemes/{scheme}`), 6 new tests
-  - [ ] **T2.6b** Query parameters: `?page=1&search=x` → optional named params + `queryParameters` (not baked into the endpoint)
+  - [x] **T2.6b** Query parameters: `?page=1&search=x` → optional named params (typed int/double/bool/String from the sample) + `queryParameters` with null-aware entries; endpoint without the query; keywords suffixed, `filter[x]` skipped with a warning; clashes refused. Also fixed: a list GET was wired into the bloc as `Model` instead of `List<Model>` (compile error). Verified against dam.test `/crops?page=&per_page=&search=`; 3 new tests
   - [ ] **T2.6c** Pagination: `meta`/`links` in the sample → a paged result (items, page, last page, total, has more) + core `Paged<T>` in the starter
   - [ ] **T2.6d** Multipart upload: `file`/`image` field types → `FormData` + `MultipartFile` (farm photos, scheme documents)
   - [ ] **T2.6e** 422 `errors` → per-field errors on generated forms (verify the existing path end to end against dam.test)
   - [ ] **T2.6f** Form text → l10n keys: labels, hints, "Select…", "… is required", success toast
   - [ ] **T2.6g** Forms on routes with path params (e.g. `POST /farms/{farm}/crops`): screen takes the id, bloc passes it
+  - (T2.7 note) a wired GET leaves its result in an unused local (`unused_local_variable` warning) until the bloc puts it into state - T2.7's loading/success/failure state removes it
   - [ ] **T2.6h** `sf make feature` with a data layer: generated repository leaves `_remoteDataSource` / `_localDataSource` unused (2 analyzer warnings) until methods are added
 - [ ] **T2.7** `sf make api` GET → view UI (`--view detail|list|none`)
   - **detail** (object response): a `DesignCard` of `TitleDetailsCard`s, one row per model field, in response order
