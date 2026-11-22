@@ -194,6 +194,13 @@ components:
     class_case: pascal_case
     template: widget
     description: Shared UI widget
+    variants:
+      default: stateless
+      options:
+        - name: stateless
+          description: rebuilds from its inputs; holds nothing
+        - name: stateful
+          description: owns a State object - controllers, animations, timers
 feature:
   components:
     - event

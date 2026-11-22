@@ -99,18 +99,24 @@ Every hand-written screen and every screen `sf` generates follows these. The UI 
 
 ## Phase 2 — CLI (only after T1.5 is approved)
 Kits are copied from the approved Phase 1 code. Reinstalling a kit into this project must produce no diff. Generated screens follow the **UI conventions** above.
-- [ ] **T2.1** Screen template + `sf make screen <feature> <name>`
+- [x] **T2.1** Screen template + `sf make screen <feature> <name>`
   - template body is `SingleChildScrollView` → `SafeArea` → `Padding(pagePadding, bottom 0)` → `Column`, with `AppTopBar`
   - title as an l10n key written to `app_en.arb` and read with `final l10n = AppLocalizations.of(context);` (today the template hardcodes `'UI gallery'`)
   - new screen in an existing feature: event/state/bloc/screen + route registration
   - fix existing `sf make feature` output to the same template; golden tests for the template
-- [ ] **T2.2** `sf make widget <name>`: shared widget in `lib/core/ui/widgets`
+  - Done: `internal/l10n` (reads `l10n.yaml`, edits ARB in place); title key `<feature><Screen>Title` written to `app_en.arb` + `flutter gen-l10n` run; `AppTopBar`/`AppSpacing` used when present, else `AppBar`/literals; form screens get `maintainBottomViewPadding`
+  - `sf make screen <name> --feature <f>`: screen + bloc + route constant + `GoRoute` in the feature's files; registration never duplicated (shell tabs safe)
+  - 5 new CLI tests, 3 new goldens, l10n tests; verified on a copy of this project (`flutter analyze`: 0 errors/warnings)
+- [x] **T2.2** `sf make widget <name>`: shared widget in `lib/core/ui/widgets`
+  - stateless by default, `--variant widget=stateful`; never replaces; `--dry-run` / `--output-json` / `--no-format`
+  - widget variants added to the sumato_standard architecture and to this project's `sf.yaml`; 5 CLI tests; verified on a copy (`flutter analyze`: no issues)
 - [ ] **T2.3** `sf install <kit>`: kits embedded in the `sf` binary (`go:embed`), each with its l10n keys and package dependencies
   - `confirm-sheet`, `title-details-card` (+ `shimmer-card`, `image-preview`, adds `shimmer`, `cached_network_image`), `design-card`, `bottom-bar`, `app-bar`
   - a kit that needs another kit installs it first; reinstall into this project = no diff
 - [ ] **T2.4** `sf install shell`: dynamic home shell + access layer kit
 - [ ] **T2.5** `sf make feature/screen --access <rule> [--tab]`: registers the feature's access rule and tab in `app_features.dart`; a `--tab` feature's routes go into `_tabRoutes` (shell branch), not the top-level `sf:feature-routes` block
 - [ ] **T2.6** Extend `sf make api`: path params, query params, pagination (`meta`/`links`), multipart upload, 422 `errors` → field errors
+  - form field labels, hints, "Select…", "… is required", success toast → l10n keys (titles already localized in T2.1)
 - [ ] **T2.7** `sf make api` GET → view UI (`--view detail|list|none`)
   - **detail** (object response): a `DesignCard` of `TitleDetailsCard`s, one row per model field, in response order
   - **list** (list response): one `DesignCard(onTap:)` + `TitleDetailsCard(showNavigateIcon: true)` per item, pull-to-refresh, empty state, "load more" when `meta` has pages

@@ -1,7 +1,7 @@
-# Graph Report - /Users/deepjyotibaishya/Projects/App/Super-Flutter  (2026-11-21)
+# Graph Report - /Users/deepjyotibaishya/Projects/App/Super-Flutter  (2026-11-22)
 
 ## Corpus Check
-- 193 files · ~134,060 words
+- 193 files · ~138,055 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -472,9 +472,11 @@ Nodes (0):
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `package:material_ui/material_ui.dart` connect `Community 0` to `Community 1`, `Community 2`, `Community 3`, `Community 4`, `Community 6`, `Community 10`, `Community 12`, `Community 14`, `Community 15`, `Community 18`?**
-  _High betweenness centrality (0.257) - this node is a cross-community bridge._
+  _High betweenness centrality (0.289) - this node is a cross-community bridge._
 - **Why does `dart:async` connect `Community 1` to `Community 2`, `Community 3`, `Community 5`, `Community 6`, `Community 9`, `Community 12`, `Community 17`, `Community 18`?**
-  _High betweenness centrality (0.171) - this node is a cross-community bridge._
+  _High betweenness centrality (0.115) - this node is a cross-community bridge._
+- **Why does `package:flutter_test/flutter_test.dart` connect `Community 1` to `Community 2`, `Community 3`, `Community 4`, `Community 8`, `Community 9`, `Community 16`?**
+  _High betweenness centrality (0.086) - this node is a cross-community bridge._
 - **What connects `main`, `openFrom`, `ConfirmSheet` to the rest of the system?**
   _655 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
@@ -482,6 +484,4 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.03 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.03 - nodes in this community are weakly interconnected._
-- **Should `Community 3` be split into smaller, more focused modules?**
   _Cohesion score 0.03 - nodes in this community are weakly interconnected._
