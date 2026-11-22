@@ -119,7 +119,9 @@ Kits are copied from the approved Phase 1 code. Reinstalling a kit into this pro
   - Refactor here: `buildAppShellRoute` moved to `lib/app/shell/app_shell_route.dart` (kit), tab routes to `lib/app/shell/tab_routes.dart` (project-owned)
   - Kits gained `base: lib`, seed files (written only when missing: Home-only `app_features.dart`, `tab_routes.dart`) and checks (router uses the shell + guard, `AuthCubit` provided) reported as hints
   - Verified on copies: reinstall = no diff; strip 6 files + 2 seeds and install = identical files, seeds written, `flutter analyze` 0 errors/warnings. 3 new CLI tests
-- [ ] **T2.5** `sf make feature/screen --access <rule> [--tab]`: registers the feature's access rule and tab in `app_features.dart`; a `--tab` feature's routes go into `appTabRoutes()` in `lib/app/shell/tab_routes.dart` (shell branch), not the top-level `sf:feature-routes` block
+- [x] **T2.5** `sf make feature/screen --access <rule> [--tab]`: registers the feature's access rule and tab in `app_features.dart`; a `--tab` feature's routes go into `appTabRoutes()` in `lib/app/shell/tab_routes.dart` (shell branch), not the top-level `sf:feature-routes` block
+  - Done: rule syntax `public | signed-in | profile | role:x | permission:a.b`, `+` all, `|` any, `all()/any()`; `Roles`/`Permissions` constants used when declared; `--tab --icon --priority`; screen-level `--access`; tab features and `sf make screen` never register at the router top level; table + tab routes formatted
+  - Verified on a copy: router untouched, `flutter analyze` 0 errors/warnings; 7 new tests
 - [ ] **T2.6** Extend `sf make api`: path params, query params, pagination (`meta`/`links`), multipart upload, 422 `errors` → field errors
   - form field labels, hints, "Select…", "… is required", success toast → l10n keys (titles already localized in T2.1)
 - [ ] **T2.7** `sf make api` GET → view UI (`--view detail|list|none`)

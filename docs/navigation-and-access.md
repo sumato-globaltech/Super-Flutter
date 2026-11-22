@@ -356,7 +356,12 @@ Same as above, plus:
    };
    ```
 
-(Task T2.5 makes `sf make feature --access <rule> --tab` do both steps.)
+Or let `sf` do both steps:
+
+```console
+$ sf make feature farms --title "Farms" --access "role:farmer+profile" --tab --icon plant --priority 10
+$ sf make screen farm_report --feature farms --access "permission:production.view"
+```
 
 ### Check a new permission
 
