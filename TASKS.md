@@ -91,7 +91,7 @@ Every hand-written screen and every screen `sf` generates follows these. The UI 
 - [x] **T1.4** Dynamic home shell: tabs from allowed features, "More" overflow, router guard, rebuild on access change + tests (farmer / vendor / driver / officer / agent)
   - `StatefulShellRoute.indexedStack` with one fixed branch per tab path (`buildAppShellRoute`); `AppShell` shows only allowed tabs, "More" sheet over 5, back returns to Home first
   - Guard in `resolveRedirect`: routes the user may not open go Home; Home never redirects (no loops)
-  - Unbuilt tabs show `TabPlaceholderScreen`; dashboard routes moved from the top-level `sf` block into the Home branch (`_tabRoutes`)
+  - Unbuilt tabs show `TabPlaceholderScreen`; dashboard routes moved from the top-level `sf` block into the Home branch (now `appTabRoutes()` in `lib/app/shell/tab_routes.dart`)
   - `AuthCubit` provided in `app.dart`; 11 new tests
 - [x] **T1.5** 🔒 **Review gate: you approve the UI and architecture.** Nothing in Phase 2 starts until this is ticked
   - Approved: Phase 1 widgets, UI conventions, access model, dynamic shell
@@ -110,11 +110,16 @@ Kits are copied from the approved Phase 1 code. Reinstalling a kit into this pro
 - [x] **T2.2** `sf make widget <name>`: shared widget in `lib/core/ui/widgets`
   - stateless by default, `--variant widget=stateful`; never replaces; `--dry-run` / `--output-json` / `--no-format`
   - widget variants added to the sumato_standard architecture and to this project's `sf.yaml`; 5 CLI tests; verified on a copy (`flutter analyze`: no issues)
-- [ ] **T2.3** `sf install <kit>`: kits embedded in the `sf` binary (`go:embed`), each with its l10n keys and package dependencies
+- [x] **T2.3** `sf install <kit>`: kits embedded in the `sf` binary (`go:embed`), each with its l10n keys and package dependencies
   - `confirm-sheet`, `title-details-card` (+ `shimmer-card`, `image-preview`, adds `shimmer`, `cached_network_image`), `design-card`, `bottom-bar`, `app-bar`
   - a kit that needs another kit installs it first; reinstall into this project = no diff
-- [ ] **T2.4** `sf install shell`: dynamic home shell + access layer kit
-- [ ] **T2.5** `sf make feature/screen --access <rule> [--tab]`: registers the feature's access rule and tab in `app_features.dart`; a `--tab` feature's routes go into `_tabRoutes` (shell branch), not the top-level `sf:feature-routes` block
+  - Done: 7 kits embedded (`internal/kits/data`, synced by `make sync-kits`); package name rewritten; needs derived from imports; missing packages via `flutter pub add`; missing messages added (existing kept) + `gen-l10n`; conflicts need `--force`; `--list` / `--dry-run` / `--no-pub` / `--output-json`
+  - Verified on copies of this project: reinstall = no diff; strip + reinstall = identical widgets, packages and messages back, `flutter analyze` 0 errors/warnings. 7 CLI tests + kit tests + starter-sync guard
+- [x] **T2.4** `sf install shell`: dynamic home shell + access layer kit
+  - Refactor here: `buildAppShellRoute` moved to `lib/app/shell/app_shell_route.dart` (kit), tab routes to `lib/app/shell/tab_routes.dart` (project-owned)
+  - Kits gained `base: lib`, seed files (written only when missing: Home-only `app_features.dart`, `tab_routes.dart`) and checks (router uses the shell + guard, `AuthCubit` provided) reported as hints
+  - Verified on copies: reinstall = no diff; strip 6 files + 2 seeds and install = identical files, seeds written, `flutter analyze` 0 errors/warnings. 3 new CLI tests
+- [ ] **T2.5** `sf make feature/screen --access <rule> [--tab]`: registers the feature's access rule and tab in `app_features.dart`; a `--tab` feature's routes go into `appTabRoutes()` in `lib/app/shell/tab_routes.dart` (shell branch), not the top-level `sf:feature-routes` block
 - [ ] **T2.6** Extend `sf make api`: path params, query params, pagination (`meta`/`links`), multipart upload, 422 `errors` → field errors
   - form field labels, hints, "Select…", "… is required", success toast → l10n keys (titles already localized in T2.1)
 - [ ] **T2.7** `sf make api` GET → view UI (`--view detail|list|none`)

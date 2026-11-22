@@ -89,7 +89,9 @@ whose API calls would return `403`.
 | App | `lib/app/access/app_features.dart` | **The table of every destination** |
 | App | `lib/app/shell/app_shell.dart` | Bottom bar built per user |
 | App | `lib/app/shell/tab_placeholder_screen.dart` | Stand-in for tabs not built yet |
-| App | `lib/app/router/app_router.dart` | Shell route (`buildAppShellRoute`) + guard (`resolveRedirect`) |
+| App | `lib/app/shell/app_shell_route.dart` | Shell route (`buildAppShellRoute`) |
+| App | `lib/app/shell/tab_routes.dart` | Tab routes by path (`appTabRoutes`), the project's own |
+| App | `lib/app/router/app_router.dart` | Uses the shell route; guard (`resolveRedirect`) |
 | UI | `lib/core/ui/widgets/app_bottom_bar.dart` | The bar itself (2–5 items, badges) |
 
 ---
@@ -255,7 +257,8 @@ flowchart TB
   allowed tab to its branch index. Because branches never change, access can
   change while the app is running without rebuilding the router.
 - A tab whose feature is not built yet shows `TabPlaceholderScreen`. When a
-  feature is built, add its routes to `_tabRoutes` in `app_router.dart`.
+  feature is built, add its routes to `appTabRoutes()` in
+  `lib/app/shell/tab_routes.dart`.
 
 Behaviour:
 
@@ -343,11 +346,11 @@ The guard protects it immediately; it appears in `secondary(access)`.
 Same as above, plus:
 
 1. Give the `AppFeature` an `AppTab(icon:, activeIcon:, priority:)`.
-2. Add its routes to `_tabRoutes` in `app_router.dart` (instead of the
+2. Add its routes to `appTabRoutes()` in `lib/app/shell/tab_routes.dart` (instead of the
    top-level `sf:feature-routes` block):
 
    ```dart
-   Map<String, List<RouteBase>> _tabRoutes() => {
+   Map<String, List<RouteBase>> appTabRoutes() => {
      DashboardRouteNames.dashboard: buildDashboardRoutes(),
      MarketRouteNames.root: buildMarketRoutes(),
    };
