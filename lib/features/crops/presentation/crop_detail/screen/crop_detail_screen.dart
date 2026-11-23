@@ -307,17 +307,21 @@ class _AdvisoryTabView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TitleDetailsCard(
-                  title: l10n.advisorySeason,
-                  text: advisory!.month?.name ?? '-',
-                  isFirstItem: true,
-                  iconData: PhosphorIconsRegular.calendarCheck,
-                  accentColor: DesignColor.accentPoints,
+                Row(
+                  children: [
+                    TitleDetailsCard(
+                      title: l10n.advisorySeason,
+                      text: advisory!.month?.name ?? '-',
+                      isFirstItem: true,
+                      iconData: PhosphorIconsRegular.calendarCheck,
+                      accentColor: DesignColor.accentPoints,
+                    ),
+                  ],
                 ),
                 if (advisory!.windows?.sowing != null)
                   TitleDetailsCard(
                     title: l10n.sowingWindow,
-                    text: advisory!.windows!.sowing!,
+                    text: advisory!.windows!.sowing ?? '',
                     iconData: PhosphorIconsRegular.plant,
                     accentColor: DesignColor.accentPoints,
                   ),
