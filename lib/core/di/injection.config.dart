@@ -33,6 +33,12 @@ import 'package:super_flutter/data/auth/sources/local/auth_local_data_source.dar
     as _i538;
 import 'package:super_flutter/data/auth/sources/remote/auth_remote_data_source.dart'
     as _i234;
+import 'package:super_flutter/data/communication/repositories/communication_repository_impl.dart'
+    as _i944;
+import 'package:super_flutter/data/communication/sources/local/communication_local_data_source.dart'
+    as _i940;
+import 'package:super_flutter/data/communication/sources/remote/communication_remote_data_source.dart'
+    as _i390;
 import 'package:super_flutter/domain/auth/repositories/auth_repository.dart'
     as _i631;
 import 'package:super_flutter/domain/auth/use_cases/check_auth_status.dart'
@@ -70,6 +76,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i451.AppLogger>(() => coreModule.logger);
     gh.lazySingleton<_i491.SecureStorage>(() => storageModule.secureStorage());
     gh.lazySingleton<_i686.DeviceInfoService>(() => _i686.DeviceInfoService());
+    gh.lazySingleton<_i940.CommunicationLocalDataSource>(
+      () => _i940.CommunicationLocalDataSource(),
+    );
     gh.lazySingleton<_i1067.Environment>(
       () => coreModule.appEnvironment(gh<_i65.AppConfig>()),
     );
@@ -109,11 +118,20 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i686.DeviceInfoService>(),
       ),
     );
+    gh.lazySingleton<_i390.CommunicationRemoteDataSource>(
+      () => _i390.CommunicationRemoteDataSource(gh<_i42.DioClient>()),
+    );
     gh.lazySingleton<_i631.AuthRepository>(
       () => _i227.AuthRepositoryImpl(
         gh<_i234.AuthRemoteDataSource>(),
         gh<_i538.AuthLocalDataSource>(),
         gh<_i827.SessionManager>(),
+      ),
+    );
+    gh.lazySingleton<_i944.CommunicationRepositoryImpl>(
+      () => _i944.CommunicationRepositoryImpl(
+        gh<_i390.CommunicationRemoteDataSource>(),
+        gh<_i940.CommunicationLocalDataSource>(),
       ),
     );
     gh.factory<_i236.CheckAuthStatus>(
