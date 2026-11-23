@@ -6,7 +6,6 @@ import 'package:super_flutter/core/di/injection.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/core/ui/theme/app_spacing.dart';
 import 'package:super_flutter/core/ui/widgets/app_top_bar.dart';
-import 'package:super_flutter/core/ui/widgets/design_card.dart';
 import 'package:super_flutter/core/ui/widgets/progress_circle.dart';
 import 'package:super_flutter/data/farm/model/farm_model.dart';
 
@@ -22,8 +21,9 @@ class FarmFormScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<FarmFormBloc>()
-        ..add(FarmFormInitialized(initialFarm: initialFarm)),
+      create: (_) =>
+          getIt<FarmFormBloc>()
+            ..add(FarmFormInitialized(initialFarm: initialFarm)),
       child: _FarmFormView(initialFarm: initialFarm),
     );
   }
@@ -125,7 +125,8 @@ class _FarmFormViewState extends State<_FarmFormView> {
 
   List<Map<String, String>> get _availableSoilTypes {
     final s = widget.initialFarm?.soilType;
-    if (s?.value != null && !_soilTypes.any((item) => item['value'] == s!.value)) {
+    if (s?.value != null &&
+        !_soilTypes.any((item) => item['value'] == s!.value)) {
       return [
         {'value': s!.value!, 'label': s.label ?? s.value!},
         ..._soilTypes,
@@ -136,7 +137,8 @@ class _FarmFormViewState extends State<_FarmFormView> {
 
   List<Map<String, String>> get _availableIrrigationTypes {
     final i = widget.initialFarm?.irrigationType;
-    if (i?.value != null && !_irrigationTypes.any((item) => item['value'] == i!.value)) {
+    if (i?.value != null &&
+        !_irrigationTypes.any((item) => item['value'] == i!.value)) {
       return [
         {'value': i!.value!, 'label': i.label ?? i.value!},
         ..._irrigationTypes,
@@ -147,7 +149,8 @@ class _FarmFormViewState extends State<_FarmFormView> {
 
   List<Map<String, String>> get _availableOwnerships {
     final o = widget.initialFarm?.ownership;
-    if (o?.value != null && !_ownerships.any((item) => item['value'] == o!.value)) {
+    if (o?.value != null &&
+        !_ownerships.any((item) => item['value'] == o!.value)) {
       return [
         {'value': o!.value!, 'label': o.label ?? o.value!},
         ..._ownerships,
@@ -194,16 +197,15 @@ class _FarmFormViewState extends State<_FarmFormView> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final isEditing = widget.initialFarm != null && widget.initialFarm!.id != null;
+    final isEditing =
+        widget.initialFarm != null && widget.initialFarm!.id != null;
 
     return BlocListener<FarmFormBloc, FarmFormState>(
       listener: (context, state) {
         if (state.status == FarmFormStatus.success) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(
-                isEditing ? l10n.farmUpdated : l10n.farmCreated,
-              ),
+              content: Text(isEditing ? l10n.farmUpdated : l10n.farmCreated),
             ),
           );
           context.pop(true);
@@ -217,9 +219,7 @@ class _FarmFormViewState extends State<_FarmFormView> {
         }
       },
       child: Scaffold(
-        appBar: AppTopBar(
-          title: isEditing ? l10n.editFarm : l10n.addFarm,
-        ),
+        appBar: AppTopBar(title: isEditing ? l10n.editFarm : l10n.addFarm),
         bottomNavigationBar: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(AppSpacing.md),
@@ -249,197 +249,182 @@ class _FarmFormViewState extends State<_FarmFormView> {
           child: ListView(
             padding: const EdgeInsets.all(AppSpacing.md),
             children: [
-              DesignCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextFormField(
-                      controller: _nameController,
-                      decoration: InputDecoration(
-                        labelText: '${l10n.farmName} *',
-                        prefixIcon: const Icon(PhosphorIconsRegular.plant),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
+              TextFormField(
+                controller: _nameController,
+                decoration: InputDecoration(
+                  labelText: '${l10n.farmName} *',
+                  prefixIcon: const Icon(PhosphorIconsRegular.plant),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                validator: (val) {
+                  if (val == null || val.trim().isEmpty) {
+                    return l10n.fieldRequired(l10n.farmName);
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              TextFormField(
+                controller: _areaController,
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
+                decoration: InputDecoration(
+                  labelText: '${l10n.areaHectares} *',
+                  prefixIcon: const Icon(PhosphorIconsRegular.compass),
+                  suffixText: 'ha',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                validator: (val) {
+                  if (val == null || val.trim().isEmpty) {
+                    return l10n.fieldRequired(l10n.areaHectares);
+                  }
+                  final num = double.tryParse(val.trim());
+                  if (num == null || num <= 0) {
+                    return l10n.invalidArea;
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              DropdownButtonFormField<String>(
+                isExpanded: true,
+                initialValue: _selectedDistrictId,
+                decoration: InputDecoration(
+                  labelText: l10n.district,
+                  prefixIcon: const Icon(PhosphorIconsRegular.mapPin),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                items: _availableDistricts
+                    .map(
+                      (d) => DropdownMenuItem(
+                        value: d['id'],
+                        child: Text(d['name']!),
                       ),
-                      validator: (val) {
-                        if (val == null || val.trim().isEmpty) {
-                          return l10n.fieldRequired(l10n.farmName);
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    TextFormField(
-                      controller: _areaController,
-                      keyboardType: const TextInputType.numberWithOptions(
-                        decimal: true,
-                      ),
-                      decoration: InputDecoration(
-                        labelText: '${l10n.areaHectares} *',
-                        prefixIcon: const Icon(PhosphorIconsRegular.compass),
-                        suffixText: 'ha',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      validator: (val) {
-                        if (val == null || val.trim().isEmpty) {
-                          return l10n.fieldRequired(l10n.areaHectares);
-                        }
-                        final num = double.tryParse(val.trim());
-                        if (num == null || num <= 0) {
-                          return l10n.invalidArea;
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    DropdownButtonFormField<String>(
-                      isExpanded: true,
-                      initialValue: _selectedDistrictId,
-                      decoration: InputDecoration(
-                        labelText: l10n.district,
-                        prefixIcon: const Icon(PhosphorIconsRegular.mapPin),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      items: _availableDistricts
-                          .map((d) => DropdownMenuItem(
-                                value: d['id'],
-                                child: Text(d['name']!),
-                              ))
-                          .toList(),
-                      onChanged: (val) => setState(() => _selectedDistrictId = val),
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    TextFormField(
-                      controller: _villageController,
-                      decoration: InputDecoration(
-                        labelText: l10n.village,
-                        prefixIcon: const Icon(PhosphorIconsRegular.houseLine),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    TextFormField(
-                      controller: _addressController,
-                      decoration: InputDecoration(
-                        labelText: l10n.address,
-                        prefixIcon: const Icon(PhosphorIconsRegular.mapTrifold),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                  ],
+                    )
+                    .toList(),
+                onChanged: (val) => setState(() => _selectedDistrictId = val),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              TextFormField(
+                controller: _villageController,
+                decoration: InputDecoration(
+                  labelText: l10n.village,
+                  prefixIcon: const Icon(PhosphorIconsRegular.houseLine),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              TextFormField(
+                controller: _addressController,
+                decoration: InputDecoration(
+                  labelText: l10n.address,
+                  prefixIcon: const Icon(PhosphorIconsRegular.mapTrifold),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
               const SizedBox(height: AppSpacing.md),
-              DesignCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    DropdownButtonFormField<String>(
-                      isExpanded: true,
-                      initialValue: _selectedSoilType,
-                      decoration: InputDecoration(
-                        labelText: l10n.soilType,
-                        prefixIcon: const Icon(PhosphorIconsRegular.mountains),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      items: _availableSoilTypes
-                          .map((s) => DropdownMenuItem(
-                                value: s['value'],
-                                child: Text(s['label']!),
-                              ))
-                          .toList(),
-                      onChanged: (val) => setState(() => _selectedSoilType = val),
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    DropdownButtonFormField<String>(
-                      isExpanded: true,
-                      initialValue: _selectedIrrigationType,
-                      decoration: InputDecoration(
-                        labelText: l10n.irrigationMethod,
-                        prefixIcon: const Icon(PhosphorIconsRegular.drop),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      items: _availableIrrigationTypes
-                          .map((i) => DropdownMenuItem(
-                                value: i['value'],
-                                child: Text(i['label']!),
-                              ))
-                          .toList(),
-                      onChanged: (val) =>
-                          setState(() => _selectedIrrigationType = val),
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    DropdownButtonFormField<String>(
-                      isExpanded: true,
-                      initialValue: _selectedOwnership,
-                      decoration: InputDecoration(
-                        labelText: l10n.landOwnership,
-                        prefixIcon: const Icon(PhosphorIconsRegular.certificate),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      items: _availableOwnerships
-                          .map((o) => DropdownMenuItem(
-                                value: o['value'],
-                                child: Text(o['label']!),
-                              ))
-                          .toList(),
-                      onChanged: (val) => setState(() => _selectedOwnership = val),
-                    ),
-                  ],
+              DropdownButtonFormField<String>(
+                isExpanded: true,
+                initialValue: _selectedSoilType,
+                decoration: InputDecoration(
+                  labelText: l10n.soilType,
+                  prefixIcon: const Icon(PhosphorIconsRegular.mountains),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
+                items: _availableSoilTypes
+                    .map(
+                      (s) => DropdownMenuItem(
+                        value: s['value'],
+                        child: Text(s['label']!),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (val) => setState(() => _selectedSoilType = val),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              DropdownButtonFormField<String>(
+                isExpanded: true,
+                initialValue: _selectedIrrigationType,
+                decoration: InputDecoration(
+                  labelText: l10n.irrigationMethod,
+                  prefixIcon: const Icon(PhosphorIconsRegular.drop),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                items: _availableIrrigationTypes
+                    .map(
+                      (i) => DropdownMenuItem(
+                        value: i['value'],
+                        child: Text(i['label']!),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (val) =>
+                    setState(() => _selectedIrrigationType = val),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              DropdownButtonFormField<String>(
+                isExpanded: true,
+                initialValue: _selectedOwnership,
+                decoration: InputDecoration(
+                  labelText: l10n.landOwnership,
+                  prefixIcon: const Icon(PhosphorIconsRegular.certificate),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                items: _availableOwnerships
+                    .map(
+                      (o) => DropdownMenuItem(
+                        value: o['value'],
+                        child: Text(o['label']!),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (val) => setState(() => _selectedOwnership = val),
               ),
               const SizedBox(height: AppSpacing.md),
-              DesignCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextFormField(
-                      controller: _latController,
-                      keyboardType: const TextInputType.numberWithOptions(
-                        decimal: true,
-                        signed: true,
-                      ),
-                      decoration: InputDecoration(
-                        labelText: l10n.latitude,
-                        prefixIcon:
-                            const Icon(PhosphorIconsRegular.navigationArrow),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    TextFormField(
-                      controller: _lngController,
-                      keyboardType: const TextInputType.numberWithOptions(
-                        decimal: true,
-                        signed: true,
-                      ),
-                      decoration: InputDecoration(
-                        labelText: l10n.longitude,
-                        prefixIcon:
-                            const Icon(PhosphorIconsRegular.navigationArrow),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                  ],
+              TextFormField(
+                controller: _latController,
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                  signed: true,
+                ),
+                decoration: InputDecoration(
+                  labelText: l10n.latitude,
+                  prefixIcon: const Icon(PhosphorIconsRegular.navigationArrow),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              TextFormField(
+                controller: _lngController,
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                  signed: true,
+                ),
+                decoration: InputDecoration(
+                  labelText: l10n.longitude,
+                  prefixIcon: const Icon(PhosphorIconsRegular.navigationArrow),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
             ],
