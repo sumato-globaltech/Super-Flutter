@@ -174,7 +174,11 @@ Each GET screen starts from `sf make api --view`, then is adjusted by hand where
   - [x] **T3.5b** Farms list screen: `FarmsListScreen` at `/farms` with Active / Archived segmented switch, farm card summary with area in hectares and code, pull-to-refresh, empty states, and infinite load-more pagination
   - [x] **T3.5c** Farm create & edit form: `FarmFormScreen` at `/farms/new` and `/farms/:farmId/edit` with fields for name, area, district, village, address, soil type, irrigation type, land ownership, and coordinates; sticky bottom submission button with loading state
   - [x] **T3.5d** Farm detail & management: `FarmDetailScreen` at `/farms/:farmId` with overview card, archive/unarchive action, delete confirmation, and tabbed subviews for Crops, Transactions ledger & financial summary, and Photos gallery; tab routes wired in `tab_routes.dart`; EN/ES localizations added; 13 Bloc tests, 5 widget tests; 285 app tests pass, 0 new analyzer issues
-- [ ] **T3.6** IoT *(farmer)*: devices, sync, soil-sensor account, readings
+- [x] **T3.6** IoT *(farmer)*: devices, sync, soil-sensor account, readings
+  - [x] **T3.6a** Data: `iot` data layer (`IotRemoteDataSource`, `IotEndpoints`, models: `DeviceModel`, `DeviceSensorModel`, `SensorReadingModel`, `SensorHistoryModel`, `ReadingPointModel`, `SoilSensorAccountModel`, `IntegrationRunModel`, `IotRepositoryImpl`), 9 remote data source tests
+  - [x] **T3.6b** Soil sensor account & farm devices tab: 4th tab on `FarmDetailScreen` (`_FarmDevicesTab`) with SoilSens account linking/unlinking modal dialogs, manual sync action, device cards list with online status and telemetry summary
+  - [x] **T3.6c** Device detail & telemetry screen: `DeviceDetailScreen` at `/devices/:deviceId` with device overview card, sensor selector chips, date range filters (7D/14D/30D), and readings timeline
+  - [x] **T3.6d** Routes & verification: `buildIotRoutes` in `app_router.dart`, EN/ES localization keys added, 8 Bloc tests (device detail + farm detail IoT interactions); 302 app tests pass, 0 new analyzer issues
 - [ ] **T3.7** Schemes: list, detail; farmer apply/applications/documents/withdraw; officer list (`schemes.view`)
 - [ ] **T3.8** Help desk: farmer call centre/call-back/tickets; agent queue summary (`helpdesk.manage`)
 - [ ] **T3.9** Shipments: farmer request/cancel; vendor accept/reject/assign/receive/reweigh; driver picked/pickup/reach

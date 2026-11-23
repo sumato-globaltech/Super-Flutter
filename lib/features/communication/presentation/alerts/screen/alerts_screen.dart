@@ -138,37 +138,47 @@ class _AlertsView extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    TitleDetailsCard(
-                      title: [
-                        alert.severity?.label,
-                        (alert.statewide ?? false)
-                            ? l10n.homeStatewide
-                            : alert.district?.name,
-                      ].whereType<String>().join(' · '),
-                      text: alert.title ?? '-',
-                      isFirstItem: true,
-                      iconData: switch (alert.severity?.value) {
-                        'emergency' => PhosphorIconsRegular.siren,
-                        'warning' => PhosphorIconsRegular.warning,
-                        'watch' => PhosphorIconsRegular.eye,
-                        _ => PhosphorIconsRegular.info,
-                      },
-                      accentColor: switch (alert.severity?.value) {
-                        'emergency' => Theme.of(context).colorScheme.error,
-                        'warning' => DesignColor.orange,
-                        'watch' => DesignColor.golden,
-                        _ => DesignColor.skyBlue,
-                      },
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TitleDetailsCard(
+                            title: [
+                              alert.severity?.label,
+                              (alert.statewide ?? false)
+                                  ? l10n.homeStatewide
+                                  : alert.district?.name,
+                            ].whereType<String>().join(' · '),
+                            text: alert.title ?? '--',
+                            isFirstItem: true,
+                            iconData: switch (alert.severity?.value) {
+                              'emergency' => PhosphorIconsRegular.siren,
+                              'warning' => PhosphorIconsRegular.warning,
+                              'watch' => PhosphorIconsRegular.eye,
+                              _ => PhosphorIconsRegular.info,
+                            },
+                            accentColor: switch (alert.severity?.value) {
+                              'emergency' => Theme.of(context).colorScheme.error,
+                              'warning' => DesignColor.orange,
+                              'watch' => DesignColor.golden,
+                              _ => DesignColor.skyBlue,
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                    if (alert.description case final description?
-                        when description.isNotEmpty)
-                      TitleDetailsCard(
-                        title: alert.category?.name ?? '',
-                        text: description,
-                        isReadMore: true,
-                        iconData: PhosphorIconsRegular.note,
-                        accentColor: DesignColor.accentEnergy,
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TitleDetailsCard(
+                            title: alert.category?.name ?? '--',
+                            text: alert.description ?? '--',
+                            isReadMore: true,
+                            iconData: PhosphorIconsRegular.note,
+                            accentColor: DesignColor.accentEnergy,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
