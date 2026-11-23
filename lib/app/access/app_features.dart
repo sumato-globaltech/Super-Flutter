@@ -168,13 +168,6 @@ final appFeatures = FeatureRegistry([
     title: _farmAddFarm,
     icon: PhosphorIconsRegular.squaresFour,
   ),
-  const AppFeature(
-    id: 'farm_edit_farm',
-    path: FarmRouteNames.editFarm,
-    rule: AccessRule.all([AccessRule.role(Roles.farmer), AccessRule.profile()]),
-    title: _farmEditFarm,
-    icon: PhosphorIconsRegular.squaresFour,
-  ),
 ]);
 
 const _farmer = AccessRule.all([
