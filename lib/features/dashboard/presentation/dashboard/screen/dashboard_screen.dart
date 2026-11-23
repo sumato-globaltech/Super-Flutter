@@ -226,7 +226,8 @@ class _DashboardView extends StatelessWidget {
                               16,
                             ),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 TitleDetailsCard(
                                   title: [
@@ -280,7 +281,8 @@ class _DashboardView extends StatelessWidget {
                             16,
                           ),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               for (final (index, notice)
                                   in state.notices.indexed)
