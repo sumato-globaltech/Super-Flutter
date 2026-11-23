@@ -831,10 +831,13 @@ class _FarmCropsTab extends StatelessWidget {
               message: l10n.addCropPrompt,
             ),
             const SizedBox(height: AppSpacing.sm),
-            FilledButton.icon(
-              icon: const Icon(PhosphorIconsRegular.plus),
-              label: Text(l10n.addCrop),
-              onPressed: onAdd,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: FilledButton.icon(
+                icon: const Icon(PhosphorIconsRegular.plus),
+                label: Text(l10n.addCrop),
+                onPressed: onAdd,
+              ),
             ),
           ],
         ),
