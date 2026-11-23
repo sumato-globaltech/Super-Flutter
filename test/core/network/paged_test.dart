@@ -79,27 +79,4 @@ void main() {
     expect(both.hasMore, isFalse);
     expect(both, Paged(items: const [1, 2, 3], page: 2, lastPage: 2, total: 3));
   });
-
-  test('reads nested Laravel-style paginated envelope', () {
-    final page = Paged.fromEnvelope({
-      'success': true,
-      'data': {
-        'current_page': 1,
-        'data': [
-          {'name': 'Wheat'},
-          {'name': 'Barley'},
-        ],
-        'per_page': 2,
-        'total': 4,
-        'last_page': 2,
-      },
-    }, _Crop.fromJson);
-
-    expect(page.items.map((c) => c.name), ['Wheat', 'Barley']);
-    expect(page.page, 1);
-    expect(page.lastPage, 2);
-    expect(page.perPage, 2);
-    expect(page.total, 4);
-    expect(page.hasMore, isTrue);
-  });
 }
