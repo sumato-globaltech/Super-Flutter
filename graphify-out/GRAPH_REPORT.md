@@ -1,11 +1,11 @@
 # Graph Report - /Users/deepjyotibaishya/Projects/App/Super-Flutter  (2026-11-23)
 
 ## Corpus Check
-- 317 files · ~248,440 words
+- 325 files · ~252,000 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1887 nodes · 2693 edges · 84 communities detected
+- 1932 nodes · 2764 edges · 90 communities detected
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 14 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
@@ -94,22 +94,26 @@
 - [[_COMMUNITY_Community 81|Community 81]]
 - [[_COMMUNITY_Community 82|Community 82]]
 - [[_COMMUNITY_Community 83|Community 83]]
+- [[_COMMUNITY_Community 84|Community 84]]
+- [[_COMMUNITY_Community 85|Community 85]]
+- [[_COMMUNITY_Community 86|Community 86]]
+- [[_COMMUNITY_Community 87|Community 87]]
+- [[_COMMUNITY_Community 88|Community 88]]
+- [[_COMMUNITY_Community 89|Community 89]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `package:material_ui/material_ui.dart` - 64 edges
-2. `_` - 59 edges
-3. `package:equatable/equatable.dart` - 52 edges
-4. `package:flutter_test/flutter_test.dart` - 46 edges
-5. `package:injectable/injectable.dart` - 46 edges
-6. `package:flutter_bloc/flutter_bloc.dart` - 37 edges
-7. `package:super_flutter/core/localization/app_localizations.dart` - 34 edges
-8. `package:mocktail/mocktail.dart` - 30 edges
-9. `package:go_router/go_router.dart` - 30 edges
+1. `package:material_ui/material_ui.dart` - 65 edges
+2. `_` - 60 edges
+3. `package:equatable/equatable.dart` - 54 edges
+4. `package:injectable/injectable.dart` - 47 edges
+5. `package:flutter_test/flutter_test.dart` - 46 edges
+6. `package:flutter_bloc/flutter_bloc.dart` - 39 edges
+7. `package:super_flutter/core/localization/app_localizations.dart` - 35 edges
+8. `package:go_router/go_router.dart` - 31 edges
+9. `package:mocktail/mocktail.dart` - 30 edges
 10. `package:super_flutter/core/network/paged.dart` - 26 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `my_application_dispose()` --calls--> `dispose`  [INFERRED]
-  /Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/my_application.cc → /Users/deepjyotibaishya/Projects/App/Super-Flutter/lib/app/router/router_refresh.dart
 - `OnCreate()` --calls--> `RegisterPlugins()`  [INFERRED]
   /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/flutter_window.cpp → /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/flutter/generated_plugin_registrant.cc
 - `OnCreate()` --calls--> `Show()`  [INFERRED]
@@ -118,80 +122,82 @@
   /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/utils.cpp → /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/main.cpp
 - `SetQuitOnClose()` --calls--> `wWinMain()`  [INFERRED]
   /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/win32_window.cpp → /Users/deepjyotibaishya/Projects/App/Super-Flutter/windows/runner/main.cpp
+- `main()` --calls--> `my_application_new()`  [INFERRED]
+  /Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/main.cc → /Users/deepjyotibaishya/Projects/App/Super-Flutter/linux/runner/my_application.cc
 
 ## Communities
 
 ### Community 0 - "Community 0"
 Cohesion: 0.01
-Nodes (205): ../bloc/alerts_bloc.dart, ../bloc/alerts_event.dart, ../bloc/alerts_state.dart, ../bloc/crop_recommendations_bloc.dart, ../bloc/crop_recommendations_event.dart, ../bloc/crop_recommendations_state.dart, ../bloc/crops_list_bloc.dart, ../bloc/crops_list_event.dart (+197 more)
+Nodes (239): ../bloc/alerts_bloc.dart, ../bloc/alerts_event.dart, ../bloc/alerts_state.dart, ../bloc/crop_recommendations_bloc.dart, ../bloc/crop_recommendations_event.dart, ../bloc/crop_recommendations_state.dart, ../bloc/crops_list_bloc.dart, ../bloc/crops_list_event.dart (+231 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.01
-Nodes (125): access_policy.dart, access_rule.dart, auth_token.dart, crop_advisory_model.dart, crop_model.dart, device_model.dart, farm_model.dart, package:equatable/equatable.dart (+117 more)
+Nodes (133): access_policy.dart, access_rule.dart, auth_token.dart, crop_advisory_model.dart, crop_model.dart, device_model.dart, farm_model.dart, package:equatable/equatable.dart (+125 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.02
-Nodes (126): confirm_sheet.dart, ../constants/app_constants.dart, ../../../core/constants/app_constants.dart, dart:io, dart:math, image_preview.dart, main_production.dart, package:cached_network_image/cached_network_image.dart (+118 more)
+Nodes (121): ../bloc/login_bloc.dart, ../bloc/login_event.dart, ../bloc/login_state.dart, confirm_sheet.dart, ../../../core/constants/app_constants.dart, dart:io, dart:math, image_preview.dart (+113 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.02
-Nodes (118): ../bloc/farm_detail_bloc.dart, ../bloc/farm_detail_event.dart, ../bloc/farm_detail_state.dart, device_detail_event.dart, device_detail_state.dart, farm_detail_event.dart, farm_detail_state.dart, farm_endpoints.dart (+110 more)
+Nodes (102): ../bloc/crop_detail_bloc.dart, ../bloc/crop_detail_event.dart, ../bloc/crop_detail_state.dart, crop_endpoints.dart, crops_route_names.dart, market_route_names.dart, package:bloc_test/bloc_test.dart, package:super_flutter/app/config/flavor.dart (+94 more)
 
 ### Community 4 - "Community 4"
 Cohesion: 0.02
-Nodes (109): ../../app/config/environment.dart, ../core/di/injection.dart, ../core/localization/app_localizations.dart, ../core/ui/theme/app_theme.dart, dart:async, dio_client.dart, ../../../domain/auth/repositories/auth_repository.dart, ../error/composite_error_reporter.dart (+101 more)
+Nodes (91): app_logger.dart, auth_state.dart, ../core/di/injection.dart, ../core/localization/app_localizations.dart, ../core/ui/theme/app_theme.dart, dart:async, ../../../../domain/auth/entities/access_policy.dart, ../../../../domain/auth/entities/auth_status.dart (+83 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.02
-Nodes (94): dart:typed_data, market_endpoints.dart, ../network_constants.dart, ../network_exception_mapper.dart, package:bloc_test/bloc_test.dart, package:dio/dio.dart, package:flutter_test/flutter_test.dart, package:mocktail/mocktail.dart (+86 more)
+Cohesion: 0.03
+Nodes (83): dart:typed_data, market_endpoints.dart, ../network_constants.dart, ../network_exception_mapper.dart, package:dio/dio.dart, package:flutter_test/flutter_test.dart, package:mocktail/mocktail.dart, package:super_flutter/app/startup/remote_app_settings.dart (+75 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.02
-Nodes (88): communication_route_names.dart, market_event.dart, market_route_names.dart, market_state.dart, package:super_flutter/core/network/api_endpoints.dart, package:super_flutter/core/network/paged.dart, package:super_flutter/core/ui/widgets/app_error_view.dart, package:super_flutter/data/communication/model/alert_model.dart (+80 more)
+Cohesion: 0.03
+Nodes (75): add_farm_event.dart, add_farm_state.dart, alerts_event.dart, alerts_state.dart, crop_detail_event.dart, crop_detail_state.dart, crop_recommendations_event.dart, crop_recommendations_state.dart (+67 more)
 
 ### Community 7 - "Community 7"
-Cohesion: 0.03
-Nodes (80): ../access/app_features.dart, ../access/feature_registry.dart, app_shell.dart, ../bloc/crop_detail_bloc.dart, ../bloc/crop_detail_event.dart, ../bloc/crop_detail_state.dart, crop_endpoints.dart, crops_route_names.dart (+72 more)
+Cohesion: 0.02
+Nodes (85): ../access/app_features.dart, ../access/feature_registry.dart, app_shell.dart, ../config/app_config.dart, feature_registry.dart, navigator_keys.dart, package:super_flutter/app/access/app_features.dart, package:super_flutter/app/access/feature_registry.dart (+77 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.03
-Nodes (81): ../config/app_config.dart, feature_registry.dart, navigator_keys.dart, package:super_flutter/app/access/app_features.dart, package:super_flutter/app/access/feature_registry.dart, package:super_flutter/app/config/flavor.dart, package:super_flutter/app/router/app_router.dart, package:super_flutter/app/router/routes_names.dart (+73 more)
+Nodes (83): ../bloc/farm_detail_bloc.dart, ../bloc/farm_detail_event.dart, ../bloc/farm_detail_state.dart, farm_endpoints.dart, farm_route_names.dart, package:super_flutter/data/farm/model/block_model.dart, package:super_flutter/data/farm/model/farm_crop_model.dart, package:super_flutter/data/farm/model/farm_model.dart (+75 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.02
-Nodes (83): ../../core/constants/constants.dart, ../../core/constants/design_colors.dart, ../../core/logging/app_logger.dart, ../../core/network/dio_client.dart, ../../core/service/remote_service.dart, ../../../../core/storage/storage_keys.dart, ../../../../core/storage/storage_service.dart, ../../core/utils/utils.dart (+75 more)
+Nodes (78): ../../core/constants/assets_names.dart, ../../core/constants/constants.dart, ../../core/constants/design_colors.dart, ../../core/logging/app_logger.dart, ../../core/network/dio_client.dart, ../../core/service/remote_service.dart, ../../../../core/storage/storage_keys.dart, ../../../../core/storage/storage_service.dart (+70 more)
 
 ### Community 10 - "Community 10"
 Cohesion: 0.03
-Nodes (63): alerts_event.dart, alerts_state.dart, crop_detail_event.dart, crop_detail_state.dart, crop_recommendations_event.dart, crop_recommendations_state.dart, crops_list_event.dart, crops_list_state.dart (+55 more)
+Nodes (71): communication_route_names.dart, dashboard_route_names.dart, package:super_flutter/core/error/exceptions/cache_exception.dart, package:super_flutter/core/error/exceptions/unknown_exception.dart, package:super_flutter/core/network/api_endpoints.dart, package:super_flutter/core/network/paged.dart, package:super_flutter/data/communication/model/alert_model.dart, package:super_flutter/data/communication/model/banner_model.dart (+63 more)
 
 ### Community 11 - "Community 11"
-Cohesion: 0.04
-Nodes (62): auth_route_names.dart, login_event.dart, login_state.dart, ../model/login_model.dart, package:super_flutter/core/error/exceptions/cache_exception.dart, package:super_flutter/core/error/exceptions/forbidden_exception.dart, package:super_flutter/core/error/exceptions/unauthorized_exception.dart, package:super_flutter/core/error/exceptions/unknown_exception.dart (+54 more)
+Cohesion: 0.03
+Nodes (61): app_localizations.dart, app_localizations_en.dart, app_localizations_es.dart, package:flutter/widgets.dart, package:intl/intl.dart, _isSameDay, isStalerThan, isStaleThan (+53 more)
 
 ### Community 12 - "Community 12"
-Cohesion: 0.05
-Nodes (28): ../bloc/login_bloc.dart, ../bloc/login_event.dart, ../bloc/login_state.dart, fl_register_plugins(), main(), my_application_activate(), my_application_dispose(), my_application_new() (+20 more)
+Cohesion: 0.04
+Nodes (51): auth_route_names.dart, login_event.dart, login_state.dart, ../model/login_model.dart, package:super_flutter/domain/auth/entities/auth_session.dart, package:super_flutter/domain/auth/entities/auth_token.dart, package:super_flutter/domain/auth/use_cases/login.dart, package:super_flutter/domain/auth/use_cases/request_otp.dart (+43 more)
 
 ### Community 13 - "Community 13"
-Cohesion: 0.06
-Nodes (35): app_colors.dart, ../../../app/config/flavor.dart, design_colors.dart, AppColorsExt, copyWith, lerp, seedFor, font (+27 more)
+Cohesion: 0.04
+Nodes (42): ../../app/config/environment.dart, dio_client.dart, ../error/composite_error_reporter.dart, ../error/error_reporter.dart, ../error/logger_error_reporter.dart, error_reporter.dart, interceptors/api_key_interceptor.dart, interceptors/auth_interceptor.dart (+34 more)
 
 ### Community 14 - "Community 14"
 Cohesion: 0.05
-Nodes (35): app_localizations.dart, package:intl/intl.dart, _isSameDay, isStalerThan, isStaleThan, AppLocalizationsEn, cropDurationDays, fieldChoose (+27 more)
+Nodes (41): device_detail_event.dart, device_detail_state.dart, farm_detail_event.dart, farm_detail_state.dart, iot_endpoints.dart, package:super_flutter/data/iot/model/device_model.dart, package:super_flutter/data/iot/model/integration_run_model.dart, package:super_flutter/data/iot/model/sensor_history_model.dart (+33 more)
 
 ### Community 15 - "Community 15"
+Cohesion: 0.06
+Nodes (35): app_colors.dart, ../../../app/config/flavor.dart, design_colors.dart, AppColorsExt, copyWith, lerp, seedFor, font (+27 more)
+
+### Community 16 - "Community 16"
 Cohesion: 0.09
 Nodes (25): FlutterWindow(), OnCreate(), RegisterPlugins(), wWinMain(), CreateAndAttachConsole(), GetCommandLineArguments(), Utf8FromUtf16(), Create() (+17 more)
 
-### Community 16 - "Community 16"
-Cohesion: 0.06
-Nodes (28): app_localizations_en.dart, app_localizations_es.dart, ../../core/constants/assets_names.dart, ../../core/utils/image_precache.dart, package:flutter/widgets.dart, AppLocalizations, _AppLocalizationsDelegate, AppLocalizationsEn (+20 more)
-
 ### Community 17 - "Community 17"
-Cohesion: 0.09
-Nodes (19): app_logger.dart, auth_state.dart, ../../../../domain/auth/entities/access_policy.dart, ../../../../domain/auth/entities/auth_status.dart, ../../../../domain/auth/entities/user.dart, ../../../../domain/auth/use_cases/check_auth_status.dart, ../../../../domain/auth/use_cases/get_current_user.dart, ../../../../domain/auth/use_cases/refresh_user.dart (+11 more)
+Cohesion: 0.11
+Nodes (9): fl_register_plugins(), main(), my_application_activate(), my_application_dispose(), my_application_new(), dispose, GoRouterRefreshStream, dispose (+1 more)
 
 ### Community 18 - "Community 18"
 Cohesion: 0.12
@@ -222,156 +228,156 @@ Cohesion: 0.22
 Nodes (3): AppDelegate, FlutterAppDelegate, FlutterImplicitEngineDelegate
 
 ### Community 25 - "Community 25"
+Cohesion: 0.22
+Nodes (8): build, DesignProgress, DesignProgressAnimation, _DesignProgressAnimationState, didUpdateWidget, dispose, initState, SizedBox
+
+### Community 26 - "Community 26"
 Cohesion: 0.32
 Nodes (5): app/app.dart, app/config/app_config.dart, main, main, main
 
-### Community 26 - "Community 26"
+### Community 27 - "Community 27"
 Cohesion: 0.25
 Nodes (7): package:drift/drift.dart, package:drift_flutter/drift_flutter.dart, customStatement, delete, KeyValueRows, LocalDatabase, ProductRows
 
-### Community 27 - "Community 27"
+### Community 28 - "Community 28"
 Cohesion: 0.25
 Nodes (6): environment.dart, flavor.dart, AppConfig, toString, Environment, toString
 
-### Community 28 - "Community 28"
+### Community 29 - "Community 29"
 Cohesion: 0.25
 Nodes (7): advisory, calendar, crop, CropEndpoints, economics, fertilizers, prices
 
-### Community 29 - "Community 29"
+### Community 30 - "Community 30"
 Cohesion: 0.29
 Nodes (6): device, deviceReadings, farmDevices, IotEndpoints, soilSensorAccount, syncFarmDevices
 
-### Community 30 - "Community 30"
+### Community 31 - "Community 31"
 Cohesion: 0.33
 Nodes (3): RegisterGeneratedPlugins(), MainFlutterWindow, NSWindow
 
-### Community 31 - "Community 31"
+### Community 32 - "Community 32"
 Cohesion: 0.4
 Nodes (2): RunnerTests, XCTestCase
 
-### Community 32 - "Community 32"
+### Community 33 - "Community 33"
 Cohesion: 0.4
 Nodes (2): GeneratedPluginRegistrant, -registerWithRegistry
 
-### Community 33 - "Community 33"
+### Community 34 - "Community 34"
 Cohesion: 0.4
 Nodes (4): market_model.dart, market_summary_model.dart, MarketPriceModel, UnitModel
 
-### Community 34 - "Community 34"
+### Community 35 - "Community 35"
 Cohesion: 0.5
 Nodes (2): handle_new_rx_page(), Intercept NOTIFY_DEBUGGER_ABOUT_RX_PAGES and touch the pages.
 
-### Community 35 - "Community 35"
-Cohesion: 0.5
-Nodes (3): editFarmFor, farmDetailFor, FarmsRouteNames
-
 ### Community 36 - "Community 36"
+Cohesion: 0.5
+Nodes (3): build, Scaffold, SplashScreen
+
+### Community 37 - "Community 37"
+Cohesion: 0.5
+Nodes (3): farmDetail, isPublic, notice
+
+### Community 38 - "Community 38"
+Cohesion: 0.5
+Nodes (3): editFarmFor, farmDetailFor, FarmRouteNames
+
+### Community 39 - "Community 39"
 Cohesion: 0.5
 Nodes (3): CategoryModel, NoticeModel, PriorityModel
 
-### Community 37 - "Community 37"
+### Community 40 - "Community 40"
 Cohesion: 0.67
 Nodes (2): FlutterSceneDelegate, SceneDelegate
 
-### Community 38 - "Community 38"
+### Community 41 - "Community 41"
 Cohesion: 0.67
 Nodes (2): package:package_info_plus/package_info_plus.dart, Constants
 
-### Community 39 - "Community 39"
-Cohesion: 0.67
-Nodes (2): isPublic, notice
-
-### Community 40 - "Community 40"
+### Community 42 - "Community 42"
 Cohesion: 0.67
 Nodes (2): orEmpty, truncate
 
-### Community 41 - "Community 41"
+### Community 43 - "Community 43"
 Cohesion: 0.67
 Nodes (2): AppException, toString
 
-### Community 42 - "Community 42"
+### Community 44 - "Community 44"
 Cohesion: 0.67
 Nodes (2): cropDetailFor, CropsRouteNames
 
-### Community 43 - "Community 43"
+### Community 45 - "Community 45"
 Cohesion: 0.67
 Nodes (2): RoleModel, UserModel
 
-### Community 44 - "Community 44"
+### Community 46 - "Community 46"
 Cohesion: 0.67
 Nodes (2): favourite, prices
 
-### Community 45 - "Community 45"
+### Community 47 - "Community 47"
 Cohesion: 1.0
 Nodes (1): PodsDummy_Pods_Runner
 
-### Community 46 - "Community 46"
+### Community 48 - "Community 48"
 Cohesion: 1.0
 Nodes (1): PodsDummy_Pods_RunnerTests
 
-### Community 47 - "Community 47"
+### Community 49 - "Community 49"
 Cohesion: 1.0
 Nodes (1): MainActivity
 
-### Community 48 - "Community 48"
+### Community 50 - "Community 50"
 Cohesion: 1.0
 Nodes (1): AssetsName
 
-### Community 49 - "Community 49"
+### Community 51 - "Community 51"
 Cohesion: 1.0
 Nodes (1): bearerToken
 
-### Community 50 - "Community 50"
+### Community 52 - "Community 52"
 Cohesion: 1.0
 Nodes (1): report
 
-### Community 51 - "Community 51"
+### Community 53 - "Community 53"
 Cohesion: 1.0
 Nodes (1): RemoteAppSettings
 
-### Community 52 - "Community 52"
+### Community 54 - "Community 54"
 Cohesion: 1.0
 Nodes (1): deviceDetail
 
-### Community 53 - "Community 53"
+### Community 55 - "Community 55"
 Cohesion: 1.0
 Nodes (1): priceHistory
 
-### Community 54 - "Community 54"
+### Community 56 - "Community 56"
 Cohesion: 1.0
 Nodes (1): noticeDetail
 
-### Community 55 - "Community 55"
-Cohesion: 1.0
-Nodes (1): SuperBoyModel
-
-### Community 56 - "Community 56"
-Cohesion: 1.0
-Nodes (1): BannerModel
-
 ### Community 57 - "Community 57"
 Cohesion: 1.0
-Nodes (0): 
+Nodes (1): BlockModel
 
 ### Community 58 - "Community 58"
 Cohesion: 1.0
-Nodes (0): 
+Nodes (1): SoilTypeModel
 
 ### Community 59 - "Community 59"
 Cohesion: 1.0
-Nodes (0): 
+Nodes (1): IrrigationTypeModel
 
 ### Community 60 - "Community 60"
 Cohesion: 1.0
-Nodes (0): 
+Nodes (1): OwnershipModel
 
 ### Community 61 - "Community 61"
 Cohesion: 1.0
-Nodes (0): 
+Nodes (1): SuperBoyModel
 
 ### Community 62 - "Community 62"
 Cohesion: 1.0
-Nodes (0): 
+Nodes (1): BannerModel
 
 ### Community 63 - "Community 63"
 Cohesion: 1.0
@@ -457,99 +463,131 @@ Nodes (0):
 Cohesion: 1.0
 Nodes (0): 
 
+### Community 84 - "Community 84"
+Cohesion: 1.0
+Nodes (0): 
+
+### Community 85 - "Community 85"
+Cohesion: 1.0
+Nodes (0): 
+
+### Community 86 - "Community 86"
+Cohesion: 1.0
+Nodes (0): 
+
+### Community 87 - "Community 87"
+Cohesion: 1.0
+Nodes (0): 
+
+### Community 88 - "Community 88"
+Cohesion: 1.0
+Nodes (0): 
+
+### Community 89 - "Community 89"
+Cohesion: 1.0
+Nodes (0): 
+
 ## Knowledge Gaps
-- **1315 isolated node(s):** `main`, `openFrom`, `ConfirmSheet`, `BadRequestException`, `main` (+1310 more)
+- **1346 isolated node(s):** `main`, `openFrom`, `ConfirmSheet`, `BadRequestException`, `main` (+1341 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **Thin community `Community 45`** (2 nodes): `PodsDummy_Pods_Runner`, `Pods-Runner-dummy.m`
+- **Thin community `Community 47`** (2 nodes): `PodsDummy_Pods_Runner`, `Pods-Runner-dummy.m`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 46`** (2 nodes): `PodsDummy_Pods_RunnerTests`, `Pods-RunnerTests-dummy.m`
+- **Thin community `Community 48`** (2 nodes): `PodsDummy_Pods_RunnerTests`, `Pods-RunnerTests-dummy.m`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 47`** (2 nodes): `MainActivity`, `MainActivity.kt`
+- **Thin community `Community 49`** (2 nodes): `MainActivity`, `MainActivity.kt`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 48`** (2 nodes): `assets_names.dart`, `AssetsName`
+- **Thin community `Community 50`** (2 nodes): `assets_names.dart`, `AssetsName`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 49`** (2 nodes): `network_constants.dart`, `bearerToken`
+- **Thin community `Community 51`** (2 nodes): `network_constants.dart`, `bearerToken`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 50`** (2 nodes): `error_reporter.dart`, `report`
+- **Thin community `Community 52`** (2 nodes): `error_reporter.dart`, `report`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 51`** (2 nodes): `remote_app_settings.dart`, `RemoteAppSettings`
+- **Thin community `Community 53`** (2 nodes): `remote_app_settings.dart`, `RemoteAppSettings`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 52`** (2 nodes): `iot_route_names.dart`, `deviceDetail`
+- **Thin community `Community 54`** (2 nodes): `iot_route_names.dart`, `deviceDetail`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 53`** (2 nodes): `market_route_names.dart`, `priceHistory`
+- **Thin community `Community 55`** (2 nodes): `market_route_names.dart`, `priceHistory`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 54`** (2 nodes): `communication_route_names.dart`, `noticeDetail`
+- **Thin community `Community 56`** (2 nodes): `communication_route_names.dart`, `noticeDetail`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 55`** (2 nodes): `super_boy_model.dart`, `SuperBoyModel`
+- **Thin community `Community 57`** (2 nodes): `block_model.dart`, `BlockModel`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 56`** (2 nodes): `banner_model.dart`, `BannerModel`
+- **Thin community `Community 58`** (2 nodes): `soil_type_model.dart`, `SoilTypeModel`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 57`** (1 nodes): `Package.swift`
+- **Thin community `Community 59`** (2 nodes): `irrigation_type_model.dart`, `IrrigationTypeModel`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 58`** (1 nodes): `FlutterGeneratedPluginSwiftPackage.swift`
+- **Thin community `Community 60`** (2 nodes): `ownership_model.dart`, `OwnershipModel`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 59`** (1 nodes): `Runner-Bridging-Header.h`
+- **Thin community `Community 61`** (2 nodes): `super_boy_model.dart`, `SuperBoyModel`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 60`** (1 nodes): `GeneratedPluginRegistrant.h`
+- **Thin community `Community 62`** (2 nodes): `banner_model.dart`, `BannerModel`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 61`** (1 nodes): `Package.swift`
+- **Thin community `Community 63`** (1 nodes): `Package.swift`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 62`** (1 nodes): `FlutterGeneratedPluginSwiftPackage.swift`
+- **Thin community `Community 64`** (1 nodes): `FlutterGeneratedPluginSwiftPackage.swift`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 63`** (1 nodes): `Pods-Runner-umbrella.h`
+- **Thin community `Community 65`** (1 nodes): `Runner-Bridging-Header.h`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 64`** (1 nodes): `Pods-RunnerTests-umbrella.h`
+- **Thin community `Community 66`** (1 nodes): `GeneratedPluginRegistrant.h`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 65`** (1 nodes): `my_application.h`
+- **Thin community `Community 67`** (1 nodes): `Package.swift`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 66`** (1 nodes): `generated_plugin_registrant.h`
+- **Thin community `Community 68`** (1 nodes): `FlutterGeneratedPluginSwiftPackage.swift`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 67`** (1 nodes): `build.gradle.kts`
+- **Thin community `Community 69`** (1 nodes): `Pods-Runner-umbrella.h`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 68`** (1 nodes): `settings.gradle.kts`
+- **Thin community `Community 70`** (1 nodes): `Pods-RunnerTests-umbrella.h`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 69`** (1 nodes): `build.gradle.kts`
+- **Thin community `Community 71`** (1 nodes): `my_application.h`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 70`** (1 nodes): `app_button.dart`
+- **Thin community `Community 72`** (1 nodes): `generated_plugin_registrant.h`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 71`** (1 nodes): `app_constants.dart`
+- **Thin community `Community 73`** (1 nodes): `build.gradle.kts`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 72`** (1 nodes): `asset_constants.dart`
+- **Thin community `Community 74`** (1 nodes): `settings.gradle.kts`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 73`** (1 nodes): `storage_keys.dart`
+- **Thin community `Community 75`** (1 nodes): `build.gradle.kts`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 74`** (1 nodes): `flavor.dart`
+- **Thin community `Community 76`** (1 nodes): `app_button.dart`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 75`** (1 nodes): `auth_route_names.dart`
+- **Thin community `Community 77`** (1 nodes): `app_constants.dart`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 76`** (1 nodes): `dashboard_route_names.dart`
+- **Thin community `Community 78`** (1 nodes): `asset_constants.dart`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 77`** (1 nodes): `super_awesome_route_names.dart`
+- **Thin community `Community 79`** (1 nodes): `storage_keys.dart`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 78`** (1 nodes): `ui_gallery_route_names.dart`
+- **Thin community `Community 80`** (1 nodes): `flavor.dart`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 79`** (1 nodes): `auth_status.dart`
+- **Thin community `Community 81`** (1 nodes): `auth_route_names.dart`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 80`** (1 nodes): `utils.h`
+- **Thin community `Community 82`** (1 nodes): `dashboard_route_names.dart`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 81`** (1 nodes): `win32_window.h`
+- **Thin community `Community 83`** (1 nodes): `super_awesome_route_names.dart`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 82`** (1 nodes): `resource.h`
+- **Thin community `Community 84`** (1 nodes): `ui_gallery_route_names.dart`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 83`** (1 nodes): `generated_plugin_registrant.h`
+- **Thin community `Community 85`** (1 nodes): `auth_status.dart`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 86`** (1 nodes): `utils.h`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 87`** (1 nodes): `win32_window.h`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 88`** (1 nodes): `resource.h`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 89`** (1 nodes): `generated_plugin_registrant.h`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `package:material_ui/material_ui.dart` connect `Community 2` to `Community 0`, `Community 3`, `Community 4`, `Community 6`, `Community 7`, `Community 8`, `Community 9`, `Community 11`, `Community 12`, `Community 13`?**
-  _High betweenness centrality (0.203) - this node is a cross-community bridge._
-- **Why does `package:equatable/equatable.dart` connect `Community 1` to `Community 3`, `Community 6`, `Community 7`, `Community 11`, `Community 17`, `Community 19`?**
-  _High betweenness centrality (0.166) - this node is a cross-community bridge._
-- **Why does `package:flutter_bloc/flutter_bloc.dart` connect `Community 10` to `Community 0`, `Community 3`, `Community 4`, `Community 6`, `Community 7`, `Community 8`, `Community 11`, `Community 12`?**
-  _High betweenness centrality (0.091) - this node is a cross-community bridge._
+- **Why does `package:material_ui/material_ui.dart` connect `Community 0` to `Community 2`, `Community 3`, `Community 4`, `Community 36`, `Community 7`, `Community 8`, `Community 9`, `Community 10`, `Community 12`, `Community 14`, `Community 15`, `Community 17`, `Community 25`?**
+  _High betweenness centrality (0.209) - this node is a cross-community bridge._
+- **Why does `package:equatable/equatable.dart` connect `Community 1` to `Community 3`, `Community 4`, `Community 8`, `Community 10`, `Community 12`, `Community 14`, `Community 19`?**
+  _High betweenness centrality (0.198) - this node is a cross-community bridge._
+- **Why does `package:injectable/injectable.dart` connect `Community 6` to `Community 3`, `Community 4`, `Community 5`, `Community 8`, `Community 9`, `Community 10`, `Community 12`, `Community 13`, `Community 14`?**
+  _High betweenness centrality (0.119) - this node is a cross-community bridge._
 - **What connects `main`, `openFrom`, `ConfirmSheet` to the rest of the system?**
-  _1315 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1346 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.01 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**

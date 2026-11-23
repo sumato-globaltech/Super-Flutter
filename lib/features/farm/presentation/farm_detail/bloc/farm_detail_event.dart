@@ -102,4 +102,3 @@ class FarmSoilSensorAccountLinked extends FarmDetailEvent {
 class FarmSoilSensorAccountUnlinked extends FarmDetailEvent {
   const FarmSoilSensorAccountUnlinked();
 }
-

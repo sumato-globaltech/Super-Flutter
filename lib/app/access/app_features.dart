@@ -3,6 +3,7 @@ import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/domain/auth/entities/access_policy.dart';
 import 'package:super_flutter/domain/auth/entities/access_rule.dart';
 import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
+import 'package:super_flutter/features/farm/routes/farm_route_names.dart';
 
 import 'feature_registry.dart';
 
@@ -160,6 +161,20 @@ final appFeatures = FeatureRegistry([
     title: _profile,
     icon: PhosphorIconsRegular.user,
   ),
+  const AppFeature(
+    id: 'farm_add_farm',
+    path: FarmRouteNames.addFarm,
+    rule: AccessRule.all([AccessRule.role(Roles.farmer), AccessRule.profile()]),
+    title: _farmAddFarm,
+    icon: PhosphorIconsRegular.squaresFour,
+  ),
+  const AppFeature(
+    id: 'farm_edit_farm',
+    path: FarmRouteNames.editFarm,
+    rule: AccessRule.all([AccessRule.role(Roles.farmer), AccessRule.profile()]),
+    title: _farmEditFarm,
+    icon: PhosphorIconsRegular.squaresFour,
+  ),
 ]);
 
 const _farmer = AccessRule.all([
@@ -185,3 +200,7 @@ String _notices(AppLocalizations l10n) => l10n.notices;
 String _manageNotices(AppLocalizations l10n) => l10n.manageNotices;
 String _manageAlerts(AppLocalizations l10n) => l10n.manageAlerts;
 String _profile(AppLocalizations l10n) => l10n.profile;
+
+String _farmAddFarm(AppLocalizations l10n) => l10n.farmAddFarmTitle;
+
+String _farmEditFarm(AppLocalizations l10n) => l10n.farmEditFarmTitle;

@@ -1,9 +1,12 @@
-abstract class FarmsRouteNames {
+abstract class FarmRouteNames {
   static const String farms = '/farms';
-  static const String newFarm = '/farms/new';
   static const String farmDetail = '/farms/:farmId';
-  static const String editFarm = '/farms/:farmId/edit';
 
   static String farmDetailFor(String farmId) => '/farms/$farmId';
-  static String editFarmFor(String farmId) => '/farms/$farmId/edit';
+
+  static const addFarm = '/farm/add_farm';
+
+  static const editFarm = '/farm/edit_farm/:farm';
+
+  static String editFarmFor(String farm) => '/farm/edit_farm/$farm';
 }

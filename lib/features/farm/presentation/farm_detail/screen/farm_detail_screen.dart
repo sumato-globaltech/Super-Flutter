@@ -18,7 +18,7 @@ import 'package:super_flutter/data/farm/model/farm_photo_model.dart';
 import 'package:super_flutter/data/farm/model/farm_transaction_model.dart';
 import 'package:super_flutter/data/iot/model/device_model.dart';
 import 'package:super_flutter/data/iot/model/soil_sensor_account_model.dart';
-import 'package:super_flutter/features/farm/routes/farms_route_names.dart';
+import 'package:super_flutter/features/farm/routes/farm_route_names.dart';
 import 'package:super_flutter/features/iot/routes/iot_route_names.dart';
 
 import '../bloc/farm_detail_bloc.dart';
@@ -54,14 +54,13 @@ class _FarmDetailView extends StatelessWidget {
           prev.actionSuccessMessage != curr.actionSuccessMessage,
       listener: (context, state) {
         if (state.isDeleted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l10n.farmDeleted)),
-          );
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(l10n.farmDeleted)));
           context.pop();
         } else if (state.actionSuccessMessage != null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.actionSuccessMessage!)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.actionSuccessMessage!)));
         } else if (state.errorMessage != null &&
             state.status == FarmDetailStatus.success) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -85,8 +84,7 @@ class _FarmDetailView extends StatelessWidget {
                   icon: const Icon(PhosphorIconsRegular.pencilSimple),
                   onPressed: () async {
                     final updated = await context.push<bool>(
-                      FarmsRouteNames.editFarmFor(farm.id!),
-                      extra: farm,
+                      FarmRouteNames.editFarmFor(farm.id!),
                     );
                     if (updated == true && context.mounted) {
                       bloc.add(const FarmDetailRefreshed());
@@ -140,98 +138,99 @@ class _FarmDetailView extends StatelessWidget {
             ],
           ),
           body: switch (state.status) {
-            FarmDetailStatus.initial || FarmDetailStatus.loading =>
-              const Center(
-                child: Padding(
-                  padding: EdgeInsets.all(32),
-                  child: DesignProgress(),
-                ),
+            FarmDetailStatus.initial ||
+            FarmDetailStatus.loading => const Center(
+              child: Padding(
+                padding: EdgeInsets.all(32),
+                child: DesignProgress(),
               ),
+            ),
             FarmDetailStatus.failure => AppErrorView(
-                message: state.errorMessage ?? l10n.errorUnknown,
-                retryLabel: l10n.tryAgain,
-                onRetry: () => bloc.add(FarmDetailStarted(state.farmId)),
-              ),
+              message: state.errorMessage ?? l10n.errorUnknown,
+              retryLabel: l10n.tryAgain,
+              onRetry: () => bloc.add(FarmDetailStarted(state.farmId)),
+            ),
             FarmDetailStatus.success => RefreshIndicator(
-                onRefresh: () async {
-                  bloc.add(const FarmDetailRefreshed());
-                },
-                child: DefaultTabController(
-                  length: 4,
-                  initialIndex: state.selectedTab,
-                  child: NestedScrollView(
-                    headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                      SliverToBoxAdapter(
-                        child: Padding(
-                          padding: const EdgeInsets.all(AppSpacing.md),
-                          child: _FarmOverviewCard(farm: farm!),
-                        ),
+              onRefresh: () async {
+                bloc.add(const FarmDetailRefreshed());
+              },
+              child: DefaultTabController(
+                length: 4,
+                initialIndex: state.selectedTab,
+                child: NestedScrollView(
+                  headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.all(AppSpacing.md),
+                        child: _FarmOverviewCard(farm: farm!),
                       ),
-                      SliverPersistentHeader(
-                        pinned: true,
-                        delegate: _FarmTabBarDelegate(
-                          TabBar(
-                            labelColor: theme.colorScheme.primary,
-                            unselectedLabelColor: theme.textTheme.bodyMedium?.color
-                                ?.withValues(alpha: 0.6),
-                            indicatorColor: theme.colorScheme.primary,
-                            tabs: [
-                              Tab(
-                                text: '${l10n.crops} (${state.crops.length})',
-                              ),
-                              Tab(
-                                text:
-                                    '${l10n.transactions} (${state.transactions.length})',
-                              ),
-                              Tab(
-                                text:
-                                    '${l10n.photos} (${state.photos.length})',
-                              ),
-                              Tab(
-                                text:
-                                    '${l10n.devices} (${state.devices.length})',
-                              ),
-                            ],
-                            onTap: (index) {
-                              bloc.add(FarmDetailTabChanged(index));
-                            },
-                          ),
-                          theme.colorScheme.surface,
+                    ),
+                    SliverPersistentHeader(
+                      pinned: true,
+                      delegate: _FarmTabBarDelegate(
+                        TabBar(
+                          labelColor: theme.colorScheme.primary,
+                          unselectedLabelColor: theme
+                              .textTheme
+                              .bodyMedium
+                              ?.color
+                              ?.withValues(alpha: 0.6),
+                          indicatorColor: theme.colorScheme.primary,
+                          tabs: [
+                            Tab(text: '${l10n.crops} (${state.crops.length})'),
+                            Tab(
+                              text:
+                                  '${l10n.transactions} (${state.transactions.length})',
+                            ),
+                            Tab(
+                              text: '${l10n.photos} (${state.photos.length})',
+                            ),
+                            Tab(
+                              text: '${l10n.devices} (${state.devices.length})',
+                            ),
+                          ],
+                          onTap: (index) {
+                            bloc.add(FarmDetailTabChanged(index));
+                          },
                         ),
+                        theme.colorScheme.surface,
+                      ),
+                    ),
+                  ],
+                  body: TabBarView(
+                    children: [
+                      _FarmCropsTab(
+                        crops: state.crops,
+                        onAdd: () => _showAddCropDialog(context, bloc, l10n),
+                        onDelete: (cropId) => bloc.add(FarmCropDeleted(cropId)),
+                      ),
+                      _FarmTransactionsTab(
+                        transactions: state.transactions,
+                        summary: state.summary,
+                        onAdd: () =>
+                            _showAddTransactionDialog(context, bloc, l10n),
+                      ),
+                      _FarmPhotosTab(
+                        photos: state.photos,
+                        onDelete: (photoId) =>
+                            bloc.add(FarmPhotoDeleted(photoId)),
+                      ),
+                      _FarmDevicesTab(
+                        devices: state.devices,
+                        soilSensorAccount: state.soilSensorAccount,
+                        isSyncing: state.isSyncingDevices,
+                        onSync: () =>
+                            bloc.add(const FarmDevicesSyncRequested()),
+                        onLink: () =>
+                            _showLinkSoilSensDialog(context, bloc, l10n),
+                        onUnlink: () =>
+                            _showUnlinkSoilSensDialog(context, bloc, l10n),
                       ),
                     ],
-                    body: TabBarView(
-                      children: [
-                        _FarmCropsTab(
-                          crops: state.crops,
-                          onAdd: () => _showAddCropDialog(context, bloc, l10n),
-                          onDelete: (cropId) =>
-                              bloc.add(FarmCropDeleted(cropId)),
-                        ),
-                        _FarmTransactionsTab(
-                          transactions: state.transactions,
-                          summary: state.summary,
-                          onAdd: () =>
-                              _showAddTransactionDialog(context, bloc, l10n),
-                        ),
-                        _FarmPhotosTab(
-                          photos: state.photos,
-                          onDelete: (photoId) =>
-                              bloc.add(FarmPhotoDeleted(photoId)),
-                        ),
-                        _FarmDevicesTab(
-                          devices: state.devices,
-                          soilSensorAccount: state.soilSensorAccount,
-                          isSyncing: state.isSyncingDevices,
-                          onSync: () => bloc.add(const FarmDevicesSyncRequested()),
-                          onLink: () => _showLinkSoilSensDialog(context, bloc, l10n),
-                          onUnlink: () => _showUnlinkSoilSensDialog(context, bloc, l10n),
-                        ),
-                      ],
-                    ),
                   ),
                 ),
               ),
+            ),
           },
         );
       },
@@ -255,17 +254,13 @@ class _FarmDetailView extends StatelessWidget {
           children: [
             TextField(
               controller: usernameCtrl,
-              decoration: InputDecoration(
-                labelText: l10n.soilSensUsername,
-              ),
+              decoration: InputDecoration(labelText: l10n.soilSensUsername),
             ),
             const SizedBox(height: AppSpacing.sm),
             TextField(
               controller: passwordCtrl,
               obscureText: true,
-              decoration: InputDecoration(
-                labelText: l10n.soilSensPassword,
-              ),
+              decoration: InputDecoration(labelText: l10n.soilSensPassword),
             ),
           ],
         ),
@@ -280,10 +275,12 @@ class _FarmDetailView extends StatelessWidget {
               final password = passwordCtrl.text;
               if (username.isNotEmpty && password.isNotEmpty) {
                 Navigator.pop(ctx);
-                bloc.add(FarmSoilSensorAccountLinked(
-                  username: username,
-                  password: password,
-                ));
+                bloc.add(
+                  FarmSoilSensorAccountLinked(
+                    username: username,
+                    password: password,
+                  ),
+                );
               }
             },
             child: Text(l10n.linkAccount),
@@ -380,7 +377,9 @@ class _FarmDetailView extends StatelessWidget {
               const SizedBox(height: AppSpacing.sm),
               TextField(
                 controller: areaCtrl,
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
                 decoration: InputDecoration(
                   labelText: l10n.areaHectares,
                   suffixText: 'ha',
@@ -459,7 +458,9 @@ class _FarmDetailView extends StatelessWidget {
               const SizedBox(height: AppSpacing.sm),
               TextField(
                 controller: amountCtrl,
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
                 decoration: const InputDecoration(
                   labelText: 'Amount (₹)',
                   prefixText: '₹ ',
@@ -490,7 +491,10 @@ class _FarmDetailView extends StatelessWidget {
                   FarmTransactionAdded({
                     'type': type,
                     'amount': amount,
-                    'occurred_on': DateTime.now().toIso8601String().substring(0, 10),
+                    'occurred_on': DateTime.now().toIso8601String().substring(
+                      0,
+                      10,
+                    ),
                     'description': descCtrl.text.trim(),
                   }),
                 );
@@ -522,10 +526,7 @@ class _FarmTabBarDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return Container(
-      color: backgroundColor,
-      child: tabBar,
-    );
+    return Container(color: backgroundColor, child: tabBar);
   }
 
   @override
@@ -579,8 +580,9 @@ class _FarmOverviewCard extends StatelessWidget {
                         farm.code!,
                         style: theme.textTheme.bodySmall?.copyWith(
                           fontFamily: 'monospace',
-                          color: theme.textTheme.bodySmall?.color
-                              ?.withValues(alpha: 0.7),
+                          color: theme.textTheme.bodySmall?.color?.withValues(
+                            alpha: 0.7,
+                          ),
                         ),
                       ),
                     ],
@@ -640,10 +642,11 @@ class _FarmOverviewCard extends StatelessWidget {
               Expanded(
                 child: TitleDetailsCard(
                   title: l10n.location,
-                  text: [
-                    if (farm.village != null) farm.village,
-                    if (farm.address != null) farm.address,
-                  ].isNotEmpty
+                  text:
+                      [
+                        if (farm.village != null) farm.village,
+                        if (farm.address != null) farm.address,
+                      ].isNotEmpty
                       ? [
                           if (farm.village != null) farm.village,
                           if (farm.address != null) farm.address,
@@ -743,7 +746,10 @@ class _FarmCropsTab extends StatelessWidget {
                     if (crop.season?.label != null)
                       Chip(
                         label: Text(crop.season!.label!),
-                        avatar: const Icon(PhosphorIconsRegular.calendar, size: 12),
+                        avatar: const Icon(
+                          PhosphorIconsRegular.calendar,
+                          size: 12,
+                        ),
                       ),
                     if (crop.status?.label != null)
                       Chip(
@@ -753,7 +759,10 @@ class _FarmCropsTab extends StatelessWidget {
                     if (crop.areaHa != null)
                       Chip(
                         label: Text('${crop.areaHa} ha'),
-                        avatar: const Icon(PhosphorIconsRegular.compass, size: 12),
+                        avatar: const Icon(
+                          PhosphorIconsRegular.compass,
+                          size: 12,
+                        ),
                       ),
                   ],
                 ),
@@ -938,8 +947,9 @@ class _FarmTransactionsTab extends StatelessWidget {
                             Text(
                               tx.category?.name ??
                                   (tx.isIncome ? 'Income' : 'Expense'),
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.w600),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                             if (tx.occurredOn != null)
                               Text(
@@ -980,10 +990,7 @@ class _FarmPhotosTab extends StatelessWidget {
   final List<FarmPhotoModel> photos;
   final ValueChanged<String> onDelete;
 
-  const _FarmPhotosTab({
-    required this.photos,
-    required this.onDelete,
-  });
+  const _FarmPhotosTab({required this.photos, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -1080,7 +1087,8 @@ class _FarmDevicesTab extends StatelessWidget {
                     child: TitleDetailsCard(
                       title: 'SoilSens',
                       text: isLinked
-                          ? (soilSensorAccount!.username ?? l10n.soilSensorAccountLinked)
+                          ? (soilSensorAccount!.username ??
+                                l10n.soilSensorAccountLinked)
                           : l10n.soilSensorAccountNotLinked,
                       iconData: isLinked
                           ? PhosphorIconsRegular.checkCircle
@@ -1110,13 +1118,19 @@ class _FarmDevicesTab extends StatelessWidget {
                               height: 14,
                               child: CircularProgressIndicator(strokeWidth: 2),
                             )
-                          : const Icon(PhosphorIconsRegular.arrowsClockwise, size: 16),
+                          : const Icon(
+                              PhosphorIconsRegular.arrowsClockwise,
+                              size: 16,
+                            ),
                       label: Text(isSyncing ? l10n.syncing : l10n.syncDevices),
                     ),
                   ] else ...[
                     FilledButton.icon(
                       onPressed: onLink,
-                      icon: const Icon(PhosphorIconsRegular.plugsConnected, size: 16),
+                      icon: const Icon(
+                        PhosphorIconsRegular.plugsConnected,
+                        size: 16,
+                      ),
                       label: Text(l10n.linkAccount),
                     ),
                   ],
@@ -1218,4 +1232,3 @@ class _FarmDevicesTab extends StatelessWidget {
     );
   }
 }
-

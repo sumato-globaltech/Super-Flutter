@@ -26,4 +26,16 @@ abstract final class ApiEndpoints {
   static const alerts = '/api/v1/alerts';
 
   static const banners = '/api/v1/banners';
+
+  static const farm = '/api/v1/farmer/farms';
+
+  static const blocks = '/api/v1/farmer/blocks';
+
+  static const soilTypes = '/api/v1/farmer/soil-types';
+
+  static const irrigationMethods = '/api/v1/farmer/irrigation-methods';
+
+  static const landOwnerships = '/api/v1/farmer/land-ownerships';
+
+  static String farmDetail(String farm) => '/api/v1/farmer/farms/$farm';
 }

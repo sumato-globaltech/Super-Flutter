@@ -44,12 +44,12 @@ class FarmsState extends Equatable {
 
   @override
   List<Object?> get props => [
-        status,
-        items,
-        statusFilter,
-        page,
-        hasMore,
-        loadingMore,
-        errorMessage,
-      ];
+    status,
+    items,
+    statusFilter,
+    page,
+    hasMore,
+    loadingMore,
+    errorMessage,
+  ];
 }

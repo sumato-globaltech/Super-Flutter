@@ -84,20 +84,20 @@ class FarmDetailState extends Equatable {
 
   @override
   List<Object?> get props => [
-        status,
-        farmId,
-        farm,
-        crops,
-        transactions,
-        summary,
-        photos,
-        devices,
-        soilSensorAccount,
-        selectedTab,
-        isActionLoading,
-        isSyncingDevices,
-        isDeleted,
-        errorMessage,
-        actionSuccessMessage,
-      ];
+    status,
+    farmId,
+    farm,
+    crops,
+    transactions,
+    summary,
+    photos,
+    devices,
+    soilSensorAccount,
+    selectedTab,
+    isActionLoading,
+    isSyncingDevices,
+    isDeleted,
+    errorMessage,
+    actionSuccessMessage,
+  ];
 }

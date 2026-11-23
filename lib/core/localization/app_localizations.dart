@@ -1663,6 +1663,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Status'**
   String get status;
+
+  /// App bar title of the add_farm screen
+  ///
+  /// In en, this message translates to:
+  /// **'Add Farm'**
+  String get farmAddFarmTitle;
+
+  /// App bar title of the edit_farm screen
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Farm'**
+  String get farmEditFarmTitle;
+
+  /// Label of the name input
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get farmAddFarmName;
+
+  /// Label of the area_ha input
+  ///
+  /// In en, this message translates to:
+  /// **'Area Ha'**
+  String get farmAddFarmAreaHa;
+
+  /// Label of the block_id input
+  ///
+  /// In en, this message translates to:
+  /// **'Block'**
+  String get farmAddFarmBlockId;
+
+  /// Label of the village input
+  ///
+  /// In en, this message translates to:
+  /// **'Village'**
+  String get farmAddFarmVillage;
+
+  /// Label of the address input
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get farmAddFarmAddress;
+
+  /// Label of the soil_type input
+  ///
+  /// In en, this message translates to:
+  /// **'Soil Type'**
+  String get farmAddFarmSoilType;
+
+  /// Label of the irrigation_type input
+  ///
+  /// In en, this message translates to:
+  /// **'Irrigation Type'**
+  String get farmAddFarmIrrigationType;
+
+  /// Label of the ownership input
+  ///
+  /// In en, this message translates to:
+  /// **'Ownership'**
+  String get farmAddFarmOwnership;
+
+  /// Label of the latitude input
+  ///
+  /// In en, this message translates to:
+  /// **'Latitude'**
+  String get farmAddFarmLatitude;
+
+  /// Label of the longitude input
+  ///
+  /// In en, this message translates to:
+  /// **'Longitude'**
+  String get farmAddFarmLongitude;
+
+  /// Shown when the farm form was sent
+  ///
+  /// In en, this message translates to:
+  /// **'Farm created.'**
+  String get farmAddFarmDone;
+
+  /// Label of the name input
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get farmEditFarmName;
+
+  /// Label of the area_ha input
+  ///
+  /// In en, this message translates to:
+  /// **'Area Ha'**
+  String get farmEditFarmAreaHa;
+
+  /// Label of the block_id input
+  ///
+  /// In en, this message translates to:
+  /// **'Block'**
+  String get farmEditFarmBlockId;
+
+  /// Label of the village input
+  ///
+  /// In en, this message translates to:
+  /// **'Village'**
+  String get farmEditFarmVillage;
+
+  /// Label of the address input
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get farmEditFarmAddress;
+
+  /// Label of the soil_type input
+  ///
+  /// In en, this message translates to:
+  /// **'Soil Type'**
+  String get farmEditFarmSoilType;
+
+  /// Label of the irrigation_type input
+  ///
+  /// In en, this message translates to:
+  /// **'Irrigation Type'**
+  String get farmEditFarmIrrigationType;
+
+  /// Label of the ownership input
+  ///
+  /// In en, this message translates to:
+  /// **'Ownership'**
+  String get farmEditFarmOwnership;
+
+  /// Label of the latitude input
+  ///
+  /// In en, this message translates to:
+  /// **'Latitude'**
+  String get farmEditFarmLatitude;
+
+  /// Label of the longitude input
+  ///
+  /// In en, this message translates to:
+  /// **'Longitude'**
+  String get farmEditFarmLongitude;
+
+  /// Shown when the farm detail form was sent
+  ///
+  /// In en, this message translates to:
+  /// **'Farm Detail updated.'**
+  String get farmEditFarmDone;
 }
 
 class _AppLocalizationsDelegate

@@ -870,4 +870,76 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get status => 'Estado';
+
+  @override
+  String get farmAddFarmTitle => 'Add Farm';
+
+  @override
+  String get farmEditFarmTitle => 'Edit Farm';
+
+  @override
+  String get farmAddFarmName => 'Name';
+
+  @override
+  String get farmAddFarmAreaHa => 'Area Ha';
+
+  @override
+  String get farmAddFarmBlockId => 'Block';
+
+  @override
+  String get farmAddFarmVillage => 'Village';
+
+  @override
+  String get farmAddFarmAddress => 'Address';
+
+  @override
+  String get farmAddFarmSoilType => 'Soil Type';
+
+  @override
+  String get farmAddFarmIrrigationType => 'Irrigation Type';
+
+  @override
+  String get farmAddFarmOwnership => 'Ownership';
+
+  @override
+  String get farmAddFarmLatitude => 'Latitude';
+
+  @override
+  String get farmAddFarmLongitude => 'Longitude';
+
+  @override
+  String get farmAddFarmDone => 'Farm created.';
+
+  @override
+  String get farmEditFarmName => 'Name';
+
+  @override
+  String get farmEditFarmAreaHa => 'Area Ha';
+
+  @override
+  String get farmEditFarmBlockId => 'Block';
+
+  @override
+  String get farmEditFarmVillage => 'Village';
+
+  @override
+  String get farmEditFarmAddress => 'Address';
+
+  @override
+  String get farmEditFarmSoilType => 'Soil Type';
+
+  @override
+  String get farmEditFarmIrrigationType => 'Irrigation Type';
+
+  @override
+  String get farmEditFarmOwnership => 'Ownership';
+
+  @override
+  String get farmEditFarmLatitude => 'Latitude';
+
+  @override
+  String get farmEditFarmLongitude => 'Longitude';
+
+  @override
+  String get farmEditFarmDone => 'Farm Detail updated.';
 }

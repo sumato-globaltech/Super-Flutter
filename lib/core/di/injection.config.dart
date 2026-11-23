@@ -90,10 +90,12 @@ import 'package:super_flutter/features/crops/presentation/crops_list/bloc/crops_
     as _i64;
 import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart'
     as _i931;
+import 'package:super_flutter/features/farm/presentation/add_farm/bloc/add_farm_bloc.dart'
+    as _i461;
+import 'package:super_flutter/features/farm/presentation/edit_farm/bloc/edit_farm_bloc.dart'
+    as _i288;
 import 'package:super_flutter/features/farm/presentation/farm_detail/bloc/farm_detail_bloc.dart'
     as _i255;
-import 'package:super_flutter/features/farm/presentation/farm_form/bloc/farm_form_bloc.dart'
-    as _i653;
 import 'package:super_flutter/features/farm/presentation/farms_list/bloc/farms_bloc.dart'
     as _i664;
 import 'package:super_flutter/features/iot/presentation/device_detail/bloc/device_detail_bloc.dart'
@@ -207,9 +209,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i929.NoticesBloc>(
       () => _i929.NoticesBloc(gh<_i390.CommunicationRemoteDataSource>()),
     );
-    gh.factory<_i653.FarmFormBloc>(
-      () => _i653.FarmFormBloc(gh<_i773.FarmRemoteDataSource>()),
-    );
     gh.factory<_i664.FarmsBloc>(
       () => _i664.FarmsBloc(gh<_i773.FarmRemoteDataSource>()),
     );
@@ -230,6 +229,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i341.MarketRepositoryImpl>(
       () => _i341.MarketRepositoryImpl(gh<_i1002.MarketRemoteDataSource>()),
+    );
+    gh.factory<_i461.AddFarmBloc>(
+      () => _i461.AddFarmBloc(gh<_i773.FarmRemoteDataSource>()),
+    );
+    gh.factory<_i288.EditFarmBloc>(
+      () => _i288.EditFarmBloc(gh<_i773.FarmRemoteDataSource>()),
     );
     gh.factory<_i255.FarmDetailBloc>(
       () => _i255.FarmDetailBloc(

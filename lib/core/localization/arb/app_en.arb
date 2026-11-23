@@ -409,5 +409,77 @@
   "unlinkConfirmMessage": "Are you sure you want to unlink your soil sensor account? IoT readings will no longer sync automatically.",
   "soilSensUsername": "SoilSens Username",
   "soilSensPassword": "Password",
-  "status": "Status"
+  "status": "Status",
+
+  "farmAddFarmTitle": "Add Farm",
+  "@farmAddFarmTitle": { "description": "App bar title of the add_farm screen" },
+
+  "farmEditFarmTitle": "Edit Farm",
+  "@farmEditFarmTitle": { "description": "App bar title of the edit_farm screen" },
+
+  "farmAddFarmName": "Name",
+  "@farmAddFarmName": { "description": "Label of the name input" },
+
+  "farmAddFarmAreaHa": "Area Ha",
+  "@farmAddFarmAreaHa": { "description": "Label of the area_ha input" },
+
+  "farmAddFarmBlockId": "Block",
+  "@farmAddFarmBlockId": { "description": "Label of the block_id input" },
+
+  "farmAddFarmVillage": "Village",
+  "@farmAddFarmVillage": { "description": "Label of the village input" },
+
+  "farmAddFarmAddress": "Address",
+  "@farmAddFarmAddress": { "description": "Label of the address input" },
+
+  "farmAddFarmSoilType": "Soil Type",
+  "@farmAddFarmSoilType": { "description": "Label of the soil_type input" },
+
+  "farmAddFarmIrrigationType": "Irrigation Type",
+  "@farmAddFarmIrrigationType": { "description": "Label of the irrigation_type input" },
+
+  "farmAddFarmOwnership": "Ownership",
+  "@farmAddFarmOwnership": { "description": "Label of the ownership input" },
+
+  "farmAddFarmLatitude": "Latitude",
+  "@farmAddFarmLatitude": { "description": "Label of the latitude input" },
+
+  "farmAddFarmLongitude": "Longitude",
+  "@farmAddFarmLongitude": { "description": "Label of the longitude input" },
+
+  "farmAddFarmDone": "Farm created.",
+  "@farmAddFarmDone": { "description": "Shown when the farm form was sent" },
+
+  "farmEditFarmName": "Name",
+  "@farmEditFarmName": { "description": "Label of the name input" },
+
+  "farmEditFarmAreaHa": "Area Ha",
+  "@farmEditFarmAreaHa": { "description": "Label of the area_ha input" },
+
+  "farmEditFarmBlockId": "Block",
+  "@farmEditFarmBlockId": { "description": "Label of the block_id input" },
+
+  "farmEditFarmVillage": "Village",
+  "@farmEditFarmVillage": { "description": "Label of the village input" },
+
+  "farmEditFarmAddress": "Address",
+  "@farmEditFarmAddress": { "description": "Label of the address input" },
+
+  "farmEditFarmSoilType": "Soil Type",
+  "@farmEditFarmSoilType": { "description": "Label of the soil_type input" },
+
+  "farmEditFarmIrrigationType": "Irrigation Type",
+  "@farmEditFarmIrrigationType": { "description": "Label of the irrigation_type input" },
+
+  "farmEditFarmOwnership": "Ownership",
+  "@farmEditFarmOwnership": { "description": "Label of the ownership input" },
+
+  "farmEditFarmLatitude": "Latitude",
+  "@farmEditFarmLatitude": { "description": "Label of the latitude input" },
+
+  "farmEditFarmLongitude": "Longitude",
+  "@farmEditFarmLongitude": { "description": "Label of the longitude input" },
+
+  "farmEditFarmDone": "Farm Detail updated.",
+  "@farmEditFarmDone": { "description": "Shown when the farm detail form was sent" }
 }

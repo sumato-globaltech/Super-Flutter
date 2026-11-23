@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
 import 'package:super_flutter/features/dashboard/routes/dashboard_routes.dart';
-import 'package:super_flutter/features/farm/routes/farms_route_names.dart';
-import 'package:super_flutter/features/farm/routes/farms_routes.dart';
+import 'package:super_flutter/features/farm/routes/farm_route_names.dart';
+import 'package:super_flutter/features/farm/routes/farm_routes.dart';
 import 'package:super_flutter/features/market/routes/market_route_names.dart';
 import 'package:super_flutter/features/market/routes/market_routes.dart';
 
@@ -11,5 +11,5 @@ import 'package:super_flutter/features/market/routes/market_routes.dart';
 Map<String, List<RouteBase>> appTabRoutes() => {
   DashboardRouteNames.dashboard: buildDashboardRoutes(),
   MarketRouteNames.market: buildMarketRoutes(),
-  FarmsRouteNames.farms: buildFarmsRoutes(),
+  FarmRouteNames.farms: buildFarmRoutes(),
 };

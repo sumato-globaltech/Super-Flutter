@@ -302,6 +302,78 @@ models:
         type: String
         nullable: true
     origin: generated
+  - name: BlockModel
+    kind: model
+    feature: farm
+    path: lib/data/farm/model/block_model.dart
+    import: package:super_flutter/data/farm/model/block_model.dart
+    fingerprint: '{code:string,district_id:string,id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+      - name: code
+        json_key: code
+        type: String
+        nullable: true
+      - name: districtId
+        json_key: district_id
+        type: String
+        nullable: true
+    origin: generated
+  - name: IrrigationTypeModel
+    kind: model
+    feature: farm
+    path: lib/data/farm/model/irrigation_type_model.dart
+    import: package:super_flutter/data/farm/model/irrigation_type_model.dart
+    fingerprint: '{id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+    origin: generated
+  - name: OwnershipModel
+    kind: model
+    feature: farm
+    path: lib/data/farm/model/ownership_model.dart
+    import: package:super_flutter/data/farm/model/ownership_model.dart
+    fingerprint: '{id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+    origin: generated
+  - name: SoilTypeModel
+    kind: model
+    feature: farm
+    path: lib/data/farm/model/soil_type_model.dart
+    import: package:super_flutter/data/farm/model/soil_type_model.dart
+    fingerprint: '{id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+    origin: generated
   - name: DistrictModel
     kind: model
     feature: newPostFeatureDep

@@ -11,10 +11,8 @@ import 'farm_detail_state.dart';
 
 @injectable
 class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
-  FarmDetailBloc(
-    this._remoteDataSource, [
-    this._iotRemoteDataSource,
-  ]) : super(const FarmDetailState()) {
+  FarmDetailBloc(this._remoteDataSource, [this._iotRemoteDataSource])
+    : super(const FarmDetailState()) {
     on<FarmDetailStarted>(_onStarted, transformer: restartable());
     on<FarmDetailRefreshed>(_onRefreshed, transformer: restartable());
     on<FarmArchiveToggled>(_onArchiveToggled);
@@ -107,10 +105,7 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
     Emitter<FarmDetailState> emit,
   ) async {
     emit(
-      state.copyWith(
-        status: FarmDetailStatus.loading,
-        farmId: event.farmId,
-      ),
+      state.copyWith(status: FarmDetailStatus.loading, farmId: event.farmId),
     );
     await _loadAll(emit, farmId: event.farmId);
   }
@@ -141,22 +136,12 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
           ? await _remoteDataSource.archiveFarm(state.farmId)
           : await _remoteDataSource.unarchiveFarm(state.farmId);
       if (updated != null) {
-        emit(
-          state.copyWith(
-            farm: updated,
-            isActionLoading: false,
-          ),
-        );
+        emit(state.copyWith(farm: updated, isActionLoading: false));
       } else {
         emit(state.copyWith(isActionLoading: false));
       }
     } catch (e) {
-      emit(
-        state.copyWith(
-          isActionLoading: false,
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(state.copyWith(isActionLoading: false, errorMessage: e.toString()));
     }
   }
 
@@ -169,22 +154,12 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
     try {
       final success = await _remoteDataSource.deleteFarm(state.farmId);
       if (success) {
-        emit(
-          state.copyWith(
-            isDeleted: true,
-            isActionLoading: false,
-          ),
-        );
+        emit(state.copyWith(isDeleted: true, isActionLoading: false));
       } else {
         emit(state.copyWith(isActionLoading: false));
       }
     } catch (e) {
-      emit(
-        state.copyWith(
-          isActionLoading: false,
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(state.copyWith(isActionLoading: false, errorMessage: e.toString()));
     }
   }
 
@@ -201,21 +176,13 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
       );
       if (crop != null) {
         emit(
-          state.copyWith(
-            crops: [crop, ...state.crops],
-            isActionLoading: false,
-          ),
+          state.copyWith(crops: [crop, ...state.crops], isActionLoading: false),
         );
       } else {
         emit(state.copyWith(isActionLoading: false));
       }
     } catch (e) {
-      emit(
-        state.copyWith(
-          isActionLoading: false,
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(state.copyWith(isActionLoading: false, errorMessage: e.toString()));
     }
   }
 
@@ -241,12 +208,7 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
         emit(state.copyWith(isActionLoading: false));
       }
     } catch (e) {
-      emit(
-        state.copyWith(
-          isActionLoading: false,
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(state.copyWith(isActionLoading: false, errorMessage: e.toString()));
     }
   }
 
@@ -262,8 +224,9 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
         event.data,
       );
       if (transaction != null) {
-        final summary =
-            await _remoteDataSource.getTransactionSummary(state.farmId);
+        final summary = await _remoteDataSource.getTransactionSummary(
+          state.farmId,
+        );
         emit(
           state.copyWith(
             transactions: [transaction, ...state.transactions],
@@ -275,12 +238,7 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
         emit(state.copyWith(isActionLoading: false));
       }
     } catch (e) {
-      emit(
-        state.copyWith(
-          isActionLoading: false,
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(state.copyWith(isActionLoading: false, errorMessage: e.toString()));
     }
   }
 
@@ -306,12 +264,7 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
         emit(state.copyWith(isActionLoading: false));
       }
     } catch (e) {
-      emit(
-        state.copyWith(
-          isActionLoading: false,
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(state.copyWith(isActionLoading: false, errorMessage: e.toString()));
     }
   }
 
@@ -337,12 +290,7 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
         emit(state.copyWith(isActionLoading: false));
       }
     } catch (e) {
-      emit(
-        state.copyWith(
-          isActionLoading: false,
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(state.copyWith(isActionLoading: false, errorMessage: e.toString()));
     }
   }
 
@@ -363,12 +311,7 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
         ),
       );
     } catch (e) {
-      emit(
-        state.copyWith(
-          isSyncingDevices: false,
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(state.copyWith(isSyncingDevices: false, errorMessage: e.toString()));
     }
   }
 
@@ -393,12 +336,7 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
         ),
       );
     } catch (e) {
-      emit(
-        state.copyWith(
-          isActionLoading: false,
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(state.copyWith(isActionLoading: false, errorMessage: e.toString()));
     }
   }
 
@@ -419,12 +357,7 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
         ),
       );
     } catch (e) {
-      emit(
-        state.copyWith(
-          isActionLoading: false,
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(state.copyWith(isActionLoading: false, errorMessage: e.toString()));
     }
   }
 }

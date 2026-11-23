@@ -1,12 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:super_flutter/core/error/app_exception.dart';
+import 'package:super_flutter/core/error/exceptions/validation_exception.dart';
+import 'package:super_flutter/core/network/api_endpoints.dart';
 import 'package:super_flutter/core/network/dio_client.dart';
 import 'package:super_flutter/core/network/network_exception_mapper.dart';
 import 'package:super_flutter/core/network/paged.dart';
+import 'package:super_flutter/data/farm/model/block_model.dart';
 import 'package:super_flutter/data/farm/model/farm_crop_model.dart';
 import 'package:super_flutter/data/farm/model/farm_model.dart';
 import 'package:super_flutter/data/farm/model/farm_photo_model.dart';
 import 'package:super_flutter/data/farm/model/farm_transaction_model.dart';
+import 'package:super_flutter/data/farm/model/irrigation_type_model.dart';
+import 'package:super_flutter/data/farm/model/ownership_model.dart';
+import 'package:super_flutter/data/farm/model/soil_type_model.dart';
 
 import 'farm_endpoints.dart';
 
@@ -57,51 +64,6 @@ class FarmRemoteDataSource {
         final body = response.data as Map;
         final data = body['data'] is Map ? body['data'] as Map : body;
         return FarmModel.fromJson(Map<String, dynamic>.from(data));
-      }
-      return null;
-    } on DioException catch (e) {
-      throw NetworkException.fromDioException(e);
-    } on NetworkException {
-      rethrow;
-    } catch (_) {
-      return null;
-    }
-  }
-
-  /// POST /api/v1/farmer/farms
-  Future<FarmModel?> createFarm(Map<String, dynamic> data) async {
-    try {
-      final response = await _dioClient.dio.post<dynamic>(
-        FarmEndpoints.farms,
-        data: data,
-      );
-      if ((response.statusCode == 200 || response.statusCode == 201) &&
-          response.data is Map) {
-        final body = response.data as Map;
-        final resData = body['data'] is Map ? body['data'] as Map : body;
-        return FarmModel.fromJson(Map<String, dynamic>.from(resData));
-      }
-      return null;
-    } on DioException catch (e) {
-      throw NetworkException.fromDioException(e);
-    } on NetworkException {
-      rethrow;
-    } catch (_) {
-      return null;
-    }
-  }
-
-  /// PUT /api/v1/farmer/farms/{farm}
-  Future<FarmModel?> updateFarm(String id, Map<String, dynamic> data) async {
-    try {
-      final response = await _dioClient.dio.put<dynamic>(
-        FarmEndpoints.farm(id),
-        data: data,
-      );
-      if (response.statusCode == 200 && response.data is Map) {
-        final body = response.data as Map;
-        final resData = body['data'] is Map ? body['data'] as Map : body;
-        return FarmModel.fromJson(Map<String, dynamic>.from(resData));
       }
       return null;
     } on DioException catch (e) {
@@ -420,6 +382,239 @@ class FarmRemoteDataSource {
     } on NetworkException {
       rethrow;
     } catch (_) {
+      return false;
+    }
+  }
+
+  /// POST http://dam.test/api/v1/farmer/farms
+  Future<bool> createFarm({
+    required String name,
+    required double areaHa,
+    String? blockId,
+    String? village,
+    String? address,
+    String? soilType,
+    String? irrigationType,
+    String? ownership,
+    double? latitude,
+    double? longitude,
+  }) async {
+    try {
+      final response = await _dioClient.dio.post<dynamic>(
+        ApiEndpoints.farm,
+        data: <String, dynamic>{
+          'name': name,
+          'area_ha': areaHa,
+          'block_id': ?blockId,
+          'village': ?village,
+          'address': ?address,
+          'soil_type': ?soilType,
+          'irrigation_type': ?irrigationType,
+          'ownership': ?ownership,
+          'latitude': ?latitude,
+          'longitude': ?longitude,
+        },
+      );
+      final body = response.data;
+      if (body is Map && body['success'] == false) {
+        final message =
+            (body['message'] as String?) ?? 'The farm request failed.';
+        final fieldErrors = NetworkException.fieldErrorsFrom(body);
+        if (fieldErrors.isNotEmpty) {
+          throw ValidationException(message, fieldErrors: fieldErrors);
+        }
+        throw BadRequestException(message, statusCode: response.statusCode);
+      }
+      return response.statusCode == 201;
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on AppException {
+      rethrow;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// GET http://dam.test/api/v1/farmer/blocks
+  Future<List<BlockModel>> getBlocks() async {
+    try {
+      final response = await _dioClient.dio.get<dynamic>(ApiEndpoints.blocks);
+      final body = response.data;
+      if (response.statusCode == 200 && body is Map) {
+        final data = body['data'];
+        final items = data is List
+            ? data
+            : (data is Map && data['data'] is List
+                  ? data['data'] as List
+                  : null);
+        if (items != null) {
+          return items
+              .whereType<Map>()
+              .map(
+                (item) => BlockModel.fromJson(Map<String, dynamic>.from(item)),
+              )
+              .toList();
+        }
+      }
+      return const [];
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on NetworkException {
+      rethrow;
+    } catch (e) {
+      return const [];
+    }
+  }
+
+  /// GET http://dam.test/api/v1/farmer/soil-types
+  Future<List<SoilTypeModel>> getSoilTypes() async {
+    try {
+      final response = await _dioClient.dio.get<dynamic>(
+        ApiEndpoints.soilTypes,
+      );
+      final body = response.data;
+      if (response.statusCode == 200 && body is Map) {
+        final data = body['data'];
+        final items = data is List
+            ? data
+            : (data is Map && data['data'] is List
+                  ? data['data'] as List
+                  : null);
+        if (items != null) {
+          return items
+              .whereType<Map>()
+              .map(
+                (item) =>
+                    SoilTypeModel.fromJson(Map<String, dynamic>.from(item)),
+              )
+              .toList();
+        }
+      }
+      return const [];
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on NetworkException {
+      rethrow;
+    } catch (e) {
+      return const [];
+    }
+  }
+
+  /// GET http://dam.test/api/v1/farmer/irrigation-methods
+  Future<List<IrrigationTypeModel>> getIrrigationMethods() async {
+    try {
+      final response = await _dioClient.dio.get<dynamic>(
+        ApiEndpoints.irrigationMethods,
+      );
+      final body = response.data;
+      if (response.statusCode == 200 && body is Map) {
+        final data = body['data'];
+        final items = data is List
+            ? data
+            : (data is Map && data['data'] is List
+                  ? data['data'] as List
+                  : null);
+        if (items != null) {
+          return items
+              .whereType<Map>()
+              .map(
+                (item) => IrrigationTypeModel.fromJson(
+                  Map<String, dynamic>.from(item),
+                ),
+              )
+              .toList();
+        }
+      }
+      return const [];
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on NetworkException {
+      rethrow;
+    } catch (e) {
+      return const [];
+    }
+  }
+
+  /// GET http://dam.test/api/v1/farmer/land-ownerships
+  Future<List<OwnershipModel>> getLandOwnerships() async {
+    try {
+      final response = await _dioClient.dio.get<dynamic>(
+        ApiEndpoints.landOwnerships,
+      );
+      final body = response.data;
+      if (response.statusCode == 200 && body is Map) {
+        final data = body['data'];
+        final items = data is List
+            ? data
+            : (data is Map && data['data'] is List
+                  ? data['data'] as List
+                  : null);
+        if (items != null) {
+          return items
+              .whereType<Map>()
+              .map(
+                (item) =>
+                    OwnershipModel.fromJson(Map<String, dynamic>.from(item)),
+              )
+              .toList();
+        }
+      }
+      return const [];
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on NetworkException {
+      rethrow;
+    } catch (e) {
+      return const [];
+    }
+  }
+
+  /// PUT http://dam.test/api/v1/farmer/farms/{farm}
+  Future<bool> updateFarmDetail(
+    String farm, {
+    required String name,
+    required double areaHa,
+    String? blockId,
+    String? village,
+    String? address,
+    String? soilType,
+    String? irrigationType,
+    String? ownership,
+    double? latitude,
+    double? longitude,
+  }) async {
+    try {
+      final response = await _dioClient.dio.put<dynamic>(
+        ApiEndpoints.farmDetail(farm),
+        data: <String, dynamic>{
+          'name': name,
+          'area_ha': areaHa,
+          'block_id': ?blockId,
+          'village': ?village,
+          'address': ?address,
+          'soil_type': ?soilType,
+          'irrigation_type': ?irrigationType,
+          'ownership': ?ownership,
+          'latitude': ?latitude,
+          'longitude': ?longitude,
+        },
+      );
+      final body = response.data;
+      if (body is Map && body['success'] == false) {
+        final message =
+            (body['message'] as String?) ?? 'The farm detail request failed.';
+        final fieldErrors = NetworkException.fieldErrorsFrom(body);
+        if (fieldErrors.isNotEmpty) {
+          throw ValidationException(message, fieldErrors: fieldErrors);
+        }
+        throw BadRequestException(message, statusCode: response.statusCode);
+      }
+      return true;
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on AppException {
+      rethrow;
+    } catch (e) {
       return false;
     }
   }

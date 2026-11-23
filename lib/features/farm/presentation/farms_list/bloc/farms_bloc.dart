@@ -47,10 +47,7 @@ class FarmsBloc extends Bloc<FarmsEvent, FarmsState> {
     }
   }
 
-  Future<void> _onStarted(
-    FarmsStarted event,
-    Emitter<FarmsState> emit,
-  ) async {
+  Future<void> _onStarted(FarmsStarted event, Emitter<FarmsState> emit) async {
     emit(
       state.copyWith(
         status: FarmsListStatus.loading,
@@ -86,10 +83,6 @@ class FarmsBloc extends Bloc<FarmsEvent, FarmsState> {
   ) async {
     if (!state.hasMore || state.loadingMore) return;
     emit(state.copyWith(loadingMore: true));
-    await _fetchPage(
-      emit,
-      page: state.page + 1,
-      status: state.statusFilter,
-    );
+    await _fetchPage(emit, page: state.page + 1, status: state.statusFilter);
   }
 }

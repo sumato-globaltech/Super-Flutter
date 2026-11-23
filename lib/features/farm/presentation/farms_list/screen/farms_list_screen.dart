@@ -12,7 +12,7 @@ import 'package:super_flutter/core/ui/widgets/app_top_bar.dart';
 import 'package:super_flutter/core/ui/widgets/design_card.dart';
 import 'package:super_flutter/core/ui/widgets/progress_circle.dart';
 import 'package:super_flutter/data/farm/model/farm_model.dart';
-import 'package:super_flutter/features/farm/routes/farms_route_names.dart';
+import 'package:super_flutter/features/farm/routes/farm_route_names.dart';
 
 import '../bloc/farms_bloc.dart';
 import '../bloc/farms_event.dart';
@@ -41,7 +41,7 @@ class _FarmsListView extends StatelessWidget {
       appBar: AppTopBar(title: l10n.farms),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final created = await context.push<bool>(FarmsRouteNames.newFarm);
+          final created = await context.push<bool>(FarmRouteNames.addFarm);
           if (created == true && context.mounted) {
             context.read<FarmsBloc>().add(const FarmsRefreshed());
           }
@@ -70,8 +70,8 @@ class _FarmsListView extends StatelessWidget {
                   selected: {state.statusFilter},
                   onSelectionChanged: (selected) {
                     context.read<FarmsBloc>().add(
-                          FarmsStatusFilterChanged(selected.first),
-                        );
+                      FarmsStatusFilterChanged(selected.first),
+                    );
                   },
                 );
               },
@@ -83,8 +83,8 @@ class _FarmsListView extends StatelessWidget {
               builder: (context, state) {
                 final bloc = context.read<FarmsBloc>();
                 return switch (state.status) {
-                  FarmsListStatus.initial ||
-                  FarmsListStatus.loading when state.items.isEmpty =>
+                  FarmsListStatus.initial || FarmsListStatus.loading
+                      when state.items.isEmpty =>
                     const Center(
                       child: Padding(
                         padding: EdgeInsets.all(32),
@@ -98,55 +98,55 @@ class _FarmsListView extends StatelessWidget {
                       onRetry: () => bloc.add(const FarmsStarted()),
                     ),
                   _ when state.items.isEmpty => AppEmptyView(
-                      title: state.statusFilter == 'active'
-                          ? l10n.noFarmsFound
-                          : l10n.noArchivedFarmsFound,
-                      message: l10n.addFarmPrompt,
-                    ),
+                    title: state.statusFilter == 'active'
+                        ? l10n.noFarmsFound
+                        : l10n.noArchivedFarmsFound,
+                    message: l10n.addFarmPrompt,
+                  ),
                   _ => RefreshIndicator(
-                      onRefresh: () async {
-                        bloc.add(const FarmsRefreshed());
+                    onRefresh: () async {
+                      bloc.add(const FarmsRefreshed());
+                    },
+                    child: NotificationListener<ScrollUpdateNotification>(
+                      onNotification: (notification) {
+                        if (notification.metrics.extentAfter < 300) {
+                          bloc.add(const FarmsMoreRequested());
+                        }
+                        return false;
                       },
-                      child: NotificationListener<ScrollUpdateNotification>(
-                        onNotification: (notification) {
-                          if (notification.metrics.extentAfter < 300) {
-                            bloc.add(const FarmsMoreRequested());
-                          }
-                          return false;
-                        },
-                        child: ListView.separated(
-                          padding: const EdgeInsets.all(AppSpacing.md),
-                          itemCount:
-                              state.items.length + (state.loadingMore ? 1 : 0),
-                          separatorBuilder: (_, _) =>
-                              const SizedBox(height: AppSpacing.sm),
-                          itemBuilder: (context, index) {
-                            if (index >= state.items.length) {
-                              return const Center(
-                                child: Padding(
-                                  padding: EdgeInsets.all(16),
-                                  child: DesignProgress(),
-                                ),
-                              );
-                            }
-                            final farm = state.items[index];
-                            return _FarmCard(
-                              farm: farm,
-                              onTap: () async {
-                                if (farm.id != null) {
-                                  await context.push(
-                                    FarmsRouteNames.farmDetailFor(farm.id!),
-                                  );
-                                  if (context.mounted) {
-                                    bloc.add(const FarmsRefreshed());
-                                  }
-                                }
-                              },
+                      child: ListView.separated(
+                        padding: const EdgeInsets.all(AppSpacing.md),
+                        itemCount:
+                            state.items.length + (state.loadingMore ? 1 : 0),
+                        separatorBuilder: (_, _) =>
+                            const SizedBox(height: AppSpacing.sm),
+                        itemBuilder: (context, index) {
+                          if (index >= state.items.length) {
+                            return const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(16),
+                                child: DesignProgress(),
+                              ),
                             );
-                          },
-                        ),
+                          }
+                          final farm = state.items[index];
+                          return _FarmCard(
+                            farm: farm,
+                            onTap: () async {
+                              if (farm.id != null) {
+                                await context.push(
+                                  FarmRouteNames.farmDetailFor(farm.id!),
+                                );
+                                if (context.mounted) {
+                                  bloc.add(const FarmsRefreshed());
+                                }
+                              }
+                            },
+                          );
+                        },
                       ),
                     ),
+                  ),
                 };
               },
             ),
@@ -226,8 +226,9 @@ class _FarmCard extends StatelessWidget {
                               farm.district!.name,
                           ].join(', '),
                           style: theme.textTheme.bodySmall?.copyWith(
-                            color: theme.textTheme.bodySmall?.color
-                                ?.withValues(alpha: 0.7),
+                            color: theme.textTheme.bodySmall?.color?.withValues(
+                              alpha: 0.7,
+                            ),
                           ),
                         ),
                       ),
