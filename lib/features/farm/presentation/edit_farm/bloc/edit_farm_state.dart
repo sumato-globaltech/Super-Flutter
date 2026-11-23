@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:super_flutter/data/farm/model/block_model.dart';
+import 'package:super_flutter/data/farm/model/farm_model.dart';
 import 'package:super_flutter/data/farm/model/irrigation_type_model.dart';
 import 'package:super_flutter/data/farm/model/ownership_model.dart';
 import 'package:super_flutter/data/farm/model/soil_type_model.dart';
@@ -16,6 +17,7 @@ class EditFarmState extends Equatable {
     this.irrigationTypeOptions = const [],
     this.ownershipOptions = const [],
     this.loadingOptions = false,
+    this.farm,
   });
 
   final EditFarmStatus status;
@@ -39,6 +41,8 @@ class EditFarmState extends Equatable {
   /// Whether the dropdowns' choices are still loading.
   final bool loadingOptions;
 
+  final FarmModel? farm;
+
   String? get nameError => fieldErrors['name'];
   String? get areaHaError => fieldErrors['area_ha'];
   String? get blockIdError => fieldErrors['block_id'];
@@ -61,6 +65,7 @@ class EditFarmState extends Equatable {
     List<IrrigationTypeModel>? irrigationTypeOptions,
     List<OwnershipModel>? ownershipOptions,
     bool? loadingOptions,
+    FarmModel? farm,
   }) {
     return EditFarmState(
       status: status ?? this.status,
@@ -72,6 +77,7 @@ class EditFarmState extends Equatable {
           irrigationTypeOptions ?? this.irrigationTypeOptions,
       ownershipOptions: ownershipOptions ?? this.ownershipOptions,
       loadingOptions: loadingOptions ?? this.loadingOptions,
+      farm: farm ?? this.farm,
     );
   }
 
@@ -85,5 +91,6 @@ class EditFarmState extends Equatable {
     irrigationTypeOptions,
     ownershipOptions,
     loadingOptions,
+    farm,
   ];
 }

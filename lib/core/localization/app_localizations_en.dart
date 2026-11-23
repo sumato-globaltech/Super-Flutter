@@ -905,10 +905,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get farmEditFarmTitle => 'Edit Farm';
 
   @override
-  String get farmAddFarmName => 'Name';
+  String get farmAddFarmName => 'Farm Name';
 
   @override
-  String get farmAddFarmAreaHa => 'Area Ha';
+  String get farmAddFarmAreaHa => 'Area (ha)';
 
   @override
   String get farmAddFarmBlockId => 'Block';
@@ -923,10 +923,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get farmAddFarmSoilType => 'Soil Type';
 
   @override
-  String get farmAddFarmIrrigationType => 'Irrigation Type';
+  String get farmAddFarmIrrigationType => 'Irrigation Method';
 
   @override
-  String get farmAddFarmOwnership => 'Ownership';
+  String get farmAddFarmOwnership => 'Land Ownership';
 
   @override
   String get farmAddFarmLatitude => 'Latitude';
@@ -938,10 +938,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get farmAddFarmDone => 'Farm created.';
 
   @override
-  String get farmEditFarmName => 'Name';
+  String get farmEditFarmName => 'Farm Name';
 
   @override
-  String get farmEditFarmAreaHa => 'Area Ha';
+  String get farmEditFarmAreaHa => 'Area (ha)';
 
   @override
   String get farmEditFarmBlockId => 'Block';
@@ -956,10 +956,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get farmEditFarmSoilType => 'Soil Type';
 
   @override
-  String get farmEditFarmIrrigationType => 'Irrigation Type';
+  String get farmEditFarmIrrigationType => 'Irrigation Method';
 
   @override
-  String get farmEditFarmOwnership => 'Ownership';
+  String get farmEditFarmOwnership => 'Land Ownership';
 
   @override
   String get farmEditFarmLatitude => 'Latitude';

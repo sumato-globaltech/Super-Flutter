@@ -1745,13 +1745,13 @@ abstract class AppLocalizations {
   /// Label of the name input
   ///
   /// In en, this message translates to:
-  /// **'Name'**
+  /// **'Farm Name'**
   String get farmAddFarmName;
 
   /// Label of the area_ha input
   ///
   /// In en, this message translates to:
-  /// **'Area Ha'**
+  /// **'Area (ha)'**
   String get farmAddFarmAreaHa;
 
   /// Label of the block_id input
@@ -1781,13 +1781,13 @@ abstract class AppLocalizations {
   /// Label of the irrigation_type input
   ///
   /// In en, this message translates to:
-  /// **'Irrigation Type'**
+  /// **'Irrigation Method'**
   String get farmAddFarmIrrigationType;
 
   /// Label of the ownership input
   ///
   /// In en, this message translates to:
-  /// **'Ownership'**
+  /// **'Land Ownership'**
   String get farmAddFarmOwnership;
 
   /// Label of the latitude input
@@ -1811,13 +1811,13 @@ abstract class AppLocalizations {
   /// Label of the name input
   ///
   /// In en, this message translates to:
-  /// **'Name'**
+  /// **'Farm Name'**
   String get farmEditFarmName;
 
   /// Label of the area_ha input
   ///
   /// In en, this message translates to:
-  /// **'Area Ha'**
+  /// **'Area (ha)'**
   String get farmEditFarmAreaHa;
 
   /// Label of the block_id input
@@ -1847,13 +1847,13 @@ abstract class AppLocalizations {
   /// Label of the irrigation_type input
   ///
   /// In en, this message translates to:
-  /// **'Irrigation Type'**
+  /// **'Irrigation Method'**
   String get farmEditFarmIrrigationType;
 
   /// Label of the ownership input
   ///
   /// In en, this message translates to:
-  /// **'Ownership'**
+  /// **'Land Ownership'**
   String get farmEditFarmOwnership;
 
   /// Label of the latitude input

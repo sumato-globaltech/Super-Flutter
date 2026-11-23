@@ -24,6 +24,7 @@ class EditFarmBloc extends Bloc<EditFarmEvent, EditFarmState> {
   ) async {
     emit(state.copyWith(loadingOptions: true));
     try {
+      final farm = await _farmRemoteDataSource.getFarm(event.farm);
       final blockOptions = await _farmRemoteDataSource.getBlocks();
       final soilTypeOptions = await _farmRemoteDataSource.getSoilTypes();
       final irrigationTypeOptions = await _farmRemoteDataSource
@@ -36,6 +37,7 @@ class EditFarmBloc extends Bloc<EditFarmEvent, EditFarmState> {
           soilTypeOptions: soilTypeOptions,
           irrigationTypeOptions: irrigationTypeOptions,
           ownershipOptions: ownershipOptions,
+          farm: farm,
         ),
       );
     } on AppException catch (e) {

@@ -8,7 +8,12 @@ sealed class EditFarmEvent extends Equatable {
 }
 
 class EditFarmStarted extends EditFarmEvent {
-  const EditFarmStarted();
+  const EditFarmStarted(this.farm);
+
+  final String farm;
+
+  @override
+  List<Object?> get props => [farm];
 }
 
 class EditFarmFieldErrorCleared extends EditFarmEvent {

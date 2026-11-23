@@ -428,10 +428,10 @@
   "farmEditFarmTitle": "Edit Farm",
   "@farmEditFarmTitle": { "description": "App bar title of the edit_farm screen" },
 
-  "farmAddFarmName": "Name",
+  "farmAddFarmName": "Farm Name",
   "@farmAddFarmName": { "description": "Label of the name input" },
 
-  "farmAddFarmAreaHa": "Area Ha",
+  "farmAddFarmAreaHa": "Area (ha)",
   "@farmAddFarmAreaHa": { "description": "Label of the area_ha input" },
 
   "farmAddFarmBlockId": "Block",
@@ -446,10 +446,10 @@
   "farmAddFarmSoilType": "Soil Type",
   "@farmAddFarmSoilType": { "description": "Label of the soil_type input" },
 
-  "farmAddFarmIrrigationType": "Irrigation Type",
+  "farmAddFarmIrrigationType": "Irrigation Method",
   "@farmAddFarmIrrigationType": { "description": "Label of the irrigation_type input" },
 
-  "farmAddFarmOwnership": "Ownership",
+  "farmAddFarmOwnership": "Land Ownership",
   "@farmAddFarmOwnership": { "description": "Label of the ownership input" },
 
   "farmAddFarmLatitude": "Latitude",
@@ -461,10 +461,10 @@
   "farmAddFarmDone": "Farm created.",
   "@farmAddFarmDone": { "description": "Shown when the farm form was sent" },
 
-  "farmEditFarmName": "Name",
+  "farmEditFarmName": "Farm Name",
   "@farmEditFarmName": { "description": "Label of the name input" },
 
-  "farmEditFarmAreaHa": "Area Ha",
+  "farmEditFarmAreaHa": "Area (ha)",
   "@farmEditFarmAreaHa": { "description": "Label of the area_ha input" },
 
   "farmEditFarmBlockId": "Block",
@@ -479,10 +479,10 @@
   "farmEditFarmSoilType": "Soil Type",
   "@farmEditFarmSoilType": { "description": "Label of the soil_type input" },
 
-  "farmEditFarmIrrigationType": "Irrigation Type",
+  "farmEditFarmIrrigationType": "Irrigation Method",
   "@farmEditFarmIrrigationType": { "description": "Label of the irrigation_type input" },
 
-  "farmEditFarmOwnership": "Ownership",
+  "farmEditFarmOwnership": "Land Ownership",
   "@farmEditFarmOwnership": { "description": "Label of the ownership input" },
 
   "farmEditFarmLatitude": "Latitude",

@@ -10,6 +10,7 @@ import 'package:super_flutter/core/ui/theme/app_spacing.dart';
 import 'package:super_flutter/core/ui/widgets/app_top_bar.dart';
 import 'package:super_flutter/core/ui/widgets/progress_circle.dart';
 import 'package:super_flutter/core/utils/utils.dart';
+import 'package:super_flutter/data/farm/model/farm_model.dart';
 import 'package:super_flutter/features/farm/presentation/edit_farm/bloc/edit_farm_bloc.dart';
 import 'package:super_flutter/features/farm/presentation/edit_farm/bloc/edit_farm_event.dart';
 import 'package:super_flutter/features/farm/presentation/edit_farm/bloc/edit_farm_state.dart';
@@ -22,7 +23,7 @@ class EditFarmScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<EditFarmBloc>()..add(const EditFarmStarted()),
+      create: (_) => getIt<EditFarmBloc>()..add(EditFarmStarted(farm)),
       child: _EditFarmView(farm: farm),
     );
   }
@@ -50,6 +51,7 @@ class _EditFarmViewState extends State<_EditFarmView> {
   String? _irrigationType;
   String? _ownership;
   late final EditFarmBloc _editFarmBloc;
+  bool _prefilled = false;
 
   @override
   void initState() {
@@ -66,6 +68,20 @@ class _EditFarmViewState extends State<_EditFarmView> {
     _latitudeController.dispose();
     _longitudeController.dispose();
     super.dispose();
+  }
+
+  void _prefill(FarmModel farm) {
+    _prefilled = true;
+    _nameController.text = farm.name ?? '';
+    _areaHaController.text = farm.areaHa?.toString() ?? '';
+    _villageController.text = farm.village ?? '';
+    _addressController.text = farm.address ?? '';
+    _latitudeController.text = farm.latitude?.toString() ?? '';
+    _longitudeController.text = farm.longitude?.toString() ?? '';
+    _blockId = farm.block?.id;
+    _soilType = farm.soilType?.value;
+    _irrigationType = farm.irrigationType?.value;
+    _ownership = farm.ownership?.value;
   }
 
   /// Empty text is sent as null, so an optional field left blank is not sent.
@@ -95,8 +111,11 @@ class _EditFarmViewState extends State<_EditFarmView> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return BlocListener<EditFarmBloc, EditFarmState>(
-      listenWhen: (prev, curr) => prev.status != curr.status,
+      listenWhen: (prev, curr) =>
+          prev.status != curr.status || prev.farm != curr.farm,
       listener: (context, state) {
+        final farm = state.farm;
+        if (!_prefilled && farm != null) _prefill(farm);
         switch (state.status) {
           case EditFarmStatus.success:
             Utils.flutterToast(l10n.farmEditFarmDone);
@@ -183,9 +202,11 @@ class _EditFarmViewState extends State<_EditFarmView> {
                       buildWhen: (prev, curr) =>
                           prev.blockOptions != curr.blockOptions ||
                           prev.loadingOptions != curr.loadingOptions ||
+                          prev.farm != curr.farm ||
                           prev.blockIdError != curr.blockIdError,
                       builder: (context, state) =>
                           DropdownButtonFormField<String>(
+                            key: ValueKey(state.farm),
                             initialValue: _blockId,
                             forceErrorText: state.blockIdError,
                             isExpanded: true,
@@ -265,9 +286,11 @@ class _EditFarmViewState extends State<_EditFarmView> {
                       buildWhen: (prev, curr) =>
                           prev.soilTypeOptions != curr.soilTypeOptions ||
                           prev.loadingOptions != curr.loadingOptions ||
+                          prev.farm != curr.farm ||
                           prev.soilTypeError != curr.soilTypeError,
                       builder: (context, state) =>
                           DropdownButtonFormField<String>(
+                            key: ValueKey(state.farm),
                             initialValue: _soilType,
                             forceErrorText: state.soilTypeError,
                             isExpanded: true,
@@ -304,9 +327,11 @@ class _EditFarmViewState extends State<_EditFarmView> {
                           prev.irrigationTypeOptions !=
                               curr.irrigationTypeOptions ||
                           prev.loadingOptions != curr.loadingOptions ||
+                          prev.farm != curr.farm ||
                           prev.irrigationTypeError != curr.irrigationTypeError,
                       builder: (context, state) =>
                           DropdownButtonFormField<String>(
+                            key: ValueKey(state.farm),
                             initialValue: _irrigationType,
                             forceErrorText: state.irrigationTypeError,
                             isExpanded: true,
@@ -344,9 +369,11 @@ class _EditFarmViewState extends State<_EditFarmView> {
                       buildWhen: (prev, curr) =>
                           prev.ownershipOptions != curr.ownershipOptions ||
                           prev.loadingOptions != curr.loadingOptions ||
+                          prev.farm != curr.farm ||
                           prev.ownershipError != curr.ownershipError,
                       builder: (context, state) =>
                           DropdownButtonFormField<String>(
+                            key: ValueKey(state.farm),
                             initialValue: _ownership,
                             forceErrorText: state.ownershipError,
                             isExpanded: true,
