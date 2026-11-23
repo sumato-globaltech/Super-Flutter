@@ -1189,6 +1189,300 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Suitability'**
   String get suitability;
+
+  /// No description provided for @activeFarms.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get activeFarms;
+
+  /// No description provided for @archivedFarms.
+  ///
+  /// In en, this message translates to:
+  /// **'Archived'**
+  String get archivedFarms;
+
+  /// No description provided for @noFarmsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No farms found'**
+  String get noFarmsFound;
+
+  /// No description provided for @noArchivedFarmsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No archived farms found'**
+  String get noArchivedFarmsFound;
+
+  /// No description provided for @addFarmPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the button below to add your first farm.'**
+  String get addFarmPrompt;
+
+  /// No description provided for @archived.
+  ///
+  /// In en, this message translates to:
+  /// **'Archived'**
+  String get archived;
+
+  /// No description provided for @active.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active;
+
+  /// No description provided for @addFarm.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Farm'**
+  String get addFarm;
+
+  /// No description provided for @editFarm.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Farm'**
+  String get editFarm;
+
+  /// No description provided for @farmName.
+  ///
+  /// In en, this message translates to:
+  /// **'Farm Name'**
+  String get farmName;
+
+  /// No description provided for @village.
+  ///
+  /// In en, this message translates to:
+  /// **'Village'**
+  String get village;
+
+  /// No description provided for @soilType.
+  ///
+  /// In en, this message translates to:
+  /// **'Soil Type'**
+  String get soilType;
+
+  /// No description provided for @irrigationMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Irrigation Method'**
+  String get irrigationMethod;
+
+  /// No description provided for @landOwnership.
+  ///
+  /// In en, this message translates to:
+  /// **'Land Ownership'**
+  String get landOwnership;
+
+  /// No description provided for @latitude.
+  ///
+  /// In en, this message translates to:
+  /// **'Latitude'**
+  String get latitude;
+
+  /// No description provided for @longitude.
+  ///
+  /// In en, this message translates to:
+  /// **'Longitude'**
+  String get longitude;
+
+  /// No description provided for @invalidArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid area in hectares (greater than 0)'**
+  String get invalidArea;
+
+  /// No description provided for @createFarm.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Farm'**
+  String get createFarm;
+
+  /// No description provided for @updateFarm.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Farm'**
+  String get updateFarm;
+
+  /// No description provided for @farmCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Farm added successfully'**
+  String get farmCreated;
+
+  /// No description provided for @farmUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Farm updated successfully'**
+  String get farmUpdated;
+
+  /// No description provided for @farmDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Farm deleted successfully'**
+  String get farmDeleted;
+
+  /// No description provided for @farmDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Farm Details'**
+  String get farmDetails;
+
+  /// No description provided for @deleteFarmConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Farm?'**
+  String get deleteFarmConfirmTitle;
+
+  /// No description provided for @deleteFarmConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this farm? This action cannot be undone.'**
+  String get deleteFarmConfirmMessage;
+
+  /// No description provided for @noCropsOnFarm.
+  ///
+  /// In en, this message translates to:
+  /// **'No crops recorded'**
+  String get noCropsOnFarm;
+
+  /// No description provided for @addCropPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Add crops to track growth, season, and yields.'**
+  String get addCropPrompt;
+
+  /// No description provided for @addCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Crop'**
+  String get addCrop;
+
+  /// No description provided for @cropName.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop Name'**
+  String get cropName;
+
+  /// No description provided for @season.
+  ///
+  /// In en, this message translates to:
+  /// **'Season'**
+  String get season;
+
+  /// No description provided for @sownOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sown on'**
+  String get sownOn;
+
+  /// No description provided for @expectedHarvest.
+  ///
+  /// In en, this message translates to:
+  /// **'Expected harvest'**
+  String get expectedHarvest;
+
+  /// No description provided for @income.
+  ///
+  /// In en, this message translates to:
+  /// **'Income'**
+  String get income;
+
+  /// No description provided for @expense.
+  ///
+  /// In en, this message translates to:
+  /// **'Expense'**
+  String get expense;
+
+  /// No description provided for @netProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'Net Profit'**
+  String get netProfit;
+
+  /// No description provided for @noTransactionsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No transactions found'**
+  String get noTransactionsFound;
+
+  /// No description provided for @addTransactionPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Add income or expense transactions to track farm finances.'**
+  String get addTransactionPrompt;
+
+  /// No description provided for @addTransaction.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Transaction'**
+  String get addTransaction;
+
+  /// No description provided for @noPhotosFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No photos uploaded'**
+  String get noPhotosFound;
+
+  /// No description provided for @noPhotosSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload photos to monitor your farm progress.'**
+  String get noPhotosSubtitle;
+
+  /// No description provided for @uploadPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Photo'**
+  String get uploadPhoto;
+
+  /// No description provided for @archive.
+  ///
+  /// In en, this message translates to:
+  /// **'Archive'**
+  String get archive;
+
+  /// No description provided for @unarchive.
+  ///
+  /// In en, this message translates to:
+  /// **'Unarchive'**
+  String get unarchive;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @transactions.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions'**
+  String get transactions;
+
+  /// No description provided for @photos.
+  ///
+  /// In en, this message translates to:
+  /// **'Photos'**
+  String get photos;
+
+  /// No description provided for @add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get add;
+
+  /// No description provided for @location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get location;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
 }
 
 class _AppLocalizationsDelegate

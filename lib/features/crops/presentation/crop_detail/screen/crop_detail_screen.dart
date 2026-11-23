@@ -318,10 +318,9 @@ class _AdvisoryTabView extends StatelessWidget {
                     ),
                   ],
                 ),
-                if (advisory!.windows?.sowing != null)
                   TitleDetailsCard(
                     title: l10n.sowingWindow,
-                    text: advisory!.windows!.sowing ?? '',
+                    text: advisory?.windows?.sowing ?? '--',
                     iconData: PhosphorIconsRegular.plant,
                     accentColor: DesignColor.accentPoints,
                   ),

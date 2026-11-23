@@ -43,6 +43,10 @@ import 'package:super_flutter/data/crops/repositories/crop_repository_impl.dart'
     as _i468;
 import 'package:super_flutter/data/crops/sources/remote/crop_remote_data_source.dart'
     as _i444;
+import 'package:super_flutter/data/farm/repositories/farm_repository_impl.dart'
+    as _i749;
+import 'package:super_flutter/data/farm/sources/remote/farm_remote_data_source.dart'
+    as _i773;
 import 'package:super_flutter/data/market/repositories/market_repository_impl.dart'
     as _i341;
 import 'package:super_flutter/data/market/sources/remote/market_remote_data_source.dart'
@@ -82,6 +86,12 @@ import 'package:super_flutter/features/crops/presentation/crops_list/bloc/crops_
     as _i64;
 import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart'
     as _i931;
+import 'package:super_flutter/features/farm/presentation/farm_detail/bloc/farm_detail_bloc.dart'
+    as _i255;
+import 'package:super_flutter/features/farm/presentation/farm_form/bloc/farm_form_bloc.dart'
+    as _i653;
+import 'package:super_flutter/features/farm/presentation/farms_list/bloc/farms_bloc.dart'
+    as _i664;
 import 'package:super_flutter/features/market/presentation/market/bloc/market_bloc.dart'
     as _i336;
 import 'package:super_flutter/features/market/presentation/market_prices/bloc/market_prices_bloc.dart'
@@ -148,6 +158,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i444.CropRemoteDataSource>(
       () => _i444.CropRemoteDataSource(gh<_i42.DioClient>()),
     );
+    gh.lazySingleton<_i773.FarmRemoteDataSource>(
+      () => _i773.FarmRemoteDataSource(gh<_i42.DioClient>()),
+    );
     gh.lazySingleton<_i1002.MarketRemoteDataSource>(
       () => _i1002.MarketRemoteDataSource(gh<_i42.DioClient>()),
     );
@@ -178,6 +191,18 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i929.NoticesBloc>(
       () => _i929.NoticesBloc(gh<_i390.CommunicationRemoteDataSource>()),
+    );
+    gh.factory<_i255.FarmDetailBloc>(
+      () => _i255.FarmDetailBloc(gh<_i773.FarmRemoteDataSource>()),
+    );
+    gh.factory<_i653.FarmFormBloc>(
+      () => _i653.FarmFormBloc(gh<_i773.FarmRemoteDataSource>()),
+    );
+    gh.factory<_i664.FarmsBloc>(
+      () => _i664.FarmsBloc(gh<_i773.FarmRemoteDataSource>()),
+    );
+    gh.lazySingleton<_i749.FarmRepositoryImpl>(
+      () => _i749.FarmRepositoryImpl(gh<_i773.FarmRemoteDataSource>()),
     );
     gh.lazySingleton<_i944.CommunicationRepositoryImpl>(
       () => _i944.CommunicationRepositoryImpl(

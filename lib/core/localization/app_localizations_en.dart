@@ -622,4 +622,154 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get suitability => 'Suitability';
+
+  @override
+  String get activeFarms => 'Active';
+
+  @override
+  String get archivedFarms => 'Archived';
+
+  @override
+  String get noFarmsFound => 'No farms found';
+
+  @override
+  String get noArchivedFarmsFound => 'No archived farms found';
+
+  @override
+  String get addFarmPrompt => 'Tap the button below to add your first farm.';
+
+  @override
+  String get archived => 'Archived';
+
+  @override
+  String get active => 'Active';
+
+  @override
+  String get addFarm => 'Add Farm';
+
+  @override
+  String get editFarm => 'Edit Farm';
+
+  @override
+  String get farmName => 'Farm Name';
+
+  @override
+  String get village => 'Village';
+
+  @override
+  String get soilType => 'Soil Type';
+
+  @override
+  String get irrigationMethod => 'Irrigation Method';
+
+  @override
+  String get landOwnership => 'Land Ownership';
+
+  @override
+  String get latitude => 'Latitude';
+
+  @override
+  String get longitude => 'Longitude';
+
+  @override
+  String get invalidArea =>
+      'Please enter a valid area in hectares (greater than 0)';
+
+  @override
+  String get createFarm => 'Create Farm';
+
+  @override
+  String get updateFarm => 'Update Farm';
+
+  @override
+  String get farmCreated => 'Farm added successfully';
+
+  @override
+  String get farmUpdated => 'Farm updated successfully';
+
+  @override
+  String get farmDeleted => 'Farm deleted successfully';
+
+  @override
+  String get farmDetails => 'Farm Details';
+
+  @override
+  String get deleteFarmConfirmTitle => 'Delete Farm?';
+
+  @override
+  String get deleteFarmConfirmMessage =>
+      'Are you sure you want to delete this farm? This action cannot be undone.';
+
+  @override
+  String get noCropsOnFarm => 'No crops recorded';
+
+  @override
+  String get addCropPrompt => 'Add crops to track growth, season, and yields.';
+
+  @override
+  String get addCrop => 'Add Crop';
+
+  @override
+  String get cropName => 'Crop Name';
+
+  @override
+  String get season => 'Season';
+
+  @override
+  String get sownOn => 'Sown on';
+
+  @override
+  String get expectedHarvest => 'Expected harvest';
+
+  @override
+  String get income => 'Income';
+
+  @override
+  String get expense => 'Expense';
+
+  @override
+  String get netProfit => 'Net Profit';
+
+  @override
+  String get noTransactionsFound => 'No transactions found';
+
+  @override
+  String get addTransactionPrompt =>
+      'Add income or expense transactions to track farm finances.';
+
+  @override
+  String get addTransaction => 'Add Transaction';
+
+  @override
+  String get noPhotosFound => 'No photos uploaded';
+
+  @override
+  String get noPhotosSubtitle => 'Upload photos to monitor your farm progress.';
+
+  @override
+  String get uploadPhoto => 'Upload Photo';
+
+  @override
+  String get archive => 'Archive';
+
+  @override
+  String get unarchive => 'Unarchive';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get transactions => 'Transactions';
+
+  @override
+  String get photos => 'Photos';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get location => 'Location';
+
+  @override
+  String get address => 'Address';
 }

@@ -627,4 +627,155 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get suitability => 'Idoneidad';
+
+  @override
+  String get activeFarms => 'Activas';
+
+  @override
+  String get archivedFarms => 'Archivadas';
+
+  @override
+  String get noFarmsFound => 'No se encontraron fincas';
+
+  @override
+  String get noArchivedFarmsFound => 'No se encontraron fincas archivadas';
+
+  @override
+  String get addFarmPrompt => 'Toca el botón para añadir tu primera finca.';
+
+  @override
+  String get archived => 'Archivada';
+
+  @override
+  String get active => 'Activa';
+
+  @override
+  String get addFarm => 'Añadir finca';
+
+  @override
+  String get editFarm => 'Editar finca';
+
+  @override
+  String get farmName => 'Nombre de la finca';
+
+  @override
+  String get village => 'Aldea';
+
+  @override
+  String get soilType => 'Tipo de suelo';
+
+  @override
+  String get irrigationMethod => 'Método de riego';
+
+  @override
+  String get landOwnership => 'Propiedad de la tierra';
+
+  @override
+  String get latitude => 'Latitud';
+
+  @override
+  String get longitude => 'Longitud';
+
+  @override
+  String get invalidArea => 'Introduce un área válida en hectáreas (mayor a 0)';
+
+  @override
+  String get createFarm => 'Crear finca';
+
+  @override
+  String get updateFarm => 'Actualizar finca';
+
+  @override
+  String get farmCreated => 'Finca creada exitosamente';
+
+  @override
+  String get farmUpdated => 'Finca actualizada exitosamente';
+
+  @override
+  String get farmDeleted => 'Finca eliminada exitosamente';
+
+  @override
+  String get farmDetails => 'Detalles de la finca';
+
+  @override
+  String get deleteFarmConfirmTitle => '¿Eliminar finca?';
+
+  @override
+  String get deleteFarmConfirmMessage =>
+      '¿Estás seguro de que deseas eliminar esta finca? Esta acción no se puede deshacer.';
+
+  @override
+  String get noCropsOnFarm => 'Sin cultivos registrados';
+
+  @override
+  String get addCropPrompt =>
+      'Añade cultivos para rastrear el crecimiento y la cosecha.';
+
+  @override
+  String get addCrop => 'Añadir cultivo';
+
+  @override
+  String get cropName => 'Nombre del cultivo';
+
+  @override
+  String get season => 'Temporada';
+
+  @override
+  String get sownOn => 'Sembrado el';
+
+  @override
+  String get expectedHarvest => 'Cosecha esperada';
+
+  @override
+  String get income => 'Ingresos';
+
+  @override
+  String get expense => 'Gastos';
+
+  @override
+  String get netProfit => 'Beneficio neto';
+
+  @override
+  String get noTransactionsFound => 'Sin transacciones';
+
+  @override
+  String get addTransactionPrompt =>
+      'Añade transacciones de ingresos o gastos para rastrear las finanzas.';
+
+  @override
+  String get addTransaction => 'Añadir transacción';
+
+  @override
+  String get noPhotosFound => 'Sin fotos subidas';
+
+  @override
+  String get noPhotosSubtitle =>
+      'Sube fotos para monitorear el progreso de tu finca.';
+
+  @override
+  String get uploadPhoto => 'Subir foto';
+
+  @override
+  String get archive => 'Archivar';
+
+  @override
+  String get unarchive => 'Desarchivar';
+
+  @override
+  String get delete => 'Eliminar';
+
+  @override
+  String get transactions => 'Transacciones';
+
+  @override
+  String get photos => 'Fotos';
+
+  @override
+  String get add => 'Añadir';
+
+  @override
+  String get location => 'Ubicación';
+
+  @override
+  String get address => 'Dirección';
 }
