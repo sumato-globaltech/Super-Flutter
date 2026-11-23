@@ -529,19 +529,22 @@ class _FarmOverviewCard extends StatelessWidget {
                 ),
             ],
           ),
-          if (farm.address != null || farm.village != null) ...[
-            const SizedBox(height: AppSpacing.xs),
-            TitleDetailsCard(
-              title: l10n.location,
-              text: [
-                if (farm.village != null) farm.village,
-                if (farm.address != null) farm.address,
-              ].join(', '),
-              isFirstItem: true,
-              iconData: PhosphorIconsRegular.mapTrifold,
-              accentColor: DesignColor.accentLocation,
-            ),
-          ],
+          const SizedBox(height: AppSpacing.xs),
+          TitleDetailsCard(
+            title: l10n.location,
+            text: [
+              if (farm.village != null) farm.village,
+              if (farm.address != null) farm.address,
+            ].isNotEmpty
+                ? [
+                    if (farm.village != null) farm.village,
+                    if (farm.address != null) farm.address,
+                  ].join(', ')
+                : '--',
+            isFirstItem: true,
+            iconData: PhosphorIconsRegular.mapTrifold,
+            accentColor: DesignColor.accentLocation,
+          ),
         ],
       ),
     );
@@ -643,21 +646,19 @@ class _FarmCropsTab extends StatelessWidget {
                       ),
                   ],
                 ),
-                if (crop.sownOn != null)
-                  TitleDetailsCard(
-                    title: l10n.sownOn,
-                    text: crop.sownOn!,
-                    isFirstItem: true,
-                    iconData: PhosphorIconsRegular.plant,
-                    accentColor: DesignColor.accentPoints,
-                  ),
-                if (crop.expectedHarvestOn != null)
-                  TitleDetailsCard(
-                    title: l10n.expectedHarvest,
-                    text: crop.expectedHarvestOn!,
-                    iconData: PhosphorIconsRegular.scissors,
-                    accentColor: DesignColor.golden,
-                  ),
+                TitleDetailsCard(
+                  title: l10n.sownOn,
+                  text: crop.sownOn ?? '--',
+                  isFirstItem: true,
+                  iconData: PhosphorIconsRegular.plant,
+                  accentColor: DesignColor.accentPoints,
+                ),
+                TitleDetailsCard(
+                  title: l10n.expectedHarvest,
+                  text: crop.expectedHarvestOn ?? '--',
+                  iconData: PhosphorIconsRegular.scissors,
+                  accentColor: DesignColor.golden,
+                ),
               ],
             ),
           );

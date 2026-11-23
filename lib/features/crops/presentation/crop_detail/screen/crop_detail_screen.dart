@@ -314,7 +314,7 @@ class _AdvisoryTabView extends StatelessWidget {
                   children: [
                     TitleDetailsCard(
                       title: l10n.advisorySeason,
-                      text: advisory!.month?.name ?? '-',
+                      text: advisory?.month?.name ?? '--',
                       isFirstItem: true,
                       iconData: PhosphorIconsRegular.calendarCheck,
                       accentColor: DesignColor.accentPoints,
@@ -327,13 +327,12 @@ class _AdvisoryTabView extends StatelessWidget {
                   iconData: PhosphorIconsRegular.plant,
                   accentColor: DesignColor.accentPoints,
                 ),
-                if (advisory!.windows?.harvest != null)
-                  TitleDetailsCard(
-                    title: l10n.harvestWindow,
-                    text: advisory!.windows!.harvest!,
-                    iconData: PhosphorIconsRegular.scissors,
-                    accentColor: DesignColor.accentEnergy,
-                  ),
+                TitleDetailsCard(
+                  title: l10n.harvestWindow,
+                  text: advisory?.windows?.harvest ?? '--',
+                  iconData: PhosphorIconsRegular.scissors,
+                  accentColor: DesignColor.accentEnergy,
+                ),
               ],
             ),
           ),
@@ -346,7 +345,7 @@ class _AdvisoryTabView extends StatelessWidget {
                 TitleDetailsCard(
                   title: l10n.temperatureRange,
                   text:
-                      '${climate.tempMinC ?? '-'}°C - ${climate.tempMaxC ?? '-'}°C',
+                      '${climate.tempMinC ?? '--'}°C - ${climate.tempMaxC ?? '--'}°C',
                   isFirstItem: true,
                   iconData: PhosphorIconsRegular.thermometer,
                   accentColor: DesignColor.accentEnergy,
@@ -354,7 +353,7 @@ class _AdvisoryTabView extends StatelessWidget {
                 TitleDetailsCard(
                   title: l10n.rainfallRequirement,
                   text:
-                      '${climate.rainMinMm ?? '-'} mm - ${climate.rainMaxMm ?? '-'} mm',
+                      '${climate.rainMinMm ?? '--'} mm - ${climate.rainMaxMm ?? '--'} mm',
                   iconData: PhosphorIconsRegular.cloudRain,
                   accentColor: DesignColor.accentName,
                 ),
@@ -367,27 +366,27 @@ class _AdvisoryTabView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (soil.types.isNotEmpty)
-                  TitleDetailsCard(
-                    title: l10n.soilTypes,
-                    text: soil.types.join(', '),
-                    isFirstItem: true,
-                    iconData: PhosphorIconsRegular.mountains,
-                    accentColor: DesignColor.accentLocation,
-                  ),
+                TitleDetailsCard(
+                  title: l10n.soilTypes,
+                  text: soil.types.isNotEmpty ? soil.types.join(', ') : '--',
+                  isFirstItem: true,
+                  iconData: PhosphorIconsRegular.mountains,
+                  accentColor: DesignColor.accentLocation,
+                ),
                 TitleDetailsCard(
                   title: l10n.soilPh,
-                  text: '${soil.phMin ?? '-'} - ${soil.phMax ?? '-'}',
+                  text: soil.phMin != null || soil.phMax != null
+                      ? '${soil.phMin ?? '--'} - ${soil.phMax ?? '--'}'
+                      : '--',
                   iconData: PhosphorIconsRegular.drop,
                   accentColor: DesignColor.accentName,
                 ),
-                if (soil.drainage != null)
-                  TitleDetailsCard(
-                    title: l10n.soilDrainage,
-                    text: soil.drainage!,
-                    iconData: PhosphorIconsRegular.waves,
-                    accentColor: DesignColor.accentType,
-                  ),
+                TitleDetailsCard(
+                  title: l10n.soilDrainage,
+                  text: soil.drainage ?? '--',
+                  iconData: PhosphorIconsRegular.waves,
+                  accentColor: DesignColor.accentType,
+                ),
               ],
             ),
           ),
@@ -397,28 +396,25 @@ class _AdvisoryTabView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (sowing.method != null)
-                  TitleDetailsCard(
-                    title: l10n.sowingMethod,
-                    text: sowing.method!,
-                    isFirstItem: true,
-                    iconData: PhosphorIconsRegular.plant,
-                    accentColor: DesignColor.accentPoints,
-                  ),
-                if (sowing.seedRateKgHa != null)
-                  TitleDetailsCard(
-                    title: l10n.seedRate,
-                    text: '${sowing.seedRateKgHa} kg/ha',
-                    iconData: PhosphorIconsRegular.scales,
-                    accentColor: DesignColor.accentUin,
-                  ),
-                if (sowing.spacing != null)
-                  TitleDetailsCard(
-                    title: l10n.plantSpacing,
-                    text: sowing.spacing!,
-                    iconData: PhosphorIconsRegular.arrowsHorizontal,
-                    accentColor: DesignColor.accentName,
-                  ),
+                TitleDetailsCard(
+                  title: l10n.sowingMethod,
+                  text: sowing.method ?? '--',
+                  isFirstItem: true,
+                  iconData: PhosphorIconsRegular.plant,
+                  accentColor: DesignColor.accentPoints,
+                ),
+                TitleDetailsCard(
+                  title: l10n.seedRate,
+                  text: sowing.seedRateKgHa != null ? '${sowing.seedRateKgHa} kg/ha' : '--',
+                  iconData: PhosphorIconsRegular.scales,
+                  accentColor: DesignColor.accentUin,
+                ),
+                TitleDetailsCard(
+                  title: l10n.plantSpacing,
+                  text: sowing.spacing ?? '--',
+                  iconData: PhosphorIconsRegular.arrowsHorizontal,
+                  accentColor: DesignColor.accentName,
+                ),
               ],
             ),
           ),
@@ -428,23 +424,21 @@ class _AdvisoryTabView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (practices.landPreparation != null)
-                  TitleDetailsCard(
-                    title: l10n.landPreparation,
-                    text: practices.landPreparation!,
-                    isFirstItem: true,
-                    isReadMore: true,
-                    iconData: PhosphorIconsRegular.tractor,
-                    accentColor: DesignColor.golden,
-                  ),
-                if (practices.weedManagement != null)
-                  TitleDetailsCard(
-                    title: l10n.weedManagement,
-                    text: practices.weedManagement!,
-                    isReadMore: true,
-                    iconData: PhosphorIconsRegular.shieldCheck,
-                    accentColor: DesignColor.accentPoints,
-                  ),
+                TitleDetailsCard(
+                  title: l10n.landPreparation,
+                  text: practices.landPreparation ?? '--',
+                  isFirstItem: true,
+                  isReadMore: true,
+                  iconData: PhosphorIconsRegular.tractor,
+                  accentColor: DesignColor.golden,
+                ),
+                TitleDetailsCard(
+                  title: l10n.weedManagement,
+                  text: practices.weedManagement ?? '--',
+                  isReadMore: true,
+                  iconData: PhosphorIconsRegular.shieldCheck,
+                  accentColor: DesignColor.accentPoints,
+                ),
               ],
             ),
           ),
@@ -568,21 +562,19 @@ class _CalendarTabView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (windows.sowing != null)
-                  TitleDetailsCard(
-                    title: l10n.sowingWindow,
-                    text: windows.sowing!,
-                    isFirstItem: true,
-                    iconData: PhosphorIconsRegular.plant,
-                    accentColor: DesignColor.accentPoints,
-                  ),
-                if (windows.harvest != null)
-                  TitleDetailsCard(
-                    title: l10n.harvestWindow,
-                    text: windows.harvest!,
-                    iconData: PhosphorIconsRegular.scissors,
-                    accentColor: DesignColor.golden,
-                  ),
+                TitleDetailsCard(
+                  title: l10n.sowingWindow,
+                  text: windows.sowing ?? '--',
+                  isFirstItem: true,
+                  iconData: PhosphorIconsRegular.plant,
+                  accentColor: DesignColor.accentPoints,
+                ),
+                TitleDetailsCard(
+                  title: l10n.harvestWindow,
+                  text: windows.harvest ?? '--',
+                  iconData: PhosphorIconsRegular.scissors,
+                  accentColor: DesignColor.golden,
+                ),
               ],
             ),
           ),
@@ -639,25 +631,25 @@ class _VarietiesTabView extends StatelessWidget {
             children: [
               TitleDetailsCard(
                 title: l10n.varietyName,
-                text: name ?? '-',
+                text: name ?? '--',
                 isFirstItem: true,
                 iconData: PhosphorIconsRegular.plant,
                 accentColor: DesignColor.accentPoints,
               ),
-              if (duration != null)
-                TitleDetailsCard(
-                  title: l10n.duration,
-                  text: l10n.cropDurationDays(int.parse('$duration')),
-                  iconData: PhosphorIconsRegular.clock,
-                  accentColor: DesignColor.accentName,
-                ),
-              if (yieldPerHa != null)
-                TitleDetailsCard(
-                  title: l10n.expectedYield,
-                  text: '$yieldPerHa',
-                  iconData: PhosphorIconsRegular.scales,
-                  accentColor: DesignColor.golden,
-                ),
+              TitleDetailsCard(
+                title: l10n.duration,
+                text: duration != null
+                    ? l10n.cropDurationDays(int.tryParse('$duration') ?? 0)
+                    : '--',
+                iconData: PhosphorIconsRegular.clock,
+                accentColor: DesignColor.accentName,
+              ),
+              TitleDetailsCard(
+                title: l10n.expectedYield,
+                text: yieldPerHa != null ? '$yieldPerHa' : '--',
+                iconData: PhosphorIconsRegular.scales,
+                accentColor: DesignColor.golden,
+              ),
             ],
           ),
         );
@@ -728,20 +720,20 @@ class _PricesTabView extends StatelessWidget {
                   iconData: PhosphorIconsRegular.storefront,
                   accentColor: DesignColor.accentPoints,
                 ),
-                if (price.priceDate != null)
-                  TitleDetailsCard(
-                    title: l10n.reportingDate,
-                    text: price.priceDate!,
-                    iconData: PhosphorIconsRegular.calendar,
-                    accentColor: DesignColor.accentName,
-                  ),
-                if (price.minPrice != null && price.maxPrice != null)
-                  TitleDetailsCard(
-                    title: l10n.priceRange,
-                    text: '₹${price.minPrice} - ₹${price.maxPrice}',
-                    iconData: PhosphorIconsRegular.arrowsHorizontal,
-                    accentColor: DesignColor.accentEnergy,
-                  ),
+                TitleDetailsCard(
+                  title: l10n.reportingDate,
+                  text: price.priceDate ?? '--',
+                  iconData: PhosphorIconsRegular.calendar,
+                  accentColor: DesignColor.accentName,
+                ),
+                TitleDetailsCard(
+                  title: l10n.priceRange,
+                  text: price.minPrice != null && price.maxPrice != null
+                      ? '₹${price.minPrice} - ₹${price.maxPrice}'
+                      : '--',
+                  iconData: PhosphorIconsRegular.arrowsHorizontal,
+                  accentColor: DesignColor.accentEnergy,
+                ),
               ],
             ),
           );

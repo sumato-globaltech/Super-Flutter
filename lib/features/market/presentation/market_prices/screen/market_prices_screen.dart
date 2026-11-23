@@ -125,43 +125,46 @@ class _MarketPricesView extends StatelessWidget {
                               iconData: PhosphorIconsRegular.mapPin,
                               accentColor: DesignColor.accentLocation,
                             ),
-                            if (market!.type?.label case final type?)
-                              TitleDetailsCard(
-                                title: l10n.marketFieldType,
-                                text: type,
-                                iconData: PhosphorIconsRegular.tag,
-                                accentColor: DesignColor.accentType,
-                              ),
-                            if (market!.address != null &&
-                                market!.address!.isNotEmpty)
-                              TitleDetailsCard(
-                                title: l10n.marketFieldAddress,
-                                text: market!.address!,
-                                isReadMore: true,
-                                iconData: PhosphorIconsRegular.buildings,
-                                accentColor: DesignColor.accentName,
-                              ),
-                            if (market!.latitude != null &&
-                                market!.longitude != null)
-                              TitleDetailsCard(
-                                title: l10n.marketFieldLocation,
-                                text:
-                                    '${market!.latitude!.toStringAsFixed(4)}, ${market!.longitude!.toStringAsFixed(4)}',
-                                iconData: PhosphorIconsRegular.navigationArrow,
-                                accentColor: DesignColor.accentLocation,
-                                onTap: () => Utils.navigateToMapLocation(
-                                  '${market!.latitude!}',
-                                  '${market!.longitude!}',
-                                ),
-                              ),
-                            if (market!.facilities != null &&
-                                market!.facilities!.isNotEmpty)
-                              TitleDetailsCard(
-                                title: l10n.marketFieldFacilities,
-                                text: market!.facilities!.join(', '),
-                                iconData: PhosphorIconsRegular.checkCircle,
-                                accentColor: DesignColor.accentPoints,
-                              ),
+                            TitleDetailsCard(
+                              title: l10n.marketFieldType,
+                              text: market!.type?.label ?? '--',
+                              iconData: PhosphorIconsRegular.tag,
+                              accentColor: DesignColor.accentType,
+                            ),
+                            TitleDetailsCard(
+                              title: l10n.marketFieldAddress,
+                              text: market!.address?.isNotEmpty == true
+                                  ? market!.address!
+                                  : '--',
+                              isReadMore: true,
+                              iconData: PhosphorIconsRegular.buildings,
+                              accentColor: DesignColor.accentName,
+                            ),
+                            TitleDetailsCard(
+                              title: l10n.marketFieldLocation,
+                              text: market!.latitude != null &&
+                                      market!.longitude != null
+                                  ? '${market!.latitude!.toStringAsFixed(4)}, ${market!.longitude!.toStringAsFixed(4)}'
+                                  : '--',
+                              iconData: PhosphorIconsRegular.navigationArrow,
+                              accentColor: DesignColor.accentLocation,
+                              onTap: market!.latitude != null &&
+                                      market!.longitude != null
+                                  ? () => Utils.navigateToMapLocation(
+                                        '${market!.latitude!}',
+                                        '${market!.longitude!}',
+                                      )
+                                  : null,
+                            ),
+                            TitleDetailsCard(
+                              title: l10n.marketFieldFacilities,
+                              text: market!.facilities != null &&
+                                      market!.facilities!.isNotEmpty
+                                  ? market!.facilities!.join(', ')
+                                  : '--',
+                              iconData: PhosphorIconsRegular.checkCircle,
+                              accentColor: DesignColor.accentPoints,
+                            ),
                           ],
                         ),
                       ),

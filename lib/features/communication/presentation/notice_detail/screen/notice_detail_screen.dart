@@ -107,20 +107,20 @@ class _NoticeDetailView extends StatelessWidget {
                       title: l10n.noticeDetailFieldPublishedAt,
                       text: switch (notice.publishedAt) {
                         final date? => DateFormat.yMMMd().format(date.toLocal()),
-                        null => '-',
+                        null => '--',
                       },
                       iconData: PhosphorIconsRegular.calendar,
                       accentColor: DesignColor.accentPoints,
                     ),
-                    if (notice.expiresAt != null)
-                      TitleDetailsCard(
-                        title: l10n.noticeDetailFieldExpiresAt,
-                        text: DateFormat.yMMMd().format(
-                          notice.expiresAt!.toLocal(),
-                        ),
-                        iconData: PhosphorIconsRegular.calendarX,
-                        accentColor: DesignColor.accentLocation,
-                      ),
+                    TitleDetailsCard(
+                      title: l10n.noticeDetailFieldExpiresAt,
+                      text: switch (notice.expiresAt) {
+                        final date? => DateFormat.yMMMd().format(date.toLocal()),
+                        null => '--',
+                      },
+                      iconData: PhosphorIconsRegular.calendarX,
+                      accentColor: DesignColor.accentLocation,
+                    ),
                   ],
                 ),
               ),
