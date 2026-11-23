@@ -638,22 +638,26 @@ class _CalendarTabView extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    TitleDetailsCard(
-                      title: l10n.sowingWindow,
-                      text: windows.sowing ?? '--',
-                      isFirstItem: true,
-                      iconData: PhosphorIconsRegular.plant,
-                      accentColor: DesignColor.accentPoints,
+                    Expanded(
+                      child: TitleDetailsCard(
+                        title: l10n.sowingWindow,
+                        text: windows.sowing ?? '--',
+                        isFirstItem: true,
+                        iconData: PhosphorIconsRegular.plant,
+                        accentColor: DesignColor.accentPoints,
+                      ),
                     ),
                   ],
                 ),
                 Row(
                   children: [
-                    TitleDetailsCard(
-                      title: l10n.harvestWindow,
-                      text: windows.harvest ?? '--',
-                      iconData: PhosphorIconsRegular.scissors,
-                      accentColor: DesignColor.golden,
+                    Expanded(
+                      child: TitleDetailsCard(
+                        title: l10n.harvestWindow,
+                        text: windows.harvest ?? '--',
+                        iconData: PhosphorIconsRegular.scissors,
+                        accentColor: DesignColor.golden,
+                      ),
                     ),
                   ],
                 ),
@@ -720,34 +724,40 @@ class _VarietiesTabView extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  TitleDetailsCard(
-                    title: l10n.varietyName,
-                    text: name ?? '--',
-                    isFirstItem: true,
-                    iconData: PhosphorIconsRegular.plant,
-                    accentColor: DesignColor.accentPoints,
+                  Expanded(
+                    child: TitleDetailsCard(
+                      title: l10n.varietyName,
+                      text: name ?? '--',
+                      isFirstItem: true,
+                      iconData: PhosphorIconsRegular.plant,
+                      accentColor: DesignColor.accentPoints,
+                    ),
                   ),
                 ],
               ),
               Row(
                 children: [
-                  TitleDetailsCard(
-                    title: l10n.duration,
-                    text: duration != null
-                        ? l10n.cropDurationDays(int.tryParse('$duration') ?? 0)
-                        : '--',
-                    iconData: PhosphorIconsRegular.clock,
-                    accentColor: DesignColor.accentName,
+                  Expanded(
+                    child: TitleDetailsCard(
+                      title: l10n.duration,
+                      text: duration != null
+                          ? l10n.cropDurationDays(int.tryParse('$duration') ?? 0)
+                          : '--',
+                      iconData: PhosphorIconsRegular.clock,
+                      accentColor: DesignColor.accentName,
+                    ),
                   ),
                 ],
               ),
               Row(
                 children: [
-                  TitleDetailsCard(
-                    title: l10n.expectedYield,
-                    text: yieldPerHa != null ? '$yieldPerHa' : '--',
-                    iconData: PhosphorIconsRegular.scales,
-                    accentColor: DesignColor.golden,
+                  Expanded(
+                    child: TitleDetailsCard(
+                      title: l10n.expectedYield,
+                      text: yieldPerHa != null ? '$yieldPerHa' : '--',
+                      iconData: PhosphorIconsRegular.scales,
+                      accentColor: DesignColor.golden,
+                    ),
                   ),
                 ],
               ),
@@ -816,34 +826,40 @@ class _PricesTabView extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    TitleDetailsCard(
-                      title: marketName,
-                      text: modal,
-                      isFirstItem: true,
-                      iconData: PhosphorIconsRegular.storefront,
-                      accentColor: DesignColor.accentPoints,
+                    Expanded(
+                      child: TitleDetailsCard(
+                        title: marketName,
+                        text: modal,
+                        isFirstItem: true,
+                        iconData: PhosphorIconsRegular.storefront,
+                        accentColor: DesignColor.accentPoints,
+                      ),
                     ),
                   ],
                 ),
                 Row(
                   children: [
-                    TitleDetailsCard(
-                      title: l10n.reportingDate,
-                      text: price.priceDate ?? '--',
-                      iconData: PhosphorIconsRegular.calendar,
-                      accentColor: DesignColor.accentName,
+                    Expanded(
+                      child: TitleDetailsCard(
+                        title: l10n.reportingDate,
+                        text: price.priceDate ?? '--',
+                        iconData: PhosphorIconsRegular.calendar,
+                        accentColor: DesignColor.accentName,
+                      ),
                     ),
                   ],
                 ),
                 Row(
                   children: [
-                    TitleDetailsCard(
-                      title: l10n.priceRange,
-                      text: price.minPrice != null && price.maxPrice != null
-                          ? '₹${price.minPrice} - ₹${price.maxPrice}'
-                          : '--',
-                      iconData: PhosphorIconsRegular.arrowsHorizontal,
-                      accentColor: DesignColor.accentEnergy,
+                    Expanded(
+                      child: TitleDetailsCard(
+                        title: l10n.priceRange,
+                        text: price.minPrice != null && price.maxPrice != null
+                            ? '₹${price.minPrice} - ₹${price.maxPrice}'
+                            : '--',
+                        iconData: PhosphorIconsRegular.arrowsHorizontal,
+                        accentColor: DesignColor.accentEnergy,
+                      ),
                     ),
                   ],
                 ),
