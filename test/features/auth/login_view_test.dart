@@ -4,10 +4,17 @@ import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:super_flutter/core/error/exceptions/validation_exception.dart';
 import 'package:super_flutter/domain/auth/use_cases/login.dart';
+import 'package:super_flutter/domain/auth/use_cases/request_otp.dart';
+import 'package:super_flutter/domain/auth/use_cases/verify_otp.dart';
+import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/features/auth/presentation/login/bloc/login_bloc.dart';
 import 'package:super_flutter/features/auth/presentation/login/screen/login_screen.dart';
 
 class MockLogin extends Mock implements Login {}
+
+class MockRequestOtp extends Mock implements RequestOtp {}
+
+class MockVerifyOtp extends Mock implements VerifyOtp {}
 
 void main() {
   const serverError = 'These credentials do not match our records.';
@@ -28,8 +35,10 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: BlocProvider(
-          create: (_) => LoginBloc(login),
+          create: (_) => LoginBloc(login, MockRequestOtp(), MockVerifyOtp()),
           child: const LoginView(),
         ),
       ),

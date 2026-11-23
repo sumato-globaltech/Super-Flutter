@@ -189,4 +189,53 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get errorUnknown => 'Algo salió mal. Inténtalo de nuevo.';
+
+  @override
+  String get loginWithEmail => 'Email';
+
+  @override
+  String get loginWithPhone => 'Phone';
+
+  @override
+  String get loginPhone => 'Mobile number *';
+
+  @override
+  String get loginPhoneHint => '10-digit mobile number';
+
+  @override
+  String get loginPhoneInvalid => 'Enter a 10-digit mobile number';
+
+  @override
+  String get loginOtpSend => 'Send OTP';
+
+  @override
+  String get loginOtp => 'OTP *';
+
+  @override
+  String get loginOtpHint => '6-digit code';
+
+  @override
+  String get loginOtpInvalid => 'Enter the 6-digit code';
+
+  @override
+  String get loginOtpVerify => 'Verify';
+
+  @override
+  String loginOtpSentTo(String phone) {
+    return 'We sent a code to $phone';
+  }
+
+  @override
+  String loginOtpExpiresIn(String time) {
+    return 'Code expires in $time';
+  }
+
+  @override
+  String get loginOtpExpired => 'The code has expired';
+
+  @override
+  String get loginOtpResend => 'Resend OTP';
+
+  @override
+  String get loginOtpChangeNumber => 'Change number';
 }

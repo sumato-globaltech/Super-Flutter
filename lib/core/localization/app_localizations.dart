@@ -427,6 +427,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong. Please try again.'**
   String get errorUnknown;
+
+  /// No description provided for @loginWithEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get loginWithEmail;
+
+  /// No description provided for @loginWithPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get loginWithPhone;
+
+  /// No description provided for @loginPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile number *'**
+  String get loginPhone;
+
+  /// No description provided for @loginPhoneHint.
+  ///
+  /// In en, this message translates to:
+  /// **'10-digit mobile number'**
+  String get loginPhoneHint;
+
+  /// No description provided for @loginPhoneInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a 10-digit mobile number'**
+  String get loginPhoneInvalid;
+
+  /// No description provided for @loginOtpSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send OTP'**
+  String get loginOtpSend;
+
+  /// No description provided for @loginOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP *'**
+  String get loginOtp;
+
+  /// No description provided for @loginOtpHint.
+  ///
+  /// In en, this message translates to:
+  /// **'6-digit code'**
+  String get loginOtpHint;
+
+  /// No description provided for @loginOtpInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the 6-digit code'**
+  String get loginOtpInvalid;
+
+  /// No description provided for @loginOtpVerify.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get loginOtpVerify;
+
+  /// Shown above the code input
+  ///
+  /// In en, this message translates to:
+  /// **'We sent a code to {phone}'**
+  String loginOtpSentTo(String phone);
+
+  /// Countdown of the sent code, as m:ss
+  ///
+  /// In en, this message translates to:
+  /// **'Code expires in {time}'**
+  String loginOtpExpiresIn(String time);
+
+  /// No description provided for @loginOtpExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'The code has expired'**
+  String get loginOtpExpired;
+
+  /// No description provided for @loginOtpResend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend OTP'**
+  String get loginOtpResend;
+
+  /// No description provided for @loginOtpChangeNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Change number'**
+  String get loginOtpChangeNumber;
 }
 
 class _AppLocalizationsDelegate

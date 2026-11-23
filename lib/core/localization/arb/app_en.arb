@@ -78,5 +78,29 @@
   "errorTimeout": "The request took too long. Please try again.",
   "errorServer": "Something went wrong on our side.",
   "errorSessionExpired": "Your session has expired. Please sign in again.",
-  "errorUnknown": "Something went wrong. Please try again."
+  "errorUnknown": "Something went wrong. Please try again.",
+
+  "loginWithEmail": "Email",
+  "loginWithPhone": "Phone",
+  "loginPhone": "Mobile number *",
+  "loginPhoneHint": "10-digit mobile number",
+  "loginPhoneInvalid": "Enter a 10-digit mobile number",
+  "loginOtpSend": "Send OTP",
+  "loginOtp": "OTP *",
+  "loginOtpHint": "6-digit code",
+  "loginOtpInvalid": "Enter the 6-digit code",
+  "loginOtpVerify": "Verify",
+  "loginOtpSentTo": "We sent a code to {phone}",
+  "@loginOtpSentTo": {
+    "description": "Shown above the code input",
+    "placeholders": { "phone": { "type": "String" } }
+  },
+  "loginOtpExpiresIn": "Code expires in {time}",
+  "@loginOtpExpiresIn": {
+    "description": "Countdown of the sent code, as m:ss",
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "loginOtpExpired": "The code has expired",
+  "loginOtpResend": "Resend OTP",
+  "loginOtpChangeNumber": "Change number"
 }

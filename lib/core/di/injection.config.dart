@@ -135,7 +135,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i930.DashboardBloc>(
       () => _i930.DashboardBloc(gh<_i239.Logout>()),
     );
-    gh.factory<_i386.LoginBloc>(() => _i386.LoginBloc(gh<_i489.Login>()));
+    gh.factory<_i386.LoginBloc>(
+      () => _i386.LoginBloc(
+        gh<_i489.Login>(),
+        gh<_i643.RequestOtp>(),
+        gh<_i625.VerifyOtp>(),
+      ),
+    );
     gh.lazySingleton<_i828.AuthCubit>(
       () => _i828.AuthCubit(
         gh<_i236.CheckAuthStatus>(),
