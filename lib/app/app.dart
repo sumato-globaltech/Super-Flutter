@@ -98,7 +98,7 @@ class _AppState extends State<App> {
         theme: AppTheme.light(_config.flavor),
         darkTheme: AppTheme.dark(_config.flavor),
         routerConfig: _router,
-        // themeMode: ThemeMode.system,
+        themeMode: ThemeMode.system,
         // theme: theme,
         // darkTheme: darkTheme,
         localizationsDelegates: [

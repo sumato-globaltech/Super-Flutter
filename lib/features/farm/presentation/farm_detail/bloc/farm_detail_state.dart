@@ -53,6 +53,7 @@ class FarmDetailState extends Equatable {
     List<FarmPhotoModel>? photos,
     List<DeviceModel>? devices,
     SoilSensorAccountModel? soilSensorAccount,
+    bool clearSoilSensorAccount = false,
     int? selectedTab,
     bool? isActionLoading,
     bool? isSyncingDevices,
@@ -69,7 +70,9 @@ class FarmDetailState extends Equatable {
       summary: summary ?? this.summary,
       photos: photos ?? this.photos,
       devices: devices ?? this.devices,
-      soilSensorAccount: soilSensorAccount ?? this.soilSensorAccount,
+      soilSensorAccount: clearSoilSensorAccount
+          ? null
+          : (soilSensorAccount ?? this.soilSensorAccount),
       selectedTab: selectedTab ?? this.selectedTab,
       isActionLoading: isActionLoading ?? this.isActionLoading,
       isSyncingDevices: isSyncingDevices ?? this.isSyncingDevices,

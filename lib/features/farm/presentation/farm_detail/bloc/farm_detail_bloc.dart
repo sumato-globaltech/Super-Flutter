@@ -412,7 +412,7 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
       await _iotRemoteDataSource.unlinkSoilSensorAccount(state.farmId);
       emit(
         state.copyWith(
-          soilSensorAccount: null,
+          clearSoilSensorAccount: true,
           devices: const [],
           isActionLoading: false,
           actionSuccessMessage: 'Soil sensor account unlinked',
