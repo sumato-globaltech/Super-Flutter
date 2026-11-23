@@ -39,7 +39,6 @@ void main() {
   Future<void> pump(WidgetTester tester) async {
     // Made in the test's zone, so its stream follows the test's clock.
     bloc = LoginBloc(MockLogin(), requestOtp, verifyOtp);
-    addTearDown(bloc.close);
     await tester.pumpWidget(
       MaterialApp(
         theme: AppTheme.dark(Flavor.development),
