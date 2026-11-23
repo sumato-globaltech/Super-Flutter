@@ -2,7 +2,6 @@ import 'package:material_ui/material_ui.dart';
 
 import '../theme/app_dimensions.dart';
 import '../theme/app_spacing.dart';
-import 'app_button.dart';
 
 class AppEmptyView extends StatelessWidget {
   const AppEmptyView({

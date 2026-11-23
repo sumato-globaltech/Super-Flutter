@@ -8,7 +8,6 @@ import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:super_flutter/app/access/feature_registry.dart';
 import 'package:super_flutter/app/config/flavor.dart';
-import 'package:super_flutter/app/router/app_router.dart';
 import 'package:super_flutter/app/shell/app_shell_route.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/core/ui/theme/app_theme.dart';

@@ -9,7 +9,6 @@ import 'package:super_flutter/core/network/network_exception_mapper.dart';
 
 import '../theme/app_dimensions.dart';
 import '../theme/app_spacing.dart';
-import 'app_button.dart';
 
 class AppErrorView extends StatelessWidget {
   const AppErrorView({
