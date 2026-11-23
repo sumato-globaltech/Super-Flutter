@@ -82,44 +82,74 @@ class _NoticeDetailView extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    TitleDetailsCard(
-                      title: l10n.noticeDetailFieldTitle,
-                      text: notice.title ?? '-',
-                      isFirstItem: true,
-                      iconData: PhosphorIconsRegular.textT,
-                      accentColor: DesignColor.accentName,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TitleDetailsCard(
+                            title: l10n.noticeDetailFieldTitle,
+                            text: notice.title ?? '--',
+                            isFirstItem: true,
+                            iconData: PhosphorIconsRegular.textT,
+                            accentColor: DesignColor.accentName,
+                          ),
+                        ),
+                      ],
                     ),
-                    TitleDetailsCard(
-                      title: l10n.noticeDetailFieldCategory,
-                      text: notice.category?.name ?? '-',
-                      iconData: PhosphorIconsRegular.tag,
-                      accentColor: DesignColor.accentType,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TitleDetailsCard(
+                            title: l10n.noticeDetailFieldCategory,
+                            text: notice.category?.name ?? '--',
+                            iconData: PhosphorIconsRegular.tag,
+                            accentColor: DesignColor.accentType,
+                          ),
+                        ),
+                      ],
                     ),
-                    TitleDetailsCard(
-                      title: l10n.noticeDetailFieldPriority,
-                      text: notice.priority?.label ?? '-',
-                      iconData: PhosphorIconsRegular.flag,
-                      accentColor: notice.priority?.value == 'high'
-                          ? DesignColor.orange
-                          : DesignColor.accentEnergy,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TitleDetailsCard(
+                            title: l10n.noticeDetailFieldPriority,
+                            text: notice.priority?.label ?? '--',
+                            iconData: PhosphorIconsRegular.flag,
+                            accentColor: notice.priority?.value == 'high'
+                                ? DesignColor.orange
+                                : DesignColor.accentEnergy,
+                          ),
+                        ),
+                      ],
                     ),
-                    TitleDetailsCard(
-                      title: l10n.noticeDetailFieldPublishedAt,
-                      text: switch (notice.publishedAt) {
-                        final date? => DateFormat.yMMMd().format(date.toLocal()),
-                        null => '--',
-                      },
-                      iconData: PhosphorIconsRegular.calendar,
-                      accentColor: DesignColor.accentPoints,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TitleDetailsCard(
+                            title: l10n.noticeDetailFieldPublishedAt,
+                            text: switch (notice.publishedAt) {
+                              final date? => DateFormat.yMMMd().format(date.toLocal()),
+                              null => '--',
+                            },
+                            iconData: PhosphorIconsRegular.calendar,
+                            accentColor: DesignColor.accentPoints,
+                          ),
+                        ),
+                      ],
                     ),
-                    TitleDetailsCard(
-                      title: l10n.noticeDetailFieldExpiresAt,
-                      text: switch (notice.expiresAt) {
-                        final date? => DateFormat.yMMMd().format(date.toLocal()),
-                        null => '--',
-                      },
-                      iconData: PhosphorIconsRegular.calendarX,
-                      accentColor: DesignColor.accentLocation,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TitleDetailsCard(
+                            title: l10n.noticeDetailFieldExpiresAt,
+                            text: switch (notice.expiresAt) {
+                              final date? => DateFormat.yMMMd().format(date.toLocal()),
+                              null => '--',
+                            },
+                            iconData: PhosphorIconsRegular.calendarX,
+                            accentColor: DesignColor.accentLocation,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -132,12 +162,18 @@ class _NoticeDetailView extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      TitleDetailsCard(
-                        title: l10n.noticeDetailFieldBody,
-                        text: '',
-                        isFirstItem: true,
-                        iconData: PhosphorIconsRegular.article,
-                        accentColor: DesignColor.accentName,
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TitleDetailsCard(
+                              title: l10n.noticeDetailFieldBody,
+                              text: '',
+                              isFirstItem: true,
+                              iconData: PhosphorIconsRegular.article,
+                              accentColor: DesignColor.accentName,
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 8),
                       SelectableText(
