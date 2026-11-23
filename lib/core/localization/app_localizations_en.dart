@@ -237,4 +237,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loginOtpChangeNumber => 'Change number';
+
+  @override
+  String get authChangePasswordTitle => 'Change password';
+
+  @override
+  String fieldEnter(String field) {
+    return 'Enter $field';
+  }
+
+  @override
+  String fieldSelect(String field) {
+    return 'Select $field';
+  }
+
+  @override
+  String fieldChoose(String field) {
+    return 'Choose $field';
+  }
+
+  @override
+  String fieldRequired(String field) {
+    return '$field is required';
+  }
+
+  @override
+  String get fieldInvalidNumber => 'Enter a valid number';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get formSubmit => 'Submit';
+
+  @override
+  String get authChangePasswordCurrentPassword => 'Current password';
+
+  @override
+  String get authChangePasswordPassword => 'New password';
+
+  @override
+  String get authChangePasswordPasswordConfirmation => 'Confirm new password';
+
+  @override
+  String get authChangePasswordDone =>
+      'Password changed. Other devices have been signed out.';
+
+  @override
+  String get authChangePasswordRequired => 'Set a new password to continue.';
 }

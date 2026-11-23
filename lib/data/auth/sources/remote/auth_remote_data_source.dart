@@ -232,4 +232,43 @@ class AuthRemoteDataSource {
       );
     }
   }
+
+  /// PUT http://dam.test/api/v1/profile/password
+  Future<bool> changePassword({
+    required String currentPassword,
+    required String password,
+    required String passwordConfirmation,
+  }) async {
+    try {
+      final response = await _dioClient.dio.put<dynamic>(
+        ApiEndpoints.changePassword,
+        data: <String, dynamic>{
+          'current_password': currentPassword,
+          'password': password,
+          'password_confirmation': passwordConfirmation,
+        },
+      );
+      final body = response.data;
+      if (body is Map && body['success'] == false) {
+        final message =
+            (body['message'] as String?) ??
+            'The change password request failed.';
+        final fieldErrors = NetworkException.fieldErrorsFrom(body);
+        if (fieldErrors.isNotEmpty) {
+          throw ValidationException(message, fieldErrors: fieldErrors);
+        }
+        throw BadRequestException(message, statusCode: response.statusCode);
+      }
+      return true;
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on AppException {
+      rethrow;
+    } catch (e) {
+      throw NetworkException(
+        'Could not process the change password response.',
+        cause: e,
+      );
+    }
+  }
 }

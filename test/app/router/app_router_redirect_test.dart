@@ -18,6 +18,26 @@ void main() {
       );
 
   group('resolveRedirect', () {
+    test('a password that must change holds the user on its screen', () {
+      const change = AuthRouteNames.changePassword;
+      String? forced(String location) => resolveRedirect(
+        location: location,
+        status: AuthStatus.authenticated,
+        updateRequired: false,
+        passwordChangeRequired: true,
+      );
+      expect(forced(dashboard), change);
+      expect(forced(login), change);
+      expect(forced(RouteNames.splash), change);
+      expect(forced(change), isNull);
+
+      // Changed, the screen lets go; it can still be opened on purpose.
+      expect(redirect(change, AuthStatus.authenticated), isNull);
+      expect(redirect(login, AuthStatus.authenticated), dashboard);
+      // Signed out from it, the user goes to login.
+      expect(redirect(change, AuthStatus.unauthenticated), login);
+    });
+
     test('force update wins over everything', () {
       expect(
         redirect(dashboard, AuthStatus.authenticated, update: true),

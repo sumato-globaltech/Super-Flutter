@@ -517,6 +517,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Change number'**
   String get loginOtpChangeNumber;
+
+  /// App bar title of the change_password screen
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get authChangePasswordTitle;
+
+  /// Hint of a text input
+  ///
+  /// In en, this message translates to:
+  /// **'Enter {field}'**
+  String fieldEnter(String field);
+
+  /// Hint of a date or dropdown input, and a date picker's title
+  ///
+  /// In en, this message translates to:
+  /// **'Select {field}'**
+  String fieldSelect(String field);
+
+  /// Hint of a file input
+  ///
+  /// In en, this message translates to:
+  /// **'Choose {field}'**
+  String fieldChoose(String field);
+
+  /// Shown under an empty required input
+  ///
+  /// In en, this message translates to:
+  /// **'{field} is required'**
+  String fieldRequired(String field);
+
+  /// Shown under a number input that is not a number
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid number'**
+  String get fieldInvalidNumber;
+
+  /// Shown while a list loads
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loading;
+
+  /// Submit button of a form
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get formSubmit;
+
+  /// Label of the current_password input
+  ///
+  /// In en, this message translates to:
+  /// **'Current password'**
+  String get authChangePasswordCurrentPassword;
+
+  /// Label of the password input
+  ///
+  /// In en, this message translates to:
+  /// **'New password'**
+  String get authChangePasswordPassword;
+
+  /// Label of the password_confirmation input
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm new password'**
+  String get authChangePasswordPasswordConfirmation;
+
+  /// Shown when the change password form was sent
+  ///
+  /// In en, this message translates to:
+  /// **'Password changed. Other devices have been signed out.'**
+  String get authChangePasswordDone;
+
+  /// Shown on the change password screen when the account must change it
+  ///
+  /// In en, this message translates to:
+  /// **'Set a new password to continue.'**
+  String get authChangePasswordRequired;
 }
 
 class _AppLocalizationsDelegate

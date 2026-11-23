@@ -8,6 +8,7 @@ import 'interceptors/api_key_interceptor.dart';
 import 'interceptors/auth_interceptor.dart';
 import 'interceptors/error_interceptor.dart';
 import 'interceptors/logging_interceptor.dart';
+import 'interceptors/password_policy_interceptor.dart';
 import 'interceptors/refresh_token_interceptor.dart';
 
 class DioClient {
@@ -16,6 +17,7 @@ class DioClient {
     required SecureStorage secureStorage,
     required this._logger,
     required Future<void> Function() onSessionExpired,
+    void Function()? onPasswordChangeRequired,
   }) {
     _refreshClient = _createDio()..interceptors.addAll(_supportInterceptors());
 
@@ -26,6 +28,9 @@ class DioClient {
           secureStorage: secureStorage,
           tokenClient: _refreshClient,
           onSessionExpired: onSessionExpired,
+        ),
+        PasswordPolicyInterceptor(
+          onPasswordChangeRequired: onPasswordChangeRequired ?? () {},
         ),
         ..._supportInterceptors(),
       ]);

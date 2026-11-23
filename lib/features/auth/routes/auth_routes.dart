@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:super_flutter/features/auth/presentation/change_password/screen/change_password_screen.dart';
 import 'package:super_flutter/features/auth/presentation/login/screen/login_screen.dart';
 
 import 'auth_route_names.dart';
@@ -10,5 +11,10 @@ List<GoRoute> buildAuthRoutes() => [
     path: AuthRouteNames.login,
     name: AuthRouteNames.login,
     builder: (context, state) => const LoginScreen(),
+  ),
+  GoRoute(
+    path: AuthRouteNames.changePassword,
+    name: AuthRouteNames.changePassword,
+    builder: (context, state) => const ChangePasswordScreen(),
   ),
 ];

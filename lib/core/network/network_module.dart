@@ -20,6 +20,7 @@ abstract class NetworkModule {
       secureStorage: secureStorage,
       logger: logger,
       onSessionExpired: sessionManager.onSessionExpired,
+      onPasswordChangeRequired: sessionManager.onPasswordChangeRequired,
     );
   }
 }

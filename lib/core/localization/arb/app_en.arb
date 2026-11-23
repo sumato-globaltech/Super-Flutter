@@ -102,5 +102,44 @@
   },
   "loginOtpExpired": "The code has expired",
   "loginOtpResend": "Resend OTP",
-  "loginOtpChangeNumber": "Change number"
+  "loginOtpChangeNumber": "Change number",
+
+  "authChangePasswordTitle": "Change password",
+  "@authChangePasswordTitle": { "description": "App bar title of the change_password screen" },
+
+  "fieldEnter": "Enter {field}",
+  "@fieldEnter": { "description": "Hint of a text input", "placeholders": { "field": { "type": "String" } } },
+
+  "fieldSelect": "Select {field}",
+  "@fieldSelect": { "description": "Hint of a date or dropdown input, and a date picker's title", "placeholders": { "field": { "type": "String" } } },
+
+  "fieldChoose": "Choose {field}",
+  "@fieldChoose": { "description": "Hint of a file input", "placeholders": { "field": { "type": "String" } } },
+
+  "fieldRequired": "{field} is required",
+  "@fieldRequired": { "description": "Shown under an empty required input", "placeholders": { "field": { "type": "String" } } },
+
+  "fieldInvalidNumber": "Enter a valid number",
+  "@fieldInvalidNumber": { "description": "Shown under a number input that is not a number" },
+
+  "loading": "Loading...",
+  "@loading": { "description": "Shown while a list loads" },
+
+  "formSubmit": "Submit",
+  "@formSubmit": { "description": "Submit button of a form" },
+
+  "authChangePasswordCurrentPassword": "Current password",
+  "@authChangePasswordCurrentPassword": { "description": "Label of the current_password input" },
+
+  "authChangePasswordPassword": "New password",
+  "@authChangePasswordPassword": { "description": "Label of the password input" },
+
+  "authChangePasswordPasswordConfirmation": "Confirm new password",
+  "@authChangePasswordPasswordConfirmation": { "description": "Label of the password_confirmation input" },
+
+  "authChangePasswordDone": "Password changed. Other devices have been signed out.",
+  "@authChangePasswordDone": { "description": "Shown when the change password form was sent" },
+
+  "authChangePasswordRequired": "Set a new password to continue.",
+  "@authChangePasswordRequired": { "description": "Shown on the change password screen when the account must change it" }
 }

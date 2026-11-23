@@ -41,11 +41,15 @@ import 'package:super_flutter/domain/auth/use_cases/get_current_user.dart'
     as _i309;
 import 'package:super_flutter/domain/auth/use_cases/login.dart' as _i489;
 import 'package:super_flutter/domain/auth/use_cases/logout.dart' as _i239;
+import 'package:super_flutter/domain/auth/use_cases/password_changed.dart'
+    as _i275;
 import 'package:super_flutter/domain/auth/use_cases/refresh_user.dart' as _i993;
 import 'package:super_flutter/domain/auth/use_cases/request_otp.dart' as _i643;
 import 'package:super_flutter/domain/auth/use_cases/verify_otp.dart' as _i625;
 import 'package:super_flutter/domain/auth/use_cases/watch_auth_status.dart'
     as _i729;
+import 'package:super_flutter/features/auth/presentation/change_password/bloc/change_password_bloc.dart'
+    as _i929;
 import 'package:super_flutter/features/auth/presentation/login/bloc/login_bloc.dart'
     as _i386;
 import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart'
@@ -120,6 +124,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i489.Login>(() => _i489.Login(gh<_i631.AuthRepository>()));
     gh.factory<_i239.Logout>(() => _i239.Logout(gh<_i631.AuthRepository>()));
+    gh.factory<_i275.PasswordChanged>(
+      () => _i275.PasswordChanged(gh<_i631.AuthRepository>()),
+    );
     gh.factory<_i993.RefreshUser>(
       () => _i993.RefreshUser(gh<_i631.AuthRepository>()),
     );
@@ -134,6 +141,13 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i930.DashboardBloc>(
       () => _i930.DashboardBloc(gh<_i239.Logout>()),
+    );
+    gh.factory<_i929.ChangePasswordBloc>(
+      () => _i929.ChangePasswordBloc(
+        gh<_i234.AuthRemoteDataSource>(),
+        gh<_i275.PasswordChanged>(),
+        gh<_i239.Logout>(),
+      ),
     );
     gh.factory<_i386.LoginBloc>(
       () => _i386.LoginBloc(

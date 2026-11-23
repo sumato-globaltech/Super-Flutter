@@ -16,4 +16,6 @@ abstract final class ApiEndpoints {
   static const requestOtp = '/api/v1/otp/request';
 
   static const verifyOtp = '/api/v1/otp/verify';
+
+  static const changePassword = '/api/v1/profile/password';
 }

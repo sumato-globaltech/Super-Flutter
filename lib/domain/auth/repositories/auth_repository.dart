@@ -19,6 +19,9 @@ abstract interface class AuthRepository {
   /// Loads the signed-in user from `/me` and caches it.
   Future<User> refreshUser();
 
+  /// The password was changed: reloads the user, who may now continue.
+  Future<void> passwordChanged();
+
   /// Ends the session here, or on every device with [allDevices]. The local
   /// session is cleared even when the server cannot be reached.
   Future<void> logout({bool allDevices = false});

@@ -22,6 +22,7 @@ void main() {
   late MockLocalDataSource local;
   late MockSessionManager sessionManager;
   late StreamController<void> expired;
+  late StreamController<void> passwordRequired;
   late AuthRepositoryImpl repository;
 
   setUpAll(() {
@@ -34,13 +35,17 @@ void main() {
     local = MockLocalDataSource();
     sessionManager = MockSessionManager();
     expired = StreamController<void>.broadcast();
+    passwordRequired = StreamController<void>.broadcast();
     when(() => sessionManager.expired).thenAnswer((_) => expired.stream);
+    when(() => sessionManager.passwordChangeRequired)
+        .thenAnswer((_) => passwordRequired.stream);
     repository = AuthRepositoryImpl(remote, local, sessionManager);
   });
 
   tearDown(() async {
     await repository.dispose();
     await expired.close();
+    await passwordRequired.close();
   });
 
   test('hasSession delegates to local data source', () async {
@@ -229,5 +234,60 @@ void main() {
     expired.add(null);
 
     await statuses;
+  });
+
+  group('password change', () {
+    test('a refused request marks the cached user and re-announces', () async {
+      final cached = UserModel(id: 'u1', name: 'Emily', email: 'e@test.com');
+      when(() => local.getUser()).thenAnswer((_) async => cached);
+      when(() => local.saveUser(any())).thenAnswer((_) async {});
+      final statuses = expectLater(
+        repository.status,
+        emits(AuthStatus.authenticated),
+      );
+
+      passwordRequired.add(null);
+      await statuses;
+
+      expect(cached.passwordChangeRequired, isTrue);
+      verify(() => local.saveUser(cached)).called(1);
+    });
+
+    test('a second refusal changes nothing', () async {
+      final cached = UserModel(id: 'u1', passwordChangeRequired: true);
+      when(() => local.getUser()).thenAnswer((_) async => cached);
+
+      passwordRequired.add(null);
+      await Future<void>.delayed(Duration.zero);
+
+      verifyNever(() => local.saveUser(any()));
+    });
+
+    test('once changed, /me is loaded again', () async {
+      final me = UserModel(id: 'u1', passwordChangeRequired: false);
+      when(() => remote.getMe()).thenAnswer((_) async => me);
+      when(() => local.saveUser(any())).thenAnswer((_) async {});
+      final statuses = expectLater(
+        repository.status,
+        emits(AuthStatus.authenticated),
+      );
+
+      await repository.passwordChanged();
+      await statuses;
+
+      verify(() => local.saveUser(me)).called(1);
+    });
+
+    test('once changed but offline, the cached user is let go', () async {
+      final cached = UserModel(id: 'u1', passwordChangeRequired: true);
+      when(() => remote.getMe()).thenThrow(Exception('offline'));
+      when(() => local.getUser()).thenAnswer((_) async => cached);
+      when(() => local.saveUser(any())).thenAnswer((_) async {});
+
+      await repository.passwordChanged();
+
+      expect(cached.passwordChangeRequired, isFalse);
+      verify(() => local.saveUser(cached)).called(1);
+    });
   });
 }

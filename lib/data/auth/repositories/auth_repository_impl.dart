@@ -22,12 +22,16 @@ class AuthRepositoryImpl implements AuthRepository {
     _expiredSubscription = sessionManager.expired.listen(
       (_) => _status.add(AuthStatus.unauthenticated),
     );
+    _passwordSubscription = sessionManager.passwordChangeRequired.listen(
+      (_) => _setPasswordChangeRequired(true),
+    );
   }
 
   final AuthRemoteDataSource _remoteDataSource;
   final AuthLocalDataSource _localDataSource;
   final _status = StreamController<AuthStatus>.broadcast();
   late final StreamSubscription<void> _expiredSubscription;
+  late final StreamSubscription<void> _passwordSubscription;
 
   @override
   Stream<AuthStatus> get status => _status.stream;
@@ -84,6 +88,28 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<void> passwordChanged() async {
+    try {
+      await refreshUser();
+      _status.add(AuthStatus.authenticated);
+    } on Object {
+      await _setPasswordChangeRequired(false);
+    }
+  }
+
+  /// Marks the cached user, so the app sends them to change it (or lets
+  /// them go once they have).
+  Future<void> _setPasswordChangeRequired(bool required) async {
+    final user = await _localDataSource.getUser();
+    if (user == null || (user.passwordChangeRequired ?? false) == required) {
+      return;
+    }
+    user.passwordChangeRequired = required;
+    await _localDataSource.saveUser(user);
+    _status.add(AuthStatus.authenticated);
+  }
+
+  @override
   Future<void> logout({bool allDevices = false}) async {
     try {
       if (_localDataSource.hasSession) {
@@ -104,6 +130,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
   Future<void> dispose() async {
     await _expiredSubscription.cancel();
+    await _passwordSubscription.cancel();
     await _status.close();
   }
 }

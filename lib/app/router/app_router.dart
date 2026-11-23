@@ -37,6 +37,7 @@ GoRouter createRouter({
       status: authCubit.state.status,
       updateRequired: startup.updateRequired,
       access: authCubit.state.access,
+      passwordChangeRequired: authCubit.state.mustChangePassword,
     ),
     routes: [
       GoRoute(
@@ -67,6 +68,7 @@ String? resolveRedirect({
   required bool updateRequired,
   AccessPolicy? access,
   FeatureRegistry? registry,
+  bool passwordChangeRequired = false,
 }) {
   if (updateRequired) {
     return location == RouteNames.forceUpdate ? null : RouteNames.forceUpdate;
@@ -80,6 +82,12 @@ String? resolveRedirect({
     case AuthStatus.unauthenticated:
       return isAuthRoute ? null : AuthRouteNames.login;
     case AuthStatus.authenticated:
+      // The server refuses everything else until the password is changed.
+      const changePassword = AuthRouteNames.changePassword;
+      if (passwordChangeRequired) {
+        return location == changePassword ? null : changePassword;
+      }
+      if (location == changePassword) return null;
       const home = DashboardRouteNames.dashboard;
       if (isEntryRoute || isAuthRoute) return home;
       if (location == home) return null;

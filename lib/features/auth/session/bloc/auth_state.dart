@@ -14,6 +14,11 @@ class AuthState extends Equatable {
 
   bool get isAuthenticated => status == AuthStatus.authenticated;
 
+  /// Signed in, but the server refuses everything until the password is
+  /// changed.
+  bool get mustChangePassword =>
+      isAuthenticated && (user?.passwordChangeRequired ?? false);
+
   AccessPolicy get access =>
       isAuthenticated ? AccessPolicy.fromUser(user) : AccessPolicy.guest;
 
