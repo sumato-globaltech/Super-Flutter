@@ -8,5 +8,6 @@ class Logout {
 
   final AuthRepository _repository;
 
-  Future<void> call() => _repository.logout();
+  Future<void> call({bool allDevices = false}) =>
+      _repository.logout(allDevices: allDevices);
 }

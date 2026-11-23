@@ -41,6 +41,9 @@ import 'package:super_flutter/domain/auth/use_cases/get_current_user.dart'
     as _i309;
 import 'package:super_flutter/domain/auth/use_cases/login.dart' as _i489;
 import 'package:super_flutter/domain/auth/use_cases/logout.dart' as _i239;
+import 'package:super_flutter/domain/auth/use_cases/refresh_user.dart' as _i993;
+import 'package:super_flutter/domain/auth/use_cases/request_otp.dart' as _i643;
+import 'package:super_flutter/domain/auth/use_cases/verify_otp.dart' as _i625;
 import 'package:super_flutter/domain/auth/use_cases/watch_auth_status.dart'
     as _i729;
 import 'package:super_flutter/features/auth/presentation/login/bloc/login_bloc.dart'
@@ -117,6 +120,15 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i489.Login>(() => _i489.Login(gh<_i631.AuthRepository>()));
     gh.factory<_i239.Logout>(() => _i239.Logout(gh<_i631.AuthRepository>()));
+    gh.factory<_i993.RefreshUser>(
+      () => _i993.RefreshUser(gh<_i631.AuthRepository>()),
+    );
+    gh.factory<_i643.RequestOtp>(
+      () => _i643.RequestOtp(gh<_i631.AuthRepository>()),
+    );
+    gh.factory<_i625.VerifyOtp>(
+      () => _i625.VerifyOtp(gh<_i631.AuthRepository>()),
+    );
     gh.factory<_i729.WatchAuthStatus>(
       () => _i729.WatchAuthStatus(gh<_i631.AuthRepository>()),
     );

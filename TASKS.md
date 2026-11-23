@@ -150,6 +150,10 @@ Kits are copied from the approved Phase 1 code. Reinstalling a kit into this pro
 ## Phase 3 — Features (built with the Phase 2 CLI)
 Each GET screen starts from `sf make api --view`, then is adjusted by hand where the design needs it.
 - [ ] **T3.1** Auth: email/password login, phone OTP request/verify (resend timer from `meta.expires_in`), `/me`, logout, logout-all, forced change password when `password_change_required`
+  - [x] **T3.1a** Data layer: `sf make api … --bloc none` (new) added `getMe`, `logout`, `logoutAll`, `requestOtp`, `verifyOtp` to `AuthRemoteDataSource` + `ApiEndpoints`; by hand: `requestOtp` returns `meta.expires_in` (300 if missing), `verifyOtp` sends `device_name` and refuses a token-less session, OTP paths in `publicPaths`. Repository: `requestOtp`, `verifyOtp` (same start as login), `refreshUser` (/me → cache), `logout({allDevices})` (server call when there is a session, local session always cleared, offline-safe). Use cases `RequestOtp`, `VerifyOtp`, `RefreshUser`, `Logout(allDevices:)`. Tests: 6 data source (fake Dio adapter: payloads, meta, 422 → `otp` field error, token check, paths), 8 repository; 149 app tests pass, 0 new analyzer issues
+  - [ ] **T3.1b** Login screen: Email | Phone (OTP) tabs; phone → request → 6-digit code with `expires_in` countdown + resend; field errors under phone/otp
+  - [ ] **T3.1c** Forced change password: from login/OTP session, `/me` or any 403 `meta.code == password_change_required` → router redirect to change-password form (`sf make api change_password -X PUT`), then continue
+  - [ ] **T3.1d** Session: `/me` on app start (fresh permissions/tabs), logout + logout-all actions with confirm sheet
 - [ ] **T3.2** Home: banners, alerts, notices, quick actions (only allowed features)
 - [ ] **T3.3** Markets: list, summary, price history, favourites
 - [ ] **T3.4** Crops: list, detail, advisory, calendar, fertilizers, economics, recommendations

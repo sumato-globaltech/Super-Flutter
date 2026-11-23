@@ -111,17 +111,113 @@ void main() {
     await statuses;
   });
 
-  test('logout clears local session', () async {
-    when(() => local.clearSession()).thenAnswer((_) async {});
+  test('verifyOtp starts the session like login', () async {
+    final response = LoginModel(
+      accessToken: 'b',
+      passwordChangeRequired: true,
+      user: UserModel(id: 'u2', name: 'Ramesh', email: '', phone: '9876543210'),
+    );
+    when(
+      () => remote.verifyOtp(
+        phone: any(named: 'phone'),
+        otp: any(named: 'otp'),
+      ),
+    ).thenAnswer((_) async => response);
+    when(() => local.saveTokens(any())).thenAnswer((_) async {});
+    when(() => local.saveUser(any())).thenAnswer((_) async {});
     final statuses = expectLater(
       repository.status,
-      emits(AuthStatus.unauthenticated),
+      emits(AuthStatus.authenticated),
     );
 
-    await repository.logout();
-    await statuses;
+    final session = await repository.verifyOtp(
+      phone: '9876543210',
+      otp: '123456',
+    );
 
-    verify(() => local.clearSession()).called(1);
+    expect(session.user.phone, '9876543210');
+    expect(session.passwordChangeRequired, isTrue);
+    verify(() => local.saveTokens(const AuthTokens(accessToken: 'b')))
+        .called(1);
+    verify(() => local.saveUser(response.user!)).called(1);
+    await statuses;
+  });
+
+  test('requestOtp returns how long the code is valid', () async {
+    when(() => remote.requestOtp(phone: any(named: 'phone')))
+        .thenAnswer((_) async => 300);
+
+    expect(await repository.requestOtp(phone: '9876543210'), 300);
+  });
+
+  test('refreshUser loads /me and caches it', () async {
+    final me = UserModel(
+      id: 'u1',
+      name: 'Emily',
+      email: 'emily@test.com',
+      permissions: ['markets.view'],
+    );
+    when(() => remote.getMe()).thenAnswer((_) async => me);
+    when(() => local.saveUser(any())).thenAnswer((_) async {});
+
+    final user = await repository.refreshUser();
+
+    expect(user.permissions, {'markets.view'});
+    verify(() => local.saveUser(me)).called(1);
+  });
+
+  group('logout', () {
+    setUp(() {
+      when(() => local.clearSession()).thenAnswer((_) async {});
+      when(() => local.hasSession).thenReturn(true);
+    });
+
+    test('ends the session on the server, then here', () async {
+      when(() => remote.logout()).thenAnswer((_) async => true);
+      final statuses = expectLater(
+        repository.status,
+        emits(AuthStatus.unauthenticated),
+      );
+
+      await repository.logout();
+      await statuses;
+
+      verify(() => remote.logout()).called(1);
+      verifyNever(() => remote.logoutAll());
+      verify(() => local.clearSession()).called(1);
+    });
+
+    test('on every device', () async {
+      when(() => remote.logoutAll()).thenAnswer((_) async => true);
+
+      await repository.logout(allDevices: true);
+
+      verify(() => remote.logoutAll()).called(1);
+      verifyNever(() => remote.logout());
+      verify(() => local.clearSession()).called(1);
+    });
+
+    test('offline still ends the session here', () async {
+      when(() => remote.logout()).thenThrow(Exception('offline'));
+      final statuses = expectLater(
+        repository.status,
+        emits(AuthStatus.unauthenticated),
+      );
+
+      await repository.logout();
+      await statuses;
+
+      verify(() => local.clearSession()).called(1);
+    });
+
+    test('without a session nothing is sent', () async {
+      when(() => local.hasSession).thenReturn(false);
+
+      await repository.logout();
+
+      verifyNever(() => remote.logout());
+      verify(() => local.clearSession()).called(1);
+    });
   });
 
   test('session expiry is reported as unauthenticated', () async {
