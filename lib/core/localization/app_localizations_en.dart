@@ -285,4 +285,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authChangePasswordRequired => 'Set a new password to continue.';
+
+  @override
+  String get signOutAllDevices => 'Sign out of all devices';
+
+  @override
+  String get signOutConfirmTitle => 'Sign out?';
+
+  @override
+  String get signOutConfirmMessage =>
+      'You will need to sign in again on this device.';
+
+  @override
+  String get signOutAllConfirmTitle => 'Sign out of all devices?';
+
+  @override
+  String get signOutAllConfirmMessage =>
+      'Every device signed in to your account, this one included, will need to sign in again.';
 }

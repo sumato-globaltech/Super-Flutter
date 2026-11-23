@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../domain/auth/entities/user.dart';
 import '../../../../domain/auth/use_cases/check_auth_status.dart';
 import '../../../../domain/auth/use_cases/get_current_user.dart';
+import '../../../../domain/auth/use_cases/refresh_user.dart';
 import '../../../../domain/auth/use_cases/watch_auth_status.dart';
 import 'auth_state.dart';
 
@@ -15,12 +16,14 @@ class AuthCubit extends Cubit<AuthState> {
     this._checkAuthStatus,
     this._getCurrentUser,
     WatchAuthStatus watchAuthStatus,
+    this._refreshUser,
   ) : super(const AuthState()) {
     _statusSubscription = watchAuthStatus().listen(_apply);
   }
 
   final CheckAuthStatus _checkAuthStatus;
   final GetCurrentUser _getCurrentUser;
+  final RefreshUser _refreshUser;
   late final StreamSubscription<AuthStatus> _statusSubscription;
 
   Future<void> initialize() async {
@@ -31,7 +34,21 @@ class AuthCubit extends Cubit<AuthState> {
       );
     } catch (_) {
       emit(const AuthState(status: AuthStatus.unauthenticated));
+      return;
     }
+    // The cached user opens the app at once; /me then brings its roles
+    // and permissions up to date.
+    if (state.isAuthenticated) unawaited(syncUser());
+  }
+
+  /// Loads the user from the server; offline, the cached one stays.
+  Future<void> syncUser() async {
+    try {
+      await _refreshUser();
+    } catch (_) {
+      return;
+    }
+    if (!isClosed) await refreshUser();
   }
 
   /// Reloads the signed-in user, for example after `/me` refreshed it.

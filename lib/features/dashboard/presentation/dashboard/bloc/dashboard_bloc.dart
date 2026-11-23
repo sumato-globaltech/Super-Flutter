@@ -23,7 +23,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   ) async {
     emit(state.copyWith(status: DashboardStatus.submitting));
     try {
-      await _logout();
+      await _logout(allDevices: event.allDevices);
     } finally {
       emit(state.copyWith(status: DashboardStatus.success));
     }

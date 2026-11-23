@@ -595,6 +595,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Set a new password to continue.'**
   String get authChangePasswordRequired;
+
+  /// No description provided for @signOutAllDevices.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out of all devices'**
+  String get signOutAllDevices;
+
+  /// No description provided for @signOutConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out?'**
+  String get signOutConfirmTitle;
+
+  /// No description provided for @signOutConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to sign in again on this device.'**
+  String get signOutConfirmMessage;
+
+  /// No description provided for @signOutAllConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out of all devices?'**
+  String get signOutAllConfirmTitle;
+
+  /// No description provided for @signOutAllConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Every device signed in to your account, this one included, will need to sign in again.'**
+  String get signOutAllConfirmMessage;
 }
 
 class _AppLocalizationsDelegate

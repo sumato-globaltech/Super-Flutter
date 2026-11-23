@@ -8,5 +8,10 @@ sealed class DashboardEvent extends Equatable {
 }
 
 class DashboardSignOutRequested extends DashboardEvent {
-  const DashboardSignOutRequested();
+  const DashboardSignOutRequested({this.allDevices = false});
+
+  final bool allDevices;
+
+  @override
+  List<Object?> get props => [allDevices];
 }

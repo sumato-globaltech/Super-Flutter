@@ -141,5 +141,11 @@
   "@authChangePasswordDone": { "description": "Shown when the change password form was sent" },
 
   "authChangePasswordRequired": "Set a new password to continue.",
-  "@authChangePasswordRequired": { "description": "Shown on the change password screen when the account must change it" }
+  "@authChangePasswordRequired": { "description": "Shown on the change password screen when the account must change it" },
+
+  "signOutAllDevices": "Sign out of all devices",
+  "signOutConfirmTitle": "Sign out?",
+  "signOutConfirmMessage": "You will need to sign in again on this device.",
+  "signOutAllConfirmTitle": "Sign out of all devices?",
+  "signOutAllConfirmMessage": "Every device signed in to your account, this one included, will need to sign in again."
 }

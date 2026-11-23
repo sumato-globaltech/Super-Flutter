@@ -5,6 +5,7 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:super_flutter/app/config/app_config.dart';
 import 'package:super_flutter/core/di/injection.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
+import 'package:super_flutter/core/ui/widgets/confirm_sheet.dart';
 import 'package:super_flutter/features/ui_gallery/routes/ui_gallery_route_names.dart';
 
 import '../bloc/dashboard_bloc.dart';
@@ -41,20 +42,46 @@ class _DashboardView extends StatelessWidget {
             ),
           BlocBuilder<DashboardBloc, DashboardState>(
             builder: (context, state) {
-              return IconButton(
+              if (state.isSubmitting) {
+                return const Padding(
+                  padding: EdgeInsets.all(14),
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  ),
+                );
+              }
+              // The value says whether every device is signed out.
+              return PopupMenuButton<bool>(
                 tooltip: l10n.signOut,
-                icon: state.isSubmitting
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Icon(Icons.logout_outlined),
-                onPressed: state.isSubmitting
-                    ? null
-                    : () => context.read<DashboardBloc>().add(
-                        const DashboardSignOutRequested(),
-                      ),
+                icon: const Icon(Icons.logout_outlined),
+                itemBuilder: (_) => [
+                  PopupMenuItem(value: false, child: Text(l10n.signOut)),
+                  PopupMenuItem(
+                    value: true,
+                    child: Text(l10n.signOutAllDevices),
+                  ),
+                ],
+                onSelected: (allDevices) async {
+                  final bloc = context.read<DashboardBloc>();
+                  final confirmed = await ConfirmSheet.confirm(
+                    context,
+                    title: allDevices
+                        ? l10n.signOutAllConfirmTitle
+                        : l10n.signOutConfirmTitle,
+                    description: allDevices
+                        ? l10n.signOutAllConfirmMessage
+                        : l10n.signOutConfirmMessage,
+                    confirmText: allDevices
+                        ? l10n.signOutAllDevices
+                        : l10n.signOut,
+                    icon: const Icon(Icons.logout_outlined),
+                  );
+                  if (confirmed) {
+                    bloc.add(DashboardSignOutRequested(allDevices: allDevices));
+                  }
+                },
               );
             },
           ),

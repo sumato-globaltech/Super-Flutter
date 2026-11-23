@@ -1,11 +1,11 @@
 # Graph Report - /Users/deepjyotibaishya/Projects/App/Super-Flutter  (2026-11-23)
 
 ## Corpus Check
-- 202 files · ~149,665 words
+- 203 files · ~151,708 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1109 nodes · 1376 edges · 73 communities detected
+- 1115 nodes · 1394 edges · 73 communities detected
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 13 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
@@ -85,16 +85,16 @@
 - [[_COMMUNITY_Community 72|Community 72]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `package:material_ui/material_ui.dart` - 45 edges
+1. `package:material_ui/material_ui.dart` - 46 edges
 2. `_` - 36 edges
-3. `package:flutter_test/flutter_test.dart` - 25 edges
+3. `package:flutter_test/flutter_test.dart` - 26 edges
 4. `package:injectable/injectable.dart` - 23 edges
-5. `package:super_flutter/core/localization/app_localizations.dart` - 15 edges
+5. `package:super_flutter/core/localization/app_localizations.dart` - 16 edges
 6. `_` - 15 edges
 7. `dart:async` - 14 edges
 8. `package:equatable/equatable.dart` - 12 edges
 9. `package:phosphoricons_flutter/phosphoricons_flutter.dart` - 11 edges
-10. `package:go_router/go_router.dart` - 11 edges
+10. `package:mocktail/mocktail.dart` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `OnCreate()` --calls--> `RegisterPlugins()`  [INFERRED]
@@ -111,104 +111,104 @@
 ## Communities
 
 ### Community 0 - "Community 0"
-Cohesion: 0.02
-Nodes (90): ../access/app_features.dart, ../access/feature_registry.dart, app_shell.dart, ../config/app_config.dart, dashboard_route_names.dart, feature_registry.dart, navigator_keys.dart, package:go_router/go_router.dart (+82 more)
+Cohesion: 0.03
+Nodes (77): ../constants/app_constants.dart, dart:io, main_production.dart, package:cached_network_image/cached_network_image.dart, package:firebase_messaging/firebase_messaging.dart, package:material_ui/material_ui.dart, package:phosphoricons_flutter/phosphoricons_flutter.dart, package:super_flutter/core/network/network_exception_mapper.dart (+69 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.02
-Nodes (89): app_button.dart, ../constants/app_constants.dart, ../../../core/constants/app_constants.dart, dart:io, main_production.dart, package:firebase_messaging/firebase_messaging.dart, package:material_ui/material_ui.dart, package:shimmer/shimmer.dart (+81 more)
+Cohesion: 0.03
+Nodes (76): ../core/di/injection.dart, ../core/localization/app_localizations.dart, ../core/ui/theme/app_theme.dart, dart:async, dashboard_event.dart, dashboard_state.dart, ../../../domain/auth/repositories/auth_repository.dart, injection.config.dart (+68 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.03
-Nodes (56): ../../core/constants/constants.dart, ../../core/constants/design_colors.dart, ../../core/logging/app_logger.dart, ../../core/network/dio_client.dart, ../../core/service/remote_service.dart, ../../../../core/storage/storage_keys.dart, ../../../../core/storage/storage_service.dart, ../../core/utils/utils.dart (+48 more)
+Cohesion: 0.04
+Nodes (59): auth_route_names.dart, login_event.dart, ../model/login_model.dart, package:flutter_bloc/flutter_bloc.dart, package:mocktail/mocktail.dart, package:super_flutter/core/error/app_exception.dart, package:super_flutter/core/error/exceptions/cache_exception.dart, package:super_flutter/core/error/exceptions/forbidden_exception.dart (+51 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.04
-Nodes (56): package:cached_network_image/cached_network_image.dart, package:flutter_test/flutter_test.dart, package:phosphoricons_flutter/phosphoricons_flutter.dart, package:super_flutter/app/startup/remote_app_settings.dart, package:super_flutter/core/network/network_exception_mapper.dart, package:super_flutter/core/network/paged.dart, package:super_flutter/core/ui/theme/app_colors.dart, package:super_flutter/core/ui/theme/app_spacing.dart (+48 more)
+Nodes (56): ../bloc/dashboard_bloc.dart, ../bloc/dashboard_event.dart, ../bloc/dashboard_state.dart, ../bloc/login_bloc.dart, ../bloc/login_event.dart, ../bloc/login_state.dart, package:super_flutter/app/config/flavor.dart, package:super_flutter/core/constants/assets_names.dart (+48 more)
 
 ### Community 4 - "Community 4"
 Cohesion: 0.04
-Nodes (53): auth_route_names.dart, login_event.dart, ../model/login_model.dart, package:flutter_bloc/flutter_bloc.dart, package:mocktail/mocktail.dart, package:super_flutter/core/error/exceptions/forbidden_exception.dart, package:super_flutter/core/error/exceptions/unauthorized_exception.dart, package:super_flutter/core/error/exceptions/validation_exception.dart (+45 more)
+Nodes (45): ../../core/constants/constants.dart, ../../core/logging/app_logger.dart, ../../core/network/dio_client.dart, ../../core/service/remote_service.dart, ../../../../core/storage/storage_keys.dart, ../../../../core/storage/storage_service.dart, ../../core/utils/utils.dart, dart:convert (+37 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.04
-Nodes (55): ../core/di/injection.dart, ../core/localization/app_localizations.dart, ../core/ui/theme/app_theme.dart, dashboard_event.dart, dashboard_state.dart, injection.config.dart, package:bloc_concurrency/bloc_concurrency.dart, package:bloc_test/bloc_test.dart (+47 more)
+Nodes (48): ../access/app_features.dart, ../access/feature_registry.dart, app_shell.dart, ../config/app_config.dart, dashboard_route_names.dart, feature_registry.dart, navigator_keys.dart, package:go_router/go_router.dart (+40 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.04
 Nodes (45): access_policy.dart, access_rule.dart, auth_token.dart, login_state.dart, package:equatable/equatable.dart, user.dart, Function, Paged (+37 more)
 
 ### Community 7 - "Community 7"
-Cohesion: 0.05
-Nodes (37): ../error/app_exception.dart, ../error/exceptions/forbidden_exception.dart, ../error/exceptions/unauthorized_exception.dart, ../error/exceptions/validation_exception.dart, ../network_constants.dart, ../network_exception_mapper.dart, package:dio/dio.dart, package:super_flutter/core/network/interceptors/api_key_interceptor.dart (+29 more)
+Cohesion: 0.04
+Nodes (46): app_button.dart, ../../../core/constants/app_constants.dart, package:shimmer/shimmer.dart, ../theme/app_colors.dart, ../theme/app_dimensions.dart, ../theme/app_spacing.dart, build, Center (+38 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.05
-Nodes (40): dart:developer, package:ntp/ntp.dart, package:path/path.dart, package:path_provider/path_provider.dart, package:super_flutter/app/router/navigator_keys.dart, AppLogger, debug, error (+32 more)
+Nodes (42): package:flutter_test/flutter_test.dart, package:super_flutter/app/access/app_features.dart, package:super_flutter/app/access/feature_registry.dart, package:super_flutter/app/router/app_router.dart, package:super_flutter/app/router/routes_names.dart, package:super_flutter/app/shell/app_shell_route.dart, package:super_flutter/app/startup/remote_app_settings.dart, package:super_flutter/core/network/paged.dart (+34 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.05
-Nodes (35): ../../app/config/environment.dart, dio_client.dart, ../error/composite_error_reporter.dart, ../error/error_reporter.dart, ../error/logger_error_reporter.dart, interceptors/api_key_interceptor.dart, interceptors/auth_interceptor.dart, interceptors/error_interceptor.dart (+27 more)
+Nodes (37): app_localizations_en.dart, app_localizations_es.dart, ../../core/constants/assets_names.dart, ../../core/constants/design_colors.dart, ../../core/utils/image_precache.dart, dart:typed_data, package:flutter_localizations/flutter_localizations.dart, package:flutter/widgets.dart (+29 more)
 
 ### Community 10 - "Community 10"
-Cohesion: 0.06
-Nodes (35): app_colors.dart, ../../../app/config/flavor.dart, design_colors.dart, AppColorsExt, copyWith, lerp, seedFor, font (+27 more)
+Cohesion: 0.05
+Nodes (38): ../../app/config/environment.dart, dio_client.dart, ../error/composite_error_reporter.dart, ../error/error_reporter.dart, ../error/logger_error_reporter.dart, error_reporter.dart, interceptors/api_key_interceptor.dart, interceptors/auth_interceptor.dart (+30 more)
 
 ### Community 11 - "Community 11"
-Cohesion: 0.06
-Nodes (33): confirm_sheet.dart, dart:math, image_preview.dart, package:flutter/gestures.dart, package:flutter/services.dart, shimmer_card.dart, ../theme/design_colors.dart, AppTextField (+25 more)
+Cohesion: 0.05
+Nodes (37): ../error/app_exception.dart, ../error/exceptions/forbidden_exception.dart, ../error/exceptions/unauthorized_exception.dart, ../error/exceptions/validation_exception.dart, ../network_constants.dart, ../network_exception_mapper.dart, package:dio/dio.dart, package:super_flutter/core/network/interceptors/api_key_interceptor.dart (+29 more)
 
 ### Community 12 - "Community 12"
-Cohesion: 0.09
-Nodes (25): FlutterWindow(), OnCreate(), RegisterPlugins(), wWinMain(), CreateAndAttachConsole(), GetCommandLineArguments(), Utf8FromUtf16(), Create() (+17 more)
+Cohesion: 0.05
+Nodes (40): dart:developer, package:ntp/ntp.dart, package:path/path.dart, package:path_provider/path_provider.dart, package:super_flutter/app/router/navigator_keys.dart, AppLogger, debug, error (+32 more)
 
 ### Community 13 - "Community 13"
 Cohesion: 0.06
-Nodes (31): ../bloc/login_bloc.dart, ../bloc/login_event.dart, ../bloc/login_state.dart, package:super_flutter/core/constants/assets_names.dart, package:super_flutter/core/extensions/context_extensions.dart, package:super_flutter/core/extensions/extensions.dart, package:super_flutter/core/ui/widgets/gradient_background.dart, progress_circle.dart (+23 more)
+Nodes (35): app_colors.dart, ../../../app/config/flavor.dart, design_colors.dart, AppColorsExt, copyWith, lerp, seedFor, font (+27 more)
 
 ### Community 14 - "Community 14"
-Cohesion: 0.07
-Nodes (24): app_localizations_en.dart, app_localizations_es.dart, ../../core/constants/assets_names.dart, ../../core/utils/image_precache.dart, package:flutter_localizations/flutter_localizations.dart, package:flutter/widgets.dart, AppLocalizations, _AppLocalizationsDelegate (+16 more)
+Cohesion: 0.06
+Nodes (33): confirm_sheet.dart, dart:math, image_preview.dart, package:flutter/gestures.dart, package:flutter/services.dart, shimmer_card.dart, ../theme/design_colors.dart, AppTextField (+25 more)
 
 ### Community 15 - "Community 15"
-Cohesion: 0.08
-Nodes (23): dart:async, ../../../domain/auth/repositories/auth_repository.dart, package:super_flutter/core/storage/storage_service.dart, package:super_flutter/data/auth/mappers/auth_mappers.dart, package:super_flutter/data/auth/model/login_model.dart, package:super_flutter/data/auth/model/user_model.dart, package:super_flutter/data/auth/repositories/auth_repository_impl.dart, package:super_flutter/data/auth/sources/local/auth_local_data_source.dart (+15 more)
+Cohesion: 0.09
+Nodes (25): FlutterWindow(), OnCreate(), RegisterPlugins(), wWinMain(), CreateAndAttachConsole(), GetCommandLineArguments(), Utf8FromUtf16(), Create() (+17 more)
 
 ### Community 16 - "Community 16"
 Cohesion: 0.07
 Nodes (25): app_localizations.dart, package:intl/intl.dart, _isSameDay, isStalerThan, isStaleThan, AppLocalizationsEn, fieldChoose, fieldEnter (+17 more)
 
 ### Community 17 - "Community 17"
-Cohesion: 0.09
-Nodes (22): dart:typed_data, package:super_flutter/core/error/exceptions/parse_exception.dart, package:super_flutter/core/network/api_endpoints.dart, package:super_flutter/core/network/dio_client.dart, package:super_flutter/core/service/device_info_service.dart, package:super_flutter/core/utils/image_precache.dart, AuthRemoteDataSource, BadRequestException (+14 more)
+Cohesion: 0.1
+Nodes (19): package:super_flutter/core/error/exceptions/parse_exception.dart, package:super_flutter/core/network/api_endpoints.dart, package:super_flutter/core/network/dio_client.dart, package:super_flutter/core/service/device_info_service.dart, package:super_flutter/data/auth/model/user_model.dart, LoginModel, AuthRemoteDataSource, BadRequestException (+11 more)
 
 ### Community 18 - "Community 18"
-Cohesion: 0.1
-Nodes (17): app_logger.dart, auth_state.dart, ../../../../domain/auth/entities/access_policy.dart, ../../../../domain/auth/entities/auth_status.dart, ../../../../domain/auth/entities/user.dart, ../../../../domain/auth/use_cases/check_auth_status.dart, ../../../../domain/auth/use_cases/get_current_user.dart, ../../../../domain/auth/use_cases/watch_auth_status.dart (+9 more)
+Cohesion: 0.09
+Nodes (19): app_logger.dart, auth_state.dart, ../../../../domain/auth/entities/access_policy.dart, ../../../../domain/auth/entities/auth_status.dart, ../../../../domain/auth/entities/user.dart, ../../../../domain/auth/use_cases/check_auth_status.dart, ../../../../domain/auth/use_cases/get_current_user.dart, ../../../../domain/auth/use_cases/refresh_user.dart (+11 more)
 
 ### Community 19 - "Community 19"
 Cohesion: 0.11
 Nodes (8): fl_register_plugins(), main(), my_application_activate(), my_application_dispose(), my_application_new(), dispose, GoRouterRefreshStream, dispose
 
 ### Community 20 - "Community 20"
-Cohesion: 0.13
-Nodes (14): ../bloc/dashboard_bloc.dart, ../bloc/dashboard_event.dart, ../bloc/dashboard_state.dart, package:super_flutter/core/di/injection.dart, package:super_flutter/features/ui_gallery/routes/ui_gallery_route_names.dart, BlocProvider, build, Center (+6 more)
-
-### Community 21 - "Community 21"
 Cohesion: 0.15
 Nodes (14): _, copyWith, copyWithCompanion, Function, KeyValueRow, KeyValueRowsCompanion, map, ProductRow (+6 more)
 
-### Community 22 - "Community 22"
+### Community 21 - "Community 21"
 Cohesion: 0.15
 Nodes (7): ../app_exception.dart, CacheException, ForbiddenException, ParseException, UnauthorizedException, UnknownException, ValidationException
 
-### Community 23 - "Community 23"
+### Community 22 - "Community 22"
 Cohesion: 0.22
 Nodes (8): ../error/exceptions/cache_exception.dart, local_storage.dart, package:flutter_secure_storage/flutter_secure_storage.dart, secure_storage.dart, storage_keys.dart, CacheException, SecureStorage, StorageService
 
-### Community 24 - "Community 24"
+### Community 23 - "Community 23"
 Cohesion: 0.22
 Nodes (3): AppDelegate, FlutterAppDelegate, FlutterImplicitEngineDelegate
+
+### Community 24 - "Community 24"
+Cohesion: 0.22
+Nodes (8): build, DesignProgress, DesignProgressAnimation, _DesignProgressAnimationState, didUpdateWidget, dispose, initState, SizedBox
 
 ### Community 25 - "Community 25"
 Cohesion: 0.32
@@ -403,7 +403,7 @@ Cohesion: 1.0
 Nodes (0): 
 
 ## Knowledge Gaps
-- **723 isolated node(s):** `main`, `openFrom`, `ConfirmSheet`, `BadRequestException`, `main` (+718 more)
+- **726 isolated node(s):** `main`, `openFrom`, `ConfirmSheet`, `BadRequestException`, `main` (+721 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **Thin community `Community 37`** (2 nodes): `PodsDummy_Pods_Runner`, `Pods-Runner-dummy.m`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
@@ -481,17 +481,17 @@ Nodes (0):
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `package:material_ui/material_ui.dart` connect `Community 1` to `Community 0`, `Community 2`, `Community 3`, `Community 4`, `Community 5`, `Community 8`, `Community 10`, `Community 11`, `Community 13`, `Community 19`, `Community 20`?**
-  _High betweenness centrality (0.276) - this node is a cross-community bridge._
-- **Why does `package:flutter_test/flutter_test.dart` connect `Community 3` to `Community 0`, `Community 4`, `Community 5`, `Community 7`, `Community 15`, `Community 17`?**
-  _High betweenness centrality (0.103) - this node is a cross-community bridge._
-- **Why does `dart:async` connect `Community 15` to `Community 0`, `Community 2`, `Community 3`, `Community 5`, `Community 8`, `Community 11`, `Community 14`, `Community 18`, `Community 19`?**
-  _High betweenness centrality (0.098) - this node is a cross-community bridge._
+- **Why does `package:material_ui/material_ui.dart` connect `Community 0` to `Community 1`, `Community 2`, `Community 3`, `Community 5`, `Community 7`, `Community 8`, `Community 9`, `Community 12`, `Community 13`, `Community 14`, `Community 19`, `Community 24`?**
+  _High betweenness centrality (0.288) - this node is a cross-community bridge._
+- **Why does `dart:async` connect `Community 1` to `Community 0`, `Community 4`, `Community 8`, `Community 9`, `Community 12`, `Community 14`, `Community 18`, `Community 19`?**
+  _High betweenness centrality (0.141) - this node is a cross-community bridge._
+- **Why does `package:flutter_test/flutter_test.dart` connect `Community 8` to `Community 0`, `Community 1`, `Community 2`, `Community 3`, `Community 9`, `Community 11`, `Community 17`?**
+  _High betweenness centrality (0.112) - this node is a cross-community bridge._
 - **What connects `main`, `openFrom`, `ConfirmSheet` to the rest of the system?**
-  _723 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _726 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.02 - nodes in this community are weakly interconnected._
-- **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.02 - nodes in this community are weakly interconnected._
-- **Should `Community 2` be split into smaller, more focused modules?**
   _Cohesion score 0.03 - nodes in this community are weakly interconnected._
+- **Should `Community 1` be split into smaller, more focused modules?**
+  _Cohesion score 0.03 - nodes in this community are weakly interconnected._
+- **Should `Community 2` be split into smaller, more focused modules?**
+  _Cohesion score 0.04 - nodes in this community are weakly interconnected._

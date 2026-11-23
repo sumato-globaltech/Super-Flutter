@@ -7,6 +7,7 @@ import 'package:super_flutter/domain/auth/entities/access_policy.dart';
 import 'package:super_flutter/domain/auth/entities/user.dart';
 import 'package:super_flutter/domain/auth/use_cases/check_auth_status.dart';
 import 'package:super_flutter/domain/auth/use_cases/get_current_user.dart';
+import 'package:super_flutter/domain/auth/use_cases/refresh_user.dart';
 import 'package:super_flutter/domain/auth/use_cases/watch_auth_status.dart';
 import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 import 'package:super_flutter/features/auth/session/bloc/auth_state.dart';
@@ -16,6 +17,8 @@ class MockCheckAuthStatus extends Mock implements CheckAuthStatus {}
 class MockGetCurrentUser extends Mock implements GetCurrentUser {}
 
 class MockWatchAuthStatus extends Mock implements WatchAuthStatus {}
+
+class MockRefreshUser extends Mock implements RefreshUser {}
 
 const _farmer = User(
   id: '1',
@@ -31,6 +34,7 @@ void main() {
   late MockGetCurrentUser getCurrentUser;
   late MockWatchAuthStatus watchAuthStatus;
   late StreamController<AuthStatus> status;
+  late MockRefreshUser refreshUser;
 
   setUp(() {
     checkAuthStatus = MockCheckAuthStatus();
@@ -39,12 +43,14 @@ void main() {
     status = StreamController<AuthStatus>.broadcast();
     when(() => watchAuthStatus()).thenAnswer((_) => status.stream);
     when(() => getCurrentUser()).thenAnswer((_) async => _farmer);
+    refreshUser = MockRefreshUser();
+    when(() => refreshUser()).thenAnswer((_) async => _farmer);
   });
 
   tearDown(() => status.close());
 
   AuthCubit build() =>
-      AuthCubit(checkAuthStatus, getCurrentUser, watchAuthStatus);
+      AuthCubit(checkAuthStatus, getCurrentUser, watchAuthStatus, refreshUser);
 
   test('initial state is unknown with guest access', () {
     final cubit = build();
@@ -140,4 +146,59 @@ void main() {
     act: (c) => c.refreshUser(),
     expect: () => const <AuthState>[],
   );
+
+  group('on start, /me', () {
+    const promoted = User(
+      id: '1',
+      name: 'Farmer',
+      email: 'farmer@example.test',
+      role: UserRole(value: Roles.farmer, label: 'Farmer'),
+      permissions: {Permissions.shipmentsRequest, 'markets.view'},
+      profileActive: true,
+    );
+
+    blocTest<AuthCubit, AuthState>(
+      'brings the cached user up to date',
+      build: () {
+        when(() => checkAuthStatus()).thenAnswer((_) async => true);
+        var calls = 0;
+        when(() => getCurrentUser())
+            .thenAnswer((_) async => calls++ == 0 ? _farmer : promoted);
+        return build();
+      },
+      act: (cubit) => cubit.initialize(),
+      wait: const Duration(milliseconds: 10),
+      expect: () => [
+        const AuthState(status: AuthStatus.authenticated, user: _farmer),
+        const AuthState(status: AuthStatus.authenticated, user: promoted),
+      ],
+      verify: (_) => verify(() => refreshUser()).called(1),
+    );
+
+    blocTest<AuthCubit, AuthState>(
+      'offline keeps the cached user',
+      build: () {
+        when(() => checkAuthStatus()).thenAnswer((_) async => true);
+        when(() => refreshUser()).thenThrow(Exception('offline'));
+        return build();
+      },
+      act: (cubit) => cubit.initialize(),
+      wait: const Duration(milliseconds: 10),
+      expect: () => [
+        const AuthState(status: AuthStatus.authenticated, user: _farmer),
+      ],
+    );
+
+    blocTest<AuthCubit, AuthState>(
+      'is not asked without a session',
+      build: () {
+        when(() => checkAuthStatus()).thenAnswer((_) async => false);
+        return build();
+      },
+      act: (cubit) => cubit.initialize(),
+      wait: const Duration(milliseconds: 10),
+      expect: () => [const AuthState(status: AuthStatus.unauthenticated)],
+      verify: (_) => verifyNever(() => refreshUser()),
+    );
+  });
 }

@@ -13,7 +13,8 @@ void main() {
 
   setUp(() {
     logout = MockLogout();
-    when(() => logout()).thenAnswer((_) async {});
+    when(() => logout(allDevices: any(named: 'allDevices')))
+        .thenAnswer((_) async {});
   });
 
   blocTest<DashboardBloc, DashboardState>(
@@ -24,6 +25,15 @@ void main() {
       const DashboardState(status: DashboardStatus.submitting),
       const DashboardState(status: DashboardStatus.success),
     ],
-    verify: (_) => verify(() => logout()).called(1),
+    verify: (_) => verify(() => logout(allDevices: false)).called(1),
+  );
+
+  blocTest<DashboardBloc, DashboardState>(
+    'signs out of every device when asked',
+    build: () => DashboardBloc(logout),
+    act: (b) => b.add(const DashboardSignOutRequested(allDevices: true)),
+    skip: 1,
+    expect: () => [const DashboardState(status: DashboardStatus.success)],
+    verify: (_) => verify(() => logout(allDevices: true)).called(1),
   );
 }
