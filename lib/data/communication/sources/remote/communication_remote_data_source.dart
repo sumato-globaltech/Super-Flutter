@@ -47,7 +47,7 @@ class CommunicationRemoteDataSource {
       );
       if (response.statusCode == 200 && response.data is Map) {
         return Paged.fromEnvelope(
-          Map<String, dynamic>.from(response.data as Map),
+          Map<String, dynamic>.from(response.data),
           NoticeModel.fromJson,
         );
       }
@@ -77,8 +77,10 @@ class CommunicationRemoteDataSource {
         },
       );
       if (response.statusCode == 200 && response.data is Map) {
+        final body = response.data as Map;
+        final data = body['data'] is Map ? body['data'] as Map : body;
         return Paged.fromEnvelope(
-          Map<String, dynamic>.from(response.data as Map),
+          Map<String, dynamic>.from(data),
           AlertModel.fromJson,
         );
       }

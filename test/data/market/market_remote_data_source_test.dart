@@ -63,6 +63,41 @@ void main() {
       expect(market.district?.name, 'Kohima');
       expect(market.distanceKm, 4.5);
     });
+
+    test('parses markets response with string facilities and null coords', () async {
+      when(
+        () => dio.get<dynamic>(
+          MarketEndpoints.markets,
+          queryParameters: any(named: 'queryParameters'),
+        ),
+      ).thenAnswer(
+        (_) async => ok({
+          'success': true,
+          'message': 'OK.',
+          'data': [
+            {
+              'id': '01m6k72n2aqpbttpb6y20zpjm3',
+              'name': 'New market',
+              'type': {'value': 'wholesale', 'label': 'Wholesale'},
+              'address': 'hey',
+              'latitude': null,
+              'longitude': null,
+              'facilities': 'hey',
+              'district': {'id': '01m6de2pq2ewspmabq763tymyn', 'name': 'Longleng'},
+            },
+          ],
+          'meta': {'current_page': 1, 'per_page': 50, 'total': 1, 'last_page': 1},
+        }),
+      );
+
+      final result = await source.getMarkets();
+      expect(result.items, hasLength(1));
+      final market = result.items.first;
+      expect(market.id, '01m6k72n2aqpbttpb6y20zpjm3');
+      expect(market.name, 'New market');
+      expect(market.facilities, ['hey']);
+      expect(market.district?.name, 'Longleng');
+    });
   });
 
   group('getSummary', () {
