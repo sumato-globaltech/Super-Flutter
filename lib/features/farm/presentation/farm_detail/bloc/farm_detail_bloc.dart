@@ -1,6 +1,13 @@
+import 'dart:async';
+
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:super_flutter/data/crops/model/crop_model.dart';
+import 'package:super_flutter/data/crops/sources/remote/crop_remote_data_source.dart';
+import 'package:super_flutter/data/farm/model/crop_status_model.dart';
+import 'package:super_flutter/data/farm/model/farm_crop_model.dart';
+import 'package:super_flutter/data/farm/model/season_model.dart';
 import 'package:super_flutter/data/farm/model/transaction_category_model.dart';
 import 'package:super_flutter/data/farm/sources/remote/farm_remote_data_source.dart';
 import 'package:super_flutter/data/iot/model/device_model.dart';
@@ -12,8 +19,11 @@ import 'farm_detail_state.dart';
 
 @injectable
 class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
-  FarmDetailBloc(this._remoteDataSource, [this._iotRemoteDataSource])
-    : super(const FarmDetailState()) {
+  FarmDetailBloc(
+    this._remoteDataSource, [
+    this._iotRemoteDataSource,
+    this._cropRemoteDataSource,
+  ]) : super(const FarmDetailState()) {
     on<FarmDetailStarted>(_onStarted, transformer: restartable());
     on<FarmDetailRefreshed>(_onRefreshed, transformer: restartable());
     on<FarmArchiveToggled>(_onArchiveToggled);
@@ -31,6 +41,7 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
 
   final FarmRemoteDataSource _remoteDataSource;
   final IotRemoteDataSource? _iotRemoteDataSource;
+  final CropRemoteDataSource? _cropRemoteDataSource;
 
   Future<void> _loadAll(
     Emitter<FarmDetailState> emit, {
@@ -62,9 +73,24 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
       }
 
       List<TransactionCategoryModel> transactionCategories = const [];
+      List<CropModel> cropOptions = const [];
+      List<SeasonModel> seasons = const [];
+      List<CropStatusModel> cropStatuses = const [];
+      FinancialYearModel? currentFinancialYear;
       try {
         transactionCategories = await _remoteDataSource
             .getTransactionCategories();
+      } catch (_) {}
+      try {
+        seasons = await _remoteDataSource.getSeasons();
+        cropStatuses = await _remoteDataSource.getCropStatuses();
+        currentFinancialYear = await _remoteDataSource
+            .getCurrentFinancialYear();
+        final cropRemoteDataSource = _cropRemoteDataSource;
+        if (cropRemoteDataSource != null) {
+          cropOptions = (await cropRemoteDataSource.getCrops(perPage: 100))
+              .items;
+        }
       } catch (_) {}
 
       List<DeviceModel> devices = const [];
@@ -96,6 +122,10 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
           devices: devices,
           soilSensorAccount: soilSensorAccount,
           transactionCategories: transactionCategories,
+          cropOptions: cropOptions,
+          seasons: seasons,
+          cropStatuses: cropStatuses,
+          currentFinancialYear: currentFinancialYear,
         ),
       );
     } catch (e) {
@@ -186,11 +216,13 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
         emit(
           state.copyWith(crops: [crop, ...state.crops], isActionLoading: false),
         );
+        event.completer?.complete();
       } else {
         emit(state.copyWith(isActionLoading: false));
+        event.completer?.completeError(Exception());
       }
     } catch (e) {
-      emit(state.copyWith(isActionLoading: false, errorMessage: e.toString()));
+      _fail(emit, e, event.completer);
     }
   }
 
@@ -248,16 +280,23 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
         event.completer?.completeError(Exception());
       }
     } catch (e) {
-      final completer = event.completer;
-      if (completer != null) {
-        emit(state.copyWith(isActionLoading: false));
-        completer.completeError(e);
-      } else {
-        emit(
-          state.copyWith(isActionLoading: false, errorMessage: e.toString()),
-        );
-      }
+      _fail(emit, e, event.completer);
     }
+  }
+
+  void _fail(
+    Emitter<FarmDetailState> emit,
+    Object error,
+    Completer<void>? completer,
+  ) {
+    if (completer == null) {
+      emit(
+        state.copyWith(isActionLoading: false, errorMessage: error.toString()),
+      );
+      return;
+    }
+    emit(state.copyWith(isActionLoading: false));
+    completer.completeError(error);
   }
 
   Future<void> _onPhotoUploaded(
@@ -353,8 +392,9 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
           actionSuccessMessage: 'Soil sensor account linked',
         ),
       );
+      event.completer?.complete();
     } catch (e) {
-      emit(state.copyWith(isActionLoading: false, errorMessage: e.toString()));
+      _fail(emit, e, event.completer);
     }
   }
 

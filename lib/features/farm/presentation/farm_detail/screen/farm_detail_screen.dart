@@ -250,50 +250,60 @@ class _FarmDetailView extends StatelessWidget {
     FarmDetailBloc bloc,
     AppLocalizations l10n,
   ) {
+    final formKey = GlobalKey<FormState>();
     final usernameCtrl = TextEditingController();
     final passwordCtrl = TextEditingController();
 
-    showDialog<void>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(l10n.linkAccount),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: usernameCtrl,
-              decoration: InputDecoration(labelText: l10n.soilSensUsername),
-            ),
-            const SizedBox(height: AppSpacing.sm),
-            TextField(
-              controller: passwordCtrl,
-              obscureText: true,
-              decoration: InputDecoration(labelText: l10n.soilSensPassword),
-            ),
-          ],
+    ConfirmSheet.show<void>(
+      context,
+      ConfirmSheet(
+        title: l10n.linkAccount,
+        description: '',
+        confirmText: l10n.linkAccount,
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                controller: usernameCtrl,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  labelText: '${l10n.soilSensUsername} *',
+                  prefixIcon: const Icon(PhosphorIconsRegular.user),
+                ),
+                validator: (value) => (value ?? '').trim().isEmpty
+                    ? l10n.fieldRequired(l10n.soilSensUsername)
+                    : null,
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              TextFormField(
+                controller: passwordCtrl,
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelText: '${l10n.soilSensPassword} *',
+                  prefixIcon: const Icon(PhosphorIconsRegular.lock),
+                ),
+                validator: (value) => (value ?? '').isEmpty
+                    ? l10n.fieldRequired(l10n.soilSensPassword)
+                    : null,
+              ),
+            ],
+          ),
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: Text(l10n.cancel),
-          ),
-          FilledButton(
-            onPressed: () {
-              final username = usernameCtrl.text.trim();
-              final password = passwordCtrl.text;
-              if (username.isNotEmpty && password.isNotEmpty) {
-                Navigator.pop(ctx);
-                bloc.add(
-                  FarmSoilSensorAccountLinked(
-                    username: username,
-                    password: password,
-                  ),
-                );
-              }
-            },
-            child: Text(l10n.linkAccount),
-          ),
-        ],
+        onPressed: () async {
+          if (!formKey.currentState!.validate()) return;
+          final completer = Completer<void>();
+          bloc.add(
+            FarmSoilSensorAccountLinked(
+              username: usernameCtrl.text.trim(),
+              password: passwordCtrl.text,
+              completer: completer,
+            ),
+          );
+          await completer.future;
+          if (context.mounted) Navigator.of(context).pop();
+        },
       ),
     );
   }
@@ -303,28 +313,13 @@ class _FarmDetailView extends StatelessWidget {
     FarmDetailBloc bloc,
     AppLocalizations l10n,
   ) {
-    showDialog<void>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(l10n.unlinkConfirmTitle),
-        content: Text(l10n.unlinkConfirmMessage),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: Text(l10n.cancel),
-          ),
-          FilledButton(
-            style: FilledButton.styleFrom(
-              backgroundColor: Theme.of(context).colorScheme.error,
-            ),
-            onPressed: () {
-              Navigator.pop(ctx);
-              bloc.add(const FarmSoilSensorAccountUnlinked());
-            },
-            child: Text(l10n.unlinkAccount),
-          ),
-        ],
-      ),
+    ConfirmSheet.confirm(
+      context,
+      title: l10n.unlinkConfirmTitle,
+      description: l10n.unlinkConfirmMessage,
+      confirmText: l10n.unlinkAccount,
+      confirmColor: Theme.of(context).colorScheme.error,
+      onConfirm: () async => bloc.add(const FarmSoilSensorAccountUnlinked()),
     );
   }
 
@@ -333,28 +328,13 @@ class _FarmDetailView extends StatelessWidget {
     FarmDetailBloc bloc,
     AppLocalizations l10n,
   ) {
-    showDialog<void>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(l10n.deleteFarmConfirmTitle),
-        content: Text(l10n.deleteFarmConfirmMessage),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: Text(l10n.cancel),
-          ),
-          FilledButton(
-            style: FilledButton.styleFrom(
-              backgroundColor: Theme.of(context).colorScheme.error,
-            ),
-            onPressed: () {
-              Navigator.pop(ctx);
-              bloc.add(const FarmDeleted());
-            },
-            child: Text(l10n.delete),
-          ),
-        ],
-      ),
+    ConfirmSheet.confirm(
+      context,
+      title: l10n.deleteFarmConfirmTitle,
+      description: l10n.deleteFarmConfirmMessage,
+      confirmText: l10n.delete,
+      confirmColor: Theme.of(context).colorScheme.error,
+      onConfirm: () async => bloc.add(const FarmDeleted()),
     );
   }
 
@@ -363,77 +343,172 @@ class _FarmDetailView extends StatelessWidget {
     FarmDetailBloc bloc,
     AppLocalizations l10n,
   ) {
-    final nameCtrl = TextEditingController();
+    final formKey = GlobalKey<FormState>();
     final areaCtrl = TextEditingController();
-    String season = 'kharif';
+    final sownOnCtrl = TextEditingController();
+    final state = bloc.state;
+    final farmArea = state.farm?.areaHa;
+    final localizations = MaterialLocalizations.of(context);
+    String? cropId;
+    String? season;
+    String? status;
+    DateTime? sownOn;
 
-    showDialog<void>(
-      context: context,
-      builder: (ctx) => StatefulBuilder(
-        builder: (ctx, setState) => AlertDialog(
-          title: Text(l10n.addCrop),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: nameCtrl,
-                decoration: InputDecoration(
-                  labelText: l10n.cropName,
-                  isDense: true,
+    ConfirmSheet.show<void>(
+      context,
+      ConfirmSheet(
+        title: l10n.addCrop,
+        description: '',
+        confirmText: l10n.add,
+        child: StatefulBuilder(
+          builder: (ctx, setState) => Form(
+            key: formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                DropdownButtonFormField<String>(
+                  initialValue: cropId,
+                  isExpanded: true,
+                  decoration: InputDecoration(
+                    labelText: '${l10n.farmCropCrop} *',
+                    hintText: l10n.fieldSelect(l10n.farmCropCrop),
+                    prefixIcon: const Icon(PhosphorIconsRegular.plant),
+                  ),
+                  items: [
+                    for (final crop in state.cropOptions)
+                      DropdownMenuItem(
+                        value: crop.id,
+                        child: Text(crop.name ?? ''),
+                      ),
+                  ],
+                  onChanged: (value) => setState(() => cropId = value),
+                  validator: (value) => value == null
+                      ? l10n.fieldRequired(l10n.farmCropCrop)
+                      : null,
                 ),
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              TextField(
-                controller: areaCtrl,
-                keyboardType: const TextInputType.numberWithOptions(
-                  decimal: true,
+                const SizedBox(height: AppSpacing.sm),
+                DropdownButtonFormField<String>(
+                  initialValue: season,
+                  isExpanded: true,
+                  decoration: InputDecoration(
+                    labelText: '${l10n.season} *',
+                    hintText: l10n.fieldSelect(l10n.season),
+                    prefixIcon: const Icon(PhosphorIconsRegular.sun),
+                  ),
+                  items: [
+                    for (final option in state.seasons)
+                      DropdownMenuItem(
+                        value: option.id,
+                        child: Text(option.name ?? ''),
+                      ),
+                  ],
+                  onChanged: (value) => setState(() => season = value),
+                  validator: (value) =>
+                      value == null ? l10n.fieldRequired(l10n.season) : null,
                 ),
-                decoration: InputDecoration(
-                  labelText: l10n.areaHectares,
-                  suffixText: 'ha',
-                  isDense: true,
+                const SizedBox(height: AppSpacing.sm),
+                DropdownButtonFormField<String>(
+                  initialValue: status,
+                  isExpanded: true,
+                  decoration: InputDecoration(
+                    labelText: '${l10n.farmCropStatus} *',
+                    hintText: l10n.fieldSelect(l10n.farmCropStatus),
+                    prefixIcon: const Icon(PhosphorIconsRegular.flag),
+                  ),
+                  items: [
+                    for (final option in state.cropStatuses)
+                      DropdownMenuItem(
+                        value: option.id,
+                        child: Text(option.name ?? ''),
+                      ),
+                  ],
+                  onChanged: (value) => setState(() => status = value),
+                  validator: (value) => value == null
+                      ? l10n.fieldRequired(l10n.farmCropStatus)
+                      : null,
                 ),
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              DropdownButtonFormField<String>(
-                initialValue: season,
-                decoration: InputDecoration(
-                  labelText: l10n.season,
-                  isDense: true,
+                const SizedBox(height: AppSpacing.sm),
+                TextFormField(
+                  controller: areaCtrl,
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                  ),
+                  decoration: InputDecoration(
+                    labelText: l10n.areaHectares,
+                    suffixText: 'ha',
+                    prefixIcon: const Icon(PhosphorIconsRegular.compass),
+                  ),
+                  validator: (value) {
+                    final text = (value ?? '').trim();
+                    if (text.isEmpty) return null;
+                    final area = double.tryParse(text);
+                    if (area == null ||
+                        area <= 0 ||
+                        (farmArea != null && area > farmArea)) {
+                      return l10n.invalidArea;
+                    }
+                    return null;
+                  },
                 ),
-                items: const [
-                  DropdownMenuItem(value: 'kharif', child: Text('Kharif')),
-                  DropdownMenuItem(value: 'rabi', child: Text('Rabi')),
-                  DropdownMenuItem(value: 'zaid', child: Text('Zaid')),
-                ],
-                onChanged: (val) {
-                  if (val != null) setState(() => season = val);
-                },
-              ),
-            ],
+                const SizedBox(height: AppSpacing.sm),
+                TextFormField(
+                  controller: sownOnCtrl,
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    labelText: status != null && status != 'planned'
+                        ? '${l10n.farmCropSownOn} *'
+                        : l10n.farmCropSownOn,
+                    hintText: l10n.fieldSelect(l10n.farmCropSownOn),
+                    prefixIcon: const Icon(PhosphorIconsRegular.calendarBlank),
+                  ),
+                  validator: (_) =>
+                      status != null && status != 'planned' && sownOn == null
+                      ? l10n.fieldRequired(l10n.farmCropSownOn)
+                      : null,
+                  onTap: () async {
+                    final now = DateTime.now();
+                    final picked = await showDatePicker(
+                      context: ctx,
+                      initialDate: sownOn ?? now,
+                      firstDate: DateTime(2000, 1, 2),
+                      lastDate: status == null || status == 'planned'
+                          ? DateTime(now.year + 2)
+                          : now,
+                      helpText: l10n.fieldSelect(l10n.farmCropSownOn),
+                    );
+                    if (picked == null) return;
+                    setState(() {
+                      sownOn = picked;
+                      sownOnCtrl.text = localizations.formatMediumDate(picked);
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: Text(l10n.cancel),
-            ),
-            FilledButton(
-              onPressed: () {
-                if (nameCtrl.text.trim().isEmpty) return;
-                Navigator.pop(ctx);
-                bloc.add(
-                  FarmCropAdded({
-                    'crop_id': nameCtrl.text.trim(),
-                    'season': season,
-                    'area_ha': double.tryParse(areaCtrl.text.trim()) ?? 1.0,
-                    'status': 'planned',
-                  }),
-                );
-              },
-              child: Text(l10n.add),
-            ),
-          ],
         ),
+        onPressed: () async {
+          if (!formKey.currentState!.validate()) return;
+          final completer = Completer<void>();
+          final area = double.tryParse(areaCtrl.text.trim());
+          bloc.add(
+            FarmCropAdded({
+              'crop_id': cropId,
+              'season': season,
+              'status': status,
+              'financial_year_id': ?state.currentFinancialYear?.id,
+              'area_ha': ?area,
+              if (sownOn != null)
+                'sown_on': sownOn!.toIso8601String().substring(0, 10),
+            }, completer: completer),
+          );
+          await completer.future;
+          if (context.mounted) {
+            Navigator.of(context).pop();
+            context.showSnackBar(l10n.farmCropAdded);
+          }
+        },
       ),
     );
   }

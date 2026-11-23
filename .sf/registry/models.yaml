@@ -326,6 +326,22 @@ models:
         type: String
         nullable: true
     origin: generated
+  - name: CropStatusModel
+    kind: model
+    feature: farm
+    path: lib/data/farm/model/crop_status_model.dart
+    import: package:super_flutter/data/farm/model/crop_status_model.dart
+    fingerprint: '{id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+    origin: generated
   - name: IrrigationTypeModel
     kind: model
     feature: farm
@@ -347,6 +363,22 @@ models:
     feature: farm
     path: lib/data/farm/model/ownership_model.dart
     import: package:super_flutter/data/farm/model/ownership_model.dart
+    fingerprint: '{id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+    origin: generated
+  - name: SeasonModel
+    kind: model
+    feature: farm
+    path: lib/data/farm/model/season_model.dart
+    import: package:super_flutter/data/farm/model/season_model.dart
     fingerprint: '{id:string,name:string}'
     fields:
       - name: id

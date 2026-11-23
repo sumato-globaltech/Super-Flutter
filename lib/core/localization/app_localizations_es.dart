@@ -767,6 +767,18 @@ class AppLocalizationsEs extends AppLocalizations {
   String get transactionAdded => 'Transacción añadida';
 
   @override
+  String get farmCropCrop => 'Cultivo';
+
+  @override
+  String get farmCropStatus => 'Estado';
+
+  @override
+  String get farmCropSownOn => 'Fecha de siembra';
+
+  @override
+  String get farmCropAdded => 'Cultivo añadido';
+
+  @override
   String get noPhotosFound => 'Sin fotos subidas';
 
   @override

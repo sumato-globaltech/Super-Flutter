@@ -41,4 +41,11 @@ abstract final class ApiEndpoints {
 
   static const transactionCategories =
       '/api/v1/categories/transaction_category';
+
+  static const seasons = '/api/v1/farmer/seasons';
+
+  static const cropStatuses = '/api/v1/farmer/crop-statuses';
+
+  static const currentFinancialYear = '/api/v1/financial-years/current';
+
 }

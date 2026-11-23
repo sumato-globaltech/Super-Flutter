@@ -1,3 +1,6 @@
+import 'package:super_flutter/data/crops/model/crop_model.dart';
+import 'package:super_flutter/data/farm/model/crop_status_model.dart';
+import 'package:super_flutter/data/farm/model/season_model.dart';
 import 'package:super_flutter/data/farm/model/transaction_category_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:super_flutter/data/farm/model/farm_crop_model.dart';
@@ -20,6 +23,10 @@ class FarmDetailState extends Equatable {
   final List<DeviceModel> devices;
   final SoilSensorAccountModel? soilSensorAccount;
   final List<TransactionCategoryModel> transactionCategories;
+  final List<CropModel> cropOptions;
+  final List<SeasonModel> seasons;
+  final List<CropStatusModel> cropStatuses;
+  final FinancialYearModel? currentFinancialYear;
   final int selectedTab;
   final bool isActionLoading;
   final bool isSyncingDevices;
@@ -38,6 +45,10 @@ class FarmDetailState extends Equatable {
     this.devices = const [],
     this.soilSensorAccount,
     this.transactionCategories = const [],
+    this.cropOptions = const [],
+    this.seasons = const [],
+    this.cropStatuses = const [],
+    this.currentFinancialYear,
     this.selectedTab = 0,
     this.isActionLoading = false,
     this.isSyncingDevices = false,
@@ -58,6 +69,10 @@ class FarmDetailState extends Equatable {
     SoilSensorAccountModel? soilSensorAccount,
     bool clearSoilSensorAccount = false,
     List<TransactionCategoryModel>? transactionCategories,
+    List<CropModel>? cropOptions,
+    List<SeasonModel>? seasons,
+    List<CropStatusModel>? cropStatuses,
+    FinancialYearModel? currentFinancialYear,
     int? selectedTab,
     bool? isActionLoading,
     bool? isSyncingDevices,
@@ -79,6 +94,10 @@ class FarmDetailState extends Equatable {
           : (soilSensorAccount ?? this.soilSensorAccount),
       transactionCategories:
           transactionCategories ?? this.transactionCategories,
+      cropOptions: cropOptions ?? this.cropOptions,
+      seasons: seasons ?? this.seasons,
+      cropStatuses: cropStatuses ?? this.cropStatuses,
+      currentFinancialYear: currentFinancialYear ?? this.currentFinancialYear,
       selectedTab: selectedTab ?? this.selectedTab,
       isActionLoading: isActionLoading ?? this.isActionLoading,
       isSyncingDevices: isSyncingDevices ?? this.isSyncingDevices,
@@ -100,6 +119,10 @@ class FarmDetailState extends Equatable {
     devices,
     soilSensorAccount,
     transactionCategories,
+    cropOptions,
+    seasons,
+    cropStatuses,
+    currentFinancialYear,
     selectedTab,
     isActionLoading,
     isSyncingDevices,

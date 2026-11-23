@@ -175,6 +175,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1002.MarketRemoteDataSource>(
       () => _i1002.MarketRemoteDataSource(gh<_i42.DioClient>()),
     );
+    gh.factory<_i255.FarmDetailBloc>(
+      () => _i255.FarmDetailBloc(
+        gh<_i773.FarmRemoteDataSource>(),
+        gh<_i17.IotRemoteDataSource>(),
+        gh<_i444.CropRemoteDataSource>(),
+      ),
+    );
     gh.lazySingleton<_i59.IotRepositoryImpl>(
       () => _i59.IotRepositoryImpl(gh<_i17.IotRemoteDataSource>()),
     );
@@ -235,12 +242,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i288.EditFarmBloc>(
       () => _i288.EditFarmBloc(gh<_i773.FarmRemoteDataSource>()),
-    );
-    gh.factory<_i255.FarmDetailBloc>(
-      () => _i255.FarmDetailBloc(
-        gh<_i773.FarmRemoteDataSource>(),
-        gh<_i17.IotRemoteDataSource>(),
-      ),
     );
     gh.factory<_i236.CheckAuthStatus>(
       () => _i236.CheckAuthStatus(gh<_i631.AuthRepository>()),

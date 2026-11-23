@@ -7,12 +7,14 @@ import 'package:super_flutter/core/network/dio_client.dart';
 import 'package:super_flutter/core/network/network_exception_mapper.dart';
 import 'package:super_flutter/core/network/paged.dart';
 import 'package:super_flutter/data/farm/model/block_model.dart';
+import 'package:super_flutter/data/farm/model/crop_status_model.dart';
 import 'package:super_flutter/data/farm/model/farm_crop_model.dart';
 import 'package:super_flutter/data/farm/model/farm_model.dart';
 import 'package:super_flutter/data/farm/model/farm_photo_model.dart';
 import 'package:super_flutter/data/farm/model/farm_transaction_model.dart';
 import 'package:super_flutter/data/farm/model/irrigation_type_model.dart';
 import 'package:super_flutter/data/farm/model/ownership_model.dart';
+import 'package:super_flutter/data/farm/model/season_model.dart';
 import 'package:super_flutter/data/farm/model/soil_type_model.dart';
 import 'package:super_flutter/data/farm/model/transaction_category_model.dart';
 
@@ -652,6 +654,92 @@ class FarmRemoteDataSource {
       rethrow;
     } catch (e) {
       return const [];
+    }
+  }
+
+  /// GET http://dam.test/api/v1/farmer/seasons
+  Future<List<SeasonModel>> getSeasons() async {
+    try {
+      final response = await _dioClient.dio.get<dynamic>(ApiEndpoints.seasons);
+      final body = response.data;
+      if (response.statusCode == 200 && body is Map) {
+        final data = body['data'];
+        final items = data is List
+            ? data
+            : (data is Map && data['data'] is List
+                  ? data['data'] as List
+                  : null);
+        if (items != null) {
+          return items
+              .whereType<Map>()
+              .map(
+                (item) => SeasonModel.fromJson(Map<String, dynamic>.from(item)),
+              )
+              .toList();
+        }
+      }
+      return const [];
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on NetworkException {
+      rethrow;
+    } catch (e) {
+      return const [];
+    }
+  }
+
+  /// GET http://dam.test/api/v1/farmer/crop-statuses
+  Future<List<CropStatusModel>> getCropStatuses() async {
+    try {
+      final response = await _dioClient.dio.get<dynamic>(
+        ApiEndpoints.cropStatuses,
+      );
+      final body = response.data;
+      if (response.statusCode == 200 && body is Map) {
+        final data = body['data'];
+        final items = data is List
+            ? data
+            : (data is Map && data['data'] is List
+                  ? data['data'] as List
+                  : null);
+        if (items != null) {
+          return items
+              .whereType<Map>()
+              .map(
+                (item) =>
+                    CropStatusModel.fromJson(Map<String, dynamic>.from(item)),
+              )
+              .toList();
+        }
+      }
+      return const [];
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on NetworkException {
+      rethrow;
+    } catch (e) {
+      return const [];
+    }
+  }
+
+  /// GET http://dam.test/api/v1/financial-years/current
+  Future<FinancialYearModel?> getCurrentFinancialYear() async {
+    try {
+      final response = await _dioClient.dio.get<dynamic>(
+        ApiEndpoints.currentFinancialYear,
+      );
+      final body = response.data;
+      if (response.statusCode == 200 && body is Map) {
+        final data = body['data'] is Map ? body['data'] as Map : body;
+        return FinancialYearModel.fromJson(Map<String, dynamic>.from(data));
+      }
+      return null;
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on NetworkException {
+      rethrow;
+    } catch (e) {
+      return null;
     }
   }
 }

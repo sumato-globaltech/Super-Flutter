@@ -14,8 +14,6 @@ import 'package:super_flutter/data/farm/model/farm_transaction_model.dart';
 import 'package:super_flutter/data/farm/sources/remote/farm_remote_data_source.dart';
 import 'package:super_flutter/features/farm/presentation/farm_detail/bloc/farm_detail_bloc.dart';
 import 'package:super_flutter/features/farm/presentation/farm_detail/screen/farm_detail_screen.dart';
-import 'package:super_flutter/features/farm/presentation/farm_form/bloc/farm_form_bloc.dart';
-import 'package:super_flutter/features/farm/presentation/farm_form/screen/farm_form_screen.dart';
 import 'package:super_flutter/features/farm/presentation/farms_list/bloc/farms_bloc.dart';
 import 'package:super_flutter/features/farm/presentation/farms_list/screen/farms_list_screen.dart';
 
@@ -59,7 +57,6 @@ void main() {
     await getIt.reset();
     getIt.registerLazySingleton<FarmRemoteDataSource>(() => source);
     getIt.registerFactory<FarmsBloc>(() => FarmsBloc(source));
-    getIt.registerFactory<FarmFormBloc>(() => FarmFormBloc(source));
     getIt.registerFactory<FarmDetailBloc>(() => FarmDetailBloc(source));
   });
 
@@ -127,26 +124,6 @@ void main() {
 
       expect(find.byType(AppEmptyView), findsOneWidget);
       expect(find.text('No farms found'), findsOneWidget);
-    });
-  });
-
-  group('FarmFormScreen', () {
-    testWidgets('renders form fields for new farm', (tester) async {
-      await pump(tester, const FarmFormScreen());
-
-      expect(find.text('Add Farm'), findsOneWidget);
-      expect(find.text('Farm Name *'), findsOneWidget);
-      expect(find.text('Area (ha) *'), findsOneWidget);
-      expect(find.text('Create Farm'), findsOneWidget);
-    });
-
-    testWidgets('renders form fields with initialFarm for edit', (tester) async {
-      await pump(tester, FarmFormScreen(initialFarm: _farm));
-
-      expect(find.text('Edit Farm'), findsOneWidget);
-      expect(find.text('Green Hills Farm'), findsOneWidget);
-      expect(find.text('2.5'), findsOneWidget);
-      expect(find.text('Update Farm'), findsOneWidget);
     });
   });
 

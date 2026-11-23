@@ -1460,6 +1460,30 @@ abstract class AppLocalizations {
   /// **'Transaction added'**
   String get transactionAdded;
 
+  /// No description provided for @farmCropCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop'**
+  String get farmCropCrop;
+
+  /// No description provided for @farmCropStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get farmCropStatus;
+
+  /// No description provided for @farmCropSownOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sown on'**
+  String get farmCropSownOn;
+
+  /// No description provided for @farmCropAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop added'**
+  String get farmCropAdded;
+
   /// No description provided for @noPhotosFound.
   ///
   /// In en, this message translates to:

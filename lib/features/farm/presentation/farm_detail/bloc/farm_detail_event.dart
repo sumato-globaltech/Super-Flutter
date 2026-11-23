@@ -32,8 +32,9 @@ class FarmDeleted extends FarmDetailEvent {
 
 class FarmCropAdded extends FarmDetailEvent {
   final Map<String, dynamic> data;
+  final Completer<void>? completer;
 
-  const FarmCropAdded(this.data);
+  const FarmCropAdded(this.data, {this.completer});
 
   @override
   List<Object?> get props => [data];
@@ -92,10 +93,12 @@ class FarmDevicesSyncRequested extends FarmDetailEvent {
 class FarmSoilSensorAccountLinked extends FarmDetailEvent {
   final String username;
   final String password;
+  final Completer<void>? completer;
 
   const FarmSoilSensorAccountLinked({
     required this.username,
     required this.password,
+    this.completer,
   });
 
   @override
