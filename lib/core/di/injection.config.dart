@@ -21,7 +21,7 @@ import 'package:super_flutter/core/error/app_error_handler.dart' as _i396;
 import 'package:super_flutter/core/error/error_reporter.dart' as _i246;
 import 'package:super_flutter/core/logging/app_logger.dart' as _i451;
 import 'package:super_flutter/core/network/dio_client.dart' as _i42;
-import 'package:super_flutter/core/network/network_module.dart' as _i468;
+import 'package:super_flutter/core/network/network_module.dart' as _i469;
 import 'package:super_flutter/core/network/session_manager.dart' as _i827;
 import 'package:super_flutter/core/service/device_info_service.dart' as _i686;
 import 'package:super_flutter/core/storage/local_storage.dart' as _i635;
@@ -39,6 +39,10 @@ import 'package:super_flutter/data/communication/sources/local/communication_loc
     as _i940;
 import 'package:super_flutter/data/communication/sources/remote/communication_remote_data_source.dart'
     as _i390;
+import 'package:super_flutter/data/crops/repositories/crop_repository_impl.dart'
+    as _i468;
+import 'package:super_flutter/data/crops/sources/remote/crop_remote_data_source.dart'
+    as _i444;
 import 'package:super_flutter/data/market/repositories/market_repository_impl.dart'
     as _i341;
 import 'package:super_flutter/data/market/sources/remote/market_remote_data_source.dart'
@@ -70,6 +74,12 @@ import 'package:super_flutter/features/communication/presentation/notice_detail/
     as _i437;
 import 'package:super_flutter/features/communication/presentation/notices/bloc/notices_bloc.dart'
     as _i929;
+import 'package:super_flutter/features/crops/presentation/crop_detail/bloc/crop_detail_bloc.dart'
+    as _i213;
+import 'package:super_flutter/features/crops/presentation/crop_recommendations/bloc/crop_recommendations_bloc.dart'
+    as _i977;
+import 'package:super_flutter/features/crops/presentation/crops_list/bloc/crops_list_bloc.dart'
+    as _i64;
 import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart'
     as _i931;
 import 'package:super_flutter/features/market/presentation/market/bloc/market_bloc.dart'
@@ -135,8 +145,23 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i390.CommunicationRemoteDataSource>(
       () => _i390.CommunicationRemoteDataSource(gh<_i42.DioClient>()),
     );
+    gh.lazySingleton<_i444.CropRemoteDataSource>(
+      () => _i444.CropRemoteDataSource(gh<_i42.DioClient>()),
+    );
     gh.lazySingleton<_i1002.MarketRemoteDataSource>(
       () => _i1002.MarketRemoteDataSource(gh<_i42.DioClient>()),
+    );
+    gh.factory<_i213.CropDetailBloc>(
+      () => _i213.CropDetailBloc(gh<_i444.CropRemoteDataSource>()),
+    );
+    gh.factory<_i977.CropRecommendationsBloc>(
+      () => _i977.CropRecommendationsBloc(gh<_i444.CropRemoteDataSource>()),
+    );
+    gh.factory<_i64.CropsListBloc>(
+      () => _i64.CropsListBloc(gh<_i444.CropRemoteDataSource>()),
+    );
+    gh.lazySingleton<_i468.CropRepositoryImpl>(
+      () => _i468.CropRepositoryImpl(gh<_i444.CropRemoteDataSource>()),
     );
     gh.lazySingleton<_i631.AuthRepository>(
       () => _i227.AuthRepositoryImpl(
@@ -236,4 +261,4 @@ class _$CoreModule extends _i962.CoreModule {}
 
 class _$StorageModule extends _i775.StorageModule {}
 
-class _$NetworkModule extends _i468.NetworkModule {}
+class _$NetworkModule extends _i469.NetworkModule {}

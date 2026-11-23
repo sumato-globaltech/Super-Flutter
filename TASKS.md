@@ -164,7 +164,11 @@ Each GET screen starts from `sf make api --view`, then is adjusted by hand where
   - [x] **T3.3b** Markets list screen (tab): `MarketScreen` with price overview summary card, horizontal scroll of top crop prices, segmented filter (All | Favourites with auth check prompt), favourite star button on cards, pull-to-refresh, load-more pagination
   - [x] **T3.3c** Market price history & detail screen: `MarketPricesScreen` with market details card (district, type, address, GPS location link via `Utils.navigateToMapLocation`, facilities) + paged crop price history list
   - [x] **T3.3d** Tab routes wiring (`appTabRoutes` for `/market`), ARB keys for EN/ES, 9 Bloc tests, 5 widget tests; 231 app tests pass, 0 new analyzer issues
-- [ ] **T3.4** Crops: list, detail, advisory, calendar, fertilizers, economics, recommendations
+- [x] **T3.4** Crops: list, detail, advisory, calendar, fertilizers, economics, recommendations
+  - [x] **T3.4a** Data: `crops` data layer (`CropRemoteDataSource`, `CropEndpoints`, models: `CropModel`, `CropVarietyModel`, `CropTypeModel`, `CropAdvisoryModel`, `CropCalendarModel`, `CropFertilizersModel`, `CropEconomicsModel`, `CropRecommendationResultModel`, `CropRepositoryImpl`), 6 remote data source tests
+  - [x] **T3.4b** Crops list screen: `CropsListScreen` at `/crops` with search input, crop type filter chips, crop recommendation banner CTA, paged list of `DesignCard`s with crop icon, name, scientific/local name, duration days badge, type chip, pull-to-refresh and infinite scroll load-more
+  - [x] **T3.4c** Crop detail screen: `CropDetailScreen` at `/crops/:cropSlug` with overview header card (name, scientific name, local name, duration, default unit, summary) + 5 tabbed sections (Advisory & Practices, Fertilizers & Nutrition, Calendar & Windows, Varieties, and Market Prices)
+  - [x] **T3.4d** Crop recommendations: `CropRecommendationsScreen` at `/crops/recommendations` with district selection, sowing month dropdown, land area in hectares input, and ranked recommendation results list; routes registered in `app_router.dart`, EN/ES localization keys added, 14 Bloc tests, 3 widget tests; 255 app tests pass, 0 new analyzer issues
 - [ ] **T3.5** Farms *(farmer)*: CRUD, archive/unarchive, farm crops, transactions + summary, photos
 - [ ] **T3.6** IoT *(farmer)*: devices, sync, soil-sensor account, readings
 - [ ] **T3.7** Schemes: list, detail; farmer apply/applications/documents/withdraw; officer list (`schemes.view`)

@@ -447,4 +447,179 @@ class AppLocalizationsEn extends AppLocalizations {
   String marketPricePerUnit(String price, String unit) {
     return '₹$price / $unit';
   }
+
+  @override
+  String get searchCrops => 'Search crops...';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get cropRecommendations => 'Crop Recommendations';
+
+  @override
+  String get cropRecommendationsSubtitle =>
+      'Find the best crops for your district and season';
+
+  @override
+  String get noCropsFound => 'No crops found';
+
+  @override
+  String get tryAdjustingFilters =>
+      'Try adjusting your search or filter options';
+
+  @override
+  String cropDurationDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days',
+      one: '1 day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cropDetails => 'Crop Details';
+
+  @override
+  String get cropAdvisory => 'Advisory';
+
+  @override
+  String get cropFertilizers => 'Fertilizers';
+
+  @override
+  String get cropCalendar => 'Calendar';
+
+  @override
+  String get cropVarieties => 'Varieties';
+
+  @override
+  String get cropPrices => 'Prices';
+
+  @override
+  String get localName => 'Local name';
+
+  @override
+  String get noAdvisoryAvailable => 'No advisory available';
+
+  @override
+  String get noAdvisorySubtitle =>
+      'Advisory information for this crop is not available yet';
+
+  @override
+  String get advisorySeason => 'Season';
+
+  @override
+  String get sowingWindow => 'Sowing window';
+
+  @override
+  String get harvestWindow => 'Harvest window';
+
+  @override
+  String get temperatureRange => 'Temperature';
+
+  @override
+  String get rainfallRequirement => 'Rainfall';
+
+  @override
+  String get soilTypes => 'Soil types';
+
+  @override
+  String get soilPh => 'Soil pH';
+
+  @override
+  String get soilDrainage => 'Drainage';
+
+  @override
+  String get sowingMethod => 'Sowing method';
+
+  @override
+  String get seedRate => 'Seed rate';
+
+  @override
+  String get plantSpacing => 'Spacing';
+
+  @override
+  String get landPreparation => 'Land preparation';
+
+  @override
+  String get weedManagement => 'Weed management';
+
+  @override
+  String get advisoryPractice => 'Practice';
+
+  @override
+  String get noFertilizersAvailable => 'No fertilizer recommendations';
+
+  @override
+  String get noFertilizersSubtitle =>
+      'Fertilizer schedules for this crop are not available yet';
+
+  @override
+  String get fertilizerGroup => 'Fertilizer Schedule';
+
+  @override
+  String get cropCalendarSchedule => 'Calendar Schedule';
+
+  @override
+  String get cropCalendarActiveMessage =>
+      'Follow the monthly crop advisory and practices for optimal yield.';
+
+  @override
+  String get noVarietiesFound => 'No varieties recorded';
+
+  @override
+  String get noVarietiesSubtitle =>
+      'Varieties for this crop have not been documented yet';
+
+  @override
+  String get varietyName => 'Variety name';
+
+  @override
+  String get duration => 'Duration';
+
+  @override
+  String get expectedYield => 'Expected yield';
+
+  @override
+  String get noPricesReported => 'No market prices reported';
+
+  @override
+  String get noPricesReportedSubtitle =>
+      'No recent market prices have been recorded for this crop';
+
+  @override
+  String get reportingDate => 'Reporting date';
+
+  @override
+  String get priceRange => 'Price range';
+
+  @override
+  String get recommendationParameters => 'Recommendation Parameters';
+
+  @override
+  String get district => 'District';
+
+  @override
+  String get sowingMonth => 'Sowing month';
+
+  @override
+  String get areaHectares => 'Area (ha)';
+
+  @override
+  String get getRecommendations => 'Get Recommendations';
+
+  @override
+  String get noRecommendationsFound => 'No recommendations found';
+
+  @override
+  String get tryDifferentMonthOrDistrict =>
+      'Try selecting a different district or sowing month';
+
+  @override
+  String get recommendedCropsList => 'Recommended Crops';
+
+  @override
+  String get suitability => 'Suitability';
 }

@@ -8,6 +8,7 @@ import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.da
 // sf:feature-routes-imports:begin
 import 'package:super_flutter/features/auth/routes/auth_routes.dart';
 import 'package:super_flutter/features/communication/routes/communication_routes.dart';
+import 'package:super_flutter/features/crops/routes/crops_routes.dart';
 import 'package:super_flutter/features/super_awesome/routes/super_awesome_routes.dart';
 import 'package:super_flutter/features/ui_gallery/routes/ui_gallery_routes.dart';
 
@@ -57,6 +58,7 @@ GoRouter createRouter({
       // sf:feature-routes:begin
       ...buildAuthRoutes(),
       ...buildCommunicationRoutes(),
+      ...buildCropsRoutes(),
       ...buildSuperAwesomeRoutes(),
       ...buildUiGalleryRoutes(),
       // sf:feature-routes:end

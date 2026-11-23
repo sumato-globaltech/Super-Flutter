@@ -871,6 +871,324 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'₹{price} / {unit}'**
   String marketPricePerUnit(String price, String unit);
+
+  /// No description provided for @searchCrops.
+  ///
+  /// In en, this message translates to:
+  /// **'Search crops...'**
+  String get searchCrops;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @cropRecommendations.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop Recommendations'**
+  String get cropRecommendations;
+
+  /// No description provided for @cropRecommendationsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Find the best crops for your district and season'**
+  String get cropRecommendationsSubtitle;
+
+  /// No description provided for @noCropsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No crops found'**
+  String get noCropsFound;
+
+  /// No description provided for @tryAdjustingFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Try adjusting your search or filter options'**
+  String get tryAdjustingFilters;
+
+  /// Duration of crop growth cycle in days
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 day} other{{count} days}}'**
+  String cropDurationDays(int count);
+
+  /// No description provided for @cropDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop Details'**
+  String get cropDetails;
+
+  /// No description provided for @cropAdvisory.
+  ///
+  /// In en, this message translates to:
+  /// **'Advisory'**
+  String get cropAdvisory;
+
+  /// No description provided for @cropFertilizers.
+  ///
+  /// In en, this message translates to:
+  /// **'Fertilizers'**
+  String get cropFertilizers;
+
+  /// No description provided for @cropCalendar.
+  ///
+  /// In en, this message translates to:
+  /// **'Calendar'**
+  String get cropCalendar;
+
+  /// No description provided for @cropVarieties.
+  ///
+  /// In en, this message translates to:
+  /// **'Varieties'**
+  String get cropVarieties;
+
+  /// No description provided for @cropPrices.
+  ///
+  /// In en, this message translates to:
+  /// **'Prices'**
+  String get cropPrices;
+
+  /// No description provided for @localName.
+  ///
+  /// In en, this message translates to:
+  /// **'Local name'**
+  String get localName;
+
+  /// No description provided for @noAdvisoryAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No advisory available'**
+  String get noAdvisoryAvailable;
+
+  /// No description provided for @noAdvisorySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Advisory information for this crop is not available yet'**
+  String get noAdvisorySubtitle;
+
+  /// No description provided for @advisorySeason.
+  ///
+  /// In en, this message translates to:
+  /// **'Season'**
+  String get advisorySeason;
+
+  /// No description provided for @sowingWindow.
+  ///
+  /// In en, this message translates to:
+  /// **'Sowing window'**
+  String get sowingWindow;
+
+  /// No description provided for @harvestWindow.
+  ///
+  /// In en, this message translates to:
+  /// **'Harvest window'**
+  String get harvestWindow;
+
+  /// No description provided for @temperatureRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Temperature'**
+  String get temperatureRange;
+
+  /// No description provided for @rainfallRequirement.
+  ///
+  /// In en, this message translates to:
+  /// **'Rainfall'**
+  String get rainfallRequirement;
+
+  /// No description provided for @soilTypes.
+  ///
+  /// In en, this message translates to:
+  /// **'Soil types'**
+  String get soilTypes;
+
+  /// No description provided for @soilPh.
+  ///
+  /// In en, this message translates to:
+  /// **'Soil pH'**
+  String get soilPh;
+
+  /// No description provided for @soilDrainage.
+  ///
+  /// In en, this message translates to:
+  /// **'Drainage'**
+  String get soilDrainage;
+
+  /// No description provided for @sowingMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Sowing method'**
+  String get sowingMethod;
+
+  /// No description provided for @seedRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Seed rate'**
+  String get seedRate;
+
+  /// No description provided for @plantSpacing.
+  ///
+  /// In en, this message translates to:
+  /// **'Spacing'**
+  String get plantSpacing;
+
+  /// No description provided for @landPreparation.
+  ///
+  /// In en, this message translates to:
+  /// **'Land preparation'**
+  String get landPreparation;
+
+  /// No description provided for @weedManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Weed management'**
+  String get weedManagement;
+
+  /// No description provided for @advisoryPractice.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice'**
+  String get advisoryPractice;
+
+  /// No description provided for @noFertilizersAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No fertilizer recommendations'**
+  String get noFertilizersAvailable;
+
+  /// No description provided for @noFertilizersSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Fertilizer schedules for this crop are not available yet'**
+  String get noFertilizersSubtitle;
+
+  /// No description provided for @fertilizerGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'Fertilizer Schedule'**
+  String get fertilizerGroup;
+
+  /// No description provided for @cropCalendarSchedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Calendar Schedule'**
+  String get cropCalendarSchedule;
+
+  /// No description provided for @cropCalendarActiveMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow the monthly crop advisory and practices for optimal yield.'**
+  String get cropCalendarActiveMessage;
+
+  /// No description provided for @noVarietiesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No varieties recorded'**
+  String get noVarietiesFound;
+
+  /// No description provided for @noVarietiesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Varieties for this crop have not been documented yet'**
+  String get noVarietiesSubtitle;
+
+  /// No description provided for @varietyName.
+  ///
+  /// In en, this message translates to:
+  /// **'Variety name'**
+  String get varietyName;
+
+  /// No description provided for @duration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get duration;
+
+  /// No description provided for @expectedYield.
+  ///
+  /// In en, this message translates to:
+  /// **'Expected yield'**
+  String get expectedYield;
+
+  /// No description provided for @noPricesReported.
+  ///
+  /// In en, this message translates to:
+  /// **'No market prices reported'**
+  String get noPricesReported;
+
+  /// No description provided for @noPricesReportedSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No recent market prices have been recorded for this crop'**
+  String get noPricesReportedSubtitle;
+
+  /// No description provided for @reportingDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Reporting date'**
+  String get reportingDate;
+
+  /// No description provided for @priceRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Price range'**
+  String get priceRange;
+
+  /// No description provided for @recommendationParameters.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation Parameters'**
+  String get recommendationParameters;
+
+  /// No description provided for @district.
+  ///
+  /// In en, this message translates to:
+  /// **'District'**
+  String get district;
+
+  /// No description provided for @sowingMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Sowing month'**
+  String get sowingMonth;
+
+  /// No description provided for @areaHectares.
+  ///
+  /// In en, this message translates to:
+  /// **'Area (ha)'**
+  String get areaHectares;
+
+  /// No description provided for @getRecommendations.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Recommendations'**
+  String get getRecommendations;
+
+  /// No description provided for @noRecommendationsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No recommendations found'**
+  String get noRecommendationsFound;
+
+  /// No description provided for @tryDifferentMonthOrDistrict.
+  ///
+  /// In en, this message translates to:
+  /// **'Try selecting a different district or sowing month'**
+  String get tryDifferentMonthOrDistrict;
+
+  /// No description provided for @recommendedCropsList.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended Crops'**
+  String get recommendedCropsList;
+
+  /// No description provided for @suitability.
+  ///
+  /// In en, this message translates to:
+  /// **'Suitability'**
+  String get suitability;
 }
 
 class _AppLocalizationsDelegate

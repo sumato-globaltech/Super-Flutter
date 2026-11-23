@@ -452,4 +452,179 @@ class AppLocalizationsEs extends AppLocalizations {
   String marketPricePerUnit(String price, String unit) {
     return '₹$price / $unit';
   }
+
+  @override
+  String get searchCrops => 'Buscar cultivos...';
+
+  @override
+  String get all => 'Todos';
+
+  @override
+  String get cropRecommendations => 'Recomendaciones de cultivos';
+
+  @override
+  String get cropRecommendationsSubtitle =>
+      'Encuentra los mejores cultivos para tu distrito y temporada';
+
+  @override
+  String get noCropsFound => 'No se encontraron cultivos';
+
+  @override
+  String get tryAdjustingFilters =>
+      'Intenta ajustar tus opciones de búsqueda o filtro';
+
+  @override
+  String cropDurationDays(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count días',
+      one: '1 día',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cropDetails => 'Detalles del cultivo';
+
+  @override
+  String get cropAdvisory => 'Asesoramiento';
+
+  @override
+  String get cropFertilizers => 'Fertilizantes';
+
+  @override
+  String get cropCalendar => 'Calendario';
+
+  @override
+  String get cropVarieties => 'Variedades';
+
+  @override
+  String get cropPrices => 'Precios';
+
+  @override
+  String get localName => 'Nombre local';
+
+  @override
+  String get noAdvisoryAvailable => 'Sin asesoramiento disponible';
+
+  @override
+  String get noAdvisorySubtitle =>
+      'La información de asesoramiento aún no está disponible';
+
+  @override
+  String get advisorySeason => 'Temporada';
+
+  @override
+  String get sowingWindow => 'Ventana de siembra';
+
+  @override
+  String get harvestWindow => 'Ventana de cosecha';
+
+  @override
+  String get temperatureRange => 'Temperatura';
+
+  @override
+  String get rainfallRequirement => 'Precipitación';
+
+  @override
+  String get soilTypes => 'Tipos de suelo';
+
+  @override
+  String get soilPh => 'pH del suelo';
+
+  @override
+  String get soilDrainage => 'Drenaje';
+
+  @override
+  String get sowingMethod => 'Método de siembra';
+
+  @override
+  String get seedRate => 'Tasa de semilla';
+
+  @override
+  String get plantSpacing => 'Espaciado';
+
+  @override
+  String get landPreparation => 'Preparación del terreno';
+
+  @override
+  String get weedManagement => 'Control de malezas';
+
+  @override
+  String get advisoryPractice => 'Práctica';
+
+  @override
+  String get noFertilizersAvailable => 'Sin recomendaciones de fertilizantes';
+
+  @override
+  String get noFertilizersSubtitle =>
+      'Los calendarios de fertilización aún no están disponibles';
+
+  @override
+  String get fertilizerGroup => 'Programa de fertilización';
+
+  @override
+  String get cropCalendarSchedule => 'Programa del calendario';
+
+  @override
+  String get cropCalendarActiveMessage =>
+      'Siga el asesoramiento mensual para un rendimiento óptimo.';
+
+  @override
+  String get noVarietiesFound => 'No hay variedades registradas';
+
+  @override
+  String get noVarietiesSubtitle =>
+      'Aún no se han documentado variedades para este cultivo';
+
+  @override
+  String get varietyName => 'Nombre de la variedad';
+
+  @override
+  String get duration => 'Duración';
+
+  @override
+  String get expectedYield => 'Rendimiento esperado';
+
+  @override
+  String get noPricesReported => 'Sin precios de mercado reportados';
+
+  @override
+  String get noPricesReportedSubtitle =>
+      'No se han registrado precios recientes para este cultivo';
+
+  @override
+  String get reportingDate => 'Fecha de reporte';
+
+  @override
+  String get priceRange => 'Rango de precio';
+
+  @override
+  String get recommendationParameters => 'Parámetros de recomendación';
+
+  @override
+  String get district => 'Distrito';
+
+  @override
+  String get sowingMonth => 'Mes de siembra';
+
+  @override
+  String get areaHectares => 'Área (ha)';
+
+  @override
+  String get getRecommendations => 'Obtener recomendaciones';
+
+  @override
+  String get noRecommendationsFound => 'No se encontraron recomendaciones';
+
+  @override
+  String get tryDifferentMonthOrDistrict =>
+      'Intente seleccionar otro distrito o mes de siembra';
+
+  @override
+  String get recommendedCropsList => 'Cultivos recomendados';
+
+  @override
+  String get suitability => 'Idoneidad';
 }
