@@ -29,8 +29,7 @@ class CropDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<CropDetailBloc>()
-        ..add(CropDetailStarted(cropSlug)),
+      create: (_) => getIt<CropDetailBloc>()..add(CropDetailStarted(cropSlug)),
       child: const _CropDetailView(),
     );
   }
@@ -53,91 +52,96 @@ class _CropDetailView extends StatelessWidget {
         return Scaffold(
           appBar: AppTopBar(title: title),
           body: switch (state.status) {
-            CropDetailStatus.initial || CropDetailStatus.loading =>
-              const Center(
-                child: Padding(
-                  padding: EdgeInsets.all(32),
-                  child: DesignProgress(),
-                ),
+            CropDetailStatus.initial ||
+            CropDetailStatus.loading => const Center(
+              child: Padding(
+                padding: EdgeInsets.all(32),
+                child: DesignProgress(),
               ),
+            ),
             CropDetailStatus.failure => AppErrorView(
-                message: state.errorMessage ?? l10n.errorUnknown,
-                retryLabel: l10n.tryAgain,
-                onRetry: () => bloc.add(CropDetailStarted(state.slug)),
-              ),
+              message: state.errorMessage ?? l10n.errorUnknown,
+              retryLabel: l10n.tryAgain,
+              onRetry: () => bloc.add(CropDetailStarted(state.slug)),
+            ),
             CropDetailStatus.success => RefreshIndicator(
-                onRefresh: () async {
-                  bloc.add(const CropDetailRefreshed());
-                },
-                child: DefaultTabController(
-                  length: 5,
-                  initialIndex: state.selectedTab,
-                  child: NestedScrollView(
-                    headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                      SliverToBoxAdapter(
-                        child: Padding(
-                          padding: const EdgeInsets.all(AppSpacing.md),
-                          child: _OverviewHeaderCard(crop: crop),
-                        ),
+              onRefresh: () async {
+                bloc.add(const CropDetailRefreshed());
+              },
+              child: DefaultTabController(
+                length: 5,
+                initialIndex: state.selectedTab,
+                child: NestedScrollView(
+                  headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.all(AppSpacing.md),
+                        child: _OverviewHeaderCard(crop: crop),
                       ),
-                      SliverPersistentHeader(
-                        pinned: true,
-                        delegate: _TabBarHeaderDelegate(
-                          TabBar(
-                            isScrollable: true,
-                            tabAlignment: TabAlignment.start,
-                            labelColor: theme.colorScheme.primary,
-                            unselectedLabelColor: theme.textTheme.bodyMedium?.color
-                                ?.withValues(alpha: 0.6),
-                            indicatorColor: theme.colorScheme.primary,
-                            tabs: [
-                              Tab(text: l10n.cropAdvisory),
-                              Tab(text: l10n.cropFertilizers),
-                              Tab(text: l10n.cropCalendar),
-                              Tab(text: l10n.cropVarieties),
-                              Tab(text: l10n.cropPrices),
-                            ],
-                            onTap: (index) {
-                              bloc.add(CropDetailTabChanged(index));
-                            },
-                          ),
-                          theme.colorScheme.surface,
-                        ),
-                      ),
-                    ],
-                    body: TabBarView(
-                      children: [
-                        _AdvisoryTabView(advisory: state.advisory),
-                        _FertilizersTabView(
-                          fertilizers: state.fertilizers ??
-                              (state.advisory?.fertilizers != null
-                                  ? CropFertilizersModel(
-                                      fertilizers: state.advisory!.fertilizers!,
-                                    )
-                                  : null),
-                        ),
-                        _CalendarTabView(
-                          advisory: state.advisory,
-                          calendar: state.calendar,
-                        ),
-                        _VarietiesTabView(
-                          varieties: crop?.varieties ??
-                              state.advisory?.varieties ??
-                              const [],
-                        ),
-                        _PricesTabView(
-                          prices: state.prices,
-                          loadingMore: state.loadingMorePrices,
-                          hasMore: state.pricesHasMore,
-                          onLoadMore: () {
-                            bloc.add(const CropDetailPricesMoreRequested());
+                    ),
+                    SliverPersistentHeader(
+                      pinned: true,
+                      delegate: _TabBarHeaderDelegate(
+                        TabBar(
+                          isScrollable: true,
+                          tabAlignment: TabAlignment.start,
+                          labelColor: theme.colorScheme.primary,
+                          unselectedLabelColor: theme
+                              .textTheme
+                              .bodyMedium
+                              ?.color
+                              ?.withValues(alpha: 0.6),
+                          indicatorColor: theme.colorScheme.primary,
+                          tabs: [
+                            Tab(text: l10n.cropAdvisory),
+                            Tab(text: l10n.cropFertilizers),
+                            Tab(text: l10n.cropCalendar),
+                            Tab(text: l10n.cropVarieties),
+                            Tab(text: l10n.cropPrices),
+                          ],
+                          onTap: (index) {
+                            bloc.add(CropDetailTabChanged(index));
                           },
                         ),
-                      ],
+                        theme.colorScheme.surface,
+                      ),
                     ),
+                  ],
+                  body: TabBarView(
+                    children: [
+                      _AdvisoryTabView(advisory: state.advisory),
+                      _FertilizersTabView(
+                        fertilizers:
+                            state.fertilizers ??
+                            (state.advisory?.fertilizers != null
+                                ? CropFertilizersModel(
+                                    fertilizers: state.advisory!.fertilizers!,
+                                  )
+                                : null),
+                      ),
+                      _CalendarTabView(
+                        advisory: state.advisory,
+                        calendar: state.calendar,
+                      ),
+                      _VarietiesTabView(
+                        varieties:
+                            crop?.varieties ??
+                            state.advisory?.varieties ??
+                            const [],
+                      ),
+                      _PricesTabView(
+                        prices: state.prices,
+                        loadingMore: state.loadingMorePrices,
+                        hasMore: state.pricesHasMore,
+                        onLoadMore: () {
+                          bloc.add(const CropDetailPricesMoreRequested());
+                        },
+                      ),
+                    ],
                   ),
                 ),
               ),
+            ),
           },
         );
       },
@@ -163,10 +167,7 @@ class _TabBarHeaderDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return Container(
-      color: backgroundColor,
-      child: tabBar,
-    );
+    return Container(color: backgroundColor, child: tabBar);
   }
 
   @override
@@ -222,8 +223,9 @@ class _OverviewHeaderCard extends StatelessWidget {
                         crop!.scientificName!,
                         style: theme.textTheme.bodyMedium?.copyWith(
                           fontStyle: FontStyle.italic,
-                          color: theme.textTheme.bodyMedium?.color
-                              ?.withValues(alpha: 0.7),
+                          color: theme.textTheme.bodyMedium?.color?.withValues(
+                            alpha: 0.7,
+                          ),
                         ),
                       ),
                     ],
@@ -232,8 +234,9 @@ class _OverviewHeaderCard extends StatelessWidget {
                       Text(
                         '${l10n.localName}: ${crop!.localName!}',
                         style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.textTheme.bodySmall?.color
-                              ?.withValues(alpha: 0.7),
+                          color: theme.textTheme.bodySmall?.color?.withValues(
+                            alpha: 0.7,
+                          ),
                         ),
                       ),
                     ],
@@ -318,12 +321,12 @@ class _AdvisoryTabView extends StatelessWidget {
                     ),
                   ],
                 ),
-                  TitleDetailsCard(
-                    title: l10n.sowingWindow,
-                    text: advisory?.windows?.sowing ?? '--',
-                    iconData: PhosphorIconsRegular.plant,
-                    accentColor: DesignColor.accentPoints,
-                  ),
+                TitleDetailsCard(
+                  title: l10n.sowingWindow,
+                  text: advisory?.windows?.sowing ?? '--',
+                  iconData: PhosphorIconsRegular.plant,
+                  accentColor: DesignColor.accentPoints,
+                ),
                 if (advisory!.windows?.harvest != null)
                   TitleDetailsCard(
                     title: l10n.harvestWindow,
@@ -447,34 +450,38 @@ class _AdvisoryTabView extends StatelessWidget {
           ),
         if (advisory!.practices != null && advisory!.practices!.isNotEmpty) ...[
           const SizedBox(height: AppSpacing.sm),
-          ...advisory!.practices!.map((p) => Padding(
-                padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-                child: DesignCard(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        p.label ?? l10n.advisoryPractice,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+          ...advisory!.practices!.map(
+            (p) => Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+              child: DesignCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      p.label ?? l10n.advisoryPractice,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: AppSpacing.xs),
+                    ...p.steps.map(
+                      (s) => Padding(
+                        padding: const EdgeInsets.only(
+                          left: AppSpacing.xs,
+                          top: 2,
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('• '),
+                            Expanded(child: Text(s)),
+                          ],
+                        ),
                       ),
-                      const SizedBox(height: AppSpacing.xs),
-                      ...p.steps.map((s) => Padding(
-                            padding: const EdgeInsets.only(
-                              left: AppSpacing.xs,
-                              top: 2,
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text('• '),
-                                Expanded(child: Text(s)),
-                              ],
-                            ),
-                          )),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              )),
+              ),
+            ),
+          ),
         ],
       ],
     );
@@ -523,8 +530,7 @@ class _FertilizersTabView extends StatelessWidget {
                   child: TitleDetailsCard(
                     title: item.fertilizer ?? '-',
                     text: [
-                      if (item.composition != null)
-                        'Comp: ${item.composition}',
+                      if (item.composition != null) 'Comp: ${item.composition}',
                       if (item.dosage != null) 'Dosage: ${item.dosage}',
                       if (item.stage != null) 'Stage: ${item.stage}',
                     ].join(' · '),
