@@ -302,4 +302,19 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get signOutAllConfirmMessage =>
       'Every device signed in to your account, this one included, will need to sign in again.';
+
+  @override
+  String get homeAlerts => 'Alerts today';
+
+  @override
+  String get homeNotices => 'Latest notices';
+
+  @override
+  String get homeStatewide => 'Statewide';
+
+  @override
+  String get homeNothingNew => 'Nothing new today';
+
+  @override
+  String get homeNothingNewMessage => 'Pull down to check again.';
 }

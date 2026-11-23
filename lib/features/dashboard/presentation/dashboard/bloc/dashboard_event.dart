@@ -15,3 +15,14 @@ class DashboardSignOutRequested extends DashboardEvent {
   @override
   List<Object?> get props => [allDevices];
 }
+
+/// Loads the home, or loads it again on a pull. [districtId] adds the
+/// district's alerts to the statewide ones.
+class DashboardStarted extends DashboardEvent {
+  const DashboardStarted({this.districtId});
+
+  final String? districtId;
+
+  @override
+  List<Object?> get props => [districtId];
+}

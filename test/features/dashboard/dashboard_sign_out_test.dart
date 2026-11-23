@@ -6,23 +6,44 @@ import 'package:super_flutter/app/config/flavor.dart';
 import 'package:super_flutter/core/di/injection.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/core/ui/theme/app_theme.dart';
+import 'package:super_flutter/core/network/paged.dart';
+import 'package:super_flutter/data/communication/sources/remote/communication_remote_data_source.dart';
 import 'package:super_flutter/domain/auth/use_cases/logout.dart';
 import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart';
 import 'package:super_flutter/features/dashboard/presentation/dashboard/screen/dashboard_screen.dart';
 
 class _Logout extends Mock implements Logout {}
 
+class _Source extends Mock implements CommunicationRemoteDataSource {}
+
 void main() {
   late _Logout logout;
+  late _Source source;
 
   setUp(() async {
     logout = _Logout();
+    source = _Source();
+    when(() => source.getBanners(placement: any(named: 'placement')))
+        .thenAnswer((_) async => []);
+    when(
+      () => source.getAlerts(
+        districtId: any(named: 'districtId'),
+        page: any(named: 'page'),
+        perPage: any(named: 'perPage'),
+      ),
+    ).thenAnswer((_) async => const Paged(items: []));
+    when(
+      () => source.getNotices(
+        page: any(named: 'page'),
+        perPage: any(named: 'perPage'),
+      ),
+    ).thenAnswer((_) async => const Paged(items: []));
     when(() => logout(allDevices: any(named: 'allDevices')))
         .thenAnswer((_) async {});
     await getIt.reset();
     getIt
       ..registerSingleton<AppConfig>(AppConfig.production())
-      ..registerFactory<DashboardBloc>(() => DashboardBloc(logout));
+      ..registerFactory<DashboardBloc>(() => DashboardBloc(logout, source));
   });
 
   Future<void> choose(WidgetTester tester, String item) async {

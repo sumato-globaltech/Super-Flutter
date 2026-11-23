@@ -625,6 +625,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Every device signed in to your account, this one included, will need to sign in again.'**
   String get signOutAllConfirmMessage;
+
+  /// No description provided for @homeAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'Alerts today'**
+  String get homeAlerts;
+
+  /// No description provided for @homeNotices.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest notices'**
+  String get homeNotices;
+
+  /// No description provided for @homeStatewide.
+  ///
+  /// In en, this message translates to:
+  /// **'Statewide'**
+  String get homeStatewide;
+
+  /// No description provided for @homeNothingNew.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing new today'**
+  String get homeNothingNew;
+
+  /// No description provided for @homeNothingNewMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Pull down to check again.'**
+  String get homeNothingNewMessage;
 }
 
 class _AppLocalizationsDelegate

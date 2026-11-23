@@ -157,9 +157,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i729.WatchAuthStatus>(
       () => _i729.WatchAuthStatus(gh<_i631.AuthRepository>()),
     );
-    gh.factory<_i930.DashboardBloc>(
-      () => _i930.DashboardBloc(gh<_i239.Logout>()),
-    );
     gh.factory<_i929.ChangePasswordBloc>(
       () => _i929.ChangePasswordBloc(
         gh<_i234.AuthRemoteDataSource>(),
@@ -188,6 +185,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i828.AuthCubit>(),
         gh<_i42.DioClient>(),
         gh<_i451.AppLogger>(),
+      ),
+    );
+    gh.factory<_i930.DashboardBloc>(
+      () => _i930.DashboardBloc(
+        gh<_i239.Logout>(),
+        gh<_i390.CommunicationRemoteDataSource>(),
       ),
     );
     return this;
