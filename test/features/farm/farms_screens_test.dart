@@ -10,7 +10,6 @@ import 'package:super_flutter/core/ui/theme/app_theme.dart';
 import 'package:super_flutter/core/ui/widgets/app_empty_view.dart';
 import 'package:super_flutter/data/farm/model/farm_crop_model.dart';
 import 'package:super_flutter/data/farm/model/farm_model.dart';
-import 'package:super_flutter/data/farm/model/farm_photo_model.dart';
 import 'package:super_flutter/data/farm/model/farm_transaction_model.dart';
 import 'package:super_flutter/data/farm/sources/remote/farm_remote_data_source.dart';
 import 'package:super_flutter/features/farm/presentation/farm_detail/bloc/farm_detail_bloc.dart';

@@ -112,6 +112,50 @@ class _FarmFormViewState extends State<_FarmFormView> {
     _selectedOwnership = farm?.ownership?.value;
   }
 
+  List<Map<String, String>> get _availableDistricts {
+    final dist = widget.initialFarm?.district;
+    if (dist?.id != null && !_districts.any((d) => d['id'] == dist!.id)) {
+      return [
+        {'id': dist!.id!, 'name': dist.name ?? dist.id!},
+        ..._districts,
+      ];
+    }
+    return _districts;
+  }
+
+  List<Map<String, String>> get _availableSoilTypes {
+    final s = widget.initialFarm?.soilType;
+    if (s?.value != null && !_soilTypes.any((item) => item['value'] == s!.value)) {
+      return [
+        {'value': s!.value!, 'label': s.label ?? s.value!},
+        ..._soilTypes,
+      ];
+    }
+    return _soilTypes;
+  }
+
+  List<Map<String, String>> get _availableIrrigationTypes {
+    final i = widget.initialFarm?.irrigationType;
+    if (i?.value != null && !_irrigationTypes.any((item) => item['value'] == i!.value)) {
+      return [
+        {'value': i!.value!, 'label': i.label ?? i.value!},
+        ..._irrigationTypes,
+      ];
+    }
+    return _irrigationTypes;
+  }
+
+  List<Map<String, String>> get _availableOwnerships {
+    final o = widget.initialFarm?.ownership;
+    if (o?.value != null && !_ownerships.any((item) => item['value'] == o!.value)) {
+      return [
+        {'value': o!.value!, 'label': o.label ?? o.value!},
+        ..._ownerships,
+      ];
+    }
+    return _ownerships;
+  }
+
   @override
   void dispose() {
     _nameController.dispose();
@@ -150,7 +194,7 @@ class _FarmFormViewState extends State<_FarmFormView> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final isEditing = context.select((FarmFormBloc b) => b.state.isEditing);
+    final isEditing = widget.initialFarm != null && widget.initialFarm!.id != null;
 
     return BlocListener<FarmFormBloc, FarmFormState>(
       listener: (context, state) {
@@ -175,6 +219,30 @@ class _FarmFormViewState extends State<_FarmFormView> {
       child: Scaffold(
         appBar: AppTopBar(
           title: isEditing ? l10n.editFarm : l10n.addFarm,
+        ),
+        bottomNavigationBar: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(AppSpacing.md),
+            child: BlocBuilder<FarmFormBloc, FarmFormState>(
+              builder: (context, state) {
+                final isLoading = state.status == FarmFormStatus.loading;
+                return SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: FilledButton(
+                    onPressed: isLoading ? null : _submit,
+                    child: isLoading
+                        ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: DesignProgress(),
+                          )
+                        : Text(isEditing ? l10n.updateFarm : l10n.createFarm),
+                  ),
+                );
+              },
+            ),
+          ),
         ),
         body: Form(
           key: _formKey,
@@ -237,7 +305,7 @@ class _FarmFormViewState extends State<_FarmFormView> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      items: _districts
+                      items: _availableDistricts
                           .map((d) => DropdownMenuItem(
                                 value: d['id'],
                                 child: Text(d['name']!),
@@ -285,7 +353,7 @@ class _FarmFormViewState extends State<_FarmFormView> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      items: _soilTypes
+                      items: _availableSoilTypes
                           .map((s) => DropdownMenuItem(
                                 value: s['value'],
                                 child: Text(s['label']!),
@@ -304,7 +372,7 @@ class _FarmFormViewState extends State<_FarmFormView> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      items: _irrigationTypes
+                      items: _availableIrrigationTypes
                           .map((i) => DropdownMenuItem(
                                 value: i['value'],
                                 child: Text(i['label']!),
@@ -324,7 +392,7 @@ class _FarmFormViewState extends State<_FarmFormView> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      items: _ownerships
+                      items: _availableOwnerships
                           .map((o) => DropdownMenuItem(
                                 value: o['value'],
                                 child: Text(o['label']!),
@@ -373,25 +441,6 @@ class _FarmFormViewState extends State<_FarmFormView> {
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(height: AppSpacing.lg),
-              BlocBuilder<FarmFormBloc, FarmFormState>(
-                builder: (context, state) {
-                  final isLoading = state.status == FarmFormStatus.loading;
-                  return SizedBox(
-                    width: double.infinity,
-                    child: FilledButton(
-                      onPressed: isLoading ? null : _submit,
-                      child: isLoading
-                          ? const SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: DesignProgress(),
-                            )
-                          : Text(isEditing ? l10n.updateFarm : l10n.createFarm),
-                    ),
-                  );
-                },
               ),
             ],
           ),
