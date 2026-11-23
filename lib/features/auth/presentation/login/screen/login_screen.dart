@@ -144,31 +144,8 @@ class _LoginViewState extends State<LoginView> {
                         textAlign: TextAlign.center,
                       ),
                       22.height,
-                      SizedBox(
-                        width: double.infinity,
-                        child: SegmentedButton<LoginMethod>(
-                          segments: [
-                            ButtonSegment(
-                              value: LoginMethod.email,
-                              label: Text(l10n.loginWithEmail),
-                              icon: const Icon(PhosphorIconsRegular.envelope),
-                            ),
-                            ButtonSegment(
-                              value: LoginMethod.phone,
-                              label: Text(l10n.loginWithPhone),
-                              icon: const Icon(
-                                PhosphorIconsRegular.deviceMobile,
-                              ),
-                            ),
-                          ],
-                          selected: {method},
-                          showSelectedIcon: false,
-                          onSelectionChanged: (selected) => _loginBloc.add(
-                            LoginMethodChanged(selected.first),
-                          ),
-                        ),
-                      ),
-                      16.height,
+
+                      // 16.height,
                       if (method == LoginMethod.email) ...[
                         BlocSelector<LoginBloc, LoginState, String?>(
                           selector: (state) => state.emailError,
@@ -423,6 +400,37 @@ class _LoginViewState extends State<LoginView> {
                             );
                           },
                         ),
+                      12.height,
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            const TextSpan(text: 'Continue with '),
+                            WidgetSpan(
+                              alignment: PlaceholderAlignment.baseline,
+                              baseline: TextBaseline.alphabetic,
+                              child: GestureDetector(
+                                onTap: () {
+                                  _loginBloc.add(
+                                    LoginMethodChanged(
+                                      method == LoginMethod.email
+                                          ? LoginMethod.phone
+                                          : LoginMethod.email,
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  method == LoginMethod.email
+                                      ? l10n.loginWithPhone
+                                      : l10n.loginWithEmail,
+                                  style: linkStyle,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        textAlign: TextAlign.center,
+                        style: textStyle,
+                      ),
                       12.height,
                       Text.rich(
                         TextSpan(

@@ -20,21 +20,12 @@ class CommunicationRemoteDataSource {
       final response = await _dioClient.dio.get<dynamic>(
         ApiEndpoints.notice(notice),
       );
-      final body = response.data;
-      if (body is! Map) {
-        throw const NetworkException('Unexpected notice response.');
+      if (response.statusCode == 200 && response.data is Map) {
+        final body = response.data as Map;
+        final data = body['data'] is Map ? body['data'] as Map : body;
+        return NoticeModel.fromJson(Map<String, dynamic>.from(data));
       }
-      if (body['success'] == false) {
-        throw BadRequestException(
-          (body['message'] as String?) ?? 'The notice request failed.',
-          statusCode: response.statusCode,
-        );
-      }
-      final data = body['data'];
-      if (data is! Map) {
-        throw const NetworkException('The notice response is missing data.');
-      }
-      return NoticeModel.fromJson(Map<String, dynamic>.from(data));
+      return NoticeModel();
     } on DioException catch (e) {
       throw NetworkException.fromDioException(e);
     } on NetworkException {
@@ -54,33 +45,19 @@ class CommunicationRemoteDataSource {
         ApiEndpoints.notices,
         queryParameters: <String, dynamic>{'page': ?page, 'per_page': ?perPage},
       );
-      final body = response.data;
-      if (body is! Map) {
-        throw const NetworkException('Unexpected notices response.');
-      }
-      if (body['success'] == false) {
-        throw BadRequestException(
-          (body['message'] as String?) ?? 'The notices request failed.',
-          statusCode: response.statusCode,
+      if (response.statusCode == 200 && response.data is Map) {
+        return Paged.fromEnvelope(
+          Map<String, dynamic>.from(response.data as Map),
+          NoticeModel.fromJson,
         );
       }
-      final data = body['data'];
-      if (data is! List) {
-        throw const NetworkException('The notices response is missing data.');
-      }
-      return Paged.fromEnvelope(
-        Map<String, dynamic>.from(body),
-        NoticeModel.fromJson,
-      );
+      return const Paged(items: []);
     } on DioException catch (e) {
       throw NetworkException.fromDioException(e);
     } on NetworkException {
       rethrow;
     } catch (e) {
-      throw NetworkException(
-        'Could not process the notices response.',
-        cause: e,
-      );
+      return const Paged(items: []);
     }
   }
 
@@ -99,33 +76,19 @@ class CommunicationRemoteDataSource {
           'per_page': ?perPage,
         },
       );
-      final body = response.data;
-      if (body is! Map) {
-        throw const NetworkException('Unexpected alerts response.');
-      }
-      if (body['success'] == false) {
-        throw BadRequestException(
-          (body['message'] as String?) ?? 'The alerts request failed.',
-          statusCode: response.statusCode,
+      if (response.statusCode == 200 && response.data is Map) {
+        return Paged.fromEnvelope(
+          Map<String, dynamic>.from(response.data as Map),
+          AlertModel.fromJson,
         );
       }
-      final data = body['data'];
-      if (data is! List) {
-        throw const NetworkException('The alerts response is missing data.');
-      }
-      return Paged.fromEnvelope(
-        Map<String, dynamic>.from(body),
-        AlertModel.fromJson,
-      );
+      return const Paged(items: []);
     } on DioException catch (e) {
       throw NetworkException.fromDioException(e);
     } on NetworkException {
       rethrow;
     } catch (e) {
-      throw NetworkException(
-        'Could not process the alerts response.',
-        cause: e,
-      );
+      return const Paged(items: []);
     }
   }
 
@@ -136,33 +99,23 @@ class CommunicationRemoteDataSource {
         ApiEndpoints.banners,
         queryParameters: <String, dynamic>{'placement': ?placement},
       );
-      final body = response.data;
-      if (body is! Map) {
-        throw const NetworkException('Unexpected banners response.');
+      if (response.statusCode == 200 && response.data is Map) {
+        final body = response.data as Map;
+        final data = body['data'];
+        if (data is List) {
+          return data
+              .whereType<Map>()
+              .map((item) => BannerModel.fromJson(Map<String, dynamic>.from(item)))
+              .toList();
+        }
       }
-      if (body['success'] == false) {
-        throw BadRequestException(
-          (body['message'] as String?) ?? 'The banners request failed.',
-          statusCode: response.statusCode,
-        );
-      }
-      final data = body['data'];
-      if (data is! List) {
-        throw const NetworkException('The banners response is missing data.');
-      }
-      return data
-          .whereType<Map>()
-          .map((item) => BannerModel.fromJson(Map<String, dynamic>.from(item)))
-          .toList();
+      return const [];
     } on DioException catch (e) {
       throw NetworkException.fromDioException(e);
     } on NetworkException {
       rethrow;
     } catch (e) {
-      throw NetworkException(
-        'Could not process the banners response.',
-        cause: e,
-      );
+      return const [];
     }
   }
 }

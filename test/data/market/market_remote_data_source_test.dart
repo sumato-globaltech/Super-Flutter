@@ -97,7 +97,8 @@ void main() {
       );
 
       final summary = await source.getSummary();
-      expect(summary.markets, 5);
+      expect(summary, isNotNull);
+      expect(summary!.markets, 5);
       expect(summary.marketsReportingToday, 3);
       expect(summary.cropsTracked, 12);
       expect(summary.crops, hasLength(1));
@@ -176,7 +177,8 @@ void main() {
       );
 
       final result = await source.addFavourite('m1');
-      expect(result.id, 'm1');
+      expect(result, isNotNull);
+      expect(result!.id, 'm1');
       expect(result.isFavourite, isTrue);
     });
 
