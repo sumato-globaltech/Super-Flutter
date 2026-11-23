@@ -374,6 +374,30 @@ models:
         type: String
         nullable: true
     origin: generated
+  - name: TransactionCategoryModel
+    kind: model
+    feature: farm
+    path: lib/data/farm/model/transaction_category_model.dart
+    import: package:super_flutter/data/farm/model/transaction_category_model.dart
+    fingerprint: '{id:string,name:string,slug:string,type:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: type
+        json_key: type
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+      - name: slug
+        json_key: slug
+        type: String
+        nullable: true
+    origin: generated
   - name: DistrictModel
     kind: model
     feature: newPostFeatureDep

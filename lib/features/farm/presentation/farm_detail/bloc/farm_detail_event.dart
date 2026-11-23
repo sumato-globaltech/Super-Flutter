@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 
 sealed class FarmDetailEvent extends Equatable {
@@ -48,8 +50,9 @@ class FarmCropDeleted extends FarmDetailEvent {
 
 class FarmTransactionAdded extends FarmDetailEvent {
   final Map<String, dynamic> data;
+  final Completer<void>? completer;
 
-  const FarmTransactionAdded(this.data);
+  const FarmTransactionAdded(this.data, {this.completer});
 
   @override
   List<Object?> get props => [data];

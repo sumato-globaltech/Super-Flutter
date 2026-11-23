@@ -1,3 +1,4 @@
+import 'package:super_flutter/data/farm/model/transaction_category_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:super_flutter/data/farm/model/farm_crop_model.dart';
 import 'package:super_flutter/data/farm/model/farm_model.dart';
@@ -18,6 +19,7 @@ class FarmDetailState extends Equatable {
   final List<FarmPhotoModel> photos;
   final List<DeviceModel> devices;
   final SoilSensorAccountModel? soilSensorAccount;
+  final List<TransactionCategoryModel> transactionCategories;
   final int selectedTab;
   final bool isActionLoading;
   final bool isSyncingDevices;
@@ -35,6 +37,7 @@ class FarmDetailState extends Equatable {
     this.photos = const [],
     this.devices = const [],
     this.soilSensorAccount,
+    this.transactionCategories = const [],
     this.selectedTab = 0,
     this.isActionLoading = false,
     this.isSyncingDevices = false,
@@ -54,6 +57,7 @@ class FarmDetailState extends Equatable {
     List<DeviceModel>? devices,
     SoilSensorAccountModel? soilSensorAccount,
     bool clearSoilSensorAccount = false,
+    List<TransactionCategoryModel>? transactionCategories,
     int? selectedTab,
     bool? isActionLoading,
     bool? isSyncingDevices,
@@ -73,6 +77,8 @@ class FarmDetailState extends Equatable {
       soilSensorAccount: clearSoilSensorAccount
           ? null
           : (soilSensorAccount ?? this.soilSensorAccount),
+      transactionCategories:
+          transactionCategories ?? this.transactionCategories,
       selectedTab: selectedTab ?? this.selectedTab,
       isActionLoading: isActionLoading ?? this.isActionLoading,
       isSyncingDevices: isSyncingDevices ?? this.isSyncingDevices,
@@ -93,6 +99,7 @@ class FarmDetailState extends Equatable {
     photos,
     devices,
     soilSensorAccount,
+    transactionCategories,
     selectedTab,
     isActionLoading,
     isSyncingDevices,

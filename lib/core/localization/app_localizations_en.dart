@@ -744,6 +744,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get addTransaction => 'Add Transaction';
 
   @override
+  String get transactionAmount => 'Amount (₹)';
+
+  @override
+  String get transactionCategory => 'Category';
+
+  @override
+  String get transactionDate => 'Date';
+
+  @override
+  String get transactionDescription => 'Description';
+
+  @override
+  String get transactionInvalidAmount => 'Enter an amount greater than 0';
+
+  @override
+  String get transactionAdded => 'Transaction added';
+
+  @override
   String get noPhotosFound => 'No photos uploaded';
 
   @override

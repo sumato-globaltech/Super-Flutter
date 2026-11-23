@@ -1,6 +1,7 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:super_flutter/data/farm/model/transaction_category_model.dart';
 import 'package:super_flutter/data/farm/sources/remote/farm_remote_data_source.dart';
 import 'package:super_flutter/data/iot/model/device_model.dart';
 import 'package:super_flutter/data/iot/model/soil_sensor_account_model.dart';
@@ -60,6 +61,12 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
         return;
       }
 
+      List<TransactionCategoryModel> transactionCategories = const [];
+      try {
+        transactionCategories = await _remoteDataSource
+            .getTransactionCategories();
+      } catch (_) {}
+
       List<DeviceModel> devices = const [];
       SoilSensorAccountModel? soilSensorAccount;
       if (_iotRemoteDataSource != null) {
@@ -88,6 +95,7 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
           photos: photos != null ? (photos as dynamic) : const [],
           devices: devices,
           soilSensorAccount: soilSensorAccount,
+          transactionCategories: transactionCategories,
         ),
       );
     } catch (e) {
@@ -234,11 +242,21 @@ class FarmDetailBloc extends Bloc<FarmDetailEvent, FarmDetailState> {
             isActionLoading: false,
           ),
         );
+        event.completer?.complete();
       } else {
         emit(state.copyWith(isActionLoading: false));
+        event.completer?.completeError(Exception());
       }
     } catch (e) {
-      emit(state.copyWith(isActionLoading: false, errorMessage: e.toString()));
+      final completer = event.completer;
+      if (completer != null) {
+        emit(state.copyWith(isActionLoading: false));
+        completer.completeError(e);
+      } else {
+        emit(
+          state.copyWith(isActionLoading: false, errorMessage: e.toString()),
+        );
+      }
     }
   }
 

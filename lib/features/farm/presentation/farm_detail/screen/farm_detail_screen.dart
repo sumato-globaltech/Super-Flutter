@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:super_flutter/core/di/injection.dart';
+import 'package:super_flutter/core/extensions/context_extensions.dart';
 import 'package:super_flutter/core/extensions/extensions.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/core/ui/theme/app_colors.dart';
@@ -11,6 +14,7 @@ import 'package:super_flutter/core/ui/theme/design_colors.dart';
 import 'package:super_flutter/core/ui/widgets/app_empty_view.dart';
 import 'package:super_flutter/core/ui/widgets/app_error_view.dart';
 import 'package:super_flutter/core/ui/widgets/app_top_bar.dart';
+import 'package:super_flutter/core/ui/widgets/confirm_sheet.dart';
 import 'package:super_flutter/core/ui/widgets/design_card.dart';
 import 'package:super_flutter/core/ui/widgets/progress_circle.dart';
 import 'package:super_flutter/core/ui/widgets/title_details_card.dart';
@@ -439,74 +443,132 @@ class _FarmDetailView extends StatelessWidget {
     FarmDetailBloc bloc,
     AppLocalizations l10n,
   ) {
+    final formKey = GlobalKey<FormState>();
     final amountCtrl = TextEditingController();
     final descCtrl = TextEditingController();
+    final dateCtrl = TextEditingController();
     String type = 'expense';
+    String? categoryId;
+    DateTime occurredOn = DateTime.now();
+    final categories = bloc.state.transactionCategories;
+    final localizations = MaterialLocalizations.of(context);
+    dateCtrl.text = localizations.formatMediumDate(occurredOn);
 
-    showDialog<void>(
-      context: context,
-      builder: (ctx) => StatefulBuilder(
-        builder: (ctx, setState) => AlertDialog(
-          title: Text(l10n.addTransaction),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SegmentedButton<String>(
-                segments: const [
-                  ButtonSegment(value: 'income', label: Text('Income')),
-                  ButtonSegment(value: 'expense', label: Text('Expense')),
-                ],
-                selected: {type},
-                onSelectionChanged: (s) => setState(() => type = s.first),
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              TextField(
-                controller: amountCtrl,
-                keyboardType: const TextInputType.numberWithOptions(
-                  decimal: true,
+    ConfirmSheet.show<void>(
+      context,
+      ConfirmSheet(
+        title: l10n.addTransaction,
+        description: '',
+        confirmText: l10n.add,
+        child: StatefulBuilder(
+          builder: (ctx, setState) => Form(
+            key: formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SegmentedButton<String>(
+                  segments: [
+                    ButtonSegment(value: 'income', label: Text(l10n.income)),
+                    ButtonSegment(value: 'expense', label: Text(l10n.expense)),
+                  ],
+                  selected: {type},
+                  onSelectionChanged: (s) => setState(() => type = s.first),
                 ),
-                decoration: const InputDecoration(
-                  labelText: 'Amount (₹)',
-                  prefixText: '₹ ',
-                  isDense: true,
+                const SizedBox(height: AppSpacing.sm),
+                TextFormField(
+                  controller: amountCtrl,
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                  ),
+                  decoration: InputDecoration(
+                    labelText: '${l10n.transactionAmount} *',
+                    prefixIcon: const Icon(PhosphorIconsRegular.currencyInr),
+                  ),
+                  validator: (value) {
+                    final amount = double.tryParse((value ?? '').trim());
+                    return amount == null || amount <= 0
+                        ? l10n.transactionInvalidAmount
+                        : null;
+                  },
                 ),
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              TextField(
-                controller: descCtrl,
-                decoration: const InputDecoration(
-                  labelText: 'Description',
-                  isDense: true,
+                const SizedBox(height: AppSpacing.sm),
+                DropdownButtonFormField<String>(
+                  initialValue: categoryId,
+                  isExpanded: true,
+                  decoration: InputDecoration(
+                    labelText: '${l10n.transactionCategory} *',
+                    hintText: l10n.fieldSelect(l10n.transactionCategory),
+                    prefixIcon: const Icon(PhosphorIconsRegular.tag),
+                  ),
+                  items: [
+                    for (final category in categories)
+                      DropdownMenuItem(
+                        value: category.id,
+                        child: Text(category.name ?? ''),
+                      ),
+                  ],
+                  onChanged: (value) => setState(() => categoryId = value),
+                  validator: (value) => value == null
+                      ? l10n.fieldRequired(l10n.transactionCategory)
+                      : null,
                 ),
-              ),
-            ],
+                const SizedBox(height: AppSpacing.sm),
+                TextFormField(
+                  controller: dateCtrl,
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    labelText: '${l10n.transactionDate} *',
+                    prefixIcon: const Icon(PhosphorIconsRegular.calendarBlank),
+                  ),
+                  onTap: () async {
+                    final now = DateTime.now();
+                    final picked = await showDatePicker(
+                      context: ctx,
+                      initialDate: occurredOn,
+                      firstDate: DateTime(2000, 1, 2),
+                      lastDate: now,
+                      helpText: l10n.fieldSelect(l10n.transactionDate),
+                    );
+                    if (picked == null) return;
+                    setState(() {
+                      occurredOn = picked;
+                      dateCtrl.text = localizations.formatMediumDate(picked);
+                    });
+                  },
+                ),
+                const SizedBox(height: AppSpacing.sm),
+                TextFormField(
+                  controller: descCtrl,
+                  maxLength: 255,
+                  decoration: InputDecoration(
+                    labelText: l10n.transactionDescription,
+                    prefixIcon: const Icon(PhosphorIconsRegular.notePencil),
+                  ),
+                ),
+              ],
+            ),
           ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: Text(l10n.cancel),
-            ),
-            FilledButton(
-              onPressed: () {
-                final amount = double.tryParse(amountCtrl.text.trim());
-                if (amount == null || amount <= 0) return;
-                Navigator.pop(ctx);
-                bloc.add(
-                  FarmTransactionAdded({
-                    'type': type,
-                    'amount': amount,
-                    'occurred_on': DateTime.now().toIso8601String().substring(
-                      0,
-                      10,
-                    ),
-                    'description': descCtrl.text.trim(),
-                  }),
-                );
-              },
-              child: Text(l10n.add),
-            ),
-          ],
         ),
+        onPressed: () async {
+          if (!formKey.currentState!.validate()) return;
+          final completer = Completer<void>();
+          final description = descCtrl.text.trim();
+          bloc.add(
+            FarmTransactionAdded({
+              'type': type,
+              'amount': double.parse(amountCtrl.text.trim()),
+              'category_id': categoryId,
+              'occurred_on': occurredOn.toIso8601String().substring(0, 10),
+              if (description.isNotEmpty) 'description': description,
+            }, completer: completer),
+          );
+          await completer.future;
+          if (context.mounted) {
+            Navigator.of(context).pop();
+            context.showSnackBar(l10n.transactionAdded);
+          }
+        },
       ),
     );
   }

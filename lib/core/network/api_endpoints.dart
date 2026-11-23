@@ -38,4 +38,7 @@ abstract final class ApiEndpoints {
   static const landOwnerships = '/api/v1/farmer/land-ownerships';
 
   static String farmDetail(String farm) => '/api/v1/farmer/farms/$farm';
+
+  static const transactionCategories =
+      '/api/v1/categories/transaction_category';
 }

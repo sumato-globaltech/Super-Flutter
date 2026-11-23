@@ -14,6 +14,7 @@ import 'package:super_flutter/data/farm/model/farm_transaction_model.dart';
 import 'package:super_flutter/data/farm/model/irrigation_type_model.dart';
 import 'package:super_flutter/data/farm/model/ownership_model.dart';
 import 'package:super_flutter/data/farm/model/soil_type_model.dart';
+import 'package:super_flutter/data/farm/model/transaction_category_model.dart';
 
 import 'farm_endpoints.dart';
 
@@ -616,6 +617,41 @@ class FarmRemoteDataSource {
       rethrow;
     } catch (e) {
       return false;
+    }
+  }
+
+  /// GET http://dam.test/api/v1/categories/transaction_category
+  Future<List<TransactionCategoryModel>> getTransactionCategories() async {
+    try {
+      final response = await _dioClient.dio.get<dynamic>(
+        ApiEndpoints.transactionCategories,
+      );
+      final body = response.data;
+      if (response.statusCode == 200 && body is Map) {
+        final data = body['data'];
+        final items = data is List
+            ? data
+            : (data is Map && data['data'] is List
+                  ? data['data'] as List
+                  : null);
+        if (items != null) {
+          return items
+              .whereType<Map>()
+              .map(
+                (item) => TransactionCategoryModel.fromJson(
+                  Map<String, dynamic>.from(item),
+                ),
+              )
+              .toList();
+        }
+      }
+      return const [];
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on NetworkException {
+      rethrow;
+    } catch (e) {
+      return const [];
     }
   }
 }
