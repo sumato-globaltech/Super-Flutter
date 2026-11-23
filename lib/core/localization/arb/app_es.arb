@@ -176,6 +176,7 @@
   "income": "Ingresos",
   "expense": "Gastos",
   "netProfit": "Beneficio neto",
+  "financeSummary": "Resumen financiero",
   "noTransactionsFound": "Sin transacciones",
   "addTransactionPrompt": "Añade transacciones de ingresos o gastos para rastrear las finanzas.",
   "addTransaction": "Añadir transacción",

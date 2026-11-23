@@ -3,7 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:super_flutter/core/di/injection.dart';
+import 'package:super_flutter/core/extensions/extensions.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
+import 'package:super_flutter/core/ui/theme/app_colors.dart';
 import 'package:super_flutter/core/ui/theme/app_spacing.dart';
 import 'package:super_flutter/core/ui/theme/design_colors.dart';
 import 'package:super_flutter/core/ui/widgets/app_empty_view.dart';
@@ -816,6 +818,7 @@ class _FarmTransactionsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
     final totals = summary?.totals;
 
     return Scaffold(
@@ -827,86 +830,79 @@ class _FarmTransactionsTab extends StatelessWidget {
         padding: const EdgeInsets.all(AppSpacing.md),
         children: [
           if (totals != null) ...[
-            Row(
-              children: [
-                Expanded(
-                  child: DesignCard(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          l10n.income,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
+            DesignCard(
+              title: l10n.financeSummary,
+              paddingChild: const EdgeInsets.fromLTRB(14, 12, 14, 14),
+              child: IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    for (final (label, amount, icon, color) in [
+                      (
+                        l10n.income,
+                        totals.income,
+                        PhosphorIconsRegular.arrowDownLeft,
+                        theme.colorScheme.success,
+                      ),
+                      (
+                        l10n.expense,
+                        totals.expense,
+                        PhosphorIconsRegular.arrowUpRight,
+                        theme.colorScheme.error,
+                      ),
+                      (
+                        l10n.netProfit,
+                        totals.net,
+                        PhosphorIconsRegular.wallet,
+                        totals.net >= 0
+                            ? theme.appColors.accent
+                            : theme.colorScheme.error,
+                      ),
+                    ])
+                      Expanded(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(7),
+                              decoration: BoxDecoration(
+                                color: color.withValues(alpha: 0.12),
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: color.withValues(alpha: 0.35),
+                                ),
+                              ),
+                              child: Icon(icon, size: 16, color: color),
+                            ),
+                            6.height,
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                '₹${amount.toStringAsFixed(0)}',
+                                style: theme.textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  color: color,
+                                ),
+                              ),
+                            ),
+                            2.height,
+                            Text(
+                              label,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                fontSize: 11,
+                                color: color,
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 4),
-                        Text(
-                          '₹${totals.income.toStringAsFixed(0)}',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.green,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                      ),
+                  ],
                 ),
-                const SizedBox(width: AppSpacing.xs),
-                Expanded(
-                  child: DesignCard(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          l10n.expense,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          '₹${totals.expense.toStringAsFixed(0)}',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(width: AppSpacing.xs),
-                Expanded(
-                  child: DesignCard(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          l10n.netProfit,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          '₹${totals.net.toStringAsFixed(0)}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: totals.net >= 0 ? Colors.green : Colors.red,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
             const SizedBox(height: AppSpacing.sm),
           ],

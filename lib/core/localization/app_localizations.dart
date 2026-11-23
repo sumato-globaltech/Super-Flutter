@@ -1400,6 +1400,12 @@ abstract class AppLocalizations {
   /// **'Net Profit'**
   String get netProfit;
 
+  /// No description provided for @financeSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Finance Summary'**
+  String get financeSummary;
+
   /// No description provided for @noTransactionsFound.
   ///
   /// In en, this message translates to:

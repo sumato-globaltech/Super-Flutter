@@ -736,6 +736,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get netProfit => 'Beneficio neto';
 
   @override
+  String get financeSummary => 'Resumen financiero';
+
+  @override
   String get noTransactionsFound => 'Sin transacciones';
 
   @override

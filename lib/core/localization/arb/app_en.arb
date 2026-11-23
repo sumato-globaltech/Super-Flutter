@@ -366,6 +366,7 @@
   "income": "Income",
   "expense": "Expense",
   "netProfit": "Net Profit",
+  "financeSummary": "Finance Summary",
   "noTransactionsFound": "No transactions found",
   "addTransactionPrompt": "Add income or expense transactions to track farm finances.",
   "addTransaction": "Add Transaction",

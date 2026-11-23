@@ -731,6 +731,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get netProfit => 'Net Profit';
 
   @override
+  String get financeSummary => 'Finance Summary';
+
+  @override
   String get noTransactionsFound => 'No transactions found';
 
   @override
