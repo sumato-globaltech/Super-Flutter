@@ -1,7 +1,7 @@
 # Graph Report - /Users/deepjyotibaishya/Projects/App/Super-Flutter  (2026-11-23)
 
 ## Corpus Check
-- 325 files · ~252,000 words
+- 325 files · ~255,089 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -581,11 +581,11 @@ Nodes (0):
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `package:material_ui/material_ui.dart` connect `Community 0` to `Community 2`, `Community 3`, `Community 4`, `Community 36`, `Community 7`, `Community 8`, `Community 9`, `Community 10`, `Community 12`, `Community 14`, `Community 15`, `Community 17`, `Community 25`?**
-  _High betweenness centrality (0.209) - this node is a cross-community bridge._
+  _High betweenness centrality (0.193) - this node is a cross-community bridge._
 - **Why does `package:equatable/equatable.dart` connect `Community 1` to `Community 3`, `Community 4`, `Community 8`, `Community 10`, `Community 12`, `Community 14`, `Community 19`?**
-  _High betweenness centrality (0.198) - this node is a cross-community bridge._
-- **Why does `package:injectable/injectable.dart` connect `Community 6` to `Community 3`, `Community 4`, `Community 5`, `Community 8`, `Community 9`, `Community 10`, `Community 12`, `Community 13`, `Community 14`?**
-  _High betweenness centrality (0.119) - this node is a cross-community bridge._
+  _High betweenness centrality (0.142) - this node is a cross-community bridge._
+- **Why does `package:flutter_test/flutter_test.dart` connect `Community 5` to `Community 0`, `Community 3`, `Community 4`, `Community 7`, `Community 8`, `Community 10`, `Community 12`, `Community 14`?**
+  _High betweenness centrality (0.091) - this node is a cross-community bridge._
 - **What connects `main`, `openFrom`, `ConfirmSheet` to the rest of the system?**
   _1346 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**

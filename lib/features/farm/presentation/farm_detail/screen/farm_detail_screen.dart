@@ -176,6 +176,8 @@ class _FarmDetailView extends StatelessWidget {
                               ?.color
                               ?.withValues(alpha: 0.6),
                           indicatorColor: theme.colorScheme.primary,
+                          isScrollable: true,
+                          tabAlignment: TabAlignment.start,
                           tabs: [
                             Tab(text: '${l10n.crops} (${state.crops.length})'),
                             Tab(
@@ -1105,33 +1107,43 @@ class _FarmDevicesTab extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   if (isLinked) ...[
-                    OutlinedButton(
-                      onPressed: onUnlink,
-                      child: Text(l10n.unlinkAccount),
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: onUnlink,
+                        child: Text(l10n.unlinkAccount),
+                      ),
                     ),
                     const SizedBox(width: AppSpacing.xs),
-                    FilledButton.icon(
-                      onPressed: isSyncing ? null : onSync,
-                      icon: isSyncing
-                          ? const SizedBox(
-                              width: 14,
-                              height: 14,
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            )
-                          : const Icon(
-                              PhosphorIconsRegular.arrowsClockwise,
-                              size: 16,
-                            ),
-                      label: Text(isSyncing ? l10n.syncing : l10n.syncDevices),
+                    Expanded(
+                      child: FilledButton.icon(
+                        onPressed: isSyncing ? null : onSync,
+                        icon: isSyncing
+                            ? const SizedBox(
+                                width: 14,
+                                height: 14,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : const Icon(
+                                PhosphorIconsRegular.arrowsClockwise,
+                                size: 16,
+                              ),
+                        label: Text(
+                          isSyncing ? l10n.syncing : l10n.syncDevices,
+                        ),
+                      ),
                     ),
                   ] else ...[
-                    FilledButton.icon(
-                      onPressed: onLink,
-                      icon: const Icon(
-                        PhosphorIconsRegular.plugsConnected,
-                        size: 16,
+                    Expanded(
+                      child: FilledButton.icon(
+                        onPressed: onLink,
+                        icon: const Icon(
+                          PhosphorIconsRegular.plugsConnected,
+                          size: 16,
+                        ),
+                        label: Text(l10n.linkAccount),
                       ),
-                      label: Text(l10n.linkAccount),
                     ),
                   ],
                 ],
