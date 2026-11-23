@@ -661,6 +661,216 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Quick actions'**
   String get homeQuickActions;
+
+  /// App bar title of the all-notices list screen
+  ///
+  /// In en, this message translates to:
+  /// **'Notices'**
+  String get noticesTitle;
+
+  /// Empty state title when there are no notices
+  ///
+  /// In en, this message translates to:
+  /// **'No notices yet'**
+  String get noticesEmpty;
+
+  /// Empty state message below the notices empty title
+  ///
+  /// In en, this message translates to:
+  /// **'Pull down to check again.'**
+  String get noticesEmptyMessage;
+
+  /// App bar title of the all-alerts list screen
+  ///
+  /// In en, this message translates to:
+  /// **'Alerts'**
+  String get alertsTitle;
+
+  /// Empty state title when there are no alerts
+  ///
+  /// In en, this message translates to:
+  /// **'No alerts'**
+  String get alertsEmpty;
+
+  /// Empty state message below the alerts empty title
+  ///
+  /// In en, this message translates to:
+  /// **'Pull down to check again.'**
+  String get alertsEmptyMessage;
+
+  /// App bar title of the notice detail screen
+  ///
+  /// In en, this message translates to:
+  /// **'Notice'**
+  String get noticeDetailTitle;
+
+  /// Label for the notice title field
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get noticeDetailFieldTitle;
+
+  /// Label for the notice category field
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get noticeDetailFieldCategory;
+
+  /// Label for the notice priority field
+  ///
+  /// In en, this message translates to:
+  /// **'Priority'**
+  String get noticeDetailFieldPriority;
+
+  /// Label for the notice published date field
+  ///
+  /// In en, this message translates to:
+  /// **'Published'**
+  String get noticeDetailFieldPublishedAt;
+
+  /// Label for the notice expiry date field
+  ///
+  /// In en, this message translates to:
+  /// **'Expires'**
+  String get noticeDetailFieldExpiresAt;
+
+  /// Label for the notice body content section
+  ///
+  /// In en, this message translates to:
+  /// **'Content'**
+  String get noticeDetailFieldBody;
+
+  /// Link text to open the all notices screen from the home
+  ///
+  /// In en, this message translates to:
+  /// **'View all'**
+  String get homeViewAllNotices;
+
+  /// Link text to open the all alerts screen from the home
+  ///
+  /// In en, this message translates to:
+  /// **'View all'**
+  String get homeViewAllAlerts;
+
+  /// Title of the market prices overview card
+  ///
+  /// In en, this message translates to:
+  /// **'Price Overview'**
+  String get marketSummaryTitle;
+
+  /// Number of markets that reported prices today
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 market reporting today} other{{count} markets reporting today}}'**
+  String marketReportingToday(int count);
+
+  /// Number of crops tracked in the market summary
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 crop tracked} other{{count} crops tracked}}'**
+  String marketCropsTracked(int count);
+
+  /// Tab or filter chip for all markets
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get marketFilterAll;
+
+  /// Tab or filter chip for favourite markets
+  ///
+  /// In en, this message translates to:
+  /// **'Favourites'**
+  String get marketFilterFavourites;
+
+  /// Empty state title when no markets exist
+  ///
+  /// In en, this message translates to:
+  /// **'No markets found'**
+  String get marketEmpty;
+
+  /// Empty state message when no markets exist
+  ///
+  /// In en, this message translates to:
+  /// **'Pull down to check again.'**
+  String get marketEmptyMessage;
+
+  /// Empty state title for favourites list
+  ///
+  /// In en, this message translates to:
+  /// **'No favourite markets yet'**
+  String get marketFavouritesEmpty;
+
+  /// Empty state message for favourites list
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the star icon on any market to add it to your favourites.'**
+  String get marketFavouritesEmptyMessage;
+
+  /// Prompt when guest tries to view favourites
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to save favourite markets'**
+  String get marketSignInForFavourites;
+
+  /// Title of the price history screen
+  ///
+  /// In en, this message translates to:
+  /// **'Price History'**
+  String get marketPriceHistoryTitle;
+
+  /// Empty state title when a market has no price records
+  ///
+  /// In en, this message translates to:
+  /// **'No price records'**
+  String get marketPriceHistoryEmpty;
+
+  /// Empty state message when a market has no price records
+  ///
+  /// In en, this message translates to:
+  /// **'No price history has been recorded for this market yet.'**
+  String get marketPriceHistoryEmptyMessage;
+
+  /// Label for market address
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get marketFieldAddress;
+
+  /// Label for market type
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get marketFieldType;
+
+  /// Label for market district
+  ///
+  /// In en, this message translates to:
+  /// **'District'**
+  String get marketFieldDistrict;
+
+  /// Label for market facilities
+  ///
+  /// In en, this message translates to:
+  /// **'Facilities'**
+  String get marketFieldFacilities;
+
+  /// Label for market GPS location
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get marketFieldLocation;
+
+  /// Price range min to max
+  ///
+  /// In en, this message translates to:
+  /// **'Min ₹{min} · Max ₹{max}'**
+  String marketPriceRange(String min, String max);
+
+  /// Modal price per unit
+  ///
+  /// In en, this message translates to:
+  /// **'₹{price} / {unit}'**
+  String marketPricePerUnit(String price, String unit);
 }
 
 class _AppLocalizationsDelegate

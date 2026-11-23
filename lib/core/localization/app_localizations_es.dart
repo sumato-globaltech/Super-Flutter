@@ -321,4 +321,135 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get homeQuickActions => 'Quick actions';
+
+  @override
+  String get noticesTitle => 'Avisos';
+
+  @override
+  String get noticesEmpty => 'No hay avisos aún';
+
+  @override
+  String get noticesEmptyMessage =>
+      'Desliza hacia abajo para volver a comprobar.';
+
+  @override
+  String get alertsTitle => 'Alertas';
+
+  @override
+  String get alertsEmpty => 'Sin alertas';
+
+  @override
+  String get alertsEmptyMessage =>
+      'Desliza hacia abajo para volver a comprobar.';
+
+  @override
+  String get noticeDetailTitle => 'Aviso';
+
+  @override
+  String get noticeDetailFieldTitle => 'Título';
+
+  @override
+  String get noticeDetailFieldCategory => 'Categoría';
+
+  @override
+  String get noticeDetailFieldPriority => 'Prioridad';
+
+  @override
+  String get noticeDetailFieldPublishedAt => 'Publicado';
+
+  @override
+  String get noticeDetailFieldExpiresAt => 'Vence';
+
+  @override
+  String get noticeDetailFieldBody => 'Contenido';
+
+  @override
+  String get homeViewAllNotices => 'Ver todos';
+
+  @override
+  String get homeViewAllAlerts => 'Ver todos';
+
+  @override
+  String get marketSummaryTitle => 'Resumen de precios';
+
+  @override
+  String marketReportingToday(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count mercados reportando hoy',
+      one: '1 mercado reportando hoy',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String marketCropsTracked(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cultivos registrados',
+      one: '1 cultivo registrado',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get marketFilterAll => 'Todos';
+
+  @override
+  String get marketFilterFavourites => 'Favoritos';
+
+  @override
+  String get marketEmpty => 'No se encontraron mercados';
+
+  @override
+  String get marketEmptyMessage =>
+      'Desliza hacia abajo para comprobar de nuevo.';
+
+  @override
+  String get marketFavouritesEmpty => 'Aún no tienes mercados favoritos';
+
+  @override
+  String get marketFavouritesEmptyMessage =>
+      'Toca el ícono de estrella en cualquier mercado para añadirlo a favoritos.';
+
+  @override
+  String get marketSignInForFavourites =>
+      'Inicia sesión para guardar mercados favoritos';
+
+  @override
+  String get marketPriceHistoryTitle => 'Historial de precios';
+
+  @override
+  String get marketPriceHistoryEmpty => 'Sin registros de precios';
+
+  @override
+  String get marketPriceHistoryEmptyMessage =>
+      'Aún no hay historial de precios para este mercado.';
+
+  @override
+  String get marketFieldAddress => 'Dirección';
+
+  @override
+  String get marketFieldType => 'Tipo';
+
+  @override
+  String get marketFieldDistrict => 'Distrito';
+
+  @override
+  String get marketFieldFacilities => 'Instalaciones';
+
+  @override
+  String get marketFieldLocation => 'Ubicación';
+
+  @override
+  String marketPriceRange(String min, String max) {
+    return 'Mín ₹$min · Máx ₹$max';
+  }
+
+  @override
+  String marketPricePerUnit(String price, String unit) {
+    return '₹$price / $unit';
+  }
 }

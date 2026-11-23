@@ -154,5 +154,122 @@
   "homeStatewide": "Statewide",
   "homeNothingNew": "Nothing new today",
   "homeNothingNewMessage": "Pull down to check again.",
-  "homeQuickActions": "Quick actions"
+  "homeQuickActions": "Quick actions",
+
+  "noticesTitle": "Notices",
+  "@noticesTitle": { "description": "App bar title of the all-notices list screen" },
+
+  "noticesEmpty": "No notices yet",
+  "@noticesEmpty": { "description": "Empty state title when there are no notices" },
+
+  "noticesEmptyMessage": "Pull down to check again.",
+  "@noticesEmptyMessage": { "description": "Empty state message below the notices empty title" },
+
+  "alertsTitle": "Alerts",
+  "@alertsTitle": { "description": "App bar title of the all-alerts list screen" },
+
+  "alertsEmpty": "No alerts",
+  "@alertsEmpty": { "description": "Empty state title when there are no alerts" },
+
+  "alertsEmptyMessage": "Pull down to check again.",
+  "@alertsEmptyMessage": { "description": "Empty state message below the alerts empty title" },
+
+  "noticeDetailTitle": "Notice",
+  "@noticeDetailTitle": { "description": "App bar title of the notice detail screen" },
+
+  "noticeDetailFieldTitle": "Title",
+  "@noticeDetailFieldTitle": { "description": "Label for the notice title field" },
+
+  "noticeDetailFieldCategory": "Category",
+  "@noticeDetailFieldCategory": { "description": "Label for the notice category field" },
+
+  "noticeDetailFieldPriority": "Priority",
+  "@noticeDetailFieldPriority": { "description": "Label for the notice priority field" },
+
+  "noticeDetailFieldPublishedAt": "Published",
+  "@noticeDetailFieldPublishedAt": { "description": "Label for the notice published date field" },
+
+  "noticeDetailFieldExpiresAt": "Expires",
+  "@noticeDetailFieldExpiresAt": { "description": "Label for the notice expiry date field" },
+
+  "noticeDetailFieldBody": "Content",
+  "@noticeDetailFieldBody": { "description": "Label for the notice body content section" },
+
+  "homeViewAllNotices": "View all",
+  "@homeViewAllNotices": { "description": "Link text to open the all notices screen from the home" },
+
+  "homeViewAllAlerts": "View all",
+  "@homeViewAllAlerts": { "description": "Link text to open the all alerts screen from the home" },
+
+  "marketSummaryTitle": "Price Overview",
+  "@marketSummaryTitle": { "description": "Title of the market prices overview card" },
+
+  "marketReportingToday": "{count, plural, =1{1 market reporting today} other{{count} markets reporting today}}",
+  "@marketReportingToday": {
+    "description": "Number of markets that reported prices today",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "marketCropsTracked": "{count, plural, =1{1 crop tracked} other{{count} crops tracked}}",
+  "@marketCropsTracked": {
+    "description": "Number of crops tracked in the market summary",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "marketFilterAll": "All",
+  "@marketFilterAll": { "description": "Tab or filter chip for all markets" },
+
+  "marketFilterFavourites": "Favourites",
+  "@marketFilterFavourites": { "description": "Tab or filter chip for favourite markets" },
+
+  "marketEmpty": "No markets found",
+  "@marketEmpty": { "description": "Empty state title when no markets exist" },
+
+  "marketEmptyMessage": "Pull down to check again.",
+  "@marketEmptyMessage": { "description": "Empty state message when no markets exist" },
+
+  "marketFavouritesEmpty": "No favourite markets yet",
+  "@marketFavouritesEmpty": { "description": "Empty state title for favourites list" },
+
+  "marketFavouritesEmptyMessage": "Tap the star icon on any market to add it to your favourites.",
+  "@marketFavouritesEmptyMessage": { "description": "Empty state message for favourites list" },
+
+  "marketSignInForFavourites": "Sign in to save favourite markets",
+  "@marketSignInForFavourites": { "description": "Prompt when guest tries to view favourites" },
+
+  "marketPriceHistoryTitle": "Price History",
+  "@marketPriceHistoryTitle": { "description": "Title of the price history screen" },
+
+  "marketPriceHistoryEmpty": "No price records",
+  "@marketPriceHistoryEmpty": { "description": "Empty state title when a market has no price records" },
+
+  "marketPriceHistoryEmptyMessage": "No price history has been recorded for this market yet.",
+  "@marketPriceHistoryEmptyMessage": { "description": "Empty state message when a market has no price records" },
+
+  "marketFieldAddress": "Address",
+  "@marketFieldAddress": { "description": "Label for market address" },
+
+  "marketFieldType": "Type",
+  "@marketFieldType": { "description": "Label for market type" },
+
+  "marketFieldDistrict": "District",
+  "@marketFieldDistrict": { "description": "Label for market district" },
+
+  "marketFieldFacilities": "Facilities",
+  "@marketFieldFacilities": { "description": "Label for market facilities" },
+
+  "marketFieldLocation": "Location",
+  "@marketFieldLocation": { "description": "Label for market GPS location" },
+
+  "marketPriceRange": "Min ₹{min} · Max ₹{max}",
+  "@marketPriceRange": {
+    "description": "Price range min to max",
+    "placeholders": { "min": { "type": "String" }, "max": { "type": "String" } }
+  },
+
+  "marketPricePerUnit": "₹{price} / {unit}",
+  "@marketPricePerUnit": {
+    "description": "Modal price per unit",
+    "placeholders": { "price": { "type": "String" }, "unit": { "type": "String" } }
+  }
 }

@@ -7,6 +7,7 @@ import 'package:super_flutter/core/constants/constants.dart';
 import 'package:super_flutter/core/di/injection.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/core/ui/widgets/confirm_sheet.dart';
+import 'package:super_flutter/features/communication/routes/communication_route_names.dart';
 import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
 import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 import 'package:super_flutter/app/access/app_features.dart';
@@ -289,9 +290,20 @@ class _DashboardView extends StatelessWidget {
                           ),
                         },
                       if (state.alerts.isNotEmpty) ...[
-                        Text(
-                          l10n.homeAlerts,
-                          style: theme.textTheme.titleMedium,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              l10n.homeAlerts,
+                              style: theme.textTheme.titleMedium,
+                            ),
+                            TextButton(
+                              onPressed: () => context.push(
+                                CommunicationRouteNames.alerts,
+                              ),
+                              child: Text(l10n.homeViewAllAlerts),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 8),
                         for (final alert in state.alerts) ...[
@@ -345,9 +357,20 @@ class _DashboardView extends StatelessWidget {
                         const SizedBox(height: 4),
                       ],
                       if (state.notices.isNotEmpty) ...[
-                        Text(
-                          l10n.homeNotices,
-                          style: theme.textTheme.titleMedium,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              l10n.homeNotices,
+                              style: theme.textTheme.titleMedium,
+                            ),
+                            TextButton(
+                              onPressed: () => context.push(
+                                CommunicationRouteNames.notices,
+                              ),
+                              child: Text(l10n.homeViewAllNotices),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 8),
                         DesignCard(
@@ -363,22 +386,30 @@ class _DashboardView extends StatelessWidget {
                             children: [
                               for (final (index, notice)
                                   in state.notices.indexed)
-                                TitleDetailsCard(
-                                  title: [
-                                    notice.category?.name,
-                                    switch (notice.publishedAt) {
-                                      final date? => DateFormat.yMMMd().format(
-                                        date.toLocal(),
-                                      ),
-                                      null => null,
-                                    },
-                                  ].whereType<String>().join(' · '),
-                                  text: notice.title ?? '-',
-                                  isFirstItem: index == 0,
-                                  iconData: PhosphorIconsRegular.megaphone,
-                                  accentColor: notice.priority?.value == 'high'
-                                      ? DesignColor.orange
-                                      : DesignColor.accentName,
+                                GestureDetector(
+                                  onTap: () => context.push(
+                                    CommunicationRouteNames.noticeDetail(
+                                      notice.id!,
+                                    ),
+                                  ),
+                                  child: TitleDetailsCard(
+                                    title: [
+                                      notice.category?.name,
+                                      switch (notice.publishedAt) {
+                                        final date? => DateFormat.yMMMd().format(
+                                          date.toLocal(),
+                                        ),
+                                        null => null,
+                                      },
+                                    ].whereType<String>().join(' · '),
+                                    text: notice.title ?? '-',
+                                    isFirstItem: index == 0,
+                                    showNavigateIcon: true,
+                                    iconData: PhosphorIconsRegular.megaphone,
+                                    accentColor: notice.priority?.value == 'high'
+                                        ? DesignColor.orange
+                                        : DesignColor.accentName,
+                                  ),
                                 ),
                             ],
                           ),

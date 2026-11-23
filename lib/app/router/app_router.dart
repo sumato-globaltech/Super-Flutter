@@ -7,6 +7,7 @@ import 'package:super_flutter/domain/auth/entities/access_policy.dart';
 import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
 // sf:feature-routes-imports:begin
 import 'package:super_flutter/features/auth/routes/auth_routes.dart';
+import 'package:super_flutter/features/communication/routes/communication_routes.dart';
 import 'package:super_flutter/features/super_awesome/routes/super_awesome_routes.dart';
 import 'package:super_flutter/features/ui_gallery/routes/ui_gallery_routes.dart';
 
@@ -55,6 +56,7 @@ GoRouter createRouter({
       buildAppShellRoute(),
       // sf:feature-routes:begin
       ...buildAuthRoutes(),
+      ...buildCommunicationRoutes(),
       ...buildSuperAwesomeRoutes(),
       ...buildUiGalleryRoutes(),
       // sf:feature-routes:end

@@ -39,6 +39,10 @@ import 'package:super_flutter/data/communication/sources/local/communication_loc
     as _i940;
 import 'package:super_flutter/data/communication/sources/remote/communication_remote_data_source.dart'
     as _i390;
+import 'package:super_flutter/data/market/repositories/market_repository_impl.dart'
+    as _i341;
+import 'package:super_flutter/data/market/sources/remote/market_remote_data_source.dart'
+    as _i1002;
 import 'package:super_flutter/domain/auth/repositories/auth_repository.dart'
     as _i631;
 import 'package:super_flutter/domain/auth/use_cases/check_auth_status.dart'
@@ -55,13 +59,23 @@ import 'package:super_flutter/domain/auth/use_cases/verify_otp.dart' as _i625;
 import 'package:super_flutter/domain/auth/use_cases/watch_auth_status.dart'
     as _i729;
 import 'package:super_flutter/features/auth/presentation/change_password/bloc/change_password_bloc.dart'
-    as _i929;
+    as _i930;
 import 'package:super_flutter/features/auth/presentation/login/bloc/login_bloc.dart'
     as _i386;
 import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart'
     as _i828;
+import 'package:super_flutter/features/communication/presentation/alerts/bloc/alerts_bloc.dart'
+    as _i140;
+import 'package:super_flutter/features/communication/presentation/notice_detail/bloc/notice_detail_bloc.dart'
+    as _i437;
+import 'package:super_flutter/features/communication/presentation/notices/bloc/notices_bloc.dart'
+    as _i929;
 import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart'
-    as _i930;
+    as _i931;
+import 'package:super_flutter/features/market/presentation/market/bloc/market_bloc.dart'
+    as _i336;
+import 'package:super_flutter/features/market/presentation/market_prices/bloc/market_prices_bloc.dart'
+    as _i688;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -121,6 +135,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i390.CommunicationRemoteDataSource>(
       () => _i390.CommunicationRemoteDataSource(gh<_i42.DioClient>()),
     );
+    gh.lazySingleton<_i1002.MarketRemoteDataSource>(
+      () => _i1002.MarketRemoteDataSource(gh<_i42.DioClient>()),
+    );
     gh.lazySingleton<_i631.AuthRepository>(
       () => _i227.AuthRepositoryImpl(
         gh<_i234.AuthRemoteDataSource>(),
@@ -128,11 +145,29 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i827.SessionManager>(),
       ),
     );
+    gh.factory<_i140.AlertsBloc>(
+      () => _i140.AlertsBloc(gh<_i390.CommunicationRemoteDataSource>()),
+    );
+    gh.factory<_i437.NoticeDetailBloc>(
+      () => _i437.NoticeDetailBloc(gh<_i390.CommunicationRemoteDataSource>()),
+    );
+    gh.factory<_i929.NoticesBloc>(
+      () => _i929.NoticesBloc(gh<_i390.CommunicationRemoteDataSource>()),
+    );
     gh.lazySingleton<_i944.CommunicationRepositoryImpl>(
       () => _i944.CommunicationRepositoryImpl(
         gh<_i390.CommunicationRemoteDataSource>(),
         gh<_i940.CommunicationLocalDataSource>(),
       ),
+    );
+    gh.factory<_i336.MarketBloc>(
+      () => _i336.MarketBloc(gh<_i1002.MarketRemoteDataSource>()),
+    );
+    gh.factory<_i688.MarketPricesBloc>(
+      () => _i688.MarketPricesBloc(gh<_i1002.MarketRemoteDataSource>()),
+    );
+    gh.lazySingleton<_i341.MarketRepositoryImpl>(
+      () => _i341.MarketRepositoryImpl(gh<_i1002.MarketRemoteDataSource>()),
     );
     gh.factory<_i236.CheckAuthStatus>(
       () => _i236.CheckAuthStatus(gh<_i631.AuthRepository>()),
@@ -157,8 +192,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i729.WatchAuthStatus>(
       () => _i729.WatchAuthStatus(gh<_i631.AuthRepository>()),
     );
-    gh.factory<_i929.ChangePasswordBloc>(
-      () => _i929.ChangePasswordBloc(
+    gh.factory<_i930.ChangePasswordBloc>(
+      () => _i930.ChangePasswordBloc(
         gh<_i234.AuthRemoteDataSource>(),
         gh<_i275.PasswordChanged>(),
         gh<_i239.Logout>(),
@@ -187,8 +222,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i451.AppLogger>(),
       ),
     );
-    gh.factory<_i930.DashboardBloc>(
-      () => _i930.DashboardBloc(
+    gh.factory<_i931.DashboardBloc>(
+      () => _i931.DashboardBloc(
         gh<_i239.Logout>(),
         gh<_i390.CommunicationRemoteDataSource>(),
       ),
