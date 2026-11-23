@@ -15,6 +15,7 @@ import '../access/app_features.dart';
 import '../access/feature_registry.dart';
 import '../config/app_config.dart';
 import '../shell/app_shell_route.dart';
+import '../shell/placeholder_routes.dart';
 import '../startup/app_startup.dart';
 import '../startup/force_update_screen.dart';
 import '../startup/splash_screen.dart';
@@ -39,7 +40,7 @@ GoRouter createRouter({
       access: authCubit.state.access,
       passwordChangeRequired: authCubit.state.mustChangePassword,
     ),
-    routes: [
+    routes: withPlaceholderRoutes(appFeatures, [
       GoRoute(
         path: RouteNames.splash,
         name: RouteNames.splash,
@@ -57,7 +58,7 @@ GoRouter createRouter({
       ...buildSuperAwesomeRoutes(),
       ...buildUiGalleryRoutes(),
       // sf:feature-routes:end
-    ],
+    ]),
   );
 }
 

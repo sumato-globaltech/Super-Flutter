@@ -95,6 +95,23 @@ class FeatureRegistry {
     );
   }
 
+  /// What the user can open that the tab bar does not show: tabs past
+  /// [maxTabs], then the features without one. [home] is left out.
+  List<AppFeature> quickActions(
+    AccessPolicy policy, {
+    required String home,
+    int maxTabs = 5,
+  }) {
+    final paths = <String>{home};
+    return [
+      for (final feature in [
+        ...navigationFor(policy, maxTabs: maxTabs).overflow,
+        ...secondary(policy),
+      ])
+        if (paths.add(feature.path)) feature,
+    ];
+  }
+
   List<AppFeature> secondary(AccessPolicy policy) =>
       allowed(policy).where((f) => f.tab == null).toList(growable: false);
 

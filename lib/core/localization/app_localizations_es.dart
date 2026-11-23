@@ -318,4 +318,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get homeNothingNewMessage => 'Pull down to check again.';
+
+  @override
+  String get homeQuickActions => 'Quick actions';
 }

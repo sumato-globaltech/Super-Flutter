@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:super_flutter/app/access/app_features.dart';
 import 'package:super_flutter/domain/auth/entities/access_policy.dart';
+import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
 
 /// Role defaults from `dam/config/access.php`, as the API returns them.
 const _defaults = <String, Set<String>>{
@@ -153,6 +154,46 @@ void main() {
           .map((f) => f.id);
       expect(ids, containsAll(['manage_notices', 'manage_alerts']));
       expect(ids, isNot(contains('support')));
+    });
+  });
+
+  group('quick actions on Home', () {
+    List<String> actionsOf(AccessPolicy policy) => appFeatures
+        .quickActions(policy, home: DashboardRouteNames.dashboard)
+        .map((f) => f.id)
+        .toList();
+
+    test('a farmer gets what the tab bar does not show', () {
+      final ids = actionsOf(policyFor(Roles.farmer, profile: true));
+      expect(ids, ['support', 'crops', 'notices', 'profile']);
+    });
+
+    test('an admin gets the management screens, not the farmer ones', () {
+      final ids = actionsOf(policyFor(Roles.admin));
+      expect(ids, containsAll(['manage_notices', 'manage_alerts']));
+      expect(ids, isNot(contains('support')));
+      expect(ids, isNot(contains('home')));
+    });
+
+    test('tabs behind More come first, once per path', () {
+      final policy = policyFor(Roles.superAdmin, profile: true);
+      final overflow = appFeatures
+          .navigationFor(policy, maxTabs: 3)
+          .overflow
+          .map((f) => f.path)
+          .toSet();
+      final actions = appFeatures.quickActions(
+        policy,
+        home: DashboardRouteNames.dashboard,
+        maxTabs: 3,
+      );
+      expect(overflow, isNotEmpty);
+      expect(
+        actions.take(overflow.length).map((f) => f.path).toSet(),
+        overflow,
+      );
+      final paths = actions.map((f) => f.path).toList();
+      expect(paths.toSet().length, paths.length);
     });
   });
 

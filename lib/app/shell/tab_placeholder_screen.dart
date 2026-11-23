@@ -19,7 +19,6 @@ class TabPlaceholderScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppTopBar(
         title: feature?.title(l10n) ?? l10n.comingSoon,
-        automaticallyImplyLeading: false,
       ),
       body: SafeArea(
         child: AppEmptyView(

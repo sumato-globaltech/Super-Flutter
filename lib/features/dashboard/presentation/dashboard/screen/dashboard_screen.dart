@@ -6,6 +6,9 @@ import 'package:super_flutter/app/config/app_config.dart';
 import 'package:super_flutter/core/di/injection.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/core/ui/widgets/confirm_sheet.dart';
+import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
+import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
+import 'package:super_flutter/app/access/app_features.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
 import 'package:super_flutter/core/ui/theme/app_spacing.dart';
@@ -106,20 +109,20 @@ class _DashboardView extends StatelessWidget {
         builder: (context, state) {
           final bloc = context.read<DashboardBloc>();
           final theme = Theme.of(context);
-          if (!state.hasContent) {
-            switch (state.homeStatus) {
-              case DashboardHomeStatus.initial || DashboardHomeStatus.loading:
-                return const Center(child: DesignProgress());
-              case DashboardHomeStatus.failure:
-                return AppErrorView(
-                  message: state.errorMessage ?? l10n.errorUnknown,
-                  retryLabel: l10n.tryAgain,
-                  onRetry: () => bloc.add(const DashboardStarted()),
-                );
-              case DashboardHomeStatus.success:
-                break;
-            }
-          }
+          final registry = appFeatures;
+          final actions = registry.quickActions(
+            context.select((AuthCubit cubit) => cubit.state.access),
+            home: DashboardRouteNames.dashboard,
+          );
+          final tabPaths = registry.tabPaths.toSet();
+          const accents = [
+            DesignColor.accentName,
+            DesignColor.accentEnergy,
+            DesignColor.accentPoints,
+            DesignColor.accentUin,
+            DesignColor.accentType,
+            DesignColor.accentLocation,
+          ];
           return RefreshIndicator(
             onRefresh: () async {
               bloc.add(const DashboardStarted());
@@ -135,15 +138,6 @@ class _DashboardView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      if (!state.hasContent)
-                        SizedBox(
-                          height: 400,
-                          child: AppEmptyView(
-                            title: l10n.homeNothingNew,
-                            message: l10n.homeNothingNewMessage,
-                            icon: PhosphorIconsRegular.sun,
-                          ),
-                        ),
                       if (state.banners.isNotEmpty) ...[
                         SizedBox(
                           height: 160,
@@ -211,6 +205,88 @@ class _DashboardView extends StatelessWidget {
                         ),
                         const SizedBox(height: 12),
                       ],
+                      if (actions.isNotEmpty) ...[
+                        Text(
+                          l10n.homeQuickActions,
+                          style: theme.textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 8),
+                        GridView.count(
+                          crossAxisCount: 4,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          mainAxisSpacing: 4,
+                          crossAxisSpacing: 4,
+                          childAspectRatio: 0.85,
+                          children: [
+                            for (final (index, feature) in actions.indexed)
+                              InkWell(
+                                borderRadius: BorderRadius.circular(12),
+                                // A tab behind More is a branch of the shell.
+                                onTap: () => tabPaths.contains(feature.path)
+                                    ? context.go(feature.path)
+                                    : context.push(feature.path),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: 48,
+                                      height: 48,
+                                      decoration: BoxDecoration(
+                                        color: accents[index % accents.length]
+                                            .withValues(
+                                              alpha:
+                                                  theme.brightness ==
+                                                      Brightness.dark
+                                                  ? 0.22
+                                                  : 0.12,
+                                            ),
+                                        borderRadius: BorderRadius.circular(14),
+                                      ),
+                                      child: Icon(
+                                        feature.icon,
+                                        color: accents[index % accents.length],
+                                      ),
+                                    ),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      feature.title(l10n),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.center,
+                                      style: theme.textTheme.labelMedium,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                      ],
+                      if (!state.hasContent)
+                        switch (state.homeStatus) {
+                          DashboardHomeStatus.initial ||
+                          DashboardHomeStatus.loading => const Padding(
+                            padding: EdgeInsets.all(32),
+                            child: Center(child: DesignProgress()),
+                          ),
+                          DashboardHomeStatus.failure => SizedBox(
+                            height: 320,
+                            child: AppErrorView(
+                              message: state.errorMessage ?? l10n.errorUnknown,
+                              retryLabel: l10n.tryAgain,
+                              onRetry: () => bloc.add(const DashboardStarted()),
+                            ),
+                          ),
+                          DashboardHomeStatus.success => SizedBox(
+                            height: 320,
+                            child: AppEmptyView(
+                              title: l10n.homeNothingNew,
+                              message: l10n.homeNothingNewMessage,
+                              icon: PhosphorIconsRegular.sun,
+                            ),
+                          ),
+                        },
                       if (state.alerts.isNotEmpty) ...[
                         Text(
                           l10n.homeAlerts,
