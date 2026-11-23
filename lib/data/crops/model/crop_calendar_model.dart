@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'crop_advisory_model.dart';
 import 'crop_model.dart';
 

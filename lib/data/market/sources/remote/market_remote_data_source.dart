@@ -55,9 +55,7 @@ class MarketRemoteDataSource {
     try {
       final response = await _dioClient.dio.get<dynamic>(
         MarketEndpoints.summary,
-        queryParameters: <String, dynamic>{
-          'district_id': ?districtId,
-        },
+        queryParameters: <String, dynamic>{'district_id': ?districtId},
       );
       if (response.statusCode == 200 && response.data is Map) {
         final body = response.data as Map;
@@ -113,17 +111,11 @@ class MarketRemoteDataSource {
   }
 
   /// GET /api/v1/markets/favourites
-  Future<Paged<MarketModel>> getFavourites({
-    int? page,
-    int? perPage,
-  }) async {
+  Future<Paged<MarketModel>> getFavourites({int? page, int? perPage}) async {
     try {
       final response = await _dioClient.dio.get<dynamic>(
         MarketEndpoints.favourites,
-        queryParameters: <String, dynamic>{
-          'page': ?page,
-          'per_page': ?perPage,
-        },
+        queryParameters: <String, dynamic>{'page': ?page, 'per_page': ?perPage},
       );
       if (response.statusCode == 200 && response.data is Map) {
         final body = response.data as Map;
@@ -169,9 +161,7 @@ class MarketRemoteDataSource {
   /// DELETE /api/v1/markets/{market}/favourite
   Future<void> removeFavourite(String marketId) async {
     try {
-      await _dioClient.dio.delete<dynamic>(
-        MarketEndpoints.favourite(marketId),
-      );
+      await _dioClient.dio.delete<dynamic>(MarketEndpoints.favourite(marketId));
     } on DioException catch (e) {
       throw NetworkException.fromDioException(e);
     }

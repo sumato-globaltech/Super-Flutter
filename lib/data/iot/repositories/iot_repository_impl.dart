@@ -23,8 +23,7 @@ class IotRepositoryImpl {
   Future<SoilSensorAccountModel?> linkSoilSensorAccount(
     String farmId,
     Map<String, dynamic> data,
-  ) =>
-      _remoteDataSource.linkSoilSensorAccount(farmId, data);
+  ) => _remoteDataSource.linkSoilSensorAccount(farmId, data);
 
   Future<bool> unlinkSoilSensorAccount(String farmId) =>
       _remoteDataSource.unlinkSoilSensorAccount(farmId);
@@ -37,11 +36,10 @@ class IotRepositoryImpl {
     required String sensorId,
     String? from,
     String? to,
-  }) =>
-      _remoteDataSource.getDeviceReadings(
-        deviceId,
-        sensorId: sensorId,
-        from: from,
-        to: to,
-      );
+  }) => _remoteDataSource.getDeviceReadings(
+    deviceId,
+    sensorId: sensorId,
+    from: from,
+    to: to,
+  );
 }

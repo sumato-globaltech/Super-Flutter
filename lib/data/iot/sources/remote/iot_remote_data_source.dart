@@ -42,9 +42,7 @@ class IotRemoteDataSource {
           response.data is Map) {
         final data = response.data['data'];
         if (data is Map) {
-          return IntegrationRunModel.fromJson(
-            Map<String, dynamic>.from(data),
-          );
+          return IntegrationRunModel.fromJson(Map<String, dynamic>.from(data));
         }
       }
       return null;
@@ -96,7 +94,9 @@ class IotRemoteDataSource {
 
   Future<bool> unlinkSoilSensorAccount(String farmId) async {
     try {
-      final response = await _dio.delete(IotEndpoints.soilSensorAccount(farmId));
+      final response = await _dio.delete(
+        IotEndpoints.soilSensorAccount(farmId),
+      );
       return response.statusCode == 200 || response.statusCode == 204;
     } on DioException catch (e) {
       throw NetworkException.fromDioException(e);
@@ -127,18 +127,12 @@ class IotRemoteDataSource {
     try {
       final response = await _dio.get(
         IotEndpoints.deviceReadings(deviceId),
-        queryParameters: {
-          'sensor': sensorId,
-          'from': ?from,
-          'to': ?to,
-        },
+        queryParameters: {'sensor': sensorId, 'from': ?from, 'to': ?to},
       );
       if (response.statusCode == 200 && response.data is Map) {
         final data = response.data['data'];
         if (data is Map) {
-          return SensorHistoryModel.fromJson(
-            Map<String, dynamic>.from(data),
-          );
+          return SensorHistoryModel.fromJson(Map<String, dynamic>.from(data));
         }
       }
       return null;

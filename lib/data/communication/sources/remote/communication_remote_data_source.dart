@@ -107,7 +107,9 @@ class CommunicationRemoteDataSource {
         if (data is List) {
           return data
               .whereType<Map>()
-              .map((item) => BannerModel.fromJson(Map<String, dynamic>.from(item)))
+              .map(
+                (item) => BannerModel.fromJson(Map<String, dynamic>.from(item)),
+              )
               .toList();
         }
       }

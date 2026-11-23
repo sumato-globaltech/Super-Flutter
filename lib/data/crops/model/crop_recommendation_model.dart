@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'crop_advisory_model.dart';
 import 'crop_model.dart';
 
@@ -17,11 +18,13 @@ class CropRecommendationResultModel extends Equatable {
     final rawResults = json['results'];
     final parsedResults = rawResults is List
         ? rawResults
-            .whereType<Map>()
-            .map((e) => CropRecommendationItemModel.fromJson(
+              .whereType<Map>()
+              .map(
+                (e) => CropRecommendationItemModel.fromJson(
                   Map<String, dynamic>.from(e),
-                ))
-            .toList()
+                ),
+              )
+              .toList()
         : <CropRecommendationItemModel>[];
 
     return CropRecommendationResultModel(
@@ -124,13 +127,13 @@ class CropRecommendationItemModel extends Equatable {
 
   @override
   List<Object?> get props => [
-        rank,
-        crop,
-        suitability,
-        suitabilityLabel,
-        suitabilityScore,
-        sowingWindow,
-        expected,
-        notes,
-      ];
+    rank,
+    crop,
+    suitability,
+    suitabilityLabel,
+    suitabilityScore,
+    sowingWindow,
+    expected,
+    notes,
+  ];
 }

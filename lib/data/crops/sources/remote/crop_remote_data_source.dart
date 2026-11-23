@@ -81,9 +81,7 @@ class CropRemoteDataSource {
     try {
       final response = await _dioClient.dio.get<dynamic>(
         CropEndpoints.advisory(slug),
-        queryParameters: <String, dynamic>{
-          'district_id': ?districtId,
-        },
+        queryParameters: <String, dynamic>{'district_id': ?districtId},
       );
       if (response.statusCode == 200 && response.data is Map) {
         final body = response.data as Map;
@@ -108,9 +106,7 @@ class CropRemoteDataSource {
     try {
       final response = await _dioClient.dio.get<dynamic>(
         CropEndpoints.calendar(slug),
-        queryParameters: <String, dynamic>{
-          'district_id': ?districtId,
-        },
+        queryParameters: <String, dynamic>{'district_id': ?districtId},
       );
       if (response.statusCode == 200 && response.data is Map) {
         final body = response.data as Map;
@@ -156,9 +152,7 @@ class CropRemoteDataSource {
     try {
       final response = await _dioClient.dio.get<dynamic>(
         CropEndpoints.economics(slug),
-        queryParameters: <String, dynamic>{
-          'district_id': ?districtId,
-        },
+        queryParameters: <String, dynamic>{'district_id': ?districtId},
       );
       if (response.statusCode == 200 && response.data is Map) {
         final body = response.data as Map;
@@ -184,10 +178,7 @@ class CropRemoteDataSource {
     try {
       final response = await _dioClient.dio.get<dynamic>(
         CropEndpoints.prices(slug),
-        queryParameters: <String, dynamic>{
-          'page': ?page,
-          'per_page': ?perPage,
-        },
+        queryParameters: <String, dynamic>{'page': ?page, 'per_page': ?perPage},
       );
       if (response.statusCode == 200 && response.data is Map) {
         return Paged.fromEnvelope(

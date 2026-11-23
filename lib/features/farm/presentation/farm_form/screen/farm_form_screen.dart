@@ -67,25 +67,28 @@ class _FarmFormViewState extends State<_FarmFormView> {
 
   static const List<Map<String, String>> _soilTypes = [
     {'value': 'alluvial', 'label': 'Alluvial'},
-    {'value': 'red', 'label': 'Red'},
-    {'value': 'black', 'label': 'Black'},
+    {'value': 'clay', 'label': 'Clay'},
     {'value': 'laterite', 'label': 'Laterite'},
-    {'value': 'loamy', 'label': 'Loamy'},
+    {'value': 'loam', 'label': 'Loam'},
+    {'value': 'red', 'label': 'Red'},
     {'value': 'sandy', 'label': 'Sandy'},
+    {'value': 'silt', 'label': 'Silt'},
   ];
 
   static const List<Map<String, String>> _irrigationTypes = [
     {'value': 'rainfed', 'label': 'Rainfed'},
-    {'value': 'drip', 'label': 'Drip irrigation'},
+    {'value': 'flood', 'label': 'Flood'},
+    {'value': 'furrow', 'label': 'Furrow'},
+    {'value': 'basin', 'label': 'Basin'},
     {'value': 'sprinkler', 'label': 'Sprinkler'},
-    {'value': 'canal', 'label': 'Canal'},
-    {'value': 'borewell', 'label': 'Borewell'},
+    {'value': 'drip', 'label': 'Drip'},
   ];
 
   static const List<Map<String, String>> _ownerships = [
     {'value': 'owned', 'label': 'Owned'},
     {'value': 'leased', 'label': 'Leased'},
-    {'value': 'shared', 'label': 'Shared'},
+    {'value': 'sharecropped', 'label': 'Sharecropped'},
+    {'value': 'community', 'label': 'Community land'},
   ];
 
   @override

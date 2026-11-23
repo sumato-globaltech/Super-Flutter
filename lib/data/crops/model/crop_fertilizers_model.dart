@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'crop_advisory_model.dart';
 import 'crop_model.dart';
 
@@ -17,10 +18,13 @@ class CropFertilizersModel extends Equatable {
     final rawFertilizers = json['fertilizers'];
     final parsedFertilizers = rawFertilizers is List
         ? rawFertilizers
-            .whereType<Map>()
-            .map((e) =>
-                CropFertilizerGroupModel.fromJson(Map<String, dynamic>.from(e)))
-            .toList()
+              .whereType<Map>()
+              .map(
+                (e) => CropFertilizerGroupModel.fromJson(
+                  Map<String, dynamic>.from(e),
+                ),
+              )
+              .toList()
         : <CropFertilizerGroupModel>[];
 
     return CropFertilizersModel(

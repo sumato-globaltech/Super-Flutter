@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'farm_model.dart';
 
 class FarmTransactionModel extends Equatable {
@@ -59,14 +60,14 @@ class FarmTransactionModel extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        farmCropId,
-        type,
-        category,
-        amount,
-        occurredOn,
-        description,
-      ];
+    id,
+    farmCropId,
+    type,
+    category,
+    amount,
+    occurredOn,
+    description,
+  ];
 }
 
 class FarmCategoryModel extends Equatable {
@@ -103,11 +104,12 @@ class FarmTransactionSummaryModel extends Equatable {
     final rawCrops = json['crops'];
     final parsedCrops = rawCrops is List
         ? rawCrops
-            .whereType<Map>()
-            .map((e) => CropLedgerTotalModel.fromJson(
-                  Map<String, dynamic>.from(e),
-                ))
-            .toList()
+              .whereType<Map>()
+              .map(
+                (e) =>
+                    CropLedgerTotalModel.fromJson(Map<String, dynamic>.from(e)),
+              )
+              .toList()
         : <CropLedgerTotalModel>[];
 
     return FarmTransactionSummaryModel(
@@ -197,12 +199,12 @@ class CropLedgerTotalModel extends Equatable {
 
   @override
   List<Object?> get props => [
-        farmCropId,
-        crop,
-        season,
-        financialYear,
-        income,
-        expense,
-        net,
-      ];
+    farmCropId,
+    crop,
+    season,
+    financialYear,
+    income,
+    expense,
+    net,
+  ];
 }

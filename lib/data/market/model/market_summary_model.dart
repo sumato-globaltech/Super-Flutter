@@ -20,27 +20,29 @@ class MarketSummaryModel extends Equatable {
   });
 
   MarketSummaryModel.fromJson(Map<String, dynamic> json)
-      : markets = json['markets'] is int
-            ? json['markets']
-            : int.tryParse('${json['markets']}'),
-        marketsReportingToday = json['markets_reporting_today'] is int
-            ? json['markets_reporting_today']
-            : int.tryParse('${json['markets_reporting_today']}'),
-        cropsTracked = json['crops_tracked'] is int
-            ? json['crops_tracked']
-            : int.tryParse('${json['crops_tracked']}'),
-        latestPriceDate = json['latest_price_date'],
-        recentDays = json['recent_days'] is int
-            ? json['recent_days']
-            : int.tryParse('${json['recent_days']}'),
-        priceUnit = json['price_unit'],
-        crops = json['crops'] != null && json['crops'] is List
-            ? (json['crops'] as List)
+    : markets = json['markets'] is int
+          ? json['markets']
+          : int.tryParse('${json['markets']}'),
+      marketsReportingToday = json['markets_reporting_today'] is int
+          ? json['markets_reporting_today']
+          : int.tryParse('${json['markets_reporting_today']}'),
+      cropsTracked = json['crops_tracked'] is int
+          ? json['crops_tracked']
+          : int.tryParse('${json['crops_tracked']}'),
+      latestPriceDate = json['latest_price_date'],
+      recentDays = json['recent_days'] is int
+          ? json['recent_days']
+          : int.tryParse('${json['recent_days']}'),
+      priceUnit = json['price_unit'],
+      crops = json['crops'] != null && json['crops'] is List
+          ? (json['crops'] as List)
                 .whereType<Map>()
-                .map((e) =>
-                    CropSummaryModel.fromJson(Map<String, dynamic>.from(e)))
+                .map(
+                  (e) =>
+                      CropSummaryModel.fromJson(Map<String, dynamic>.from(e)),
+                )
                 .toList()
-            : null;
+          : null;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -86,16 +88,16 @@ class CropSummaryModel extends Equatable {
   });
 
   CropSummaryModel.fromJson(Map<String, dynamic> json)
-      : crop = json['crop'] != null
-            ? CropModel.fromJson(Map<String, dynamic>.from(json['crop']))
-            : null,
-        markets = json['markets'] is int
-            ? json['markets']
-            : int.tryParse('${json['markets']}'),
-        latestPriceDate = json['latest_price_date'],
-        lowestPrice = json['lowest_price']?.toString(),
-        medianPrice = json['median_price']?.toString(),
-        highestPrice = json['highest_price']?.toString();
+    : crop = json['crop'] != null
+          ? CropModel.fromJson(Map<String, dynamic>.from(json['crop']))
+          : null,
+      markets = json['markets'] is int
+          ? json['markets']
+          : int.tryParse('${json['markets']}'),
+      latestPriceDate = json['latest_price_date'],
+      lowestPrice = json['lowest_price']?.toString(),
+      medianPrice = json['median_price']?.toString(),
+      highestPrice = json['highest_price']?.toString();
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -129,9 +131,9 @@ class CropModel extends Equatable {
   const CropModel({this.id, this.name, this.slug});
 
   CropModel.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        name = json['name'],
-        slug = json['slug'];
+    : id = json['id'],
+      name = json['name'],
+      slug = json['slug'];
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

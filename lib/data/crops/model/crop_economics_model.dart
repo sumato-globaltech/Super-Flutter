@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'crop_model.dart';
 
 class CropEconomicsModel extends Equatable {
@@ -6,11 +7,7 @@ class CropEconomicsModel extends Equatable {
   final DistrictModel? district;
   final Map<String, dynamic>? economics;
 
-  const CropEconomicsModel({
-    this.crop,
-    this.district,
-    this.economics,
-  });
+  const CropEconomicsModel({this.crop, this.district, this.economics});
 
   factory CropEconomicsModel.fromJson(Map<String, dynamic> json) {
     return CropEconomicsModel(

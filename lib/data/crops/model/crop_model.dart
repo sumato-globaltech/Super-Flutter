@@ -49,7 +49,9 @@ class CropModel extends Equatable {
           ? Map<String, dynamic>.from(json['local_names'] as Map)
           : null,
       type: json['type'] != null && json['type'] is Map
-          ? CropTypeModel.fromJson(Map<String, dynamic>.from(json['type'] as Map))
+          ? CropTypeModel.fromJson(
+              Map<String, dynamic>.from(json['type'] as Map),
+            )
           : null,
       icon: json['icon'] as String?,
       durationDays: json['duration_days'] is int
@@ -63,10 +65,12 @@ class CropModel extends Equatable {
       summary: json['summary'] as String?,
       varieties: json['varieties'] is List
           ? (json['varieties'] as List)
-              .whereType<Map>()
-              .map((e) =>
-                  CropVarietyModel.fromJson(Map<String, dynamic>.from(e)))
-              .toList()
+                .whereType<Map>()
+                .map(
+                  (e) =>
+                      CropVarietyModel.fromJson(Map<String, dynamic>.from(e)),
+                )
+                .toList()
           : null,
     );
   }
@@ -95,18 +99,18 @@ class CropModel extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        name,
-        slug,
-        scientificName,
-        localNames,
-        type,
-        icon,
-        durationDays,
-        defaultUnit,
-        summary,
-        varieties,
-      ];
+    id,
+    name,
+    slug,
+    scientificName,
+    localNames,
+    type,
+    icon,
+    durationDays,
+    defaultUnit,
+    summary,
+    varieties,
+  ];
 }
 
 class CropTypeModel extends Equatable {
@@ -182,9 +186,11 @@ class CropVarietyModel extends Equatable {
       elevationBand: json['elevation_band'] as String?,
       recommendedDistricts: json['recommended_districts'] is List
           ? (json['recommended_districts'] as List)
-              .whereType<Map>()
-              .map((e) => DistrictModel.fromJson(Map<String, dynamic>.from(e)))
-              .toList()
+                .whereType<Map>()
+                .map(
+                  (e) => DistrictModel.fromJson(Map<String, dynamic>.from(e)),
+                )
+                .toList()
           : null,
     );
   }
@@ -198,21 +204,22 @@ class CropVarietyModel extends Equatable {
       'tolerance': tolerance,
       'elevation_band': elevationBand,
       if (recommendedDistricts != null)
-        'recommended_districts':
-            recommendedDistricts!.map((e) => e.toJson()).toList(),
+        'recommended_districts': recommendedDistricts!
+            .map((e) => e.toJson())
+            .toList(),
     };
   }
 
   @override
   List<Object?> get props => [
-        name,
-        type,
-        durationDays,
-        yieldPerHa,
-        tolerance,
-        elevationBand,
-        recommendedDistricts,
-      ];
+    name,
+    type,
+    durationDays,
+    yieldPerHa,
+    tolerance,
+    elevationBand,
+    recommendedDistricts,
+  ];
 }
 
 class DistrictModel extends Equatable {

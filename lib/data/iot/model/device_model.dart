@@ -51,45 +51,45 @@ class DeviceModel extends Equatable {
       lastReadingAt: json['last_reading_at']?.toString(),
       sensors: json['sensors'] is List
           ? (json['sensors'] as List)
-              .whereType<Map<String, dynamic>>()
-              .map(DeviceSensorModel.fromJson)
-              .toList()
+                .whereType<Map<String, dynamic>>()
+                .map(DeviceSensorModel.fromJson)
+                .toList()
           : const [],
     );
   }
 
   Map<String, dynamic> toJson() => {
-        if (id != null) 'id': id,
-        if (code != null) 'code': code,
-        if (name != null) 'name': name,
-        if (type != null) 'type': type,
-        if (typeLabel != null) 'type_label': typeLabel,
-        if (provider != null) 'provider': provider,
-        if (farmId != null) 'farm_id': farmId,
-        if (latitude != null) 'latitude': latitude,
-        if (longitude != null) 'longitude': longitude,
-        if (installedAt != null) 'installed_at': installedAt,
-        if (isOnline != null) 'is_online': isOnline,
-        if (lastReadingAt != null) 'last_reading_at': lastReadingAt,
-        'sensors': sensors.map((s) => s.toJson()).toList(),
-      };
+    if (id != null) 'id': id,
+    if (code != null) 'code': code,
+    if (name != null) 'name': name,
+    if (type != null) 'type': type,
+    if (typeLabel != null) 'type_label': typeLabel,
+    if (provider != null) 'provider': provider,
+    if (farmId != null) 'farm_id': farmId,
+    if (latitude != null) 'latitude': latitude,
+    if (longitude != null) 'longitude': longitude,
+    if (installedAt != null) 'installed_at': installedAt,
+    if (isOnline != null) 'is_online': isOnline,
+    if (lastReadingAt != null) 'last_reading_at': lastReadingAt,
+    'sensors': sensors.map((s) => s.toJson()).toList(),
+  };
 
   @override
   List<Object?> get props => [
-        id,
-        code,
-        name,
-        type,
-        typeLabel,
-        provider,
-        farmId,
-        latitude,
-        longitude,
-        installedAt,
-        isOnline,
-        lastReadingAt,
-        sensors,
-      ];
+    id,
+    code,
+    name,
+    type,
+    typeLabel,
+    provider,
+    farmId,
+    latitude,
+    longitude,
+    installedAt,
+    isOnline,
+    lastReadingAt,
+    sensors,
+  ];
 }
 
 class DeviceSensorModel extends Equatable {
@@ -122,12 +122,12 @@ class DeviceSensorModel extends Equatable {
   }
 
   Map<String, dynamic> toJson() => {
-        if (id != null) 'id': id,
-        if (name != null) 'name': name,
-        if (metric != null) 'metric': metric,
-        if (unit != null) 'unit': unit,
-        if (latestReading != null) 'latest_reading': latestReading!.toJson(),
-      };
+    if (id != null) 'id': id,
+    if (name != null) 'name': name,
+    if (metric != null) 'metric': metric,
+    if (unit != null) 'unit': unit,
+    if (latestReading != null) 'latest_reading': latestReading!.toJson(),
+  };
 
   @override
   List<Object?> get props => [id, name, metric, unit, latestReading];
@@ -138,11 +138,7 @@ class SensorReadingModel extends Equatable {
   final String? quality;
   final String? recordedAt;
 
-  const SensorReadingModel({
-    this.value,
-    this.quality,
-    this.recordedAt,
-  });
+  const SensorReadingModel({this.value, this.quality, this.recordedAt});
 
   factory SensorReadingModel.fromJson(Map<String, dynamic> json) {
     return SensorReadingModel(
@@ -155,10 +151,10 @@ class SensorReadingModel extends Equatable {
   }
 
   Map<String, dynamic> toJson() => {
-        if (value != null) 'value': value,
-        if (quality != null) 'quality': quality,
-        if (recordedAt != null) 'recorded_at': recordedAt,
-      };
+    if (value != null) 'value': value,
+    if (quality != null) 'quality': quality,
+    if (recordedAt != null) 'recorded_at': recordedAt,
+  };
 
   @override
   List<Object?> get props => [value, quality, recordedAt];

@@ -16,7 +16,7 @@ class FarmRemoteDataSource {
 
   final DioClient _dioClient;
 
-  /// GET /api/v1/farms
+  /// GET /api/v1/farmer/farms
   Future<Paged<FarmModel>> getFarms({
     String? status,
     int? page,
@@ -47,7 +47,7 @@ class FarmRemoteDataSource {
     }
   }
 
-  /// GET /api/v1/farms/{farm}
+  /// GET /api/v1/farmer/farms/{farm}
   Future<FarmModel?> getFarm(String id) async {
     try {
       final response = await _dioClient.dio.get<dynamic>(
@@ -68,7 +68,7 @@ class FarmRemoteDataSource {
     }
   }
 
-  /// POST /api/v1/farms
+  /// POST /api/v1/farmer/farms
   Future<FarmModel?> createFarm(Map<String, dynamic> data) async {
     try {
       final response = await _dioClient.dio.post<dynamic>(
@@ -91,7 +91,7 @@ class FarmRemoteDataSource {
     }
   }
 
-  /// PUT /api/v1/farms/{farm}
+  /// PUT /api/v1/farmer/farms/{farm}
   Future<FarmModel?> updateFarm(String id, Map<String, dynamic> data) async {
     try {
       final response = await _dioClient.dio.put<dynamic>(
@@ -113,7 +113,7 @@ class FarmRemoteDataSource {
     }
   }
 
-  /// DELETE /api/v1/farms/{farm}
+  /// DELETE /api/v1/farmer/farms/{farm}
   Future<bool> deleteFarm(String id) async {
     try {
       final response = await _dioClient.dio.delete<dynamic>(
@@ -129,7 +129,7 @@ class FarmRemoteDataSource {
     }
   }
 
-  /// POST /api/v1/farms/{farm}/archive
+  /// POST /api/v1/farmer/farms/{farm}/archive
   Future<FarmModel?> archiveFarm(String id) async {
     try {
       final response = await _dioClient.dio.post<dynamic>(
@@ -150,7 +150,7 @@ class FarmRemoteDataSource {
     }
   }
 
-  /// POST /api/v1/farms/{farm}/unarchive
+  /// POST /api/v1/farmer/farms/{farm}/unarchive
   Future<FarmModel?> unarchiveFarm(String id) async {
     try {
       final response = await _dioClient.dio.post<dynamic>(
@@ -171,7 +171,7 @@ class FarmRemoteDataSource {
     }
   }
 
-  /// GET /api/v1/farms/{farm}/crops
+  /// GET /api/v1/farmer/farms/{farm}/crops
   Future<List<FarmCropModel>> getFarmCrops(String farmId) async {
     try {
       final response = await _dioClient.dio.get<dynamic>(
@@ -197,7 +197,7 @@ class FarmRemoteDataSource {
     }
   }
 
-  /// POST /api/v1/farms/{farm}/crops
+  /// POST /api/v1/farmer/farms/{farm}/crops
   Future<FarmCropModel?> createFarmCrop(
     String farmId,
     Map<String, dynamic> data,
@@ -223,7 +223,7 @@ class FarmRemoteDataSource {
     }
   }
 
-  /// PUT /api/v1/farms/{farm}/crops/{farmCrop}
+  /// PUT /api/v1/farmer/farms/{farm}/crops/{farmCrop}
   Future<FarmCropModel?> updateFarmCrop(
     String farmId,
     String cropId,
@@ -249,7 +249,7 @@ class FarmRemoteDataSource {
     }
   }
 
-  /// DELETE /api/v1/farms/{farm}/crops/{farmCrop}
+  /// DELETE /api/v1/farmer/farms/{farm}/crops/{farmCrop}
   Future<bool> deleteFarmCrop(String farmId, String cropId) async {
     try {
       final response = await _dioClient.dio.delete<dynamic>(
@@ -265,7 +265,7 @@ class FarmRemoteDataSource {
     }
   }
 
-  /// GET /api/v1/farms/{farm}/transactions
+  /// GET /api/v1/farmer/farms/{farm}/transactions
   Future<Paged<FarmTransactionModel>> getTransactions(
     String farmId, {
     String? farmCropId,
@@ -303,7 +303,7 @@ class FarmRemoteDataSource {
     }
   }
 
-  /// POST /api/v1/farms/{farm}/transactions
+  /// POST /api/v1/farmer/farms/{farm}/transactions
   Future<FarmTransactionModel?> createTransaction(
     String farmId,
     Map<String, dynamic> data,
@@ -331,7 +331,7 @@ class FarmRemoteDataSource {
     }
   }
 
-  /// GET /api/v1/farms/{farm}/transactions/summary
+  /// GET /api/v1/farmer/farms/{farm}/transactions/summary
   Future<FarmTransactionSummaryModel?> getTransactionSummary(
     String farmId,
   ) async {
@@ -356,7 +356,7 @@ class FarmRemoteDataSource {
     }
   }
 
-  /// GET /api/v1/farms/{farm}/photos
+  /// GET /api/v1/farmer/farms/{farm}/photos
   Future<List<FarmPhotoModel>> getPhotos(String farmId) async {
     try {
       final response = await _dioClient.dio.get<dynamic>(
@@ -368,9 +368,7 @@ class FarmRemoteDataSource {
         if (data is List) {
           return data
               .whereType<Map>()
-              .map(
-                (e) => FarmPhotoModel.fromJson(Map<String, dynamic>.from(e)),
-              )
+              .map((e) => FarmPhotoModel.fromJson(Map<String, dynamic>.from(e)))
               .toList();
         }
       }
@@ -384,11 +382,8 @@ class FarmRemoteDataSource {
     }
   }
 
-  /// POST /api/v1/farms/{farm}/photos
-  Future<FarmPhotoModel?> uploadPhoto(
-    String farmId,
-    String filePath,
-  ) async {
+  /// POST /api/v1/farmer/farms/{farm}/photos
+  Future<FarmPhotoModel?> uploadPhoto(String farmId, String filePath) async {
     try {
       final formData = FormData.fromMap({
         'photo': await MultipartFile.fromFile(filePath),
@@ -413,7 +408,7 @@ class FarmRemoteDataSource {
     }
   }
 
-  /// DELETE /api/v1/farms/{farm}/photos/{photo}
+  /// DELETE /api/v1/farmer/farms/{farm}/photos/{photo}
   Future<bool> deletePhoto(String farmId, String photoId) async {
     try {
       final response = await _dioClient.dio.delete<dynamic>(

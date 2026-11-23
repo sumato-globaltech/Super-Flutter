@@ -26,12 +26,12 @@ class IntegrationRunModel extends Equatable {
   }
 
   Map<String, dynamic> toJson() => {
-        if (id != null) 'id': id,
-        if (status != null) 'status': status,
-        if (queuedAt != null) 'queued_at': queuedAt,
-        if (startedAt != null) 'started_at': startedAt,
-        if (finishedAt != null) 'finished_at': finishedAt,
-      };
+    if (id != null) 'id': id,
+    if (status != null) 'status': status,
+    if (queuedAt != null) 'queued_at': queuedAt,
+    if (startedAt != null) 'started_at': startedAt,
+    if (finishedAt != null) 'finished_at': finishedAt,
+  };
 
   @override
   List<Object?> get props => [id, status, queuedAt, startedAt, finishedAt];

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'crop_model.dart';
 
 class CropAdvisoryModel extends Equatable {
@@ -49,24 +50,31 @@ class CropAdvisoryModel extends Equatable {
           : null,
       practices: json['practices'] is List
           ? (json['practices'] as List)
-              .whereType<Map>()
-              .map((e) =>
-                  CropPracticeModel.fromJson(Map<String, dynamic>.from(e)))
-              .toList()
+                .whereType<Map>()
+                .map(
+                  (e) =>
+                      CropPracticeModel.fromJson(Map<String, dynamic>.from(e)),
+                )
+                .toList()
           : null,
       fertilizers: json['fertilizers'] is List
           ? (json['fertilizers'] as List)
-              .whereType<Map>()
-              .map((e) =>
-                  CropFertilizerGroupModel.fromJson(Map<String, dynamic>.from(e)))
-              .toList()
+                .whereType<Map>()
+                .map(
+                  (e) => CropFertilizerGroupModel.fromJson(
+                    Map<String, dynamic>.from(e),
+                  ),
+                )
+                .toList()
           : null,
       varieties: json['varieties'] is List
           ? (json['varieties'] as List)
-              .whereType<Map>()
-              .map((e) =>
-                  CropVarietyModel.fromJson(Map<String, dynamic>.from(e)))
-              .toList()
+                .whereType<Map>()
+                .map(
+                  (e) =>
+                      CropVarietyModel.fromJson(Map<String, dynamic>.from(e)),
+                )
+                .toList()
           : null,
       economics: json['economics'] is Map
           ? Map<String, dynamic>.from(json['economics'] as Map)
@@ -76,16 +84,16 @@ class CropAdvisoryModel extends Equatable {
 
   @override
   List<Object?> get props => [
-        crop,
-        district,
-        month,
-        windows,
-        profile,
-        practices,
-        fertilizers,
-        varieties,
-        economics,
-      ];
+    crop,
+    district,
+    month,
+    windows,
+    profile,
+    practices,
+    fertilizers,
+    varieties,
+    economics,
+  ];
 }
 
 class MonthModel extends Equatable {
@@ -230,13 +238,13 @@ class CropSoilModel extends Equatable {
 
   @override
   List<Object?> get props => [
-        types,
-        phMin,
-        phMax,
-        drainage,
-        organicMatter,
-        saltTolerance,
-      ];
+    types,
+    phMin,
+    phMax,
+    drainage,
+    organicMatter,
+    saltTolerance,
+  ];
 }
 
 class CropSowingModel extends Equatable {
@@ -262,12 +270,7 @@ class CropSowingModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        method,
-        seedRateKgHa,
-        plantingDepthCm,
-        spacing,
-      ];
+  List<Object?> get props => [method, seedRateKgHa, plantingDepthCm, spacing];
 }
 
 class CropFieldPracticesModel extends Equatable {
@@ -297,12 +300,12 @@ class CropFieldPracticesModel extends Equatable {
 
   @override
   List<Object?> get props => [
-        landPreparation,
-        interculturalOperations,
-        weedManagement,
-        mulching,
-        labourRequirement,
-      ];
+    landPreparation,
+    interculturalOperations,
+    weedManagement,
+    mulching,
+    labourRequirement,
+  ];
 }
 
 class CropPracticeModel extends Equatable {
@@ -310,11 +313,7 @@ class CropPracticeModel extends Equatable {
   final String? label;
   final List<String> steps;
 
-  const CropPracticeModel({
-    this.kind,
-    this.label,
-    this.steps = const [],
-  });
+  const CropPracticeModel({this.kind, this.label, this.steps = const []});
 
   factory CropPracticeModel.fromJson(Map<String, dynamic> json) {
     final rawSteps = json['steps'];
@@ -347,11 +346,13 @@ class CropFertilizerGroupModel extends Equatable {
     final rawItems = json['items'];
     final parsedItems = rawItems is List
         ? rawItems
-            .whereType<Map>()
-            .map((e) => CropFertilizerItemModel.fromJson(
+              .whereType<Map>()
+              .map(
+                (e) => CropFertilizerItemModel.fromJson(
                   Map<String, dynamic>.from(e),
-                ))
-            .toList()
+                ),
+              )
+              .toList()
         : <CropFertilizerItemModel>[];
     return CropFertilizerGroupModel(
       recommendation: json['recommendation'] as String?,
@@ -396,11 +397,11 @@ class CropFertilizerItemModel extends Equatable {
 
   @override
   List<Object?> get props => [
-        fertilizer,
-        composition,
-        dosage,
-        stage,
-        priority,
-        notes,
-      ];
+    fertilizer,
+    composition,
+    dosage,
+    stage,
+    priority,
+    notes,
+  ];
 }

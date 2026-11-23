@@ -26,19 +26,19 @@ class SoilSensorAccountModel extends Equatable {
   }
 
   Map<String, dynamic> toJson() => {
-        if (provider != null) 'provider': provider,
-        if (username != null) 'username': username,
-        if (isActive != null) 'is_active': isActive,
-        if (linkedAt != null) 'linked_at': linkedAt,
-        if (lastSyncedAt != null) 'last_synced_at': lastSyncedAt,
-      };
+    if (provider != null) 'provider': provider,
+    if (username != null) 'username': username,
+    if (isActive != null) 'is_active': isActive,
+    if (linkedAt != null) 'linked_at': linkedAt,
+    if (lastSyncedAt != null) 'last_synced_at': lastSyncedAt,
+  };
 
   @override
   List<Object?> get props => [
-        provider,
-        username,
-        isActive,
-        linkedAt,
-        lastSyncedAt,
-      ];
+    provider,
+    username,
+    isActive,
+    linkedAt,
+    lastSyncedAt,
+  ];
 }

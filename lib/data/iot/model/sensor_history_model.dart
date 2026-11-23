@@ -29,20 +29,20 @@ class SensorHistoryModel extends Equatable {
       resolution: json['resolution']?.toString(),
       points: json['points'] is List
           ? (json['points'] as List)
-              .whereType<Map<String, dynamic>>()
-              .map(ReadingPointModel.fromJson)
-              .toList()
+                .whereType<Map<String, dynamic>>()
+                .map(ReadingPointModel.fromJson)
+                .toList()
           : const [],
     );
   }
 
   Map<String, dynamic> toJson() => {
-        if (sensor != null) 'sensor': sensor!.toJson(),
-        if (from != null) 'from': from,
-        if (to != null) 'to': to,
-        if (resolution != null) 'resolution': resolution,
-        'points': points.map((p) => p.toJson()).toList(),
-      };
+    if (sensor != null) 'sensor': sensor!.toJson(),
+    if (from != null) 'from': from,
+    if (to != null) 'to': to,
+    if (resolution != null) 'resolution': resolution,
+    'points': points.map((p) => p.toJson()).toList(),
+  };
 
   @override
   List<Object?> get props => [sensor, from, to, resolution, points];
@@ -64,9 +64,9 @@ class ReadingPointModel extends Equatable {
   }
 
   Map<String, dynamic> toJson() => {
-        if (at != null) 'at': at,
-        if (value != null) 'value': value,
-      };
+    if (at != null) 'at': at,
+    if (value != null) 'value': value,
+  };
 
   @override
   List<Object?> get props => [at, value];

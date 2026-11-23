@@ -26,36 +26,38 @@ class MarketModel extends Equatable {
   });
 
   MarketModel.fromJson(Map<String, dynamic> json)
-      : id = json['id']?.toString(),
-        name = json['name']?.toString(),
-        type = json['type'] is Map
-            ? MarketTypeModel.fromJson(Map<String, dynamic>.from(json['type'] as Map))
-            : null,
-        address = json['address']?.toString(),
-        latitude = json['latitude'] != null
-            ? double.tryParse(json['latitude'].toString())
-            : null,
-        longitude = json['longitude'] != null
-            ? double.tryParse(json['longitude'].toString())
-            : null,
-        facilities = json['facilities'] is List
-            ? (json['facilities'] as List)
+    : id = json['id']?.toString(),
+      name = json['name']?.toString(),
+      type = json['type'] is Map
+          ? MarketTypeModel.fromJson(
+              Map<String, dynamic>.from(json['type'] as Map),
+            )
+          : null,
+      address = json['address']?.toString(),
+      latitude = json['latitude'] != null
+          ? double.tryParse(json['latitude'].toString())
+          : null,
+      longitude = json['longitude'] != null
+          ? double.tryParse(json['longitude'].toString())
+          : null,
+      facilities = json['facilities'] is List
+          ? (json['facilities'] as List)
                 .whereType<dynamic>()
                 .map((e) => e.toString())
                 .toList()
-            : (json['facilities'] is String &&
+          : (json['facilities'] is String &&
                     (json['facilities'] as String).isNotEmpty
                 ? [json['facilities'] as String]
                 : null),
-        district = json['district'] is Map
-            ? DistrictModel.fromJson(
-                Map<String, dynamic>.from(json['district'] as Map),
-              )
-            : null,
-        distanceKm = json['distance_km'] != null
-            ? double.tryParse(json['distance_km'].toString())
-            : null,
-        isFavourite = false;
+      district = json['district'] is Map
+          ? DistrictModel.fromJson(
+              Map<String, dynamic>.from(json['district'] as Map),
+            )
+          : null,
+      distanceKm = json['distance_km'] != null
+          ? double.tryParse(json['distance_km'].toString())
+          : null,
+      isFavourite = false;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -123,8 +125,8 @@ class MarketTypeModel extends Equatable {
   const MarketTypeModel({this.value, this.label});
 
   MarketTypeModel.fromJson(Map<String, dynamic> json)
-      : value = json['value']?.toString(),
-        label = json['label']?.toString();
+    : value = json['value']?.toString(),
+      label = json['label']?.toString();
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -144,8 +146,8 @@ class DistrictModel extends Equatable {
   const DistrictModel({this.id, this.name});
 
   DistrictModel.fromJson(Map<String, dynamic> json)
-      : id = json['id']?.toString(),
-        name = json['name']?.toString();
+    : id = json['id']?.toString(),
+      name = json['name']?.toString();
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

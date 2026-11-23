@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'farm_model.dart';
 
 class FarmCropModel extends Equatable {
@@ -84,18 +85,18 @@ class FarmCropModel extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        crop,
-        variety,
-        financialYear,
-        season,
-        status,
-        areaHa,
-        sownOn,
-        expectedHarvestOn,
-        harvestedOn,
-        notes,
-      ];
+    id,
+    crop,
+    variety,
+    financialYear,
+    season,
+    status,
+    areaHa,
+    sownOn,
+    expectedHarvestOn,
+    harvestedOn,
+    notes,
+  ];
 }
 
 class FarmCropRefModel extends Equatable {
