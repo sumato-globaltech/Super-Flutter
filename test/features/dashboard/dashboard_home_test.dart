@@ -1,3 +1,14 @@
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:super_flutter/app/access/app_features.dart';
+import 'package:super_flutter/app/shell/placeholder_routes.dart';
+import 'package:super_flutter/app/shell/tab_placeholder_screen.dart';
+import 'package:super_flutter/domain/auth/entities/access_policy.dart';
+import 'package:super_flutter/domain/auth/entities/user.dart';
+import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
+import 'package:super_flutter/features/auth/session/bloc/auth_state.dart';
+import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
@@ -24,6 +35,8 @@ import 'package:url_launcher_platform_interface/url_launcher_platform_interface.
 class _Logout extends Mock implements Logout {}
 
 class _Source extends Mock implements CommunicationRemoteDataSource {}
+
+class _AuthCubit extends MockCubit<AuthState> implements AuthCubit {}
 
 class _Launcher extends UrlLauncherPlatform {
   final launched = <String>[];
@@ -109,18 +122,50 @@ void main() {
       ..registerFactory<DashboardBloc>(() => DashboardBloc(_Logout(), source));
   });
 
-  Future<void> pump(WidgetTester tester, {bool dark = true}) async {
+  Future<void> pump(
+    WidgetTester tester, {
+    bool dark = true,
+    String role = Roles.farmer,
+  }) async {
     tester.view.physicalSize = const Size(390, 844) * 3;
     tester.view.devicePixelRatio = 3;
     addTearDown(tester.view.reset);
+    final auth = _AuthCubit();
+    when(() => auth.state).thenReturn(
+      AuthState(
+        status: AuthStatus.authenticated,
+        user: User(
+          id: 'u1',
+          name: 'Ramesh',
+          email: '',
+          role: UserRole(value: role, label: role),
+          permissions: role == Roles.admin
+              ? const {Permissions.noticesManage, Permissions.alertsManage}
+              : const {},
+          profileActive: true,
+        ),
+      ),
+    );
+    final router = GoRouter(
+      initialLocation: DashboardRouteNames.dashboard,
+      routes: withPlaceholderRoutes(appFeatures, [
+        GoRoute(
+          path: DashboardRouteNames.dashboard,
+          builder: (_, _) => const DashboardScreen(),
+        ),
+      ]),
+    );
     await tester.pumpWidget(
-      MaterialApp(
-        theme: dark
-            ? AppTheme.dark(Flavor.development)
-            : AppTheme.light(Flavor.development),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        home: const DashboardScreen(),
+      BlocProvider<AuthCubit>.value(
+        value: auth,
+        child: MaterialApp.router(
+          theme: dark
+              ? AppTheme.dark(Flavor.development)
+              : AppTheme.light(Flavor.development),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          routerConfig: router,
+        ),
       ),
     );
     await tester.pumpAndSettle();
@@ -209,5 +254,36 @@ void main() {
     tester.widget<AppErrorView>(find.byType(AppErrorView)).onRetry!();
     await tester.pumpAndSettle();
     expect(find.text('Heavy rainfall'), findsOneWidget);
+  });
+
+  testWidgets('a farmer\'s quick actions open their screens', (tester) async {
+    answer();
+    await pump(tester);
+    expect(find.text('Quick actions'), findsOneWidget);
+    for (final label in ['Help desk', 'Crops', 'Notices', 'Profile']) {
+      expect(find.text(label), findsOneWidget, reason: label);
+    }
+    expect(find.text('Manage notices'), findsNothing);
+
+    await tester.tap(find.text('Crops'));
+    await tester.pumpAndSettle();
+    expect(find.byType(TabPlaceholderScreen), findsOneWidget);
+    expect(find.text('Coming soon'), findsOneWidget);
+  });
+
+  testWidgets('an admin sees the management screens', (tester) async {
+    answer();
+    await pump(tester, role: Roles.admin);
+    expect(find.text('Manage notices'), findsOneWidget);
+    expect(find.text('Manage alerts'), findsOneWidget);
+    expect(find.text('Help desk'), findsNothing);
+  });
+
+  testWidgets('quick actions stay when nothing else loads', (tester) async {
+    answer(fail: true);
+    await pump(tester);
+    expect(find.byType(AppErrorView), findsOneWidget);
+    expect(find.text('Quick actions'), findsOneWidget);
+    expect(find.text('Crops'), findsOneWidget);
   });
 }

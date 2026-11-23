@@ -1,4 +1,8 @@
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
+import 'package:super_flutter/features/auth/session/bloc/auth_state.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:super_flutter/app/config/app_config.dart';
@@ -13,6 +17,8 @@ import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/das
 import 'package:super_flutter/features/dashboard/presentation/dashboard/screen/dashboard_screen.dart';
 
 class _Logout extends Mock implements Logout {}
+
+class _AuthCubit extends MockCubit<AuthState> implements AuthCubit {}
 
 class _Source extends Mock implements CommunicationRemoteDataSource {}
 
@@ -47,12 +53,18 @@ void main() {
   });
 
   Future<void> choose(WidgetTester tester, String item) async {
+    final auth = _AuthCubit();
+    when(() => auth.state)
+        .thenReturn(const AuthState(status: AuthStatus.authenticated));
     await tester.pumpWidget(
-      MaterialApp(
-        theme: AppTheme.dark(Flavor.development),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        home: const DashboardScreen(),
+      BlocProvider<AuthCubit>.value(
+        value: auth,
+        child: MaterialApp(
+          theme: AppTheme.dark(Flavor.development),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: const DashboardScreen(),
+        ),
       ),
     );
     await tester.tap(find.byTooltip('Sign out'));
