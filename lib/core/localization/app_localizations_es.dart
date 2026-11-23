@@ -778,4 +778,96 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get address => 'Dirección';
+
+  @override
+  String get devices => 'Dispositivos';
+
+  @override
+  String get deviceDetail => 'Detalle del dispositivo';
+
+  @override
+  String get soilSensorAccount => 'Cuenta de sensor de suelo';
+
+  @override
+  String get soilSensorAccountLinked => 'Vinculado';
+
+  @override
+  String get soilSensorAccountNotLinked => 'No vinculado';
+
+  @override
+  String get linkAccount => 'Vincular cuenta';
+
+  @override
+  String get unlinkAccount => 'Desvincular cuenta';
+
+  @override
+  String get syncDevices => 'Sincronizar dispositivos';
+
+  @override
+  String get syncing => 'Sincronizando...';
+
+  @override
+  String get syncQueued => 'Sincronización en cola con éxito';
+
+  @override
+  String get noDevicesFound => 'No se encontraron dispositivos IoT';
+
+  @override
+  String get noDevicesFoundDesc =>
+      'Conecte una cuenta de sensor de suelo o registre dispositivos para ver las lecturas.';
+
+  @override
+  String get deviceOnline => 'En línea';
+
+  @override
+  String get deviceOffline => 'Desconectado';
+
+  @override
+  String get sensors => 'Sensores';
+
+  @override
+  String get readings => 'Lecturas';
+
+  @override
+  String get noReadingsFound => 'No se registraron lecturas para este período.';
+
+  @override
+  String get serialNumber => 'Número de serie';
+
+  @override
+  String get hardwareModel => 'Modelo de hardware';
+
+  @override
+  String get batteryLevel => 'Nivel de batería';
+
+  @override
+  String get lastSync => 'Última sincronización';
+
+  @override
+  String get lastReading => 'Última lectura';
+
+  @override
+  String get days7 => '7 Días';
+
+  @override
+  String get days14 => '14 Días';
+
+  @override
+  String get days30 => '30 Días';
+
+  @override
+  String get unlinkConfirmTitle => '¿Desvincular cuenta de sensor de suelo?';
+
+  @override
+  String get unlinkConfirmMessage =>
+      '¿Está seguro de que desea desvincular su cuenta? Las lecturas de IoT ya no se sincronizarán automáticamente.';
+
+  @override
+  String get soilSensUsername => 'Usuario SoilSens';
+
+  @override
+  String get soilSensPassword => 'Contraseña';
+
+  @override
+  String get status => 'Estado';
 }

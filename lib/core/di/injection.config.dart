@@ -47,6 +47,10 @@ import 'package:super_flutter/data/farm/repositories/farm_repository_impl.dart'
     as _i749;
 import 'package:super_flutter/data/farm/sources/remote/farm_remote_data_source.dart'
     as _i773;
+import 'package:super_flutter/data/iot/repositories/iot_repository_impl.dart'
+    as _i59;
+import 'package:super_flutter/data/iot/sources/remote/iot_remote_data_source.dart'
+    as _i17;
 import 'package:super_flutter/data/market/repositories/market_repository_impl.dart'
     as _i341;
 import 'package:super_flutter/data/market/sources/remote/market_remote_data_source.dart'
@@ -92,6 +96,8 @@ import 'package:super_flutter/features/farm/presentation/farm_form/bloc/farm_for
     as _i653;
 import 'package:super_flutter/features/farm/presentation/farms_list/bloc/farms_bloc.dart'
     as _i664;
+import 'package:super_flutter/features/iot/presentation/device_detail/bloc/device_detail_bloc.dart'
+    as _i561;
 import 'package:super_flutter/features/market/presentation/market/bloc/market_bloc.dart'
     as _i336;
 import 'package:super_flutter/features/market/presentation/market_prices/bloc/market_prices_bloc.dart'
@@ -161,8 +167,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i773.FarmRemoteDataSource>(
       () => _i773.FarmRemoteDataSource(gh<_i42.DioClient>()),
     );
+    gh.lazySingleton<_i17.IotRemoteDataSource>(
+      () => _i17.IotRemoteDataSource(gh<_i42.DioClient>()),
+    );
     gh.lazySingleton<_i1002.MarketRemoteDataSource>(
       () => _i1002.MarketRemoteDataSource(gh<_i42.DioClient>()),
+    );
+    gh.lazySingleton<_i59.IotRepositoryImpl>(
+      () => _i59.IotRepositoryImpl(gh<_i17.IotRemoteDataSource>()),
+    );
+    gh.factory<_i561.DeviceDetailBloc>(
+      () => _i561.DeviceDetailBloc(gh<_i17.IotRemoteDataSource>()),
     );
     gh.factory<_i213.CropDetailBloc>(
       () => _i213.CropDetailBloc(gh<_i444.CropRemoteDataSource>()),
@@ -192,9 +207,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i929.NoticesBloc>(
       () => _i929.NoticesBloc(gh<_i390.CommunicationRemoteDataSource>()),
     );
-    gh.factory<_i255.FarmDetailBloc>(
-      () => _i255.FarmDetailBloc(gh<_i773.FarmRemoteDataSource>()),
-    );
     gh.factory<_i653.FarmFormBloc>(
       () => _i653.FarmFormBloc(gh<_i773.FarmRemoteDataSource>()),
     );
@@ -218,6 +230,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i341.MarketRepositoryImpl>(
       () => _i341.MarketRepositoryImpl(gh<_i1002.MarketRemoteDataSource>()),
+    );
+    gh.factory<_i255.FarmDetailBloc>(
+      () => _i255.FarmDetailBloc(
+        gh<_i773.FarmRemoteDataSource>(),
+        gh<_i17.IotRemoteDataSource>(),
+      ),
     );
     gh.factory<_i236.CheckAuthStatus>(
       () => _i236.CheckAuthStatus(gh<_i631.AuthRepository>()),

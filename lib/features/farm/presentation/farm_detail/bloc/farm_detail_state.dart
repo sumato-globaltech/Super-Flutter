@@ -3,6 +3,8 @@ import 'package:super_flutter/data/farm/model/farm_crop_model.dart';
 import 'package:super_flutter/data/farm/model/farm_model.dart';
 import 'package:super_flutter/data/farm/model/farm_photo_model.dart';
 import 'package:super_flutter/data/farm/model/farm_transaction_model.dart';
+import 'package:super_flutter/data/iot/model/device_model.dart';
+import 'package:super_flutter/data/iot/model/soil_sensor_account_model.dart';
 
 enum FarmDetailStatus { initial, loading, success, failure }
 
@@ -14,10 +16,14 @@ class FarmDetailState extends Equatable {
   final List<FarmTransactionModel> transactions;
   final FarmTransactionSummaryModel? summary;
   final List<FarmPhotoModel> photos;
+  final List<DeviceModel> devices;
+  final SoilSensorAccountModel? soilSensorAccount;
   final int selectedTab;
   final bool isActionLoading;
+  final bool isSyncingDevices;
   final bool isDeleted;
   final String? errorMessage;
+  final String? actionSuccessMessage;
 
   const FarmDetailState({
     this.status = FarmDetailStatus.initial,
@@ -27,10 +33,14 @@ class FarmDetailState extends Equatable {
     this.transactions = const [],
     this.summary,
     this.photos = const [],
+    this.devices = const [],
+    this.soilSensorAccount,
     this.selectedTab = 0,
     this.isActionLoading = false,
+    this.isSyncingDevices = false,
     this.isDeleted = false,
     this.errorMessage,
+    this.actionSuccessMessage,
   });
 
   FarmDetailState copyWith({
@@ -41,10 +51,14 @@ class FarmDetailState extends Equatable {
     List<FarmTransactionModel>? transactions,
     FarmTransactionSummaryModel? summary,
     List<FarmPhotoModel>? photos,
+    List<DeviceModel>? devices,
+    SoilSensorAccountModel? soilSensorAccount,
     int? selectedTab,
     bool? isActionLoading,
+    bool? isSyncingDevices,
     bool? isDeleted,
     String? errorMessage,
+    String? actionSuccessMessage,
   }) {
     return FarmDetailState(
       status: status ?? this.status,
@@ -54,10 +68,14 @@ class FarmDetailState extends Equatable {
       transactions: transactions ?? this.transactions,
       summary: summary ?? this.summary,
       photos: photos ?? this.photos,
+      devices: devices ?? this.devices,
+      soilSensorAccount: soilSensorAccount ?? this.soilSensorAccount,
       selectedTab: selectedTab ?? this.selectedTab,
       isActionLoading: isActionLoading ?? this.isActionLoading,
+      isSyncingDevices: isSyncingDevices ?? this.isSyncingDevices,
       isDeleted: isDeleted ?? this.isDeleted,
       errorMessage: errorMessage ?? this.errorMessage,
+      actionSuccessMessage: actionSuccessMessage ?? this.actionSuccessMessage,
     );
   }
 
@@ -70,9 +88,13 @@ class FarmDetailState extends Equatable {
         transactions,
         summary,
         photos,
+        devices,
+        soilSensorAccount,
         selectedTab,
         isActionLoading,
+        isSyncingDevices,
         isDeleted,
         errorMessage,
+        actionSuccessMessage,
       ];
 }

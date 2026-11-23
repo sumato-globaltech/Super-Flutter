@@ -1483,6 +1483,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Address'**
   String get address;
+
+  /// No description provided for @devices.
+  ///
+  /// In en, this message translates to:
+  /// **'Devices'**
+  String get devices;
+
+  /// No description provided for @deviceDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Device Detail'**
+  String get deviceDetail;
+
+  /// No description provided for @soilSensorAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Soil Sensor Account'**
+  String get soilSensorAccount;
+
+  /// No description provided for @soilSensorAccountLinked.
+  ///
+  /// In en, this message translates to:
+  /// **'Linked'**
+  String get soilSensorAccountLinked;
+
+  /// No description provided for @soilSensorAccountNotLinked.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Linked'**
+  String get soilSensorAccountNotLinked;
+
+  /// No description provided for @linkAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Link Account'**
+  String get linkAccount;
+
+  /// No description provided for @unlinkAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlink Account'**
+  String get unlinkAccount;
+
+  /// No description provided for @syncDevices.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync Devices'**
+  String get syncDevices;
+
+  /// No description provided for @syncing.
+  ///
+  /// In en, this message translates to:
+  /// **'Syncing...'**
+  String get syncing;
+
+  /// No description provided for @syncQueued.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync queued successfully'**
+  String get syncQueued;
+
+  /// No description provided for @noDevicesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No IoT devices found'**
+  String get noDevicesFound;
+
+  /// No description provided for @noDevicesFoundDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect a soil sensor account or register devices to see sensor readings.'**
+  String get noDevicesFoundDesc;
+
+  /// No description provided for @deviceOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get deviceOnline;
+
+  /// No description provided for @deviceOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline'**
+  String get deviceOffline;
+
+  /// No description provided for @sensors.
+  ///
+  /// In en, this message translates to:
+  /// **'Sensors'**
+  String get sensors;
+
+  /// No description provided for @readings.
+  ///
+  /// In en, this message translates to:
+  /// **'Readings'**
+  String get readings;
+
+  /// No description provided for @noReadingsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No readings recorded for this period.'**
+  String get noReadingsFound;
+
+  /// No description provided for @serialNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Serial Number'**
+  String get serialNumber;
+
+  /// No description provided for @hardwareModel.
+  ///
+  /// In en, this message translates to:
+  /// **'Hardware Model'**
+  String get hardwareModel;
+
+  /// No description provided for @batteryLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Battery Level'**
+  String get batteryLevel;
+
+  /// No description provided for @lastSync.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Sync'**
+  String get lastSync;
+
+  /// No description provided for @lastReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Reading'**
+  String get lastReading;
+
+  /// No description provided for @days7.
+  ///
+  /// In en, this message translates to:
+  /// **'7 Days'**
+  String get days7;
+
+  /// No description provided for @days14.
+  ///
+  /// In en, this message translates to:
+  /// **'14 Days'**
+  String get days14;
+
+  /// No description provided for @days30.
+  ///
+  /// In en, this message translates to:
+  /// **'30 Days'**
+  String get days30;
+
+  /// No description provided for @unlinkConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlink Soil Sensor Account?'**
+  String get unlinkConfirmTitle;
+
+  /// No description provided for @unlinkConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to unlink your soil sensor account? IoT readings will no longer sync automatically.'**
+  String get unlinkConfirmMessage;
+
+  /// No description provided for @soilSensUsername.
+  ///
+  /// In en, this message translates to:
+  /// **'SoilSens Username'**
+  String get soilSensUsername;
+
+  /// No description provided for @soilSensPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get soilSensPassword;
+
+  /// No description provided for @status.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get status;
 }
 
 class _AppLocalizationsDelegate

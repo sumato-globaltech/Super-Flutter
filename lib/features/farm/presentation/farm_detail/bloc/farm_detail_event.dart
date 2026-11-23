@@ -81,3 +81,25 @@ class FarmDetailTabChanged extends FarmDetailEvent {
   @override
   List<Object?> get props => [index];
 }
+
+class FarmDevicesSyncRequested extends FarmDetailEvent {
+  const FarmDevicesSyncRequested();
+}
+
+class FarmSoilSensorAccountLinked extends FarmDetailEvent {
+  final String username;
+  final String password;
+
+  const FarmSoilSensorAccountLinked({
+    required this.username,
+    required this.password,
+  });
+
+  @override
+  List<Object?> get props => [username, password];
+}
+
+class FarmSoilSensorAccountUnlinked extends FarmDetailEvent {
+  const FarmSoilSensorAccountUnlinked();
+}
+

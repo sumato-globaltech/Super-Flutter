@@ -772,4 +772,96 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get address => 'Address';
+
+  @override
+  String get devices => 'Devices';
+
+  @override
+  String get deviceDetail => 'Device Detail';
+
+  @override
+  String get soilSensorAccount => 'Soil Sensor Account';
+
+  @override
+  String get soilSensorAccountLinked => 'Linked';
+
+  @override
+  String get soilSensorAccountNotLinked => 'Not Linked';
+
+  @override
+  String get linkAccount => 'Link Account';
+
+  @override
+  String get unlinkAccount => 'Unlink Account';
+
+  @override
+  String get syncDevices => 'Sync Devices';
+
+  @override
+  String get syncing => 'Syncing...';
+
+  @override
+  String get syncQueued => 'Sync queued successfully';
+
+  @override
+  String get noDevicesFound => 'No IoT devices found';
+
+  @override
+  String get noDevicesFoundDesc =>
+      'Connect a soil sensor account or register devices to see sensor readings.';
+
+  @override
+  String get deviceOnline => 'Online';
+
+  @override
+  String get deviceOffline => 'Offline';
+
+  @override
+  String get sensors => 'Sensors';
+
+  @override
+  String get readings => 'Readings';
+
+  @override
+  String get noReadingsFound => 'No readings recorded for this period.';
+
+  @override
+  String get serialNumber => 'Serial Number';
+
+  @override
+  String get hardwareModel => 'Hardware Model';
+
+  @override
+  String get batteryLevel => 'Battery Level';
+
+  @override
+  String get lastSync => 'Last Sync';
+
+  @override
+  String get lastReading => 'Last Reading';
+
+  @override
+  String get days7 => '7 Days';
+
+  @override
+  String get days14 => '14 Days';
+
+  @override
+  String get days30 => '30 Days';
+
+  @override
+  String get unlinkConfirmTitle => 'Unlink Soil Sensor Account?';
+
+  @override
+  String get unlinkConfirmMessage =>
+      'Are you sure you want to unlink your soil sensor account? IoT readings will no longer sync automatically.';
+
+  @override
+  String get soilSensUsername => 'SoilSens Username';
+
+  @override
+  String get soilSensPassword => 'Password';
+
+  @override
+  String get status => 'Status';
 }

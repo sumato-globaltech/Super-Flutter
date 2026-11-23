@@ -16,7 +16,10 @@ import 'package:super_flutter/data/farm/model/farm_crop_model.dart';
 import 'package:super_flutter/data/farm/model/farm_model.dart';
 import 'package:super_flutter/data/farm/model/farm_photo_model.dart';
 import 'package:super_flutter/data/farm/model/farm_transaction_model.dart';
+import 'package:super_flutter/data/iot/model/device_model.dart';
+import 'package:super_flutter/data/iot/model/soil_sensor_account_model.dart';
 import 'package:super_flutter/features/farm/routes/farms_route_names.dart';
+import 'package:super_flutter/features/iot/routes/iot_route_names.dart';
 
 import '../bloc/farm_detail_bloc.dart';
 import '../bloc/farm_detail_event.dart';
@@ -47,13 +50,18 @@ class _FarmDetailView extends StatelessWidget {
     return BlocConsumer<FarmDetailBloc, FarmDetailState>(
       listenWhen: (prev, curr) =>
           prev.isDeleted != curr.isDeleted ||
-          prev.errorMessage != curr.errorMessage,
+          prev.errorMessage != curr.errorMessage ||
+          prev.actionSuccessMessage != curr.actionSuccessMessage,
       listener: (context, state) {
         if (state.isDeleted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(l10n.farmDeleted)),
           );
           context.pop();
+        } else if (state.actionSuccessMessage != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.actionSuccessMessage!)),
+          );
         } else if (state.errorMessage != null &&
             state.status == FarmDetailStatus.success) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -149,7 +157,7 @@ class _FarmDetailView extends StatelessWidget {
                   bloc.add(const FarmDetailRefreshed());
                 },
                 child: DefaultTabController(
-                  length: 3,
+                  length: 4,
                   initialIndex: state.selectedTab,
                   child: NestedScrollView(
                     headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -179,6 +187,10 @@ class _FarmDetailView extends StatelessWidget {
                                 text:
                                     '${l10n.photos} (${state.photos.length})',
                               ),
+                              Tab(
+                                text:
+                                    '${l10n.devices} (${state.devices.length})',
+                              ),
                             ],
                             onTap: (index) {
                               bloc.add(FarmDetailTabChanged(index));
@@ -207,6 +219,14 @@ class _FarmDetailView extends StatelessWidget {
                           onDelete: (photoId) =>
                               bloc.add(FarmPhotoDeleted(photoId)),
                         ),
+                        _FarmDevicesTab(
+                          devices: state.devices,
+                          soilSensorAccount: state.soilSensorAccount,
+                          isSyncing: state.isSyncingDevices,
+                          onSync: () => bloc.add(const FarmDevicesSyncRequested()),
+                          onLink: () => _showLinkSoilSensDialog(context, bloc, l10n),
+                          onUnlink: () => _showUnlinkSoilSensDialog(context, bloc, l10n),
+                        ),
                       ],
                     ),
                   ),
@@ -215,6 +235,91 @@ class _FarmDetailView extends StatelessWidget {
           },
         );
       },
+    );
+  }
+
+  void _showLinkSoilSensDialog(
+    BuildContext context,
+    FarmDetailBloc bloc,
+    AppLocalizations l10n,
+  ) {
+    final usernameCtrl = TextEditingController();
+    final passwordCtrl = TextEditingController();
+
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.linkAccount),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: usernameCtrl,
+              decoration: InputDecoration(
+                labelText: l10n.soilSensUsername,
+              ),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            TextField(
+              controller: passwordCtrl,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: l10n.soilSensPassword,
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text(l10n.cancel),
+          ),
+          FilledButton(
+            onPressed: () {
+              final username = usernameCtrl.text.trim();
+              final password = passwordCtrl.text;
+              if (username.isNotEmpty && password.isNotEmpty) {
+                Navigator.pop(ctx);
+                bloc.add(FarmSoilSensorAccountLinked(
+                  username: username,
+                  password: password,
+                ));
+              }
+            },
+            child: Text(l10n.linkAccount),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showUnlinkSoilSensDialog(
+    BuildContext context,
+    FarmDetailBloc bloc,
+    AppLocalizations l10n,
+  ) {
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.unlinkConfirmTitle),
+        content: Text(l10n.unlinkConfirmMessage),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text(l10n.cancel),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.error,
+            ),
+            onPressed: () {
+              Navigator.pop(ctx);
+              bloc.add(const FarmSoilSensorAccountUnlinked());
+            },
+            child: Text(l10n.unlinkAccount),
+          ),
+        ],
+      ),
     );
   }
 
@@ -937,3 +1042,180 @@ class _FarmPhotosTab extends StatelessWidget {
     );
   }
 }
+
+class _FarmDevicesTab extends StatelessWidget {
+  final List<DeviceModel> devices;
+  final SoilSensorAccountModel? soilSensorAccount;
+  final bool isSyncing;
+  final VoidCallback onSync;
+  final VoidCallback onLink;
+  final VoidCallback onUnlink;
+
+  const _FarmDevicesTab({
+    required this.devices,
+    required this.soilSensorAccount,
+    required this.isSyncing,
+    required this.onSync,
+    required this.onLink,
+    required this.onUnlink,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final isLinked = soilSensorAccount != null;
+
+    return ListView(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      children: [
+        DesignCard(
+          title: l10n.soilSensorAccount,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: TitleDetailsCard(
+                      title: 'SoilSens',
+                      text: isLinked
+                          ? (soilSensorAccount!.username ?? l10n.soilSensorAccountLinked)
+                          : l10n.soilSensorAccountNotLinked,
+                      iconData: isLinked
+                          ? PhosphorIconsRegular.checkCircle
+                          : PhosphorIconsRegular.xCircle,
+                      accentColor: isLinked
+                          ? DesignColor.colorPrimary
+                          : theme.colorScheme.outline,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  if (isLinked) ...[
+                    OutlinedButton(
+                      onPressed: onUnlink,
+                      child: Text(l10n.unlinkAccount),
+                    ),
+                    const SizedBox(width: AppSpacing.xs),
+                    FilledButton.icon(
+                      onPressed: isSyncing ? null : onSync,
+                      icon: isSyncing
+                          ? const SizedBox(
+                              width: 14,
+                              height: 14,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                          : const Icon(PhosphorIconsRegular.arrowsClockwise, size: 16),
+                      label: Text(isSyncing ? l10n.syncing : l10n.syncDevices),
+                    ),
+                  ] else ...[
+                    FilledButton.icon(
+                      onPressed: onLink,
+                      icon: const Icon(PhosphorIconsRegular.plugsConnected, size: 16),
+                      label: Text(l10n.linkAccount),
+                    ),
+                  ],
+                ],
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: AppSpacing.md),
+        if (devices.isEmpty)
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppSpacing.xl),
+              child: AppEmptyView(
+                title: l10n.noDevicesFound,
+                message: l10n.noDevicesFoundDesc,
+              ),
+            ),
+          )
+        else
+          ListView.separated(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: devices.length,
+            separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.sm),
+            itemBuilder: (context, index) {
+              final device = devices[index];
+              final deviceTitle = device.name?.isNotEmpty == true
+                  ? device.name!
+                  : (device.code ?? '--');
+              return InkWell(
+                onTap: () {
+                  if (device.id != null) {
+                    context.push(IotRouteNames.deviceDetail(device.id!));
+                  }
+                },
+                borderRadius: BorderRadius.circular(12),
+                child: DesignCard(
+                  title: deviceTitle,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TitleDetailsCard(
+                              title: l10n.serialNumber,
+                              text: device.code ?? '--',
+                              iconData: PhosphorIconsRegular.barcode,
+                              accentColor: theme.colorScheme.primary,
+                            ),
+                          ),
+                          const SizedBox(width: AppSpacing.sm),
+                          Expanded(
+                            child: TitleDetailsCard(
+                              title: l10n.hardwareModel,
+                              text: device.typeLabel ?? device.type ?? '--',
+                              iconData: PhosphorIconsRegular.cpu,
+                              accentColor: theme.colorScheme.primary,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: AppSpacing.sm),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TitleDetailsCard(
+                              title: l10n.status,
+                              text: (device.isOnline ?? false)
+                                  ? l10n.deviceOnline
+                                  : l10n.deviceOffline,
+                              iconData: (device.isOnline ?? false)
+                                  ? PhosphorIconsRegular.wifiHigh
+                                  : PhosphorIconsRegular.wifiSlash,
+                              accentColor: (device.isOnline ?? false)
+                                  ? DesignColor.colorPrimary
+                                  : theme.colorScheme.error,
+                            ),
+                          ),
+                          const SizedBox(width: AppSpacing.sm),
+                          Expanded(
+                            child: TitleDetailsCard(
+                              title: l10n.lastReading,
+                              text: device.lastReadingAt ?? '--',
+                              iconData: PhosphorIconsRegular.clock,
+                              accentColor: theme.colorScheme.primary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+      ],
+    );
+  }
+}
+
