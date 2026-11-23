@@ -11,6 +11,8 @@ class Paged<T> extends Equatable {
     this.total = 0,
   });
 
+  static const defaultPerPage = 20;
+
   /// Reads the envelope; a missing or malformed meta is one complete page.
   factory Paged.fromEnvelope(
     Map<String, dynamic> body,
