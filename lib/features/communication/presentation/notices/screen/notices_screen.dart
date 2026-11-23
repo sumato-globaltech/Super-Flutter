@@ -140,22 +140,26 @@ class _NoticesView extends StatelessWidget {
                   CommunicationRouteNames.noticeDetail(notice.id!),
                 ),
                 paddingChild: const EdgeInsets.fromLTRB(14, 14, 14, 16),
-                child: TitleDetailsCard(
-                  title: [
-                    notice.category?.name,
-                    switch (notice.publishedAt) {
-                      final date? =>
-                        DateFormat.yMMMd().format(date.toLocal()),
-                      null => null,
-                    },
-                  ].whereType<String>().join(' · '),
-                  text: notice.title ?? '-',
-                  isFirstItem: true,
-                  showNavigateIcon: true,
-                  iconData: PhosphorIconsRegular.megaphone,
-                  accentColor: notice.priority?.value == 'high'
-                      ? DesignColor.orange
-                      : DesignColor.accentName,
+                child: Row(
+                  children: [
+                    TitleDetailsCard(
+                      title: [
+                        notice.category?.name,
+                        switch (notice.publishedAt) {
+                          final date? =>
+                            DateFormat.yMMMd().format(date.toLocal()),
+                          null => null,
+                        },
+                      ].whereType<String>().join(' · '),
+                      text: notice.title ?? '-',
+                      isFirstItem: true,
+                      showNavigateIcon: true,
+                      iconData: PhosphorIconsRegular.megaphone,
+                      accentColor: notice.priority?.value == 'high'
+                          ? DesignColor.orange
+                          : DesignColor.accentName,
+                    ),
+                  ],
                 ),
               ),
             );
