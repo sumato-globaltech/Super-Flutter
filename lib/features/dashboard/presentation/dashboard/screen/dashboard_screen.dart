@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:super_flutter/app/config/app_config.dart';
+import 'package:super_flutter/core/constants/constants.dart';
 import 'package:super_flutter/core/di/injection.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/core/ui/widgets/confirm_sheet.dart';
@@ -45,7 +46,7 @@ class _DashboardView extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.home),
+        title: Text(Constants.appName),
         actions: [
           if (!getIt<AppConfig>().isProduction)
             IconButton(

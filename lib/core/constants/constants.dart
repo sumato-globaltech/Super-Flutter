@@ -31,7 +31,7 @@ class Constants {
     // deviceIpAddress = await Utils.getDeviceIpAddress();
   }
 
-  static const String appName = 'UDAE';
+  static const String appName = 'Kheti Manu';
   // key
   static const String keyLoginButton = "keyLoginButton";
   static const int otpResendSeconds = 120;
