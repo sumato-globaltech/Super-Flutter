@@ -1274,4 +1274,48 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get shipmentsInvalidWeighed => 'Introduce 0 o más';
+
+  @override
+  String get shipmentsSold => 'Vendido';
+
+  @override
+  String get shipmentsSave => 'Guardar';
+
+  @override
+  String get shipmentsRecordPicked => 'Registrar carga';
+
+  @override
+  String get shipmentsRecordPickedTitle => 'Registrar cantidades cargadas';
+
+  @override
+  String get shipmentsRecordPickedMessage =>
+      'Introduce lo que cargaste de cada producto.';
+
+  @override
+  String get shipmentsPickedSaved => 'Cantidades cargadas guardadas';
+
+  @override
+  String get shipmentsConfirmPickup => 'Confirmar recogida';
+
+  @override
+  String get shipmentsPickupTitle => 'Confirmar la recogida';
+
+  @override
+  String get shipmentsPickupMessage =>
+      'Revisa la cantidad cargada de cada producto. El envío saldrá en camino.';
+
+  @override
+  String get shipmentsPickedUp => 'Recogida confirmada';
+
+  @override
+  String get shipmentsMarkReached => 'Llegado';
+
+  @override
+  String get shipmentsReachTitle => '¿Marcar como llegado?';
+
+  @override
+  String get shipmentsReachMessage => 'El comprador registrará lo recibido.';
+
+  @override
+  String get shipmentsReachedDone => 'Marcado como llegado';
 }

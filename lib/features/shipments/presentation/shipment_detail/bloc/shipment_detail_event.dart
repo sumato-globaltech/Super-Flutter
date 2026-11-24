@@ -4,7 +4,17 @@ import 'package:equatable/equatable.dart';
 import 'package:super_flutter/data/shipments/model/assignment_options_model.dart';
 import 'package:super_flutter/features/shipments/presentation/shipment_party.dart';
 
-enum ShipmentAction { cancel, accept, reject, reassign, receive, reweigh }
+enum ShipmentAction {
+  cancel,
+  accept,
+  reject,
+  reassign,
+  receive,
+  reweigh,
+  recordPicked,
+  pickup,
+  reach,
+}
 
 sealed class ShipmentDetailEvent extends Equatable {
   const ShipmentDetailEvent();

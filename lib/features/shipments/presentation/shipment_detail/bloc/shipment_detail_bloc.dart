@@ -26,7 +26,12 @@ class ShipmentDetailBloc
         ShipmentParty.vendor => _shipmentsRemoteDataSource.getVendorShipment(
           shipment,
         ),
-        _ => _shipmentsRemoteDataSource.getShipment(shipment),
+        ShipmentParty.driver => _shipmentsRemoteDataSource.getDriverShipment(
+          shipment,
+        ),
+        ShipmentParty.farmer => _shipmentsRemoteDataSource.getShipment(
+          shipment,
+        ),
       };
 
   Future<void> _onStarted(
@@ -82,6 +87,12 @@ class ShipmentDetailBloc
           );
         case ShipmentAction.receive:
           await source.receiveShipment(id, quantities: event.quantities!);
+        case ShipmentAction.recordPicked:
+          await source.updateRecordPicked(id, quantities: event.quantities!);
+        case ShipmentAction.pickup:
+          await source.createConfirmPickup(id, quantities: event.quantities);
+        case ShipmentAction.reach:
+          await source.markReached(id);
         case ShipmentAction.reweigh:
           await source.reweighShipmentItem(
             id,

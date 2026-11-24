@@ -242,17 +242,20 @@ class _ShipmentsView extends StatelessWidget {
                                           accentColor: DesignColor.accentType,
                                         ),
                                         TitleDetailsCard(
-                                          title: state.party ==
+                                          title:
+                                              state.party ==
                                                   ShipmentParty.vendor
                                               ? l10n.shipmentsFarmer
                                               : l10n.shipmentsVendor,
-                                          text: (state.party ==
+                                          text:
+                                              (state.party ==
                                                           ShipmentParty.vendor
                                                       ? shipment.farmer
                                                       : shipment.vendor)
                                                   ?.name ??
                                               '--',
-                                          iconData: PhosphorIconsRegular.storefront,
+                                          iconData:
+                                              PhosphorIconsRegular.storefront,
                                           accentColor: DesignColor.accentName,
                                         ),
                                         TitleDetailsCard(

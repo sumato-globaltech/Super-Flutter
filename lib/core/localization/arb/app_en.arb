@@ -684,5 +684,19 @@
   "shipmentsReweighTitle": "Re-weigh an item",
   "shipmentsReweighMessage": "Correct the received quantity of one item.",
   "shipmentsReweighed": "Re-weighed quantity saved",
-  "shipmentsInvalidWeighed": "Enter 0 or more"
+  "shipmentsInvalidWeighed": "Enter 0 or more",
+  "shipmentsSold": "Sold",
+  "shipmentsSave": "Save",
+  "shipmentsRecordPicked": "Record picked",
+  "shipmentsRecordPickedTitle": "Record picked quantities",
+  "shipmentsRecordPickedMessage": "Enter what you loaded for each item.",
+  "shipmentsPickedSaved": "Picked quantities saved",
+  "shipmentsConfirmPickup": "Confirm pickup",
+  "shipmentsPickupTitle": "Confirm the pickup",
+  "shipmentsPickupMessage": "Check the picked quantity of each item. The shipment will be on its way.",
+  "shipmentsPickedUp": "Pickup confirmed",
+  "shipmentsMarkReached": "Reached",
+  "shipmentsReachTitle": "Mark as reached?",
+  "shipmentsReachMessage": "The vendor will record what was received.",
+  "shipmentsReachedDone": "Marked as reached"
 }

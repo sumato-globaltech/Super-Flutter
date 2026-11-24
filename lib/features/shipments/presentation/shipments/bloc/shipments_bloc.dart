@@ -30,7 +30,12 @@ class ShipmentsBloc extends Bloc<ShipmentsEvent, ShipmentsState> {
       page: page,
       perPage: Paged.defaultPerPage,
     ),
-    _ => _shipmentsRemoteDataSource.getShipments(
+    ShipmentParty.driver => _shipmentsRemoteDataSource.getDriverShipments(
+      open: open ? 1 : 0,
+      page: page,
+      perPage: Paged.defaultPerPage,
+    ),
+    ShipmentParty.farmer => _shipmentsRemoteDataSource.getShipments(
       open: open ? 1 : 0,
       page: page,
       perPage: Paged.defaultPerPage,

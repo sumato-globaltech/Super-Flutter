@@ -108,7 +108,17 @@ class _ShipmentDetailView extends StatelessWidget {
                       label: Text(l10n.shipmentsReassign),
                     ),
                     'receive' => FilledButton.icon(
-                      onPressed: () => _receiveSheet(context, l10n),
+                      onPressed: () => _quantitiesSheet(
+                        context,
+                        l10n,
+                        action: ShipmentAction.receive,
+                        title: l10n.shipmentsReceiveTitle,
+                        message: l10n.shipmentsReceiveMessage,
+                        confirm: l10n.shipmentsReceive,
+                        done: l10n.shipmentsReceived,
+                        prefill: (item) =>
+                            item.quantityPicked ?? item.quantitySold,
+                      ),
                       icon: const Icon(PhosphorIconsRegular.package),
                       label: Text(l10n.shipmentsReceive),
                     ),
@@ -116,6 +126,57 @@ class _ShipmentDetailView extends StatelessWidget {
                       onPressed: () => _reweighSheet(context, l10n),
                       icon: const Icon(PhosphorIconsRegular.scales),
                       label: Text(l10n.shipmentsReweigh),
+                    ),
+                    'record_picked' => OutlinedButton.icon(
+                      onPressed: () => _quantitiesSheet(
+                        context,
+                        l10n,
+                        action: ShipmentAction.recordPicked,
+                        title: l10n.shipmentsRecordPickedTitle,
+                        message: l10n.shipmentsRecordPickedMessage,
+                        confirm: l10n.shipmentsSave,
+                        done: l10n.shipmentsPickedSaved,
+                        prefill: (item) =>
+                            item.quantityPicked ?? item.quantitySold,
+                      ),
+                      icon: const Icon(PhosphorIconsRegular.scales),
+                      label: Text(l10n.shipmentsRecordPicked),
+                    ),
+                    'pickup' => FilledButton.icon(
+                      onPressed: () => _quantitiesSheet(
+                        context,
+                        l10n,
+                        action: ShipmentAction.pickup,
+                        title: l10n.shipmentsPickupTitle,
+                        message: l10n.shipmentsPickupMessage,
+                        confirm: l10n.shipmentsConfirmPickup,
+                        done: l10n.shipmentsPickedUp,
+                        prefill: (item) =>
+                            item.quantityPicked ?? item.quantitySold,
+                      ),
+                      icon: const Icon(PhosphorIconsRegular.truck),
+                      label: Text(l10n.shipmentsConfirmPickup),
+                    ),
+                    'reach' => FilledButton.icon(
+                      onPressed: () => ConfirmSheet.show<void>(
+                        context,
+                        ConfirmSheet(
+                          title: l10n.shipmentsReachTitle,
+                          description: l10n.shipmentsReachMessage,
+                          confirmText: l10n.shipmentsMarkReached,
+                          onPressed: () => _send(
+                            context,
+                            l10n.shipmentsReachedDone,
+                            (completer) => ShipmentActionSubmitted(
+                              shipment: shipment,
+                              action: ShipmentAction.reach,
+                              completer: completer,
+                            ),
+                          ),
+                        ),
+                      ),
+                      icon: const Icon(PhosphorIconsRegular.flagCheckered),
+                      label: Text(l10n.shipmentsMarkReached),
                     ),
                     _ => null,
                   },
@@ -351,7 +412,7 @@ class _ShipmentDetailView extends StatelessWidget {
                               ),
                             ],
                           ),
-                          if (state.party == ShipmentParty.vendor)
+                          if (state.party != ShipmentParty.farmer)
                             TitleDetailsCard(
                               title: l10n.shipmentsFarmer,
                               text: shipmentDetails == null
@@ -866,7 +927,16 @@ class _ShipmentDetailView extends StatelessWidget {
         : null;
   }
 
-  void _receiveSheet(BuildContext context, AppLocalizations l10n) {
+  void _quantitiesSheet(
+    BuildContext context,
+    AppLocalizations l10n, {
+    required ShipmentAction action,
+    required String title,
+    required String message,
+    required String confirm,
+    required String done,
+    required double? Function(ItemModel item) prefill,
+  }) {
     final items = [
       for (final item
           in context.read<ShipmentDetailBloc>().state.shipmentDetails?.items ??
@@ -878,15 +948,15 @@ class _ShipmentDetailView extends StatelessWidget {
     final controllers = {
       for (final item in items)
         item.id!: TextEditingController(
-          text: format.format(item.quantityPicked ?? item.quantitySold ?? 0),
+          text: format.format(prefill(item) ?? 0),
         ),
     };
     ConfirmSheet.show<void>(
       context,
       ConfirmSheet(
-        title: l10n.shipmentsReceiveTitle,
-        description: l10n.shipmentsReceiveMessage,
-        confirmText: l10n.shipmentsReceive,
+        title: title,
+        description: message,
+        confirmText: confirm,
         child: Padding(
           padding: const EdgeInsets.only(top: AppSpacing.sm),
           child: Form(
@@ -908,9 +978,8 @@ class _ShipmentDetailView extends StatelessWidget {
                     decoration: InputDecoration(
                       labelText: '${item.crop?.name ?? '--'} *',
                       suffixText: item.unit?.name,
-                      helperText: item.quantityPicked == null
-                          ? null
-                          : '${l10n.shipmentsPicked}: ${format.format(item.quantityPicked)}',
+                      helperText:
+                          '${l10n.shipmentsSold}: ${format.format(item.quantitySold ?? 0)}',
                     ),
                     validator: (value) => _quantityError(l10n, value),
                   ),
@@ -924,10 +993,10 @@ class _ShipmentDetailView extends StatelessWidget {
           if (!formKey.currentState!.validate()) return;
           await _send(
             context,
-            l10n.shipmentsReceived,
+            done,
             (completer) => ShipmentActionSubmitted(
               shipment: shipment,
-              action: ShipmentAction.receive,
+              action: action,
               quantities: {
                 for (final entry in controllers.entries)
                   entry.key: double.parse(entry.value.text.trim()),

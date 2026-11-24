@@ -281,5 +281,19 @@
   "shipmentsReweighTitle": "Volver a pesar un producto",
   "shipmentsReweighMessage": "Corrige la cantidad recibida de un producto.",
   "shipmentsReweighed": "Cantidad corregida guardada",
-  "shipmentsInvalidWeighed": "Introduce 0 o más"
+  "shipmentsInvalidWeighed": "Introduce 0 o más",
+  "shipmentsSold": "Vendido",
+  "shipmentsSave": "Guardar",
+  "shipmentsRecordPicked": "Registrar carga",
+  "shipmentsRecordPickedTitle": "Registrar cantidades cargadas",
+  "shipmentsRecordPickedMessage": "Introduce lo que cargaste de cada producto.",
+  "shipmentsPickedSaved": "Cantidades cargadas guardadas",
+  "shipmentsConfirmPickup": "Confirmar recogida",
+  "shipmentsPickupTitle": "Confirmar la recogida",
+  "shipmentsPickupMessage": "Revisa la cantidad cargada de cada producto. El envío saldrá en camino.",
+  "shipmentsPickedUp": "Recogida confirmada",
+  "shipmentsMarkReached": "Llegado",
+  "shipmentsReachTitle": "¿Marcar como llegado?",
+  "shipmentsReachMessage": "El comprador registrará lo recibido.",
+  "shipmentsReachedDone": "Marcado como llegado"
 }

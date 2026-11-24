@@ -2461,6 +2461,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter 0 or more'**
   String get shipmentsInvalidWeighed;
+
+  /// No description provided for @shipmentsSold.
+  ///
+  /// In en, this message translates to:
+  /// **'Sold'**
+  String get shipmentsSold;
+
+  /// No description provided for @shipmentsSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get shipmentsSave;
+
+  /// No description provided for @shipmentsRecordPicked.
+  ///
+  /// In en, this message translates to:
+  /// **'Record picked'**
+  String get shipmentsRecordPicked;
+
+  /// No description provided for @shipmentsRecordPickedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Record picked quantities'**
+  String get shipmentsRecordPickedTitle;
+
+  /// No description provided for @shipmentsRecordPickedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter what you loaded for each item.'**
+  String get shipmentsRecordPickedMessage;
+
+  /// No description provided for @shipmentsPickedSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Picked quantities saved'**
+  String get shipmentsPickedSaved;
+
+  /// No description provided for @shipmentsConfirmPickup.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm pickup'**
+  String get shipmentsConfirmPickup;
+
+  /// No description provided for @shipmentsPickupTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm the pickup'**
+  String get shipmentsPickupTitle;
+
+  /// No description provided for @shipmentsPickupMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the picked quantity of each item. The shipment will be on its way.'**
+  String get shipmentsPickupMessage;
+
+  /// No description provided for @shipmentsPickedUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup confirmed'**
+  String get shipmentsPickedUp;
+
+  /// No description provided for @shipmentsMarkReached.
+  ///
+  /// In en, this message translates to:
+  /// **'Reached'**
+  String get shipmentsMarkReached;
+
+  /// No description provided for @shipmentsReachTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as reached?'**
+  String get shipmentsReachTitle;
+
+  /// No description provided for @shipmentsReachMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'The vendor will record what was received.'**
+  String get shipmentsReachMessage;
+
+  /// No description provided for @shipmentsReachedDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Marked as reached'**
+  String get shipmentsReachedDone;
 }
 
 class _AppLocalizationsDelegate

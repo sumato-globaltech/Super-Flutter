@@ -341,4 +341,90 @@ void main() {
       await bloc.close();
     });
   });
+
+  group('driver', () {
+    blocTest<ShipmentsBloc, ShipmentsState>(
+      'a driver\'s list comes from the driver endpoint',
+      build: () {
+        when(
+          () => source.getDriverShipments(
+            open: 1,
+            page: 1,
+            perPage: any(named: 'perPage'),
+          ),
+        ).thenAnswer((_) async => Paged(items: [active]));
+        return ShipmentsBloc(source);
+      },
+      act: (bloc) =>
+          bloc.add(const ShipmentsStarted(party: ShipmentParty.driver)),
+      verify: (bloc) => expect(bloc.state.shipments?.items, [active]),
+    );
+
+    Future<ShipmentDetailBloc> driverDetail() async {
+      when(() => source.getDriverShipment('s1'))
+          .thenAnswer((_) async => active);
+      final bloc = ShipmentDetailBloc(source)
+        ..add(
+          const ShipmentDetailStarted(
+            shipment: 's1',
+            party: ShipmentParty.driver,
+          ),
+        );
+      await bloc.stream.firstWhere((s) => s.shipmentDetails != null);
+      return bloc;
+    }
+
+    test('confirming the pickup sends the picked quantities', () async {
+      when(() => source.createConfirmPickup('s1', quantities: {'i1': 10.0}))
+          .thenAnswer((_) async => true);
+      final bloc = await driverDetail();
+      final completer = Completer<void>();
+
+      bloc.add(
+        ShipmentActionSubmitted(
+          shipment: 's1',
+          action: ShipmentAction.pickup,
+          quantities: const {'i1': 10.0},
+          completer: completer,
+        ),
+      );
+      await completer.future;
+
+      verify(() => source.createConfirmPickup('s1', quantities: {'i1': 10.0}))
+          .called(1);
+      verify(() => source.getDriverShipment('s1')).called(2);
+      await bloc.close();
+    });
+
+    test(
+      'recording picked quantities and reaching call their endpoints',
+      () async {
+        when(() => source.updateRecordPicked('s1', quantities: {'i1': 9.5}))
+            .thenAnswer((_) async => true);
+        when(() => source.markReached('s1')).thenAnswer((_) async => true);
+        final bloc = await driverDetail();
+
+        for (final event in [
+          (ShipmentAction.recordPicked, const {'i1': 9.5}),
+          (ShipmentAction.reach, null),
+        ]) {
+          final completer = Completer<void>();
+          bloc.add(
+            ShipmentActionSubmitted(
+              shipment: 's1',
+              action: event.$1,
+              quantities: event.$2,
+              completer: completer,
+            ),
+          );
+          await completer.future;
+        }
+
+        verify(() => source.updateRecordPicked('s1', quantities: {'i1': 9.5}))
+            .called(1);
+        verify(() => source.markReached('s1')).called(1);
+        await bloc.close();
+      },
+    );
+  });
 }

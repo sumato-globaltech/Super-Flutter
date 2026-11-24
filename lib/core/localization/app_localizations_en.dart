@@ -1268,4 +1268,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shipmentsInvalidWeighed => 'Enter 0 or more';
+
+  @override
+  String get shipmentsSold => 'Sold';
+
+  @override
+  String get shipmentsSave => 'Save';
+
+  @override
+  String get shipmentsRecordPicked => 'Record picked';
+
+  @override
+  String get shipmentsRecordPickedTitle => 'Record picked quantities';
+
+  @override
+  String get shipmentsRecordPickedMessage =>
+      'Enter what you loaded for each item.';
+
+  @override
+  String get shipmentsPickedSaved => 'Picked quantities saved';
+
+  @override
+  String get shipmentsConfirmPickup => 'Confirm pickup';
+
+  @override
+  String get shipmentsPickupTitle => 'Confirm the pickup';
+
+  @override
+  String get shipmentsPickupMessage =>
+      'Check the picked quantity of each item. The shipment will be on its way.';
+
+  @override
+  String get shipmentsPickedUp => 'Pickup confirmed';
+
+  @override
+  String get shipmentsMarkReached => 'Reached';
+
+  @override
+  String get shipmentsReachTitle => 'Mark as reached?';
+
+  @override
+  String get shipmentsReachMessage =>
+      'The vendor will record what was received.';
+
+  @override
+  String get shipmentsReachedDone => 'Marked as reached';
 }

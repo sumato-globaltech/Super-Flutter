@@ -80,4 +80,18 @@ abstract final class ApiEndpoints {
 
   static String assignmentOptions(String shipment) =>
       '/api/v1/vendor/shipments/$shipment/assignment-options';
+
+  static const driverShipments = '/api/v1/driver/shipments';
+
+  static String driverShipment(String shipment) =>
+      '/api/v1/driver/shipments/$shipment';
+
+  static String recordPicked(String shipment) =>
+      '/api/v1/driver/shipments/$shipment/picked';
+
+  static String confirmPickup(String shipment) =>
+      '/api/v1/driver/shipments/$shipment/pickup';
+
+  static String markReached(String shipment) =>
+      '/api/v1/driver/shipments/$shipment/reach';
 }

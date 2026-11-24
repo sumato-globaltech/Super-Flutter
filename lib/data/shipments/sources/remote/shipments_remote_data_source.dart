@@ -392,4 +392,145 @@ class ShipmentsRemoteDataSource {
       return null;
     }
   }
+
+  /// GET http://dam.test/api/v1/driver/shipments
+  Future<Paged<ShipmentModel>> getDriverShipments({
+    int? open,
+    int? page,
+    int? perPage,
+  }) async {
+    try {
+      final response = await _dioClient.dio.get<dynamic>(
+        ApiEndpoints.driverShipments,
+        queryParameters: <String, dynamic>{
+          'open': ?open,
+          'page': ?page,
+          'per_page': ?perPage,
+        },
+      );
+      final body = response.data;
+      if (response.statusCode == 200 && body is Map) {
+        return Paged.fromEnvelope(
+          Map<String, dynamic>.from(body),
+          ShipmentModel.fromJson,
+        );
+      }
+      return const Paged(items: []);
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on NetworkException {
+      rethrow;
+    } catch (e) {
+      return const Paged(items: []);
+    }
+  }
+
+  /// GET http://dam.test/api/v1/driver/shipments/{shipment}
+  Future<ShipmentModel?> getDriverShipment(String shipment) async {
+    try {
+      final response = await _dioClient.dio.get<dynamic>(
+        ApiEndpoints.driverShipment(shipment),
+      );
+      final body = response.data;
+      if (response.statusCode == 200 && body is Map) {
+        final data = body['data'] is Map ? body['data'] as Map : body;
+        return ShipmentModel.fromJson(Map<String, dynamic>.from(data));
+      }
+      return null;
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on NetworkException {
+      rethrow;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// PUT http://dam.test/api/v1/driver/shipments/{shipment}/picked
+  Future<bool> updateRecordPicked(
+    String shipment, {
+    required Map<String, double> quantities,
+  }) async {
+    try {
+      final response = await _dioClient.dio.put<dynamic>(
+        ApiEndpoints.recordPicked(shipment),
+        data: <String, dynamic>{'quantities': quantities},
+      );
+      final body = response.data;
+      if (body is Map && body['success'] == false) {
+        final message =
+            (body['message'] as String?) ?? 'The record picked request failed.';
+        final fieldErrors = NetworkException.fieldErrorsFrom(body);
+        if (fieldErrors.isNotEmpty) {
+          throw ValidationException(message, fieldErrors: fieldErrors);
+        }
+        throw BadRequestException(message, statusCode: response.statusCode);
+      }
+      return true;
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on AppException {
+      rethrow;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// POST http://dam.test/api/v1/driver/shipments/{shipment}/pickup
+  Future<bool> createConfirmPickup(
+    String shipment, {
+    Map<String, double>? quantities,
+  }) async {
+    try {
+      final response = await _dioClient.dio.post<dynamic>(
+        ApiEndpoints.confirmPickup(shipment),
+        data: <String, dynamic>{'quantities': ?quantities},
+      );
+      final body = response.data;
+      if (body is Map && body['success'] == false) {
+        final message =
+            (body['message'] as String?) ??
+            'The confirm pickup request failed.';
+        final fieldErrors = NetworkException.fieldErrorsFrom(body);
+        if (fieldErrors.isNotEmpty) {
+          throw ValidationException(message, fieldErrors: fieldErrors);
+        }
+        throw BadRequestException(message, statusCode: response.statusCode);
+      }
+      return response.statusCode == 201;
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on AppException {
+      rethrow;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// POST http://dam.test/api/v1/driver/shipments/{shipment}/reach
+  Future<bool> markReached(String shipment) async {
+    try {
+      final response = await _dioClient.dio.post<dynamic>(
+        ApiEndpoints.markReached(shipment),
+        data: const <String, dynamic>{},
+      );
+      final body = response.data;
+      if (body is Map && body['success'] == false) {
+        final message =
+            (body['message'] as String?) ?? 'The mark reached request failed.';
+        final fieldErrors = NetworkException.fieldErrorsFrom(body);
+        if (fieldErrors.isNotEmpty) {
+          throw ValidationException(message, fieldErrors: fieldErrors);
+        }
+        throw BadRequestException(message, statusCode: response.statusCode);
+      }
+      return true;
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on AppException {
+      rethrow;
+    } catch (e) {
+      return false;
+    }
+  }
 }
