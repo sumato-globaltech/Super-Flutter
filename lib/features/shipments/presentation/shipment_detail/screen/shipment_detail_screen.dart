@@ -707,29 +707,20 @@ class _ShipmentDetailView extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Flexible(
-                                  child: TitleDetailsCard(
-                                    title:
-                                        l10n.shipmentsShipmentDetailDriverPhone,
-                                    text: driver == null
-                                        ? ''
-                                        : driver.phone ?? '--',
-                                    isTextLoading: driver == null,
-                                    isCrossAxisAlignmentStart: false,
-                                    iconData: PhosphorIconsRegular.phone,
-                                    accentColor: DesignColor.accentUin,
-                                    onTap: driver?.phone == null
-                                        ? null
-                                        : () => Utils.launchUrl2(
-                                            url: 'tel:${driver?.phone}',
-                                          ),
-                                  ),
-                                ),
-                              ],
+                            TitleDetailsCard(
+                              title:
+                                  l10n.shipmentsShipmentDetailDriverPhone,
+                              text: driver == null
+                                  ? ''
+                                  : driver.phone ?? '--',
+                              isTextLoading: driver == null,
+                              iconData: PhosphorIconsRegular.phone,
+                              accentColor: DesignColor.accentUin,
+                              onTap: driver?.phone == null
+                                  ? null
+                                  : () => Utils.launchUrl2(
+                                      url: 'tel:${driver?.phone}',
+                                    ),
                             ),
                           ],
                         ),
