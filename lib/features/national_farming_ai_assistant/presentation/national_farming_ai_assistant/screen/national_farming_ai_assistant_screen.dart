@@ -159,7 +159,15 @@ class _NationalFarmingAiAssistantView extends StatelessWidget {
                   ActionChip(
                     avatar: const Icon(
                       PhosphorIconsRegular.translate,
-                      size: 18,
+                      size: 14,
+                    ),
+                    labelStyle: theme.textTheme.labelMedium,
+                    visualDensity: VisualDensity.compact,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    labelPadding: const EdgeInsets.only(left: 4, right: 2),
+                    avatarBoxConstraints: const BoxConstraints.tightFor(
+                      width: 14,
+                      height: 14,
                     ),
                     tooltip: l10n.nationalFarmingAiAssistantLanguage,
                     label: Text(
@@ -174,12 +182,19 @@ class _NationalFarmingAiAssistantView extends StatelessWidget {
                 FilterChip(
                   avatar: Icon(
                     PhosphorIconsRegular.mapPin,
-                    size: 18,
+                    size: 14,
                     color: state.useLocation
                         ? scheme.onPrimary
                         : scheme.onSurface,
                   ),
-                  labelStyle: theme.textTheme.labelLarge?.copyWith(
+                  visualDensity: VisualDensity.compact,
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  labelPadding: const EdgeInsets.only(left: 4, right: 2),
+                  avatarBoxConstraints: const BoxConstraints.tightFor(
+                    width: 14,
+                    height: 14,
+                  ),
+                  labelStyle: theme.textTheme.labelMedium?.copyWith(
                     color: state.useLocation
                         ? scheme.onPrimary
                         : scheme.onSurface,

@@ -124,7 +124,12 @@ class _AiChatState extends State<AiChat> with SingleTickerProviderStateMixin {
     final extra = widget.thinking || failed ? 1 : 0;
     return Scaffold(
       appBar: AppTopBar(
-        title: widget.title,
+        titleWidget: Text(
+          widget.title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: theme.appBarTheme.titleTextStyle?.copyWith(fontSize: 15),
+        ),
         actions: [
           if (messages.isNotEmpty)
             IconButton(
