@@ -266,80 +266,101 @@ class _ShipmentDetailView extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Flexible(
-                                child: TitleDetailsCard(
-                                  title: l10n.shipmentsShipmentDetailAcceptedAt,
-                                  text: shipmentDetails == null
-                                      ? ''
-                                      : switch (shipmentDetails.acceptedAt) {
-                                          final date? =>
-                                            DateFormat.yMMMd().format(date),
-                                          null => '--',
-                                        },
-                                  isTextLoading: shipmentDetails == null,
-                                  iconData: PhosphorIconsRegular.calendarBlank,
-                                  accentColor: DesignColor.accentType,
-                                ),
-                              ),
-                              Flexible(
-                                child: TitleDetailsCard(
-                                  title: l10n.shipmentsShipmentDetailPickedUpAt,
-                                  text: shipmentDetails == null
-                                      ? ''
-                                      : switch (shipmentDetails.pickedUpAt) {
-                                          final date? =>
-                                            DateFormat.yMMMd().format(date),
-                                          null => '--',
-                                        },
-                                  isTextLoading: shipmentDetails == null,
-                                  isCrossAxisAlignmentStart: false,
-                                  iconData: PhosphorIconsRegular.calendarBlank,
-                                  accentColor: DesignColor.accentType,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Flexible(
-                                child: TitleDetailsCard(
-                                  title: l10n.shipmentsShipmentDetailReachedAt,
-                                  text: shipmentDetails == null
-                                      ? ''
-                                      : switch (shipmentDetails.reachedAt) {
-                                          final date? =>
-                                            DateFormat.yMMMd().format(date),
-                                          null => '--',
-                                        },
-                                  isTextLoading: shipmentDetails == null,
-                                  iconData: PhosphorIconsRegular.calendarBlank,
-                                  accentColor: DesignColor.accentType,
-                                ),
-                              ),
-                              Flexible(
-                                child: TitleDetailsCard(
-                                  title: l10n.shipmentsShipmentDetailReceivedAt,
-                                  text: shipmentDetails == null
-                                      ? ''
-                                      : switch (shipmentDetails.receivedAt) {
-                                          final date? =>
-                                            DateFormat.yMMMd().format(date),
-                                          null => '--',
-                                        },
-                                  isTextLoading: shipmentDetails == null,
-                                  isCrossAxisAlignmentStart: false,
-                                  iconData: PhosphorIconsRegular.calendarBlank,
-                                  accentColor: DesignColor.accentType,
-                                ),
-                              ),
-                            ],
-                          ),
+                          if (shipmentDetails?.acceptedAt != null ||
+                              shipmentDetails?.pickedUpAt != null)
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                if (shipmentDetails?.acceptedAt != null)
+                                  Flexible(
+                                    child: TitleDetailsCard(
+                                      title: l10n
+                                          .shipmentsShipmentDetailAcceptedAt,
+                                      text: shipmentDetails == null
+                                          ? ''
+                                          : switch (shipmentDetails
+                                                .acceptedAt) {
+                                              final date? =>
+                                                DateFormat.yMMMd().format(date),
+                                              null => '--',
+                                            },
+                                      isTextLoading: shipmentDetails == null,
+                                      iconData:
+                                          PhosphorIconsRegular.calendarBlank,
+                                      accentColor: DesignColor.accentType,
+                                    ),
+                                  ),
+                                if (shipmentDetails?.pickedUpAt != null)
+                                  Flexible(
+                                    child: TitleDetailsCard(
+                                      title: l10n
+                                          .shipmentsShipmentDetailPickedUpAt,
+                                      text: shipmentDetails == null
+                                          ? ''
+                                          : switch (shipmentDetails
+                                                .pickedUpAt) {
+                                              final date? =>
+                                                DateFormat.yMMMd().format(date),
+                                              null => '--',
+                                            },
+                                      isTextLoading: shipmentDetails == null,
+                                      isCrossAxisAlignmentStart:
+                                          shipmentDetails?.acceptedAt == null,
+                                      iconData:
+                                          PhosphorIconsRegular.calendarBlank,
+                                      accentColor: DesignColor.accentType,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          if (shipmentDetails?.reachedAt != null ||
+                              shipmentDetails?.receivedAt != null)
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                if (shipmentDetails?.reachedAt != null)
+                                  Flexible(
+                                    child: TitleDetailsCard(
+                                      title:
+                                          l10n.shipmentsShipmentDetailReachedAt,
+                                      text: shipmentDetails == null
+                                          ? ''
+                                          : switch (shipmentDetails.reachedAt) {
+                                              final date? =>
+                                                DateFormat.yMMMd().format(date),
+                                              null => '--',
+                                            },
+                                      isTextLoading: shipmentDetails == null,
+                                      iconData:
+                                          PhosphorIconsRegular.calendarBlank,
+                                      accentColor: DesignColor.accentType,
+                                    ),
+                                  ),
+                                if (shipmentDetails?.receivedAt != null)
+                                  Flexible(
+                                    child: TitleDetailsCard(
+                                      title: l10n
+                                          .shipmentsShipmentDetailReceivedAt,
+                                      text: shipmentDetails == null
+                                          ? ''
+                                          : switch (shipmentDetails
+                                                .receivedAt) {
+                                              final date? =>
+                                                DateFormat.yMMMd().format(date),
+                                              null => '--',
+                                            },
+                                      isTextLoading: shipmentDetails == null,
+                                      isCrossAxisAlignmentStart:
+                                          shipmentDetails?.reachedAt == null,
+                                      iconData:
+                                          PhosphorIconsRegular.calendarBlank,
+                                      accentColor: DesignColor.accentType,
+                                    ),
+                                  ),
+                              ],
+                            ),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

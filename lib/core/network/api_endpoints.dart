@@ -94,4 +94,21 @@ abstract final class ApiEndpoints {
 
   static String markReached(String shipment) =>
       '/api/v1/driver/shipments/$shipment/reach';
+
+  static const schemes = '/api/v1/schemes';
+
+  static String scheme(String scheme) => '/api/v1/schemes/$scheme';
+
+  static String applyScheme(String scheme) =>
+      '/api/v1/farmer/schemes/$scheme/apply';
+
+  static String withdrawApplication(String application) =>
+      '/api/v1/farmer/applications/$application/withdraw';
+
+  static String applicationDocument(String application) =>
+      '/api/v1/farmer/applications/$application/documents';
+
+  static const officerSchemes = '/api/v1/officer/schemes';
+
+  static const schemeApplications = '/api/v1/farmer/applications';
 }

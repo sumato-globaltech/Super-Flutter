@@ -2545,6 +2545,198 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Marked as reached'**
   String get shipmentsReachedDone;
+
+  /// App bar title of the schemes screen
+  ///
+  /// In en, this message translates to:
+  /// **'Schemes'**
+  String get schemesTitle;
+
+  /// Title of the SchemeModel list
+  ///
+  /// In en, this message translates to:
+  /// **'Schemes'**
+  String get schemesList;
+
+  /// Shown when there is no SchemeModel
+  ///
+  /// In en, this message translates to:
+  /// **'No schemes yet'**
+  String get schemesEmpty;
+
+  /// Label of the name row
+  ///
+  /// In en, this message translates to:
+  /// **'Scheme'**
+  String get schemesName;
+
+  /// Label of the code row
+  ///
+  /// In en, this message translates to:
+  /// **'Code'**
+  String get schemesCode;
+
+  /// Label of the isOpen row
+  ///
+  /// In en, this message translates to:
+  /// **'Open for applications'**
+  String get schemesIsOpen;
+
+  /// Label of the endsOn row
+  ///
+  /// In en, this message translates to:
+  /// **'Closes on'**
+  String get schemesEndsOn;
+
+  /// App bar title of the scheme_detail screen
+  ///
+  /// In en, this message translates to:
+  /// **'Scheme'**
+  String get schemesSchemeDetailTitle;
+
+  /// Title of the SchemeModel card
+  ///
+  /// In en, this message translates to:
+  /// **'Scheme Details'**
+  String get schemesSchemeDetailDetails;
+
+  /// Label of the code row
+  ///
+  /// In en, this message translates to:
+  /// **'Code'**
+  String get schemesSchemeDetailCode;
+
+  /// Label of the isOpen row
+  ///
+  /// In en, this message translates to:
+  /// **'Open for applications'**
+  String get schemesSchemeDetailIsOpen;
+
+  /// Label of the startsOn row
+  ///
+  /// In en, this message translates to:
+  /// **'Opens on'**
+  String get schemesSchemeDetailStartsOn;
+
+  /// Label of the endsOn row
+  ///
+  /// In en, this message translates to:
+  /// **'Closes on'**
+  String get schemesSchemeDetailEndsOn;
+
+  /// Label of the subsidyAmount row
+  ///
+  /// In en, this message translates to:
+  /// **'Subsidy'**
+  String get schemesSchemeDetailSubsidyAmount;
+
+  /// Label of the fundingSource row
+  ///
+  /// In en, this message translates to:
+  /// **'Funded by'**
+  String get schemesSchemeDetailFundingSource;
+
+  /// Label of the financialYear row
+  ///
+  /// In en, this message translates to:
+  /// **'Financial year'**
+  String get schemesSchemeDetailFinancialYear;
+
+  /// Label of the description row
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get schemesSchemeDetailDescription;
+
+  /// Label of the eligibility row
+  ///
+  /// In en, this message translates to:
+  /// **'Eligibility'**
+  String get schemesSchemeDetailEligibility;
+
+  /// Label of the applicationProcess row
+  ///
+  /// In en, this message translates to:
+  /// **'How to apply'**
+  String get schemesSchemeDetailApplicationProcess;
+
+  /// App bar title of the my_applications screen
+  ///
+  /// In en, this message translates to:
+  /// **'My Applications'**
+  String get schemesMyApplicationsTitle;
+
+  /// No description provided for @schemesMyApplications.
+  ///
+  /// In en, this message translates to:
+  /// **'My applications'**
+  String get schemesMyApplications;
+
+  /// No description provided for @schemesApplicationsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Applications'**
+  String get schemesApplicationsCount;
+
+  /// No description provided for @schemesRequiredDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents you will need'**
+  String get schemesRequiredDocuments;
+
+  /// No description provided for @schemesFiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Scheme files'**
+  String get schemesFiles;
+
+  /// No description provided for @schemesFile.
+  ///
+  /// In en, this message translates to:
+  /// **'File'**
+  String get schemesFile;
+
+  /// No description provided for @schemesDistricts.
+  ///
+  /// In en, this message translates to:
+  /// **'Where it applies'**
+  String get schemesDistricts;
+
+  /// No description provided for @schemesApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get schemesApply;
+
+  /// No description provided for @schemesApplyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply to this scheme?'**
+  String get schemesApplyTitle;
+
+  /// No description provided for @schemesApplyMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your application goes to the officers for review.'**
+  String get schemesApplyMessage;
+
+  /// No description provided for @schemesApplied.
+  ///
+  /// In en, this message translates to:
+  /// **'Application submitted'**
+  String get schemesApplied;
+
+  /// No description provided for @schemesYourApplication.
+  ///
+  /// In en, this message translates to:
+  /// **'Your application'**
+  String get schemesYourApplication;
+
+  /// No description provided for @schemesApplyMessageDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Your application goes to the officers for review. Then upload these documents from My applications: {documents}'**
+  String schemesApplyMessageDocuments(String documents);
 }
 
 class _AppLocalizationsDelegate

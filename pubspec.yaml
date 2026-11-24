@@ -67,6 +67,7 @@ dependencies:
   bloc_concurrency: ^0.3.0
   shimmer: ^3.0.0
   cached_network_image: ^3.4.1
+  file_picker: ^13.4.1
 
 dev_dependencies:
   flutter_test:

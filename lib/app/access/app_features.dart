@@ -4,6 +4,7 @@ import 'package:super_flutter/domain/auth/entities/access_policy.dart';
 import 'package:super_flutter/domain/auth/entities/access_rule.dart';
 import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
 import 'package:super_flutter/features/farm/routes/farm_route_names.dart';
+import 'package:super_flutter/features/schemes/routes/schemes_route_names.dart';
 import 'package:super_flutter/features/shipments/routes/shipments_route_names.dart';
 
 import 'feature_registry.dart';
@@ -109,18 +110,6 @@ final appFeatures = FeatureRegistry([
     ),
   ),
   const AppFeature(
-    id: 'schemes',
-    path: '/schemes',
-    rule: AccessRule.public(),
-    title: _schemes,
-    icon: PhosphorIconsRegular.scroll,
-    tab: AppTab(
-      icon: PhosphorIconsRegular.scroll,
-      activeIcon: PhosphorIconsFill.scroll,
-      priority: 30,
-    ),
-  ),
-  const AppFeature(
     id: 'support',
     path: '/support',
     rule: _farmer,
@@ -203,6 +192,32 @@ final appFeatures = FeatureRegistry([
     title: _shipmentsRequestShipment,
     icon: PhosphorIconsRegular.squaresFour,
   ),
+  const AppFeature(
+    id: 'schemes',
+    path: SchemesRouteNames.root,
+    rule: AccessRule.public(),
+    title: _schemes,
+    icon: PhosphorIconsRegular.scroll,
+    tab: AppTab(
+      icon: PhosphorIconsRegular.scroll,
+      activeIcon: PhosphorIconsFill.scroll,
+      priority: 30,
+    ),
+  ),
+  const AppFeature(
+    id: 'schemes_scheme_detail',
+    path: SchemesRouteNames.schemeDetail,
+    rule: AccessRule.public(),
+    title: _schemesSchemeDetail,
+    icon: PhosphorIconsRegular.squaresFour,
+  ),
+  const AppFeature(
+    id: 'schemes_my_applications',
+    path: SchemesRouteNames.myApplications,
+    rule: AccessRule.all([AccessRule.role(Roles.farmer), AccessRule.profile()]),
+    title: _schemesMyApplications,
+    icon: PhosphorIconsRegular.squaresFour,
+  ),
 ]);
 
 const _farmer = AccessRule.all([
@@ -238,3 +253,9 @@ String _shipmentsShipmentDetail(AppLocalizations l10n) =>
 
 String _shipmentsRequestShipment(AppLocalizations l10n) =>
     l10n.shipmentsRequestShipmentTitle;
+
+String _schemesSchemeDetail(AppLocalizations l10n) =>
+    l10n.schemesSchemeDetailTitle;
+
+String _schemesMyApplications(AppLocalizations l10n) =>
+    l10n.schemesMyApplicationsTitle;

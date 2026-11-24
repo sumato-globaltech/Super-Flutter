@@ -295,5 +295,17 @@
   "shipmentsMarkReached": "Llegado",
   "shipmentsReachTitle": "¿Marcar como llegado?",
   "shipmentsReachMessage": "El comprador registrará lo recibido.",
-  "shipmentsReachedDone": "Marcado como llegado"
+  "shipmentsReachedDone": "Marcado como llegado",
+  "schemesMyApplications": "Mis solicitudes",
+  "schemesApplicationsCount": "Solicitudes",
+  "schemesRequiredDocuments": "Documentos que necesitarás",
+  "schemesFiles": "Archivos del programa",
+  "schemesFile": "Archivo",
+  "schemesDistricts": "Dónde se aplica",
+  "schemesApply": "Solicitar",
+  "schemesApplyTitle": "¿Solicitar este programa?",
+  "schemesApplyMessage": "Tu solicitud llegará a los funcionarios para su revisión.",
+  "schemesApplied": "Solicitud enviada",
+  "schemesYourApplication": "Tu solicitud",
+  "schemesApplyMessageDocuments": "Tu solicitud llegará a los funcionarios. Después sube estos documentos desde Mis solicitudes: {documents}"
 }

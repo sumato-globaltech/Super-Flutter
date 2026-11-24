@@ -1318,4 +1318,103 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get shipmentsReachedDone => 'Marcado como llegado';
+
+  @override
+  String get schemesTitle => 'Schemes';
+
+  @override
+  String get schemesList => 'Schemes';
+
+  @override
+  String get schemesEmpty => 'No schemes yet';
+
+  @override
+  String get schemesName => 'Scheme';
+
+  @override
+  String get schemesCode => 'Code';
+
+  @override
+  String get schemesIsOpen => 'Open for applications';
+
+  @override
+  String get schemesEndsOn => 'Closes on';
+
+  @override
+  String get schemesSchemeDetailTitle => 'Scheme';
+
+  @override
+  String get schemesSchemeDetailDetails => 'Scheme Details';
+
+  @override
+  String get schemesSchemeDetailCode => 'Code';
+
+  @override
+  String get schemesSchemeDetailIsOpen => 'Open for applications';
+
+  @override
+  String get schemesSchemeDetailStartsOn => 'Opens on';
+
+  @override
+  String get schemesSchemeDetailEndsOn => 'Closes on';
+
+  @override
+  String get schemesSchemeDetailSubsidyAmount => 'Subsidy';
+
+  @override
+  String get schemesSchemeDetailFundingSource => 'Funded by';
+
+  @override
+  String get schemesSchemeDetailFinancialYear => 'Financial year';
+
+  @override
+  String get schemesSchemeDetailDescription => 'Description';
+
+  @override
+  String get schemesSchemeDetailEligibility => 'Eligibility';
+
+  @override
+  String get schemesSchemeDetailApplicationProcess => 'How to apply';
+
+  @override
+  String get schemesMyApplicationsTitle => 'My Applications';
+
+  @override
+  String get schemesMyApplications => 'Mis solicitudes';
+
+  @override
+  String get schemesApplicationsCount => 'Solicitudes';
+
+  @override
+  String get schemesRequiredDocuments => 'Documentos que necesitarás';
+
+  @override
+  String get schemesFiles => 'Archivos del programa';
+
+  @override
+  String get schemesFile => 'Archivo';
+
+  @override
+  String get schemesDistricts => 'Dónde se aplica';
+
+  @override
+  String get schemesApply => 'Solicitar';
+
+  @override
+  String get schemesApplyTitle => '¿Solicitar este programa?';
+
+  @override
+  String get schemesApplyMessage =>
+      'Tu solicitud llegará a los funcionarios para su revisión.';
+
+  @override
+  String get schemesApplied => 'Solicitud enviada';
+
+  @override
+  String get schemesYourApplication => 'Tu solicitud';
+
+  @override
+  String schemesApplyMessageDocuments(String documents) {
+    return 'Tu solicitud llegará a los funcionarios. Después sube estos documentos desde Mis solicitudes: $documents';
+  }
 }

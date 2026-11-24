@@ -1313,4 +1313,103 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shipmentsReachedDone => 'Marked as reached';
+
+  @override
+  String get schemesTitle => 'Schemes';
+
+  @override
+  String get schemesList => 'Schemes';
+
+  @override
+  String get schemesEmpty => 'No schemes yet';
+
+  @override
+  String get schemesName => 'Scheme';
+
+  @override
+  String get schemesCode => 'Code';
+
+  @override
+  String get schemesIsOpen => 'Open for applications';
+
+  @override
+  String get schemesEndsOn => 'Closes on';
+
+  @override
+  String get schemesSchemeDetailTitle => 'Scheme';
+
+  @override
+  String get schemesSchemeDetailDetails => 'Scheme Details';
+
+  @override
+  String get schemesSchemeDetailCode => 'Code';
+
+  @override
+  String get schemesSchemeDetailIsOpen => 'Open for applications';
+
+  @override
+  String get schemesSchemeDetailStartsOn => 'Opens on';
+
+  @override
+  String get schemesSchemeDetailEndsOn => 'Closes on';
+
+  @override
+  String get schemesSchemeDetailSubsidyAmount => 'Subsidy';
+
+  @override
+  String get schemesSchemeDetailFundingSource => 'Funded by';
+
+  @override
+  String get schemesSchemeDetailFinancialYear => 'Financial year';
+
+  @override
+  String get schemesSchemeDetailDescription => 'Description';
+
+  @override
+  String get schemesSchemeDetailEligibility => 'Eligibility';
+
+  @override
+  String get schemesSchemeDetailApplicationProcess => 'How to apply';
+
+  @override
+  String get schemesMyApplicationsTitle => 'My Applications';
+
+  @override
+  String get schemesMyApplications => 'My applications';
+
+  @override
+  String get schemesApplicationsCount => 'Applications';
+
+  @override
+  String get schemesRequiredDocuments => 'Documents you will need';
+
+  @override
+  String get schemesFiles => 'Scheme files';
+
+  @override
+  String get schemesFile => 'File';
+
+  @override
+  String get schemesDistricts => 'Where it applies';
+
+  @override
+  String get schemesApply => 'Apply';
+
+  @override
+  String get schemesApplyTitle => 'Apply to this scheme?';
+
+  @override
+  String get schemesApplyMessage =>
+      'Your application goes to the officers for review.';
+
+  @override
+  String get schemesApplied => 'Application submitted';
+
+  @override
+  String get schemesYourApplication => 'Your application';
+
+  @override
+  String schemesApplyMessageDocuments(String documents) {
+    return 'Your application goes to the officers for review. Then upload these documents from My applications: $documents';
+  }
 }

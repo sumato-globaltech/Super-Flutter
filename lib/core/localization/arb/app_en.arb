@@ -698,5 +698,78 @@
   "shipmentsMarkReached": "Reached",
   "shipmentsReachTitle": "Mark as reached?",
   "shipmentsReachMessage": "The vendor will record what was received.",
-  "shipmentsReachedDone": "Marked as reached"
+  "shipmentsReachedDone": "Marked as reached",
+
+  "schemesTitle": "Schemes",
+  "@schemesTitle": { "description": "App bar title of the schemes screen" },
+
+  "schemesList": "Schemes",
+  "@schemesList": { "description": "Title of the SchemeModel list" },
+
+  "schemesEmpty": "No schemes yet",
+  "@schemesEmpty": { "description": "Shown when there is no SchemeModel" },
+
+  "schemesName": "Scheme",
+  "@schemesName": { "description": "Label of the name row" },
+
+  "schemesCode": "Code",
+  "@schemesCode": { "description": "Label of the code row" },
+
+  "schemesIsOpen": "Open for applications",
+  "@schemesIsOpen": { "description": "Label of the isOpen row" },
+
+  "schemesEndsOn": "Closes on",
+  "@schemesEndsOn": { "description": "Label of the endsOn row" },
+
+  "schemesSchemeDetailTitle": "Scheme",
+  "@schemesSchemeDetailTitle": { "description": "App bar title of the scheme_detail screen" },
+
+  "schemesSchemeDetailDetails": "Scheme Details",
+  "@schemesSchemeDetailDetails": { "description": "Title of the SchemeModel card" },
+
+  "schemesSchemeDetailCode": "Code",
+  "@schemesSchemeDetailCode": { "description": "Label of the code row" },
+
+  "schemesSchemeDetailIsOpen": "Open for applications",
+  "@schemesSchemeDetailIsOpen": { "description": "Label of the isOpen row" },
+
+  "schemesSchemeDetailStartsOn": "Opens on",
+  "@schemesSchemeDetailStartsOn": { "description": "Label of the startsOn row" },
+
+  "schemesSchemeDetailEndsOn": "Closes on",
+  "@schemesSchemeDetailEndsOn": { "description": "Label of the endsOn row" },
+
+  "schemesSchemeDetailSubsidyAmount": "Subsidy",
+  "@schemesSchemeDetailSubsidyAmount": { "description": "Label of the subsidyAmount row" },
+
+  "schemesSchemeDetailFundingSource": "Funded by",
+  "@schemesSchemeDetailFundingSource": { "description": "Label of the fundingSource row" },
+
+  "schemesSchemeDetailFinancialYear": "Financial year",
+  "@schemesSchemeDetailFinancialYear": { "description": "Label of the financialYear row" },
+
+  "schemesSchemeDetailDescription": "Description",
+  "@schemesSchemeDetailDescription": { "description": "Label of the description row" },
+
+  "schemesSchemeDetailEligibility": "Eligibility",
+  "@schemesSchemeDetailEligibility": { "description": "Label of the eligibility row" },
+
+  "schemesSchemeDetailApplicationProcess": "How to apply",
+  "@schemesSchemeDetailApplicationProcess": { "description": "Label of the applicationProcess row" },
+
+  "schemesMyApplicationsTitle": "My Applications",
+  "@schemesMyApplicationsTitle": { "description": "App bar title of the my_applications screen" },
+  "schemesMyApplications": "My applications",
+  "schemesApplicationsCount": "Applications",
+  "schemesRequiredDocuments": "Documents you will need",
+  "schemesFiles": "Scheme files",
+  "schemesFile": "File",
+  "schemesDistricts": "Where it applies",
+  "schemesApply": "Apply",
+  "schemesApplyTitle": "Apply to this scheme?",
+  "schemesApplyMessage": "Your application goes to the officers for review.",
+  "schemesApplied": "Application submitted",
+  "schemesYourApplication": "Your application",
+  "schemesApplyMessageDocuments": "Your application goes to the officers for review. Then upload these documents from My applications: {documents}",
+  "@schemesApplyMessageDocuments": {"placeholders": {"documents": {"type": "String"}}}
 }

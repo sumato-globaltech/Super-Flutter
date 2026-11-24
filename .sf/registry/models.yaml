@@ -430,12 +430,28 @@ models:
         type: String
         nullable: true
     origin: generated
-  - name: DistrictModel
+  - name: DocumentModel
     kind: model
-    feature: newPostFeatureDep
-    path: lib/data/new_post_feature_dep/model/district_model.dart
-    import: package:super_flutter/data/new_post_feature_dep/model/district_model.dart
-    fingerprint: '{code:string,id:string,name:string,state:{code:string,id:string,name:string},state_id:string}'
+    feature: schemes
+    path: lib/data/schemes/model/scheme_model.dart
+    import: package:super_flutter/data/schemes/model/scheme_model.dart
+    fingerprint: '{name:string,url:string}'
+    fields:
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+      - name: url
+        json_key: url
+        type: String
+        nullable: true
+    origin: generated
+  - name: SchemeApplicationDocumentModel
+    kind: model
+    feature: schemes
+    path: lib/data/schemes/model/scheme_application_document_model.dart
+    import: package:super_flutter/data/schemes/model/scheme_application_document_model.dart
+    fingerprint: '{id:string,name:string,remarks:string,status:{label:string,value:string},uploaded:bool,url:string}'
     fields:
       - name: id
         json_key: id
@@ -445,38 +461,174 @@ models:
         json_key: name
         type: String
         nullable: true
-      - name: code
-        json_key: code
+      - name: status
+        json_key: status
+        type: StatusModel
+        nullable: true
+      - name: remarks
+        json_key: remarks
         type: String
         nullable: true
-      - name: stateId
-        json_key: state_id
-        type: String
+      - name: uploaded
+        json_key: uploaded
+        type: bool
         nullable: true
-      - name: state
-        json_key: state
-        type: StateModel
+      - name: url
+        json_key: url
+        type: String
         nullable: true
     nested:
-      - StateModel
+      - StatusModel
     origin: generated
-  - name: StateModel
+  - name: SchemeApplicationModel
     kind: model
-    feature: newPostFeatureDep
-    path: lib/data/new_post_feature_dep/model/district_model.dart
-    import: package:super_flutter/data/new_post_feature_dep/model/district_model.dart
-    fingerprint: '{code:string,id:string,name:string}'
+    feature: schemes
+    path: lib/data/schemes/model/scheme_application_model.dart
+    import: package:super_flutter/data/schemes/model/scheme_application_model.dart
+    fingerprint: '{amount_approved:string,amount_disbursed:string,applied_at:datetime,can_withdraw:bool,decision_note:string,disbursed_on:string,documents:[{id:string,name:string,remarks:string,status:{label:string,value:string},uploaded:bool,url:string}],id:string,reviewed_at:datetime,scheme:{code:string,id:string,name:string},status:{label:string,value:string}}'
     fields:
       - name: id
         json_key: id
+        type: String
+        nullable: true
+      - name: scheme
+        json_key: scheme
+        type: ShipmentPartyModel
+        nullable: true
+      - name: status
+        json_key: status
+        type: StatusModel
+        nullable: true
+      - name: canWithdraw
+        json_key: can_withdraw
+        type: bool
+        nullable: true
+      - name: appliedAt
+        json_key: applied_at
+        type: DateTime
+        nullable: true
+      - name: reviewedAt
+        json_key: reviewed_at
+        type: DateTime
+        nullable: true
+      - name: decisionNote
+        json_key: decision_note
+        type: String
+        nullable: true
+      - name: amountApproved
+        json_key: amount_approved
+        type: String
+        nullable: true
+      - name: amountDisbursed
+        json_key: amount_disbursed
+        type: String
+        nullable: true
+      - name: disbursedOn
+        json_key: disbursed_on
+        type: String
+        nullable: true
+      - name: documents
+        json_key: documents
+        type: List<SchemeApplicationDocumentModel>
+        nullable: true
+    nested:
+      - SchemeApplicationDocumentModel
+      - ShipmentPartyModel
+      - StatusModel
+    origin: generated
+  - name: SchemeModel
+    kind: model
+    feature: schemes
+    path: lib/data/schemes/model/scheme_model.dart
+    import: package:super_flutter/data/schemes/model/scheme_model.dart
+    fingerprint: '{application_process:string,applications_count:int,code:string,description:string,districts:[{id:string,name:string}],documents:[{name:string,url:string}],eligibility:string,ends_on:string,financial_year:string,funding_source:string,id:string,is_open:bool,name:string,required_documents:[string],scope:{label:string,value:string},starts_on:string,subsidy_amount:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: code
+        json_key: code
         type: String
         nullable: true
       - name: name
         json_key: name
         type: String
         nullable: true
-      - name: code
-        json_key: code
+      - name: description
+        json_key: description
+        type: String
+        nullable: true
+      - name: scope
+        json_key: scope
+        type: ScopeModel
+        nullable: true
+      - name: startsOn
+        json_key: starts_on
+        type: String
+        nullable: true
+      - name: endsOn
+        json_key: ends_on
+        type: String
+        nullable: true
+      - name: isOpen
+        json_key: is_open
+        type: bool
+        nullable: true
+      - name: eligibility
+        json_key: eligibility
+        type: String
+        nullable: true
+      - name: applicationProcess
+        json_key: application_process
+        type: String
+        nullable: true
+      - name: requiredDocuments
+        json_key: required_documents
+        type: List<String>
+        nullable: true
+      - name: subsidyAmount
+        json_key: subsidy_amount
+        type: String
+        nullable: true
+      - name: fundingSource
+        json_key: funding_source
+        type: String
+        nullable: true
+      - name: financialYear
+        json_key: financial_year
+        type: String
+        nullable: true
+      - name: districts
+        json_key: districts
+        type: List<DistrictModel>
+        nullable: true
+      - name: documents
+        json_key: documents
+        type: List<DocumentModel>
+        nullable: true
+      - name: applicationsCount
+        json_key: applications_count
+        type: int
+        nullable: true
+    nested:
+      - DistrictModel
+      - DocumentModel
+      - ScopeModel
+    origin: generated
+  - name: ScopeModel
+    kind: model
+    feature: schemes
+    path: lib/data/schemes/model/scheme_model.dart
+    import: package:super_flutter/data/schemes/model/scheme_model.dart
+    fingerprint: '{label:string,value:string}'
+    fields:
+      - name: value
+        json_key: value
+        type: String
+        nullable: true
+      - name: label
+        json_key: label
         type: String
         nullable: true
     origin: generated

@@ -2,6 +2,80 @@
 # read them; edit with their --show, --hide, --label and --pair flags.
 version: 1
 views:
+  - bloc: SchemeDetailBloc
+    feature: schemes
+    screen: scheme_detail
+    call: getScheme
+    source_feature: schemes
+    model: SchemeModel
+    model_feature: schemes
+    ids:
+      - scheme
+    show:
+      - code
+      - is_open
+      - starts_on
+      - ends_on
+      - subsidy_amount
+      - funding_source
+      - financial_year
+      - description
+      - eligibility
+      - application_process
+    hide:
+      - id
+      - name
+      - applications_count
+      - scope
+    labels:
+      application_process: How to apply
+      code: Code
+      ends_on: Closes on
+      financial_year: Financial year
+      funding_source: Funded by
+      is_open: Open for applications
+      starts_on: Opens on
+      subsidy_amount: Subsidy
+    pair: true
+    files:
+      lib/features/schemes/presentation/scheme_detail/bloc/scheme_detail_bloc.dart: 453f21c3e1db3bf6
+      lib/features/schemes/presentation/scheme_detail/bloc/scheme_detail_event.dart: 1725d20950fd0e63
+      lib/features/schemes/presentation/scheme_detail/bloc/scheme_detail_state.dart: 7bfdc08d00cd6451
+      lib/features/schemes/presentation/scheme_detail/screen/scheme_detail_screen.dart: d810f1acaae04d40
+  - bloc: SchemesBloc
+    feature: schemes
+    screen: schemes
+    call: getSchemes
+    source_feature: schemes
+    model: SchemeModel
+    model_feature: schemes
+    list: true
+    paged: true
+    show:
+      - name
+      - code
+      - is_open
+      - ends_on
+    hide:
+      - id
+      - description
+      - starts_on
+      - eligibility
+      - application_process
+      - subsidy_amount
+      - funding_source
+      - financial_year
+      - applications_count
+    labels:
+      ends_on: Closes on
+      is_open: Open for applications
+      name: Scheme
+    open: schemeDetail
+    files:
+      lib/features/schemes/presentation/schemes/bloc/schemes_bloc.dart: 97497d9f96eed3c0
+      lib/features/schemes/presentation/schemes/bloc/schemes_event.dart: 5268c83d1d796313
+      lib/features/schemes/presentation/schemes/bloc/schemes_state.dart: 6f688d6ace5b696e
+      lib/features/schemes/presentation/schemes/screen/schemes_screen.dart: 1e71b108b7c453ba
   - bloc: ShipmentDetailBloc
     feature: shipments
     screen: shipment_detail
