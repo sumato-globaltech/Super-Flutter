@@ -27,6 +27,12 @@ import 'package:super_flutter/core/service/device_info_service.dart' as _i686;
 import 'package:super_flutter/core/storage/local_storage.dart' as _i635;
 import 'package:super_flutter/core/storage/secure_storage.dart' as _i491;
 import 'package:super_flutter/core/storage/storage_service.dart' as _i407;
+import 'package:super_flutter/data/admin_communication/repositories/admin_communication_repository_impl.dart'
+    as _i1055;
+import 'package:super_flutter/data/admin_communication/sources/local/admin_communication_local_data_source.dart'
+    as _i466;
+import 'package:super_flutter/data/admin_communication/sources/remote/admin_communication_remote_data_source.dart'
+    as _i414;
 import 'package:super_flutter/data/auth/repositories/auth_repository_impl.dart'
     as _i227;
 import 'package:super_flutter/data/auth/sources/local/auth_local_data_source.dart'
@@ -67,6 +73,12 @@ import 'package:super_flutter/data/production/sources/local/production_local_dat
     as _i385;
 import 'package:super_flutter/data/production/sources/remote/production_remote_data_source.dart'
     as _i480;
+import 'package:super_flutter/data/profile/repositories/profile_repository_impl.dart'
+    as _i931;
+import 'package:super_flutter/data/profile/sources/local/profile_local_data_source.dart'
+    as _i394;
+import 'package:super_flutter/data/profile/sources/remote/profile_remote_data_source.dart'
+    as _i117;
 import 'package:super_flutter/data/schemes/repositories/schemes_repository_impl.dart'
     as _i707;
 import 'package:super_flutter/data/schemes/sources/local/schemes_local_data_source.dart'
@@ -100,6 +112,18 @@ import 'package:super_flutter/domain/auth/use_cases/request_otp.dart' as _i643;
 import 'package:super_flutter/domain/auth/use_cases/verify_otp.dart' as _i625;
 import 'package:super_flutter/domain/auth/use_cases/watch_auth_status.dart'
     as _i729;
+import 'package:super_flutter/features/admin_communication/presentation/add_alert/bloc/add_alert_bloc.dart'
+    as _i463;
+import 'package:super_flutter/features/admin_communication/presentation/add_notice/bloc/add_notice_bloc.dart'
+    as _i486;
+import 'package:super_flutter/features/admin_communication/presentation/admin_alerts/bloc/admin_alerts_bloc.dart'
+    as _i141;
+import 'package:super_flutter/features/admin_communication/presentation/admin_notices/bloc/admin_notices_bloc.dart'
+    as _i186;
+import 'package:super_flutter/features/admin_communication/presentation/edit_alert/bloc/edit_alert_bloc.dart'
+    as _i715;
+import 'package:super_flutter/features/admin_communication/presentation/edit_notice/bloc/edit_notice_bloc.dart'
+    as _i294;
 import 'package:super_flutter/features/auth/presentation/change_password/bloc/change_password_bloc.dart'
     as _i930;
 import 'package:super_flutter/features/auth/presentation/login/bloc/login_bloc.dart'
@@ -119,7 +143,7 @@ import 'package:super_flutter/features/crops/presentation/crop_recommendations/b
 import 'package:super_flutter/features/crops/presentation/crops_list/bloc/crops_list_bloc.dart'
     as _i64;
 import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart'
-    as _i931;
+    as _i932;
 import 'package:super_flutter/features/farm/presentation/add_farm/bloc/add_farm_bloc.dart'
     as _i461;
 import 'package:super_flutter/features/farm/presentation/edit_farm/bloc/edit_farm_bloc.dart'
@@ -138,6 +162,10 @@ import 'package:super_flutter/features/market/presentation/market_prices/bloc/ma
     as _i688;
 import 'package:super_flutter/features/production/presentation/production/bloc/production_bloc.dart'
     as _i477;
+import 'package:super_flutter/features/profile/presentation/edit_profile/bloc/edit_profile_bloc.dart'
+    as _i734;
+import 'package:super_flutter/features/profile/presentation/profile/bloc/profile_bloc.dart'
+    as _i116;
 import 'package:super_flutter/features/schemes/presentation/my_applications/bloc/my_applications_bloc.dart'
     as _i250;
 import 'package:super_flutter/features/schemes/presentation/scheme_detail/bloc/scheme_detail_bloc.dart'
@@ -170,6 +198,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i451.AppLogger>(() => coreModule.logger);
     gh.lazySingleton<_i491.SecureStorage>(() => storageModule.secureStorage());
     gh.lazySingleton<_i686.DeviceInfoService>(() => _i686.DeviceInfoService());
+    gh.lazySingleton<_i466.AdminCommunicationLocalDataSource>(
+      () => _i466.AdminCommunicationLocalDataSource(),
+    );
     gh.lazySingleton<_i940.CommunicationLocalDataSource>(
       () => _i940.CommunicationLocalDataSource(),
     );
@@ -178,6 +209,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i385.ProductionLocalDataSource>(
       () => _i385.ProductionLocalDataSource(),
+    );
+    gh.lazySingleton<_i394.ProfileLocalDataSource>(
+      () => _i394.ProfileLocalDataSource(),
     );
     gh.lazySingleton<_i1054.SchemesLocalDataSource>(
       () => _i1054.SchemesLocalDataSource(),
@@ -227,6 +261,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i686.DeviceInfoService>(),
       ),
     );
+    gh.lazySingleton<_i414.AdminCommunicationRemoteDataSource>(
+      () => _i414.AdminCommunicationRemoteDataSource(gh<_i42.DioClient>()),
+    );
     gh.lazySingleton<_i390.CommunicationRemoteDataSource>(
       () => _i390.CommunicationRemoteDataSource(gh<_i42.DioClient>()),
     );
@@ -248,6 +285,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i480.ProductionRemoteDataSource>(
       () => _i480.ProductionRemoteDataSource(gh<_i42.DioClient>()),
     );
+    gh.lazySingleton<_i117.ProfileRemoteDataSource>(
+      () => _i117.ProfileRemoteDataSource(gh<_i42.DioClient>()),
+    );
     gh.lazySingleton<_i474.SchemesRemoteDataSource>(
       () => _i474.SchemesRemoteDataSource(gh<_i42.DioClient>()),
     );
@@ -265,6 +305,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i247.TicketDetailBloc>(
       () => _i247.TicketDetailBloc(gh<_i975.SupportRemoteDataSource>()),
+    );
+    gh.factory<_i116.ProfileBloc>(
+      () => _i116.ProfileBloc(gh<_i117.ProfileRemoteDataSource>()),
     );
     gh.factory<_i477.ProductionBloc>(
       () => _i477.ProductionBloc(
@@ -317,6 +360,34 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i935.ShipmentsBloc>(
       () => _i935.ShipmentsBloc(gh<_i353.ShipmentsRemoteDataSource>()),
+    );
+    gh.factory<_i463.AddAlertBloc>(
+      () => _i463.AddAlertBloc(gh<_i414.AdminCommunicationRemoteDataSource>()),
+    );
+    gh.factory<_i486.AddNoticeBloc>(
+      () => _i486.AddNoticeBloc(gh<_i414.AdminCommunicationRemoteDataSource>()),
+    );
+    gh.factory<_i141.AdminAlertsBloc>(
+      () =>
+          _i141.AdminAlertsBloc(gh<_i414.AdminCommunicationRemoteDataSource>()),
+    );
+    gh.factory<_i186.AdminNoticesBloc>(
+      () => _i186.AdminNoticesBloc(
+        gh<_i414.AdminCommunicationRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i715.EditAlertBloc>(
+      () => _i715.EditAlertBloc(gh<_i414.AdminCommunicationRemoteDataSource>()),
+    );
+    gh.factory<_i294.EditNoticeBloc>(
+      () =>
+          _i294.EditNoticeBloc(gh<_i414.AdminCommunicationRemoteDataSource>()),
+    );
+    gh.lazySingleton<_i931.ProfileRepositoryImpl>(
+      () => _i931.ProfileRepositoryImpl(
+        gh<_i117.ProfileRemoteDataSource>(),
+        gh<_i394.ProfileLocalDataSource>(),
+      ),
     );
     gh.lazySingleton<_i631.AuthRepository>(
       () => _i227.AuthRepositoryImpl(
@@ -385,6 +456,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i341.MarketRepositoryImpl>(
       () => _i341.MarketRepositoryImpl(gh<_i1002.MarketRemoteDataSource>()),
     );
+    gh.factory<_i734.EditProfileBloc>(
+      () => _i734.EditProfileBloc(
+        gh<_i117.ProfileRemoteDataSource>(),
+        gh<_i773.FarmRemoteDataSource>(),
+      ),
+    );
+    gh.lazySingleton<_i1055.AdminCommunicationRepositoryImpl>(
+      () => _i1055.AdminCommunicationRepositoryImpl(
+        gh<_i414.AdminCommunicationRemoteDataSource>(),
+        gh<_i466.AdminCommunicationLocalDataSource>(),
+      ),
+    );
     gh.factory<_i461.AddFarmBloc>(
       () => _i461.AddFarmBloc(gh<_i773.FarmRemoteDataSource>()),
     );
@@ -444,8 +527,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i451.AppLogger>(),
       ),
     );
-    gh.factory<_i931.DashboardBloc>(
-      () => _i931.DashboardBloc(
+    gh.factory<_i932.DashboardBloc>(
+      () => _i932.DashboardBloc(
         gh<_i239.Logout>(),
         gh<_i390.CommunicationRemoteDataSource>(),
       ),

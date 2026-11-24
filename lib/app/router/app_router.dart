@@ -6,10 +6,12 @@ import 'package:super_flutter/features/auth/session/bloc/auth_state.dart';
 import 'package:super_flutter/domain/auth/entities/access_policy.dart';
 import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
 // sf:feature-routes-imports:begin
+import 'package:super_flutter/features/admin_communication/routes/admin_communication_routes.dart';
 import 'package:super_flutter/features/auth/routes/auth_routes.dart';
 import 'package:super_flutter/features/communication/routes/communication_routes.dart';
 import 'package:super_flutter/features/crops/routes/crops_routes.dart';
 import 'package:super_flutter/features/iot/routes/iot_routes.dart';
+import 'package:super_flutter/features/profile/routes/profile_routes.dart';
 import 'package:super_flutter/features/super_awesome/routes/super_awesome_routes.dart';
 import 'package:super_flutter/features/support/routes/support_routes.dart';
 import 'package:super_flutter/features/ui_gallery/routes/ui_gallery_routes.dart';
@@ -58,10 +60,12 @@ GoRouter createRouter({
       ),
       buildAppShellRoute(),
       // sf:feature-routes:begin
+      ...buildAdminCommunicationRoutes(),
       ...buildAuthRoutes(),
       ...buildCommunicationRoutes(),
       ...buildCropsRoutes(),
       ...buildIotRoutes(),
+      ...buildProfileRoutes(),
       ...buildSuperAwesomeRoutes(),
       ...buildSupportRoutes(),
       ...buildUiGalleryRoutes(),

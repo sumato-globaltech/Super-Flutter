@@ -2,6 +2,57 @@
 # read them; edit with their --show, --hide, --label and --pair flags.
 version: 1
 views:
+  - bloc: AdminAlertsBloc
+    feature: admin_communication
+    screen: admin_alerts
+    call: getAdminAlerts
+    source_feature: admin_communication
+    model: AdminAlertModel
+    model_feature: admin_communication
+    list: true
+    paged: true
+    show:
+      - title
+      - starts_on
+      - ends_on
+    hide:
+      - id
+      - description
+      - statewide
+      - created_at
+    labels:
+      ends_on: Until
+      starts_on: From
+    files:
+      lib/features/admin_communication/presentation/admin_alerts/bloc/admin_alerts_bloc.dart: 427cb8f42d9d820f
+      lib/features/admin_communication/presentation/admin_alerts/bloc/admin_alerts_event.dart: 574e85298c918f3a
+      lib/features/admin_communication/presentation/admin_alerts/bloc/admin_alerts_state.dart: 667e5b14e5a3c3cc
+      lib/features/admin_communication/presentation/admin_alerts/screen/admin_alerts_screen.dart: 85f8186c717657b3
+  - bloc: AdminNoticesBloc
+    feature: admin_communication
+    screen: admin_notices
+    call: getAdminNotices
+    source_feature: admin_communication
+    model: AdminNoticeModel
+    model_feature: admin_communication
+    list: true
+    paged: true
+    show:
+      - title
+      - published_at
+      - expires_at
+    hide:
+      - id
+      - body
+      - created_at
+    labels:
+      expires_at: Expires on
+      published_at: Published on
+    files:
+      lib/features/admin_communication/presentation/admin_notices/bloc/admin_notices_bloc.dart: 1f7fa8b03481b83b
+      lib/features/admin_communication/presentation/admin_notices/bloc/admin_notices_event.dart: d9caf33dbf338319
+      lib/features/admin_communication/presentation/admin_notices/bloc/admin_notices_state.dart: 18d05af4e6c082b2
+      lib/features/admin_communication/presentation/admin_notices/screen/admin_notices_screen.dart: 22a9aac0b7e5e54b
   - bloc: ProductionBloc
     feature: production
     screen: production

@@ -1640,4 +1640,226 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get adminCommunicationAdminNoticesTitle => 'Manage Notices';
+
+  @override
+  String get adminCommunicationAdminAlertsTitle => 'Manage Alerts';
+
+  @override
+  String get adminCommunicationAddNoticeTitle => 'New Notice';
+
+  @override
+  String get adminCommunicationEditNoticeTitle => 'Edit Notice';
+
+  @override
+  String get adminCommunicationAddAlertTitle => 'New Alert';
+
+  @override
+  String get adminCommunicationEditAlertTitle => 'Edit Alert';
+
+  @override
+  String get adminCommunicationAdminNoticesList => 'Admin Notices';
+
+  @override
+  String get adminCommunicationAdminNoticesEmpty => 'No notices yet';
+
+  @override
+  String get adminCommunicationAdminNoticesPublishedAt => 'Published on';
+
+  @override
+  String get adminCommunicationAdminNoticesExpiresAt => 'Expires on';
+
+  @override
+  String get adminCommunicationAdminAlertsList => 'Admin Alerts';
+
+  @override
+  String get adminCommunicationAdminAlertsEmpty => 'No alerts yet';
+
+  @override
+  String get adminCommunicationAdminAlertsStartsOn => 'From';
+
+  @override
+  String get adminCommunicationAdminAlertsEndsOn => 'Until';
+
+  @override
+  String get adminCommunicationAddNoticeCategoryId => 'Category';
+
+  @override
+  String get adminCommunicationAddNoticeBody => 'Text';
+
+  @override
+  String get adminCommunicationAddNoticePriority => 'Priority';
+
+  @override
+  String get adminCommunicationAddNoticeExpiresOn => 'Expires on';
+
+  @override
+  String get adminCommunicationAddNoticeDone => 'Notice saved as a draft';
+
+  @override
+  String get adminCommunicationEditNoticeCategoryId => 'Category';
+
+  @override
+  String get adminCommunicationEditNoticeBody => 'Text';
+
+  @override
+  String get adminCommunicationEditNoticePriority => 'Priority';
+
+  @override
+  String get adminCommunicationEditNoticeExpiresOn => 'Expires on';
+
+  @override
+  String get adminCommunicationEditNoticeDone => 'Notice updated';
+
+  @override
+  String get adminCommunicationAddAlertCategoryId => 'Category';
+
+  @override
+  String get adminCommunicationAddAlertDistrictId => 'District';
+
+  @override
+  String get adminCommunicationAddAlertDescription => 'Description';
+
+  @override
+  String get adminCommunicationAddAlertSeverity => 'Severity';
+
+  @override
+  String get adminCommunicationAddAlertStartsOn => 'Starts on';
+
+  @override
+  String get adminCommunicationAddAlertEndsOn => 'Ends on';
+
+  @override
+  String get adminCommunicationAddAlertDone => 'Alert saved as a draft';
+
+  @override
+  String get adminCommunicationEditAlertCategoryId => 'Category';
+
+  @override
+  String get adminCommunicationEditAlertDistrictId => 'District';
+
+  @override
+  String get adminCommunicationEditAlertDescription => 'Description';
+
+  @override
+  String get adminCommunicationEditAlertSeverity => 'Severity';
+
+  @override
+  String get adminCommunicationEditAlertStartsOn => 'Starts on';
+
+  @override
+  String get adminCommunicationEditAlertEndsOn => 'Ends on';
+
+  @override
+  String get adminCommunicationEditAlertDone => 'Alert updated';
+
+  @override
+  String get adminTitle => 'Title';
+
+  @override
+  String get adminStatus => 'Status';
+
+  @override
+  String get adminEdit => 'Edit';
+
+  @override
+  String get adminPublish => 'Publish';
+
+  @override
+  String get adminArchive => 'Archive';
+
+  @override
+  String get adminRestore => 'Restore';
+
+  @override
+  String get adminActivate => 'Activate';
+
+  @override
+  String get adminAlertCancel => 'Cancel alert';
+
+  @override
+  String get adminAlertStatewide => 'Statewide';
+
+  @override
+  String get adminDeleteWarning => 'This can\'t be undone.';
+
+  @override
+  String get adminAlertCancelWarning =>
+      'A cancelled alert can\'t be edited or activated again.';
+
+  @override
+  String get adminDone => 'Saved';
+
+  @override
+  String get adminNoticeFormattingLost =>
+      'This notice has formatting. Changing the text here saves it as plain text.';
+
+  @override
+  String get profileTitle => 'Profile';
+
+  @override
+  String get profileEditProfileTitle => 'Edit Profile';
+
+  @override
+  String get profileEditProfileName => 'Name';
+
+  @override
+  String get profileEditProfileEmail => 'Email';
+
+  @override
+  String get profileEditProfileGender => 'Gender';
+
+  @override
+  String get profileEditProfileDateOfBirth => 'Date of birth';
+
+  @override
+  String get profileEditProfileVillage => 'Village';
+
+  @override
+  String get profileEditProfileAddress => 'Address';
+
+  @override
+  String get profileEditProfileLandAreaHa => 'Land (ha)';
+
+  @override
+  String get profileEditProfileLandOwnership => 'Land ownership';
+
+  @override
+  String get profileEditProfileDone => 'Profile updated';
+
+  @override
+  String get profileAccount => 'Account';
+
+  @override
+  String get profileRole => 'Role';
+
+  @override
+  String get profilePhone => 'Phone';
+
+  @override
+  String get profileFarmer => 'Farmer details';
+
+  @override
+  String get profileCode => 'Farmer code';
+
+  @override
+  String get profileVerified => 'Verified';
+
+  @override
+  String get profileDistricts => 'Districts';
+
+  @override
+  String get profileBlocks => 'Blocks';
+
+  @override
+  String get profileNotSet => 'Not set';
+
+  @override
+  String get profileVerifyAgain =>
+      'You are verified. Changing your details may mean you need verifying again.';
+
+  @override
+  String get profileChangePassword => 'Change password';
 }

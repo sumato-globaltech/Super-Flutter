@@ -1647,4 +1647,226 @@ class AppLocalizationsEs extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get adminCommunicationAdminNoticesTitle => 'Manage Notices';
+
+  @override
+  String get adminCommunicationAdminAlertsTitle => 'Manage Alerts';
+
+  @override
+  String get adminCommunicationAddNoticeTitle => 'New Notice';
+
+  @override
+  String get adminCommunicationEditNoticeTitle => 'Edit Notice';
+
+  @override
+  String get adminCommunicationAddAlertTitle => 'New Alert';
+
+  @override
+  String get adminCommunicationEditAlertTitle => 'Edit Alert';
+
+  @override
+  String get adminCommunicationAdminNoticesList => 'Admin Notices';
+
+  @override
+  String get adminCommunicationAdminNoticesEmpty => 'No notices yet';
+
+  @override
+  String get adminCommunicationAdminNoticesPublishedAt => 'Published on';
+
+  @override
+  String get adminCommunicationAdminNoticesExpiresAt => 'Expires on';
+
+  @override
+  String get adminCommunicationAdminAlertsList => 'Admin Alerts';
+
+  @override
+  String get adminCommunicationAdminAlertsEmpty => 'No alerts yet';
+
+  @override
+  String get adminCommunicationAdminAlertsStartsOn => 'From';
+
+  @override
+  String get adminCommunicationAdminAlertsEndsOn => 'Until';
+
+  @override
+  String get adminCommunicationAddNoticeCategoryId => 'Category';
+
+  @override
+  String get adminCommunicationAddNoticeBody => 'Text';
+
+  @override
+  String get adminCommunicationAddNoticePriority => 'Priority';
+
+  @override
+  String get adminCommunicationAddNoticeExpiresOn => 'Expires on';
+
+  @override
+  String get adminCommunicationAddNoticeDone => 'Notice saved as a draft';
+
+  @override
+  String get adminCommunicationEditNoticeCategoryId => 'Category';
+
+  @override
+  String get adminCommunicationEditNoticeBody => 'Text';
+
+  @override
+  String get adminCommunicationEditNoticePriority => 'Priority';
+
+  @override
+  String get adminCommunicationEditNoticeExpiresOn => 'Expires on';
+
+  @override
+  String get adminCommunicationEditNoticeDone => 'Notice updated';
+
+  @override
+  String get adminCommunicationAddAlertCategoryId => 'Category';
+
+  @override
+  String get adminCommunicationAddAlertDistrictId => 'District';
+
+  @override
+  String get adminCommunicationAddAlertDescription => 'Description';
+
+  @override
+  String get adminCommunicationAddAlertSeverity => 'Severity';
+
+  @override
+  String get adminCommunicationAddAlertStartsOn => 'Starts on';
+
+  @override
+  String get adminCommunicationAddAlertEndsOn => 'Ends on';
+
+  @override
+  String get adminCommunicationAddAlertDone => 'Alert saved as a draft';
+
+  @override
+  String get adminCommunicationEditAlertCategoryId => 'Category';
+
+  @override
+  String get adminCommunicationEditAlertDistrictId => 'District';
+
+  @override
+  String get adminCommunicationEditAlertDescription => 'Description';
+
+  @override
+  String get adminCommunicationEditAlertSeverity => 'Severity';
+
+  @override
+  String get adminCommunicationEditAlertStartsOn => 'Starts on';
+
+  @override
+  String get adminCommunicationEditAlertEndsOn => 'Ends on';
+
+  @override
+  String get adminCommunicationEditAlertDone => 'Alert updated';
+
+  @override
+  String get adminTitle => 'Título';
+
+  @override
+  String get adminStatus => 'Estado';
+
+  @override
+  String get adminEdit => 'Editar';
+
+  @override
+  String get adminPublish => 'Publicar';
+
+  @override
+  String get adminArchive => 'Archivar';
+
+  @override
+  String get adminRestore => 'Restaurar';
+
+  @override
+  String get adminActivate => 'Activar';
+
+  @override
+  String get adminAlertCancel => 'Cancelar alerta';
+
+  @override
+  String get adminAlertStatewide => 'Todo el estado';
+
+  @override
+  String get adminDeleteWarning => 'No se puede deshacer.';
+
+  @override
+  String get adminAlertCancelWarning =>
+      'Una alerta cancelada no se puede editar ni volver a activar.';
+
+  @override
+  String get adminDone => 'Guardado';
+
+  @override
+  String get adminNoticeFormattingLost =>
+      'Este aviso tiene formato. Si cambias el texto aquí se guardará sin formato.';
+
+  @override
+  String get profileTitle => 'Profile';
+
+  @override
+  String get profileEditProfileTitle => 'Edit Profile';
+
+  @override
+  String get profileEditProfileName => 'Name';
+
+  @override
+  String get profileEditProfileEmail => 'Email';
+
+  @override
+  String get profileEditProfileGender => 'Gender';
+
+  @override
+  String get profileEditProfileDateOfBirth => 'Date of birth';
+
+  @override
+  String get profileEditProfileVillage => 'Village';
+
+  @override
+  String get profileEditProfileAddress => 'Address';
+
+  @override
+  String get profileEditProfileLandAreaHa => 'Land (ha)';
+
+  @override
+  String get profileEditProfileLandOwnership => 'Land ownership';
+
+  @override
+  String get profileEditProfileDone => 'Profile updated';
+
+  @override
+  String get profileAccount => 'Cuenta';
+
+  @override
+  String get profileRole => 'Rol';
+
+  @override
+  String get profilePhone => 'Teléfono';
+
+  @override
+  String get profileFarmer => 'Datos del agricultor';
+
+  @override
+  String get profileCode => 'Código de agricultor';
+
+  @override
+  String get profileVerified => 'Verificado';
+
+  @override
+  String get profileDistricts => 'Distritos';
+
+  @override
+  String get profileBlocks => 'Bloques';
+
+  @override
+  String get profileNotSet => 'Sin definir';
+
+  @override
+  String get profileVerifyAgain =>
+      'Estás verificado. Si cambias tus datos, puede que haya que verificarte de nuevo.';
+
+  @override
+  String get profileChangePassword => 'Cambiar contraseña';
 }

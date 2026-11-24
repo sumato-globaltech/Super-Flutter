@@ -906,5 +906,176 @@
   "productionDistricts": "{count, plural, one{1 district} other{{count} districts}}",
   "@productionTonnes": {"placeholders": {"amount": {"type": "String"}}},
   "@productionRecords": {"placeholders": {"count": {"type": "int"}}},
-  "@productionDistricts": {"placeholders": {"count": {"type": "int"}}}
+  "@productionDistricts": {"placeholders": {"count": {"type": "int"}}},
+
+  "adminCommunicationAdminNoticesTitle": "Manage Notices",
+  "@adminCommunicationAdminNoticesTitle": { "description": "App bar title of the admin_notices screen" },
+
+  "adminCommunicationAdminAlertsTitle": "Manage Alerts",
+  "@adminCommunicationAdminAlertsTitle": { "description": "App bar title of the admin_alerts screen" },
+
+  "adminCommunicationAddNoticeTitle": "New Notice",
+  "@adminCommunicationAddNoticeTitle": { "description": "App bar title of the add_notice screen" },
+
+  "adminCommunicationEditNoticeTitle": "Edit Notice",
+  "@adminCommunicationEditNoticeTitle": { "description": "App bar title of the edit_notice screen" },
+
+  "adminCommunicationAddAlertTitle": "New Alert",
+  "@adminCommunicationAddAlertTitle": { "description": "App bar title of the add_alert screen" },
+
+  "adminCommunicationEditAlertTitle": "Edit Alert",
+  "@adminCommunicationEditAlertTitle": { "description": "App bar title of the edit_alert screen" },
+
+  "adminCommunicationAdminNoticesList": "Admin Notices",
+  "@adminCommunicationAdminNoticesList": { "description": "Title of the AdminNoticeModel list" },
+
+  "adminCommunicationAdminNoticesEmpty": "No notices yet",
+  "@adminCommunicationAdminNoticesEmpty": { "description": "Shown when there is no AdminNoticeModel" },
+
+  "adminCommunicationAdminNoticesPublishedAt": "Published on",
+  "@adminCommunicationAdminNoticesPublishedAt": { "description": "Label of the publishedAt row" },
+
+  "adminCommunicationAdminNoticesExpiresAt": "Expires on",
+  "@adminCommunicationAdminNoticesExpiresAt": { "description": "Label of the expiresAt row" },
+
+  "adminCommunicationAdminAlertsList": "Admin Alerts",
+  "@adminCommunicationAdminAlertsList": { "description": "Title of the AdminAlertModel list" },
+
+  "adminCommunicationAdminAlertsEmpty": "No alerts yet",
+  "@adminCommunicationAdminAlertsEmpty": { "description": "Shown when there is no AdminAlertModel" },
+
+  "adminCommunicationAdminAlertsStartsOn": "From",
+  "@adminCommunicationAdminAlertsStartsOn": { "description": "Label of the startsOn row" },
+
+  "adminCommunicationAdminAlertsEndsOn": "Until",
+  "@adminCommunicationAdminAlertsEndsOn": { "description": "Label of the endsOn row" },
+
+  "adminCommunicationAddNoticeCategoryId": "Category",
+  "@adminCommunicationAddNoticeCategoryId": { "description": "Label of the category_id input" },
+
+  "adminCommunicationAddNoticeBody": "Text",
+  "@adminCommunicationAddNoticeBody": { "description": "Label of the body input" },
+
+  "adminCommunicationAddNoticePriority": "Priority",
+  "@adminCommunicationAddNoticePriority": { "description": "Label of the priority input" },
+
+  "adminCommunicationAddNoticeExpiresOn": "Expires on",
+  "@adminCommunicationAddNoticeExpiresOn": { "description": "Label of the expires_on input" },
+
+  "adminCommunicationAddNoticeDone": "Notice saved as a draft",
+  "@adminCommunicationAddNoticeDone": { "description": "Shown when the add notice form was sent" },
+
+  "adminCommunicationEditNoticeCategoryId": "Category",
+  "@adminCommunicationEditNoticeCategoryId": { "description": "Label of the category_id input" },
+
+  "adminCommunicationEditNoticeBody": "Text",
+  "@adminCommunicationEditNoticeBody": { "description": "Label of the body input" },
+
+  "adminCommunicationEditNoticePriority": "Priority",
+  "@adminCommunicationEditNoticePriority": { "description": "Label of the priority input" },
+
+  "adminCommunicationEditNoticeExpiresOn": "Expires on",
+  "@adminCommunicationEditNoticeExpiresOn": { "description": "Label of the expires_on input" },
+
+  "adminCommunicationEditNoticeDone": "Notice updated",
+  "@adminCommunicationEditNoticeDone": { "description": "Shown when the edit notice form was sent" },
+
+  "adminCommunicationAddAlertCategoryId": "Category",
+  "@adminCommunicationAddAlertCategoryId": { "description": "Label of the category_id input" },
+
+  "adminCommunicationAddAlertDistrictId": "District",
+  "@adminCommunicationAddAlertDistrictId": { "description": "Label of the district_id input" },
+
+  "adminCommunicationAddAlertDescription": "Description",
+  "@adminCommunicationAddAlertDescription": { "description": "Label of the description input" },
+
+  "adminCommunicationAddAlertSeverity": "Severity",
+  "@adminCommunicationAddAlertSeverity": { "description": "Label of the severity input" },
+
+  "adminCommunicationAddAlertStartsOn": "Starts on",
+  "@adminCommunicationAddAlertStartsOn": { "description": "Label of the starts_on input" },
+
+  "adminCommunicationAddAlertEndsOn": "Ends on",
+  "@adminCommunicationAddAlertEndsOn": { "description": "Label of the ends_on input" },
+
+  "adminCommunicationAddAlertDone": "Alert saved as a draft",
+  "@adminCommunicationAddAlertDone": { "description": "Shown when the add alert form was sent" },
+
+  "adminCommunicationEditAlertCategoryId": "Category",
+  "@adminCommunicationEditAlertCategoryId": { "description": "Label of the category_id input" },
+
+  "adminCommunicationEditAlertDistrictId": "District",
+  "@adminCommunicationEditAlertDistrictId": { "description": "Label of the district_id input" },
+
+  "adminCommunicationEditAlertDescription": "Description",
+  "@adminCommunicationEditAlertDescription": { "description": "Label of the description input" },
+
+  "adminCommunicationEditAlertSeverity": "Severity",
+  "@adminCommunicationEditAlertSeverity": { "description": "Label of the severity input" },
+
+  "adminCommunicationEditAlertStartsOn": "Starts on",
+  "@adminCommunicationEditAlertStartsOn": { "description": "Label of the starts_on input" },
+
+  "adminCommunicationEditAlertEndsOn": "Ends on",
+  "@adminCommunicationEditAlertEndsOn": { "description": "Label of the ends_on input" },
+
+  "adminCommunicationEditAlertDone": "Alert updated",
+  "@adminCommunicationEditAlertDone": { "description": "Shown when the edit alert form was sent" },
+  "adminTitle": "Title",
+  "adminStatus": "Status",
+  "adminEdit": "Edit",
+  "adminPublish": "Publish",
+  "adminArchive": "Archive",
+  "adminRestore": "Restore",
+  "adminActivate": "Activate",
+  "adminAlertCancel": "Cancel alert",
+  "adminAlertStatewide": "Statewide",
+  "adminDeleteWarning": "This can't be undone.",
+  "adminAlertCancelWarning": "A cancelled alert can't be edited or activated again.",
+  "adminDone": "Saved",
+  "adminNoticeFormattingLost": "This notice has formatting. Changing the text here saves it as plain text.",
+
+  "profileTitle": "Profile",
+  "@profileTitle": { "description": "App bar title of the profile screen" },
+
+  "profileEditProfileTitle": "Edit Profile",
+  "@profileEditProfileTitle": { "description": "App bar title of the edit_profile screen" },
+
+  "profileEditProfileName": "Name",
+  "@profileEditProfileName": { "description": "Label of the name input" },
+
+  "profileEditProfileEmail": "Email",
+  "@profileEditProfileEmail": { "description": "Label of the email input" },
+
+  "profileEditProfileGender": "Gender",
+  "@profileEditProfileGender": { "description": "Label of the gender input" },
+
+  "profileEditProfileDateOfBirth": "Date of birth",
+  "@profileEditProfileDateOfBirth": { "description": "Label of the date_of_birth input" },
+
+  "profileEditProfileVillage": "Village",
+  "@profileEditProfileVillage": { "description": "Label of the village input" },
+
+  "profileEditProfileAddress": "Address",
+  "@profileEditProfileAddress": { "description": "Label of the address input" },
+
+  "profileEditProfileLandAreaHa": "Land (ha)",
+  "@profileEditProfileLandAreaHa": { "description": "Label of the land_area_ha input" },
+
+  "profileEditProfileLandOwnership": "Land ownership",
+  "@profileEditProfileLandOwnership": { "description": "Label of the land_ownership input" },
+
+  "profileEditProfileDone": "Profile updated",
+  "@profileEditProfileDone": { "description": "Shown when the edit profile form was sent" },
+  "profileAccount": "Account",
+  "profileRole": "Role",
+  "profilePhone": "Phone",
+  "profileFarmer": "Farmer details",
+  "profileCode": "Farmer code",
+  "profileVerified": "Verified",
+  "profileDistricts": "Districts",
+  "profileBlocks": "Blocks",
+  "profileNotSet": "Not set",
+  "profileVerifyAgain": "You are verified. Changing your details may mean you need verifying again.",
+  "profileChangePassword": "Change password"
 }

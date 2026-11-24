@@ -127,4 +127,43 @@ abstract final class ApiEndpoints {
   static const queueSummary = '/api/v1/agent/queue-summary';
 
   static const production = '/api/v1/production/insights';
+
+  static String publishNotice(String notice) =>
+      '/api/v1/admin/notices/$notice/publish';
+
+  static String archiveNotice(String notice) =>
+      '/api/v1/admin/notices/$notice/archive';
+
+  static String restoreNotice(String notice) =>
+      '/api/v1/admin/notices/$notice/restore';
+
+  static String adminNoticeRemoval(String notice) =>
+      '/api/v1/admin/notices/$notice';
+
+  static String activateAlert(String alert) =>
+      '/api/v1/admin/alerts/$alert/activate';
+
+  static String cancelAlert(String alert) =>
+      '/api/v1/admin/alerts/$alert/cancel';
+
+  static String adminAlertRemoval(String alert) =>
+      '/api/v1/admin/alerts/$alert';
+
+  static const adminNotices = '/api/v1/admin/notices';
+
+  static const adminAlerts = '/api/v1/admin/alerts';
+
+  static const noticeType = '/api/v1/categories/notice_type';
+
+  static const priorities = '/api/v1/admin/notices/priorities';
+
+  static const alertType = '/api/v1/categories/alert_type';
+
+  static const districts = '/api/v1/admin/alerts/districts';
+
+  static const severities = '/api/v1/admin/alerts/severities';
+
+  static const farmerProfile = '/api/v1/farmer/profile';
+
+  static const genders = '/api/v1/farmer/genders';
 }

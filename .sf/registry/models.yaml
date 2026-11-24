@@ -3,6 +3,159 @@
 # creating duplicate models and how it safely evolves existing ones.
 version: 1
 models:
+  - name: AdminAlertModel
+    kind: model
+    feature: admin_communication
+    path: lib/data/admin_communication/model/admin_alert_model.dart
+    import: package:super_flutter/data/admin_communication/model/admin_alert_model.dart
+    fingerprint: '{category:{id:string,name:string},created_at:datetime,description:string,district:{id:string,name:string},ends_on:string,id:string,severity:{label:string,value:string},starts_on:string,statewide:bool,status:{label:string,value:string},title:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: title
+        json_key: title
+        type: String
+        nullable: true
+      - name: description
+        json_key: description
+        type: String
+        nullable: true
+      - name: category
+        json_key: category
+        type: CategoryModel
+        nullable: true
+      - name: district
+        json_key: district
+        type: DistrictModel
+        nullable: true
+      - name: statewide
+        json_key: statewide
+        type: bool
+        nullable: true
+      - name: severity
+        json_key: severity
+        type: SeverityModel
+        nullable: true
+      - name: startsOn
+        json_key: starts_on
+        type: String
+        nullable: true
+      - name: endsOn
+        json_key: ends_on
+        type: String
+        nullable: true
+      - name: status
+        json_key: status
+        type: StatusModel
+        nullable: true
+      - name: createdAt
+        json_key: created_at
+        type: DateTime
+        nullable: true
+    nested:
+      - CategoryModel
+      - DistrictModel
+      - SeverityModel
+      - StatusModel
+    origin: generated
+  - name: AdminNoticeModel
+    kind: model
+    feature: admin_communication
+    path: lib/data/admin_communication/model/admin_notice_model.dart
+    import: package:super_flutter/data/admin_communication/model/admin_notice_model.dart
+    fingerprint: '{body:string,category:{id:string,name:string},created_at:datetime,expires_at:datetime,id:string,priority:{label:string,value:string},published_at:datetime,status:{label:string,value:string},title:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: title
+        json_key: title
+        type: String
+        nullable: true
+      - name: category
+        json_key: category
+        type: CategoryModel
+        nullable: true
+      - name: priority
+        json_key: priority
+        type: PriorityModel
+        nullable: true
+      - name: publishedAt
+        json_key: published_at
+        type: DateTime
+        nullable: true
+      - name: expiresAt
+        json_key: expires_at
+        type: DateTime
+        nullable: true
+      - name: body
+        json_key: body
+        type: String
+        nullable: true
+      - name: status
+        json_key: status
+        type: StatusModel
+        nullable: true
+      - name: createdAt
+        json_key: created_at
+        type: DateTime
+        nullable: true
+    nested:
+      - CategoryModel
+      - PriorityModel
+      - StatusModel
+    origin: generated
+  - name: DistrictModel
+    kind: model
+    feature: admin_communication
+    path: lib/data/admin_communication/model/district_model.dart
+    import: package:super_flutter/data/admin_communication/model/district_model.dart
+    fingerprint: '{id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+    origin: generated
+  - name: PriorityModel
+    kind: model
+    feature: admin_communication
+    path: lib/data/admin_communication/model/priority_model.dart
+    import: package:super_flutter/data/admin_communication/model/priority_model.dart
+    fingerprint: '{id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+    origin: generated
+  - name: SeverityModel
+    kind: model
+    feature: admin_communication
+    path: lib/data/admin_communication/model/severity_model.dart
+    import: package:super_flutter/data/admin_communication/model/severity_model.dart
+    fingerprint: '{id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+    origin: generated
   - name: LoginModel
     kind: model
     feature: auth
@@ -536,6 +689,152 @@ models:
     nested:
       - ByCropModel
       - ByMonthModel
+    origin: generated
+  - name: BlockModel
+    kind: model
+    feature: profile
+    path: lib/data/profile/model/farmer_profile_model.dart
+    import: package:super_flutter/data/profile/model/farmer_profile_model.dart
+    fingerprint: '{id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+    origin: generated
+  - name: BlockModel2Model
+    kind: model
+    feature: profile
+    path: lib/data/profile/model/farmer_profile_model.dart
+    import: package:super_flutter/data/profile/model/farmer_profile_model.dart
+    fingerprint: '{id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+    origin: generated
+  - name: FarmerProfileModel
+    kind: model
+    feature: profile
+    path: lib/data/profile/model/farmer_profile_model.dart
+    import: package:super_flutter/data/profile/model/farmer_profile_model.dart
+    fingerprint: '{address:string,block:{id:string,name:string},blocks:[{id:string,name:string}],code:string,date_of_birth:string,district:{id:string,name:string},districts:[{id:string,name:string}],email:string,gender:{label:string,value:string},id:string,is_verified:bool,land_area_ha:double,land_ownership:{label:string,value:string},name:string,phone:string,verified_at:datetime,village:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: code
+        json_key: code
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+      - name: phone
+        json_key: phone
+        type: String
+        nullable: true
+      - name: email
+        json_key: email
+        type: String
+        nullable: true
+      - name: gender
+        json_key: gender
+        type: GenderModel
+        nullable: true
+      - name: dateOfBirth
+        json_key: date_of_birth
+        type: String
+        nullable: true
+      - name: district
+        json_key: district
+        type: DistrictModel
+        nullable: true
+      - name: block
+        json_key: block
+        type: BlockModel
+        nullable: true
+      - name: districts
+        json_key: districts
+        type: List<DistrictModel>
+        nullable: true
+      - name: blocks
+        json_key: blocks
+        type: List<BlockModel2Model>
+        nullable: true
+      - name: village
+        json_key: village
+        type: String
+        nullable: true
+      - name: address
+        json_key: address
+        type: String
+        nullable: true
+      - name: landAreaHa
+        json_key: land_area_ha
+        type: double
+        nullable: true
+      - name: landOwnership
+        json_key: land_ownership
+        type: LandOwnershipModel
+        nullable: true
+      - name: isVerified
+        json_key: is_verified
+        type: bool
+        nullable: true
+      - name: verifiedAt
+        json_key: verified_at
+        type: DateTime
+        nullable: true
+    nested:
+      - BlockModel
+      - BlockModel2Model
+      - DistrictModel
+      - GenderModel
+      - LandOwnershipModel
+    origin: generated
+  - name: GenderModel
+    kind: model
+    feature: profile
+    path: lib/data/profile/model/gender_model.dart
+    import: package:super_flutter/data/profile/model/gender_model.dart
+    fingerprint: '{id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+    origin: generated
+  - name: LandOwnershipModel
+    kind: model
+    feature: profile
+    path: lib/data/profile/model/land_ownership_model.dart
+    import: package:super_flutter/data/profile/model/land_ownership_model.dart
+    fingerprint: '{id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
     origin: generated
   - name: DocumentModel
     kind: model

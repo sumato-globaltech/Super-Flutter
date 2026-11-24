@@ -3151,6 +3151,444 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, one{1 district} other{{count} districts}}'**
   String productionDistricts(int count);
+
+  /// App bar title of the admin_notices screen
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Notices'**
+  String get adminCommunicationAdminNoticesTitle;
+
+  /// App bar title of the admin_alerts screen
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Alerts'**
+  String get adminCommunicationAdminAlertsTitle;
+
+  /// App bar title of the add_notice screen
+  ///
+  /// In en, this message translates to:
+  /// **'New Notice'**
+  String get adminCommunicationAddNoticeTitle;
+
+  /// App bar title of the edit_notice screen
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Notice'**
+  String get adminCommunicationEditNoticeTitle;
+
+  /// App bar title of the add_alert screen
+  ///
+  /// In en, this message translates to:
+  /// **'New Alert'**
+  String get adminCommunicationAddAlertTitle;
+
+  /// App bar title of the edit_alert screen
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Alert'**
+  String get adminCommunicationEditAlertTitle;
+
+  /// Title of the AdminNoticeModel list
+  ///
+  /// In en, this message translates to:
+  /// **'Admin Notices'**
+  String get adminCommunicationAdminNoticesList;
+
+  /// Shown when there is no AdminNoticeModel
+  ///
+  /// In en, this message translates to:
+  /// **'No notices yet'**
+  String get adminCommunicationAdminNoticesEmpty;
+
+  /// Label of the publishedAt row
+  ///
+  /// In en, this message translates to:
+  /// **'Published on'**
+  String get adminCommunicationAdminNoticesPublishedAt;
+
+  /// Label of the expiresAt row
+  ///
+  /// In en, this message translates to:
+  /// **'Expires on'**
+  String get adminCommunicationAdminNoticesExpiresAt;
+
+  /// Title of the AdminAlertModel list
+  ///
+  /// In en, this message translates to:
+  /// **'Admin Alerts'**
+  String get adminCommunicationAdminAlertsList;
+
+  /// Shown when there is no AdminAlertModel
+  ///
+  /// In en, this message translates to:
+  /// **'No alerts yet'**
+  String get adminCommunicationAdminAlertsEmpty;
+
+  /// Label of the startsOn row
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get adminCommunicationAdminAlertsStartsOn;
+
+  /// Label of the endsOn row
+  ///
+  /// In en, this message translates to:
+  /// **'Until'**
+  String get adminCommunicationAdminAlertsEndsOn;
+
+  /// Label of the category_id input
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get adminCommunicationAddNoticeCategoryId;
+
+  /// Label of the body input
+  ///
+  /// In en, this message translates to:
+  /// **'Text'**
+  String get adminCommunicationAddNoticeBody;
+
+  /// Label of the priority input
+  ///
+  /// In en, this message translates to:
+  /// **'Priority'**
+  String get adminCommunicationAddNoticePriority;
+
+  /// Label of the expires_on input
+  ///
+  /// In en, this message translates to:
+  /// **'Expires on'**
+  String get adminCommunicationAddNoticeExpiresOn;
+
+  /// Shown when the add notice form was sent
+  ///
+  /// In en, this message translates to:
+  /// **'Notice saved as a draft'**
+  String get adminCommunicationAddNoticeDone;
+
+  /// Label of the category_id input
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get adminCommunicationEditNoticeCategoryId;
+
+  /// Label of the body input
+  ///
+  /// In en, this message translates to:
+  /// **'Text'**
+  String get adminCommunicationEditNoticeBody;
+
+  /// Label of the priority input
+  ///
+  /// In en, this message translates to:
+  /// **'Priority'**
+  String get adminCommunicationEditNoticePriority;
+
+  /// Label of the expires_on input
+  ///
+  /// In en, this message translates to:
+  /// **'Expires on'**
+  String get adminCommunicationEditNoticeExpiresOn;
+
+  /// Shown when the edit notice form was sent
+  ///
+  /// In en, this message translates to:
+  /// **'Notice updated'**
+  String get adminCommunicationEditNoticeDone;
+
+  /// Label of the category_id input
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get adminCommunicationAddAlertCategoryId;
+
+  /// Label of the district_id input
+  ///
+  /// In en, this message translates to:
+  /// **'District'**
+  String get adminCommunicationAddAlertDistrictId;
+
+  /// Label of the description input
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get adminCommunicationAddAlertDescription;
+
+  /// Label of the severity input
+  ///
+  /// In en, this message translates to:
+  /// **'Severity'**
+  String get adminCommunicationAddAlertSeverity;
+
+  /// Label of the starts_on input
+  ///
+  /// In en, this message translates to:
+  /// **'Starts on'**
+  String get adminCommunicationAddAlertStartsOn;
+
+  /// Label of the ends_on input
+  ///
+  /// In en, this message translates to:
+  /// **'Ends on'**
+  String get adminCommunicationAddAlertEndsOn;
+
+  /// Shown when the add alert form was sent
+  ///
+  /// In en, this message translates to:
+  /// **'Alert saved as a draft'**
+  String get adminCommunicationAddAlertDone;
+
+  /// Label of the category_id input
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get adminCommunicationEditAlertCategoryId;
+
+  /// Label of the district_id input
+  ///
+  /// In en, this message translates to:
+  /// **'District'**
+  String get adminCommunicationEditAlertDistrictId;
+
+  /// Label of the description input
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get adminCommunicationEditAlertDescription;
+
+  /// Label of the severity input
+  ///
+  /// In en, this message translates to:
+  /// **'Severity'**
+  String get adminCommunicationEditAlertSeverity;
+
+  /// Label of the starts_on input
+  ///
+  /// In en, this message translates to:
+  /// **'Starts on'**
+  String get adminCommunicationEditAlertStartsOn;
+
+  /// Label of the ends_on input
+  ///
+  /// In en, this message translates to:
+  /// **'Ends on'**
+  String get adminCommunicationEditAlertEndsOn;
+
+  /// Shown when the edit alert form was sent
+  ///
+  /// In en, this message translates to:
+  /// **'Alert updated'**
+  String get adminCommunicationEditAlertDone;
+
+  /// No description provided for @adminTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get adminTitle;
+
+  /// No description provided for @adminStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get adminStatus;
+
+  /// No description provided for @adminEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get adminEdit;
+
+  /// No description provided for @adminPublish.
+  ///
+  /// In en, this message translates to:
+  /// **'Publish'**
+  String get adminPublish;
+
+  /// No description provided for @adminArchive.
+  ///
+  /// In en, this message translates to:
+  /// **'Archive'**
+  String get adminArchive;
+
+  /// No description provided for @adminRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore'**
+  String get adminRestore;
+
+  /// No description provided for @adminActivate.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate'**
+  String get adminActivate;
+
+  /// No description provided for @adminAlertCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel alert'**
+  String get adminAlertCancel;
+
+  /// No description provided for @adminAlertStatewide.
+  ///
+  /// In en, this message translates to:
+  /// **'Statewide'**
+  String get adminAlertStatewide;
+
+  /// No description provided for @adminDeleteWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'This can\'t be undone.'**
+  String get adminDeleteWarning;
+
+  /// No description provided for @adminAlertCancelWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'A cancelled alert can\'t be edited or activated again.'**
+  String get adminAlertCancelWarning;
+
+  /// No description provided for @adminDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get adminDone;
+
+  /// No description provided for @adminNoticeFormattingLost.
+  ///
+  /// In en, this message translates to:
+  /// **'This notice has formatting. Changing the text here saves it as plain text.'**
+  String get adminNoticeFormattingLost;
+
+  /// App bar title of the profile screen
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profileTitle;
+
+  /// App bar title of the edit_profile screen
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get profileEditProfileTitle;
+
+  /// Label of the name input
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get profileEditProfileName;
+
+  /// Label of the email input
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get profileEditProfileEmail;
+
+  /// Label of the gender input
+  ///
+  /// In en, this message translates to:
+  /// **'Gender'**
+  String get profileEditProfileGender;
+
+  /// Label of the date_of_birth input
+  ///
+  /// In en, this message translates to:
+  /// **'Date of birth'**
+  String get profileEditProfileDateOfBirth;
+
+  /// Label of the village input
+  ///
+  /// In en, this message translates to:
+  /// **'Village'**
+  String get profileEditProfileVillage;
+
+  /// Label of the address input
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get profileEditProfileAddress;
+
+  /// Label of the land_area_ha input
+  ///
+  /// In en, this message translates to:
+  /// **'Land (ha)'**
+  String get profileEditProfileLandAreaHa;
+
+  /// Label of the land_ownership input
+  ///
+  /// In en, this message translates to:
+  /// **'Land ownership'**
+  String get profileEditProfileLandOwnership;
+
+  /// Shown when the edit profile form was sent
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated'**
+  String get profileEditProfileDone;
+
+  /// No description provided for @profileAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get profileAccount;
+
+  /// No description provided for @profileRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Role'**
+  String get profileRole;
+
+  /// No description provided for @profilePhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get profilePhone;
+
+  /// No description provided for @profileFarmer.
+  ///
+  /// In en, this message translates to:
+  /// **'Farmer details'**
+  String get profileFarmer;
+
+  /// No description provided for @profileCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Farmer code'**
+  String get profileCode;
+
+  /// No description provided for @profileVerified.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified'**
+  String get profileVerified;
+
+  /// No description provided for @profileDistricts.
+  ///
+  /// In en, this message translates to:
+  /// **'Districts'**
+  String get profileDistricts;
+
+  /// No description provided for @profileBlocks.
+  ///
+  /// In en, this message translates to:
+  /// **'Blocks'**
+  String get profileBlocks;
+
+  /// No description provided for @profileNotSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set'**
+  String get profileNotSet;
+
+  /// No description provided for @profileVerifyAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'You are verified. Changing your details may mean you need verifying again.'**
+  String get profileVerifyAgain;
+
+  /// No description provided for @profileChangePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get profileChangePassword;
 }
 
 class _AppLocalizationsDelegate
