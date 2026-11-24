@@ -98,6 +98,30 @@ class _TicketDetailView extends StatelessWidget {
                               ),
                             ],
                           ),
+                          for (final (title, text, icon) in [
+                            (
+                              l10n.supportStatus,
+                              ticketDetails?.status?.label,
+                              PhosphorIconsRegular.flag,
+                            ),
+                            (
+                              l10n.supportCreateTicketCategoryId,
+                              ticketDetails?.category?.name,
+                              PhosphorIconsRegular.tag,
+                            ),
+                            (
+                              l10n.supportCreateTicketCropId,
+                              ticketDetails?.crop?.name,
+                              PhosphorIconsRegular.plant,
+                            ),
+                          ])
+                            TitleDetailsCard(
+                              title: title,
+                              text: ticketDetails == null ? '' : text ?? '--',
+                              isTextLoading: ticketDetails == null,
+                              iconData: icon,
+                              accentColor: DesignColor.accentType,
+                            ),
                           Row(
                             children: [
                               Expanded(
@@ -107,6 +131,7 @@ class _TicketDetailView extends StatelessWidget {
                                       ? ''
                                       : ticketDetails.question ?? '--',
                                   isTextLoading: ticketDetails == null,
+                                  isReadMore: true,
                                   iconData: PhosphorIconsRegular.textAa,
                                   accentColor: DesignColor.accentPoints,
                                 ),
@@ -166,9 +191,52 @@ class _TicketDetailView extends StatelessWidget {
                               ),
                             ],
                           ),
+                          if ((ticketDetails?.photos ?? const []).isNotEmpty)
+                            TitleDetailsCard(
+                              title: l10n.supportCreateTicketPhoto,
+                              imagePreviewUrls: [
+                                for (final photo in ticketDetails!.photos!)
+                                  photo.url,
+                              ],
+                            ),
                         ],
                       ),
                     ),
+                    if (ticketDetails != null) ...[
+                      const SizedBox(height: 8),
+                      DesignCard(
+                        title: l10n.supportReplies,
+                        paddingChild: const EdgeInsets.fromLTRB(14, 14, 14, 16),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            if ((ticketDetails.replies ?? const []).isEmpty)
+                              Text(
+                                l10n.supportNoReplies,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            for (final (index, reply)
+                                in (ticketDetails.replies ?? const []).indexed)
+                              TitleDetailsCard(
+                                title: switch (reply.createdAt) {
+                                  final DateTime at =>
+                                    DateFormat.yMMMd().add_jm().format(
+                                      at.toLocal(),
+                                    ),
+                                  _ => '--',
+                                },
+                                text: reply.body ?? '--',
+                                isFirstItem: index == 0,
+                                isReadMore: true,
+                                iconData: PhosphorIconsRegular.chatText,
+                                accentColor: DesignColor.accentName,
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),

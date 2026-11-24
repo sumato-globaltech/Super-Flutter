@@ -1531,10 +1531,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supportCreateTicketPhoto => 'Photo';
 
   @override
-  String get supportCreateTicketDone => 'Create Ticket created.';
+  String get supportCreateTicketDone => 'Question sent';
 
   @override
-  String get helpDeskQueueSummaryDetails => 'Queue Summary Details';
+  String get helpDeskQueueSummaryDetails => 'My queue';
 
   @override
   String get helpDeskQueueSummaryOpen => 'My open tickets';
@@ -1547,4 +1547,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get helpDeskQueueSummaryUnassigned => 'Waiting for an agent';
+
+  @override
+  String get supportAsk => 'Ask a question';
+
+  @override
+  String get supportCallCenter => 'Call center';
+
+  @override
+  String get supportNoNumber => 'No number for this district yet';
+
+  @override
+  String get supportCallBack => 'Request a call back';
+
+  @override
+  String get supportCallBackMessage => 'An agent will call you.';
+
+  @override
+  String get supportCallBackSend => 'Request call';
+
+  @override
+  String get supportCallBackQuestion => 'What is it about? (optional)';
+
+  @override
+  String get supportCallBackDone => 'Call back requested';
+
+  @override
+  String get supportStatus => 'Status';
+
+  @override
+  String get supportReplies => 'Replies';
+
+  @override
+  String get supportNoReplies => 'No replies yet';
 }

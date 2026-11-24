@@ -47,91 +47,102 @@ class _QueueSummaryView extends StatelessWidget {
             );
           }
           final queueSummary = state.queueSummary;
-          return SingleChildScrollView(
-            child: SafeArea(
-              child: Padding(
-                padding: AppSpacing.pagePadding.copyWith(bottom: 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    DesignCard(
-                      title: l10n.helpDeskQueueSummaryDetails,
-                      paddingChild: const EdgeInsets.fromLTRB(14, 14, 14, 16),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: TitleDetailsCard(
-                                  title: l10n.helpDeskQueueSummaryOpen,
-                                  text: queueSummary == null
-                                      ? ''
-                                      : queueSummary.open?.toString() ?? '--',
-                                  isTextLoading: queueSummary == null,
-                                  isFirstItem: true,
-                                  iconData: PhosphorIconsRegular.hash,
-                                  accentColor: DesignColor.accentName,
+          return RefreshIndicator(
+            onRefresh: () async {
+              final bloc = context.read<QueueSummaryBloc>()
+                ..add(const QueueSummaryStarted());
+              await bloc.stream.firstWhere(
+                (state) => state.status != QueueSummaryStatus.loading,
+              );
+            },
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: SafeArea(
+                child: Padding(
+                  padding: AppSpacing.pagePadding.copyWith(bottom: 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      DesignCard(
+                        title: l10n.helpDeskQueueSummaryDetails,
+                        paddingChild: const EdgeInsets.fromLTRB(14, 14, 14, 16),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: TitleDetailsCard(
+                                    title: l10n.helpDeskQueueSummaryOpen,
+                                    text: queueSummary == null
+                                        ? ''
+                                        : queueSummary.open?.toString() ?? '--',
+                                    isTextLoading: queueSummary == null,
+                                    isFirstItem: true,
+                                    iconData: PhosphorIconsRegular.hash,
+                                    accentColor: DesignColor.accentName,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: TitleDetailsCard(
-                                  title:
-                                      l10n.helpDeskQueueSummaryOverdueFollowUps,
-                                  text: queueSummary == null
-                                      ? ''
-                                      : queueSummary.overdueFollowUps
-                                                ?.toString() ??
-                                            '--',
-                                  isTextLoading: queueSummary == null,
-                                  iconData: PhosphorIconsRegular.hash,
-                                  accentColor: DesignColor.accentEnergy,
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: TitleDetailsCard(
+                                    title: l10n
+                                        .helpDeskQueueSummaryOverdueFollowUps,
+                                    text: queueSummary == null
+                                        ? ''
+                                        : queueSummary.overdueFollowUps
+                                                  ?.toString() ??
+                                              '--',
+                                    isTextLoading: queueSummary == null,
+                                    iconData: PhosphorIconsRegular.hash,
+                                    accentColor: DesignColor.accentEnergy,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: TitleDetailsCard(
-                                  title: l10n.helpDeskQueueSummaryResolvedToday,
-                                  text: queueSummary == null
-                                      ? ''
-                                      : queueSummary.resolvedToday
-                                                ?.toString() ??
-                                            '--',
-                                  isTextLoading: queueSummary == null,
-                                  iconData: PhosphorIconsRegular.hash,
-                                  accentColor: DesignColor.accentPoints,
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: TitleDetailsCard(
+                                    title:
+                                        l10n.helpDeskQueueSummaryResolvedToday,
+                                    text: queueSummary == null
+                                        ? ''
+                                        : queueSummary.resolvedToday
+                                                  ?.toString() ??
+                                              '--',
+                                    isTextLoading: queueSummary == null,
+                                    iconData: PhosphorIconsRegular.hash,
+                                    accentColor: DesignColor.accentPoints,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: TitleDetailsCard(
-                                  title: l10n.helpDeskQueueSummaryUnassigned,
-                                  text: queueSummary == null
-                                      ? ''
-                                      : queueSummary.unassigned?.toString() ??
-                                            '--',
-                                  isTextLoading: queueSummary == null,
-                                  iconData: PhosphorIconsRegular.hash,
-                                  accentColor: DesignColor.accentType,
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: TitleDetailsCard(
+                                    title: l10n.helpDeskQueueSummaryUnassigned,
+                                    text: queueSummary == null
+                                        ? ''
+                                        : queueSummary.unassigned?.toString() ??
+                                              '--',
+                                    isTextLoading: queueSummary == null,
+                                    iconData: PhosphorIconsRegular.hash,
+                                    accentColor: DesignColor.accentType,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

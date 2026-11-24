@@ -48,7 +48,7 @@ class ConfirmSheet extends StatefulWidget {
       builder: (_) => sheet,
     );
   }
- 
+
   static Future<bool> confirm(
     BuildContext context, {
     required String title,
@@ -131,165 +131,178 @@ class _ConfirmSheetState extends State<ConfirmSheet> {
     final canClose = widget.isDismissible && !_busy;
     return PopScope(
       canPop: canClose,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Semantics(
-            button: true,
-            enabled: canClose,
-            label: MaterialLocalizations.of(context).closeButtonTooltip,
-            child: GestureDetector(
-              onTap: canClose ? () => Navigator.of(context).maybePop() : null,
-              child: Container(
-                height: 40,
-                width: 40,
-                decoration: BoxDecoration(
-                  color: theme.appColors.cardWrapper,
-                  borderRadius: BorderRadius.circular(AppSizes.radiusPill),
-                ),
-                child: Icon(
-                  Icons.close,
-                  color: canClose
-                      ? theme.colorScheme.onSurface
-                      : theme.colorScheme.onSurface.withValues(alpha: 0.38),
-                ),
-              ),
-            ),
-          ),
-          12.height,
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(AppSizes.radiusXl),
-              ),
-              color: theme.colorScheme.surface,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                if (widget.icon != null ||
-                    (widget.actions.isEmpty && widget.child == null)) ...[
-                  const SizedBox(height: 20),
-                  widget.icon ??
-                      Image.asset(
-                        widget.assetPath ?? AssetsName.appLogo,
-                        height: 80,
-                      ),
-                  const SizedBox(height: 10),
-                ],
-                SafeArea(
-                  top: false,
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(
-                      12,
-                      12,
-                      12,
-                      12 + MediaQuery.viewInsetsOf(context).bottom,
-                    ),
-                    child: Column(
-                      children: [
-                        if (widget.title.isNotEmpty) ...[
-                          Text(
-                            widget.title,
-                            textAlign: TextAlign.center,
-                            style: theme.textTheme.headlineMedium,
-                          ),
-                          10.height,
-                        ],
-                        if (widget.description.isNotEmpty) ...[
-                          const SizedBox(height: 10),
-                          Text(
-                            widget.description,
-                            textAlign: TextAlign.center,
-                            style: theme.textTheme.bodyLarge,
-                          ),
-                        ],
-                        if (widget.actions.isNotEmpty) ...[
-                          10.height,
-                          ...widget.actions.map((action) {
-                            final color = action.isDestructive
-                                ? theme.colorScheme.error
-                                : theme.colorScheme.onSurface;
-                            return InkWell(
-                              onTap: () =>
-                                  Navigator.of(context).pop(action.value),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 12,
-                                ),
-                                child: Row(
-                                  children: [
-                                    if (action.icon != null) ...[
-                                      Icon(action.icon, color: color, size: 22),
-                                      12.width,
-                                    ],
-                                    Expanded(
-                                      child: Text(
-                                        action.label,
-                                        style: theme.textTheme.titleSmall
-                                            ?.copyWith(color: color),
-                                      ),
-                                    ),
-                                    if (action.selected)
-                                      Icon(
-                                        Icons.check,
-                                        color: theme.appColors.accent,
-                                        size: 20,
-                                      ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          }),
-                        ],
-                        if (widget.child != null) widget.child!,
-                        if (_error != null) ...[
-                          const SizedBox(height: 12),
-                          Semantics(
-                            liveRegion: true,
-                            child: Text(
-                              _error!,
-                              textAlign: TextAlign.center,
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                color: theme.colorScheme.error,
-                              ),
-                            ),
-                          ),
-                        ],
-                        if (widget.onPressed != null) ...[
-                          const SizedBox(height: 20),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 48,
-                            child: AbsorbPointer(
-                              absorbing: _busy,
-                              child: ElevatedButton(
-                                style: widget.confirmColor == null
-                                    ? null
-                                    : ElevatedButton.styleFrom(
-                                        backgroundColor: widget.confirmColor,
-                                        foregroundColor:
-                                            theme.colorScheme.onError,
-                                      ),
-                                onPressed: _submit,
-                                child: _busy
-                                    ? DesignProgress(
-                                        color: theme.colorScheme.onSecondary,
-                                      )
-                                    : Text(widget.confirmText ?? l10n.done),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ],
-                    ),
+      child: Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.viewInsetsOf(context).bottom,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Semantics(
+              button: true,
+              enabled: canClose,
+              label: MaterialLocalizations.of(context).closeButtonTooltip,
+              child: GestureDetector(
+                onTap: canClose ? () => Navigator.of(context).maybePop() : null,
+                child: Container(
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                    color: theme.appColors.cardWrapper,
+                    borderRadius: BorderRadius.circular(AppSizes.radiusPill),
+                  ),
+                  child: Icon(
+                    Icons.close,
+                    color: canClose
+                        ? theme.colorScheme.onSurface
+                        : theme.colorScheme.onSurface.withValues(alpha: 0.38),
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-        ],
+            12.height,
+            Flexible(
+              child: Container(
+                width: double.infinity,
+                clipBehavior: Clip.antiAlias,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(AppSizes.radiusXl),
+                  ),
+                  color: theme.colorScheme.surface,
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      if (widget.icon != null ||
+                          (widget.actions.isEmpty && widget.child == null)) ...[
+                        const SizedBox(height: 20),
+                        widget.icon ??
+                            Image.asset(
+                              widget.assetPath ?? AssetsName.appLogo,
+                              height: 80,
+                            ),
+                        const SizedBox(height: 10),
+                      ],
+                      SafeArea(
+                        top: false,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Column(
+                            children: [
+                              if (widget.title.isNotEmpty) ...[
+                                Text(
+                                  widget.title,
+                                  textAlign: TextAlign.center,
+                                  style: theme.textTheme.headlineMedium,
+                                ),
+                                10.height,
+                              ],
+                              if (widget.description.isNotEmpty) ...[
+                                const SizedBox(height: 10),
+                                Text(
+                                  widget.description,
+                                  textAlign: TextAlign.center,
+                                  style: theme.textTheme.bodyLarge,
+                                ),
+                              ],
+                              if (widget.actions.isNotEmpty) ...[
+                                10.height,
+                                ...widget.actions.map((action) {
+                                  final color = action.isDestructive
+                                      ? theme.colorScheme.error
+                                      : theme.colorScheme.onSurface;
+                                  return InkWell(
+                                    onTap: () =>
+                                        Navigator.of(context).pop(action.value),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 12,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          if (action.icon != null) ...[
+                                            Icon(
+                                              action.icon,
+                                              color: color,
+                                              size: 22,
+                                            ),
+                                            12.width,
+                                          ],
+                                          Expanded(
+                                            child: Text(
+                                              action.label,
+                                              style: theme.textTheme.titleSmall
+                                                  ?.copyWith(color: color),
+                                            ),
+                                          ),
+                                          if (action.selected)
+                                            Icon(
+                                              Icons.check,
+                                              color: theme.appColors.accent,
+                                              size: 20,
+                                            ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }),
+                              ],
+                              if (widget.child != null) widget.child!,
+                              if (_error != null) ...[
+                                const SizedBox(height: 12),
+                                Semantics(
+                                  liveRegion: true,
+                                  child: Text(
+                                    _error!,
+                                    textAlign: TextAlign.center,
+                                    style: theme.textTheme.bodyMedium?.copyWith(
+                                      color: theme.colorScheme.error,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                              if (widget.onPressed != null) ...[
+                                const SizedBox(height: 20),
+                                SizedBox(
+                                  width: double.infinity,
+                                  height: 48,
+                                  child: AbsorbPointer(
+                                    absorbing: _busy,
+                                    child: ElevatedButton(
+                                      style: widget.confirmColor == null
+                                          ? null
+                                          : ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  widget.confirmColor,
+                                              foregroundColor:
+                                                  theme.colorScheme.onError,
+                                            ),
+                                      onPressed: _submit,
+                                      child: _busy
+                                          ? DesignProgress(
+                                              color:
+                                                  theme.colorScheme.onSecondary,
+                                            )
+                                          : Text(
+                                              widget.confirmText ?? l10n.done,
+                                            ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

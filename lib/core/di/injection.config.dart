@@ -47,6 +47,12 @@ import 'package:super_flutter/data/farm/repositories/farm_repository_impl.dart'
     as _i749;
 import 'package:super_flutter/data/farm/sources/remote/farm_remote_data_source.dart'
     as _i773;
+import 'package:super_flutter/data/help_desk/repositories/help_desk_repository_impl.dart'
+    as _i588;
+import 'package:super_flutter/data/help_desk/sources/local/help_desk_local_data_source.dart'
+    as _i772;
+import 'package:super_flutter/data/help_desk/sources/remote/help_desk_remote_data_source.dart'
+    as _i878;
 import 'package:super_flutter/data/iot/repositories/iot_repository_impl.dart'
     as _i59;
 import 'package:super_flutter/data/iot/sources/remote/iot_remote_data_source.dart'
@@ -67,6 +73,12 @@ import 'package:super_flutter/data/shipments/sources/local/shipments_local_data_
     as _i299;
 import 'package:super_flutter/data/shipments/sources/remote/shipments_remote_data_source.dart'
     as _i353;
+import 'package:super_flutter/data/support/repositories/support_repository_impl.dart'
+    as _i1006;
+import 'package:super_flutter/data/support/sources/local/support_local_data_source.dart'
+    as _i363;
+import 'package:super_flutter/data/support/sources/remote/support_remote_data_source.dart'
+    as _i975;
 import 'package:super_flutter/domain/auth/repositories/auth_repository.dart'
     as _i631;
 import 'package:super_flutter/domain/auth/use_cases/check_auth_status.dart'
@@ -110,6 +122,8 @@ import 'package:super_flutter/features/farm/presentation/farm_detail/bloc/farm_d
     as _i255;
 import 'package:super_flutter/features/farm/presentation/farms_list/bloc/farms_bloc.dart'
     as _i664;
+import 'package:super_flutter/features/help_desk/presentation/queue_summary/bloc/queue_summary_bloc.dart'
+    as _i621;
 import 'package:super_flutter/features/iot/presentation/device_detail/bloc/device_detail_bloc.dart'
     as _i561;
 import 'package:super_flutter/features/market/presentation/market/bloc/market_bloc.dart'
@@ -128,6 +142,12 @@ import 'package:super_flutter/features/shipments/presentation/shipment_detail/bl
     as _i100;
 import 'package:super_flutter/features/shipments/presentation/shipments/bloc/shipments_bloc.dart'
     as _i935;
+import 'package:super_flutter/features/support/presentation/create_ticket/bloc/create_ticket_bloc.dart'
+    as _i665;
+import 'package:super_flutter/features/support/presentation/support/bloc/support_bloc.dart'
+    as _i1070;
+import 'package:super_flutter/features/support/presentation/ticket_detail/bloc/ticket_detail_bloc.dart'
+    as _i247;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -145,11 +165,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i940.CommunicationLocalDataSource>(
       () => _i940.CommunicationLocalDataSource(),
     );
+    gh.lazySingleton<_i772.HelpDeskLocalDataSource>(
+      () => _i772.HelpDeskLocalDataSource(),
+    );
     gh.lazySingleton<_i1054.SchemesLocalDataSource>(
       () => _i1054.SchemesLocalDataSource(),
     );
     gh.lazySingleton<_i299.ShipmentsLocalDataSource>(
       () => _i299.ShipmentsLocalDataSource(),
+    );
+    gh.lazySingleton<_i363.SupportLocalDataSource>(
+      () => _i363.SupportLocalDataSource(),
     );
     gh.lazySingleton<_i1067.Environment>(
       () => coreModule.appEnvironment(gh<_i65.AppConfig>()),
@@ -199,6 +225,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i773.FarmRemoteDataSource>(
       () => _i773.FarmRemoteDataSource(gh<_i42.DioClient>()),
     );
+    gh.lazySingleton<_i878.HelpDeskRemoteDataSource>(
+      () => _i878.HelpDeskRemoteDataSource(gh<_i42.DioClient>()),
+    );
     gh.lazySingleton<_i17.IotRemoteDataSource>(
       () => _i17.IotRemoteDataSource(gh<_i42.DioClient>()),
     );
@@ -210,6 +239,30 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i353.ShipmentsRemoteDataSource>(
       () => _i353.ShipmentsRemoteDataSource(gh<_i42.DioClient>()),
+    );
+    gh.lazySingleton<_i975.SupportRemoteDataSource>(
+      () => _i975.SupportRemoteDataSource(gh<_i42.DioClient>()),
+    );
+    gh.factory<_i665.CreateTicketBloc>(
+      () => _i665.CreateTicketBloc(gh<_i975.SupportRemoteDataSource>()),
+    );
+    gh.factory<_i1070.SupportBloc>(
+      () => _i1070.SupportBloc(gh<_i975.SupportRemoteDataSource>()),
+    );
+    gh.factory<_i247.TicketDetailBloc>(
+      () => _i247.TicketDetailBloc(gh<_i975.SupportRemoteDataSource>()),
+    );
+    gh.lazySingleton<_i588.HelpDeskRepositoryImpl>(
+      () => _i588.HelpDeskRepositoryImpl(
+        gh<_i878.HelpDeskRemoteDataSource>(),
+        gh<_i772.HelpDeskLocalDataSource>(),
+      ),
+    );
+    gh.lazySingleton<_i1006.SupportRepositoryImpl>(
+      () => _i1006.SupportRepositoryImpl(
+        gh<_i975.SupportRemoteDataSource>(),
+        gh<_i363.SupportLocalDataSource>(),
+      ),
     );
     gh.factory<_i255.FarmDetailBloc>(
       () => _i255.FarmDetailBloc(
@@ -281,6 +334,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i749.FarmRepositoryImpl>(
       () => _i749.FarmRepositoryImpl(gh<_i773.FarmRemoteDataSource>()),
+    );
+    gh.factory<_i621.QueueSummaryBloc>(
+      () => _i621.QueueSummaryBloc(gh<_i878.HelpDeskRemoteDataSource>()),
     );
     gh.lazySingleton<_i944.CommunicationRepositoryImpl>(
       () => _i944.CommunicationRepositoryImpl(

@@ -854,10 +854,10 @@
   "supportCreateTicketPhoto": "Photo",
   "@supportCreateTicketPhoto": { "description": "Label of the photo input" },
 
-  "supportCreateTicketDone": "Create Ticket created.",
+  "supportCreateTicketDone": "Question sent",
   "@supportCreateTicketDone": { "description": "Shown when the create ticket form was sent" },
 
-  "helpDeskQueueSummaryDetails": "Queue Summary Details",
+  "helpDeskQueueSummaryDetails": "My queue",
   "@helpDeskQueueSummaryDetails": { "description": "Title of the QueueSummaryModel card" },
 
   "helpDeskQueueSummaryOpen": "My open tickets",
@@ -870,5 +870,16 @@
   "@helpDeskQueueSummaryResolvedToday": { "description": "Label of the resolvedToday row" },
 
   "helpDeskQueueSummaryUnassigned": "Waiting for an agent",
-  "@helpDeskQueueSummaryUnassigned": { "description": "Label of the unassigned row" }
+  "@helpDeskQueueSummaryUnassigned": { "description": "Label of the unassigned row" },
+  "supportAsk": "Ask a question",
+  "supportCallCenter": "Call center",
+  "supportNoNumber": "No number for this district yet",
+  "supportCallBack": "Request a call back",
+  "supportCallBackMessage": "An agent will call you.",
+  "supportCallBackSend": "Request call",
+  "supportCallBackQuestion": "What is it about? (optional)",
+  "supportCallBackDone": "Call back requested",
+  "supportStatus": "Status",
+  "supportReplies": "Replies",
+  "supportNoReplies": "No replies yet"
 }

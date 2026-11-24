@@ -2969,13 +2969,13 @@ abstract class AppLocalizations {
   /// Shown when the create ticket form was sent
   ///
   /// In en, this message translates to:
-  /// **'Create Ticket created.'**
+  /// **'Question sent'**
   String get supportCreateTicketDone;
 
   /// Title of the QueueSummaryModel card
   ///
   /// In en, this message translates to:
-  /// **'Queue Summary Details'**
+  /// **'My queue'**
   String get helpDeskQueueSummaryDetails;
 
   /// Label of the open row
@@ -3001,6 +3001,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Waiting for an agent'**
   String get helpDeskQueueSummaryUnassigned;
+
+  /// No description provided for @supportAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask a question'**
+  String get supportAsk;
+
+  /// No description provided for @supportCallCenter.
+  ///
+  /// In en, this message translates to:
+  /// **'Call center'**
+  String get supportCallCenter;
+
+  /// No description provided for @supportNoNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'No number for this district yet'**
+  String get supportNoNumber;
+
+  /// No description provided for @supportCallBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Request a call back'**
+  String get supportCallBack;
+
+  /// No description provided for @supportCallBackMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'An agent will call you.'**
+  String get supportCallBackMessage;
+
+  /// No description provided for @supportCallBackSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Request call'**
+  String get supportCallBackSend;
+
+  /// No description provided for @supportCallBackQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'What is it about? (optional)'**
+  String get supportCallBackQuestion;
+
+  /// No description provided for @supportCallBackDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Call back requested'**
+  String get supportCallBackDone;
+
+  /// No description provided for @supportStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get supportStatus;
+
+  /// No description provided for @supportReplies.
+  ///
+  /// In en, this message translates to:
+  /// **'Replies'**
+  String get supportReplies;
+
+  /// No description provided for @supportNoReplies.
+  ///
+  /// In en, this message translates to:
+  /// **'No replies yet'**
+  String get supportNoReplies;
 }
 
 class _AppLocalizationsDelegate

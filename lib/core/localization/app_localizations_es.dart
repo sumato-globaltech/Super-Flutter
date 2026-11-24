@@ -1474,83 +1474,117 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get supportTitle => 'Help Desk';
+  String get supportTitle => 'Mesa de ayuda';
 
   @override
-  String get supportTicketDetailTitle => 'Ticket';
+  String get supportTicketDetailTitle => 'Consulta';
 
   @override
-  String get supportCreateTicketTitle => 'New Ticket';
+  String get supportCreateTicketTitle => 'Nueva consulta';
 
   @override
-  String get helpDeskQueueSummaryTitle => 'Help Desk';
+  String get helpDeskQueueSummaryTitle => 'Mesa de ayuda';
 
   @override
   String get supportList => 'Tickets';
 
   @override
-  String get supportEmpty => 'No tickets yet';
+  String get supportEmpty => 'Aún no hay consultas';
 
   @override
-  String get supportNumber => 'Number';
+  String get supportNumber => 'Número';
 
   @override
-  String get supportSubject => 'Subject';
+  String get supportSubject => 'Asunto';
 
   @override
-  String get supportCreatedAt => 'Asked on';
+  String get supportCreatedAt => 'Preguntado el';
 
   @override
-  String get supportTicketDetailDetails => 'Ticket Details';
+  String get supportTicketDetailDetails => 'Detalles de la consulta';
 
   @override
-  String get supportTicketDetailNumber => 'Number';
+  String get supportTicketDetailNumber => 'Número';
 
   @override
-  String get supportTicketDetailSubject => 'Subject';
+  String get supportTicketDetailSubject => 'Asunto';
 
   @override
-  String get supportTicketDetailQuestion => 'Question';
+  String get supportTicketDetailQuestion => 'Pregunta';
 
   @override
-  String get supportTicketDetailOutcome => 'Outcome';
+  String get supportTicketDetailOutcome => 'Resultado';
 
   @override
-  String get supportTicketDetailCreatedAt => 'Asked on';
+  String get supportTicketDetailCreatedAt => 'Preguntado el';
 
   @override
-  String get supportTicketDetailResolvedAt => 'Resolved on';
+  String get supportTicketDetailResolvedAt => 'Resuelto el';
 
   @override
-  String get supportCreateTicketCategoryId => 'Category';
+  String get supportCreateTicketCategoryId => 'Categoría';
 
   @override
-  String get supportCreateTicketSubject => 'Subject';
+  String get supportCreateTicketSubject => 'Asunto';
 
   @override
-  String get supportCreateTicketQuestion => 'Question';
+  String get supportCreateTicketQuestion => 'Pregunta';
 
   @override
-  String get supportCreateTicketCropId => 'Crop';
+  String get supportCreateTicketCropId => 'Cultivo';
 
   @override
-  String get supportCreateTicketPhoto => 'Photo';
+  String get supportCreateTicketPhoto => 'Foto';
 
   @override
-  String get supportCreateTicketDone => 'Create Ticket created.';
+  String get supportCreateTicketDone => 'Pregunta enviada';
 
   @override
-  String get helpDeskQueueSummaryDetails => 'Queue Summary Details';
+  String get helpDeskQueueSummaryDetails => 'Mi cola';
 
   @override
-  String get helpDeskQueueSummaryOpen => 'My open tickets';
+  String get helpDeskQueueSummaryOpen => 'Mis consultas abiertas';
 
   @override
-  String get helpDeskQueueSummaryOverdueFollowUps => 'My overdue follow-ups';
+  String get helpDeskQueueSummaryOverdueFollowUps =>
+      'Mis seguimientos atrasados';
 
   @override
-  String get helpDeskQueueSummaryResolvedToday => 'Resolved today';
+  String get helpDeskQueueSummaryResolvedToday => 'Resueltas hoy';
 
   @override
-  String get helpDeskQueueSummaryUnassigned => 'Waiting for an agent';
+  String get helpDeskQueueSummaryUnassigned => 'Esperando un agente';
+
+  @override
+  String get supportAsk => 'Hacer una pregunta';
+
+  @override
+  String get supportCallCenter => 'Centro de llamadas';
+
+  @override
+  String get supportNoNumber => 'Aún no hay número para este distrito';
+
+  @override
+  String get supportCallBack => 'Solicitar una llamada';
+
+  @override
+  String get supportCallBackMessage => 'Un agente te llamará.';
+
+  @override
+  String get supportCallBackSend => 'Solicitar llamada';
+
+  @override
+  String get supportCallBackQuestion => '¿De qué se trata? (opcional)';
+
+  @override
+  String get supportCallBackDone => 'Llamada solicitada';
+
+  @override
+  String get supportStatus => 'Estado';
+
+  @override
+  String get supportReplies => 'Respuestas';
+
+  @override
+  String get supportNoReplies => 'Aún no hay respuestas';
 }

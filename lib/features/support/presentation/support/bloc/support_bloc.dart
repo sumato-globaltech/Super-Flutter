@@ -13,6 +13,7 @@ class SupportBloc extends Bloc<SupportEvent, SupportState> {
   SupportBloc(this._supportRemoteDataSource) : super(const SupportState()) {
     on<SupportStarted>(_onStarted, transformer: restartable());
     on<SupportMoreRequested>(_onMoreRequested, transformer: droppable());
+    on<SupportCallBackRequested>(_onCallBackRequested);
   }
 
   final SupportRemoteDataSource _supportRemoteDataSource;
@@ -23,6 +24,11 @@ class SupportBloc extends Bloc<SupportEvent, SupportState> {
   ) async {
     emit(state.copyWith(status: SupportStatus.loading));
     try {
+      // The tickets still show when the call center can't be loaded.
+      final callCenter = _supportRemoteDataSource.getCallCenter().then(
+        (value) => value,
+        onError: (Object _) => null,
+      );
       final tickets = await _supportRemoteDataSource.getTickets(
         page: 1,
         perPage: Paged.defaultPerPage,
@@ -31,6 +37,7 @@ class SupportBloc extends Bloc<SupportEvent, SupportState> {
         state.copyWith(
           status: SupportStatus.success,
           tickets: tickets,
+          callCenter: await callCenter,
           loadingMore: false,
         ),
       );
@@ -80,6 +87,19 @@ class SupportBloc extends Bloc<SupportEvent, SupportState> {
       );
     } catch (_) {
       emit(state.copyWith(status: SupportStatus.failure, loadingMore: false));
+    }
+  }
+
+  Future<void> _onCallBackRequested(
+    SupportCallBackRequested event,
+    Emitter<SupportState> emit,
+  ) async {
+    try {
+      await _supportRemoteDataSource.createCallBack(question: event.question);
+      event.completer.complete();
+      if (!isClosed) add(const SupportStarted());
+    } catch (e) {
+      event.completer.completeError(e);
     }
   }
 }
