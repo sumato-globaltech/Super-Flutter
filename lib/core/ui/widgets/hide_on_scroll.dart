@@ -77,7 +77,7 @@ class HideOnScrollButton extends StatelessWidget {
           child: AnimatedOpacity(
             opacity: visible ? 1 : 0,
             duration: duration,
-            child: child,
+            child: TickerMode(enabled: visible, child: child),
           ),
         ),
       ),

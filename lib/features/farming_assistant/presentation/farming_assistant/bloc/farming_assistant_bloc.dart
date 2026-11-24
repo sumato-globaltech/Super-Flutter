@@ -32,6 +32,9 @@ class FarmingAssistantBloc
         if (state.status != FarmingAssistantStatus.failure) return;
         messages = state.messages;
         question = messages.last.text;
+      case ChatCleared():
+        emit(const FarmingAssistantState());
+        return;
     }
     emit(
       FarmingAssistantState(

@@ -15,6 +15,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
 import 'package:super_flutter/core/ui/theme/app_spacing.dart';
 import 'package:super_flutter/core/ui/theme/design_colors.dart';
+import 'package:super_flutter/core/ui/widgets/ai_sparkle.dart';
 import 'package:super_flutter/core/ui/widgets/app_empty_view.dart';
 import 'package:super_flutter/core/ui/widgets/app_error_view.dart';
 import 'package:super_flutter/core/ui/widgets/design_card.dart';
@@ -60,7 +61,9 @@ class _DashboardView extends StatelessWidget {
                 heroTag: null,
                 tooltip: l10n.farmingAssistantTitle,
                 onPressed: () => context.push(FarmingAssistantRouteNames.root),
-                child: const Icon(PhosphorIconsFill.robot),
+                backgroundColor: Colors.transparent,
+                shape: const CircleBorder(),
+                child: const AiSparkle(size: 56, animate: true),
               ),
             )
           : null,

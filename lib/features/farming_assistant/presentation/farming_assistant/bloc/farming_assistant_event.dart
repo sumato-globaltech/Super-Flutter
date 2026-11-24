@@ -20,3 +20,7 @@ class QuestionAsked extends FarmingAssistantEvent {
 class QuestionRetried extends FarmingAssistantEvent {
   const QuestionRetried();
 }
+
+class ChatCleared extends FarmingAssistantEvent {
+  const ChatCleared();
+}

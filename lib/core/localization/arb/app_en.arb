@@ -1178,12 +1178,14 @@
   "@farmingAssistantTitle": { "description": "App bar title of the farming_assistant screen" },
   "farmingAssistantHello": "Hello, I am Kheti Manu",
   "farmingAssistantIntro": "Ask me about crops, diseases, equipment and farming practices.",
-  "farmingAssistantTry": "Try asking",
-  "farmingAssistantAsk": "Ask",
   "farmingAssistantPromptDisease": "How to control leaf spot disease?",
   "farmingAssistantPromptBanana": "Tell me about growing bananas",
   "farmingAssistantThinking": "Thinking…",
   "farmingAssistantHint": "Message Kheti Manu",
   "farmingAssistantSend": "Send",
-  "farmingAssistantDisclaimer": "AI answers can be wrong. Ask an officer when it matters."
+  "farmingAssistantDisclaimer": "AI answers can be wrong. Ask an officer when it matters.",
+  "farmingAssistantNew": "New chat",
+  "farmingAssistantStop": "Stop typing",
+  "farmingAssistantCopy": "Copy",
+  "farmingAssistantCopied": "Copied"
 }

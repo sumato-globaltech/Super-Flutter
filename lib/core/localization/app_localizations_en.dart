@@ -2071,12 +2071,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Ask me about crops, diseases, equipment and farming practices.';
 
   @override
-  String get farmingAssistantTry => 'Try asking';
-
-  @override
-  String get farmingAssistantAsk => 'Ask';
-
-  @override
   String get farmingAssistantPromptDisease =>
       'How to control leaf spot disease?';
 
@@ -2095,4 +2089,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get farmingAssistantDisclaimer =>
       'AI answers can be wrong. Ask an officer when it matters.';
+
+  @override
+  String get farmingAssistantNew => 'New chat';
+
+  @override
+  String get farmingAssistantStop => 'Stop typing';
+
+  @override
+  String get farmingAssistantCopy => 'Copy';
+
+  @override
+  String get farmingAssistantCopied => 'Copied';
 }

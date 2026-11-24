@@ -15,6 +15,7 @@ import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/core/network/paged.dart';
 import 'package:super_flutter/core/ui/theme/app_theme.dart';
 import 'package:super_flutter/core/ui/widgets/hide_on_scroll.dart';
+import 'package:super_flutter/core/ui/widgets/typing_dots.dart';
 import 'package:super_flutter/data/communication/model/notice_model.dart';
 import 'package:super_flutter/data/communication/sources/remote/communication_remote_data_source.dart';
 import 'package:super_flutter/data/farming_assistant/model/assistant_answer_model.dart';
@@ -26,6 +27,7 @@ import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 import 'package:super_flutter/features/auth/session/bloc/auth_state.dart';
 import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart';
 import 'package:super_flutter/features/dashboard/presentation/dashboard/screen/dashboard_screen.dart';
+import 'package:super_flutter/features/farming_assistant/presentation/assistant_text.dart';
 import 'package:super_flutter/features/farming_assistant/presentation/farming_assistant/bloc/farming_assistant_bloc.dart';
 import 'package:super_flutter/features/farming_assistant/presentation/farming_assistant/screen/farming_assistant_screen.dart';
 import 'package:super_flutter/features/farming_assistant/routes/farming_assistant_routes.dart';
@@ -79,7 +81,12 @@ void main() {
     Widget home, {
     Size size = const Size(390, 844),
     bool dark = false,
+    bool still = true,
   }) async {
+    // The sparkle never settles while it moves.
+    tester.platformDispatcher.accessibilityFeaturesTestValue =
+        FakeAccessibilityFeatures(disableAnimations: still);
+    addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
     tester.view.physicalSize = size;
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
@@ -99,7 +106,7 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    still ? await tester.pumpAndSettle() : await tester.pump();
   }
 
   Widget home(Set<String> permissions) {
@@ -241,6 +248,7 @@ void main() {
       );
 
       await tester.enterText(find.byType(TextField), ' How to grow rice? ');
+      await tester.pump();
       await tester.tap(find.byTooltip('Send'));
       await tester.pumpAndSettle();
       expect(find.text('Try later.'), findsOneWidget);
@@ -253,20 +261,83 @@ void main() {
     });
   }
 
-  testWidgets('a suggestion is asked while the answer loads', (tester) async {
+  testWidgets('a suggestion shows typing dots, then types the answer', (
+    tester,
+  ) async {
     final answer = Completer<AssistantAnswerModel?>();
     when(
       () => source.createAssistantAnswer(
         question: 'How to control leaf spot disease?',
       ),
     ).thenAnswer((_) => answer.future);
-    await pump(tester, const FarmingAssistantScreen());
+    await pump(tester, const FarmingAssistantScreen(), still: false);
     await tester.tap(find.text('How to control leaf spot disease?'));
     await tester.pump();
     await tester.pump();
-    expect(find.text('Thinking…'), findsOneWidget);
-    answer.complete(AssistantAnswerModel(answer: 'Remove infected leaves.'));
-    await tester.pumpAndSettle();
-    expect(find.text('Remove infected leaves.'), findsOneWidget);
+    expect(find.byType(TypingDots), findsOneWidget);
+
+    const text = 'Remove **infected** leaves and improve airflow.';
+    const shown = 'Remove infected leaves and improve airflow.';
+    answer.complete(AssistantAnswerModel(answer: text));
+    await tester.pump();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.byType(TypingDots), findsNothing);
+    expect(find.byTooltip('Stop typing'), findsOneWidget);
+    expect(find.byTooltip('Copy'), findsNothing);
+    expect(find.textContaining('Remove', findRichText: true), findsOneWidget);
+    expect(find.textContaining('airflow', findRichText: true), findsNothing);
+
+    await tester.tap(find.byTooltip('Stop typing'));
+    await tester.pump();
+    expect(find.text(shown, findRichText: true), findsOneWidget);
+    expect(find.byTooltip('Copy'), findsOneWidget);
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.byTooltip('Send'), findsOneWidget);
+  });
+
+  testWidgets('typing finishes by itself and a new chat starts over', (
+    tester,
+  ) async {
+    when(
+      () => source.createAssistantAnswer(question: any(named: 'question')),
+    ).thenAnswer((_) async => AssistantAnswerModel(answer: 'Water at dawn.'));
+    await pump(tester, const FarmingAssistantScreen(), still: false);
+    await tester.tap(find.text('Tell me about growing bananas'));
+    await tester.pump();
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pump();
+    expect(find.text('Water at dawn.', findRichText: true), findsOneWidget);
+
+    await tester.tap(find.byTooltip('New chat'));
+    await tester.pump();
+    await tester.pump();
+    expect(find.text('Hello, I am Kheti Manu'), findsOneWidget);
+    expect(find.text('Water at dawn.', findRichText: true), findsNothing);
+  });
+
+  test('answers lose their Markdown marks', () {
+    String plain(String text) =>
+        assistantSpans(text).map((span) => span.text).join();
+    expect(
+      plain('## Tips\n- **Water** early\n* Mulch\n1. Weed'),
+      'Tips\n• Water early\n• Mulch\n1. Weed',
+    );
+    expect(plain('2 ** 3 is 8'), '2 ** 3 is 8');
+    expect(assistantSpans('a **b** c').map((span) => span.bold), [
+      false,
+      true,
+      false,
+    ]);
+    expect(assistantLength(assistantSpans('👩‍🌾 ok')), 4);
+    expect(
+      assistantTextSpan(
+        assistantSpans('👩‍🌾 ok'),
+        style: null,
+        count: 1,
+      ).toPlainText(),
+      '👩‍🌾',
+    );
   });
 }

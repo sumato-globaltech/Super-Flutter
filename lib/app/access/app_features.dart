@@ -248,7 +248,7 @@ final appFeatures = FeatureRegistry([
     path: FarmingAssistantRouteNames.root,
     rule: AccessRule.permission(Permissions.farmingAssistantUse),
     title: _farmingAssistant,
-    icon: PhosphorIconsRegular.robot,
+    icon: PhosphorIconsRegular.sparkle,
     quickAction: false,
   ),
 ]);

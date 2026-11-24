@@ -3974,18 +3974,6 @@ abstract class AppLocalizations {
   /// **'Ask me about crops, diseases, equipment and farming practices.'**
   String get farmingAssistantIntro;
 
-  /// No description provided for @farmingAssistantTry.
-  ///
-  /// In en, this message translates to:
-  /// **'Try asking'**
-  String get farmingAssistantTry;
-
-  /// No description provided for @farmingAssistantAsk.
-  ///
-  /// In en, this message translates to:
-  /// **'Ask'**
-  String get farmingAssistantAsk;
-
   /// No description provided for @farmingAssistantPromptDisease.
   ///
   /// In en, this message translates to:
@@ -4021,6 +4009,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'AI answers can be wrong. Ask an officer when it matters.'**
   String get farmingAssistantDisclaimer;
+
+  /// No description provided for @farmingAssistantNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New chat'**
+  String get farmingAssistantNew;
+
+  /// No description provided for @farmingAssistantStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop typing'**
+  String get farmingAssistantStop;
+
+  /// No description provided for @farmingAssistantCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get farmingAssistantCopy;
+
+  /// No description provided for @farmingAssistantCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied'**
+  String get farmingAssistantCopied;
 }
 
 class _AppLocalizationsDelegate

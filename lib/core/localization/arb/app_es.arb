@@ -461,12 +461,14 @@
   "farmingAssistantTitle": "Asistente agrícola IA",
   "farmingAssistantHello": "Hola, soy Kheti Manu",
   "farmingAssistantIntro": "Pregúntame sobre cultivos, enfermedades, equipos y prácticas agrícolas.",
-  "farmingAssistantTry": "Prueba a preguntar",
-  "farmingAssistantAsk": "Preguntar",
   "farmingAssistantPromptDisease": "¿Cómo controlar la mancha foliar?",
   "farmingAssistantPromptBanana": "Háblame del cultivo del plátano",
   "farmingAssistantThinking": "Pensando…",
   "farmingAssistantHint": "Escribe a Kheti Manu",
   "farmingAssistantSend": "Enviar",
-  "farmingAssistantDisclaimer": "Las respuestas de la IA pueden fallar. Consulta a un técnico si es importante."
+  "farmingAssistantDisclaimer": "Las respuestas de la IA pueden fallar. Consulta a un técnico si es importante.",
+  "farmingAssistantNew": "Nuevo chat",
+  "farmingAssistantStop": "Dejar de escribir",
+  "farmingAssistantCopy": "Copiar",
+  "farmingAssistantCopied": "Copiado"
 }
