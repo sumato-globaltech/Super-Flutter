@@ -1944,11 +1944,11 @@ models:
       - ReplyModel
       - StatusModel
     origin: generated
-  - name: VistaarAnswerModel
+  - name: NationalFarmingAiAssistantAnswerModel
     kind: model
-    feature: vistaar
-    path: lib/data/vistaar/model/vistaar_answer_model.dart
-    import: package:super_flutter/data/vistaar/model/vistaar_answer_model.dart
+    feature: national_farming_ai_assistant
+    path: lib/data/national_farming_ai_assistant/model/national_farming_ai_assistant_answer_model.dart
+    import: package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_answer_model.dart
     fingerprint: '{answer:string}'
     fields:
       - name: answer
@@ -1956,11 +1956,11 @@ models:
         type: String
         nullable: true
     origin: generated
-  - name: VistaarLanguageModel
+  - name: NationalFarmingAiAssistantLanguageModel
     kind: model
-    feature: vistaar
-    path: lib/data/vistaar/model/vistaar_language_model.dart
-    import: package:super_flutter/data/vistaar/model/vistaar_language_model.dart
+    feature: national_farming_ai_assistant
+    path: lib/data/national_farming_ai_assistant/model/national_farming_ai_assistant_language_model.dart
+    import: package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_language_model.dart
     fingerprint: '{label:string,value:string}'
     fields:
       - name: value

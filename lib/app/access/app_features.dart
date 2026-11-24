@@ -10,7 +10,7 @@ import 'package:super_flutter/features/farming_assistant/routes/farming_assistan
 import 'package:super_flutter/features/meetings/routes/meetings_route_names.dart';
 import 'package:super_flutter/features/schemes/routes/schemes_route_names.dart';
 import 'package:super_flutter/features/shipments/routes/shipments_route_names.dart';
-import 'package:super_flutter/features/vistaar/routes/vistaar_route_names.dart';
+import 'package:super_flutter/features/national_farming_ai_assistant/routes/national_farming_ai_assistant_route_names.dart';
 
 import 'feature_registry.dart';
 
@@ -253,10 +253,10 @@ final appFeatures = FeatureRegistry([
     quickAction: false,
   ),
   const AppFeature(
-    id: 'vistaar',
-    path: VistaarRouteNames.root,
-    rule: AccessRule.permission(Permissions.vistaarUse),
-    title: _vistaar,
+    id: 'national_farming_ai_assistant',
+    path: NationalFarmingAiAssistantRouteNames.root,
+    rule: AccessRule.permission(Permissions.nationalFarmingAiAssistantUse),
+    title: _nationalFarmingAiAssistant,
     icon: PhosphorIconsRegular.sparkle,
   ),
 ]);
@@ -309,4 +309,5 @@ String _cropDetector(AppLocalizations l10n) => l10n.cropDetectorTitle;
 
 String _farmingAssistant(AppLocalizations l10n) => l10n.farmingAssistantTitle;
 
-String _vistaar(AppLocalizations l10n) => l10n.vistaarTitle;
+String _nationalFarmingAiAssistant(AppLocalizations l10n) =>
+    l10n.nationalFarmingAiAssistantTitle;

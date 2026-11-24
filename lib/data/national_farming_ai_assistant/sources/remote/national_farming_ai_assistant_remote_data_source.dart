@@ -5,20 +5,21 @@ import 'package:super_flutter/core/error/exceptions/validation_exception.dart';
 import 'package:super_flutter/core/network/api_endpoints.dart';
 import 'package:super_flutter/core/network/dio_client.dart';
 import 'package:super_flutter/core/network/network_exception_mapper.dart';
-import 'package:super_flutter/data/vistaar/model/vistaar_answer_model.dart';
-import 'package:super_flutter/data/vistaar/model/vistaar_language_model.dart';
+import 'package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_answer_model.dart';
+import 'package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_language_model.dart';
 
 @lazySingleton
-class VistaarRemoteDataSource {
-  VistaarRemoteDataSource(this._dioClient);
+class NationalFarmingAiAssistantRemoteDataSource {
+  NationalFarmingAiAssistantRemoteDataSource(this._dioClient);
 
   final DioClient _dioClient;
 
-  /// GET http://dam.test/api/v1/vistaar/languages
-  Future<List<VistaarLanguageModel>> getVistaarLanguages() async {
+  /// GET http://dam.test/api/v1/national-farming-ai-assistant/languages
+  Future<List<NationalFarmingAiAssistantLanguageModel>>
+  getNationalFarmingAiAssistantLanguages() async {
     try {
       final response = await _dioClient.dio.get<dynamic>(
-        ApiEndpoints.vistaarLanguages,
+        ApiEndpoints.nationalFarmingAiAssistantLanguages,
       );
       final body = response.data;
       if (response.statusCode == 200 && body is Map) {
@@ -32,7 +33,7 @@ class VistaarRemoteDataSource {
           return items
               .whereType<Map>()
               .map(
-                (item) => VistaarLanguageModel.fromJson(
+                (item) => NationalFarmingAiAssistantLanguageModel.fromJson(
                   Map<String, dynamic>.from(item),
                 ),
               )
@@ -49,8 +50,9 @@ class VistaarRemoteDataSource {
     }
   }
 
-  /// POST http://dam.test/api/v1/vistaar/chat
-  Future<VistaarAnswerModel?> createVistaarAnswer({
+  /// POST http://dam.test/api/v1/national-farming-ai-assistant/chat
+  Future<NationalFarmingAiAssistantAnswerModel?>
+  createNationalFarmingAiAssistantAnswer({
     required String question,
     required String sessionId,
     required String language,
@@ -59,7 +61,7 @@ class VistaarRemoteDataSource {
   }) async {
     try {
       final response = await _dioClient.dio.post<dynamic>(
-        ApiEndpoints.vistaarAnswer,
+        ApiEndpoints.nationalFarmingAiAssistantAnswer,
         data: FormData.fromMap(<String, dynamic>{
           'question': question,
           'session_id': sessionId,
@@ -76,8 +78,7 @@ class VistaarRemoteDataSource {
       final body = response.data;
       if (body is Map && body['success'] == false) {
         final message =
-            (body['message'] as String?) ??
-            'The vistaar answer request failed.';
+            (body['message'] as String?) ?? 'The answer request failed.';
         final fieldErrors = NetworkException.fieldErrorsFrom(body);
         if (fieldErrors.isNotEmpty) {
           throw ValidationException(message, fieldErrors: fieldErrors);
@@ -87,7 +88,9 @@ class VistaarRemoteDataSource {
       if ((response.statusCode == 200 || response.statusCode == 201) &&
           body is Map) {
         final data = body['data'] is Map ? body['data'] as Map : body;
-        return VistaarAnswerModel.fromJson(Map<String, dynamic>.from(data));
+        return NationalFarmingAiAssistantAnswerModel.fromJson(
+          Map<String, dynamic>.from(data),
+        );
       }
       return null;
     } on DioException catch (e) {

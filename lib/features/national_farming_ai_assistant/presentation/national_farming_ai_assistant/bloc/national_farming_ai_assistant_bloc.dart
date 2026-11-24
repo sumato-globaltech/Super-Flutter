@@ -3,39 +3,45 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:super_flutter/core/error/app_exception.dart';
 import 'package:super_flutter/core/ui/widgets/ai_chat.dart';
-import 'package:super_flutter/data/vistaar/sources/remote/vistaar_remote_data_source.dart';
+import 'package:super_flutter/data/national_farming_ai_assistant/sources/remote/national_farming_ai_assistant_remote_data_source.dart';
 import 'package:uuid/uuid.dart';
 
-import 'vistaar_event.dart';
-import 'vistaar_state.dart';
+import 'national_farming_ai_assistant_event.dart';
+import 'national_farming_ai_assistant_state.dart';
 
 @injectable
-class VistaarBloc extends Bloc<VistaarEvent, VistaarState> {
-  VistaarBloc(this._vistaarRemoteDataSource) : super(const VistaarState()) {
-    on<VistaarStarted>(_onStarted);
-    on<VistaarChatEvent>(_onChat, transformer: droppable());
-    on<VistaarLanguageChosen>(
+class NationalFarmingAiAssistantBloc
+    extends
+        Bloc<NationalFarmingAiAssistantEvent, NationalFarmingAiAssistantState> {
+  NationalFarmingAiAssistantBloc(
+    this._nationalFarmingAiAssistantRemoteDataSource,
+  ) : super(const NationalFarmingAiAssistantState()) {
+    on<NationalFarmingAiAssistantStarted>(_onStarted);
+    on<NationalFarmingAiAssistantChatEvent>(_onChat, transformer: droppable());
+    on<NationalFarmingAiAssistantLanguageChosen>(
       (event, emit) => emit(state.copyWith(language: event.language)),
     );
-    on<VistaarLocationToggled>(
+    on<NationalFarmingAiAssistantLocationToggled>(
       (event, emit) => emit(state.copyWith(useLocation: event.useLocation)),
     );
-    on<VistaarPhotoChosen>(
+    on<NationalFarmingAiAssistantPhotoChosen>(
       (event, emit) => emit(state.copyWith(photo: () => event.photo)),
     );
   }
 
-  final VistaarRemoteDataSource _vistaarRemoteDataSource;
+  final NationalFarmingAiAssistantRemoteDataSource
+  _nationalFarmingAiAssistantRemoteDataSource;
 
-  /// Vistaar remembers a chat by this id.
+  /// The assistant remembers a chat by this id.
   String _sessionId = const Uuid().v4();
 
   Future<void> _onStarted(
-    VistaarStarted event,
-    Emitter<VistaarState> emit,
+    NationalFarmingAiAssistantStarted event,
+    Emitter<NationalFarmingAiAssistantState> emit,
   ) async {
     try {
-      final languages = await _vistaarRemoteDataSource.getVistaarLanguages();
+      final languages = await _nationalFarmingAiAssistantRemoteDataSource
+          .getNationalFarmingAiAssistantLanguages();
       emit(state.copyWith(languages: languages));
     } catch (_) {
       // The chat still works in English.
@@ -43,26 +49,26 @@ class VistaarBloc extends Bloc<VistaarEvent, VistaarState> {
   }
 
   Future<void> _onChat(
-    VistaarChatEvent event,
-    Emitter<VistaarState> emit,
+    NationalFarmingAiAssistantChatEvent event,
+    Emitter<NationalFarmingAiAssistantState> emit,
   ) async {
     final List<AiMessage> messages;
     switch (event) {
-      case VistaarAsked():
+      case NationalFarmingAiAssistantAsked():
         final question = event.question.trim();
         if (question.isEmpty) return;
         messages = [
           ...state.messages,
           (text: question, mine: true, image: state.photo),
         ];
-      case VistaarRetried():
-        if (state.status != VistaarStatus.failure) return;
+      case NationalFarmingAiAssistantRetried():
+        if (state.status != NationalFarmingAiAssistantStatus.failure) return;
         messages = state.messages;
-      case VistaarCleared():
+      case NationalFarmingAiAssistantCleared():
         _sessionId = const Uuid().v4();
         emit(
           state.copyWith(
-            status: VistaarStatus.idle,
+            status: NationalFarmingAiAssistantStatus.idle,
             messages: const [],
             errorMessage: () => null,
             photo: () => null,
@@ -72,25 +78,28 @@ class VistaarBloc extends Bloc<VistaarEvent, VistaarState> {
     }
     emit(
       state.copyWith(
-        status: VistaarStatus.thinking,
+        status: NationalFarmingAiAssistantStatus.thinking,
         messages: messages,
         errorMessage: () => null,
-        photo: event is VistaarAsked ? () => null : null,
+        photo: event is NationalFarmingAiAssistantAsked ? () => null : null,
       ),
     );
     String? message;
     try {
-      final answer = (await _vistaarRemoteDataSource.createVistaarAnswer(
-        question: messages.last.text,
-        sessionId: _sessionId,
-        language: state.language,
-        useLocation: state.useLocation,
-        image: messages.last.image,
-      ))?.answer;
+      final answer =
+          (await _nationalFarmingAiAssistantRemoteDataSource
+                  .createNationalFarmingAiAssistantAnswer(
+                    question: messages.last.text,
+                    sessionId: _sessionId,
+                    language: state.language,
+                    useLocation: state.useLocation,
+                    image: messages.last.image,
+                  ))
+              ?.answer;
       if (answer != null && answer.isNotEmpty) {
         emit(
           state.copyWith(
-            status: VistaarStatus.idle,
+            status: NationalFarmingAiAssistantStatus.idle,
             messages: [...messages, (text: answer, mine: false, image: null)],
           ),
         );
@@ -101,7 +110,7 @@ class VistaarBloc extends Bloc<VistaarEvent, VistaarState> {
     } catch (_) {}
     emit(
       state.copyWith(
-        status: VistaarStatus.failure,
+        status: NationalFarmingAiAssistantStatus.failure,
         errorMessage: () => message,
       ),
     );

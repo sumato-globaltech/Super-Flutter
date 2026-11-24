@@ -272,12 +272,14 @@ class _DashboardView extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(height: 6),
-                                    Text(
-                                      feature.title(l10n),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.center,
-                                      style: theme.textTheme.labelMedium,
+                                    Flexible(
+                                      child: Text(
+                                        feature.title(l10n),
+                                        maxLines: 3,
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.center,
+                                        style: theme.textTheme.labelMedium,
+                                      ),
                                     ),
                                   ],
                                 ),

@@ -1,14 +1,14 @@
-/// VistaarAnswerModel as returned by the API.
-class VistaarAnswerModel {
+/// NationalFarmingAiAssistantAnswerModel as returned by the API.
+class NationalFarmingAiAssistantAnswerModel {
   String? answer;
 
-  VistaarAnswerModel({this.answer});
+  NationalFarmingAiAssistantAnswerModel({this.answer});
 
-  VistaarAnswerModel.fromJson(Map<String, dynamic> json) {
+  NationalFarmingAiAssistantAnswerModel.fromJson(Map<String, dynamic> json) {
     answer = json['answer'];
   }
 
-  // sf:custom:begin VistaarAnswerModel
+  // sf:custom:begin NationalFarmingAiAssistantAnswerModel
   // Add getters and helpers here. SF preserves this region when it
   // regenerates the model.
   // sf:custom:end

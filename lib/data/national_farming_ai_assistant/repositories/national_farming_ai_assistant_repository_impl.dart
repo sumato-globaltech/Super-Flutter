@@ -1,13 +1,16 @@
 import 'package:injectable/injectable.dart';
-import 'package:super_flutter/data/vistaar/sources/local/vistaar_local_data_source.dart';
-import 'package:super_flutter/data/vistaar/sources/remote/vistaar_remote_data_source.dart';
+import 'package:super_flutter/data/national_farming_ai_assistant/sources/local/national_farming_ai_assistant_local_data_source.dart';
+import 'package:super_flutter/data/national_farming_ai_assistant/sources/remote/national_farming_ai_assistant_remote_data_source.dart';
 
 @lazySingleton
-class VistaarRepositoryImpl {
-  const VistaarRepositoryImpl(this._remoteDataSource, this._localDataSource);
+class NationalFarmingAiAssistantRepositoryImpl {
+  const NationalFarmingAiAssistantRepositoryImpl(
+    this._remoteDataSource,
+    this._localDataSource,
+  );
 
   // ignore: unused_field
-  final VistaarRemoteDataSource _remoteDataSource;
+  final NationalFarmingAiAssistantRemoteDataSource _remoteDataSource;
   // ignore: unused_field
-  final VistaarLocalDataSource _localDataSource;
+  final NationalFarmingAiAssistantLocalDataSource _localDataSource;
 }

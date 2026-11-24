@@ -91,6 +91,12 @@ import 'package:super_flutter/data/meetings/sources/local/meetings_local_data_so
     as _i496;
 import 'package:super_flutter/data/meetings/sources/remote/meetings_remote_data_source.dart'
     as _i133;
+import 'package:super_flutter/data/national_farming_ai_assistant/repositories/national_farming_ai_assistant_repository_impl.dart'
+    as _i120;
+import 'package:super_flutter/data/national_farming_ai_assistant/sources/local/national_farming_ai_assistant_local_data_source.dart'
+    as _i730;
+import 'package:super_flutter/data/national_farming_ai_assistant/sources/remote/national_farming_ai_assistant_remote_data_source.dart'
+    as _i779;
 import 'package:super_flutter/data/production/repositories/production_repository_impl.dart'
     as _i142;
 import 'package:super_flutter/data/production/sources/local/production_local_data_source.dart'
@@ -121,12 +127,6 @@ import 'package:super_flutter/data/support/sources/local/support_local_data_sour
     as _i363;
 import 'package:super_flutter/data/support/sources/remote/support_remote_data_source.dart'
     as _i975;
-import 'package:super_flutter/data/vistaar/repositories/vistaar_repository_impl.dart'
-    as _i432;
-import 'package:super_flutter/data/vistaar/sources/local/vistaar_local_data_source.dart'
-    as _i813;
-import 'package:super_flutter/data/vistaar/sources/remote/vistaar_remote_data_source.dart'
-    as _i393;
 import 'package:super_flutter/domain/auth/repositories/auth_repository.dart'
     as _i631;
 import 'package:super_flutter/domain/auth/use_cases/check_auth_status.dart'
@@ -200,6 +200,8 @@ import 'package:super_flutter/features/market/presentation/market_prices/bloc/ma
     as _i688;
 import 'package:super_flutter/features/meetings/presentation/meetings/bloc/meetings_bloc.dart'
     as _i188;
+import 'package:super_flutter/features/national_farming_ai_assistant/presentation/national_farming_ai_assistant/bloc/national_farming_ai_assistant_bloc.dart'
+    as _i880;
 import 'package:super_flutter/features/production/presentation/production/bloc/production_bloc.dart'
     as _i477;
 import 'package:super_flutter/features/profile/presentation/edit_profile/bloc/edit_profile_bloc.dart'
@@ -224,8 +226,6 @@ import 'package:super_flutter/features/support/presentation/support/bloc/support
     as _i1070;
 import 'package:super_flutter/features/support/presentation/ticket_detail/bloc/ticket_detail_bloc.dart'
     as _i247;
-import 'package:super_flutter/features/vistaar/presentation/vistaar/bloc/vistaar_bloc.dart'
-    as _i653;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -261,6 +261,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i496.MeetingsLocalDataSource>(
       () => _i496.MeetingsLocalDataSource(),
     );
+    gh.lazySingleton<_i730.NationalFarmingAiAssistantLocalDataSource>(
+      () => _i730.NationalFarmingAiAssistantLocalDataSource(),
+    );
     gh.lazySingleton<_i385.ProductionLocalDataSource>(
       () => _i385.ProductionLocalDataSource(),
     );
@@ -275,9 +278,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i363.SupportLocalDataSource>(
       () => _i363.SupportLocalDataSource(),
-    );
-    gh.lazySingleton<_i813.VistaarLocalDataSource>(
-      () => _i813.VistaarLocalDataSource(),
     );
     gh.lazySingleton<_i1067.Environment>(
       () => coreModule.appEnvironment(gh<_i65.AppConfig>()),
@@ -351,6 +351,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i133.MeetingsRemoteDataSource>(
       () => _i133.MeetingsRemoteDataSource(gh<_i42.DioClient>()),
     );
+    gh.lazySingleton<_i779.NationalFarmingAiAssistantRemoteDataSource>(
+      () => _i779.NationalFarmingAiAssistantRemoteDataSource(
+        gh<_i42.DioClient>(),
+      ),
+    );
     gh.lazySingleton<_i480.ProductionRemoteDataSource>(
       () => _i480.ProductionRemoteDataSource(gh<_i42.DioClient>()),
     );
@@ -365,9 +370,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i975.SupportRemoteDataSource>(
       () => _i975.SupportRemoteDataSource(gh<_i42.DioClient>()),
-    );
-    gh.lazySingleton<_i393.VistaarRemoteDataSource>(
-      () => _i393.VistaarRemoteDataSource(gh<_i42.DioClient>()),
     );
     gh.factory<_i188.MeetingsBloc>(
       () => _i188.MeetingsBloc(
@@ -421,6 +423,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i444.CropRemoteDataSource>(),
       ),
     );
+    gh.lazySingleton<_i120.NationalFarmingAiAssistantRepositoryImpl>(
+      () => _i120.NationalFarmingAiAssistantRepositoryImpl(
+        gh<_i779.NationalFarmingAiAssistantRemoteDataSource>(),
+        gh<_i730.NationalFarmingAiAssistantLocalDataSource>(),
+      ),
+    );
     gh.lazySingleton<_i59.IotRepositoryImpl>(
       () => _i59.IotRepositoryImpl(gh<_i17.IotRemoteDataSource>()),
     );
@@ -459,15 +467,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i935.ShipmentsBloc>(
       () => _i935.ShipmentsBloc(gh<_i353.ShipmentsRemoteDataSource>()),
-    );
-    gh.factory<_i653.VistaarBloc>(
-      () => _i653.VistaarBloc(gh<_i393.VistaarRemoteDataSource>()),
-    );
-    gh.lazySingleton<_i432.VistaarRepositoryImpl>(
-      () => _i432.VistaarRepositoryImpl(
-        gh<_i393.VistaarRemoteDataSource>(),
-        gh<_i813.VistaarLocalDataSource>(),
-      ),
     );
     gh.factory<_i463.AddAlertBloc>(
       () => _i463.AddAlertBloc(gh<_i414.AdminCommunicationRemoteDataSource>()),
@@ -547,6 +546,11 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i944.CommunicationRepositoryImpl(
         gh<_i390.CommunicationRemoteDataSource>(),
         gh<_i940.CommunicationLocalDataSource>(),
+      ),
+    );
+    gh.factory<_i880.NationalFarmingAiAssistantBloc>(
+      () => _i880.NationalFarmingAiAssistantBloc(
+        gh<_i779.NationalFarmingAiAssistantRemoteDataSource>(),
       ),
     );
     gh.lazySingleton<_i316.FacilitiesRepositoryImpl>(

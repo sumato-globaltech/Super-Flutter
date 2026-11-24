@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:super_flutter/core/ui/widgets/ai_chat.dart';
-import 'package:super_flutter/data/vistaar/model/vistaar_language_model.dart';
+import 'package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_language_model.dart';
 
-enum VistaarStatus { idle, thinking, failure }
+enum NationalFarmingAiAssistantStatus { idle, thinking, failure }
 
-class VistaarState extends Equatable {
-  const VistaarState({
-    this.status = VistaarStatus.idle,
+class NationalFarmingAiAssistantState extends Equatable {
+  const NationalFarmingAiAssistantState({
+    this.status = NationalFarmingAiAssistantStatus.idle,
     this.messages = const [],
     this.errorMessage,
     this.languages = const [],
@@ -15,25 +15,25 @@ class VistaarState extends Equatable {
     this.photo,
   });
 
-  final VistaarStatus status;
+  final NationalFarmingAiAssistantStatus status;
   final List<AiMessage> messages;
   final String? errorMessage;
-  final List<VistaarLanguageModel> languages;
+  final List<NationalFarmingAiAssistantLanguageModel> languages;
   final String language;
   final bool useLocation;
   final String? photo;
 
-  bool get isThinking => status == VistaarStatus.thinking;
+  bool get isThinking => status == NationalFarmingAiAssistantStatus.thinking;
 
-  VistaarState copyWith({
-    VistaarStatus? status,
+  NationalFarmingAiAssistantState copyWith({
+    NationalFarmingAiAssistantStatus? status,
     List<AiMessage>? messages,
     String? Function()? errorMessage,
-    List<VistaarLanguageModel>? languages,
+    List<NationalFarmingAiAssistantLanguageModel>? languages,
     String? language,
     bool? useLocation,
     String? Function()? photo,
-  }) => VistaarState(
+  }) => NationalFarmingAiAssistantState(
     status: status ?? this.status,
     messages: messages ?? this.messages,
     errorMessage: errorMessage == null ? this.errorMessage : errorMessage(),

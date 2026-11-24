@@ -2111,46 +2111,48 @@ class AppLocalizationsEs extends AppLocalizations {
   String get farmingAssistantCopied => 'Copiado';
 
   @override
-  String get vistaarTitle => 'Bharat Vistaar IA';
+  String get nationalFarmingAiAssistantTitle =>
+      'Asistente agrícola nacional IA';
 
   @override
-  String get vistaarHello => 'Pregunta a Bharat Vistaar';
+  String get nationalFarmingAiAssistantHello =>
+      'Pregunta al asistente agrícola nacional';
 
   @override
-  String get vistaarIntro =>
+  String get nationalFarmingAiAssistantIntro =>
       'Consejos de cultivo, plagas, enfermedades y precios de mercado del servicio agrícola nacional.';
 
   @override
-  String get vistaarPromptPest =>
+  String get nationalFarmingAiAssistantPromptPest =>
       '¿Cómo controlar el gusano cogollero en el maíz?';
 
   @override
-  String get vistaarPromptPrice =>
+  String get nationalFarmingAiAssistantPromptPrice =>
       '¿Cuál es el precio de hoy del jengibre en Dimapur?';
 
   @override
-  String get vistaarHint => 'Pregunta sobre tu cultivo';
+  String get nationalFarmingAiAssistantHint => 'Pregunta sobre tu cultivo';
 
   @override
-  String get vistaarAddPhoto => 'Añadir foto del cultivo';
+  String get nationalFarmingAiAssistantAddPhoto => 'Añadir foto del cultivo';
 
   @override
-  String get vistaarPhoto => 'Foto del cultivo';
+  String get nationalFarmingAiAssistantPhoto => 'Foto del cultivo';
 
   @override
-  String get vistaarRemovePhoto => 'Quitar foto';
+  String get nationalFarmingAiAssistantRemovePhoto => 'Quitar foto';
 
   @override
-  String get vistaarPhotoQuestion =>
+  String get nationalFarmingAiAssistantPhotoQuestion =>
       '¿Qué enfermedad tiene esta planta y cómo la trato?';
 
   @override
-  String get vistaarLanguage => 'Idioma de respuesta';
+  String get nationalFarmingAiAssistantLanguage => 'Idioma de respuesta';
 
   @override
-  String get vistaarNearMe => 'Cerca de mí';
+  String get nationalFarmingAiAssistantNearMe => 'Cerca de mí';
 
   @override
-  String get vistaarNearMeHelp =>
+  String get nationalFarmingAiAssistantNearMeHelp =>
       'Envía la ubicación aproximada de tu finca o distrito para precios cercanos';
 }

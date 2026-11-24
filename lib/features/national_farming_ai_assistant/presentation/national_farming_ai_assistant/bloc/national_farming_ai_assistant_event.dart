@@ -1,22 +1,25 @@
 import 'package:equatable/equatable.dart';
 
-sealed class VistaarEvent extends Equatable {
-  const VistaarEvent();
+sealed class NationalFarmingAiAssistantEvent extends Equatable {
+  const NationalFarmingAiAssistantEvent();
 
   @override
   List<Object?> get props => [];
 }
 
-class VistaarStarted extends VistaarEvent {
-  const VistaarStarted();
+class NationalFarmingAiAssistantStarted
+    extends NationalFarmingAiAssistantEvent {
+  const NationalFarmingAiAssistantStarted();
 }
 
-sealed class VistaarChatEvent extends VistaarEvent {
-  const VistaarChatEvent();
+sealed class NationalFarmingAiAssistantChatEvent
+    extends NationalFarmingAiAssistantEvent {
+  const NationalFarmingAiAssistantChatEvent();
 }
 
-class VistaarAsked extends VistaarChatEvent {
-  const VistaarAsked(this.question);
+class NationalFarmingAiAssistantAsked
+    extends NationalFarmingAiAssistantChatEvent {
+  const NationalFarmingAiAssistantAsked(this.question);
 
   final String question;
 
@@ -25,16 +28,19 @@ class VistaarAsked extends VistaarChatEvent {
 }
 
 /// Asks the last question again after it failed.
-class VistaarRetried extends VistaarChatEvent {
-  const VistaarRetried();
+class NationalFarmingAiAssistantRetried
+    extends NationalFarmingAiAssistantChatEvent {
+  const NationalFarmingAiAssistantRetried();
 }
 
-class VistaarCleared extends VistaarChatEvent {
-  const VistaarCleared();
+class NationalFarmingAiAssistantCleared
+    extends NationalFarmingAiAssistantChatEvent {
+  const NationalFarmingAiAssistantCleared();
 }
 
-class VistaarLanguageChosen extends VistaarEvent {
-  const VistaarLanguageChosen(this.language);
+class NationalFarmingAiAssistantLanguageChosen
+    extends NationalFarmingAiAssistantEvent {
+  const NationalFarmingAiAssistantLanguageChosen(this.language);
 
   final String language;
 
@@ -42,8 +48,9 @@ class VistaarLanguageChosen extends VistaarEvent {
   List<Object?> get props => [language];
 }
 
-class VistaarLocationToggled extends VistaarEvent {
-  const VistaarLocationToggled({required this.useLocation});
+class NationalFarmingAiAssistantLocationToggled
+    extends NationalFarmingAiAssistantEvent {
+  const NationalFarmingAiAssistantLocationToggled({required this.useLocation});
 
   final bool useLocation;
 
@@ -52,8 +59,9 @@ class VistaarLocationToggled extends VistaarEvent {
 }
 
 /// A null [photo] takes the chosen one away.
-class VistaarPhotoChosen extends VistaarEvent {
-  const VistaarPhotoChosen(this.photo);
+class NationalFarmingAiAssistantPhotoChosen
+    extends NationalFarmingAiAssistantEvent {
+  const NationalFarmingAiAssistantPhotoChosen(this.photo);
 
   final String? photo;
 

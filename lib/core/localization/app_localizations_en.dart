@@ -2103,45 +2103,47 @@ class AppLocalizationsEn extends AppLocalizations {
   String get farmingAssistantCopied => 'Copied';
 
   @override
-  String get vistaarTitle => 'Bharat Vistaar AI';
+  String get nationalFarmingAiAssistantTitle => 'National Farming AI Assistant';
 
   @override
-  String get vistaarHello => 'Ask Bharat Vistaar';
+  String get nationalFarmingAiAssistantHello =>
+      'Ask the National Farming AI Assistant';
 
   @override
-  String get vistaarIntro =>
+  String get nationalFarmingAiAssistantIntro =>
       'Crop advice, pests and diseases, and mandi prices from the national farming service.';
 
   @override
-  String get vistaarPromptPest => 'How to control fall armyworm in maize?';
+  String get nationalFarmingAiAssistantPromptPest =>
+      'How to control fall armyworm in maize?';
 
   @override
-  String get vistaarPromptPrice =>
+  String get nationalFarmingAiAssistantPromptPrice =>
       'What is today\'s mandi price of ginger in Dimapur?';
 
   @override
-  String get vistaarHint => 'Ask about your crop';
+  String get nationalFarmingAiAssistantHint => 'Ask about your crop';
 
   @override
-  String get vistaarAddPhoto => 'Add a crop photo';
+  String get nationalFarmingAiAssistantAddPhoto => 'Add a crop photo';
 
   @override
-  String get vistaarPhoto => 'Crop photo';
+  String get nationalFarmingAiAssistantPhoto => 'Crop photo';
 
   @override
-  String get vistaarRemovePhoto => 'Remove photo';
+  String get nationalFarmingAiAssistantRemovePhoto => 'Remove photo';
 
   @override
-  String get vistaarPhotoQuestion =>
+  String get nationalFarmingAiAssistantPhotoQuestion =>
       'What disease does this plant have and how do I treat it?';
 
   @override
-  String get vistaarLanguage => 'Answer language';
+  String get nationalFarmingAiAssistantLanguage => 'Answer language';
 
   @override
-  String get vistaarNearMe => 'Near me';
+  String get nationalFarmingAiAssistantNearMe => 'Near me';
 
   @override
-  String get vistaarNearMeHelp =>
+  String get nationalFarmingAiAssistantNearMeHelp =>
       'Sends your farm\'s or district\'s rough location for nearby mandi prices';
 }

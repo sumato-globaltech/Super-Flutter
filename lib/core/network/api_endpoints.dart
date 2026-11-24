@@ -181,7 +181,9 @@ abstract final class ApiEndpoints {
 
   static const assistantAnswer = '/api/v1/farming-assistant';
 
-  static const vistaarLanguages = '/api/v1/vistaar/languages';
+  static const nationalFarmingAiAssistantLanguages =
+      '/api/v1/national-farming-ai-assistant/languages';
 
-  static const vistaarAnswer = '/api/v1/vistaar/chat';
+  static const nationalFarmingAiAssistantAnswer =
+      '/api/v1/national-farming-ai-assistant/chat';
 }

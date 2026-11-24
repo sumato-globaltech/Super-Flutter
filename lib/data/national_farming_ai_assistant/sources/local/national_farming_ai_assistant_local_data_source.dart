@@ -1,4 +1,4 @@
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
-class VistaarLocalDataSource {}
+class NationalFarmingAiAssistantLocalDataSource {}

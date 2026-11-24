@@ -4034,83 +4034,83 @@ abstract class AppLocalizations {
   /// **'Copied'**
   String get farmingAssistantCopied;
 
-  /// App bar title of the vistaar screen
+  /// App bar title of the national_farming_ai_assistant screen
   ///
   /// In en, this message translates to:
-  /// **'Bharat Vistaar AI'**
-  String get vistaarTitle;
+  /// **'National Farming AI Assistant'**
+  String get nationalFarmingAiAssistantTitle;
 
-  /// No description provided for @vistaarHello.
+  /// No description provided for @nationalFarmingAiAssistantHello.
   ///
   /// In en, this message translates to:
-  /// **'Ask Bharat Vistaar'**
-  String get vistaarHello;
+  /// **'Ask the National Farming AI Assistant'**
+  String get nationalFarmingAiAssistantHello;
 
-  /// No description provided for @vistaarIntro.
+  /// No description provided for @nationalFarmingAiAssistantIntro.
   ///
   /// In en, this message translates to:
   /// **'Crop advice, pests and diseases, and mandi prices from the national farming service.'**
-  String get vistaarIntro;
+  String get nationalFarmingAiAssistantIntro;
 
-  /// No description provided for @vistaarPromptPest.
+  /// No description provided for @nationalFarmingAiAssistantPromptPest.
   ///
   /// In en, this message translates to:
   /// **'How to control fall armyworm in maize?'**
-  String get vistaarPromptPest;
+  String get nationalFarmingAiAssistantPromptPest;
 
-  /// No description provided for @vistaarPromptPrice.
+  /// No description provided for @nationalFarmingAiAssistantPromptPrice.
   ///
   /// In en, this message translates to:
   /// **'What is today\'s mandi price of ginger in Dimapur?'**
-  String get vistaarPromptPrice;
+  String get nationalFarmingAiAssistantPromptPrice;
 
-  /// No description provided for @vistaarHint.
+  /// No description provided for @nationalFarmingAiAssistantHint.
   ///
   /// In en, this message translates to:
   /// **'Ask about your crop'**
-  String get vistaarHint;
+  String get nationalFarmingAiAssistantHint;
 
-  /// No description provided for @vistaarAddPhoto.
+  /// No description provided for @nationalFarmingAiAssistantAddPhoto.
   ///
   /// In en, this message translates to:
   /// **'Add a crop photo'**
-  String get vistaarAddPhoto;
+  String get nationalFarmingAiAssistantAddPhoto;
 
-  /// No description provided for @vistaarPhoto.
+  /// No description provided for @nationalFarmingAiAssistantPhoto.
   ///
   /// In en, this message translates to:
   /// **'Crop photo'**
-  String get vistaarPhoto;
+  String get nationalFarmingAiAssistantPhoto;
 
-  /// No description provided for @vistaarRemovePhoto.
+  /// No description provided for @nationalFarmingAiAssistantRemovePhoto.
   ///
   /// In en, this message translates to:
   /// **'Remove photo'**
-  String get vistaarRemovePhoto;
+  String get nationalFarmingAiAssistantRemovePhoto;
 
-  /// No description provided for @vistaarPhotoQuestion.
+  /// No description provided for @nationalFarmingAiAssistantPhotoQuestion.
   ///
   /// In en, this message translates to:
   /// **'What disease does this plant have and how do I treat it?'**
-  String get vistaarPhotoQuestion;
+  String get nationalFarmingAiAssistantPhotoQuestion;
 
-  /// No description provided for @vistaarLanguage.
+  /// No description provided for @nationalFarmingAiAssistantLanguage.
   ///
   /// In en, this message translates to:
   /// **'Answer language'**
-  String get vistaarLanguage;
+  String get nationalFarmingAiAssistantLanguage;
 
-  /// No description provided for @vistaarNearMe.
+  /// No description provided for @nationalFarmingAiAssistantNearMe.
   ///
   /// In en, this message translates to:
   /// **'Near me'**
-  String get vistaarNearMe;
+  String get nationalFarmingAiAssistantNearMe;
 
-  /// No description provided for @vistaarNearMeHelp.
+  /// No description provided for @nationalFarmingAiAssistantNearMeHelp.
   ///
   /// In en, this message translates to:
   /// **'Sends your farm\'s or district\'s rough location for nearby mandi prices'**
-  String get vistaarNearMeHelp;
+  String get nationalFarmingAiAssistantNearMeHelp;
 }
 
 class _AppLocalizationsDelegate

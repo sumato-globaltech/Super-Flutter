@@ -12,16 +12,17 @@ import 'package:super_flutter/core/error/exceptions/validation_exception.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/core/network/dio_client.dart';
 import 'package:super_flutter/core/ui/theme/app_theme.dart';
-import 'package:super_flutter/data/vistaar/model/vistaar_answer_model.dart';
-import 'package:super_flutter/data/vistaar/model/vistaar_language_model.dart';
-import 'package:super_flutter/data/vistaar/sources/remote/vistaar_remote_data_source.dart';
+import 'package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_answer_model.dart';
+import 'package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_language_model.dart';
+import 'package:super_flutter/data/national_farming_ai_assistant/sources/remote/national_farming_ai_assistant_remote_data_source.dart';
 import 'package:super_flutter/domain/auth/entities/access_policy.dart';
-import 'package:super_flutter/features/vistaar/presentation/vistaar/bloc/vistaar_bloc.dart';
-import 'package:super_flutter/features/vistaar/presentation/vistaar/bloc/vistaar_event.dart';
-import 'package:super_flutter/features/vistaar/presentation/vistaar/screen/vistaar_screen.dart';
-import 'package:super_flutter/features/vistaar/routes/vistaar_route_names.dart';
+import 'package:super_flutter/features/national_farming_ai_assistant/presentation/national_farming_ai_assistant/bloc/national_farming_ai_assistant_bloc.dart';
+import 'package:super_flutter/features/national_farming_ai_assistant/presentation/national_farming_ai_assistant/bloc/national_farming_ai_assistant_event.dart';
+import 'package:super_flutter/features/national_farming_ai_assistant/presentation/national_farming_ai_assistant/screen/national_farming_ai_assistant_screen.dart';
+import 'package:super_flutter/features/national_farming_ai_assistant/routes/national_farming_ai_assistant_route_names.dart';
 
-class _MockSource extends Mock implements VistaarRemoteDataSource {}
+class _MockSource extends Mock
+    implements NationalFarmingAiAssistantRemoteDataSource {}
 
 class _MockDioClient extends Mock implements DioClient {}
 
@@ -54,22 +55,28 @@ class _Adapter implements HttpClientAdapter {
 
 void main() {
   late _MockSource source;
-  late VistaarBloc bloc;
+  late NationalFarmingAiAssistantBloc bloc;
   final asked = <Map<Symbol, dynamic>>[];
-  var answers = <VistaarAnswerModel? Function()>[];
+  var answers = <NationalFarmingAiAssistantAnswerModel? Function()>[];
 
   setUp(() async {
     asked.clear();
     answers = [];
     source = _MockSource();
-    when(() => source.getVistaarLanguages()).thenAnswer(
+    when(() => source.getNationalFarmingAiAssistantLanguages()).thenAnswer(
       (_) async => [
-        VistaarLanguageModel.fromJson({'value': 'en', 'label': 'English'}),
-        VistaarLanguageModel.fromJson({'value': 'hi', 'label': 'हिन्दी'}),
+        NationalFarmingAiAssistantLanguageModel.fromJson({
+          'value': 'en',
+          'label': 'English',
+        }),
+        NationalFarmingAiAssistantLanguageModel.fromJson({
+          'value': 'hi',
+          'label': 'हिन्दी',
+        }),
       ],
     );
     when(
-      () => source.createVistaarAnswer(
+      () => source.createNationalFarmingAiAssistantAnswer(
         question: any(named: 'question'),
         sessionId: any(named: 'sessionId'),
         language: any(named: 'language'),
@@ -79,11 +86,11 @@ void main() {
     ).thenAnswer((call) async {
       asked.add(call.namedArguments);
       return answers.isEmpty
-          ? VistaarAnswerModel(answer: 'Use **compost**.')
+          ? NationalFarmingAiAssistantAnswerModel(answer: 'Use **compost**.')
           : answers.removeAt(0)();
     });
     await getIt.reset();
-    getIt.registerFactory(() => bloc = VistaarBloc(source));
+    getIt.registerFactory(() => bloc = NationalFarmingAiAssistantBloc(source));
   });
 
   Future<void> pump(WidgetTester tester, {bool dark = false}) async {
@@ -101,7 +108,7 @@ void main() {
             : AppTheme.light(Flavor.development),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: const VistaarScreen(),
+        home: const NationalFarmingAiAssistantScreen(),
       ),
     );
     await tester.pumpAndSettle();
@@ -119,26 +126,29 @@ void main() {
         AccessPolicy(isSignedIn: true, permissions: permissions);
     bool listed(Set<String> permissions) => appFeatures
         .quickActions(policy(permissions), home: '/')
-        .any((feature) => feature.id == 'vistaar');
+        .any((feature) => feature.id == 'national_farming_ai_assistant');
 
     for (final permissions in [
       <String>{},
       {Permissions.farmingAssistantUse},
     ]) {
       expect(
-        appFeatures.canOpen(VistaarRouteNames.root, policy(permissions)),
+        appFeatures.canOpen(
+          NationalFarmingAiAssistantRouteNames.root,
+          policy(permissions),
+        ),
         isFalse,
       );
       expect(listed(permissions), isFalse);
     }
     expect(
       appFeatures.canOpen(
-        VistaarRouteNames.root,
-        policy({Permissions.vistaarUse}),
+        NationalFarmingAiAssistantRouteNames.root,
+        policy({Permissions.nationalFarmingAiAssistantUse}),
       ),
       isTrue,
     );
-    expect(listed({Permissions.vistaarUse}), isTrue);
+    expect(listed({Permissions.nationalFarmingAiAssistantUse}), isTrue);
   });
 
   for (final dark in [false, true]) {
@@ -157,7 +167,10 @@ void main() {
 
       await tester.tap(find.byTooltip('New chat'));
       await tester.pumpAndSettle();
-      expect(find.text('Ask Bharat Vistaar'), findsOneWidget);
+      expect(
+        find.text('Ask the National Farming AI Assistant'),
+        findsOneWidget,
+      );
       await ask(tester, 'Hello');
       expect(asked[2][#sessionId], isNot(asked[0][#sessionId]));
     });
@@ -188,7 +201,7 @@ void main() {
   ) async {
     answers = [() => throw const ValidationException('Try later.')];
     await pump(tester);
-    bloc.add(const VistaarPhotoChosen('/leaf.jpg'));
+    bloc.add(const NationalFarmingAiAssistantPhotoChosen('/leaf.jpg'));
     await tester.pumpAndSettle();
     expect(find.text('Crop photo'), findsOneWidget);
     await tester.tap(find.byTooltip('Send'));
@@ -211,7 +224,7 @@ void main() {
 
   testWidgets('a photo can be taken away before sending', (tester) async {
     await pump(tester);
-    bloc.add(const VistaarPhotoChosen('/leaf.jpg'));
+    bloc.add(const NationalFarmingAiAssistantPhotoChosen('/leaf.jpg'));
     await tester.pumpAndSettle();
     await tester.tap(find.byTooltip('Remove photo'));
     await tester.pumpAndSettle();
@@ -224,7 +237,7 @@ void main() {
   testWidgets('an empty answer is a failure; no languages still chats', (
     tester,
   ) async {
-    when(() => source.getVistaarLanguages())
+    when(() => source.getNationalFarmingAiAssistantLanguages())
         .thenThrow(const ValidationException('no'));
     answers = [() => null];
     await pump(tester);
@@ -239,12 +252,12 @@ void main() {
     when(() => client.dio).thenReturn(
       Dio(BaseOptions(baseUrl: 'http://dam.test'))..httpClientAdapter = adapter,
     );
-    final source = VistaarRemoteDataSource(client);
+    final source = NationalFarmingAiAssistantRemoteDataSource(client);
     final photo = File('${Directory.systemTemp.createTempSync().path}/a.jpg')
       ..writeAsBytesSync([1]);
     addTearDown(() => photo.parent.deleteSync(recursive: true));
 
-    await source.createVistaarAnswer(
+    await source.createNationalFarmingAiAssistantAnswer(
       question: 'Q',
       sessionId: 's',
       language: 'hi',
@@ -253,7 +266,7 @@ void main() {
     );
     expect(
       adapter.request!.uri.toString(),
-      'http://dam.test/api/v1/vistaar/chat',
+      'http://dam.test/api/v1/national-farming-ai-assistant/chat',
     );
     var form = adapter.request!.data as FormData;
     expect(Map.fromEntries(form.fields), {
@@ -264,7 +277,7 @@ void main() {
     });
     expect(form.files.single.key, 'image');
 
-    final answer = await source.createVistaarAnswer(
+    final answer = await source.createNationalFarmingAiAssistantAnswer(
       question: 'Q',
       sessionId: 's',
       language: 'en',
