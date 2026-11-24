@@ -774,6 +774,18 @@ models:
         type: String
         nullable: true
     origin: generated
+  - name: AssistantAnswerModel
+    kind: model
+    feature: farming_assistant
+    path: lib/data/farming_assistant/model/assistant_answer_model.dart
+    import: package:super_flutter/data/farming_assistant/model/assistant_answer_model.dart
+    fingerprint: '{answer:string}'
+    fields:
+      - name: answer
+        json_key: answer
+        type: String
+        nullable: true
+    origin: generated
   - name: QueueSummaryModel
     kind: model
     feature: help_desk

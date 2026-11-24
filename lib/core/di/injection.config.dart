@@ -65,6 +65,12 @@ import 'package:super_flutter/data/farm/repositories/farm_repository_impl.dart'
     as _i749;
 import 'package:super_flutter/data/farm/sources/remote/farm_remote_data_source.dart'
     as _i773;
+import 'package:super_flutter/data/farming_assistant/repositories/farming_assistant_repository_impl.dart'
+    as _i77;
+import 'package:super_flutter/data/farming_assistant/sources/local/farming_assistant_local_data_source.dart'
+    as _i214;
+import 'package:super_flutter/data/farming_assistant/sources/remote/farming_assistant_remote_data_source.dart'
+    as _i254;
 import 'package:super_flutter/data/help_desk/repositories/help_desk_repository_impl.dart'
     as _i588;
 import 'package:super_flutter/data/help_desk/sources/local/help_desk_local_data_source.dart'
@@ -176,6 +182,8 @@ import 'package:super_flutter/features/farm/presentation/farm_detail/bloc/farm_d
     as _i255;
 import 'package:super_flutter/features/farm/presentation/farms_list/bloc/farms_bloc.dart'
     as _i664;
+import 'package:super_flutter/features/farming_assistant/presentation/farming_assistant/bloc/farming_assistant_bloc.dart'
+    as _i784;
 import 'package:super_flutter/features/help_desk/presentation/queue_summary/bloc/queue_summary_bloc.dart'
     as _i621;
 import 'package:super_flutter/features/iot/presentation/device_detail/bloc/device_detail_bloc.dart'
@@ -235,6 +243,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i1048.FacilitiesLocalDataSource>(
       () => _i1048.FacilitiesLocalDataSource(),
+    );
+    gh.lazySingleton<_i214.FarmingAssistantLocalDataSource>(
+      () => _i214.FarmingAssistantLocalDataSource(),
     );
     gh.lazySingleton<_i772.HelpDeskLocalDataSource>(
       () => _i772.HelpDeskLocalDataSource(),
@@ -313,6 +324,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i773.FarmRemoteDataSource>(
       () => _i773.FarmRemoteDataSource(gh<_i42.DioClient>()),
+    );
+    gh.lazySingleton<_i254.FarmingAssistantRemoteDataSource>(
+      () => _i254.FarmingAssistantRemoteDataSource(gh<_i42.DioClient>()),
     );
     gh.lazySingleton<_i878.HelpDeskRemoteDataSource>(
       () => _i878.HelpDeskRemoteDataSource(gh<_i42.DioClient>()),
@@ -398,6 +412,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i561.DeviceDetailBloc>(
       () => _i561.DeviceDetailBloc(gh<_i17.IotRemoteDataSource>()),
+    );
+    gh.lazySingleton<_i77.FarmingAssistantRepositoryImpl>(
+      () => _i77.FarmingAssistantRepositoryImpl(
+        gh<_i254.FarmingAssistantRemoteDataSource>(),
+        gh<_i214.FarmingAssistantLocalDataSource>(),
+      ),
     );
     gh.factory<_i213.CropDetailBloc>(
       () => _i213.CropDetailBloc(gh<_i444.CropRemoteDataSource>()),
@@ -535,6 +555,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i341.MarketRepositoryImpl>(
       () => _i341.MarketRepositoryImpl(gh<_i1002.MarketRemoteDataSource>()),
+    );
+    gh.factory<_i784.FarmingAssistantBloc>(
+      () => _i784.FarmingAssistantBloc(
+        gh<_i254.FarmingAssistantRemoteDataSource>(),
+      ),
     );
     gh.factory<_i734.EditProfileBloc>(
       () => _i734.EditProfileBloc(

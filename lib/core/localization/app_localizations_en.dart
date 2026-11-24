@@ -2059,4 +2059,40 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get cropDetectorDisclaimer =>
       'An AI result can be wrong. Ask an officer before treating your crop.';
+
+  @override
+  String get farmingAssistantTitle => 'AI Farming Assistant';
+
+  @override
+  String get farmingAssistantHello => 'Hello, I am Kheti Manu';
+
+  @override
+  String get farmingAssistantIntro =>
+      'Ask me about crops, diseases, equipment and farming practices.';
+
+  @override
+  String get farmingAssistantTry => 'Try asking';
+
+  @override
+  String get farmingAssistantAsk => 'Ask';
+
+  @override
+  String get farmingAssistantPromptDisease =>
+      'How to control leaf spot disease?';
+
+  @override
+  String get farmingAssistantPromptBanana => 'Tell me about growing bananas';
+
+  @override
+  String get farmingAssistantThinking => 'Thinking…';
+
+  @override
+  String get farmingAssistantHint => 'Message Kheti Manu';
+
+  @override
+  String get farmingAssistantSend => 'Send';
+
+  @override
+  String get farmingAssistantDisclaimer =>
+      'AI answers can be wrong. Ask an officer when it matters.';
 }

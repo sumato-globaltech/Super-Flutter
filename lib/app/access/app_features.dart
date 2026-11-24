@@ -6,6 +6,7 @@ import 'package:super_flutter/features/crop_detector/routes/crop_detector_route_
 import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
 import 'package:super_flutter/features/facilities/routes/facilities_route_names.dart';
 import 'package:super_flutter/features/farm/routes/farm_route_names.dart';
+import 'package:super_flutter/features/farming_assistant/routes/farming_assistant_route_names.dart';
 import 'package:super_flutter/features/meetings/routes/meetings_route_names.dart';
 import 'package:super_flutter/features/schemes/routes/schemes_route_names.dart';
 import 'package:super_flutter/features/shipments/routes/shipments_route_names.dart';
@@ -242,6 +243,14 @@ final appFeatures = FeatureRegistry([
     title: _cropDetector,
     icon: PhosphorIconsRegular.scan,
   ),
+  const AppFeature(
+    id: 'farming_assistant',
+    path: FarmingAssistantRouteNames.root,
+    rule: AccessRule.permission(Permissions.farmingAssistantUse),
+    title: _farmingAssistant,
+    icon: PhosphorIconsRegular.robot,
+    quickAction: false,
+  ),
 ]);
 
 const _farmer = AccessRule.all([
@@ -289,3 +298,5 @@ String _meetings(AppLocalizations l10n) => l10n.meetingsTitle;
 String _facilities(AppLocalizations l10n) => l10n.facilitiesTitle;
 
 String _cropDetector(AppLocalizations l10n) => l10n.cropDetectorTitle;
+
+String _farmingAssistant(AppLocalizations l10n) => l10n.farmingAssistantTitle;

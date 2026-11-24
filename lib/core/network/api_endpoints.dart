@@ -178,4 +178,6 @@ abstract final class ApiEndpoints {
   static const facilityStats = '/api/v1/facilities/stats';
 
   static const cropAnalysis = '/api/v1/crop-detector';
+
+  static const assistantAnswer = '/api/v1/farming-assistant';
 }

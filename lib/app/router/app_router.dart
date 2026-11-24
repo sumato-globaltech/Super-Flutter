@@ -12,6 +12,7 @@ import 'package:super_flutter/features/communication/routes/communication_routes
 import 'package:super_flutter/features/crop_detector/routes/crop_detector_routes.dart';
 import 'package:super_flutter/features/crops/routes/crops_routes.dart';
 import 'package:super_flutter/features/facilities/routes/facilities_routes.dart';
+import 'package:super_flutter/features/farming_assistant/routes/farming_assistant_routes.dart';
 import 'package:super_flutter/features/iot/routes/iot_routes.dart';
 import 'package:super_flutter/features/meetings/routes/meetings_routes.dart';
 import 'package:super_flutter/features/profile/routes/profile_routes.dart';
@@ -69,6 +70,7 @@ GoRouter createRouter({
       ...buildCropDetectorRoutes(),
       ...buildCropsRoutes(),
       ...buildFacilitiesRoutes(),
+      ...buildFarmingAssistantRoutes(),
       ...buildIotRoutes(),
       ...buildMeetingsRoutes(),
       ...buildProfileRoutes(),

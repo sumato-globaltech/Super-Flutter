@@ -18,9 +18,11 @@ import 'package:super_flutter/core/ui/theme/design_colors.dart';
 import 'package:super_flutter/core/ui/widgets/app_empty_view.dart';
 import 'package:super_flutter/core/ui/widgets/app_error_view.dart';
 import 'package:super_flutter/core/ui/widgets/design_card.dart';
+import 'package:super_flutter/core/ui/widgets/hide_on_scroll.dart';
 import 'package:super_flutter/core/ui/widgets/progress_circle.dart';
 import 'package:super_flutter/core/ui/widgets/title_details_card.dart';
 import 'package:super_flutter/core/utils/utils.dart';
+import 'package:super_flutter/features/farming_assistant/routes/farming_assistant_route_names.dart';
 import 'package:super_flutter/features/ui_gallery/routes/ui_gallery_route_names.dart';
 
 import '../bloc/dashboard_bloc.dart';
@@ -34,7 +36,7 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => getIt<DashboardBloc>()..add(const DashboardStarted()),
-      child: const _DashboardView(),
+      child: const HideOnScroll(child: _DashboardView()),
     );
   }
 }
@@ -45,7 +47,23 @@ class _DashboardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final canAsk = context.select(
+      (AuthCubit cubit) => appFeatures.canOpen(
+        FarmingAssistantRouteNames.root,
+        cubit.state.access,
+      ),
+    );
     return Scaffold(
+      floatingActionButton: canAsk
+          ? HideOnScrollButton(
+              child: FloatingActionButton(
+                heroTag: null,
+                tooltip: l10n.farmingAssistantTitle,
+                onPressed: () => context.push(FarmingAssistantRouteNames.root),
+                child: const Icon(PhosphorIconsFill.robot),
+              ),
+            )
+          : null,
       appBar: AppBar(
         title: Text(Constants.appName),
         actions: [

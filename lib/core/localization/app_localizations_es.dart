@@ -2067,4 +2067,40 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get cropDetectorDisclaimer =>
       'Un resultado de IA puede fallar. Consulta a un técnico antes de tratar tu cultivo.';
+
+  @override
+  String get farmingAssistantTitle => 'Asistente agrícola IA';
+
+  @override
+  String get farmingAssistantHello => 'Hola, soy Kheti Manu';
+
+  @override
+  String get farmingAssistantIntro =>
+      'Pregúntame sobre cultivos, enfermedades, equipos y prácticas agrícolas.';
+
+  @override
+  String get farmingAssistantTry => 'Prueba a preguntar';
+
+  @override
+  String get farmingAssistantAsk => 'Preguntar';
+
+  @override
+  String get farmingAssistantPromptDisease =>
+      '¿Cómo controlar la mancha foliar?';
+
+  @override
+  String get farmingAssistantPromptBanana => 'Háblame del cultivo del plátano';
+
+  @override
+  String get farmingAssistantThinking => 'Pensando…';
+
+  @override
+  String get farmingAssistantHint => 'Escribe a Kheti Manu';
+
+  @override
+  String get farmingAssistantSend => 'Enviar';
+
+  @override
+  String get farmingAssistantDisclaimer =>
+      'Las respuestas de la IA pueden fallar. Consulta a un técnico si es importante.';
 }

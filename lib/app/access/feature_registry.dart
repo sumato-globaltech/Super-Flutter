@@ -22,6 +22,7 @@ class AppFeature {
     required this.title,
     required this.icon,
     this.tab,
+    this.quickAction = true,
   });
 
   final String id;
@@ -31,6 +32,9 @@ class AppFeature {
   final IconData icon;
 
   final AppTab? tab;
+
+  /// Whether Home lists it; false when it is opened another way.
+  final bool quickAction;
 
   bool allowedFor(AccessPolicy policy) => rule.allows(policy);
 
@@ -108,7 +112,9 @@ class FeatureRegistry {
         ...navigationFor(policy, maxTabs: maxTabs).overflow,
         ...secondary(policy),
       ])
-        if (!feature.path.contains('/:') && paths.add(feature.path)) feature,
+        if (feature.quickAction &&
+            !feature.path.contains('/:') &&
+            paths.add(feature.path)) feature,
     ];
   }
 

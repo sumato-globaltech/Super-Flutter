@@ -3955,6 +3955,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An AI result can be wrong. Ask an officer before treating your crop.'**
   String get cropDetectorDisclaimer;
+
+  /// App bar title of the farming_assistant screen
+  ///
+  /// In en, this message translates to:
+  /// **'AI Farming Assistant'**
+  String get farmingAssistantTitle;
+
+  /// No description provided for @farmingAssistantHello.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello, I am Kheti Manu'**
+  String get farmingAssistantHello;
+
+  /// No description provided for @farmingAssistantIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask me about crops, diseases, equipment and farming practices.'**
+  String get farmingAssistantIntro;
+
+  /// No description provided for @farmingAssistantTry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try asking'**
+  String get farmingAssistantTry;
+
+  /// No description provided for @farmingAssistantAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask'**
+  String get farmingAssistantAsk;
+
+  /// No description provided for @farmingAssistantPromptDisease.
+  ///
+  /// In en, this message translates to:
+  /// **'How to control leaf spot disease?'**
+  String get farmingAssistantPromptDisease;
+
+  /// No description provided for @farmingAssistantPromptBanana.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell me about growing bananas'**
+  String get farmingAssistantPromptBanana;
+
+  /// No description provided for @farmingAssistantThinking.
+  ///
+  /// In en, this message translates to:
+  /// **'Thinking…'**
+  String get farmingAssistantThinking;
+
+  /// No description provided for @farmingAssistantHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Message Kheti Manu'**
+  String get farmingAssistantHint;
+
+  /// No description provided for @farmingAssistantSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get farmingAssistantSend;
+
+  /// No description provided for @farmingAssistantDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'AI answers can be wrong. Ask an officer when it matters.'**
+  String get farmingAssistantDisclaimer;
 }
 
 class _AppLocalizationsDelegate

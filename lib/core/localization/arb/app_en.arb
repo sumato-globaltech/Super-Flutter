@@ -1172,5 +1172,18 @@
   "cropDetectorPrevention": "Preventive measures",
   "cropDetectorOrganic": "Organic treatment",
   "cropDetectorChemical": "Chemical treatment",
-  "cropDetectorDisclaimer": "An AI result can be wrong. Ask an officer before treating your crop."
+  "cropDetectorDisclaimer": "An AI result can be wrong. Ask an officer before treating your crop.",
+
+  "farmingAssistantTitle": "AI Farming Assistant",
+  "@farmingAssistantTitle": { "description": "App bar title of the farming_assistant screen" },
+  "farmingAssistantHello": "Hello, I am Kheti Manu",
+  "farmingAssistantIntro": "Ask me about crops, diseases, equipment and farming practices.",
+  "farmingAssistantTry": "Try asking",
+  "farmingAssistantAsk": "Ask",
+  "farmingAssistantPromptDisease": "How to control leaf spot disease?",
+  "farmingAssistantPromptBanana": "Tell me about growing bananas",
+  "farmingAssistantThinking": "Thinking…",
+  "farmingAssistantHint": "Message Kheti Manu",
+  "farmingAssistantSend": "Send",
+  "farmingAssistantDisclaimer": "AI answers can be wrong. Ask an officer when it matters."
 }
