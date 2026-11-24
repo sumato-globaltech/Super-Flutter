@@ -113,8 +113,8 @@ class _CropsListViewState extends State<_CropsListView> {
                         l10n.all,
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: state.selectedType == null
-                              ? theme.colorScheme.secondary
-                              : theme.colorScheme.primary,
+                              ? theme.colorScheme.onPrimary
+                              : theme.colorScheme.onSurface,
                         ),
                       ),
                       onSelected: (_) {
@@ -137,8 +137,8 @@ class _CropsListViewState extends State<_CropsListView> {
                             label,
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: isSelected
-                                  ? theme.colorScheme.secondary
-                                  : theme.colorScheme.primary,
+                                  ? theme.colorScheme.onPrimary
+                                  : theme.colorScheme.onSurface,
                             ),
                           ),
                           onSelected: (_) {
