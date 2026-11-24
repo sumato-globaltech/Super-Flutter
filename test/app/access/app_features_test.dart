@@ -172,6 +172,7 @@ void main() {
         'profile',
         'farm_add_farm',
         'shipments_request_shipment',
+        'schemes_my_applications',
       ]);
     });
 

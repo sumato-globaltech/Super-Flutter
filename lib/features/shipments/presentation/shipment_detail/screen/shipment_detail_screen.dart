@@ -409,28 +409,28 @@ class _ShipmentDetailView extends StatelessWidget {
                                   ),
                               ],
                             ),
-                          TitleDetailsCard(
-                            title:
-                                l10n.shipmentsShipmentDetailRejectReason,
-                            text: shipmentDetails == null
-                                ? ''
-                                : shipmentDetails.rejectReason ?? '--',
-                            isTextLoading: shipmentDetails == null,
-                            iconData: PhosphorIconsRegular.note,
-                            accentColor: DesignColor.accentEnergy,
-                            isReadMore: true,
-                          ),
-                          TitleDetailsCard(
-                            title:
-                                l10n.shipmentsShipmentDetailCancelReason,
-                            text: shipmentDetails == null
-                                ? ''
-                                : shipmentDetails.cancelReason ?? '--',
-                            isTextLoading: shipmentDetails == null,
-                            iconData: PhosphorIconsRegular.note,
-                            accentColor: DesignColor.accentEnergy,
-                            isReadMore: true,
-                          ),
+                          if (shipmentDetails?.rejectReason != null)
+                            TitleDetailsCard(
+                              title: l10n.shipmentsShipmentDetailRejectReason,
+                              text: shipmentDetails == null
+                                  ? ''
+                                  : shipmentDetails.rejectReason ?? '--',
+                              isTextLoading: shipmentDetails == null,
+                              iconData: PhosphorIconsRegular.note,
+                              accentColor: DesignColor.accentEnergy,
+                              isReadMore: true,
+                            ),
+                          if (shipmentDetails?.cancelReason != null)
+                            TitleDetailsCard(
+                              title: l10n.shipmentsShipmentDetailCancelReason,
+                              text: shipmentDetails == null
+                                  ? ''
+                                  : shipmentDetails.cancelReason ?? '--',
+                              isTextLoading: shipmentDetails == null,
+                              iconData: PhosphorIconsRegular.note,
+                              accentColor: DesignColor.accentEnergy,
+                              isReadMore: true,
+                            ),
                           if (state.party != ShipmentParty.farmer)
                             TitleDetailsCard(
                               title: l10n.shipmentsFarmer,
