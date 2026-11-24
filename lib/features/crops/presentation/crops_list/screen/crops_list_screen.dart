@@ -82,8 +82,8 @@ class _CropsListViewState extends State<_CropsListView> {
                         onPressed: () {
                           _searchController.clear();
                           context.read<CropsListBloc>().add(
-                                const CropsListSearchChanged(''),
-                              );
+                            const CropsListSearchChanged(''),
+                          );
                         },
                       )
                     : null,
@@ -109,11 +109,16 @@ class _CropsListViewState extends State<_CropsListView> {
                   children: [
                     FilterChip(
                       selected: state.selectedType == null,
-                      label: Text(l10n.all),
+                      label: Text(
+                        l10n.all,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.secondary,
+                        ),
+                      ),
                       onSelected: (_) {
                         context.read<CropsListBloc>().add(
-                              const CropsListTypeSelected(null),
-                            );
+                          const CropsListTypeSelected(null),
+                        );
                       },
                     ),
                     const SizedBox(width: AppSpacing.xs),
@@ -129,10 +134,8 @@ class _CropsListViewState extends State<_CropsListView> {
                           label: Text(label),
                           onSelected: (_) {
                             context.read<CropsListBloc>().add(
-                                  CropsListTypeSelected(
-                                    isSelected ? null : type,
-                                  ),
-                                );
+                              CropsListTypeSelected(isSelected ? null : type),
+                            );
                           },
                         ),
                       );
@@ -177,8 +180,9 @@ class _CropsListViewState extends State<_CropsListView> {
                         Text(
                           l10n.cropRecommendationsSubtitle,
                           style: theme.textTheme.bodySmall?.copyWith(
-                            color: theme.textTheme.bodySmall?.color
-                                ?.withValues(alpha: 0.7),
+                            color: theme.textTheme.bodySmall?.color?.withValues(
+                              alpha: 0.7,
+                            ),
                           ),
                         ),
                       ],
@@ -199,8 +203,8 @@ class _CropsListViewState extends State<_CropsListView> {
               builder: (context, state) {
                 final bloc = context.read<CropsListBloc>();
                 return switch (state.status) {
-                  CropsListStatus.initial ||
-                  CropsListStatus.loading when state.items.isEmpty =>
+                  CropsListStatus.initial || CropsListStatus.loading
+                      when state.items.isEmpty =>
                     const Center(
                       child: Padding(
                         padding: EdgeInsets.all(32),
@@ -214,51 +218,50 @@ class _CropsListViewState extends State<_CropsListView> {
                       onRetry: () => bloc.add(const CropsListStarted()),
                     ),
                   _ when state.items.isEmpty => AppEmptyView(
-                      title: l10n.noCropsFound,
-                      message: l10n.tryAdjustingFilters,
-                    ),
+                    title: l10n.noCropsFound,
+                    message: l10n.tryAdjustingFilters,
+                  ),
                   _ => RefreshIndicator(
-                      onRefresh: () async {
-                        bloc.add(const CropsListRefreshed());
+                    onRefresh: () async {
+                      bloc.add(const CropsListRefreshed());
+                    },
+                    child: NotificationListener<ScrollUpdateNotification>(
+                      onNotification: (notification) {
+                        if (notification.metrics.extentAfter < 300) {
+                          bloc.add(const CropsListMoreRequested());
+                        }
+                        return false;
                       },
-                      child: NotificationListener<ScrollUpdateNotification>(
-                        onNotification: (notification) {
-                          if (notification.metrics.extentAfter < 300) {
-                            bloc.add(const CropsListMoreRequested());
-                          }
-                          return false;
-                        },
-                        child: ListView.separated(
-                          padding: const EdgeInsets.all(AppSpacing.md),
-                          itemCount:
-                              state.items.length + (state.loadingMore ? 1 : 0),
-                          separatorBuilder: (_, _) =>
-                              const SizedBox(height: AppSpacing.sm),
-                          itemBuilder: (context, index) {
-                            if (index >= state.items.length) {
-                              return const Center(
-                                child: Padding(
-                                  padding: EdgeInsets.all(16),
-                                  child: DesignProgress(),
-                                ),
-                              );
-                            }
-                            final crop = state.items[index];
-                            return _CropCard(
-                              crop: crop,
-                              onTap: () {
-                                if (crop.slug != null &&
-                                    crop.slug!.isNotEmpty) {
-                                  context.push(
-                                    CropsRouteNames.cropDetailFor(crop.slug!),
-                                  );
-                                }
-                              },
+                      child: ListView.separated(
+                        padding: const EdgeInsets.all(AppSpacing.md),
+                        itemCount:
+                            state.items.length + (state.loadingMore ? 1 : 0),
+                        separatorBuilder: (_, _) =>
+                            const SizedBox(height: AppSpacing.sm),
+                        itemBuilder: (context, index) {
+                          if (index >= state.items.length) {
+                            return const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(16),
+                                child: DesignProgress(),
+                              ),
                             );
-                          },
-                        ),
+                          }
+                          final crop = state.items[index];
+                          return _CropCard(
+                            crop: crop,
+                            onTap: () {
+                              if (crop.slug != null && crop.slug!.isNotEmpty) {
+                                context.push(
+                                  CropsRouteNames.cropDetailFor(crop.slug!),
+                                );
+                              }
+                            },
+                          );
+                        },
                       ),
                     ),
+                  ),
                 };
               },
             ),
@@ -327,8 +330,9 @@ class _CropCard extends StatelessWidget {
                     crop.scientificName!,
                     style: theme.textTheme.bodySmall?.copyWith(
                       fontStyle: FontStyle.italic,
-                      color: theme.textTheme.bodySmall?.color
-                          ?.withValues(alpha: 0.7),
+                      color: theme.textTheme.bodySmall?.color?.withValues(
+                        alpha: 0.7,
+                      ),
                     ),
                   ),
                 ] else if (crop.localName != null &&
@@ -337,8 +341,9 @@ class _CropCard extends StatelessWidget {
                   Text(
                     crop.localName!,
                     style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.textTheme.bodySmall?.color
-                          ?.withValues(alpha: 0.7),
+                      color: theme.textTheme.bodySmall?.color?.withValues(
+                        alpha: 0.7,
+                      ),
                     ),
                   ),
                 ],

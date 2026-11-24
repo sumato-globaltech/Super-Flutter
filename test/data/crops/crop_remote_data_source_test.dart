@@ -197,6 +197,31 @@ void main() {
     });
   });
 
+  group('getSowingMonths', () {
+    test('parses the months of a crop', () async {
+      when(
+        () => dio.get<dynamic>(
+          CropEndpoints.sowingMonths,
+          queryParameters: {'crop': 'ginger', 'district_id': 'd1'},
+        ),
+      ).thenAnswer(
+        (_) async => ok({
+          'success': true,
+          'data': [
+            {'number': 6, 'name': 'June'},
+          ],
+        }),
+      );
+
+      final months = await source.getSowingMonths(
+        crop: 'ginger',
+        districtId: 'd1',
+      );
+      expect(months.single.number, 6);
+      expect(months.single.name, 'June');
+    });
+  });
+
   group('getRecommendations', () {
     test('parses crop recommendations', () async {
       when(
@@ -219,6 +244,11 @@ void main() {
                 'crop': {'id': 'c1', 'name': 'Ginger', 'slug': 'ginger'},
                 'suitability': 'high',
                 'suitability_score': 95,
+                'sowing_window': {
+                  'label': 'Oct – Nov',
+                  'months': [10, 11],
+                  'source': 'crop',
+                },
                 'notes': ['Optimal season'],
               },
             ],
@@ -230,9 +260,17 @@ void main() {
         districtId: 'd1',
         sowingMonth: 11,
         areaHa: 2.0,
+        crops: ['ginger'],
       );
-      expect(result, isNotNull);
-      expect(result!.input?.district?.name, 'Kohima');
+      final query = verify(
+        () => dio.get<dynamic>(
+          CropEndpoints.recommendations,
+          queryParameters: captureAny(named: 'queryParameters'),
+        ),
+      ).captured.single as Map;
+      expect(query['crops[]'], ['ginger']);
+      expect(result!.results.first.sowingWindow, 'Oct – Nov');
+      expect(result.input?.district?.name, 'Kohima');
       expect(result.results, hasLength(1));
       expect(result.results.first.rank, 1);
       expect(result.results.first.crop?.name, 'Ginger');
