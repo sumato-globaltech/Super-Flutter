@@ -1580,4 +1580,64 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get supportNoReplies => 'No replies yet';
+
+  @override
+  String get productionTitle => 'Production';
+
+  @override
+  String get productionDetails => 'Summary';
+
+  @override
+  String get productionFinancialYear => 'Financial year';
+
+  @override
+  String get productionTotalTonnes => 'Total (tonnes)';
+
+  @override
+  String get productionMonth => 'Month';
+
+  @override
+  String get productionAllMonths => 'All months';
+
+  @override
+  String get productionCrop => 'Crop';
+
+  @override
+  String get productionAllCrops => 'All crops';
+
+  @override
+  String get productionByMonth => 'Tonnes by month';
+
+  @override
+  String get productionByCrop => 'By crop';
+
+  @override
+  String get productionEmpty => 'No production recorded';
+
+  @override
+  String productionTonnes(String amount) {
+    return '$amount tonnes';
+  }
+
+  @override
+  String productionRecords(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count records',
+      one: '1 record',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String productionDistricts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count districts',
+      one: '1 district',
+    );
+    return '$_temp0';
+  }
 }

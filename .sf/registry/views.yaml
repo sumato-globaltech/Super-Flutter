@@ -2,6 +2,27 @@
 # read them; edit with their --show, --hide, --label and --pair flags.
 version: 1
 views:
+  - bloc: ProductionBloc
+    feature: production
+    screen: production
+    call: getProduction
+    source_feature: production
+    model: ProductionInsightsModel
+    model_feature: production
+    show:
+      - financial_year
+      - total_tonnes
+    hide:
+      - month
+      - month_name
+    labels:
+      financial_year: Financial year
+      total_tonnes: Total (tonnes)
+    files:
+      lib/features/production/presentation/production/bloc/production_bloc.dart: 2e2eed684c977e1d
+      lib/features/production/presentation/production/bloc/production_event.dart: 4d61dc0a28cfb499
+      lib/features/production/presentation/production/bloc/production_state.dart: 5d371bdd10362e67
+      lib/features/production/presentation/production/screen/production_screen.dart: 9bf057a461ef059e
   - bloc: QueueSummaryBloc
     feature: help_desk
     screen: queue_summary

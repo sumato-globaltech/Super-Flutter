@@ -361,5 +361,19 @@
   "helpDeskQueueSummaryOpen": "Mis consultas abiertas",
   "helpDeskQueueSummaryOverdueFollowUps": "Mis seguimientos atrasados",
   "helpDeskQueueSummaryResolvedToday": "Resueltas hoy",
-  "helpDeskQueueSummaryUnassigned": "Esperando un agente"
+  "helpDeskQueueSummaryUnassigned": "Esperando un agente",
+  "productionMonth": "Mes",
+  "productionAllMonths": "Todos los meses",
+  "productionCrop": "Cultivo",
+  "productionAllCrops": "Todos los cultivos",
+  "productionByMonth": "Toneladas por mes",
+  "productionByCrop": "Por cultivo",
+  "productionEmpty": "No hay producción registrada",
+  "productionTonnes": "{amount} toneladas",
+  "productionRecords": "{count, plural, one{1 registro} other{{count} registros}}",
+  "productionDistricts": "{count, plural, one{1 distrito} other{{count} distritos}}",
+  "productionTitle": "Producción",
+  "productionDetails": "Resumen",
+  "productionFinancialYear": "Año fiscal",
+  "productionTotalTonnes": "Total (toneladas)"
 }

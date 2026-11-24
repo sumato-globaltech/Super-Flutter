@@ -881,5 +881,30 @@
   "supportCallBackDone": "Call back requested",
   "supportStatus": "Status",
   "supportReplies": "Replies",
-  "supportNoReplies": "No replies yet"
+  "supportNoReplies": "No replies yet",
+
+  "productionTitle": "Production",
+  "@productionTitle": { "description": "App bar title of the production screen" },
+
+  "productionDetails": "Summary",
+  "@productionDetails": { "description": "Title of the ProductionInsightsModel card" },
+
+  "productionFinancialYear": "Financial year",
+  "@productionFinancialYear": { "description": "Label of the financialYear row" },
+
+  "productionTotalTonnes": "Total (tonnes)",
+  "@productionTotalTonnes": { "description": "Label of the totalTonnes row" },
+  "productionMonth": "Month",
+  "productionAllMonths": "All months",
+  "productionCrop": "Crop",
+  "productionAllCrops": "All crops",
+  "productionByMonth": "Tonnes by month",
+  "productionByCrop": "By crop",
+  "productionEmpty": "No production recorded",
+  "productionTonnes": "{amount} tonnes",
+  "productionRecords": "{count, plural, one{1 record} other{{count} records}}",
+  "productionDistricts": "{count, plural, one{1 district} other{{count} districts}}",
+  "@productionTonnes": {"placeholders": {"amount": {"type": "String"}}},
+  "@productionRecords": {"placeholders": {"count": {"type": "int"}}},
+  "@productionDistricts": {"placeholders": {"count": {"type": "int"}}}
 }

@@ -7,6 +7,8 @@ import 'package:super_flutter/features/help_desk/routes/help_desk_route_names.da
 import 'package:super_flutter/features/help_desk/routes/help_desk_routes.dart';
 import 'package:super_flutter/features/market/routes/market_route_names.dart';
 import 'package:super_flutter/features/market/routes/market_routes.dart';
+import 'package:super_flutter/features/production/routes/production_route_names.dart';
+import 'package:super_flutter/features/production/routes/production_routes.dart';
 import 'package:super_flutter/features/schemes/routes/schemes_route_names.dart';
 import 'package:super_flutter/features/schemes/routes/schemes_routes.dart';
 import 'package:super_flutter/features/shipments/routes/shipments_route_names.dart';
@@ -21,4 +23,5 @@ Map<String, List<RouteBase>> appTabRoutes() => {
   ShipmentsRouteNames.root: buildShipmentsRoutes(),
   SchemesRouteNames.root: buildSchemesRoutes(),
   HelpDeskRouteNames.root: buildHelpDeskRoutes(),
+  ProductionRouteNames.root: buildProductionRoutes(),
 };

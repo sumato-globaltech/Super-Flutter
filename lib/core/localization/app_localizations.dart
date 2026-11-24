@@ -3067,6 +3067,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No replies yet'**
   String get supportNoReplies;
+
+  /// App bar title of the production screen
+  ///
+  /// In en, this message translates to:
+  /// **'Production'**
+  String get productionTitle;
+
+  /// Title of the ProductionInsightsModel card
+  ///
+  /// In en, this message translates to:
+  /// **'Summary'**
+  String get productionDetails;
+
+  /// Label of the financialYear row
+  ///
+  /// In en, this message translates to:
+  /// **'Financial year'**
+  String get productionFinancialYear;
+
+  /// Label of the totalTonnes row
+  ///
+  /// In en, this message translates to:
+  /// **'Total (tonnes)'**
+  String get productionTotalTonnes;
+
+  /// No description provided for @productionMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get productionMonth;
+
+  /// No description provided for @productionAllMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'All months'**
+  String get productionAllMonths;
+
+  /// No description provided for @productionCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop'**
+  String get productionCrop;
+
+  /// No description provided for @productionAllCrops.
+  ///
+  /// In en, this message translates to:
+  /// **'All crops'**
+  String get productionAllCrops;
+
+  /// No description provided for @productionByMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Tonnes by month'**
+  String get productionByMonth;
+
+  /// No description provided for @productionByCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'By crop'**
+  String get productionByCrop;
+
+  /// No description provided for @productionEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No production recorded'**
+  String get productionEmpty;
+
+  /// No description provided for @productionTonnes.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} tonnes'**
+  String productionTonnes(String amount);
+
+  /// No description provided for @productionRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{1 record} other{{count} records}}'**
+  String productionRecords(int count);
+
+  /// No description provided for @productionDistricts.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{1 district} other{{count} districts}}'**
+  String productionDistricts(int count);
 }
 
 class _AppLocalizationsDelegate

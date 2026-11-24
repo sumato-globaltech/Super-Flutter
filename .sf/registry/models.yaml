@@ -454,6 +454,89 @@ models:
         type: int
         nullable: true
     origin: generated
+  - name: ByCropModel
+    kind: model
+    feature: production
+    path: lib/data/production/model/production_insights_model.dart
+    import: package:super_flutter/data/production/model/production_insights_model.dart
+    fingerprint: '{crop:string,crop_id:string,districts:int,records:int,tonnes:string}'
+    fields:
+      - name: cropId
+        json_key: crop_id
+        type: String
+        nullable: true
+      - name: crop
+        json_key: crop
+        type: String
+        nullable: true
+      - name: records
+        json_key: records
+        type: int
+        nullable: true
+      - name: districts
+        json_key: districts
+        type: int
+        nullable: true
+      - name: tonnes
+        json_key: tonnes
+        type: String
+        nullable: true
+    origin: generated
+  - name: ByMonthModel
+    kind: model
+    feature: production
+    path: lib/data/production/model/production_insights_model.dart
+    import: package:super_flutter/data/production/model/production_insights_model.dart
+    fingerprint: '{month:int,name:string,tonnes:string}'
+    fields:
+      - name: month
+        json_key: month
+        type: int
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+      - name: tonnes
+        json_key: tonnes
+        type: String
+        nullable: true
+    origin: generated
+  - name: ProductionInsightsModel
+    kind: model
+    feature: production
+    path: lib/data/production/model/production_insights_model.dart
+    import: package:super_flutter/data/production/model/production_insights_model.dart
+    fingerprint: '{by_crop:[{crop:string,crop_id:string,districts:int,records:int,tonnes:string}],by_month:[{month:int,name:string,tonnes:string}],financial_year:string,month:int,month_name:string,total_tonnes:string}'
+    fields:
+      - name: financialYear
+        json_key: financial_year
+        type: String
+        nullable: true
+      - name: month
+        json_key: month
+        type: int
+        nullable: true
+      - name: monthName
+        json_key: month_name
+        type: String
+        nullable: true
+      - name: totalTonnes
+        json_key: total_tonnes
+        type: String
+        nullable: true
+      - name: byCrop
+        json_key: by_crop
+        type: List<ByCropModel>
+        nullable: true
+      - name: byMonth
+        json_key: by_month
+        type: List<ByMonthModel>
+        nullable: true
+    nested:
+      - ByCropModel
+      - ByMonthModel
+    origin: generated
   - name: DocumentModel
     kind: model
     feature: schemes

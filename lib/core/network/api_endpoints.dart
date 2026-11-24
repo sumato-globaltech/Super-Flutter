@@ -125,4 +125,6 @@ abstract final class ApiEndpoints {
   static const crops = '/api/v1/crops?per_page=100';
 
   static const queueSummary = '/api/v1/agent/queue-summary';
+
+  static const production = '/api/v1/production/insights';
 }

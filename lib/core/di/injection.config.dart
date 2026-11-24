@@ -61,6 +61,12 @@ import 'package:super_flutter/data/market/repositories/market_repository_impl.da
     as _i341;
 import 'package:super_flutter/data/market/sources/remote/market_remote_data_source.dart'
     as _i1002;
+import 'package:super_flutter/data/production/repositories/production_repository_impl.dart'
+    as _i142;
+import 'package:super_flutter/data/production/sources/local/production_local_data_source.dart'
+    as _i385;
+import 'package:super_flutter/data/production/sources/remote/production_remote_data_source.dart'
+    as _i480;
 import 'package:super_flutter/data/schemes/repositories/schemes_repository_impl.dart'
     as _i707;
 import 'package:super_flutter/data/schemes/sources/local/schemes_local_data_source.dart'
@@ -130,6 +136,8 @@ import 'package:super_flutter/features/market/presentation/market/bloc/market_bl
     as _i336;
 import 'package:super_flutter/features/market/presentation/market_prices/bloc/market_prices_bloc.dart'
     as _i688;
+import 'package:super_flutter/features/production/presentation/production/bloc/production_bloc.dart'
+    as _i477;
 import 'package:super_flutter/features/schemes/presentation/my_applications/bloc/my_applications_bloc.dart'
     as _i250;
 import 'package:super_flutter/features/schemes/presentation/scheme_detail/bloc/scheme_detail_bloc.dart'
@@ -167,6 +175,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i772.HelpDeskLocalDataSource>(
       () => _i772.HelpDeskLocalDataSource(),
+    );
+    gh.lazySingleton<_i385.ProductionLocalDataSource>(
+      () => _i385.ProductionLocalDataSource(),
     );
     gh.lazySingleton<_i1054.SchemesLocalDataSource>(
       () => _i1054.SchemesLocalDataSource(),
@@ -234,6 +245,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1002.MarketRemoteDataSource>(
       () => _i1002.MarketRemoteDataSource(gh<_i42.DioClient>()),
     );
+    gh.lazySingleton<_i480.ProductionRemoteDataSource>(
+      () => _i480.ProductionRemoteDataSource(gh<_i42.DioClient>()),
+    );
     gh.lazySingleton<_i474.SchemesRemoteDataSource>(
       () => _i474.SchemesRemoteDataSource(gh<_i42.DioClient>()),
     );
@@ -251,6 +265,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i247.TicketDetailBloc>(
       () => _i247.TicketDetailBloc(gh<_i975.SupportRemoteDataSource>()),
+    );
+    gh.factory<_i477.ProductionBloc>(
+      () => _i477.ProductionBloc(
+        gh<_i480.ProductionRemoteDataSource>(),
+        gh<_i444.CropRemoteDataSource>(),
+      ),
     );
     gh.lazySingleton<_i588.HelpDeskRepositoryImpl>(
       () => _i588.HelpDeskRepositoryImpl(
@@ -328,6 +348,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i929.NoticesBloc>(
       () => _i929.NoticesBloc(gh<_i390.CommunicationRemoteDataSource>()),
+    );
+    gh.lazySingleton<_i142.ProductionRepositoryImpl>(
+      () => _i142.ProductionRepositoryImpl(
+        gh<_i480.ProductionRemoteDataSource>(),
+        gh<_i385.ProductionLocalDataSource>(),
+      ),
     );
     gh.factory<_i664.FarmsBloc>(
       () => _i664.FarmsBloc(gh<_i773.FarmRemoteDataSource>()),

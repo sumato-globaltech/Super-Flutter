@@ -1587,4 +1587,64 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get supportNoReplies => 'Aún no hay respuestas';
+
+  @override
+  String get productionTitle => 'Producción';
+
+  @override
+  String get productionDetails => 'Resumen';
+
+  @override
+  String get productionFinancialYear => 'Año fiscal';
+
+  @override
+  String get productionTotalTonnes => 'Total (toneladas)';
+
+  @override
+  String get productionMonth => 'Mes';
+
+  @override
+  String get productionAllMonths => 'Todos los meses';
+
+  @override
+  String get productionCrop => 'Cultivo';
+
+  @override
+  String get productionAllCrops => 'Todos los cultivos';
+
+  @override
+  String get productionByMonth => 'Toneladas por mes';
+
+  @override
+  String get productionByCrop => 'Por cultivo';
+
+  @override
+  String get productionEmpty => 'No hay producción registrada';
+
+  @override
+  String productionTonnes(String amount) {
+    return '$amount toneladas';
+  }
+
+  @override
+  String productionRecords(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count registros',
+      one: '1 registro',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String productionDistricts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count distritos',
+      one: '1 distrito',
+    );
+    return '$_temp0';
+  }
 }
