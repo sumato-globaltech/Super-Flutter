@@ -3,6 +3,8 @@ import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.da
 import 'package:super_flutter/features/dashboard/routes/dashboard_routes.dart';
 import 'package:super_flutter/features/farm/routes/farm_route_names.dart';
 import 'package:super_flutter/features/farm/routes/farm_routes.dart';
+import 'package:super_flutter/features/help_desk/routes/help_desk_route_names.dart';
+import 'package:super_flutter/features/help_desk/routes/help_desk_routes.dart';
 import 'package:super_flutter/features/market/routes/market_route_names.dart';
 import 'package:super_flutter/features/market/routes/market_routes.dart';
 import 'package:super_flutter/features/schemes/routes/schemes_route_names.dart';
@@ -18,4 +20,5 @@ Map<String, List<RouteBase>> appTabRoutes() => {
   FarmRouteNames.farms: buildFarmRoutes(),
   ShipmentsRouteNames.root: buildShipmentsRoutes(),
   SchemesRouteNames.root: buildSchemesRoutes(),
+  HelpDeskRouteNames.root: buildHelpDeskRoutes(),
 };

@@ -11,6 +11,7 @@ import 'package:super_flutter/features/communication/routes/communication_routes
 import 'package:super_flutter/features/crops/routes/crops_routes.dart';
 import 'package:super_flutter/features/iot/routes/iot_routes.dart';
 import 'package:super_flutter/features/super_awesome/routes/super_awesome_routes.dart';
+import 'package:super_flutter/features/support/routes/support_routes.dart';
 import 'package:super_flutter/features/ui_gallery/routes/ui_gallery_routes.dart';
 
 // sf:feature-routes-imports:end
@@ -62,6 +63,7 @@ GoRouter createRouter({
       ...buildCropsRoutes(),
       ...buildIotRoutes(),
       ...buildSuperAwesomeRoutes(),
+      ...buildSupportRoutes(),
       ...buildUiGalleryRoutes(),
       // sf:feature-routes:end
     ]),

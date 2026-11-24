@@ -1472,4 +1472,85 @@ class AppLocalizationsEs extends AppLocalizations {
   String schemesUploadTitle(String document) {
     return '¿Subir $document?';
   }
+
+  @override
+  String get supportTitle => 'Help Desk';
+
+  @override
+  String get supportTicketDetailTitle => 'Ticket';
+
+  @override
+  String get supportCreateTicketTitle => 'New Ticket';
+
+  @override
+  String get helpDeskQueueSummaryTitle => 'Help Desk';
+
+  @override
+  String get supportList => 'Tickets';
+
+  @override
+  String get supportEmpty => 'No tickets yet';
+
+  @override
+  String get supportNumber => 'Number';
+
+  @override
+  String get supportSubject => 'Subject';
+
+  @override
+  String get supportCreatedAt => 'Asked on';
+
+  @override
+  String get supportTicketDetailDetails => 'Ticket Details';
+
+  @override
+  String get supportTicketDetailNumber => 'Number';
+
+  @override
+  String get supportTicketDetailSubject => 'Subject';
+
+  @override
+  String get supportTicketDetailQuestion => 'Question';
+
+  @override
+  String get supportTicketDetailOutcome => 'Outcome';
+
+  @override
+  String get supportTicketDetailCreatedAt => 'Asked on';
+
+  @override
+  String get supportTicketDetailResolvedAt => 'Resolved on';
+
+  @override
+  String get supportCreateTicketCategoryId => 'Category';
+
+  @override
+  String get supportCreateTicketSubject => 'Subject';
+
+  @override
+  String get supportCreateTicketQuestion => 'Question';
+
+  @override
+  String get supportCreateTicketCropId => 'Crop';
+
+  @override
+  String get supportCreateTicketPhoto => 'Photo';
+
+  @override
+  String get supportCreateTicketDone => 'Create Ticket created.';
+
+  @override
+  String get helpDeskQueueSummaryDetails => 'Queue Summary Details';
+
+  @override
+  String get helpDeskQueueSummaryOpen => 'My open tickets';
+
+  @override
+  String get helpDeskQueueSummaryOverdueFollowUps => 'My overdue follow-ups';
+
+  @override
+  String get helpDeskQueueSummaryResolvedToday => 'Resolved today';
+
+  @override
+  String get helpDeskQueueSummaryUnassigned => 'Waiting for an agent';
 }

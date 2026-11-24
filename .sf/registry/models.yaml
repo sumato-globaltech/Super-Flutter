@@ -430,6 +430,30 @@ models:
         type: String
         nullable: true
     origin: generated
+  - name: QueueSummaryModel
+    kind: model
+    feature: help_desk
+    path: lib/data/help_desk/model/queue_summary_model.dart
+    import: package:super_flutter/data/help_desk/model/queue_summary_model.dart
+    fingerprint: '{open:int,overdue_follow_ups:int,resolved_today:int,unassigned:int}'
+    fields:
+      - name: open
+        json_key: open
+        type: int
+        nullable: true
+      - name: overdueFollowUps
+        json_key: overdue_follow_ups
+        type: int
+        nullable: true
+      - name: resolvedToday
+        json_key: resolved_today
+        type: int
+        nullable: true
+      - name: unassigned
+        json_key: unassigned
+        type: int
+        nullable: true
+    origin: generated
   - name: DocumentModel
     kind: model
     feature: schemes
@@ -1124,4 +1148,154 @@ models:
         json_key: districts
         type: List<String>
         nullable: true
+    origin: generated
+  - name: CallCenterModel
+    kind: model
+    feature: support
+    path: lib/data/support/model/call_center_model.dart
+    import: package:super_flutter/data/support/model/call_center_model.dart
+    fingerprint: '{district:string,number:string}'
+    fields:
+      - name: district
+        json_key: district
+        type: String
+        nullable: true
+      - name: number
+        json_key: number
+        type: String
+        nullable: true
+    origin: generated
+  - name: CategoryModel
+    kind: model
+    feature: support
+    path: lib/data/support/model/category_model.dart
+    import: package:super_flutter/data/support/model/category_model.dart
+    fingerprint: '{id:string,name:string,slug:string,type:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: type
+        json_key: type
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+      - name: slug
+        json_key: slug
+        type: String
+        nullable: true
+    origin: generated
+  - name: PhotoModel
+    kind: model
+    feature: support
+    path: lib/data/support/model/ticket_model.dart
+    import: package:super_flutter/data/support/model/ticket_model.dart
+    fingerprint: '{created_at:datetime,id:string,mime_type:string,size:int,url:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: url
+        json_key: url
+        type: String
+        nullable: true
+      - name: mimeType
+        json_key: mime_type
+        type: String
+        nullable: true
+      - name: size
+        json_key: size
+        type: int
+        nullable: true
+      - name: createdAt
+        json_key: created_at
+        type: DateTime
+        nullable: true
+    origin: generated
+  - name: ReplyModel
+    kind: model
+    feature: support
+    path: lib/data/support/model/ticket_model.dart
+    import: package:super_flutter/data/support/model/ticket_model.dart
+    fingerprint: '{body:string,created_at:datetime,id:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: body
+        json_key: body
+        type: String
+        nullable: true
+      - name: createdAt
+        json_key: created_at
+        type: DateTime
+        nullable: true
+    origin: generated
+  - name: TicketModel
+    kind: model
+    feature: support
+    path: lib/data/support/model/ticket_model.dart
+    import: package:super_flutter/data/support/model/ticket_model.dart
+    fingerprint: '{category:{id:string,name:string},created_at:datetime,crop:{id:string,name:string},id:string,number:string,outcome:string,photos:[{created_at:datetime,id:string,mime_type:string,size:int,url:string}],question:string,replies:[{body:string,created_at:datetime,id:string}],resolved_at:datetime,status:{label:string,value:string},subject:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: number
+        json_key: number
+        type: String
+        nullable: true
+      - name: subject
+        json_key: subject
+        type: String
+        nullable: true
+      - name: status
+        json_key: status
+        type: StatusModel
+        nullable: true
+      - name: category
+        json_key: category
+        type: CategoryModel
+        nullable: true
+      - name: crop
+        json_key: crop
+        type: CropModel
+        nullable: true
+      - name: question
+        json_key: question
+        type: String
+        nullable: true
+      - name: outcome
+        json_key: outcome
+        type: String
+        nullable: true
+      - name: createdAt
+        json_key: created_at
+        type: DateTime
+        nullable: true
+      - name: resolvedAt
+        json_key: resolved_at
+        type: DateTime
+        nullable: true
+      - name: photos
+        json_key: photos
+        type: List<PhotoModel>
+        nullable: true
+      - name: replies
+        json_key: replies
+        type: List<ReplyModel>
+        nullable: true
+    nested:
+      - CategoryModel
+      - CropModel
+      - PhotoModel
+      - ReplyModel
+      - StatusModel
     origin: generated

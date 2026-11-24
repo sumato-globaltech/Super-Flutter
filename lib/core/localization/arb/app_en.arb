@@ -789,5 +789,86 @@
   "schemesNoApplications": "No applications yet",
   "schemesNoApplicationsMessage": "Open a scheme and tap Apply.",
   "schemesUploadTitle": "Upload {document}?",
-  "@schemesUploadTitle": {"placeholders": {"document": {"type": "String"}}}
+  "@schemesUploadTitle": {"placeholders": {"document": {"type": "String"}}},
+
+  "supportTitle": "Help Desk",
+  "@supportTitle": { "description": "App bar title of the support screen" },
+
+  "supportTicketDetailTitle": "Ticket",
+  "@supportTicketDetailTitle": { "description": "App bar title of the ticket_detail screen" },
+
+  "supportCreateTicketTitle": "New Ticket",
+  "@supportCreateTicketTitle": { "description": "App bar title of the create_ticket screen" },
+
+  "helpDeskQueueSummaryTitle": "Help Desk",
+  "@helpDeskQueueSummaryTitle": { "description": "App bar title of the queue_summary screen" },
+
+  "supportList": "Tickets",
+  "@supportList": { "description": "Title of the TicketModel list" },
+
+  "supportEmpty": "No tickets yet",
+  "@supportEmpty": { "description": "Shown when there is no TicketModel" },
+
+  "supportNumber": "Number",
+  "@supportNumber": { "description": "Label of the number row" },
+
+  "supportSubject": "Subject",
+  "@supportSubject": { "description": "Label of the subject row" },
+
+  "supportCreatedAt": "Asked on",
+  "@supportCreatedAt": { "description": "Label of the createdAt row" },
+
+  "supportTicketDetailDetails": "Ticket Details",
+  "@supportTicketDetailDetails": { "description": "Title of the TicketModel card" },
+
+  "supportTicketDetailNumber": "Number",
+  "@supportTicketDetailNumber": { "description": "Label of the number row" },
+
+  "supportTicketDetailSubject": "Subject",
+  "@supportTicketDetailSubject": { "description": "Label of the subject row" },
+
+  "supportTicketDetailQuestion": "Question",
+  "@supportTicketDetailQuestion": { "description": "Label of the question row" },
+
+  "supportTicketDetailOutcome": "Outcome",
+  "@supportTicketDetailOutcome": { "description": "Label of the outcome row" },
+
+  "supportTicketDetailCreatedAt": "Asked on",
+  "@supportTicketDetailCreatedAt": { "description": "Label of the createdAt row" },
+
+  "supportTicketDetailResolvedAt": "Resolved on",
+  "@supportTicketDetailResolvedAt": { "description": "Label of the resolvedAt row" },
+
+  "supportCreateTicketCategoryId": "Category",
+  "@supportCreateTicketCategoryId": { "description": "Label of the category_id input" },
+
+  "supportCreateTicketSubject": "Subject",
+  "@supportCreateTicketSubject": { "description": "Label of the subject input" },
+
+  "supportCreateTicketQuestion": "Question",
+  "@supportCreateTicketQuestion": { "description": "Label of the question input" },
+
+  "supportCreateTicketCropId": "Crop",
+  "@supportCreateTicketCropId": { "description": "Label of the crop_id input" },
+
+  "supportCreateTicketPhoto": "Photo",
+  "@supportCreateTicketPhoto": { "description": "Label of the photo input" },
+
+  "supportCreateTicketDone": "Create Ticket created.",
+  "@supportCreateTicketDone": { "description": "Shown when the create ticket form was sent" },
+
+  "helpDeskQueueSummaryDetails": "Queue Summary Details",
+  "@helpDeskQueueSummaryDetails": { "description": "Title of the QueueSummaryModel card" },
+
+  "helpDeskQueueSummaryOpen": "My open tickets",
+  "@helpDeskQueueSummaryOpen": { "description": "Label of the open row" },
+
+  "helpDeskQueueSummaryOverdueFollowUps": "My overdue follow-ups",
+  "@helpDeskQueueSummaryOverdueFollowUps": { "description": "Label of the overdueFollowUps row" },
+
+  "helpDeskQueueSummaryResolvedToday": "Resolved today",
+  "@helpDeskQueueSummaryResolvedToday": { "description": "Label of the resolvedToday row" },
+
+  "helpDeskQueueSummaryUnassigned": "Waiting for an agent",
+  "@helpDeskQueueSummaryUnassigned": { "description": "Label of the unassigned row" }
 }

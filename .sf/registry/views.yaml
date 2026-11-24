@@ -2,6 +2,28 @@
 # read them; edit with their --show, --hide, --label and --pair flags.
 version: 1
 views:
+  - bloc: QueueSummaryBloc
+    feature: help_desk
+    screen: queue_summary
+    call: getQueueSummary
+    source_feature: help_desk
+    model: QueueSummaryModel
+    model_feature: help_desk
+    show:
+      - open
+      - overdue_follow_ups
+      - resolved_today
+      - unassigned
+    labels:
+      open: My open tickets
+      overdue_follow_ups: My overdue follow-ups
+      resolved_today: Resolved today
+      unassigned: Waiting for an agent
+    files:
+      lib/features/help_desk/presentation/queue_summary/bloc/queue_summary_bloc.dart: c8bb4dc712c840db
+      lib/features/help_desk/presentation/queue_summary/bloc/queue_summary_event.dart: 59cb9097925176a7
+      lib/features/help_desk/presentation/queue_summary/bloc/queue_summary_state.dart: 19ddb21f9643575f
+      lib/features/help_desk/presentation/queue_summary/screen/queue_summary_screen.dart: e5e32e1a62ea20c0
   - bloc: SchemeDetailBloc
     feature: schemes
     screen: scheme_detail
@@ -159,3 +181,58 @@ views:
       lib/features/shipments/presentation/shipments/bloc/shipments_event.dart: 9b41a15bd3ef4a0e
       lib/features/shipments/presentation/shipments/bloc/shipments_state.dart: debf65a640de2c3c
       lib/features/shipments/presentation/shipments/screen/shipments_screen.dart: 14a16ddde1509a84
+  - bloc: SupportBloc
+    feature: support
+    screen: support
+    call: getTickets
+    source_feature: support
+    model: TicketModel
+    model_feature: support
+    list: true
+    paged: true
+    show:
+      - number
+      - subject
+      - created_at
+    hide:
+      - id
+      - question
+      - outcome
+      - resolved_at
+    labels:
+      created_at: Asked on
+    open: ticketDetail
+    files:
+      lib/features/support/presentation/support/bloc/support_bloc.dart: 915fa86a06b6d82f
+      lib/features/support/presentation/support/bloc/support_event.dart: 512fff3e259e07d5
+      lib/features/support/presentation/support/bloc/support_state.dart: 106fee7410a572ce
+      lib/features/support/presentation/support/screen/support_screen.dart: 4965875d61daa439
+  - bloc: TicketDetailBloc
+    feature: support
+    screen: ticket_detail
+    call: getTicket
+    source_feature: support
+    model: TicketModel
+    model_feature: support
+    ids:
+      - ticket
+    show:
+      - number
+      - subject
+      - question
+      - outcome
+      - created_at
+      - resolved_at
+    hide:
+      - id
+      - status
+      - category
+      - crop
+    labels:
+      created_at: Asked on
+      resolved_at: Resolved on
+    files:
+      lib/features/support/presentation/ticket_detail/bloc/ticket_detail_bloc.dart: e139de8378382f2e
+      lib/features/support/presentation/ticket_detail/bloc/ticket_detail_event.dart: b3cd09d665537108
+      lib/features/support/presentation/ticket_detail/bloc/ticket_detail_state.dart: f976b8f6962a882f
+      lib/features/support/presentation/ticket_detail/screen/ticket_detail_screen.dart: 097a238e99e8b62c

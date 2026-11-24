@@ -111,4 +111,18 @@ abstract final class ApiEndpoints {
   static const officerSchemes = '/api/v1/officer/schemes';
 
   static const schemeApplications = '/api/v1/farmer/applications';
+
+  static const callCenter = '/api/v1/farmer/call-center';
+
+  static const callBack = '/api/v1/farmer/call-back';
+
+  static const tickets = '/api/v1/farmer/tickets';
+
+  static String ticket(String ticket) => '/api/v1/farmer/tickets/$ticket';
+
+  static const ticketCategory = '/api/v1/categories/ticket_category';
+
+  static const crops = '/api/v1/crops?per_page=100';
+
+  static const queueSummary = '/api/v1/agent/queue-summary';
 }

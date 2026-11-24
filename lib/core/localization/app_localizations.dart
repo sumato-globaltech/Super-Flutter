@@ -2839,6 +2839,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Upload {document}?'**
   String schemesUploadTitle(String document);
+
+  /// App bar title of the support screen
+  ///
+  /// In en, this message translates to:
+  /// **'Help Desk'**
+  String get supportTitle;
+
+  /// App bar title of the ticket_detail screen
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket'**
+  String get supportTicketDetailTitle;
+
+  /// App bar title of the create_ticket screen
+  ///
+  /// In en, this message translates to:
+  /// **'New Ticket'**
+  String get supportCreateTicketTitle;
+
+  /// App bar title of the queue_summary screen
+  ///
+  /// In en, this message translates to:
+  /// **'Help Desk'**
+  String get helpDeskQueueSummaryTitle;
+
+  /// Title of the TicketModel list
+  ///
+  /// In en, this message translates to:
+  /// **'Tickets'**
+  String get supportList;
+
+  /// Shown when there is no TicketModel
+  ///
+  /// In en, this message translates to:
+  /// **'No tickets yet'**
+  String get supportEmpty;
+
+  /// Label of the number row
+  ///
+  /// In en, this message translates to:
+  /// **'Number'**
+  String get supportNumber;
+
+  /// Label of the subject row
+  ///
+  /// In en, this message translates to:
+  /// **'Subject'**
+  String get supportSubject;
+
+  /// Label of the createdAt row
+  ///
+  /// In en, this message translates to:
+  /// **'Asked on'**
+  String get supportCreatedAt;
+
+  /// Title of the TicketModel card
+  ///
+  /// In en, this message translates to:
+  /// **'Ticket Details'**
+  String get supportTicketDetailDetails;
+
+  /// Label of the number row
+  ///
+  /// In en, this message translates to:
+  /// **'Number'**
+  String get supportTicketDetailNumber;
+
+  /// Label of the subject row
+  ///
+  /// In en, this message translates to:
+  /// **'Subject'**
+  String get supportTicketDetailSubject;
+
+  /// Label of the question row
+  ///
+  /// In en, this message translates to:
+  /// **'Question'**
+  String get supportTicketDetailQuestion;
+
+  /// Label of the outcome row
+  ///
+  /// In en, this message translates to:
+  /// **'Outcome'**
+  String get supportTicketDetailOutcome;
+
+  /// Label of the createdAt row
+  ///
+  /// In en, this message translates to:
+  /// **'Asked on'**
+  String get supportTicketDetailCreatedAt;
+
+  /// Label of the resolvedAt row
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved on'**
+  String get supportTicketDetailResolvedAt;
+
+  /// Label of the category_id input
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get supportCreateTicketCategoryId;
+
+  /// Label of the subject input
+  ///
+  /// In en, this message translates to:
+  /// **'Subject'**
+  String get supportCreateTicketSubject;
+
+  /// Label of the question input
+  ///
+  /// In en, this message translates to:
+  /// **'Question'**
+  String get supportCreateTicketQuestion;
+
+  /// Label of the crop_id input
+  ///
+  /// In en, this message translates to:
+  /// **'Crop'**
+  String get supportCreateTicketCropId;
+
+  /// Label of the photo input
+  ///
+  /// In en, this message translates to:
+  /// **'Photo'**
+  String get supportCreateTicketPhoto;
+
+  /// Shown when the create ticket form was sent
+  ///
+  /// In en, this message translates to:
+  /// **'Create Ticket created.'**
+  String get supportCreateTicketDone;
+
+  /// Title of the QueueSummaryModel card
+  ///
+  /// In en, this message translates to:
+  /// **'Queue Summary Details'**
+  String get helpDeskQueueSummaryDetails;
+
+  /// Label of the open row
+  ///
+  /// In en, this message translates to:
+  /// **'My open tickets'**
+  String get helpDeskQueueSummaryOpen;
+
+  /// Label of the overdueFollowUps row
+  ///
+  /// In en, this message translates to:
+  /// **'My overdue follow-ups'**
+  String get helpDeskQueueSummaryOverdueFollowUps;
+
+  /// Label of the resolvedToday row
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved today'**
+  String get helpDeskQueueSummaryResolvedToday;
+
+  /// Label of the unassigned row
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for an agent'**
+  String get helpDeskQueueSummaryUnassigned;
 }
 
 class _AppLocalizationsDelegate
