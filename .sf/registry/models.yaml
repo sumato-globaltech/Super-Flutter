@@ -455,6 +455,84 @@ models:
         type: String
         nullable: true
     origin: generated
+  - name: CropAnalysisModel
+    kind: model
+    feature: crop_detector
+    path: lib/data/crop_detector/model/crop_analysis_model.dart
+    import: package:super_flutter/data/crop_detector/model/crop_analysis_model.dart
+    fingerprint: '{crop_health:string,crops:[string],diagnoses:[{chemical_treatment:string,description:string,images:[string],likelihood:string,name:string,organic_treatment:string,prevention:[string],scientific_name:string,signs:[string]}],distance:string,focus:string,notice:string}'
+    fields:
+      - name: cropHealth
+        json_key: crop_health
+        type: String
+        nullable: true
+      - name: crops
+        json_key: crops
+        type: List<String>
+        nullable: true
+      - name: focus
+        json_key: focus
+        type: String
+        nullable: true
+      - name: distance
+        json_key: distance
+        type: String
+        nullable: true
+      - name: notice
+        json_key: notice
+        type: String
+        nullable: true
+      - name: diagnoses
+        json_key: diagnoses
+        type: List<DiagnosModel>
+        nullable: true
+    nested:
+      - DiagnosModel
+    origin: generated
+  - name: DiagnosModel
+    kind: model
+    feature: crop_detector
+    path: lib/data/crop_detector/model/crop_analysis_model.dart
+    import: package:super_flutter/data/crop_detector/model/crop_analysis_model.dart
+    fingerprint: '{chemical_treatment:string,description:string,images:[string],likelihood:string,name:string,organic_treatment:string,prevention:[string],scientific_name:string,signs:[string]}'
+    fields:
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+      - name: scientificName
+        json_key: scientific_name
+        type: String
+        nullable: true
+      - name: likelihood
+        json_key: likelihood
+        type: String
+        nullable: true
+      - name: images
+        json_key: images
+        type: List<String>
+        nullable: true
+      - name: signs
+        json_key: signs
+        type: List<String>
+        nullable: true
+      - name: description
+        json_key: description
+        type: String
+        nullable: true
+      - name: prevention
+        json_key: prevention
+        type: List<String>
+        nullable: true
+      - name: organicTreatment
+        json_key: organic_treatment
+        type: String
+        nullable: true
+      - name: chemicalTreatment
+        json_key: chemical_treatment
+        type: String
+        nullable: true
+    origin: generated
   - name: ByCategoryModel
     kind: model
     feature: facilities

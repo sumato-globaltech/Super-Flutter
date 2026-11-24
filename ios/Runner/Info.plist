@@ -73,6 +73,8 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Take a photo of a crop to check its health.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Choose a photo to upload.</string>
 </dict>

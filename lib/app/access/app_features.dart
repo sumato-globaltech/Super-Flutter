@@ -2,6 +2,7 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/domain/auth/entities/access_policy.dart';
 import 'package:super_flutter/domain/auth/entities/access_rule.dart';
+import 'package:super_flutter/features/crop_detector/routes/crop_detector_route_names.dart';
 import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
 import 'package:super_flutter/features/facilities/routes/facilities_route_names.dart';
 import 'package:super_flutter/features/farm/routes/farm_route_names.dart';
@@ -234,6 +235,13 @@ final appFeatures = FeatureRegistry([
     title: _facilities,
     icon: PhosphorIconsRegular.warehouse,
   ),
+  const AppFeature(
+    id: 'crop_detector',
+    path: CropDetectorRouteNames.root,
+    rule: AccessRule.permission(Permissions.cropDetectorUse),
+    title: _cropDetector,
+    icon: PhosphorIconsRegular.scan,
+  ),
 ]);
 
 const _farmer = AccessRule.all([
@@ -279,3 +287,5 @@ String _schemesMyApplications(AppLocalizations l10n) =>
 String _meetings(AppLocalizations l10n) => l10n.meetingsTitle;
 
 String _facilities(AppLocalizations l10n) => l10n.facilitiesTitle;
+
+String _cropDetector(AppLocalizations l10n) => l10n.cropDetectorTitle;

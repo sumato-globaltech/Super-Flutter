@@ -3775,6 +3775,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{working} of {total} operational'**
   String facilitiesWorking(int working, int total);
+
+  /// App bar title of the crop_detector screen
+  ///
+  /// In en, this message translates to:
+  /// **'AI Crop Detector'**
+  String get cropDetectorTitle;
+
+  /// No description provided for @cropDetectorGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery'**
+  String get cropDetectorGallery;
+
+  /// No description provided for @cropDetectorCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get cropDetectorCamera;
+
+  /// No description provided for @cropDetectorAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan again'**
+  String get cropDetectorAgain;
+
+  /// No description provided for @cropDetectorNoAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow access to the camera or photos in Settings'**
+  String get cropDetectorNoAccess;
+
+  /// No description provided for @cropDetectorGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan a crop'**
+  String get cropDetectorGuide;
+
+  /// No description provided for @cropDetectorGuideLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get cropDetectorGuideLight;
+
+  /// No description provided for @cropDetectorGuideLightText.
+  ///
+  /// In en, this message translates to:
+  /// **'Use good natural light and keep the plant in focus'**
+  String get cropDetectorGuideLightText;
+
+  /// No description provided for @cropDetectorGuideFocus.
+  ///
+  /// In en, this message translates to:
+  /// **'Subject'**
+  String get cropDetectorGuideFocus;
+
+  /// No description provided for @cropDetectorGuideFocusText.
+  ///
+  /// In en, this message translates to:
+  /// **'Show one plant and avoid a busy background'**
+  String get cropDetectorGuideFocusText;
+
+  /// No description provided for @cropDetectorGuidePrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Your photo'**
+  String get cropDetectorGuidePrivacy;
+
+  /// No description provided for @cropDetectorGuidePrivacyText.
+  ///
+  /// In en, this message translates to:
+  /// **'It is sent to Plantix to be checked'**
+  String get cropDetectorGuidePrivacyText;
+
+  /// No description provided for @cropDetectorAnalysing.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking the crop. This may take a moment.'**
+  String get cropDetectorAnalysing;
+
+  /// No description provided for @cropDetectorResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Result'**
+  String get cropDetectorResult;
+
+  /// No description provided for @cropDetectorHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop health'**
+  String get cropDetectorHealth;
+
+  /// No description provided for @cropDetectorCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop'**
+  String get cropDetectorCrop;
+
+  /// No description provided for @cropDetectorPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo quality'**
+  String get cropDetectorPhoto;
+
+  /// No description provided for @cropDetectorFocus.
+  ///
+  /// In en, this message translates to:
+  /// **'Focus'**
+  String get cropDetectorFocus;
+
+  /// No description provided for @cropDetectorDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance'**
+  String get cropDetectorDistance;
+
+  /// No description provided for @cropDetectorNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get cropDetectorNotice;
+
+  /// No description provided for @cropDetectorNoDiagnosis.
+  ///
+  /// In en, this message translates to:
+  /// **'No diagnosis was found for this photo'**
+  String get cropDetectorNoDiagnosis;
+
+  /// No description provided for @cropDetectorUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown diagnosis'**
+  String get cropDetectorUnknown;
+
+  /// No description provided for @cropDetectorLikelihood.
+  ///
+  /// In en, this message translates to:
+  /// **'Likelihood'**
+  String get cropDetectorLikelihood;
+
+  /// No description provided for @cropDetectorSimilar.
+  ///
+  /// In en, this message translates to:
+  /// **'Similar cases'**
+  String get cropDetectorSimilar;
+
+  /// No description provided for @cropDetectorSigns.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick signs'**
+  String get cropDetectorSigns;
+
+  /// No description provided for @cropDetectorDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get cropDetectorDescription;
+
+  /// No description provided for @cropDetectorPrevention.
+  ///
+  /// In en, this message translates to:
+  /// **'Preventive measures'**
+  String get cropDetectorPrevention;
+
+  /// No description provided for @cropDetectorOrganic.
+  ///
+  /// In en, this message translates to:
+  /// **'Organic treatment'**
+  String get cropDetectorOrganic;
+
+  /// No description provided for @cropDetectorChemical.
+  ///
+  /// In en, this message translates to:
+  /// **'Chemical treatment'**
+  String get cropDetectorChemical;
+
+  /// No description provided for @cropDetectorDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'An AI result can be wrong. Ask an officer before treating your crop.'**
+  String get cropDetectorDisclaimer;
 }
 
 class _AppLocalizationsDelegate

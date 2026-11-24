@@ -1970,4 +1970,101 @@ class AppLocalizationsEs extends AppLocalizations {
   String facilitiesWorking(int working, int total) {
     return '$working de $total en funcionamiento';
   }
+
+  @override
+  String get cropDetectorTitle => 'Detector de cultivos IA';
+
+  @override
+  String get cropDetectorGallery => 'Galería';
+
+  @override
+  String get cropDetectorCamera => 'Cámara';
+
+  @override
+  String get cropDetectorAgain => 'Escanear otra vez';
+
+  @override
+  String get cropDetectorNoAccess =>
+      'Permite el acceso a la cámara o las fotos en Ajustes';
+
+  @override
+  String get cropDetectorGuide => 'Escanea un cultivo';
+
+  @override
+  String get cropDetectorGuideLight => 'Luz';
+
+  @override
+  String get cropDetectorGuideLightText =>
+      'Usa buena luz natural y mantén la planta enfocada';
+
+  @override
+  String get cropDetectorGuideFocus => 'Sujeto';
+
+  @override
+  String get cropDetectorGuideFocusText =>
+      'Muestra una planta y evita fondos recargados';
+
+  @override
+  String get cropDetectorGuidePrivacy => 'Tu foto';
+
+  @override
+  String get cropDetectorGuidePrivacyText =>
+      'Se envía a Plantix para analizarla';
+
+  @override
+  String get cropDetectorAnalysing =>
+      'Analizando el cultivo. Puede tardar un momento.';
+
+  @override
+  String get cropDetectorResult => 'Resultado';
+
+  @override
+  String get cropDetectorHealth => 'Salud del cultivo';
+
+  @override
+  String get cropDetectorCrop => 'Cultivo';
+
+  @override
+  String get cropDetectorPhoto => 'Calidad de la foto';
+
+  @override
+  String get cropDetectorFocus => 'Enfoque';
+
+  @override
+  String get cropDetectorDistance => 'Distancia';
+
+  @override
+  String get cropDetectorNotice => 'Nota';
+
+  @override
+  String get cropDetectorNoDiagnosis =>
+      'No se encontró ningún diagnóstico para esta foto';
+
+  @override
+  String get cropDetectorUnknown => 'Diagnóstico desconocido';
+
+  @override
+  String get cropDetectorLikelihood => 'Probabilidad';
+
+  @override
+  String get cropDetectorSimilar => 'Casos similares';
+
+  @override
+  String get cropDetectorSigns => 'Signos';
+
+  @override
+  String get cropDetectorDescription => 'Descripción';
+
+  @override
+  String get cropDetectorPrevention => 'Medidas preventivas';
+
+  @override
+  String get cropDetectorOrganic => 'Tratamiento orgánico';
+
+  @override
+  String get cropDetectorChemical => 'Tratamiento químico';
+
+  @override
+  String get cropDetectorDisclaimer =>
+      'Un resultado de IA puede fallar. Consulta a un técnico antes de tratar tu cultivo.';
 }

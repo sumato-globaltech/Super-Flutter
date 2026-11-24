@@ -23,6 +23,7 @@ abstract final class Permissions {
   static const helpdeskManage = 'helpdesk.manage';
   static const noticesManage = 'notices.manage';
   static const alertsManage = 'alerts.manage';
+  static const cropDetectorUse = 'crop_detector.use';
   static const shipmentsRequest = 'shipments.request';
   static const shipmentsHandle = 'shipments.handle';
   static const shipmentsDrive = 'shipments.drive';

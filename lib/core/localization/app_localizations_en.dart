@@ -1963,4 +1963,100 @@ class AppLocalizationsEn extends AppLocalizations {
   String facilitiesWorking(int working, int total) {
     return '$working of $total operational';
   }
+
+  @override
+  String get cropDetectorTitle => 'AI Crop Detector';
+
+  @override
+  String get cropDetectorGallery => 'Gallery';
+
+  @override
+  String get cropDetectorCamera => 'Camera';
+
+  @override
+  String get cropDetectorAgain => 'Scan again';
+
+  @override
+  String get cropDetectorNoAccess =>
+      'Allow access to the camera or photos in Settings';
+
+  @override
+  String get cropDetectorGuide => 'Scan a crop';
+
+  @override
+  String get cropDetectorGuideLight => 'Light';
+
+  @override
+  String get cropDetectorGuideLightText =>
+      'Use good natural light and keep the plant in focus';
+
+  @override
+  String get cropDetectorGuideFocus => 'Subject';
+
+  @override
+  String get cropDetectorGuideFocusText =>
+      'Show one plant and avoid a busy background';
+
+  @override
+  String get cropDetectorGuidePrivacy => 'Your photo';
+
+  @override
+  String get cropDetectorGuidePrivacyText =>
+      'It is sent to Plantix to be checked';
+
+  @override
+  String get cropDetectorAnalysing =>
+      'Checking the crop. This may take a moment.';
+
+  @override
+  String get cropDetectorResult => 'Result';
+
+  @override
+  String get cropDetectorHealth => 'Crop health';
+
+  @override
+  String get cropDetectorCrop => 'Crop';
+
+  @override
+  String get cropDetectorPhoto => 'Photo quality';
+
+  @override
+  String get cropDetectorFocus => 'Focus';
+
+  @override
+  String get cropDetectorDistance => 'Distance';
+
+  @override
+  String get cropDetectorNotice => 'Note';
+
+  @override
+  String get cropDetectorNoDiagnosis => 'No diagnosis was found for this photo';
+
+  @override
+  String get cropDetectorUnknown => 'Unknown diagnosis';
+
+  @override
+  String get cropDetectorLikelihood => 'Likelihood';
+
+  @override
+  String get cropDetectorSimilar => 'Similar cases';
+
+  @override
+  String get cropDetectorSigns => 'Quick signs';
+
+  @override
+  String get cropDetectorDescription => 'Description';
+
+  @override
+  String get cropDetectorPrevention => 'Preventive measures';
+
+  @override
+  String get cropDetectorOrganic => 'Organic treatment';
+
+  @override
+  String get cropDetectorChemical => 'Chemical treatment';
+
+  @override
+  String get cropDetectorDisclaimer =>
+      'An AI result can be wrong. Ask an officer before treating your crop.';
 }

@@ -176,4 +176,6 @@ abstract final class ApiEndpoints {
   static const facilities = '/api/v1/facilities';
 
   static const facilityStats = '/api/v1/facilities/stats';
+
+  static const cropAnalysis = '/api/v1/crop-detector';
 }

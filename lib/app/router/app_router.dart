@@ -9,6 +9,7 @@ import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.da
 import 'package:super_flutter/features/admin_communication/routes/admin_communication_routes.dart';
 import 'package:super_flutter/features/auth/routes/auth_routes.dart';
 import 'package:super_flutter/features/communication/routes/communication_routes.dart';
+import 'package:super_flutter/features/crop_detector/routes/crop_detector_routes.dart';
 import 'package:super_flutter/features/crops/routes/crops_routes.dart';
 import 'package:super_flutter/features/facilities/routes/facilities_routes.dart';
 import 'package:super_flutter/features/iot/routes/iot_routes.dart';
@@ -65,6 +66,7 @@ GoRouter createRouter({
       ...buildAdminCommunicationRoutes(),
       ...buildAuthRoutes(),
       ...buildCommunicationRoutes(),
+      ...buildCropDetectorRoutes(),
       ...buildCropsRoutes(),
       ...buildFacilitiesRoutes(),
       ...buildIotRoutes(),

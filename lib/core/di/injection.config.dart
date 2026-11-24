@@ -28,7 +28,7 @@ import 'package:super_flutter/core/storage/local_storage.dart' as _i635;
 import 'package:super_flutter/core/storage/secure_storage.dart' as _i491;
 import 'package:super_flutter/core/storage/storage_service.dart' as _i407;
 import 'package:super_flutter/data/admin_communication/repositories/admin_communication_repository_impl.dart'
-    as _i1055;
+    as _i1056;
 import 'package:super_flutter/data/admin_communication/sources/local/admin_communication_local_data_source.dart'
     as _i466;
 import 'package:super_flutter/data/admin_communication/sources/remote/admin_communication_remote_data_source.dart'
@@ -45,6 +45,12 @@ import 'package:super_flutter/data/communication/sources/local/communication_loc
     as _i940;
 import 'package:super_flutter/data/communication/sources/remote/communication_remote_data_source.dart'
     as _i390;
+import 'package:super_flutter/data/crop_detector/repositories/crop_detector_repository_impl.dart'
+    as _i264;
+import 'package:super_flutter/data/crop_detector/sources/local/crop_detector_local_data_source.dart'
+    as _i223;
+import 'package:super_flutter/data/crop_detector/sources/remote/crop_detector_remote_data_source.dart'
+    as _i981;
 import 'package:super_flutter/data/crops/repositories/crop_repository_impl.dart'
     as _i468;
 import 'package:super_flutter/data/crops/sources/remote/crop_remote_data_source.dart'
@@ -148,6 +154,8 @@ import 'package:super_flutter/features/communication/presentation/notice_detail/
     as _i437;
 import 'package:super_flutter/features/communication/presentation/notices/bloc/notices_bloc.dart'
     as _i929;
+import 'package:super_flutter/features/crop_detector/presentation/crop_detector/bloc/crop_detector_bloc.dart'
+    as _i1055;
 import 'package:super_flutter/features/crops/presentation/crop_detail/bloc/crop_detail_bloc.dart'
     as _i213;
 import 'package:super_flutter/features/crops/presentation/crop_recommendations/bloc/crop_recommendations_bloc.dart'
@@ -222,6 +230,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i940.CommunicationLocalDataSource>(
       () => _i940.CommunicationLocalDataSource(),
     );
+    gh.lazySingleton<_i223.CropDetectorLocalDataSource>(
+      () => _i223.CropDetectorLocalDataSource(),
+    );
     gh.lazySingleton<_i1048.FacilitiesLocalDataSource>(
       () => _i1048.FacilitiesLocalDataSource(),
     );
@@ -291,6 +302,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i390.CommunicationRemoteDataSource>(
       () => _i390.CommunicationRemoteDataSource(gh<_i42.DioClient>()),
     );
+    gh.lazySingleton<_i981.CropDetectorRemoteDataSource>(
+      () => _i981.CropDetectorRemoteDataSource(gh<_i42.DioClient>()),
+    );
     gh.lazySingleton<_i444.CropRemoteDataSource>(
       () => _i444.CropRemoteDataSource(gh<_i42.DioClient>()),
     );
@@ -341,6 +355,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i247.TicketDetailBloc>(
       () => _i247.TicketDetailBloc(gh<_i975.SupportRemoteDataSource>()),
+    );
+    gh.factory<_i1055.CropDetectorBloc>(
+      () => _i1055.CropDetectorBloc(gh<_i981.CropDetectorRemoteDataSource>()),
     );
     gh.lazySingleton<_i849.MeetingsRepositoryImpl>(
       () => _i849.MeetingsRepositoryImpl(
@@ -504,6 +521,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i299.ShipmentsLocalDataSource>(),
       ),
     );
+    gh.lazySingleton<_i264.CropDetectorRepositoryImpl>(
+      () => _i264.CropDetectorRepositoryImpl(
+        gh<_i981.CropDetectorRemoteDataSource>(),
+        gh<_i223.CropDetectorLocalDataSource>(),
+      ),
+    );
     gh.factory<_i336.MarketBloc>(
       () => _i336.MarketBloc(gh<_i1002.MarketRemoteDataSource>()),
     );
@@ -519,8 +542,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i773.FarmRemoteDataSource>(),
       ),
     );
-    gh.lazySingleton<_i1055.AdminCommunicationRepositoryImpl>(
-      () => _i1055.AdminCommunicationRepositoryImpl(
+    gh.lazySingleton<_i1056.AdminCommunicationRepositoryImpl>(
+      () => _i1056.AdminCommunicationRepositoryImpl(
         gh<_i414.AdminCommunicationRemoteDataSource>(),
         gh<_i466.AdminCommunicationLocalDataSource>(),
       ),
