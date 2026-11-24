@@ -133,29 +133,6 @@ views:
       lib/features/production/presentation/production/bloc/production_event.dart: 4d61dc0a28cfb499
       lib/features/production/presentation/production/bloc/production_state.dart: 5d371bdd10362e67
       lib/features/production/presentation/production/screen/production_screen.dart: 9bf057a461ef059e
-  - bloc: PublicationsBloc
-    feature: publications
-    screen: publications
-    call: getPublications
-    source_feature: publications
-    model: PublicationModel
-    model_feature: publications
-    list: true
-    paged: true
-    show:
-      - title
-      - summary
-    hide:
-      - id
-      - left_text
-      - right_text
-      - cover_url
-      - pdf_url
-    files:
-      lib/features/publications/presentation/publications/bloc/publications_bloc.dart: 396127edf4ef1632
-      lib/features/publications/presentation/publications/bloc/publications_event.dart: 4ddc0310756c76ca
-      lib/features/publications/presentation/publications/bloc/publications_state.dart: 5eeee8de8a6508b9
-      lib/features/publications/presentation/publications/screen/publications_screen.dart: ec4df36565d81d38
   - bloc: QueueSummaryBloc
     feature: help_desk
     screen: queue_summary

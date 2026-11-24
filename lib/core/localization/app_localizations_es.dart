@@ -1871,9 +1871,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get profileChangePassword => 'Cambiar contraseña';
 
   @override
-  String get publicationsTitle => 'Publicaciones';
-
-  @override
   String get meetingsTitle => 'Reuniones';
 
   @override
@@ -1881,15 +1878,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get facilitiesFacilityStatsTitle => 'Estadísticas';
-
-  @override
-  String get publicationsList => 'Publications';
-
-  @override
-  String get publicationsEmpty => 'Aún no hay publicaciones';
-
-  @override
-  String get publicationsSummary => 'Summary';
 
   @override
   String get meetingsList => 'Meetings';
@@ -1923,9 +1911,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get facilitiesFacilityStatsOperational => 'En funcionamiento';
-
-  @override
-  String get publicationsOpen => 'Abrir PDF';
 
   @override
   String get meetingsChoose => 'Elige un distrito para ver sus reuniones';

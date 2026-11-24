@@ -171,8 +171,6 @@ abstract final class ApiEndpoints {
 
   static const facilityTypes = '/api/v1/categories/facility_type';
 
-  static const publications = '/api/v1/publications';
-
   static const meetings = '/api/v1/meetings';
 
   static const facilities = '/api/v1/facilities';

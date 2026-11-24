@@ -6,7 +6,6 @@ import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.da
 import 'package:super_flutter/features/facilities/routes/facilities_route_names.dart';
 import 'package:super_flutter/features/farm/routes/farm_route_names.dart';
 import 'package:super_flutter/features/meetings/routes/meetings_route_names.dart';
-import 'package:super_flutter/features/publications/routes/publications_route_names.dart';
 import 'package:super_flutter/features/schemes/routes/schemes_route_names.dart';
 import 'package:super_flutter/features/shipments/routes/shipments_route_names.dart';
 
@@ -222,13 +221,6 @@ final appFeatures = FeatureRegistry([
     icon: PhosphorIconsRegular.squaresFour,
   ),
   const AppFeature(
-    id: 'publications',
-    path: PublicationsRouteNames.root,
-    rule: AccessRule.public(),
-    title: _publications,
-    icon: PhosphorIconsRegular.books,
-  ),
-  const AppFeature(
     id: 'meetings',
     path: MeetingsRouteNames.root,
     rule: AccessRule.public(),
@@ -283,8 +275,6 @@ String _schemesSchemeDetail(AppLocalizations l10n) =>
 
 String _schemesMyApplications(AppLocalizations l10n) =>
     l10n.schemesMyApplicationsTitle;
-
-String _publications(AppLocalizations l10n) => l10n.publicationsTitle;
 
 String _meetings(AppLocalizations l10n) => l10n.meetingsTitle;
 

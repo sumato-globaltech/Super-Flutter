@@ -1079,9 +1079,6 @@
   "profileVerifyAgain": "You are verified. Changing your details may mean you need verifying again.",
   "profileChangePassword": "Change password",
 
-  "publicationsTitle": "Publications",
-  "@publicationsTitle": { "description": "App bar title of the publications screen" },
-
   "meetingsTitle": "Meetings",
   "@meetingsTitle": { "description": "App bar title of the meetings screen" },
 
@@ -1090,15 +1087,6 @@
 
   "facilitiesFacilityStatsTitle": "Statistics",
   "@facilitiesFacilityStatsTitle": { "description": "App bar title of the facility_stats screen" },
-
-  "publicationsList": "Publications",
-  "@publicationsList": { "description": "Title of the PublicationModel list" },
-
-  "publicationsEmpty": "No publications yet",
-  "@publicationsEmpty": { "description": "Shown when there is no PublicationModel" },
-
-  "publicationsSummary": "Summary",
-  "@publicationsSummary": { "description": "Label of the summary row" },
 
   "meetingsList": "Meetings",
   "@meetingsList": { "description": "Title of the MeetingModel list" },
@@ -1132,7 +1120,6 @@
 
   "facilitiesFacilityStatsOperational": "Operational",
   "@facilitiesFacilityStatsOperational": { "description": "Label of the operational row" },
-  "publicationsOpen": "Open PDF",
   "meetingsChoose": "Choose a district to see its meetings",
   "meetingsStatus": "Status",
   "meetingsRescheduled": "moved from {date}",

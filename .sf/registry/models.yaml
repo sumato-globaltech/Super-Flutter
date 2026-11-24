@@ -1009,42 +1009,6 @@ models:
         type: String
         nullable: true
     origin: generated
-  - name: PublicationModel
-    kind: model
-    feature: publications
-    path: lib/data/publications/model/publication_model.dart
-    import: package:super_flutter/data/publications/model/publication_model.dart
-    fingerprint: '{cover_url:string,id:string,left_text:string,pdf_url:string,right_text:string,summary:string,title:string}'
-    fields:
-      - name: id
-        json_key: id
-        type: String
-        nullable: true
-      - name: title
-        json_key: title
-        type: String
-        nullable: true
-      - name: summary
-        json_key: summary
-        type: String
-        nullable: true
-      - name: leftText
-        json_key: left_text
-        type: String
-        nullable: true
-      - name: rightText
-        json_key: right_text
-        type: String
-        nullable: true
-      - name: coverUrl
-        json_key: cover_url
-        type: String
-        nullable: true
-      - name: pdfUrl
-        json_key: pdf_url
-        type: String
-        nullable: true
-    origin: generated
   - name: DocumentModel
     kind: model
     feature: schemes

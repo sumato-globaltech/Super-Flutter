@@ -1864,9 +1864,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileChangePassword => 'Change password';
 
   @override
-  String get publicationsTitle => 'Publications';
-
-  @override
   String get meetingsTitle => 'Meetings';
 
   @override
@@ -1874,15 +1871,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get facilitiesFacilityStatsTitle => 'Statistics';
-
-  @override
-  String get publicationsList => 'Publications';
-
-  @override
-  String get publicationsEmpty => 'No publications yet';
-
-  @override
-  String get publicationsSummary => 'Summary';
 
   @override
   String get meetingsList => 'Meetings';
@@ -1916,9 +1904,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get facilitiesFacilityStatsOperational => 'Operational';
-
-  @override
-  String get publicationsOpen => 'Open PDF';
 
   @override
   String get meetingsChoose => 'Choose a district to see its meetings';

@@ -10,6 +10,7 @@ import 'package:super_flutter/core/error/exceptions/validation_exception.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/core/network/paged.dart';
 import 'package:super_flutter/core/ui/theme/app_theme.dart';
+import 'package:super_flutter/core/ui/widgets/app_network_image.dart';
 import 'package:super_flutter/data/facilities/model/facility_model.dart';
 import 'package:super_flutter/data/facilities/model/facility_stats_model.dart';
 import 'package:super_flutter/data/facilities/sources/remote/facilities_remote_data_source.dart';
@@ -19,8 +20,6 @@ import 'package:super_flutter/data/meetings/sources/remote/meetings_remote_data_
 import 'package:super_flutter/data/profile/model/farmer_profile_model.dart'
     show FarmerProfileModel;
 import 'package:super_flutter/data/profile/sources/remote/profile_remote_data_source.dart';
-import 'package:super_flutter/data/publications/model/publication_model.dart';
-import 'package:super_flutter/data/publications/sources/remote/publications_remote_data_source.dart';
 import 'package:super_flutter/data/support/model/category_model.dart'
     as options;
 import 'package:super_flutter/domain/auth/entities/user.dart';
@@ -33,15 +32,10 @@ import 'package:super_flutter/features/facilities/routes/facilities_routes.dart'
 import 'package:super_flutter/features/meetings/presentation/meetings/bloc/meetings_bloc.dart';
 import 'package:super_flutter/features/meetings/routes/meetings_route_names.dart';
 import 'package:super_flutter/features/meetings/routes/meetings_routes.dart';
-import 'package:super_flutter/features/publications/presentation/publications/bloc/publications_bloc.dart';
-import 'package:super_flutter/features/publications/routes/publications_route_names.dart';
-import 'package:super_flutter/features/publications/routes/publications_routes.dart';
 
 class _MockFacilities extends Mock implements FacilitiesRemoteDataSource {}
 
 class _MockMeetings extends Mock implements MeetingsRemoteDataSource {}
-
-class _MockPublications extends Mock implements PublicationsRemoteDataSource {}
 
 class _MockProfile extends Mock implements ProfileRemoteDataSource {}
 
@@ -50,7 +44,6 @@ class _MockAuth extends MockCubit<AuthState> implements AuthCubit {}
 void main() {
   late _MockFacilities facilities;
   late _MockMeetings meetings;
-  late _MockPublications publications;
   late _MockProfile profile;
   late _MockAuth auth;
 
@@ -76,15 +69,13 @@ void main() {
   setUp(() async {
     facilities = _MockFacilities();
     meetings = _MockMeetings();
-    publications = _MockPublications();
     profile = _MockProfile();
     auth = _MockAuth();
     await getIt.reset();
     getIt
       ..registerFactory(() => FacilitiesBloc(facilities, meetings))
       ..registerFactory(() => FacilityStatsBloc(facilities))
-      ..registerFactory(() => MeetingsBloc(meetings, profile))
-      ..registerFactory(() => PublicationsBloc(publications));
+      ..registerFactory(() => MeetingsBloc(meetings, profile));
     when(() => meetings.getDistrictList()).thenAnswer(
       (_) async => [
         DistrictOptionModel(id: 'd1', name: 'Kohima'),
@@ -142,11 +133,7 @@ void main() {
           supportedLocales: AppLocalizations.supportedLocales,
           routerConfig: GoRouter(
             initialLocation: location,
-            routes: [
-              ...buildFacilitiesRoutes(),
-              ...buildMeetingsRoutes(),
-              ...buildPublicationsRoutes(),
-            ],
+            routes: [...buildFacilitiesRoutes(), ...buildMeetingsRoutes()],
           ),
         ),
       ),
@@ -239,28 +226,17 @@ void main() {
     expect(find.text('By district'), findsNothing);
   });
 
-  testWidgets('publications offer their PDF only when there is one', (
-    tester,
-  ) async {
-    when(
-      () =>
-          publications.getPublications(page: 1, perPage: any(named: 'perPage')),
-    ).thenAnswer(
-      (_) async => Paged(
-        items: [
-          PublicationModel(
-            id: 'p1',
-            title: 'Report',
-            coverUrl: 'https://x/c',
-            pdfUrl: 'https://x/p',
-          ),
-          PublicationModel(id: 'p2', title: 'Note', summary: 'Text'),
-        ],
+  testWidgets('a full-width network image builds', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light(Flavor.development),
+        home: const AppNetworkImage(
+          url: 'https://x/c',
+          width: double.infinity,
+          height: 140,
+        ),
       ),
     );
-    await pump(tester, PublicationsRouteNames.root);
-    expect(find.text('Report'), findsOneWidget);
-    expect(find.text('Text'), findsOneWidget);
-    expect(find.text('Open PDF'), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 }

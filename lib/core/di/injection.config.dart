@@ -91,12 +91,6 @@ import 'package:super_flutter/data/profile/sources/local/profile_local_data_sour
     as _i394;
 import 'package:super_flutter/data/profile/sources/remote/profile_remote_data_source.dart'
     as _i117;
-import 'package:super_flutter/data/publications/repositories/publications_repository_impl.dart'
-    as _i690;
-import 'package:super_flutter/data/publications/sources/local/publications_local_data_source.dart'
-    as _i706;
-import 'package:super_flutter/data/publications/sources/remote/publications_remote_data_source.dart'
-    as _i828;
 import 'package:super_flutter/data/schemes/repositories/schemes_repository_impl.dart'
     as _i707;
 import 'package:super_flutter/data/schemes/sources/local/schemes_local_data_source.dart'
@@ -147,7 +141,7 @@ import 'package:super_flutter/features/auth/presentation/change_password/bloc/ch
 import 'package:super_flutter/features/auth/presentation/login/bloc/login_bloc.dart'
     as _i386;
 import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart'
-    as _i829;
+    as _i828;
 import 'package:super_flutter/features/communication/presentation/alerts/bloc/alerts_bloc.dart'
     as _i140;
 import 'package:super_flutter/features/communication/presentation/notice_detail/bloc/notice_detail_bloc.dart'
@@ -190,8 +184,6 @@ import 'package:super_flutter/features/profile/presentation/edit_profile/bloc/ed
     as _i734;
 import 'package:super_flutter/features/profile/presentation/profile/bloc/profile_bloc.dart'
     as _i116;
-import 'package:super_flutter/features/publications/presentation/publications/bloc/publications_bloc.dart'
-    as _i1061;
 import 'package:super_flutter/features/schemes/presentation/my_applications/bloc/my_applications_bloc.dart'
     as _i250;
 import 'package:super_flutter/features/schemes/presentation/scheme_detail/bloc/scheme_detail_bloc.dart'
@@ -244,9 +236,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i394.ProfileLocalDataSource>(
       () => _i394.ProfileLocalDataSource(),
-    );
-    gh.lazySingleton<_i706.PublicationsLocalDataSource>(
-      () => _i706.PublicationsLocalDataSource(),
     );
     gh.lazySingleton<_i1054.SchemesLocalDataSource>(
       () => _i1054.SchemesLocalDataSource(),
@@ -329,9 +318,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i117.ProfileRemoteDataSource>(
       () => _i117.ProfileRemoteDataSource(gh<_i42.DioClient>()),
     );
-    gh.lazySingleton<_i828.PublicationsRemoteDataSource>(
-      () => _i828.PublicationsRemoteDataSource(gh<_i42.DioClient>()),
-    );
     gh.lazySingleton<_i474.SchemesRemoteDataSource>(
       () => _i474.SchemesRemoteDataSource(gh<_i42.DioClient>()),
     );
@@ -340,12 +326,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i975.SupportRemoteDataSource>(
       () => _i975.SupportRemoteDataSource(gh<_i42.DioClient>()),
-    );
-    gh.lazySingleton<_i690.PublicationsRepositoryImpl>(
-      () => _i690.PublicationsRepositoryImpl(
-        gh<_i828.PublicationsRemoteDataSource>(),
-        gh<_i706.PublicationsLocalDataSource>(),
-      ),
     );
     gh.factory<_i188.MeetingsBloc>(
       () => _i188.MeetingsBloc(
@@ -401,9 +381,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i561.DeviceDetailBloc>(
       () => _i561.DeviceDetailBloc(gh<_i17.IotRemoteDataSource>()),
-    );
-    gh.factory<_i1061.PublicationsBloc>(
-      () => _i1061.PublicationsBloc(gh<_i828.PublicationsRemoteDataSource>()),
     );
     gh.factory<_i213.CropDetailBloc>(
       () => _i213.CropDetailBloc(gh<_i444.CropRemoteDataSource>()),
@@ -584,8 +561,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i239.Logout>(),
       ),
     );
-    gh.lazySingleton<_i829.AuthCubit>(
-      () => _i829.AuthCubit(
+    gh.lazySingleton<_i828.AuthCubit>(
+      () => _i828.AuthCubit(
         gh<_i236.CheckAuthStatus>(),
         gh<_i309.GetCurrentUser>(),
         gh<_i729.WatchAuthStatus>(),
@@ -602,7 +579,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1066.AppStartup>(
       () => _i1066.AppStartup(
         gh<_i407.StorageService>(),
-        gh<_i829.AuthCubit>(),
+        gh<_i828.AuthCubit>(),
         gh<_i42.DioClient>(),
         gh<_i451.AppLogger>(),
       ),

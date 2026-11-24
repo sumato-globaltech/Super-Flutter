@@ -3590,12 +3590,6 @@ abstract class AppLocalizations {
   /// **'Change password'**
   String get profileChangePassword;
 
-  /// App bar title of the publications screen
-  ///
-  /// In en, this message translates to:
-  /// **'Publications'**
-  String get publicationsTitle;
-
   /// App bar title of the meetings screen
   ///
   /// In en, this message translates to:
@@ -3613,24 +3607,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Statistics'**
   String get facilitiesFacilityStatsTitle;
-
-  /// Title of the PublicationModel list
-  ///
-  /// In en, this message translates to:
-  /// **'Publications'**
-  String get publicationsList;
-
-  /// Shown when there is no PublicationModel
-  ///
-  /// In en, this message translates to:
-  /// **'No publications yet'**
-  String get publicationsEmpty;
-
-  /// Label of the summary row
-  ///
-  /// In en, this message translates to:
-  /// **'Summary'**
-  String get publicationsSummary;
 
   /// Title of the MeetingModel list
   ///
@@ -3697,12 +3673,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Operational'**
   String get facilitiesFacilityStatsOperational;
-
-  /// No description provided for @publicationsOpen.
-  ///
-  /// In en, this message translates to:
-  /// **'Open PDF'**
-  String get publicationsOpen;
 
   /// No description provided for @meetingsChoose.
   ///
