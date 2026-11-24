@@ -4,6 +4,7 @@ import 'package:super_flutter/domain/auth/entities/access_policy.dart';
 import 'package:super_flutter/domain/auth/entities/access_rule.dart';
 import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
 import 'package:super_flutter/features/farm/routes/farm_route_names.dart';
+import 'package:super_flutter/features/shipments/routes/shipments_route_names.dart';
 
 import 'feature_registry.dart';
 
@@ -168,6 +169,40 @@ final appFeatures = FeatureRegistry([
     title: _farmAddFarm,
     icon: PhosphorIconsRegular.squaresFour,
   ),
+  const AppFeature(
+    id: 'shipments_shipment_detail',
+    path: ShipmentsRouteNames.shipmentDetail,
+    rule: AccessRule.any([
+      AccessRule.all([
+        AccessRule.role(Roles.farmer),
+        AccessRule.profile(),
+        AccessRule.permission(Permissions.shipmentsRequest),
+      ]),
+      AccessRule.all([
+        AccessRule.role(Roles.vendor),
+        AccessRule.profile(),
+        AccessRule.permission(Permissions.shipmentsHandle),
+      ]),
+      AccessRule.all([
+        AccessRule.role(Roles.driver),
+        AccessRule.profile(),
+        AccessRule.permission(Permissions.shipmentsDrive),
+      ]),
+    ]),
+    title: _shipmentsShipmentDetail,
+    icon: PhosphorIconsRegular.squaresFour,
+  ),
+  const AppFeature(
+    id: 'shipments_request_shipment',
+    path: ShipmentsRouteNames.requestShipment,
+    rule: AccessRule.all([
+      AccessRule.role(Roles.farmer),
+      AccessRule.profile(),
+      AccessRule.permission(Permissions.shipmentsRequest),
+    ]),
+    title: _shipmentsRequestShipment,
+    icon: PhosphorIconsRegular.squaresFour,
+  ),
 ]);
 
 const _farmer = AccessRule.all([
@@ -197,3 +232,9 @@ String _profile(AppLocalizations l10n) => l10n.profile;
 String _farmAddFarm(AppLocalizations l10n) => l10n.farmAddFarmTitle;
 
 String _farmEditFarm(AppLocalizations l10n) => l10n.farmEditFarmTitle;
+
+String _shipmentsShipmentDetail(AppLocalizations l10n) =>
+    l10n.shipmentsShipmentDetailTitle;
+
+String _shipmentsRequestShipment(AppLocalizations l10n) =>
+    l10n.shipmentsRequestShipmentTitle;

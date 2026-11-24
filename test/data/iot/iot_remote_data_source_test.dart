@@ -23,9 +23,11 @@ void main() {
 
   group('IotRemoteDataSource', () {
     test('getFarmDevices parses list of devices with sensors', () async {
-      when(() => dio.get('/api/v1/farms/f1/devices')).thenAnswer(
+      when(() => dio.get('/api/v1/farmer/farms/f1/devices')).thenAnswer(
         (_) async => Response(
-          requestOptions: RequestOptions(path: '/api/v1/farms/f1/devices'),
+          requestOptions: RequestOptions(
+            path: '/api/v1/farmer/farms/f1/devices',
+          ),
           statusCode: 200,
           data: {
             'success': true,
@@ -73,59 +75,74 @@ void main() {
     });
 
     test('getFarmDevices throws NetworkException on DioException', () async {
-      when(() => dio.get('/api/v1/farms/f1/devices')).thenThrow(
+      when(() => dio.get('/api/v1/farmer/farms/f1/devices')).thenThrow(
         DioException(
-          requestOptions: RequestOptions(path: '/api/v1/farms/f1/devices'),
+          requestOptions: RequestOptions(
+            path: '/api/v1/farmer/farms/f1/devices',
+          ),
           response: Response(
-            requestOptions: RequestOptions(path: '/api/v1/farms/f1/devices'),
+            requestOptions: RequestOptions(
+              path: '/api/v1/farmer/farms/f1/devices',
+            ),
             statusCode: 500,
           ),
         ),
       );
 
-      expect(() => dataSource.getFarmDevices('f1'), throwsA(isA<NetworkException>()));
-    });
-
-    test('syncFarmDevices requests sync and parses IntegrationRunModel', () async {
-      when(() => dio.post('/api/v1/farms/f1/devices/sync')).thenAnswer(
-        (_) async => Response(
-          requestOptions: RequestOptions(path: '/api/v1/farms/f1/devices/sync'),
-          statusCode: 202,
-          data: {
-            'success': true,
-            'message': 'Sync requested.',
-            'data': {
-              'id': 'run1',
-              'status': 'queued',
-              'queued_at': '2026-11-23T10:00:00Z',
-            },
-          },
-        ),
+      expect(
+        () => dataSource.getFarmDevices('f1'),
+        throwsA(isA<NetworkException>()),
       );
-
-      final run = await dataSource.syncFarmDevices('f1');
-      expect(run, isNotNull);
-      expect(run!.id, 'run1');
-      expect(run.status, 'queued');
     });
+
+    test(
+      'syncFarmDevices requests sync and parses IntegrationRunModel',
+      () async {
+        when(() => dio.post('/api/v1/farmer/farms/f1/devices/sync')).thenAnswer(
+          (_) async => Response(
+            requestOptions: RequestOptions(
+              path: '/api/v1/farmer/farms/f1/devices/sync',
+            ),
+            statusCode: 202,
+            data: {
+              'success': true,
+              'message': 'Sync requested.',
+              'data': {
+                'id': 'run1',
+                'status': 'queued',
+                'queued_at': '2026-11-23T10:00:00Z',
+              },
+            },
+          ),
+        );
+
+        final run = await dataSource.syncFarmDevices('f1');
+        expect(run, isNotNull);
+        expect(run!.id, 'run1');
+        expect(run.status, 'queued');
+      },
+    );
 
     test('getSoilSensorAccount returns account model when linked', () async {
-      when(() => dio.get('/api/v1/farms/f1/soil-sensor-account')).thenAnswer(
-        (_) async => Response(
-          requestOptions: RequestOptions(path: '/api/v1/farms/f1/soil-sensor-account'),
-          statusCode: 200,
-          data: {
-            'success': true,
-            'data': {
-              'provider': 'soilsens',
-              'username': 'farmer_john',
-              'is_active': true,
-              'linked_at': '2026-10-01T00:00:00Z',
-              'last_synced_at': '2026-11-23T08:00:00Z',
-            },
-          },
-        ),
-      );
+      when(() => dio.get('/api/v1/farmer/farms/f1/soil-sensor-account'))
+          .thenAnswer(
+            (_) async => Response(
+              requestOptions: RequestOptions(
+                path: '/api/v1/farmer/farms/f1/soil-sensor-account',
+              ),
+              statusCode: 200,
+              data: {
+                'success': true,
+                'data': {
+                  'provider': 'soilsens',
+                  'username': 'farmer_john',
+                  'is_active': true,
+                  'linked_at': '2026-10-01T00:00:00Z',
+                  'last_synced_at': '2026-11-23T08:00:00Z',
+                },
+              },
+            ),
+          );
 
       final account = await dataSource.getSoilSensorAccount('f1');
       expect(account, isNotNull);
@@ -134,63 +151,74 @@ void main() {
     });
 
     test('getSoilSensorAccount returns null when data is null', () async {
-      when(() => dio.get('/api/v1/farms/f1/soil-sensor-account')).thenAnswer(
-        (_) async => Response(
-          requestOptions: RequestOptions(path: '/api/v1/farms/f1/soil-sensor-account'),
-          statusCode: 200,
-          data: {
-            'success': true,
-            'data': null,
-          },
-        ),
-      );
+      when(() => dio.get('/api/v1/farmer/farms/f1/soil-sensor-account'))
+          .thenAnswer(
+            (_) async => Response(
+              requestOptions: RequestOptions(
+                path: '/api/v1/farmer/farms/f1/soil-sensor-account',
+              ),
+              statusCode: 200,
+              data: {'success': true, 'data': null},
+            ),
+          );
 
       final account = await dataSource.getSoilSensorAccount('f1');
       expect(account, isNull);
     });
 
-    test('linkSoilSensorAccount puts credentials and parses updated account', () async {
-      when(
-        () => dio.put(
-          '/api/v1/farms/f1/soil-sensor-account',
-          data: {'username': 'new_user', 'password': 'secret'},
-        ),
-      ).thenAnswer(
-        (_) async => Response(
-          requestOptions: RequestOptions(path: '/api/v1/farms/f1/soil-sensor-account'),
-          statusCode: 200,
-          data: {
-            'success': true,
-            'data': {
-              'provider': 'soilsens',
-              'username': 'new_user',
-              'is_active': true,
-              'linked_at': '2026-11-23T10:00:00Z',
+    test(
+      'linkSoilSensorAccount puts credentials and parses updated account',
+      () async {
+        when(
+          () => dio.put(
+            '/api/v1/farmer/farms/f1/soil-sensor-account',
+            data: {'username': 'new_user', 'password': 'secret'},
+          ),
+        ).thenAnswer(
+          (_) async => Response(
+            requestOptions: RequestOptions(
+              path: '/api/v1/farmer/farms/f1/soil-sensor-account',
+            ),
+            statusCode: 200,
+            data: {
+              'success': true,
+              'data': {
+                'provider': 'soilsens',
+                'username': 'new_user',
+                'is_active': true,
+                'linked_at': '2026-11-23T10:00:00Z',
+              },
             },
-          },
-        ),
-      );
+          ),
+        );
 
-      final account = await dataSource.linkSoilSensorAccount(
-        'f1',
-        {'username': 'new_user', 'password': 'secret'},
-      );
-      expect(account, isNotNull);
-      expect(account!.username, 'new_user');
-    });
+        final account = await dataSource.linkSoilSensorAccount('f1', {
+          'username': 'new_user',
+          'password': 'secret',
+        });
+        expect(account, isNotNull);
+        expect(account!.username, 'new_user');
+      },
+    );
 
-    test('unlinkSoilSensorAccount deletes credential and returns true', () async {
-      when(() => dio.delete('/api/v1/farms/f1/soil-sensor-account')).thenAnswer(
-        (_) async => Response(
-          requestOptions: RequestOptions(path: '/api/v1/farms/f1/soil-sensor-account'),
-          statusCode: 200,
-          data: {'success': true},
-        ),
-      );
+    test(
+      'unlinkSoilSensorAccount deletes credential and returns true',
+      () async {
+        when(() => dio.delete('/api/v1/farmer/farms/f1/soil-sensor-account'))
+            .thenAnswer(
+              (_) async => Response(
+                requestOptions: RequestOptions(
+                  path: '/api/v1/farmer/farms/f1/soil-sensor-account',
+                ),
+                statusCode: 200,
+                data: {'success': true},
+              ),
+            );
 
-      final result = await dataSource.unlinkSoilSensorAccount('f1');
-      expect(result, true);
-    });
+        final result = await dataSource.unlinkSoilSensorAccount('f1');
+        expect(result, true);
+      },
+    );
 
     test('getDevice parses single device with sensors', () async {
       when(() => dio.get('/api/v1/devices/d1')).thenAnswer(
@@ -223,53 +251,56 @@ void main() {
       expect(device.sensors.length, 1);
     });
 
-    test('getDeviceReadings sends query and parses SensorHistoryModel', () async {
-      when(
-        () => dio.get(
-          '/api/v1/devices/d1/readings',
-          queryParameters: {
-            'sensor': 's1',
-            'from': '2026-11-16',
-            'to': '2026-11-23',
-          },
-        ),
-      ).thenAnswer(
-        (_) async => Response(
-          requestOptions: RequestOptions(path: '/api/v1/devices/d1/readings'),
-          statusCode: 200,
-          data: {
-            'success': true,
-            'data': {
-              'sensor': {
-                'id': 's1',
-                'name': 'Soil Moisture',
-                'metric': 'moisture',
-                'unit': '%',
-              },
+    test(
+      'getDeviceReadings sends query and parses SensorHistoryModel',
+      () async {
+        when(
+          () => dio.get(
+            '/api/v1/devices/d1/readings',
+            queryParameters: {
+              'sensor': 's1',
               'from': '2026-11-16',
               'to': '2026-11-23',
-              'resolution': 'day',
-              'points': [
-                {'at': '2026-11-16T00:00:00Z', 'value': 28.4},
-                {'at': '2026-11-17T00:00:00Z', 'value': 29.1},
-                {'at': '2026-11-18T00:00:00Z', 'value': 30.5},
-              ],
             },
-          },
-        ),
-      );
+          ),
+        ).thenAnswer(
+          (_) async => Response(
+            requestOptions: RequestOptions(path: '/api/v1/devices/d1/readings'),
+            statusCode: 200,
+            data: {
+              'success': true,
+              'data': {
+                'sensor': {
+                  'id': 's1',
+                  'name': 'Soil Moisture',
+                  'metric': 'moisture',
+                  'unit': '%',
+                },
+                'from': '2026-11-16',
+                'to': '2026-11-23',
+                'resolution': 'day',
+                'points': [
+                  {'at': '2026-11-16T00:00:00Z', 'value': 28.4},
+                  {'at': '2026-11-17T00:00:00Z', 'value': 29.1},
+                  {'at': '2026-11-18T00:00:00Z', 'value': 30.5},
+                ],
+              },
+            },
+          ),
+        );
 
-      final history = await dataSource.getDeviceReadings(
-        'd1',
-        sensorId: 's1',
-        from: '2026-11-16',
-        to: '2026-11-23',
-      );
+        final history = await dataSource.getDeviceReadings(
+          'd1',
+          sensorId: 's1',
+          from: '2026-11-16',
+          to: '2026-11-23',
+        );
 
-      expect(history, isNotNull);
-      expect(history!.resolution, 'day');
-      expect(history.points.length, 3);
-      expect(history.points.first.value, 28.4);
-    });
+        expect(history, isNotNull);
+        expect(history!.resolution, 'day');
+        expect(history.points.length, 3);
+        expect(history.points.first.value, 28.4);
+      },
+    );
   });
 }

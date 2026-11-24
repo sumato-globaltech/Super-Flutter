@@ -108,7 +108,7 @@ class FeatureRegistry {
         ...navigationFor(policy, maxTabs: maxTabs).overflow,
         ...secondary(policy),
       ])
-        if (paths.add(feature.path)) feature,
+        if (!feature.path.contains('/:') && paths.add(feature.path)) feature,
     ];
   }
 

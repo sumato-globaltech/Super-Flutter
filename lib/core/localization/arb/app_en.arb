@@ -492,5 +492,197 @@
   "@farmEditFarmLongitude": { "description": "Label of the longitude input" },
 
   "farmEditFarmDone": "Farm Detail updated.",
-  "@farmEditFarmDone": { "description": "Shown when the farm detail form was sent" }
+  "@farmEditFarmDone": { "description": "Shown when the farm detail form was sent" },
+
+  "shipmentsTitle": "Shipments",
+  "@shipmentsTitle": { "description": "App bar title of the shipments screen" },
+
+  "shipmentsList": "Shipments",
+  "@shipmentsList": { "description": "Title of the ShipmentModel list" },
+
+  "shipmentsEmpty": "No shipments yet",
+  "@shipmentsEmpty": { "description": "Shown when there is no ShipmentModel" },
+
+  "shipmentsNumber": "Number",
+  "@shipmentsNumber": { "description": "Label of the number row" },
+
+  "shipmentsRequestedAt": "Requested At",
+  "@shipmentsRequestedAt": { "description": "Label of the requestedAt row" },
+
+  "shipmentsAcceptedAt": "Accepted At",
+  "@shipmentsAcceptedAt": { "description": "Label of the acceptedAt row" },
+
+  "shipmentsRejectedAt": "Rejected At",
+  "@shipmentsRejectedAt": { "description": "Label of the rejectedAt row" },
+
+  "shipmentsShipmentDetailTitle": "Shipment",
+  "@shipmentsShipmentDetailTitle": { "description": "App bar title of the shipment_detail screen" },
+
+  "valueYes": "Yes",
+  "@valueYes": { "description": "A true value" },
+
+  "valueNo": "No",
+  "@valueNo": { "description": "A false value" },
+
+  "shipmentsShipmentDetailDetails": "Shipment Details",
+  "@shipmentsShipmentDetailDetails": { "description": "Title of the ShipmentModel card" },
+
+  "shipmentsShipmentDetailId": "Id",
+  "@shipmentsShipmentDetailId": { "description": "Label of the id row" },
+
+  "shipmentsShipmentDetailNumber": "Shipment",
+  "@shipmentsShipmentDetailNumber": { "description": "Label of the number row" },
+
+  "shipmentsShipmentDetailRejectReason": "Reject reason",
+  "@shipmentsShipmentDetailRejectReason": { "description": "Label of the rejectReason row" },
+
+  "shipmentsShipmentDetailRequestedAt": "Requested on",
+  "@shipmentsShipmentDetailRequestedAt": { "description": "Label of the requestedAt row" },
+
+  "shipmentsShipmentDetailAcceptedAt": "Accepted on",
+  "@shipmentsShipmentDetailAcceptedAt": { "description": "Label of the acceptedAt row" },
+
+  "shipmentsShipmentDetailRejectedAt": "Rejected on",
+  "@shipmentsShipmentDetailRejectedAt": { "description": "Label of the rejectedAt row" },
+
+  "shipmentsShipmentDetailPickedUpAt": "Picked up on",
+  "@shipmentsShipmentDetailPickedUpAt": { "description": "Label of the pickedUpAt row" },
+
+  "shipmentsShipmentDetailReachedAt": "Reached on",
+  "@shipmentsShipmentDetailReachedAt": { "description": "Label of the reachedAt row" },
+
+  "shipmentsShipmentDetailReceivedAt": "Received on",
+  "@shipmentsShipmentDetailReceivedAt": { "description": "Label of the receivedAt row" },
+
+  "shipmentsShipmentDetailStatus": "Status",
+  "@shipmentsShipmentDetailStatus": { "description": "Title of the status card" },
+
+  "shipmentsShipmentDetailStatusValue": "Code",
+  "@shipmentsShipmentDetailStatusValue": { "description": "Label of the status.value row" },
+
+  "shipmentsShipmentDetailStatusLabel": "Status",
+  "@shipmentsShipmentDetailStatusLabel": { "description": "Label of the status.label row" },
+
+  "shipmentsShipmentDetailFarmer": "Farmer",
+  "@shipmentsShipmentDetailFarmer": { "description": "Title of the farmer card" },
+
+  "shipmentsShipmentDetailFarmerId": "Id",
+  "@shipmentsShipmentDetailFarmerId": { "description": "Label of the farmer.id row" },
+
+  "shipmentsShipmentDetailFarmerCode": "Code",
+  "@shipmentsShipmentDetailFarmerCode": { "description": "Label of the farmer.code row" },
+
+  "shipmentsShipmentDetailFarmerName": "Name",
+  "@shipmentsShipmentDetailFarmerName": { "description": "Label of the farmer.name row" },
+
+  "shipmentsShipmentDetailVendor": "Vendor",
+  "@shipmentsShipmentDetailVendor": { "description": "Title of the vendor card" },
+
+  "shipmentsShipmentDetailVendorId": "Id",
+  "@shipmentsShipmentDetailVendorId": { "description": "Label of the vendor.id row" },
+
+  "shipmentsShipmentDetailVendorCode": "Vendor code",
+  "@shipmentsShipmentDetailVendorCode": { "description": "Label of the vendor.code row" },
+
+  "shipmentsShipmentDetailVendorName": "Vendor",
+  "@shipmentsShipmentDetailVendorName": { "description": "Label of the vendor.name row" },
+
+  "shipmentsShipmentDetailPickup": "Pickup",
+  "@shipmentsShipmentDetailPickup": { "description": "Title of the pickup card" },
+
+  "shipmentsShipmentDetailPickupAddress": "Pickup address",
+  "@shipmentsShipmentDetailPickupAddress": { "description": "Label of the pickup.address row" },
+
+  "shipmentsShipmentDetailPickupPreferredOn": "Preferred pickup",
+  "@shipmentsShipmentDetailPickupPreferredOn": { "description": "Label of the pickup.preferredOn row" },
+
+  "shipmentsShipmentDetailPickupLate": "Picked up late",
+  "@shipmentsShipmentDetailPickupLate": { "description": "Label of the pickup.late row" },
+
+  "shipmentsShipmentDetailVehicle": "Vehicle",
+  "@shipmentsShipmentDetailVehicle": { "description": "Title of the vehicle card" },
+
+  "shipmentsShipmentDetailVehicleId": "Id",
+  "@shipmentsShipmentDetailVehicleId": { "description": "Label of the vehicle.id row" },
+
+  "shipmentsShipmentDetailVehicleRegistrationNumber": "Registration number",
+  "@shipmentsShipmentDetailVehicleRegistrationNumber": { "description": "Label of the vehicle.registrationNumber row" },
+
+  "shipmentsShipmentDetailDriver": "Driver",
+  "@shipmentsShipmentDetailDriver": { "description": "Title of the driver card" },
+
+  "shipmentsShipmentDetailDriverId": "Id",
+  "@shipmentsShipmentDetailDriverId": { "description": "Label of the driver.id row" },
+
+  "shipmentsShipmentDetailDriverCode": "Driver code",
+  "@shipmentsShipmentDetailDriverCode": { "description": "Label of the driver.code row" },
+
+  "shipmentsShipmentDetailDriverName": "Driver",
+  "@shipmentsShipmentDetailDriverName": { "description": "Label of the driver.name row" },
+
+  "shipmentsShipmentDetailDriverPhone": "Phone",
+  "@shipmentsShipmentDetailDriverPhone": { "description": "Label of the driver.phone row" },
+
+  "shipmentsRequestShipmentTitle": "Request Shipment",
+  "@shipmentsRequestShipmentTitle": { "description": "App bar title of the request_shipment screen" },
+  "shipmentsActive": "Active",
+  "shipmentsHistory": "History",
+  "shipmentsRequest": "Request",
+  "shipmentsStatus": "Status",
+  "shipmentsVendor": "Vendor",
+  "shipmentsPickupOn": "Pickup on",
+  "shipmentsItems": "Items",
+  "shipmentsActiveEmpty": "No active shipments",
+  "shipmentsHistoryEmpty": "No past shipments",
+
+  "shipmentsShipmentDetailCancelledAt": "Cancelled on",
+  "@shipmentsShipmentDetailCancelledAt": { "description": "Label of the cancelledAt row" },
+
+  "shipmentsShipmentDetailCancelReason": "Cancel reason",
+  "@shipmentsShipmentDetailCancelReason": { "description": "Label of the cancelReason row" },
+
+  "shipmentsShipmentDetailNotes": "Notes",
+  "@shipmentsShipmentDetailNotes": { "description": "Label of the notes row" },
+  "shipmentsPicked": "Picked",
+  "shipmentsReceived": "Received",
+  "shipmentsVehicleType": "Vehicle type",
+  "shipmentsCancel": "Cancel shipment",
+  "shipmentsCancelTitle": "Cancel this shipment?",
+  "shipmentsCancelMessage": "The vendor will be told it is cancelled.",
+  "shipmentsCancelReason": "Reason",
+  "shipmentsCancelled": "Shipment cancelled",
+  "shipmentsPickupDistrict": "Pickup district",
+  "shipmentsPickupAddress": "Pickup address",
+  "shipmentsNotes": "Notes",
+  "shipmentsItem": "Item",
+  "shipmentsCrop": "Crop",
+  "shipmentsQuantity": "Quantity",
+  "shipmentsUnit": "Unit",
+  "shipmentsAddItem": "Add item",
+  "shipmentsRemoveItem": "Remove item",
+  "shipmentsInvalidQuantity": "Enter a quantity greater than 0",
+  "shipmentsSend": "Send request",
+  "shipmentsRequested": "Shipment sent to the vendor",
+  "shipmentsFarmer": "Farmer",
+  "shipmentsReason": "Reason",
+  "shipmentsAccept": "Accept",
+  "shipmentsAcceptTitle": "Accept this shipment?",
+  "shipmentsAccepted": "Shipment accepted",
+  "shipmentsAssignMessage": "Choose the vehicle and driver who will pick it up.",
+  "shipmentsOnTrip": "On a trip",
+  "shipmentsReject": "Reject",
+  "shipmentsRejectTitle": "Reject this shipment?",
+  "shipmentsRejectMessage": "The farmer will see your reason.",
+  "shipmentsRejected": "Shipment rejected",
+  "shipmentsReassign": "Reassign",
+  "shipmentsReassignTitle": "Change vehicle or driver",
+  "shipmentsReassigned": "Vehicle and driver updated",
+  "shipmentsReceive": "Receive",
+  "shipmentsReceiveTitle": "Record what you received",
+  "shipmentsReceiveMessage": "Enter the quantity received for each item.",
+  "shipmentsReweigh": "Re-weigh",
+  "shipmentsReweighTitle": "Re-weigh an item",
+  "shipmentsReweighMessage": "Correct the received quantity of one item.",
+  "shipmentsReweighed": "Re-weighed quantity saved",
+  "shipmentsInvalidWeighed": "Enter 0 or more"
 }

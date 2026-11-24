@@ -165,7 +165,26 @@ void main() {
 
     test('a farmer gets what the tab bar does not show', () {
       final ids = actionsOf(policyFor(Roles.farmer, profile: true));
-      expect(ids, ['support', 'crops', 'notices', 'profile']);
+      expect(ids, [
+        'support',
+        'crops',
+        'notices',
+        'profile',
+        'farm_add_farm',
+        'shipments_request_shipment',
+      ]);
+    });
+
+    test('screens that need an id in their path are never quick actions', () {
+      final actions = appFeatures.quickActions(
+        policyFor(Roles.farmer, profile: true),
+        home: DashboardRouteNames.dashboard,
+      );
+      expect(actions.where((f) => f.path.contains('/:')), isEmpty);
+      expect(
+        actions.map((f) => f.id),
+        isNot(contains('shipments_shipment_detail')),
+      );
     });
 
     test('an admin gets the management screens, not the farmer ones', () {
@@ -198,6 +217,23 @@ void main() {
   });
 
   group('route guard', () {
+    test('farmers, vendors and drivers open a shipment, others do not', () {
+      const path = '/shipments/shipment_detail/01ABC';
+      expect(
+        appFeatures.canOpen(path, policyFor(Roles.farmer, profile: true)),
+        isTrue,
+      );
+      expect(
+        appFeatures.canOpen(path, policyFor(Roles.vendor, profile: true)),
+        isTrue,
+      );
+      expect(
+        appFeatures.canOpen(path, policyFor(Roles.driver, profile: true)),
+        isTrue,
+      );
+      expect(appFeatures.canOpen(path, policyFor(Roles.vendor)), isFalse);
+    });
+
     test('only farmers with a profile open farm routes', () {
       final farmer = policyFor(Roles.farmer, profile: true);
       expect(appFeatures.canOpen('/farms', farmer), isTrue);

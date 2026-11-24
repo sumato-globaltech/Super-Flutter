@@ -480,3 +480,496 @@ models:
         type: String
         nullable: true
     origin: generated
+  - name: AssignmentOptionsModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/assignment_options_model.dart
+    import: package:super_flutter/data/shipments/model/assignment_options_model.dart
+    fingerprint: '{drivers:[{code:string,id:string,name:string}],vehicles:[{id:string,on_trip:bool,registration_number:string,type:{label:string,value:string}}]}'
+    fields:
+      - name: vehicles
+        json_key: vehicles
+        type: List<VehicleModel>
+        nullable: true
+      - name: drivers
+        json_key: drivers
+        type: List<ShipmentPartyModel>
+        nullable: true
+    nested:
+      - ShipmentPartyModel
+      - VehicleModel
+    origin: generated
+  - name: CropModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/shipment_item_model.dart
+    import: package:super_flutter/data/shipments/model/shipment_item_model.dart
+    fingerprint: '{id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+    origin: generated
+  - name: DefaultsModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/shipment_options_model.dart
+    import: package:super_flutter/data/shipments/model/shipment_options_model.dart
+    fingerprint: '{pickup_address:string,pickup_district_id:string,preferred_pickup_on:string}'
+    fields:
+      - name: pickupAddress
+        json_key: pickup_address
+        type: String
+        nullable: true
+      - name: preferredPickupOn
+        json_key: preferred_pickup_on
+        type: String
+        nullable: true
+      - name: pickupDistrictId
+        json_key: pickup_district_id
+        type: String
+        nullable: true
+    origin: generated
+  - name: DriverModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/shipment_model.dart
+    import: package:super_flutter/data/shipments/model/shipment_model.dart
+    fingerprint: '{code:string,id:string,name:string,phone:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: code
+        json_key: code
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+      - name: phone
+        json_key: phone
+        type: String
+        nullable: true
+    origin: generated
+  - name: ItemModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/shipment_model.dart
+    import: package:super_flutter/data/shipments/model/shipment_model.dart
+    fingerprint: '{crop:{id:string,name:string},id:string,picked_difference:double,quantity_picked:double,quantity_received:double,quantity_sold:double,received_difference:double,reweighs:[dynamic],unit:{id:string,name:string}}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: crop
+        json_key: crop
+        type: CropModel
+        nullable: true
+      - name: unit
+        json_key: unit
+        type: UnitModel
+        nullable: true
+      - name: quantitySold
+        json_key: quantity_sold
+        type: double
+        nullable: true
+      - name: quantityPicked
+        json_key: quantity_picked
+        type: double
+        nullable: true
+      - name: quantityReceived
+        json_key: quantity_received
+        type: double
+        nullable: true
+      - name: pickedDifference
+        json_key: picked_difference
+        type: double
+        nullable: true
+      - name: receivedDifference
+        json_key: received_difference
+        type: double
+        nullable: true
+      - name: reweighs
+        json_key: reweighs
+        type: List<dynamic>
+        nullable: true
+    nested:
+      - CropModel
+      - UnitModel
+    origin: generated
+  - name: LimitsModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/shipment_options_model.dart
+    import: package:super_flutter/data/shipments/model/shipment_options_model.dart
+    fingerprint: '{max_items:int,max_quantity:int,reason_max:int}'
+    fields:
+      - name: maxItems
+        json_key: max_items
+        type: int
+        nullable: true
+      - name: maxQuantity
+        json_key: max_quantity
+        type: int
+        nullable: true
+      - name: reasonMax
+        json_key: reason_max
+        type: int
+        nullable: true
+    origin: generated
+  - name: PickupDistrictModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/shipment_options_model.dart
+    import: package:super_flutter/data/shipments/model/shipment_options_model.dart
+    fingerprint: '{id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+    origin: generated
+  - name: ShipmentItemModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/shipment_item_model.dart
+    import: package:super_flutter/data/shipments/model/shipment_item_model.dart
+    fingerprint: '{crop:{id:string,name:string},id:string,quantity_sold:int,reweighs:[dynamic],unit:{id:string,name:string}}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: crop
+        json_key: crop
+        type: CropModel
+        nullable: true
+      - name: unit
+        json_key: unit
+        type: UnitModel
+        nullable: true
+      - name: quantitySold
+        json_key: quantity_sold
+        type: int
+        nullable: true
+      - name: reweighs
+        json_key: reweighs
+        type: List<dynamic>
+        nullable: true
+    nested:
+      - CropModel
+      - UnitModel
+    origin: generated
+  - name: ShipmentModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/shipment_model.dart
+    import: package:super_flutter/data/shipments/model/shipment_model.dart
+    fingerprint: '{accepted_at:datetime,actions:[string],cancel_reason:string,cancelled_at:datetime,driver:{code:string,id:string,name:string,phone:string},farmer:{code:string,id:string,name:string},id:string,items:[{crop:{id:string,name:string},id:string,picked_difference:double,quantity_picked:double,quantity_received:double,quantity_sold:double,received_difference:double,reweighs:[dynamic],unit:{id:string,name:string}}],notes:string,number:string,picked_up_at:datetime,pickup:{address:string,district:{id:string,name:string},late:bool,preferred_on:string},reached_at:datetime,received_at:datetime,reject_reason:string,rejected_at:datetime,requested_at:datetime,status:{label:string,value:string},vehicle:{id:string,registration_number:string,type:{label:string,value:string}},vendor:{code:string,id:string,name:string}}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: number
+        json_key: number
+        type: String
+        nullable: true
+      - name: status
+        json_key: status
+        type: StatusModel
+        nullable: true
+      - name: actions
+        json_key: actions
+        type: List<String>
+        nullable: true
+      - name: farmer
+        json_key: farmer
+        type: ShipmentPartyModel
+        nullable: true
+      - name: vendor
+        json_key: vendor
+        type: ShipmentPartyModel
+        nullable: true
+      - name: pickup
+        json_key: pickup
+        type: ShipmentPickupModel
+        nullable: true
+      - name: vehicle
+        json_key: vehicle
+        type: ShipmentVehicleModel
+        nullable: true
+      - name: driver
+        json_key: driver
+        type: DriverModel
+        nullable: true
+      - name: rejectReason
+        json_key: reject_reason
+        type: String
+        nullable: true
+      - name: requestedAt
+        json_key: requested_at
+        type: DateTime
+        nullable: true
+      - name: acceptedAt
+        json_key: accepted_at
+        type: DateTime
+        nullable: true
+      - name: rejectedAt
+        json_key: rejected_at
+        type: DateTime
+        nullable: true
+      - name: pickedUpAt
+        json_key: picked_up_at
+        type: DateTime
+        nullable: true
+      - name: reachedAt
+        json_key: reached_at
+        type: DateTime
+        nullable: true
+      - name: receivedAt
+        json_key: received_at
+        type: DateTime
+        nullable: true
+      - name: items
+        json_key: items
+        type: List<ItemModel>
+        nullable: true
+      - name: notes
+        json_key: notes
+        type: String
+        nullable: true
+      - name: cancelReason
+        json_key: cancel_reason
+        type: String
+        nullable: true
+      - name: cancelledAt
+        json_key: cancelled_at
+        type: DateTime
+        nullable: true
+    nested:
+      - DriverModel
+      - ItemModel
+      - ShipmentPartyModel
+      - ShipmentPickupModel
+      - ShipmentVehicleModel
+      - StatusModel
+    origin: generated
+  - name: ShipmentOptionsModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/shipment_options_model.dart
+    import: package:super_flutter/data/shipments/model/shipment_options_model.dart
+    fingerprint: '{crops:[{id:string,name:string}],defaults:{pickup_address:string,pickup_district_id:string,preferred_pickup_on:string},limits:{max_items:int,max_quantity:int,reason_max:int},pickup_districts:[{id:string,name:string}],units:[{id:string,name:string}],vendors:[{code:string,districts:[string],id:string,name:string}]}'
+    fields:
+      - name: vendors
+        json_key: vendors
+        type: List<VendorModel>
+        nullable: true
+      - name: pickupDistricts
+        json_key: pickup_districts
+        type: List<PickupDistrictModel>
+        nullable: true
+      - name: crops
+        json_key: crops
+        type: List<CropModel>
+        nullable: true
+      - name: units
+        json_key: units
+        type: List<UnitModel>
+        nullable: true
+      - name: defaults
+        json_key: defaults
+        type: DefaultsModel
+        nullable: true
+      - name: limits
+        json_key: limits
+        type: LimitsModel
+        nullable: true
+    nested:
+      - CropModel
+      - DefaultsModel
+      - LimitsModel
+      - PickupDistrictModel
+      - UnitModel
+      - VendorModel
+    origin: generated
+  - name: ShipmentPartyModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/shipment_party_model.dart
+    import: package:super_flutter/data/shipments/model/shipment_party_model.dart
+    fingerprint: '{code:string,id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: code
+        json_key: code
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+    origin: generated
+  - name: ShipmentPickupModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/shipment_pickup_model.dart
+    import: package:super_flutter/data/shipments/model/shipment_pickup_model.dart
+    fingerprint: '{address:string,district:{id:string,name:string},late:bool,preferred_on:string}'
+    fields:
+      - name: district
+        json_key: district
+        type: DistrictModel
+        nullable: true
+      - name: address
+        json_key: address
+        type: String
+        nullable: true
+      - name: preferredOn
+        json_key: preferred_on
+        type: String
+        nullable: true
+      - name: late
+        json_key: late
+        type: bool
+        nullable: true
+    nested:
+      - DistrictModel
+    origin: generated
+  - name: ShipmentVehicleModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/shipment_vehicle_model.dart
+    import: package:super_flutter/data/shipments/model/shipment_vehicle_model.dart
+    fingerprint: '{id:string,registration_number:string,type:{label:string,value:string}}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: registrationNumber
+        json_key: registration_number
+        type: String
+        nullable: true
+      - name: type
+        json_key: type
+        type: TypeModel
+        nullable: true
+    nested:
+      - TypeModel
+    origin: generated
+  - name: StatusModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/shipment_model.dart
+    import: package:super_flutter/data/shipments/model/shipment_model.dart
+    fingerprint: '{label:string,value:string}'
+    fields:
+      - name: value
+        json_key: value
+        type: String
+        nullable: true
+      - name: label
+        json_key: label
+        type: String
+        nullable: true
+    origin: generated
+  - name: TypeModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/shipment_vehicle_model.dart
+    import: package:super_flutter/data/shipments/model/shipment_vehicle_model.dart
+    fingerprint: '{label:string,value:string}'
+    fields:
+      - name: value
+        json_key: value
+        type: String
+        nullable: true
+      - name: label
+        json_key: label
+        type: String
+        nullable: true
+    origin: generated
+  - name: UnitModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/shipment_item_model.dart
+    import: package:super_flutter/data/shipments/model/shipment_item_model.dart
+    fingerprint: '{id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+    origin: generated
+  - name: VehicleModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/assignment_options_model.dart
+    import: package:super_flutter/data/shipments/model/assignment_options_model.dart
+    fingerprint: '{id:string,on_trip:bool,registration_number:string,type:{label:string,value:string}}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: registrationNumber
+        json_key: registration_number
+        type: String
+        nullable: true
+      - name: type
+        json_key: type
+        type: TypeModel
+        nullable: true
+      - name: onTrip
+        json_key: on_trip
+        type: bool
+        nullable: true
+    nested:
+      - TypeModel
+    origin: generated
+  - name: VendorModel
+    kind: model
+    feature: shipments
+    path: lib/data/shipments/model/shipment_options_model.dart
+    import: package:super_flutter/data/shipments/model/shipment_options_model.dart
+    fingerprint: '{code:string,districts:[string],id:string,name:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: code
+        json_key: code
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+      - name: districts
+        json_key: districts
+        type: List<String>
+        nullable: true
+    origin: generated

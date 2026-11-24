@@ -21,7 +21,10 @@ class Environment {
     appName: 'Flutter Kit Dev',
     apiBaseUrl: 'http://dam.test',
     databaseName: 'flutter_kit_dev',
-    apiKey: String.fromEnvironment('API_KEY', defaultValue: 'sdsdsdsdsdsddsdsd'),
+    apiKey: String.fromEnvironment(
+      'API_KEY',
+      defaultValue: 'sdsdsdsdsdsddsdsd',
+    ),
     connectTimeout: Duration(seconds: 30),
     receiveTimeout: Duration(seconds: 30),
     sendTimeout: Duration(seconds: 30),

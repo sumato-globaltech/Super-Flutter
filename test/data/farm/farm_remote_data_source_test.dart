@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:super_flutter/core/network/api_endpoints.dart';
 import 'package:super_flutter/core/network/dio_client.dart';
 import 'package:super_flutter/core/network/network_exception_mapper.dart';
 import 'package:super_flutter/data/farm/sources/remote/farm_endpoints.dart';
@@ -23,10 +24,10 @@ void main() {
   });
 
   Response<dynamic> ok(dynamic data, {int statusCode = 200}) => Response(
-        data: data,
-        statusCode: statusCode,
-        requestOptions: RequestOptions(),
-      );
+    data: data,
+    statusCode: statusCode,
+    requestOptions: RequestOptions(),
+  );
 
   group('getFarms', () {
     test('parses paginated farms envelope successfully', () async {
@@ -73,10 +74,7 @@ void main() {
       ).thenThrow(
         DioException(
           requestOptions: RequestOptions(),
-          response: Response(
-            statusCode: 500,
-            requestOptions: RequestOptions(),
-          ),
+          response: Response(statusCode: 500, requestOptions: RequestOptions()),
         ),
       );
 
@@ -89,11 +87,7 @@ void main() {
       when(() => dio.get<dynamic>(FarmEndpoints.farm('f1'))).thenAnswer(
         (_) async => ok({
           'success': true,
-          'data': {
-            'id': 'f1',
-            'name': 'Green Hills Farm',
-            'area_ha': 2.5,
-          },
+          'data': {'id': 'f1', 'name': 'Green Hills Farm', 'area_ha': 2.5},
         }),
       );
 
@@ -102,31 +96,37 @@ void main() {
       expect(farm!.name, 'Green Hills Farm');
     });
 
-    test('createFarm posts data and parses created farm', () async {
-      when(
-        () => dio.post<dynamic>(
-          FarmEndpoints.farms,
-          data: any(named: 'data'),
-        ),
-      ).thenAnswer(
-        (_) async => ok(
-          {
-            'success': true,
-            'data': {'id': 'f1', 'name': 'New Farm', 'area_ha': 1.0},
-          },
-          statusCode: 201,
-        ),
+    test('createFarm posts the form fields to /farmer/farms', () async {
+      when(() => dio.post<dynamic>(ApiEndpoints.farm, data: any(named: 'data')))
+          .thenAnswer(
+            (_) async => ok({
+              'success': true,
+              'data': {'id': 'f1', 'name': 'New Farm', 'area_ha': 1.0},
+            }, statusCode: 201),
+          );
+
+      final sent = await source.createFarm(
+        name: 'New Farm',
+        areaHa: 1.0,
+        blockId: 'b1',
       );
 
-      final farm = await source.createFarm({'name': 'New Farm', 'area_ha': 1.0});
-      expect(farm, isNotNull);
-      expect(farm!.name, 'New Farm');
+      expect(sent, isTrue);
+      final data =
+          verify(
+                () => dio.post<dynamic>(
+                  ApiEndpoints.farm,
+                  data: captureAny(named: 'data'),
+                ),
+              ).captured.single
+              as Map<String, dynamic>;
+      expect(data, {'name': 'New Farm', 'area_ha': 1.0, 'block_id': 'b1'});
     });
 
-    test('updateFarm puts data and parses updated farm', () async {
+    test('updateFarmDetail puts the form fields to the farm', () async {
       when(
         () => dio.put<dynamic>(
-          FarmEndpoints.farm('f1'),
+          ApiEndpoints.farmDetail('f1'),
           data: any(named: 'data'),
         ),
       ).thenAnswer(
@@ -136,15 +136,19 @@ void main() {
         }),
       );
 
-      final farm = await source.updateFarm('f1', {'name': 'Updated Farm'});
-      expect(farm, isNotNull);
-      expect(farm!.name, 'Updated Farm');
+      final sent = await source.updateFarmDetail(
+        'f1',
+        name: 'Updated Farm',
+        areaHa: 2.0,
+      );
+
+      expect(sent, isTrue);
+      expect(ApiEndpoints.farmDetail('f1'), '/api/v1/farmer/farms/f1');
     });
 
     test('deleteFarm deletes farm', () async {
-      when(() => dio.delete<dynamic>(FarmEndpoints.farm('f1'))).thenAnswer(
-        (_) async => ok(null, statusCode: 200),
-      );
+      when(() => dio.delete<dynamic>(FarmEndpoints.farm('f1')))
+          .thenAnswer((_) async => ok(null, statusCode: 200));
 
       final success = await source.deleteFarm('f1');
       expect(success, true);
@@ -218,8 +222,9 @@ void main() {
     });
 
     test('getTransactionSummary parses totals and crop totals', () async {
-      when(() => dio.get<dynamic>(FarmEndpoints.transactionSummary('f1')))
-          .thenAnswer(
+      when(
+        () => dio.get<dynamic>(FarmEndpoints.transactionSummary('f1')),
+      ).thenAnswer(
         (_) async => ok({
           'success': true,
           'data': {

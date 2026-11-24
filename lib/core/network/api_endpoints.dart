@@ -48,4 +48,36 @@ abstract final class ApiEndpoints {
 
   static const currentFinancialYear = '/api/v1/financial-years/current';
 
+  static const shipments = '/api/v1/farmer/shipments';
+
+  static String shipment(String shipment) =>
+      '/api/v1/farmer/shipments/$shipment';
+
+  static String cancelShipment(String shipment) =>
+      '/api/v1/farmer/shipments/$shipment/cancel';
+
+  static const shipmentOptions = '/api/v1/farmer/shipments/options';
+
+  static const vendorShipments = '/api/v1/vendor/shipments';
+
+  static String vendorShipment(String shipment) =>
+      '/api/v1/vendor/shipments/$shipment';
+
+  static String acceptShipment(String shipment) =>
+      '/api/v1/vendor/shipments/$shipment/accept';
+
+  static String rejectShipment(String shipment) =>
+      '/api/v1/vendor/shipments/$shipment/reject';
+
+  static String reassignShipment(String shipment) =>
+      '/api/v1/vendor/shipments/$shipment/assignment';
+
+  static String receiveShipment(String shipment) =>
+      '/api/v1/vendor/shipments/$shipment/receive';
+
+  static String reweighShipmentItem(String shipment, String item) =>
+      '/api/v1/vendor/shipments/$shipment/items/$item/reweigh';
+
+  static String assignmentOptions(String shipment) =>
+      '/api/v1/vendor/shipments/$shipment/assignment-options';
 }

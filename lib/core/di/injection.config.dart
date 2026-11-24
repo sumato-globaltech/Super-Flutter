@@ -55,6 +55,12 @@ import 'package:super_flutter/data/market/repositories/market_repository_impl.da
     as _i341;
 import 'package:super_flutter/data/market/sources/remote/market_remote_data_source.dart'
     as _i1002;
+import 'package:super_flutter/data/shipments/repositories/shipments_repository_impl.dart'
+    as _i860;
+import 'package:super_flutter/data/shipments/sources/local/shipments_local_data_source.dart'
+    as _i299;
+import 'package:super_flutter/data/shipments/sources/remote/shipments_remote_data_source.dart'
+    as _i353;
 import 'package:super_flutter/domain/auth/repositories/auth_repository.dart'
     as _i631;
 import 'package:super_flutter/domain/auth/use_cases/check_auth_status.dart'
@@ -104,6 +110,12 @@ import 'package:super_flutter/features/market/presentation/market/bloc/market_bl
     as _i336;
 import 'package:super_flutter/features/market/presentation/market_prices/bloc/market_prices_bloc.dart'
     as _i688;
+import 'package:super_flutter/features/shipments/presentation/request_shipment/bloc/request_shipment_bloc.dart'
+    as _i837;
+import 'package:super_flutter/features/shipments/presentation/shipment_detail/bloc/shipment_detail_bloc.dart'
+    as _i100;
+import 'package:super_flutter/features/shipments/presentation/shipments/bloc/shipments_bloc.dart'
+    as _i935;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -120,6 +132,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i686.DeviceInfoService>(() => _i686.DeviceInfoService());
     gh.lazySingleton<_i940.CommunicationLocalDataSource>(
       () => _i940.CommunicationLocalDataSource(),
+    );
+    gh.lazySingleton<_i299.ShipmentsLocalDataSource>(
+      () => _i299.ShipmentsLocalDataSource(),
     );
     gh.lazySingleton<_i1067.Environment>(
       () => coreModule.appEnvironment(gh<_i65.AppConfig>()),
@@ -175,6 +190,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1002.MarketRemoteDataSource>(
       () => _i1002.MarketRemoteDataSource(gh<_i42.DioClient>()),
     );
+    gh.lazySingleton<_i353.ShipmentsRemoteDataSource>(
+      () => _i353.ShipmentsRemoteDataSource(gh<_i42.DioClient>()),
+    );
     gh.factory<_i255.FarmDetailBloc>(
       () => _i255.FarmDetailBloc(
         gh<_i773.FarmRemoteDataSource>(),
@@ -199,6 +217,15 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i468.CropRepositoryImpl>(
       () => _i468.CropRepositoryImpl(gh<_i444.CropRemoteDataSource>()),
+    );
+    gh.factory<_i837.RequestShipmentBloc>(
+      () => _i837.RequestShipmentBloc(gh<_i353.ShipmentsRemoteDataSource>()),
+    );
+    gh.factory<_i100.ShipmentDetailBloc>(
+      () => _i100.ShipmentDetailBloc(gh<_i353.ShipmentsRemoteDataSource>()),
+    );
+    gh.factory<_i935.ShipmentsBloc>(
+      () => _i935.ShipmentsBloc(gh<_i353.ShipmentsRemoteDataSource>()),
     );
     gh.lazySingleton<_i631.AuthRepository>(
       () => _i227.AuthRepositoryImpl(
@@ -226,6 +253,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i944.CommunicationRepositoryImpl(
         gh<_i390.CommunicationRemoteDataSource>(),
         gh<_i940.CommunicationLocalDataSource>(),
+      ),
+    );
+    gh.lazySingleton<_i860.ShipmentsRepositoryImpl>(
+      () => _i860.ShipmentsRepositoryImpl(
+        gh<_i353.ShipmentsRemoteDataSource>(),
+        gh<_i299.ShipmentsLocalDataSource>(),
       ),
     );
     gh.factory<_i336.MarketBloc>(

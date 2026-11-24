@@ -1,0 +1,87 @@
+# The choices each view was drawn with. sf make api and sf refresh view
+# read them; edit with their --show, --hide, --label and --pair flags.
+version: 1
+views:
+  - bloc: ShipmentDetailBloc
+    feature: shipments
+    screen: shipment_detail
+    call: getShipment
+    source_feature: shipments
+    model: ShipmentModel
+    model_feature: shipments
+    ids:
+      - shipment
+    show:
+      - number
+      - status
+      - requested_at
+      - accepted_at
+      - picked_up_at
+      - reached_at
+      - received_at
+      - rejected_at
+      - cancelled_at
+      - reject_reason
+      - cancel_reason
+      - notes
+      - vendor
+      - pickup
+      - vehicle
+      - driver
+    hide:
+      - id
+      - farmer
+    labels:
+      accepted_at: Accepted on
+      cancel_reason: Cancel reason
+      cancelled_at: Cancelled on
+      driver.code: Driver code
+      driver.name: Driver
+      driver.phone: Phone
+      number: Shipment
+      picked_up_at: Picked up on
+      pickup.address: Pickup address
+      pickup.late: Picked up late
+      pickup.preferred_on: Preferred pickup
+      reached_at: Reached on
+      received_at: Received on
+      reject_reason: Reject reason
+      rejected_at: Rejected on
+      requested_at: Requested on
+      status.label: Status
+      status.value: Code
+      vehicle.registration_number: Registration number
+      vendor.code: Vendor code
+      vendor.name: Vendor
+    pair: true
+    files:
+      lib/features/shipments/presentation/shipment_detail/bloc/shipment_detail_bloc.dart: c168835aef48cebc
+      lib/features/shipments/presentation/shipment_detail/bloc/shipment_detail_event.dart: 0b29fbdcce7fa9b7
+      lib/features/shipments/presentation/shipment_detail/bloc/shipment_detail_state.dart: bd62d483e81484eb
+      lib/features/shipments/presentation/shipment_detail/screen/shipment_detail_screen.dart: 6965108741c2bc7e
+  - bloc: ShipmentsBloc
+    feature: shipments
+    screen: shipments
+    call: getShipments
+    source_feature: shipments
+    model: ShipmentModel
+    model_feature: shipments
+    list: true
+    paged: true
+    show:
+      - number
+      - requested_at
+      - accepted_at
+      - rejected_at
+    hide:
+      - id
+      - reject_reason
+      - picked_up_at
+      - reached_at
+      - received_at
+    open: shipmentDetail
+    files:
+      lib/features/shipments/presentation/shipments/bloc/shipments_bloc.dart: 5c3550de8d52484d
+      lib/features/shipments/presentation/shipments/bloc/shipments_event.dart: 9b41a15bd3ef4a0e
+      lib/features/shipments/presentation/shipments/bloc/shipments_state.dart: debf65a640de2c3c
+      lib/features/shipments/presentation/shipments/screen/shipments_screen.dart: 14a16ddde1509a84

@@ -969,4 +969,303 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get farmEditFarmDone => 'Farm Detail updated.';
+
+  @override
+  String get shipmentsTitle => 'Shipments';
+
+  @override
+  String get shipmentsList => 'Shipments';
+
+  @override
+  String get shipmentsEmpty => 'No shipments yet';
+
+  @override
+  String get shipmentsNumber => 'Number';
+
+  @override
+  String get shipmentsRequestedAt => 'Requested At';
+
+  @override
+  String get shipmentsAcceptedAt => 'Accepted At';
+
+  @override
+  String get shipmentsRejectedAt => 'Rejected At';
+
+  @override
+  String get shipmentsShipmentDetailTitle => 'Shipment';
+
+  @override
+  String get valueYes => 'Yes';
+
+  @override
+  String get valueNo => 'No';
+
+  @override
+  String get shipmentsShipmentDetailDetails => 'Shipment Details';
+
+  @override
+  String get shipmentsShipmentDetailId => 'Id';
+
+  @override
+  String get shipmentsShipmentDetailNumber => 'Shipment';
+
+  @override
+  String get shipmentsShipmentDetailRejectReason => 'Reject reason';
+
+  @override
+  String get shipmentsShipmentDetailRequestedAt => 'Requested on';
+
+  @override
+  String get shipmentsShipmentDetailAcceptedAt => 'Accepted on';
+
+  @override
+  String get shipmentsShipmentDetailRejectedAt => 'Rejected on';
+
+  @override
+  String get shipmentsShipmentDetailPickedUpAt => 'Picked up on';
+
+  @override
+  String get shipmentsShipmentDetailReachedAt => 'Reached on';
+
+  @override
+  String get shipmentsShipmentDetailReceivedAt => 'Received on';
+
+  @override
+  String get shipmentsShipmentDetailStatus => 'Status';
+
+  @override
+  String get shipmentsShipmentDetailStatusValue => 'Code';
+
+  @override
+  String get shipmentsShipmentDetailStatusLabel => 'Status';
+
+  @override
+  String get shipmentsShipmentDetailFarmer => 'Farmer';
+
+  @override
+  String get shipmentsShipmentDetailFarmerId => 'Id';
+
+  @override
+  String get shipmentsShipmentDetailFarmerCode => 'Code';
+
+  @override
+  String get shipmentsShipmentDetailFarmerName => 'Name';
+
+  @override
+  String get shipmentsShipmentDetailVendor => 'Vendor';
+
+  @override
+  String get shipmentsShipmentDetailVendorId => 'Id';
+
+  @override
+  String get shipmentsShipmentDetailVendorCode => 'Vendor code';
+
+  @override
+  String get shipmentsShipmentDetailVendorName => 'Vendor';
+
+  @override
+  String get shipmentsShipmentDetailPickup => 'Pickup';
+
+  @override
+  String get shipmentsShipmentDetailPickupAddress => 'Pickup address';
+
+  @override
+  String get shipmentsShipmentDetailPickupPreferredOn => 'Preferred pickup';
+
+  @override
+  String get shipmentsShipmentDetailPickupLate => 'Picked up late';
+
+  @override
+  String get shipmentsShipmentDetailVehicle => 'Vehicle';
+
+  @override
+  String get shipmentsShipmentDetailVehicleId => 'Id';
+
+  @override
+  String get shipmentsShipmentDetailVehicleRegistrationNumber =>
+      'Registration number';
+
+  @override
+  String get shipmentsShipmentDetailDriver => 'Driver';
+
+  @override
+  String get shipmentsShipmentDetailDriverId => 'Id';
+
+  @override
+  String get shipmentsShipmentDetailDriverCode => 'Driver code';
+
+  @override
+  String get shipmentsShipmentDetailDriverName => 'Driver';
+
+  @override
+  String get shipmentsShipmentDetailDriverPhone => 'Phone';
+
+  @override
+  String get shipmentsRequestShipmentTitle => 'Request Shipment';
+
+  @override
+  String get shipmentsActive => 'Active';
+
+  @override
+  String get shipmentsHistory => 'History';
+
+  @override
+  String get shipmentsRequest => 'Request';
+
+  @override
+  String get shipmentsStatus => 'Status';
+
+  @override
+  String get shipmentsVendor => 'Vendor';
+
+  @override
+  String get shipmentsPickupOn => 'Pickup on';
+
+  @override
+  String get shipmentsItems => 'Items';
+
+  @override
+  String get shipmentsActiveEmpty => 'No active shipments';
+
+  @override
+  String get shipmentsHistoryEmpty => 'No past shipments';
+
+  @override
+  String get shipmentsShipmentDetailCancelledAt => 'Cancelled on';
+
+  @override
+  String get shipmentsShipmentDetailCancelReason => 'Cancel reason';
+
+  @override
+  String get shipmentsShipmentDetailNotes => 'Notes';
+
+  @override
+  String get shipmentsPicked => 'Picked';
+
+  @override
+  String get shipmentsReceived => 'Received';
+
+  @override
+  String get shipmentsVehicleType => 'Vehicle type';
+
+  @override
+  String get shipmentsCancel => 'Cancel shipment';
+
+  @override
+  String get shipmentsCancelTitle => 'Cancel this shipment?';
+
+  @override
+  String get shipmentsCancelMessage =>
+      'The vendor will be told it is cancelled.';
+
+  @override
+  String get shipmentsCancelReason => 'Reason';
+
+  @override
+  String get shipmentsCancelled => 'Shipment cancelled';
+
+  @override
+  String get shipmentsPickupDistrict => 'Pickup district';
+
+  @override
+  String get shipmentsPickupAddress => 'Pickup address';
+
+  @override
+  String get shipmentsNotes => 'Notes';
+
+  @override
+  String get shipmentsItem => 'Item';
+
+  @override
+  String get shipmentsCrop => 'Crop';
+
+  @override
+  String get shipmentsQuantity => 'Quantity';
+
+  @override
+  String get shipmentsUnit => 'Unit';
+
+  @override
+  String get shipmentsAddItem => 'Add item';
+
+  @override
+  String get shipmentsRemoveItem => 'Remove item';
+
+  @override
+  String get shipmentsInvalidQuantity => 'Enter a quantity greater than 0';
+
+  @override
+  String get shipmentsSend => 'Send request';
+
+  @override
+  String get shipmentsRequested => 'Shipment sent to the vendor';
+
+  @override
+  String get shipmentsFarmer => 'Farmer';
+
+  @override
+  String get shipmentsReason => 'Reason';
+
+  @override
+  String get shipmentsAccept => 'Accept';
+
+  @override
+  String get shipmentsAcceptTitle => 'Accept this shipment?';
+
+  @override
+  String get shipmentsAccepted => 'Shipment accepted';
+
+  @override
+  String get shipmentsAssignMessage =>
+      'Choose the vehicle and driver who will pick it up.';
+
+  @override
+  String get shipmentsOnTrip => 'On a trip';
+
+  @override
+  String get shipmentsReject => 'Reject';
+
+  @override
+  String get shipmentsRejectTitle => 'Reject this shipment?';
+
+  @override
+  String get shipmentsRejectMessage => 'The farmer will see your reason.';
+
+  @override
+  String get shipmentsRejected => 'Shipment rejected';
+
+  @override
+  String get shipmentsReassign => 'Reassign';
+
+  @override
+  String get shipmentsReassignTitle => 'Change vehicle or driver';
+
+  @override
+  String get shipmentsReassigned => 'Vehicle and driver updated';
+
+  @override
+  String get shipmentsReceive => 'Receive';
+
+  @override
+  String get shipmentsReceiveTitle => 'Record what you received';
+
+  @override
+  String get shipmentsReceiveMessage =>
+      'Enter the quantity received for each item.';
+
+  @override
+  String get shipmentsReweigh => 'Re-weigh';
+
+  @override
+  String get shipmentsReweighTitle => 'Re-weigh an item';
+
+  @override
+  String get shipmentsReweighMessage =>
+      'Correct the received quantity of one item.';
+
+  @override
+  String get shipmentsReweighed => 'Re-weighed quantity saved';
+
+  @override
+  String get shipmentsInvalidWeighed => 'Enter 0 or more';
 }

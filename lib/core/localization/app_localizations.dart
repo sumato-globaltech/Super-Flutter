@@ -1873,6 +1873,594 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Farm Detail updated.'**
   String get farmEditFarmDone;
+
+  /// App bar title of the shipments screen
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get shipmentsTitle;
+
+  /// Title of the ShipmentModel list
+  ///
+  /// In en, this message translates to:
+  /// **'Shipments'**
+  String get shipmentsList;
+
+  /// Shown when there is no ShipmentModel
+  ///
+  /// In en, this message translates to:
+  /// **'No shipments yet'**
+  String get shipmentsEmpty;
+
+  /// Label of the number row
+  ///
+  /// In en, this message translates to:
+  /// **'Number'**
+  String get shipmentsNumber;
+
+  /// Label of the requestedAt row
+  ///
+  /// In en, this message translates to:
+  /// **'Requested At'**
+  String get shipmentsRequestedAt;
+
+  /// Label of the acceptedAt row
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted At'**
+  String get shipmentsAcceptedAt;
+
+  /// Label of the rejectedAt row
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected At'**
+  String get shipmentsRejectedAt;
+
+  /// App bar title of the shipment_detail screen
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment'**
+  String get shipmentsShipmentDetailTitle;
+
+  /// A true value
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get valueYes;
+
+  /// A false value
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get valueNo;
+
+  /// Title of the ShipmentModel card
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment Details'**
+  String get shipmentsShipmentDetailDetails;
+
+  /// Label of the id row
+  ///
+  /// In en, this message translates to:
+  /// **'Id'**
+  String get shipmentsShipmentDetailId;
+
+  /// Label of the number row
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment'**
+  String get shipmentsShipmentDetailNumber;
+
+  /// Label of the rejectReason row
+  ///
+  /// In en, this message translates to:
+  /// **'Reject reason'**
+  String get shipmentsShipmentDetailRejectReason;
+
+  /// Label of the requestedAt row
+  ///
+  /// In en, this message translates to:
+  /// **'Requested on'**
+  String get shipmentsShipmentDetailRequestedAt;
+
+  /// Label of the acceptedAt row
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted on'**
+  String get shipmentsShipmentDetailAcceptedAt;
+
+  /// Label of the rejectedAt row
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected on'**
+  String get shipmentsShipmentDetailRejectedAt;
+
+  /// Label of the pickedUpAt row
+  ///
+  /// In en, this message translates to:
+  /// **'Picked up on'**
+  String get shipmentsShipmentDetailPickedUpAt;
+
+  /// Label of the reachedAt row
+  ///
+  /// In en, this message translates to:
+  /// **'Reached on'**
+  String get shipmentsShipmentDetailReachedAt;
+
+  /// Label of the receivedAt row
+  ///
+  /// In en, this message translates to:
+  /// **'Received on'**
+  String get shipmentsShipmentDetailReceivedAt;
+
+  /// Title of the status card
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get shipmentsShipmentDetailStatus;
+
+  /// Label of the status.value row
+  ///
+  /// In en, this message translates to:
+  /// **'Code'**
+  String get shipmentsShipmentDetailStatusValue;
+
+  /// Label of the status.label row
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get shipmentsShipmentDetailStatusLabel;
+
+  /// Title of the farmer card
+  ///
+  /// In en, this message translates to:
+  /// **'Farmer'**
+  String get shipmentsShipmentDetailFarmer;
+
+  /// Label of the farmer.id row
+  ///
+  /// In en, this message translates to:
+  /// **'Id'**
+  String get shipmentsShipmentDetailFarmerId;
+
+  /// Label of the farmer.code row
+  ///
+  /// In en, this message translates to:
+  /// **'Code'**
+  String get shipmentsShipmentDetailFarmerCode;
+
+  /// Label of the farmer.name row
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get shipmentsShipmentDetailFarmerName;
+
+  /// Title of the vendor card
+  ///
+  /// In en, this message translates to:
+  /// **'Vendor'**
+  String get shipmentsShipmentDetailVendor;
+
+  /// Label of the vendor.id row
+  ///
+  /// In en, this message translates to:
+  /// **'Id'**
+  String get shipmentsShipmentDetailVendorId;
+
+  /// Label of the vendor.code row
+  ///
+  /// In en, this message translates to:
+  /// **'Vendor code'**
+  String get shipmentsShipmentDetailVendorCode;
+
+  /// Label of the vendor.name row
+  ///
+  /// In en, this message translates to:
+  /// **'Vendor'**
+  String get shipmentsShipmentDetailVendorName;
+
+  /// Title of the pickup card
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup'**
+  String get shipmentsShipmentDetailPickup;
+
+  /// Label of the pickup.address row
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup address'**
+  String get shipmentsShipmentDetailPickupAddress;
+
+  /// Label of the pickup.preferredOn row
+  ///
+  /// In en, this message translates to:
+  /// **'Preferred pickup'**
+  String get shipmentsShipmentDetailPickupPreferredOn;
+
+  /// Label of the pickup.late row
+  ///
+  /// In en, this message translates to:
+  /// **'Picked up late'**
+  String get shipmentsShipmentDetailPickupLate;
+
+  /// Title of the vehicle card
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle'**
+  String get shipmentsShipmentDetailVehicle;
+
+  /// Label of the vehicle.id row
+  ///
+  /// In en, this message translates to:
+  /// **'Id'**
+  String get shipmentsShipmentDetailVehicleId;
+
+  /// Label of the vehicle.registrationNumber row
+  ///
+  /// In en, this message translates to:
+  /// **'Registration number'**
+  String get shipmentsShipmentDetailVehicleRegistrationNumber;
+
+  /// Title of the driver card
+  ///
+  /// In en, this message translates to:
+  /// **'Driver'**
+  String get shipmentsShipmentDetailDriver;
+
+  /// Label of the driver.id row
+  ///
+  /// In en, this message translates to:
+  /// **'Id'**
+  String get shipmentsShipmentDetailDriverId;
+
+  /// Label of the driver.code row
+  ///
+  /// In en, this message translates to:
+  /// **'Driver code'**
+  String get shipmentsShipmentDetailDriverCode;
+
+  /// Label of the driver.name row
+  ///
+  /// In en, this message translates to:
+  /// **'Driver'**
+  String get shipmentsShipmentDetailDriverName;
+
+  /// Label of the driver.phone row
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get shipmentsShipmentDetailDriverPhone;
+
+  /// App bar title of the request_shipment screen
+  ///
+  /// In en, this message translates to:
+  /// **'Request Shipment'**
+  String get shipmentsRequestShipmentTitle;
+
+  /// No description provided for @shipmentsActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get shipmentsActive;
+
+  /// No description provided for @shipmentsHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get shipmentsHistory;
+
+  /// No description provided for @shipmentsRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Request'**
+  String get shipmentsRequest;
+
+  /// No description provided for @shipmentsStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get shipmentsStatus;
+
+  /// No description provided for @shipmentsVendor.
+  ///
+  /// In en, this message translates to:
+  /// **'Vendor'**
+  String get shipmentsVendor;
+
+  /// No description provided for @shipmentsPickupOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup on'**
+  String get shipmentsPickupOn;
+
+  /// No description provided for @shipmentsItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Items'**
+  String get shipmentsItems;
+
+  /// No description provided for @shipmentsActiveEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No active shipments'**
+  String get shipmentsActiveEmpty;
+
+  /// No description provided for @shipmentsHistoryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No past shipments'**
+  String get shipmentsHistoryEmpty;
+
+  /// Label of the cancelledAt row
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled on'**
+  String get shipmentsShipmentDetailCancelledAt;
+
+  /// Label of the cancelReason row
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel reason'**
+  String get shipmentsShipmentDetailCancelReason;
+
+  /// Label of the notes row
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get shipmentsShipmentDetailNotes;
+
+  /// No description provided for @shipmentsPicked.
+  ///
+  /// In en, this message translates to:
+  /// **'Picked'**
+  String get shipmentsPicked;
+
+  /// No description provided for @shipmentsReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'Received'**
+  String get shipmentsReceived;
+
+  /// No description provided for @shipmentsVehicleType.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle type'**
+  String get shipmentsVehicleType;
+
+  /// No description provided for @shipmentsCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel shipment'**
+  String get shipmentsCancel;
+
+  /// No description provided for @shipmentsCancelTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel this shipment?'**
+  String get shipmentsCancelTitle;
+
+  /// No description provided for @shipmentsCancelMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'The vendor will be told it is cancelled.'**
+  String get shipmentsCancelMessage;
+
+  /// No description provided for @shipmentsCancelReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get shipmentsCancelReason;
+
+  /// No description provided for @shipmentsCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment cancelled'**
+  String get shipmentsCancelled;
+
+  /// No description provided for @shipmentsPickupDistrict.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup district'**
+  String get shipmentsPickupDistrict;
+
+  /// No description provided for @shipmentsPickupAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup address'**
+  String get shipmentsPickupAddress;
+
+  /// No description provided for @shipmentsNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get shipmentsNotes;
+
+  /// No description provided for @shipmentsItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Item'**
+  String get shipmentsItem;
+
+  /// No description provided for @shipmentsCrop.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop'**
+  String get shipmentsCrop;
+
+  /// No description provided for @shipmentsQuantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity'**
+  String get shipmentsQuantity;
+
+  /// No description provided for @shipmentsUnit.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit'**
+  String get shipmentsUnit;
+
+  /// No description provided for @shipmentsAddItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Add item'**
+  String get shipmentsAddItem;
+
+  /// No description provided for @shipmentsRemoveItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove item'**
+  String get shipmentsRemoveItem;
+
+  /// No description provided for @shipmentsInvalidQuantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a quantity greater than 0'**
+  String get shipmentsInvalidQuantity;
+
+  /// No description provided for @shipmentsSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send request'**
+  String get shipmentsSend;
+
+  /// No description provided for @shipmentsRequested.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment sent to the vendor'**
+  String get shipmentsRequested;
+
+  /// No description provided for @shipmentsFarmer.
+  ///
+  /// In en, this message translates to:
+  /// **'Farmer'**
+  String get shipmentsFarmer;
+
+  /// No description provided for @shipmentsReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get shipmentsReason;
+
+  /// No description provided for @shipmentsAccept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get shipmentsAccept;
+
+  /// No description provided for @shipmentsAcceptTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept this shipment?'**
+  String get shipmentsAcceptTitle;
+
+  /// No description provided for @shipmentsAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment accepted'**
+  String get shipmentsAccepted;
+
+  /// No description provided for @shipmentsAssignMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the vehicle and driver who will pick it up.'**
+  String get shipmentsAssignMessage;
+
+  /// No description provided for @shipmentsOnTrip.
+  ///
+  /// In en, this message translates to:
+  /// **'On a trip'**
+  String get shipmentsOnTrip;
+
+  /// No description provided for @shipmentsReject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get shipmentsReject;
+
+  /// No description provided for @shipmentsRejectTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject this shipment?'**
+  String get shipmentsRejectTitle;
+
+  /// No description provided for @shipmentsRejectMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'The farmer will see your reason.'**
+  String get shipmentsRejectMessage;
+
+  /// No description provided for @shipmentsRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment rejected'**
+  String get shipmentsRejected;
+
+  /// No description provided for @shipmentsReassign.
+  ///
+  /// In en, this message translates to:
+  /// **'Reassign'**
+  String get shipmentsReassign;
+
+  /// No description provided for @shipmentsReassignTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change vehicle or driver'**
+  String get shipmentsReassignTitle;
+
+  /// No description provided for @shipmentsReassigned.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle and driver updated'**
+  String get shipmentsReassigned;
+
+  /// No description provided for @shipmentsReceive.
+  ///
+  /// In en, this message translates to:
+  /// **'Receive'**
+  String get shipmentsReceive;
+
+  /// No description provided for @shipmentsReceiveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Record what you received'**
+  String get shipmentsReceiveTitle;
+
+  /// No description provided for @shipmentsReceiveMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the quantity received for each item.'**
+  String get shipmentsReceiveMessage;
+
+  /// No description provided for @shipmentsReweigh.
+  ///
+  /// In en, this message translates to:
+  /// **'Re-weigh'**
+  String get shipmentsReweigh;
+
+  /// No description provided for @shipmentsReweighTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Re-weigh an item'**
+  String get shipmentsReweighTitle;
+
+  /// No description provided for @shipmentsReweighMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct the received quantity of one item.'**
+  String get shipmentsReweighMessage;
+
+  /// No description provided for @shipmentsReweighed.
+  ///
+  /// In en, this message translates to:
+  /// **'Re-weighed quantity saved'**
+  String get shipmentsReweighed;
+
+  /// No description provided for @shipmentsInvalidWeighed.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter 0 or more'**
+  String get shipmentsInvalidWeighed;
 }
 
 class _AppLocalizationsDelegate
