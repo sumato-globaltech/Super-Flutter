@@ -1412,4 +1412,58 @@ class AppLocalizationsEn extends AppLocalizations {
   String schemesApplyMessageDocuments(String documents) {
     return 'Your application goes to the officers for review. Then upload these documents from My applications: $documents';
   }
+
+  @override
+  String get schemesStatus => 'Status';
+
+  @override
+  String get schemesAppliedOn => 'Applied on';
+
+  @override
+  String get schemesDecisionNote => 'Officer\'s note';
+
+  @override
+  String get schemesAmountApproved => 'Approved';
+
+  @override
+  String get schemesAmountDisbursed => 'Disbursed';
+
+  @override
+  String get schemesNotUploaded => 'Not uploaded';
+
+  @override
+  String get schemesUpload => 'Upload';
+
+  @override
+  String get schemesReplace => 'Replace';
+
+  @override
+  String get schemesUploaded => 'Document uploaded';
+
+  @override
+  String get schemesFileTooLarge => 'Choose a file of 5 MB or less';
+
+  @override
+  String get schemesWithdraw => 'Withdraw';
+
+  @override
+  String get schemesWithdrawTitle => 'Withdraw this application?';
+
+  @override
+  String get schemesWithdrawMessage =>
+      'The officers will stop reviewing it. You can\'t undo this.';
+
+  @override
+  String get schemesWithdrawn => 'Application withdrawn';
+
+  @override
+  String get schemesNoApplications => 'No applications yet';
+
+  @override
+  String get schemesNoApplicationsMessage => 'Open a scheme and tap Apply.';
+
+  @override
+  String schemesUploadTitle(String document) {
+    return 'Upload $document?';
+  }
 }

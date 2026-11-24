@@ -307,5 +307,22 @@
   "schemesApplyMessage": "Tu solicitud llegará a los funcionarios para su revisión.",
   "schemesApplied": "Solicitud enviada",
   "schemesYourApplication": "Tu solicitud",
-  "schemesApplyMessageDocuments": "Tu solicitud llegará a los funcionarios. Después sube estos documentos desde Mis solicitudes: {documents}"
+  "schemesApplyMessageDocuments": "Tu solicitud llegará a los funcionarios. Después sube estos documentos desde Mis solicitudes: {documents}",
+  "schemesStatus": "Estado",
+  "schemesAppliedOn": "Solicitado el",
+  "schemesDecisionNote": "Nota del funcionario",
+  "schemesAmountApproved": "Aprobado",
+  "schemesAmountDisbursed": "Desembolsado",
+  "schemesNotUploaded": "Sin subir",
+  "schemesUpload": "Subir",
+  "schemesReplace": "Reemplazar",
+  "schemesUploaded": "Documento subido",
+  "schemesFileTooLarge": "Elige un archivo de 5 MB o menos",
+  "schemesWithdraw": "Retirar",
+  "schemesWithdrawTitle": "¿Retirar esta solicitud?",
+  "schemesWithdrawMessage": "Los funcionarios dejarán de revisarla. No se puede deshacer.",
+  "schemesWithdrawn": "Solicitud retirada",
+  "schemesNoApplications": "Aún no hay solicitudes",
+  "schemesNoApplicationsMessage": "Abre un programa y pulsa Solicitar.",
+  "schemesUploadTitle": "¿Subir {document}?"
 }

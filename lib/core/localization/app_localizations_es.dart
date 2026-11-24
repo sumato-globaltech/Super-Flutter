@@ -1417,4 +1417,59 @@ class AppLocalizationsEs extends AppLocalizations {
   String schemesApplyMessageDocuments(String documents) {
     return 'Tu solicitud llegará a los funcionarios. Después sube estos documentos desde Mis solicitudes: $documents';
   }
+
+  @override
+  String get schemesStatus => 'Estado';
+
+  @override
+  String get schemesAppliedOn => 'Solicitado el';
+
+  @override
+  String get schemesDecisionNote => 'Nota del funcionario';
+
+  @override
+  String get schemesAmountApproved => 'Aprobado';
+
+  @override
+  String get schemesAmountDisbursed => 'Desembolsado';
+
+  @override
+  String get schemesNotUploaded => 'Sin subir';
+
+  @override
+  String get schemesUpload => 'Subir';
+
+  @override
+  String get schemesReplace => 'Reemplazar';
+
+  @override
+  String get schemesUploaded => 'Documento subido';
+
+  @override
+  String get schemesFileTooLarge => 'Elige un archivo de 5 MB o menos';
+
+  @override
+  String get schemesWithdraw => 'Retirar';
+
+  @override
+  String get schemesWithdrawTitle => '¿Retirar esta solicitud?';
+
+  @override
+  String get schemesWithdrawMessage =>
+      'Los funcionarios dejarán de revisarla. No se puede deshacer.';
+
+  @override
+  String get schemesWithdrawn => 'Solicitud retirada';
+
+  @override
+  String get schemesNoApplications => 'Aún no hay solicitudes';
+
+  @override
+  String get schemesNoApplicationsMessage =>
+      'Abre un programa y pulsa Solicitar.';
+
+  @override
+  String schemesUploadTitle(String document) {
+    return '¿Subir $document?';
+  }
 }

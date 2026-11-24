@@ -409,39 +409,27 @@ class _ShipmentDetailView extends StatelessWidget {
                                   ),
                               ],
                             ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: TitleDetailsCard(
-                                  title:
-                                      l10n.shipmentsShipmentDetailRejectReason,
-                                  text: shipmentDetails == null
-                                      ? ''
-                                      : shipmentDetails.rejectReason ?? '--',
-                                  isTextLoading: shipmentDetails == null,
-                                  iconData: PhosphorIconsRegular.note,
-                                  accentColor: DesignColor.accentEnergy,
-                                  isReadMore: true,
-                                ),
-                              ),
-                            ],
+                          TitleDetailsCard(
+                            title:
+                                l10n.shipmentsShipmentDetailRejectReason,
+                            text: shipmentDetails == null
+                                ? ''
+                                : shipmentDetails.rejectReason ?? '--',
+                            isTextLoading: shipmentDetails == null,
+                            iconData: PhosphorIconsRegular.note,
+                            accentColor: DesignColor.accentEnergy,
+                            isReadMore: true,
                           ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: TitleDetailsCard(
-                                  title:
-                                      l10n.shipmentsShipmentDetailCancelReason,
-                                  text: shipmentDetails == null
-                                      ? ''
-                                      : shipmentDetails.cancelReason ?? '--',
-                                  isTextLoading: shipmentDetails == null,
-                                  iconData: PhosphorIconsRegular.note,
-                                  accentColor: DesignColor.accentEnergy,
-                                  isReadMore: true,
-                                ),
-                              ),
-                            ],
+                          TitleDetailsCard(
+                            title:
+                                l10n.shipmentsShipmentDetailCancelReason,
+                            text: shipmentDetails == null
+                                ? ''
+                                : shipmentDetails.cancelReason ?? '--',
+                            isTextLoading: shipmentDetails == null,
+                            iconData: PhosphorIconsRegular.note,
+                            accentColor: DesignColor.accentEnergy,
+                            isReadMore: true,
                           ),
                           if (state.party != ShipmentParty.farmer)
                             TitleDetailsCard(
@@ -462,21 +450,15 @@ class _ShipmentDetailView extends StatelessWidget {
                             iconData: PhosphorIconsRegular.flag,
                             accentColor: DesignColor.accentType,
                           ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: TitleDetailsCard(
-                                  title: l10n.shipmentsShipmentDetailNotes,
-                                  text: shipmentDetails == null
-                                      ? ''
-                                      : shipmentDetails.notes ?? '--',
-                                  isTextLoading: shipmentDetails == null,
-                                  iconData: PhosphorIconsRegular.note,
-                                  accentColor: DesignColor.accentEnergy,
-                                  isReadMore: true,
-                                ),
-                              ),
-                            ],
+                          TitleDetailsCard(
+                            title: l10n.shipmentsShipmentDetailNotes,
+                            text: shipmentDetails == null
+                                ? ''
+                                : shipmentDetails.notes ?? '--',
+                            isTextLoading: shipmentDetails == null,
+                            iconData: PhosphorIconsRegular.note,
+                            accentColor: DesignColor.accentEnergy,
+                            isReadMore: true,
                           ),
                         ],
                       ),

@@ -2737,6 +2737,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your application goes to the officers for review. Then upload these documents from My applications: {documents}'**
   String schemesApplyMessageDocuments(String documents);
+
+  /// No description provided for @schemesStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get schemesStatus;
+
+  /// No description provided for @schemesAppliedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Applied on'**
+  String get schemesAppliedOn;
+
+  /// No description provided for @schemesDecisionNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Officer\'s note'**
+  String get schemesDecisionNote;
+
+  /// No description provided for @schemesAmountApproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get schemesAmountApproved;
+
+  /// No description provided for @schemesAmountDisbursed.
+  ///
+  /// In en, this message translates to:
+  /// **'Disbursed'**
+  String get schemesAmountDisbursed;
+
+  /// No description provided for @schemesNotUploaded.
+  ///
+  /// In en, this message translates to:
+  /// **'Not uploaded'**
+  String get schemesNotUploaded;
+
+  /// No description provided for @schemesUpload.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload'**
+  String get schemesUpload;
+
+  /// No description provided for @schemesReplace.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace'**
+  String get schemesReplace;
+
+  /// No description provided for @schemesUploaded.
+  ///
+  /// In en, this message translates to:
+  /// **'Document uploaded'**
+  String get schemesUploaded;
+
+  /// No description provided for @schemesFileTooLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a file of 5 MB or less'**
+  String get schemesFileTooLarge;
+
+  /// No description provided for @schemesWithdraw.
+  ///
+  /// In en, this message translates to:
+  /// **'Withdraw'**
+  String get schemesWithdraw;
+
+  /// No description provided for @schemesWithdrawTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Withdraw this application?'**
+  String get schemesWithdrawTitle;
+
+  /// No description provided for @schemesWithdrawMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'The officers will stop reviewing it. You can\'t undo this.'**
+  String get schemesWithdrawMessage;
+
+  /// No description provided for @schemesWithdrawn.
+  ///
+  /// In en, this message translates to:
+  /// **'Application withdrawn'**
+  String get schemesWithdrawn;
+
+  /// No description provided for @schemesNoApplications.
+  ///
+  /// In en, this message translates to:
+  /// **'No applications yet'**
+  String get schemesNoApplications;
+
+  /// No description provided for @schemesNoApplicationsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Open a scheme and tap Apply.'**
+  String get schemesNoApplicationsMessage;
+
+  /// No description provided for @schemesUploadTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload {document}?'**
+  String schemesUploadTitle(String document);
 }
 
 class _AppLocalizationsDelegate
