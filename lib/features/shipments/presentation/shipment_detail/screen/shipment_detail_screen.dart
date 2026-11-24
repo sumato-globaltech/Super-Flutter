@@ -361,44 +361,54 @@ class _ShipmentDetailView extends StatelessWidget {
                                   ),
                               ],
                             ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Flexible(
-                                child: TitleDetailsCard(
-                                  title: l10n.shipmentsShipmentDetailRejectedAt,
-                                  text: shipmentDetails == null
-                                      ? ''
-                                      : switch (shipmentDetails.rejectedAt) {
-                                          final date? =>
-                                            DateFormat.yMMMd().format(date),
-                                          null => '--',
-                                        },
-                                  isTextLoading: shipmentDetails == null,
-                                  iconData: PhosphorIconsRegular.calendarBlank,
-                                  accentColor: DesignColor.accentType,
-                                ),
-                              ),
-                              Flexible(
-                                child: TitleDetailsCard(
-                                  title:
-                                      l10n.shipmentsShipmentDetailCancelledAt,
-                                  text: shipmentDetails == null
-                                      ? ''
-                                      : switch (shipmentDetails.cancelledAt) {
-                                          final date? =>
-                                            DateFormat.yMMMd().format(date),
-                                          null => '--',
-                                        },
-                                  isTextLoading: shipmentDetails == null,
-                                  isCrossAxisAlignmentStart: false,
-                                  iconData: PhosphorIconsRegular.calendarBlank,
-                                  accentColor: DesignColor.accentType,
-                                ),
-                              ),
-                            ],
-                          ),
+                          if (shipmentDetails?.rejectedAt != null ||
+                              shipmentDetails?.cancelledAt != null)
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                if (shipmentDetails?.rejectedAt != null)
+                                  Flexible(
+                                    child: TitleDetailsCard(
+                                      title: l10n
+                                          .shipmentsShipmentDetailRejectedAt,
+                                      text: shipmentDetails == null
+                                          ? ''
+                                          : switch (shipmentDetails
+                                                .rejectedAt) {
+                                              final date? =>
+                                                DateFormat.yMMMd().format(date),
+                                              null => '--',
+                                            },
+                                      isTextLoading: shipmentDetails == null,
+                                      iconData:
+                                          PhosphorIconsRegular.calendarBlank,
+                                      accentColor: DesignColor.accentType,
+                                    ),
+                                  ),
+                                if (shipmentDetails?.cancelledAt != null)
+                                  Flexible(
+                                    child: TitleDetailsCard(
+                                      title: l10n
+                                          .shipmentsShipmentDetailCancelledAt,
+                                      text: shipmentDetails == null
+                                          ? ''
+                                          : switch (shipmentDetails
+                                                .cancelledAt) {
+                                              final date? =>
+                                                DateFormat.yMMMd().format(date),
+                                              null => '--',
+                                            },
+                                      isTextLoading: shipmentDetails == null,
+                                      isCrossAxisAlignmentStart:
+                                          shipmentDetails?.rejectedAt == null,
+                                      iconData:
+                                          PhosphorIconsRegular.calendarBlank,
+                                      accentColor: DesignColor.accentType,
+                                    ),
+                                  ),
+                              ],
+                            ),
                           Row(
                             children: [
                               Expanded(
