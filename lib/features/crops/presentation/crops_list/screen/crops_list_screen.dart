@@ -112,7 +112,9 @@ class _CropsListViewState extends State<_CropsListView> {
                       label: Text(
                         l10n.all,
                         style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.secondary,
+                          color: state.selectedType == null
+                              ? theme.colorScheme.secondary
+                              : theme.colorScheme.primary,
                         ),
                       ),
                       onSelected: (_) {
@@ -131,7 +133,14 @@ class _CropsListViewState extends State<_CropsListView> {
                         padding: const EdgeInsets.only(right: AppSpacing.xs),
                         child: FilterChip(
                           selected: isSelected,
-                          label: Text(label),
+                          label: Text(
+                            label,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: isSelected
+                                  ? theme.colorScheme.secondary
+                                  : theme.colorScheme.primary,
+                            ),
+                          ),
                           onSelected: (_) {
                             context.read<CropsListBloc>().add(
                               CropsListTypeSelected(isSelected ? null : type),
