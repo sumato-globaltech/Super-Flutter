@@ -265,7 +265,7 @@ class _MyApplicationsView extends StatelessWidget {
                                     ?document.remarks,
                                   ].join(' · '),
                                   iconData: (document.uploaded ?? false)
-                                      ? PhosphorIconsRegular.fileCheck
+                                      ? PhosphorIconsRegular.checkCircle
                                       : PhosphorIconsRegular.fileArrowUp,
                                   accentColor: DesignColor.accentUin,
                                   showNavigateIcon: document.url != null,
@@ -281,8 +281,7 @@ class _MyApplicationsView extends StatelessWidget {
                                     spacing: AppSpacing.sm,
                                     children: [
                                       for (final document
-                                          in application.documents ??
-                                              const [])
+                                          in application.documents ?? const [])
                                         if (document.name != null &&
                                             document.status?.value !=
                                                 'verified')
@@ -308,9 +307,9 @@ class _MyApplicationsView extends StatelessWidget {
                                     alignment: Alignment.centerRight,
                                     child: TextButton.icon(
                                       style: TextButton.styleFrom(
-                                        foregroundColor: Theme.of(
-                                          context,
-                                        ).colorScheme.error,
+                                        foregroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .error,
                                       ),
                                       onPressed: () =>
                                           _withdraw(context, l10n, id),
