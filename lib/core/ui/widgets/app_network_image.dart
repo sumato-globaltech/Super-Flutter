@@ -39,7 +39,11 @@ class AppNetworkImage extends StatelessWidget {
                 fit: fit,
                 cacheWidth: width == null
                     ? null
-                    : (width! * MediaQuery.devicePixelRatioOf(context)).round(),
+                    : ((width!.isFinite
+                                  ? width!
+                                  : MediaQuery.sizeOf(context).width) *
+                              MediaQuery.devicePixelRatioOf(context))
+                          .round(),
                 loadingBuilder: (context, child, progress) {
                   if (progress == null) return child;
                   return ColoredBox(

@@ -248,7 +248,12 @@ void main() {
     ).thenAnswer(
       (_) async => Paged(
         items: [
-          PublicationModel(id: 'p1', title: 'Report', pdfUrl: 'https://x/p'),
+          PublicationModel(
+            id: 'p1',
+            title: 'Report',
+            coverUrl: 'https://x/c',
+            pdfUrl: 'https://x/p',
+          ),
           PublicationModel(id: 'p2', title: 'Note', summary: 'Text'),
         ],
       ),
