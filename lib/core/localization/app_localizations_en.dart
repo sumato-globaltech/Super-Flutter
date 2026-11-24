@@ -1862,4 +1862,120 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileChangePassword => 'Change password';
+
+  @override
+  String get publicationsTitle => 'Publications';
+
+  @override
+  String get meetingsTitle => 'Meetings';
+
+  @override
+  String get facilitiesTitle => 'Facilities';
+
+  @override
+  String get facilitiesFacilityStatsTitle => 'Statistics';
+
+  @override
+  String get publicationsList => 'Publications';
+
+  @override
+  String get publicationsEmpty => 'No publications yet';
+
+  @override
+  String get publicationsSummary => 'Summary';
+
+  @override
+  String get meetingsList => 'Meetings';
+
+  @override
+  String get meetingsEmpty => 'No upcoming meetings';
+
+  @override
+  String get meetingsAgenda => 'Agenda';
+
+  @override
+  String get meetingsStartsAt => 'Starts';
+
+  @override
+  String get facilitiesList => 'Facilities';
+
+  @override
+  String get facilitiesEmpty => 'No facilities yet';
+
+  @override
+  String get facilitiesName => 'Name';
+
+  @override
+  String get facilitiesAddress => 'Address';
+
+  @override
+  String get facilitiesFacilityStatsDetails => 'Summary';
+
+  @override
+  String get facilitiesFacilityStatsTotal => 'Total';
+
+  @override
+  String get facilitiesFacilityStatsOperational => 'Operational';
+
+  @override
+  String get publicationsOpen => 'Open PDF';
+
+  @override
+  String get meetingsChoose => 'Choose a district to see its meetings';
+
+  @override
+  String get meetingsStatus => 'Status';
+
+  @override
+  String meetingsRescheduled(String date) {
+    return 'moved from $date';
+  }
+
+  @override
+  String get meetingsJoin => 'Join';
+
+  @override
+  String get facilitiesType => 'Type';
+
+  @override
+  String get facilitiesAllTypes => 'All types';
+
+  @override
+  String get facilitiesAllDistricts => 'All districts';
+
+  @override
+  String get facilitiesStatus => 'Status';
+
+  @override
+  String get facilitiesOperational => 'Operational';
+
+  @override
+  String get facilitiesNotOperational => 'Not operational';
+
+  @override
+  String get facilitiesCapacity => 'Capacity';
+
+  @override
+  String facilitiesTonnesPerDay(String amount) {
+    return '$amount tonnes/day';
+  }
+
+  @override
+  String facilitiesSqm(String amount) {
+    return '$amount m² storage';
+  }
+
+  @override
+  String get facilitiesProducts => 'Products';
+
+  @override
+  String get facilitiesByType => 'By type';
+
+  @override
+  String get facilitiesByDistrict => 'By district';
+
+  @override
+  String facilitiesWorking(int working, int total) {
+    return '$working of $total operational';
+  }
 }

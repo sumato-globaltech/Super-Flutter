@@ -1077,5 +1077,81 @@
   "profileBlocks": "Blocks",
   "profileNotSet": "Not set",
   "profileVerifyAgain": "You are verified. Changing your details may mean you need verifying again.",
-  "profileChangePassword": "Change password"
+  "profileChangePassword": "Change password",
+
+  "publicationsTitle": "Publications",
+  "@publicationsTitle": { "description": "App bar title of the publications screen" },
+
+  "meetingsTitle": "Meetings",
+  "@meetingsTitle": { "description": "App bar title of the meetings screen" },
+
+  "facilitiesTitle": "Facilities",
+  "@facilitiesTitle": { "description": "App bar title of the facilities screen" },
+
+  "facilitiesFacilityStatsTitle": "Statistics",
+  "@facilitiesFacilityStatsTitle": { "description": "App bar title of the facility_stats screen" },
+
+  "publicationsList": "Publications",
+  "@publicationsList": { "description": "Title of the PublicationModel list" },
+
+  "publicationsEmpty": "No publications yet",
+  "@publicationsEmpty": { "description": "Shown when there is no PublicationModel" },
+
+  "publicationsSummary": "Summary",
+  "@publicationsSummary": { "description": "Label of the summary row" },
+
+  "meetingsList": "Meetings",
+  "@meetingsList": { "description": "Title of the MeetingModel list" },
+
+  "meetingsEmpty": "No upcoming meetings",
+  "@meetingsEmpty": { "description": "Shown when there is no MeetingModel" },
+
+  "meetingsAgenda": "Agenda",
+  "@meetingsAgenda": { "description": "Label of the agenda row" },
+
+  "meetingsStartsAt": "Starts",
+  "@meetingsStartsAt": { "description": "Label of the startsAt row" },
+
+  "facilitiesList": "Facilities",
+  "@facilitiesList": { "description": "Title of the FacilityModel list" },
+
+  "facilitiesEmpty": "No facilities yet",
+  "@facilitiesEmpty": { "description": "Shown when there is no FacilityModel" },
+
+  "facilitiesName": "Name",
+  "@facilitiesName": { "description": "Label of the name row" },
+
+  "facilitiesAddress": "Address",
+  "@facilitiesAddress": { "description": "Label of the address row" },
+
+  "facilitiesFacilityStatsDetails": "Summary",
+  "@facilitiesFacilityStatsDetails": { "description": "Title of the FacilityStatsModel card" },
+
+  "facilitiesFacilityStatsTotal": "Total",
+  "@facilitiesFacilityStatsTotal": { "description": "Label of the total row" },
+
+  "facilitiesFacilityStatsOperational": "Operational",
+  "@facilitiesFacilityStatsOperational": { "description": "Label of the operational row" },
+  "publicationsOpen": "Open PDF",
+  "meetingsChoose": "Choose a district to see its meetings",
+  "meetingsStatus": "Status",
+  "meetingsRescheduled": "moved from {date}",
+  "meetingsJoin": "Join",
+  "facilitiesType": "Type",
+  "facilitiesAllTypes": "All types",
+  "facilitiesAllDistricts": "All districts",
+  "facilitiesStatus": "Status",
+  "facilitiesOperational": "Operational",
+  "facilitiesNotOperational": "Not operational",
+  "facilitiesCapacity": "Capacity",
+  "facilitiesTonnesPerDay": "{amount} tonnes/day",
+  "facilitiesSqm": "{amount} m² storage",
+  "facilitiesProducts": "Products",
+  "facilitiesByType": "By type",
+  "facilitiesByDistrict": "By district",
+  "facilitiesWorking": "{working} of {total} operational",
+  "@meetingsRescheduled": {"placeholders": {"date": {"type": "String"}}},
+  "@facilitiesTonnesPerDay": {"placeholders": {"amount": {"type": "String"}}},
+  "@facilitiesSqm": {"placeholders": {"amount": {"type": "String"}}},
+  "@facilitiesWorking": {"placeholders": {"working": {"type": "int"}, "total": {"type": "int"}}}
 }

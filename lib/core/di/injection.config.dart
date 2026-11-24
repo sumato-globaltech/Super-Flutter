@@ -49,6 +49,12 @@ import 'package:super_flutter/data/crops/repositories/crop_repository_impl.dart'
     as _i468;
 import 'package:super_flutter/data/crops/sources/remote/crop_remote_data_source.dart'
     as _i444;
+import 'package:super_flutter/data/facilities/repositories/facilities_repository_impl.dart'
+    as _i316;
+import 'package:super_flutter/data/facilities/sources/local/facilities_local_data_source.dart'
+    as _i1048;
+import 'package:super_flutter/data/facilities/sources/remote/facilities_remote_data_source.dart'
+    as _i610;
 import 'package:super_flutter/data/farm/repositories/farm_repository_impl.dart'
     as _i749;
 import 'package:super_flutter/data/farm/sources/remote/farm_remote_data_source.dart'
@@ -67,6 +73,12 @@ import 'package:super_flutter/data/market/repositories/market_repository_impl.da
     as _i341;
 import 'package:super_flutter/data/market/sources/remote/market_remote_data_source.dart'
     as _i1002;
+import 'package:super_flutter/data/meetings/repositories/meetings_repository_impl.dart'
+    as _i849;
+import 'package:super_flutter/data/meetings/sources/local/meetings_local_data_source.dart'
+    as _i496;
+import 'package:super_flutter/data/meetings/sources/remote/meetings_remote_data_source.dart'
+    as _i133;
 import 'package:super_flutter/data/production/repositories/production_repository_impl.dart'
     as _i142;
 import 'package:super_flutter/data/production/sources/local/production_local_data_source.dart'
@@ -79,6 +91,12 @@ import 'package:super_flutter/data/profile/sources/local/profile_local_data_sour
     as _i394;
 import 'package:super_flutter/data/profile/sources/remote/profile_remote_data_source.dart'
     as _i117;
+import 'package:super_flutter/data/publications/repositories/publications_repository_impl.dart'
+    as _i690;
+import 'package:super_flutter/data/publications/sources/local/publications_local_data_source.dart'
+    as _i706;
+import 'package:super_flutter/data/publications/sources/remote/publications_remote_data_source.dart'
+    as _i828;
 import 'package:super_flutter/data/schemes/repositories/schemes_repository_impl.dart'
     as _i707;
 import 'package:super_flutter/data/schemes/sources/local/schemes_local_data_source.dart'
@@ -129,7 +147,7 @@ import 'package:super_flutter/features/auth/presentation/change_password/bloc/ch
 import 'package:super_flutter/features/auth/presentation/login/bloc/login_bloc.dart'
     as _i386;
 import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart'
-    as _i828;
+    as _i829;
 import 'package:super_flutter/features/communication/presentation/alerts/bloc/alerts_bloc.dart'
     as _i140;
 import 'package:super_flutter/features/communication/presentation/notice_detail/bloc/notice_detail_bloc.dart'
@@ -144,6 +162,10 @@ import 'package:super_flutter/features/crops/presentation/crops_list/bloc/crops_
     as _i64;
 import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart'
     as _i932;
+import 'package:super_flutter/features/facilities/presentation/facilities/bloc/facilities_bloc.dart'
+    as _i28;
+import 'package:super_flutter/features/facilities/presentation/facility_stats/bloc/facility_stats_bloc.dart'
+    as _i177;
 import 'package:super_flutter/features/farm/presentation/add_farm/bloc/add_farm_bloc.dart'
     as _i461;
 import 'package:super_flutter/features/farm/presentation/edit_farm/bloc/edit_farm_bloc.dart'
@@ -160,12 +182,16 @@ import 'package:super_flutter/features/market/presentation/market/bloc/market_bl
     as _i336;
 import 'package:super_flutter/features/market/presentation/market_prices/bloc/market_prices_bloc.dart'
     as _i688;
+import 'package:super_flutter/features/meetings/presentation/meetings/bloc/meetings_bloc.dart'
+    as _i188;
 import 'package:super_flutter/features/production/presentation/production/bloc/production_bloc.dart'
     as _i477;
 import 'package:super_flutter/features/profile/presentation/edit_profile/bloc/edit_profile_bloc.dart'
     as _i734;
 import 'package:super_flutter/features/profile/presentation/profile/bloc/profile_bloc.dart'
     as _i116;
+import 'package:super_flutter/features/publications/presentation/publications/bloc/publications_bloc.dart'
+    as _i1061;
 import 'package:super_flutter/features/schemes/presentation/my_applications/bloc/my_applications_bloc.dart'
     as _i250;
 import 'package:super_flutter/features/schemes/presentation/scheme_detail/bloc/scheme_detail_bloc.dart'
@@ -204,14 +230,23 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i940.CommunicationLocalDataSource>(
       () => _i940.CommunicationLocalDataSource(),
     );
+    gh.lazySingleton<_i1048.FacilitiesLocalDataSource>(
+      () => _i1048.FacilitiesLocalDataSource(),
+    );
     gh.lazySingleton<_i772.HelpDeskLocalDataSource>(
       () => _i772.HelpDeskLocalDataSource(),
+    );
+    gh.lazySingleton<_i496.MeetingsLocalDataSource>(
+      () => _i496.MeetingsLocalDataSource(),
     );
     gh.lazySingleton<_i385.ProductionLocalDataSource>(
       () => _i385.ProductionLocalDataSource(),
     );
     gh.lazySingleton<_i394.ProfileLocalDataSource>(
       () => _i394.ProfileLocalDataSource(),
+    );
+    gh.lazySingleton<_i706.PublicationsLocalDataSource>(
+      () => _i706.PublicationsLocalDataSource(),
     );
     gh.lazySingleton<_i1054.SchemesLocalDataSource>(
       () => _i1054.SchemesLocalDataSource(),
@@ -270,6 +305,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i444.CropRemoteDataSource>(
       () => _i444.CropRemoteDataSource(gh<_i42.DioClient>()),
     );
+    gh.lazySingleton<_i610.FacilitiesRemoteDataSource>(
+      () => _i610.FacilitiesRemoteDataSource(gh<_i42.DioClient>()),
+    );
     gh.lazySingleton<_i773.FarmRemoteDataSource>(
       () => _i773.FarmRemoteDataSource(gh<_i42.DioClient>()),
     );
@@ -282,11 +320,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1002.MarketRemoteDataSource>(
       () => _i1002.MarketRemoteDataSource(gh<_i42.DioClient>()),
     );
+    gh.lazySingleton<_i133.MeetingsRemoteDataSource>(
+      () => _i133.MeetingsRemoteDataSource(gh<_i42.DioClient>()),
+    );
     gh.lazySingleton<_i480.ProductionRemoteDataSource>(
       () => _i480.ProductionRemoteDataSource(gh<_i42.DioClient>()),
     );
     gh.lazySingleton<_i117.ProfileRemoteDataSource>(
       () => _i117.ProfileRemoteDataSource(gh<_i42.DioClient>()),
+    );
+    gh.lazySingleton<_i828.PublicationsRemoteDataSource>(
+      () => _i828.PublicationsRemoteDataSource(gh<_i42.DioClient>()),
     );
     gh.lazySingleton<_i474.SchemesRemoteDataSource>(
       () => _i474.SchemesRemoteDataSource(gh<_i42.DioClient>()),
@@ -297,6 +341,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i975.SupportRemoteDataSource>(
       () => _i975.SupportRemoteDataSource(gh<_i42.DioClient>()),
     );
+    gh.lazySingleton<_i690.PublicationsRepositoryImpl>(
+      () => _i690.PublicationsRepositoryImpl(
+        gh<_i828.PublicationsRemoteDataSource>(),
+        gh<_i706.PublicationsLocalDataSource>(),
+      ),
+    );
+    gh.factory<_i188.MeetingsBloc>(
+      () => _i188.MeetingsBloc(
+        gh<_i133.MeetingsRemoteDataSource>(),
+        gh<_i117.ProfileRemoteDataSource>(),
+      ),
+    );
     gh.factory<_i665.CreateTicketBloc>(
       () => _i665.CreateTicketBloc(gh<_i975.SupportRemoteDataSource>()),
     );
@@ -305,6 +361,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i247.TicketDetailBloc>(
       () => _i247.TicketDetailBloc(gh<_i975.SupportRemoteDataSource>()),
+    );
+    gh.lazySingleton<_i849.MeetingsRepositoryImpl>(
+      () => _i849.MeetingsRepositoryImpl(
+        gh<_i133.MeetingsRemoteDataSource>(),
+        gh<_i496.MeetingsLocalDataSource>(),
+      ),
     );
     gh.factory<_i116.ProfileBloc>(
       () => _i116.ProfileBloc(gh<_i117.ProfileRemoteDataSource>()),
@@ -340,6 +402,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i561.DeviceDetailBloc>(
       () => _i561.DeviceDetailBloc(gh<_i17.IotRemoteDataSource>()),
     );
+    gh.factory<_i1061.PublicationsBloc>(
+      () => _i1061.PublicationsBloc(gh<_i828.PublicationsRemoteDataSource>()),
+    );
     gh.factory<_i213.CropDetailBloc>(
       () => _i213.CropDetailBloc(gh<_i444.CropRemoteDataSource>()),
     );
@@ -351,6 +416,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i468.CropRepositoryImpl>(
       () => _i468.CropRepositoryImpl(gh<_i444.CropRemoteDataSource>()),
+    );
+    gh.factory<_i28.FacilitiesBloc>(
+      () => _i28.FacilitiesBloc(
+        gh<_i610.FacilitiesRemoteDataSource>(),
+        gh<_i133.MeetingsRemoteDataSource>(),
+      ),
     );
     gh.factory<_i837.RequestShipmentBloc>(
       () => _i837.RequestShipmentBloc(gh<_i353.ShipmentsRemoteDataSource>()),
@@ -441,6 +512,15 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i940.CommunicationLocalDataSource>(),
       ),
     );
+    gh.lazySingleton<_i316.FacilitiesRepositoryImpl>(
+      () => _i316.FacilitiesRepositoryImpl(
+        gh<_i610.FacilitiesRemoteDataSource>(),
+        gh<_i1048.FacilitiesLocalDataSource>(),
+      ),
+    );
+    gh.factory<_i177.FacilityStatsBloc>(
+      () => _i177.FacilityStatsBloc(gh<_i610.FacilitiesRemoteDataSource>()),
+    );
     gh.lazySingleton<_i860.ShipmentsRepositoryImpl>(
       () => _i860.ShipmentsRepositoryImpl(
         gh<_i353.ShipmentsRemoteDataSource>(),
@@ -504,8 +584,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i239.Logout>(),
       ),
     );
-    gh.lazySingleton<_i828.AuthCubit>(
-      () => _i828.AuthCubit(
+    gh.lazySingleton<_i829.AuthCubit>(
+      () => _i829.AuthCubit(
         gh<_i236.CheckAuthStatus>(),
         gh<_i309.GetCurrentUser>(),
         gh<_i729.WatchAuthStatus>(),
@@ -522,7 +602,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1066.AppStartup>(
       () => _i1066.AppStartup(
         gh<_i407.StorageService>(),
-        gh<_i828.AuthCubit>(),
+        gh<_i829.AuthCubit>(),
         gh<_i42.DioClient>(),
         gh<_i451.AppLogger>(),
       ),

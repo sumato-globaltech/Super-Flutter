@@ -455,6 +455,119 @@ models:
         type: String
         nullable: true
     origin: generated
+  - name: ByCategoryModel
+    kind: model
+    feature: facilities
+    path: lib/data/facilities/model/facility_stats_model.dart
+    import: package:super_flutter/data/facilities/model/facility_stats_model.dart
+    fingerprint: '{capacity_tpd:double,id:string,name:string,operational:int,storage_area_sqm:double,total:int}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+      - name: total
+        json_key: total
+        type: int
+        nullable: true
+      - name: operational
+        json_key: operational
+        type: int
+        nullable: true
+      - name: capacityTpd
+        json_key: capacity_tpd
+        type: double
+        nullable: true
+      - name: storageAreaSqm
+        json_key: storage_area_sqm
+        type: double
+        nullable: true
+    origin: generated
+  - name: FacilityModel
+    kind: model
+    feature: facilities
+    path: lib/data/facilities/model/facility_model.dart
+    import: package:super_flutter/data/facilities/model/facility_model.dart
+    fingerprint: '{address:string,capacity_tpd:double,category:{id:string,name:string},district:{id:string,name:string},id:string,is_operational:bool,latitude:double,longitude:double,name:string,products:[string],storage_area_sqm:double}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+      - name: category
+        json_key: category
+        type: CategoryModel
+        nullable: true
+      - name: district
+        json_key: district
+        type: DistrictModel
+        nullable: true
+      - name: address
+        json_key: address
+        type: String
+        nullable: true
+      - name: latitude
+        json_key: latitude
+        type: double
+        nullable: true
+      - name: longitude
+        json_key: longitude
+        type: double
+        nullable: true
+      - name: capacityTpd
+        json_key: capacity_tpd
+        type: double
+        nullable: true
+      - name: storageAreaSqm
+        json_key: storage_area_sqm
+        type: double
+        nullable: true
+      - name: products
+        json_key: products
+        type: List<String>
+        nullable: true
+      - name: isOperational
+        json_key: is_operational
+        type: bool
+        nullable: true
+    nested:
+      - CategoryModel
+      - DistrictModel
+    origin: generated
+  - name: FacilityStatsModel
+    kind: model
+    feature: facilities
+    path: lib/data/facilities/model/facility_stats_model.dart
+    import: package:super_flutter/data/facilities/model/facility_stats_model.dart
+    fingerprint: '{by_category:[{capacity_tpd:double,id:string,name:string,operational:int,storage_area_sqm:double,total:int}],by_district:[{capacity_tpd:double,id:string,name:string,operational:int,storage_area_sqm:double,total:int}],operational:int,total:int}'
+    fields:
+      - name: total
+        json_key: total
+        type: int
+        nullable: true
+      - name: operational
+        json_key: operational
+        type: int
+        nullable: true
+      - name: byCategory
+        json_key: by_category
+        type: List<ByCategoryModel>
+        nullable: true
+      - name: byDistrict
+        json_key: by_district
+        type: List<ByCategoryModel>
+        nullable: true
+    nested:
+      - ByCategoryModel
+    origin: generated
   - name: BlockModel
     kind: model
     feature: farm
@@ -606,6 +719,66 @@ models:
         json_key: unassigned
         type: int
         nullable: true
+    origin: generated
+  - name: DistrictOptionModel
+    kind: model
+    feature: meetings
+    path: lib/data/meetings/model/district_option_model.dart
+    import: package:super_flutter/data/meetings/model/district_option_model.dart
+    fingerprint: '{code:string,id:string,name:string,state:{code:string,id:string,name:string}}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: name
+        json_key: name
+        type: String
+        nullable: true
+      - name: code
+        json_key: code
+        type: String
+        nullable: true
+      - name: state
+        json_key: state
+        type: ShipmentPartyModel
+        nullable: true
+    nested:
+      - ShipmentPartyModel
+    origin: generated
+  - name: MeetingModel
+    kind: model
+    feature: meetings
+    path: lib/data/meetings/model/meeting_model.dart
+    import: package:super_flutter/data/meetings/model/meeting_model.dart
+    fingerprint: '{agenda:string,id:string,link:string,rescheduled_from:datetime,starts_at:datetime,status:{label:string,value:string}}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: agenda
+        json_key: agenda
+        type: String
+        nullable: true
+      - name: startsAt
+        json_key: starts_at
+        type: DateTime
+        nullable: true
+      - name: rescheduledFrom
+        json_key: rescheduled_from
+        type: DateTime
+        nullable: true
+      - name: link
+        json_key: link
+        type: String
+        nullable: true
+      - name: status
+        json_key: status
+        type: StatusModel
+        nullable: true
+    nested:
+      - StatusModel
     origin: generated
   - name: ByCropModel
     kind: model
@@ -833,6 +1006,42 @@ models:
         nullable: true
       - name: name
         json_key: name
+        type: String
+        nullable: true
+    origin: generated
+  - name: PublicationModel
+    kind: model
+    feature: publications
+    path: lib/data/publications/model/publication_model.dart
+    import: package:super_flutter/data/publications/model/publication_model.dart
+    fingerprint: '{cover_url:string,id:string,left_text:string,pdf_url:string,right_text:string,summary:string,title:string}'
+    fields:
+      - name: id
+        json_key: id
+        type: String
+        nullable: true
+      - name: title
+        json_key: title
+        type: String
+        nullable: true
+      - name: summary
+        json_key: summary
+        type: String
+        nullable: true
+      - name: leftText
+        json_key: left_text
+        type: String
+        nullable: true
+      - name: rightText
+        json_key: right_text
+        type: String
+        nullable: true
+      - name: coverUrl
+        json_key: cover_url
+        type: String
+        nullable: true
+      - name: pdfUrl
+        json_key: pdf_url
         type: String
         nullable: true
     origin: generated

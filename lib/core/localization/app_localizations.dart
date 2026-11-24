@@ -3589,6 +3589,222 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Change password'**
   String get profileChangePassword;
+
+  /// App bar title of the publications screen
+  ///
+  /// In en, this message translates to:
+  /// **'Publications'**
+  String get publicationsTitle;
+
+  /// App bar title of the meetings screen
+  ///
+  /// In en, this message translates to:
+  /// **'Meetings'**
+  String get meetingsTitle;
+
+  /// App bar title of the facilities screen
+  ///
+  /// In en, this message translates to:
+  /// **'Facilities'**
+  String get facilitiesTitle;
+
+  /// App bar title of the facility_stats screen
+  ///
+  /// In en, this message translates to:
+  /// **'Statistics'**
+  String get facilitiesFacilityStatsTitle;
+
+  /// Title of the PublicationModel list
+  ///
+  /// In en, this message translates to:
+  /// **'Publications'**
+  String get publicationsList;
+
+  /// Shown when there is no PublicationModel
+  ///
+  /// In en, this message translates to:
+  /// **'No publications yet'**
+  String get publicationsEmpty;
+
+  /// Label of the summary row
+  ///
+  /// In en, this message translates to:
+  /// **'Summary'**
+  String get publicationsSummary;
+
+  /// Title of the MeetingModel list
+  ///
+  /// In en, this message translates to:
+  /// **'Meetings'**
+  String get meetingsList;
+
+  /// Shown when there is no MeetingModel
+  ///
+  /// In en, this message translates to:
+  /// **'No upcoming meetings'**
+  String get meetingsEmpty;
+
+  /// Label of the agenda row
+  ///
+  /// In en, this message translates to:
+  /// **'Agenda'**
+  String get meetingsAgenda;
+
+  /// Label of the startsAt row
+  ///
+  /// In en, this message translates to:
+  /// **'Starts'**
+  String get meetingsStartsAt;
+
+  /// Title of the FacilityModel list
+  ///
+  /// In en, this message translates to:
+  /// **'Facilities'**
+  String get facilitiesList;
+
+  /// Shown when there is no FacilityModel
+  ///
+  /// In en, this message translates to:
+  /// **'No facilities yet'**
+  String get facilitiesEmpty;
+
+  /// Label of the name row
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get facilitiesName;
+
+  /// Label of the address row
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get facilitiesAddress;
+
+  /// Title of the FacilityStatsModel card
+  ///
+  /// In en, this message translates to:
+  /// **'Summary'**
+  String get facilitiesFacilityStatsDetails;
+
+  /// Label of the total row
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get facilitiesFacilityStatsTotal;
+
+  /// Label of the operational row
+  ///
+  /// In en, this message translates to:
+  /// **'Operational'**
+  String get facilitiesFacilityStatsOperational;
+
+  /// No description provided for @publicationsOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open PDF'**
+  String get publicationsOpen;
+
+  /// No description provided for @meetingsChoose.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a district to see its meetings'**
+  String get meetingsChoose;
+
+  /// No description provided for @meetingsStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get meetingsStatus;
+
+  /// No description provided for @meetingsRescheduled.
+  ///
+  /// In en, this message translates to:
+  /// **'moved from {date}'**
+  String meetingsRescheduled(String date);
+
+  /// No description provided for @meetingsJoin.
+  ///
+  /// In en, this message translates to:
+  /// **'Join'**
+  String get meetingsJoin;
+
+  /// No description provided for @facilitiesType.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get facilitiesType;
+
+  /// No description provided for @facilitiesAllTypes.
+  ///
+  /// In en, this message translates to:
+  /// **'All types'**
+  String get facilitiesAllTypes;
+
+  /// No description provided for @facilitiesAllDistricts.
+  ///
+  /// In en, this message translates to:
+  /// **'All districts'**
+  String get facilitiesAllDistricts;
+
+  /// No description provided for @facilitiesStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get facilitiesStatus;
+
+  /// No description provided for @facilitiesOperational.
+  ///
+  /// In en, this message translates to:
+  /// **'Operational'**
+  String get facilitiesOperational;
+
+  /// No description provided for @facilitiesNotOperational.
+  ///
+  /// In en, this message translates to:
+  /// **'Not operational'**
+  String get facilitiesNotOperational;
+
+  /// No description provided for @facilitiesCapacity.
+  ///
+  /// In en, this message translates to:
+  /// **'Capacity'**
+  String get facilitiesCapacity;
+
+  /// No description provided for @facilitiesTonnesPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} tonnes/day'**
+  String facilitiesTonnesPerDay(String amount);
+
+  /// No description provided for @facilitiesSqm.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} m² storage'**
+  String facilitiesSqm(String amount);
+
+  /// No description provided for @facilitiesProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get facilitiesProducts;
+
+  /// No description provided for @facilitiesByType.
+  ///
+  /// In en, this message translates to:
+  /// **'By type'**
+  String get facilitiesByType;
+
+  /// No description provided for @facilitiesByDistrict.
+  ///
+  /// In en, this message translates to:
+  /// **'By district'**
+  String get facilitiesByDistrict;
+
+  /// No description provided for @facilitiesWorking.
+  ///
+  /// In en, this message translates to:
+  /// **'{working} of {total} operational'**
+  String facilitiesWorking(int working, int total);
 }
 
 class _AppLocalizationsDelegate

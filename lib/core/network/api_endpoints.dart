@@ -166,4 +166,16 @@ abstract final class ApiEndpoints {
   static const farmerProfile = '/api/v1/farmer/profile';
 
   static const genders = '/api/v1/farmer/genders';
+
+  static const districtList = '/api/v1/districts';
+
+  static const facilityTypes = '/api/v1/categories/facility_type';
+
+  static const publications = '/api/v1/publications';
+
+  static const meetings = '/api/v1/meetings';
+
+  static const facilities = '/api/v1/facilities';
+
+  static const facilityStats = '/api/v1/facilities/stats';
 }

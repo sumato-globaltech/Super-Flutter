@@ -53,6 +53,65 @@ views:
       lib/features/admin_communication/presentation/admin_notices/bloc/admin_notices_event.dart: d9caf33dbf338319
       lib/features/admin_communication/presentation/admin_notices/bloc/admin_notices_state.dart: 18d05af4e6c082b2
       lib/features/admin_communication/presentation/admin_notices/screen/admin_notices_screen.dart: 22a9aac0b7e5e54b
+  - bloc: FacilitiesBloc
+    feature: facilities
+    screen: facilities
+    call: getFacilities
+    source_feature: facilities
+    model: FacilityModel
+    model_feature: facilities
+    list: true
+    paged: true
+    show:
+      - name
+      - address
+    hide:
+      - id
+      - location
+      - capacity_tpd
+      - storage_area_sqm
+      - is_operational
+    files:
+      lib/features/facilities/presentation/facilities/bloc/facilities_bloc.dart: d91c6d1dc972d31b
+      lib/features/facilities/presentation/facilities/bloc/facilities_event.dart: f79b70dd62e980f4
+      lib/features/facilities/presentation/facilities/bloc/facilities_state.dart: 187ff458a39a198c
+      lib/features/facilities/presentation/facilities/screen/facilities_screen.dart: 3abc41cd36f11c2c
+  - bloc: FacilityStatsBloc
+    feature: facilities
+    screen: facility_stats
+    call: getFacilityStats
+    source_feature: facilities
+    model: FacilityStatsModel
+    model_feature: facilities
+    show:
+      - total
+      - operational
+    files:
+      lib/features/facilities/presentation/facility_stats/bloc/facility_stats_bloc.dart: 3ec9fa922736f6ce
+      lib/features/facilities/presentation/facility_stats/bloc/facility_stats_event.dart: 2577e4f5149aea7a
+      lib/features/facilities/presentation/facility_stats/bloc/facility_stats_state.dart: ba984899a1b4dc3d
+      lib/features/facilities/presentation/facility_stats/screen/facility_stats_screen.dart: f5bb4473e9f866f7
+  - bloc: MeetingsBloc
+    feature: meetings
+    screen: meetings
+    call: getMeetings
+    source_feature: meetings
+    model: MeetingModel
+    model_feature: meetings
+    list: true
+    paged: true
+    show:
+      - agenda
+      - starts_at
+    hide:
+      - id
+      - rescheduled_from
+      - link
+    files:
+      lib/features/meetings/presentation/meetings/bloc/meetings_bloc.dart: 989eacec3d26e33d
+      lib/features/meetings/presentation/meetings/bloc/meetings_event.dart: 71f7195362d723dd
+      lib/features/meetings/presentation/meetings/bloc/meetings_state.dart: 85668af580635be9
+      lib/features/meetings/presentation/meetings/screen/meetings_screen.dart: 0837cbebffc5736d
   - bloc: ProductionBloc
     feature: production
     screen: production
@@ -74,6 +133,29 @@ views:
       lib/features/production/presentation/production/bloc/production_event.dart: 4d61dc0a28cfb499
       lib/features/production/presentation/production/bloc/production_state.dart: 5d371bdd10362e67
       lib/features/production/presentation/production/screen/production_screen.dart: 9bf057a461ef059e
+  - bloc: PublicationsBloc
+    feature: publications
+    screen: publications
+    call: getPublications
+    source_feature: publications
+    model: PublicationModel
+    model_feature: publications
+    list: true
+    paged: true
+    show:
+      - title
+      - summary
+    hide:
+      - id
+      - left_text
+      - right_text
+      - cover_url
+      - pdf_url
+    files:
+      lib/features/publications/presentation/publications/bloc/publications_bloc.dart: 396127edf4ef1632
+      lib/features/publications/presentation/publications/bloc/publications_event.dart: 4ddc0310756c76ca
+      lib/features/publications/presentation/publications/bloc/publications_state.dart: 5eeee8de8a6508b9
+      lib/features/publications/presentation/publications/screen/publications_screen.dart: ec4df36565d81d38
   - bloc: QueueSummaryBloc
     feature: help_desk
     screen: queue_summary

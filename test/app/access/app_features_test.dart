@@ -173,6 +173,9 @@ void main() {
         'farm_add_farm',
         'shipments_request_shipment',
         'schemes_my_applications',
+        'publications',
+        'meetings',
+        'facilities',
       ]);
     });
 

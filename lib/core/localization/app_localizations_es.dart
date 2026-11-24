@@ -1869,4 +1869,120 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get profileChangePassword => 'Cambiar contraseña';
+
+  @override
+  String get publicationsTitle => 'Publicaciones';
+
+  @override
+  String get meetingsTitle => 'Reuniones';
+
+  @override
+  String get facilitiesTitle => 'Instalaciones';
+
+  @override
+  String get facilitiesFacilityStatsTitle => 'Estadísticas';
+
+  @override
+  String get publicationsList => 'Publications';
+
+  @override
+  String get publicationsEmpty => 'Aún no hay publicaciones';
+
+  @override
+  String get publicationsSummary => 'Summary';
+
+  @override
+  String get meetingsList => 'Meetings';
+
+  @override
+  String get meetingsEmpty => 'No hay próximas reuniones';
+
+  @override
+  String get meetingsAgenda => 'Agenda';
+
+  @override
+  String get meetingsStartsAt => 'Empieza';
+
+  @override
+  String get facilitiesList => 'Facilities';
+
+  @override
+  String get facilitiesEmpty => 'Aún no hay instalaciones';
+
+  @override
+  String get facilitiesName => 'Name';
+
+  @override
+  String get facilitiesAddress => 'Dirección';
+
+  @override
+  String get facilitiesFacilityStatsDetails => 'Resumen';
+
+  @override
+  String get facilitiesFacilityStatsTotal => 'Total';
+
+  @override
+  String get facilitiesFacilityStatsOperational => 'En funcionamiento';
+
+  @override
+  String get publicationsOpen => 'Abrir PDF';
+
+  @override
+  String get meetingsChoose => 'Elige un distrito para ver sus reuniones';
+
+  @override
+  String get meetingsStatus => 'Estado';
+
+  @override
+  String meetingsRescheduled(String date) {
+    return 'cambiada desde $date';
+  }
+
+  @override
+  String get meetingsJoin => 'Unirse';
+
+  @override
+  String get facilitiesType => 'Tipo';
+
+  @override
+  String get facilitiesAllTypes => 'Todos los tipos';
+
+  @override
+  String get facilitiesAllDistricts => 'Todos los distritos';
+
+  @override
+  String get facilitiesStatus => 'Estado';
+
+  @override
+  String get facilitiesOperational => 'En funcionamiento';
+
+  @override
+  String get facilitiesNotOperational => 'Fuera de servicio';
+
+  @override
+  String get facilitiesCapacity => 'Capacidad';
+
+  @override
+  String facilitiesTonnesPerDay(String amount) {
+    return '$amount toneladas/día';
+  }
+
+  @override
+  String facilitiesSqm(String amount) {
+    return '$amount m² de almacén';
+  }
+
+  @override
+  String get facilitiesProducts => 'Productos';
+
+  @override
+  String get facilitiesByType => 'Por tipo';
+
+  @override
+  String get facilitiesByDistrict => 'Por distrito';
+
+  @override
+  String facilitiesWorking(int working, int total) {
+    return '$working de $total en funcionamiento';
+  }
 }
