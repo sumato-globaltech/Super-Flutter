@@ -2,6 +2,7 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:super_flutter/core/error/app_exception.dart';
+import 'package:super_flutter/core/ui/widgets/ai_chat.dart';
 import 'package:super_flutter/data/farming_assistant/sources/remote/farming_assistant_remote_data_source.dart';
 
 import 'farming_assistant_event.dart';
@@ -22,12 +23,15 @@ class FarmingAssistantBloc
     Emitter<FarmingAssistantState> emit,
   ) async {
     final String question;
-    final List<AssistantMessage> messages;
+    final List<AiMessage> messages;
     switch (event) {
       case QuestionAsked():
         question = event.question.trim();
         if (question.isEmpty) return;
-        messages = [...state.messages, (text: question, mine: true)];
+        messages = [
+          ...state.messages,
+          (text: question, mine: true, image: null),
+        ];
       case QuestionRetried():
         if (state.status != FarmingAssistantStatus.failure) return;
         messages = state.messages;
@@ -51,7 +55,7 @@ class FarmingAssistantBloc
       if (answer != null && answer.isNotEmpty) {
         emit(
           FarmingAssistantState(
-            messages: [...messages, (text: answer, mine: false)],
+            messages: [...messages, (text: answer, mine: false, image: null)],
           ),
         );
         return;

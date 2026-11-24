@@ -2109,4 +2109,48 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get farmingAssistantCopied => 'Copiado';
+
+  @override
+  String get vistaarTitle => 'Bharat Vistaar IA';
+
+  @override
+  String get vistaarHello => 'Pregunta a Bharat Vistaar';
+
+  @override
+  String get vistaarIntro =>
+      'Consejos de cultivo, plagas, enfermedades y precios de mercado del servicio agrícola nacional.';
+
+  @override
+  String get vistaarPromptPest =>
+      '¿Cómo controlar el gusano cogollero en el maíz?';
+
+  @override
+  String get vistaarPromptPrice =>
+      '¿Cuál es el precio de hoy del jengibre en Dimapur?';
+
+  @override
+  String get vistaarHint => 'Pregunta sobre tu cultivo';
+
+  @override
+  String get vistaarAddPhoto => 'Añadir foto del cultivo';
+
+  @override
+  String get vistaarPhoto => 'Foto del cultivo';
+
+  @override
+  String get vistaarRemovePhoto => 'Quitar foto';
+
+  @override
+  String get vistaarPhotoQuestion =>
+      '¿Qué enfermedad tiene esta planta y cómo la trato?';
+
+  @override
+  String get vistaarLanguage => 'Idioma de respuesta';
+
+  @override
+  String get vistaarNearMe => 'Cerca de mí';
+
+  @override
+  String get vistaarNearMeHelp =>
+      'Envía la ubicación aproximada de tu finca o distrito para precios cercanos';
 }

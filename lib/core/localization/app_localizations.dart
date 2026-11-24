@@ -4033,6 +4033,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Copied'**
   String get farmingAssistantCopied;
+
+  /// App bar title of the vistaar screen
+  ///
+  /// In en, this message translates to:
+  /// **'Bharat Vistaar AI'**
+  String get vistaarTitle;
+
+  /// No description provided for @vistaarHello.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask Bharat Vistaar'**
+  String get vistaarHello;
+
+  /// No description provided for @vistaarIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop advice, pests and diseases, and mandi prices from the national farming service.'**
+  String get vistaarIntro;
+
+  /// No description provided for @vistaarPromptPest.
+  ///
+  /// In en, this message translates to:
+  /// **'How to control fall armyworm in maize?'**
+  String get vistaarPromptPest;
+
+  /// No description provided for @vistaarPromptPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'What is today\'s mandi price of ginger in Dimapur?'**
+  String get vistaarPromptPrice;
+
+  /// No description provided for @vistaarHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about your crop'**
+  String get vistaarHint;
+
+  /// No description provided for @vistaarAddPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a crop photo'**
+  String get vistaarAddPhoto;
+
+  /// No description provided for @vistaarPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Crop photo'**
+  String get vistaarPhoto;
+
+  /// No description provided for @vistaarRemovePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove photo'**
+  String get vistaarRemovePhoto;
+
+  /// No description provided for @vistaarPhotoQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'What disease does this plant have and how do I treat it?'**
+  String get vistaarPhotoQuestion;
+
+  /// No description provided for @vistaarLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Answer language'**
+  String get vistaarLanguage;
+
+  /// No description provided for @vistaarNearMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Near me'**
+  String get vistaarNearMe;
+
+  /// No description provided for @vistaarNearMeHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sends your farm\'s or district\'s rough location for nearby mandi prices'**
+  String get vistaarNearMeHelp;
 }
 
 class _AppLocalizationsDelegate

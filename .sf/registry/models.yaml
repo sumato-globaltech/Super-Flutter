@@ -1944,3 +1944,31 @@ models:
       - ReplyModel
       - StatusModel
     origin: generated
+  - name: VistaarAnswerModel
+    kind: model
+    feature: vistaar
+    path: lib/data/vistaar/model/vistaar_answer_model.dart
+    import: package:super_flutter/data/vistaar/model/vistaar_answer_model.dart
+    fingerprint: '{answer:string}'
+    fields:
+      - name: answer
+        json_key: answer
+        type: String
+        nullable: true
+    origin: generated
+  - name: VistaarLanguageModel
+    kind: model
+    feature: vistaar
+    path: lib/data/vistaar/model/vistaar_language_model.dart
+    import: package:super_flutter/data/vistaar/model/vistaar_language_model.dart
+    fingerprint: '{label:string,value:string}'
+    fields:
+      - name: value
+        json_key: value
+        type: String
+        nullable: true
+      - name: label
+        json_key: label
+        type: String
+        nullable: true
+    origin: generated

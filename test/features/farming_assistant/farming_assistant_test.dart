@@ -27,7 +27,7 @@ import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 import 'package:super_flutter/features/auth/session/bloc/auth_state.dart';
 import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart';
 import 'package:super_flutter/features/dashboard/presentation/dashboard/screen/dashboard_screen.dart';
-import 'package:super_flutter/features/farming_assistant/presentation/assistant_text.dart';
+import 'package:super_flutter/core/utils/assistant_text.dart';
 import 'package:super_flutter/features/farming_assistant/presentation/farming_assistant/bloc/farming_assistant_bloc.dart';
 import 'package:super_flutter/features/farming_assistant/presentation/farming_assistant/screen/farming_assistant_screen.dart';
 import 'package:super_flutter/features/farming_assistant/routes/farming_assistant_routes.dart';

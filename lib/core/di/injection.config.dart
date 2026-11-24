@@ -121,6 +121,12 @@ import 'package:super_flutter/data/support/sources/local/support_local_data_sour
     as _i363;
 import 'package:super_flutter/data/support/sources/remote/support_remote_data_source.dart'
     as _i975;
+import 'package:super_flutter/data/vistaar/repositories/vistaar_repository_impl.dart'
+    as _i432;
+import 'package:super_flutter/data/vistaar/sources/local/vistaar_local_data_source.dart'
+    as _i813;
+import 'package:super_flutter/data/vistaar/sources/remote/vistaar_remote_data_source.dart'
+    as _i393;
 import 'package:super_flutter/domain/auth/repositories/auth_repository.dart'
     as _i631;
 import 'package:super_flutter/domain/auth/use_cases/check_auth_status.dart'
@@ -218,6 +224,8 @@ import 'package:super_flutter/features/support/presentation/support/bloc/support
     as _i1070;
 import 'package:super_flutter/features/support/presentation/ticket_detail/bloc/ticket_detail_bloc.dart'
     as _i247;
+import 'package:super_flutter/features/vistaar/presentation/vistaar/bloc/vistaar_bloc.dart'
+    as _i653;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -267,6 +275,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i363.SupportLocalDataSource>(
       () => _i363.SupportLocalDataSource(),
+    );
+    gh.lazySingleton<_i813.VistaarLocalDataSource>(
+      () => _i813.VistaarLocalDataSource(),
     );
     gh.lazySingleton<_i1067.Environment>(
       () => coreModule.appEnvironment(gh<_i65.AppConfig>()),
@@ -354,6 +365,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i975.SupportRemoteDataSource>(
       () => _i975.SupportRemoteDataSource(gh<_i42.DioClient>()),
+    );
+    gh.lazySingleton<_i393.VistaarRemoteDataSource>(
+      () => _i393.VistaarRemoteDataSource(gh<_i42.DioClient>()),
     );
     gh.factory<_i188.MeetingsBloc>(
       () => _i188.MeetingsBloc(
@@ -445,6 +459,15 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i935.ShipmentsBloc>(
       () => _i935.ShipmentsBloc(gh<_i353.ShipmentsRemoteDataSource>()),
+    );
+    gh.factory<_i653.VistaarBloc>(
+      () => _i653.VistaarBloc(gh<_i393.VistaarRemoteDataSource>()),
+    );
+    gh.lazySingleton<_i432.VistaarRepositoryImpl>(
+      () => _i432.VistaarRepositoryImpl(
+        gh<_i393.VistaarRemoteDataSource>(),
+        gh<_i813.VistaarLocalDataSource>(),
+      ),
     );
     gh.factory<_i463.AddAlertBloc>(
       () => _i463.AddAlertBloc(gh<_i414.AdminCommunicationRemoteDataSource>()),

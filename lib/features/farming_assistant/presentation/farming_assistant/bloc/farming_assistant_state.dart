@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-
-typedef AssistantMessage = ({String text, bool mine});
+import 'package:super_flutter/core/ui/widgets/ai_chat.dart';
 
 enum FarmingAssistantStatus { idle, thinking, failure }
 
@@ -12,7 +11,7 @@ class FarmingAssistantState extends Equatable {
   });
 
   final FarmingAssistantStatus status;
-  final List<AssistantMessage> messages;
+  final List<AiMessage> messages;
   final String? errorMessage;
 
   bool get isThinking => status == FarmingAssistantStatus.thinking;

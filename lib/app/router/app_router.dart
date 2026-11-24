@@ -19,6 +19,7 @@ import 'package:super_flutter/features/profile/routes/profile_routes.dart';
 import 'package:super_flutter/features/super_awesome/routes/super_awesome_routes.dart';
 import 'package:super_flutter/features/support/routes/support_routes.dart';
 import 'package:super_flutter/features/ui_gallery/routes/ui_gallery_routes.dart';
+import 'package:super_flutter/features/vistaar/routes/vistaar_routes.dart';
 
 // sf:feature-routes-imports:end
 import '../access/app_features.dart';
@@ -77,6 +78,7 @@ GoRouter createRouter({
       ...buildSuperAwesomeRoutes(),
       ...buildSupportRoutes(),
       ...buildUiGalleryRoutes(),
+      ...buildVistaarRoutes(),
       // sf:feature-routes:end
     ]),
   );

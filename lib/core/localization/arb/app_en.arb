@@ -1187,5 +1187,20 @@
   "farmingAssistantNew": "New chat",
   "farmingAssistantStop": "Stop typing",
   "farmingAssistantCopy": "Copy",
-  "farmingAssistantCopied": "Copied"
+  "farmingAssistantCopied": "Copied",
+
+  "vistaarTitle": "Bharat Vistaar AI",
+  "@vistaarTitle": { "description": "App bar title of the vistaar screen" },
+  "vistaarHello": "Ask Bharat Vistaar",
+  "vistaarIntro": "Crop advice, pests and diseases, and mandi prices from the national farming service.",
+  "vistaarPromptPest": "How to control fall armyworm in maize?",
+  "vistaarPromptPrice": "What is today's mandi price of ginger in Dimapur?",
+  "vistaarHint": "Ask about your crop",
+  "vistaarAddPhoto": "Add a crop photo",
+  "vistaarPhoto": "Crop photo",
+  "vistaarRemovePhoto": "Remove photo",
+  "vistaarPhotoQuestion": "What disease does this plant have and how do I treat it?",
+  "vistaarLanguage": "Answer language",
+  "vistaarNearMe": "Near me",
+  "vistaarNearMeHelp": "Sends your farm's or district's rough location for nearby mandi prices"
 }
