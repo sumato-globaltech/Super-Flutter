@@ -707,21 +707,21 @@ class _ShipmentDetailView extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            TitleDetailsCard(
-                              title:
-                                  l10n.shipmentsShipmentDetailDriverPhone,
-                              text: driver == null
-                                  ? ''
-                                  : driver.phone ?? '--',
-                              isTextLoading: driver == null,
-                              iconData: PhosphorIconsRegular.phone,
-                              accentColor: DesignColor.accentUin,
-                              onTap: driver?.phone == null
-                                  ? null
-                                  : () => Utils.launchUrl2(
-                                      url: 'tel:${driver?.phone}',
-                                    ),
-                            ),
+                            if (driver?.phone != null)
+                              TitleDetailsCard(
+                                title: l10n.shipmentsShipmentDetailDriverPhone,
+                                text: driver == null
+                                    ? ''
+                                    : driver.phone ?? '--',
+                                isTextLoading: driver == null,
+                                iconData: PhosphorIconsRegular.phone,
+                                accentColor: DesignColor.accentUin,
+                                onTap: driver?.phone == null
+                                    ? null
+                                    : () => Utils.launchUrl2(
+                                        url: 'tel:${driver?.phone}',
+                                      ),
+                              ),
                           ],
                         ),
                       ),
