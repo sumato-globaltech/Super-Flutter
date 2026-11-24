@@ -33,6 +33,7 @@ class AiChat extends StatefulWidget {
     this.tools,
     this.leading,
     this.emptyQuestion,
+    this.prefill,
     super.key,
   });
 
@@ -58,6 +59,9 @@ class AiChat extends StatefulWidget {
   /// Asked when nothing is typed, such as with a photo.
   final String? emptyQuestion;
 
+  /// Put in the input, unless the user already typed or asked something.
+  final String? prefill;
+
   @override
   State<AiChat> createState() => _AiChatState();
 }
@@ -78,6 +82,14 @@ class _AiChatState extends State<AiChat> with SingleTickerProviderStateMixin {
   @override
   void didUpdateWidget(AiChat oldWidget) {
     super.didUpdateWidget(oldWidget);
+    final prefill = widget.prefill;
+    if (prefill != null &&
+        prefill != oldWidget.prefill &&
+        widget.messages.isEmpty &&
+        (_questionController.text.isEmpty ||
+            _questionController.text == oldWidget.prefill)) {
+      _questionController.text = prefill;
+    }
     if (widget.messages.length <= oldWidget.messages.length) return;
     final newest = widget.messages.last;
     if (!newest.mine) _type(newest.text);

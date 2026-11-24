@@ -1,3 +1,5 @@
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
@@ -13,6 +15,12 @@ import 'package:super_flutter/data/crops/model/crop_fertilizers_model.dart';
 import 'package:super_flutter/data/crops/model/crop_model.dart';
 import 'package:super_flutter/data/crops/model/crop_recommendation_model.dart';
 import 'package:super_flutter/data/crops/sources/remote/crop_remote_data_source.dart';
+import 'package:super_flutter/domain/auth/entities/access_policy.dart';
+import 'package:super_flutter/domain/auth/entities/user.dart';
+import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
+import 'package:super_flutter/features/auth/session/bloc/auth_state.dart';
+import 'package:super_flutter/data/meetings/model/district_option_model.dart';
+import 'package:super_flutter/data/meetings/sources/remote/meetings_remote_data_source.dart';
 import 'package:super_flutter/features/crops/presentation/crop_detail/bloc/crop_detail_bloc.dart';
 import 'package:super_flutter/features/crops/presentation/crop_detail/screen/crop_detail_screen.dart';
 import 'package:super_flutter/features/crops/presentation/crop_recommendations/bloc/crop_recommendations_bloc.dart';
@@ -21,6 +29,10 @@ import 'package:super_flutter/features/crops/presentation/crops_list/bloc/crops_
 import 'package:super_flutter/features/crops/presentation/crops_list/screen/crops_list_screen.dart';
 
 class _MockCropSource extends Mock implements CropRemoteDataSource {}
+
+class _MockMeetings extends Mock implements MeetingsRemoteDataSource {}
+
+class _MockAuth extends MockCubit<AuthState> implements AuthCubit {}
 
 final _crop = CropModel(
   id: 'c1',
@@ -77,15 +89,17 @@ final _recommendationResult = CropRecommendationResultModel(
 
 void main() {
   late _MockCropSource source;
+  late _MockMeetings meetings;
 
   setUp(() async {
     source = _MockCropSource();
+    meetings = _MockMeetings();
     await getIt.reset();
     getIt.registerLazySingleton<CropRemoteDataSource>(() => source);
     getIt.registerFactory<CropsListBloc>(() => CropsListBloc(source));
     getIt.registerFactory<CropDetailBloc>(() => CropDetailBloc(source));
     getIt.registerFactory<CropRecommendationsBloc>(
-      () => CropRecommendationsBloc(source),
+      () => CropRecommendationsBloc(source, meetings),
     );
   });
 
@@ -95,7 +109,28 @@ void main() {
     bool dark = true,
     String initialRoute = '/',
     List<GoRoute>? routes,
+    Set<String> permissions = const {},
   }) async {
+    final auth = _MockAuth();
+    when(() => auth.state).thenReturn(
+      AuthState(
+        status: AuthStatus.authenticated,
+        user: User(
+          id: 'u1',
+          name: 'Vizo',
+          email: '',
+          role: const UserRole(value: 'farmer', label: 'Farmer'),
+          permissions: permissions,
+          profileActive: true,
+        ),
+      ),
+    );
+    // The sparkle never settles while it moves.
+    tester.platformDispatcher.accessibilityFeaturesTestValue =
+        const FakeAccessibilityFeatures(disableAnimations: true);
+    addTearDown(
+      tester.platformDispatcher.clearAccessibilityFeaturesTestValue,
+    );
     tester.view.physicalSize = const Size(390, 844) * 3;
     tester.view.devicePixelRatio = 3;
     addTearDown(tester.view.reset);
@@ -112,13 +147,16 @@ void main() {
     );
 
     await tester.pumpWidget(
-      MaterialApp.router(
+      BlocProvider<AuthCubit>.value(
+        value: auth,
+        child: MaterialApp.router(
         theme: dark
             ? AppTheme.dark(Flavor.development)
             : AppTheme.light(Flavor.development),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         routerConfig: router,
+      ),
       ),
     );
     await tester.pumpAndSettle();
@@ -165,7 +203,7 @@ void main() {
   });
 
   group('CropDetailScreen', () {
-    testWidgets('renders crop details, overview and advisory tab', (tester) async {
+    void stub() {
       when(() => source.getCrop('ginger')).thenAnswer((_) async => _crop);
       when(
         () => source.getCropAdvisory('ginger', districtId: any(named: 'districtId')),
@@ -182,7 +220,10 @@ void main() {
       when(() => source.getCropPrices('ginger', page: 1)).thenAnswer(
         (_) async => const Paged(items: []),
       );
+    }
 
+    testWidgets('renders crop details, overview and advisory tab', (tester) async {
+      stub();
       await pump(tester, const CropDetailScreen(cropSlug: 'ginger'));
 
       expect(find.text('Ginger'), findsWidgets);
@@ -192,6 +233,33 @@ void main() {
       expect(find.text('Calendar'), findsOneWidget);
       expect(find.text('Varieties'), findsOneWidget);
       expect(find.text('Prices'), findsOneWidget);
+      expect(find.byTooltip('Ask AI about this crop'), findsNothing);
+    });
+
+    testWidgets('the sparkle opens the national AI about this crop', (
+      tester,
+    ) async {
+      stub();
+      await pump(
+        tester,
+        const SizedBox(),
+        dark: false,
+        permissions: {Permissions.nationalFarmingAiAssistantUse},
+        routes: [
+          GoRoute(
+            path: '/',
+            builder: (_, _) => const CropDetailScreen(cropSlug: 'ginger'),
+          ),
+          GoRoute(
+            path: '/national_farming_ai_assistant',
+            builder: (_, state) =>
+                Text('AI for ${state.uri.queryParameters['crop']}'),
+          ),
+        ],
+      );
+      await tester.tap(find.byTooltip('Ask AI about this crop'));
+      await tester.pumpAndSettle();
+      expect(find.text('AI for ginger'), findsOneWidget);
     });
   });
 
@@ -203,8 +271,34 @@ void main() {
           districtId: any(named: 'districtId'),
           sowingMonth: any(named: 'sowingMonth'),
           areaHa: any(named: 'areaHa'),
+          crops: any(named: 'crops'),
         ),
       ).thenAnswer((_) async => _recommendationResult);
+      when(() => meetings.getDistrictList()).thenAnswer(
+        (_) async => [
+          DistrictOptionModel(id: 'd1', name: 'Kohima'),
+          DistrictOptionModel(id: 'd2', name: 'Longleng'),
+        ],
+      );
+      when(
+        () => source.getCrops(
+          page: any(named: 'page'),
+          perPage: any(named: 'perPage'),
+        ),
+      ).thenAnswer((_) async => Paged(items: [_crop]));
+      when(
+        () => source.getSowingMonths(
+          crop: any(named: 'crop'),
+          districtId: any(named: 'districtId'),
+        ),
+      ).thenAnswer(
+        (call) async => call.namedArguments[#crop] == null
+            ? const [
+                MonthModel(number: 1, name: 'January'),
+                MonthModel(number: 4, name: 'April'),
+              ]
+            : const [MonthModel(number: 4, name: 'April')],
+      );
 
       await pump(tester, const CropRecommendationsScreen());
 
@@ -212,11 +306,30 @@ void main() {
       expect(find.text('Recommendation Parameters'), findsOneWidget);
       expect(find.text('Get Recommendations'), findsOneWidget);
 
+      expect(find.text('Kohima'), findsOneWidget);
+      expect(find.text('All crops'), findsOneWidget);
+      expect(find.text('January'), findsOneWidget);
+
+      await tester.tap(find.text('All crops'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Ginger').last);
+      await tester.pumpAndSettle();
+      expect(find.text('January'), findsNothing);
+      expect(find.text('April'), findsOneWidget);
+
       await tester.tap(find.text('Get Recommendations'));
       await tester.pumpAndSettle();
 
-      expect(find.text('Ginger'), findsOneWidget);
+      expect(find.text('Ginger'), findsNWidgets(2));
       expect(find.text('95% Suitability'), findsOneWidget);
+      verify(
+        () => source.getRecommendations(
+          districtId: 'd1',
+          sowingMonth: 4,
+          areaHa: 1,
+          crops: ['ginger'],
+        ),
+      ).called(1);
     });
   });
 }

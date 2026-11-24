@@ -13,6 +13,8 @@ class NationalFarmingAiAssistantState extends Equatable {
     this.language = 'en',
     this.useLocation = false,
     this.photo,
+    this.questions,
+    this.prefill,
   });
 
   final NationalFarmingAiAssistantStatus status;
@@ -22,6 +24,10 @@ class NationalFarmingAiAssistantState extends Equatable {
   final String language;
   final bool useLocation;
   final String? photo;
+
+  /// Null while a crop's questions load, and empty when there are none.
+  final List<String>? questions;
+  final String? prefill;
 
   bool get isThinking => status == NationalFarmingAiAssistantStatus.thinking;
 
@@ -33,6 +39,8 @@ class NationalFarmingAiAssistantState extends Equatable {
     String? language,
     bool? useLocation,
     String? Function()? photo,
+    List<String>? questions,
+    String? Function()? prefill,
   }) => NationalFarmingAiAssistantState(
     status: status ?? this.status,
     messages: messages ?? this.messages,
@@ -41,6 +49,8 @@ class NationalFarmingAiAssistantState extends Equatable {
     language: language ?? this.language,
     useLocation: useLocation ?? this.useLocation,
     photo: photo == null ? this.photo : photo(),
+    questions: questions ?? this.questions,
+    prefill: prefill == null ? this.prefill : prefill(),
   );
 
   @override
@@ -52,5 +62,7 @@ class NationalFarmingAiAssistantState extends Equatable {
     language,
     useLocation,
     photo,
+    questions,
+    prefill,
   ];
 }

@@ -2146,4 +2146,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get nationalFarmingAiAssistantNearMeHelp =>
       'Sends your farm\'s or district\'s rough location for nearby mandi prices';
+
+  @override
+  String get cropAskAi => 'Ask AI about this crop';
 }

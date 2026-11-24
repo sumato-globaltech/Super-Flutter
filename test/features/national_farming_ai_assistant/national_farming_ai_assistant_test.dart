@@ -14,6 +14,7 @@ import 'package:super_flutter/core/network/dio_client.dart';
 import 'package:super_flutter/core/ui/theme/app_theme.dart';
 import 'package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_answer_model.dart';
 import 'package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_language_model.dart';
+import 'package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_question_model.dart';
 import 'package:super_flutter/data/national_farming_ai_assistant/sources/remote/national_farming_ai_assistant_remote_data_source.dart';
 import 'package:super_flutter/domain/auth/entities/access_policy.dart';
 import 'package:super_flutter/features/national_farming_ai_assistant/presentation/national_farming_ai_assistant/bloc/national_farming_ai_assistant_bloc.dart';
@@ -93,7 +94,11 @@ void main() {
     getIt.registerFactory(() => bloc = NationalFarmingAiAssistantBloc(source));
   });
 
-  Future<void> pump(WidgetTester tester, {bool dark = false}) async {
+  Future<void> pump(
+    WidgetTester tester, {
+    bool dark = false,
+    String? crop,
+  }) async {
     tester.view.physicalSize = const Size(390, 844);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
@@ -108,7 +113,7 @@ void main() {
             : AppTheme.light(Flavor.development),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: const NationalFarmingAiAssistantScreen(),
+        home: NationalFarmingAiAssistantScreen(crop: crop),
       ),
     );
     await tester.pumpAndSettle();
@@ -246,6 +251,97 @@ void main() {
     expect(find.text('Try again'), findsOneWidget);
   });
 
+  group('from a crop', () {
+    NationalFarmingAiAssistantQuestionModel item(
+      String question, {
+      bool prefill = false,
+    }) => NationalFarmingAiAssistantQuestionModel(
+      key: question,
+      question: question,
+      prefill: prefill,
+    );
+
+    void stub({bool fail = false}) {
+      for (final (language, name) in [('en', 'Ginger'), ('hi', 'अदरक')]) {
+        final call = when(
+          () => source.getNationalFarmingAiAssistantQuestions(
+            crop: 'ginger',
+            language: language,
+          ),
+        );
+        if (fail) {
+          call.thenThrow(const ValidationException('no'));
+        } else {
+          call.thenAnswer(
+            (_) async => [
+              item('Price of $name?', prefill: true),
+              item('Pests of $name?'),
+            ],
+          );
+        }
+      }
+    }
+
+    String typed(WidgetTester tester) =>
+        tester.widget<TextField>(find.byType(TextField)).controller!.text;
+
+    testWidgets('lists its questions and fills in the price one', (
+      tester,
+    ) async {
+      stub();
+      await pump(tester, crop: 'ginger');
+      expect(typed(tester), 'Price of Ginger?');
+      expect(find.text('Pests of Ginger?'), findsOneWidget);
+      expect(find.text('How to control fall armyworm in maize?'), findsNothing);
+      expect(asked, isEmpty);
+
+      await tester.tap(find.byTooltip('Send'));
+      await tester.pumpAndSettle();
+      expect(asked.single[#question], 'Price of Ginger?');
+      expect(typed(tester), isEmpty);
+    });
+
+    testWidgets('a listed question is asked when tapped', (tester) async {
+      stub();
+      await pump(tester, crop: 'ginger');
+      await tester.tap(find.text('Pests of Ginger?'));
+      await tester.pumpAndSettle();
+      expect(asked.single[#question], 'Pests of Ginger?');
+    });
+
+    testWidgets('the language changes them, but not what was typed', (
+      tester,
+    ) async {
+      stub();
+      await pump(tester, crop: 'ginger');
+      Future<void> choose(String from, String to) async {
+        await tester.tap(find.text(from));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text(to).last);
+        await tester.pumpAndSettle();
+      }
+
+      await choose('English', 'हिन्दी');
+      expect(typed(tester), 'Price of अदरक?');
+      expect(find.text('Pests of अदरक?'), findsOneWidget);
+
+      await tester.enterText(find.byType(TextField), 'My own');
+      await choose('हिन्दी', 'English');
+      expect(typed(tester), 'My own');
+      expect(find.text('Pests of Ginger?'), findsOneWidget);
+    });
+
+    testWidgets('the usual suggestions show when they fail', (tester) async {
+      stub(fail: true);
+      await pump(tester, crop: 'ginger');
+      expect(typed(tester), isEmpty);
+      expect(
+        find.text('How to control fall armyworm in maize?'),
+        findsOneWidget,
+      );
+    });
+  });
+
   test('it posts to dam, with the photo only when there is one', () async {
     final adapter = _Adapter();
     final client = _MockDioClient();
@@ -285,5 +381,14 @@ void main() {
     form = adapter.request!.data as FormData;
     expect(form.files, isEmpty);
     expect(answer?.answer, 'Yes');
+
+    await source.getNationalFarmingAiAssistantQuestions(
+      crop: 'ginger',
+      language: 'hi',
+    );
+    expect(
+      adapter.request!.uri.toString(),
+      'http://dam.test/api/v1/national-farming-ai-assistant/crops/ginger/questions?language=hi',
+    );
   });
 }

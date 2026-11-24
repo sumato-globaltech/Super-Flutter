@@ -870,6 +870,54 @@ models:
     nested:
       - StatusModel
     origin: generated
+  - name: NationalFarmingAiAssistantAnswerModel
+    kind: model
+    feature: national_farming_ai_assistant
+    path: lib/data/national_farming_ai_assistant/model/national_farming_ai_assistant_answer_model.dart
+    import: package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_answer_model.dart
+    fingerprint: '{answer:string}'
+    fields:
+      - name: answer
+        json_key: answer
+        type: String
+        nullable: true
+    origin: generated
+  - name: NationalFarmingAiAssistantLanguageModel
+    kind: model
+    feature: national_farming_ai_assistant
+    path: lib/data/national_farming_ai_assistant/model/national_farming_ai_assistant_language_model.dart
+    import: package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_language_model.dart
+    fingerprint: '{label:string,value:string}'
+    fields:
+      - name: value
+        json_key: value
+        type: String
+        nullable: true
+      - name: label
+        json_key: label
+        type: String
+        nullable: true
+    origin: generated
+  - name: NationalFarmingAiAssistantQuestionModel
+    kind: model
+    feature: national_farming_ai_assistant
+    path: lib/data/national_farming_ai_assistant/model/national_farming_ai_assistant_question_model.dart
+    import: package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_question_model.dart
+    fingerprint: '{key:string,prefill:bool,question:string}'
+    fields:
+      - name: key
+        json_key: key
+        type: String
+        nullable: true
+      - name: question
+        json_key: question
+        type: String
+        nullable: true
+      - name: prefill
+        json_key: prefill
+        type: bool
+        nullable: true
+    origin: generated
   - name: ByCropModel
     kind: model
     feature: production
@@ -1943,32 +1991,4 @@ models:
       - PhotoModel
       - ReplyModel
       - StatusModel
-    origin: generated
-  - name: NationalFarmingAiAssistantAnswerModel
-    kind: model
-    feature: national_farming_ai_assistant
-    path: lib/data/national_farming_ai_assistant/model/national_farming_ai_assistant_answer_model.dart
-    import: package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_answer_model.dart
-    fingerprint: '{answer:string}'
-    fields:
-      - name: answer
-        json_key: answer
-        type: String
-        nullable: true
-    origin: generated
-  - name: NationalFarmingAiAssistantLanguageModel
-    kind: model
-    feature: national_farming_ai_assistant
-    path: lib/data/national_farming_ai_assistant/model/national_farming_ai_assistant_language_model.dart
-    import: package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_language_model.dart
-    fingerprint: '{label:string,value:string}'
-    fields:
-      - name: value
-        json_key: value
-        type: String
-        nullable: true
-      - name: label
-        json_key: label
-        type: String
-        nullable: true
     origin: generated

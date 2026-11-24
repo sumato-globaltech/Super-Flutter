@@ -196,6 +196,36 @@ class CropRemoteDataSource {
     }
   }
 
+  /// GET /api/v1/crops/sowing-months
+  Future<List<MonthModel>> getSowingMonths({
+    String? crop,
+    String? districtId,
+  }) async {
+    try {
+      final response = await _dioClient.dio.get<dynamic>(
+        CropEndpoints.sowingMonths,
+        queryParameters: <String, dynamic>{
+          'crop': ?crop,
+          'district_id': ?districtId,
+        },
+      );
+      final body = response.data;
+      if (response.statusCode == 200 && body is Map && body['data'] is List) {
+        return (body['data'] as List)
+            .whereType<Map>()
+            .map((item) => MonthModel.fromJson(Map<String, dynamic>.from(item)))
+            .toList();
+      }
+      return const [];
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on NetworkException {
+      rethrow;
+    } catch (e) {
+      return const [];
+    }
+  }
+
   /// GET /api/v1/crops/recommendations
   Future<CropRecommendationResultModel?> getRecommendations({
     required String districtId,
@@ -210,7 +240,7 @@ class CropRemoteDataSource {
           'district_id': districtId,
           'sowing_month': sowingMonth,
           'area_ha': areaHa,
-          'crops': ?crops,
+          'crops[]': ?crops,
         },
       );
       if (response.statusCode == 200 && response.data is Map) {

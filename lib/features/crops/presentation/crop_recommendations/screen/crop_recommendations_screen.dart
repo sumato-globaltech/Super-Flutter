@@ -42,42 +42,12 @@ class _CropRecommendationsViewState extends State<_CropRecommendationsView> {
   final TextEditingController _areaController =
       TextEditingController(text: '1.0');
 
-  static const List<Map<String, String>> _districts = [
-    {'id': '01m6de2pq2ewspmabq763tymyn', 'name': 'Longleng'},
-    {'id': '01m6de2pq2ewspmabq763tymya', 'name': 'Kohima'},
-    {'id': '01m6de2pq2ewspmabq763tymy1', 'name': 'Dimapur'},
-    {'id': '01m6de2pq2ewspmabq763tymy2', 'name': 'Mokokchung'},
-    {'id': '01m6de2pq2ewspmabq763tymy3', 'name': 'Mon'},
-    {'id': '01m6de2pq2ewspmabq763tymy4', 'name': 'Phek'},
-    {'id': '01m6de2pq2ewspmabq763tymy5', 'name': 'Tuensang'},
-    {'id': '01m6de2pq2ewspmabq763tymy6', 'name': 'Wokha'},
-    {'id': '01m6de2pq2ewspmabq763tymy7', 'name': 'Zunheboto'},
-  ];
-
-  static const List<String> _months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-
   @override
   void initState() {
     super.initState();
-    final bloc = context.read<CropRecommendationsBloc>();
-    if (bloc.state.districtId.isEmpty) {
-      bloc.add(
-        RecommendationsDistrictChanged(_districts.first['id']!),
-      );
-    }
+    context.read<CropRecommendationsBloc>().add(
+          const RecommendationsStarted(),
+        );
   }
 
   @override
@@ -119,66 +89,125 @@ class _CropRecommendationsViewState extends State<_CropRecommendationsView> {
                 ),
                 const SizedBox(height: AppSpacing.md),
                 BlocBuilder<CropRecommendationsBloc, CropRecommendationsState>(
-                  buildWhen: (prev, curr) => prev.districtId != curr.districtId,
-                  builder: (context, state) {
-                    final selectedDistrictId = state.districtId.isNotEmpty
-                        ? state.districtId
-                        : _districts.first['id']!;
-                    return DropdownButtonFormField<String>(
-                      initialValue: _districts.any((d) => d['id'] == selectedDistrictId)
-                          ? selectedDistrictId
-                          : _districts.first['id'],
-                      decoration: InputDecoration(
-                        labelText: l10n.district,
-                        prefixIcon: const Icon(PhosphorIconsRegular.mapPin),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      items: _districts
-                          .map((d) => DropdownMenuItem(
-                                value: d['id'],
-                                child: Text(d['name']!),
-                              ))
-                          .toList(),
-                      onChanged: (val) {
-                        if (val != null) {
-                          context.read<CropRecommendationsBloc>().add(
-                                RecommendationsDistrictChanged(val),
-                              );
-                        }
-                      },
-                    );
-                  },
-                ),
-                const SizedBox(height: AppSpacing.sm),
-                BlocBuilder<CropRecommendationsBloc, CropRecommendationsState>(
                   buildWhen: (prev, curr) =>
+                      prev.optionsStatus != curr.optionsStatus ||
+                      prev.districts != curr.districts ||
+                      prev.crops != curr.crops ||
+                      prev.months != curr.months ||
+                      prev.districtId != curr.districtId ||
+                      prev.cropSlug != curr.cropSlug ||
                       prev.sowingMonth != curr.sowingMonth,
                   builder: (context, state) {
-                    return DropdownButtonFormField<int>(
-                      initialValue: state.sowingMonth,
-                      decoration: InputDecoration(
-                        labelText: l10n.sowingMonth,
-                        prefixIcon: const Icon(PhosphorIconsRegular.calendar),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
+                    if (state.optionsStatus == RecommendationsStatus.failure) {
+                      return AppErrorView(
+                        message: state.optionsError ?? l10n.errorUnknown,
+                        retryLabel: l10n.tryAgain,
+                        onRetry: () => context
+                            .read<CropRecommendationsBloc>()
+                            .add(const RecommendationsStarted()),
+                      );
+                    }
+                    final loading =
+                        state.optionsStatus != RecommendationsStatus.success;
+                    if (loading && state.months.isEmpty) {
+                      return const Center(child: DesignProgress());
+                    }
+                    return Column(
+                      children: [
+                        DropdownButtonFormField<String>(
+                          key: ValueKey((state.districts, state.districtId)),
+                          initialValue: state.districts
+                                  .any((d) => d.id == state.districtId)
+                              ? state.districtId
+                              : null,
+                          isExpanded: true,
+                          decoration: InputDecoration(
+                            labelText: l10n.district,
+                            prefixIcon: const Icon(PhosphorIconsRegular.mapPin),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          items: [
+                            for (final district in state.districts)
+                              DropdownMenuItem(
+                                value: district.id,
+                                child: Text(district.name ?? '--'),
+                              ),
+                          ],
+                          onChanged: (val) {
+                            if (val != null) {
+                              context.read<CropRecommendationsBloc>().add(
+                                    RecommendationsDistrictChanged(val),
+                                  );
+                            }
+                          },
                         ),
-                      ),
-                      items: List.generate(
-                        12,
-                        (index) => DropdownMenuItem(
-                          value: index + 1,
-                          child: Text(_months[index]),
+                        const SizedBox(height: AppSpacing.sm),
+                        DropdownButtonFormField<String>(
+                          key: ValueKey((state.crops, state.cropSlug)),
+                          initialValue: state.cropSlug,
+                          isExpanded: true,
+                          decoration: InputDecoration(
+                            labelText: l10n.productionCrop,
+                            prefixIcon: const Icon(PhosphorIconsRegular.plant),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          items: [
+                            DropdownMenuItem(
+                              value: '',
+                              child: Text(l10n.productionAllCrops),
+                            ),
+                            for (final crop in state.crops)
+                              if (crop.slug?.isNotEmpty ?? false)
+                                DropdownMenuItem(
+                                  value: crop.slug,
+                                  child: Text(crop.name ?? '--'),
+                                ),
+                          ],
+                          onChanged: (val) {
+                            if (val != null) {
+                              context.read<CropRecommendationsBloc>().add(
+                                    RecommendationsCropChanged(val),
+                                  );
+                            }
+                          },
                         ),
-                      ),
-                      onChanged: (val) {
-                        if (val != null) {
-                          context.read<CropRecommendationsBloc>().add(
-                                RecommendationsMonthChanged(val),
-                              );
-                        }
-                      },
+                        const SizedBox(height: AppSpacing.sm),
+                        DropdownButtonFormField<int>(
+                          key: ValueKey((state.months, state.sowingMonth)),
+                          initialValue: state.months
+                                  .any((m) => m.number == state.sowingMonth)
+                              ? state.sowingMonth
+                              : null,
+                          isExpanded: true,
+                          decoration: InputDecoration(
+                            labelText: l10n.sowingMonth,
+                            prefixIcon: const Icon(PhosphorIconsRegular.calendar),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          items: [
+                            for (final month in state.months)
+                              DropdownMenuItem(
+                                value: month.number,
+                                child: Text(month.name ?? '--'),
+                              ),
+                          ],
+                          onChanged: loading
+                              ? null
+                              : (val) {
+                                  if (val != null) {
+                                    context
+                                        .read<CropRecommendationsBloc>()
+                                        .add(RecommendationsMonthChanged(val));
+                                  }
+                                },
+                        ),
+                      ],
                     );
                   },
                 ),
@@ -219,7 +248,9 @@ class _CropRecommendationsViewState extends State<_CropRecommendationsView> {
                               )
                             : const Icon(PhosphorIconsRegular.sparkle),
                         label: Text(l10n.getRecommendations),
-                        onPressed: isLoading
+                        onPressed: isLoading ||
+                                state.optionsStatus !=
+                                    RecommendationsStatus.success
                             ? null
                             : () {
                                 context.read<CropRecommendationsBloc>().add(

@@ -483,5 +483,6 @@
   "nationalFarmingAiAssistantPhotoQuestion": "¿Qué enfermedad tiene esta planta y cómo la trato?",
   "nationalFarmingAiAssistantLanguage": "Idioma de respuesta",
   "nationalFarmingAiAssistantNearMe": "Cerca de mí",
-  "nationalFarmingAiAssistantNearMeHelp": "Envía la ubicación aproximada de tu finca o distrito para precios cercanos"
+  "nationalFarmingAiAssistantNearMeHelp": "Envía la ubicación aproximada de tu finca o distrito para precios cercanos",
+  "cropAskAi": "Preguntar a la IA sobre este cultivo"
 }

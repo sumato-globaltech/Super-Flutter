@@ -8,6 +8,8 @@ List<GoRoute> buildNationalFarmingAiAssistantRoutes() => [
   GoRoute(
     path: NationalFarmingAiAssistantRouteNames.root,
     name: NationalFarmingAiAssistantRouteNames.root,
-    builder: (context, state) => const NationalFarmingAiAssistantScreen(),
+    builder: (context, state) => NationalFarmingAiAssistantScreen(
+      crop: state.uri.queryParameters['crop'],
+    ),
   ),
 ];

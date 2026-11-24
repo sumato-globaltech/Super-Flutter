@@ -9,7 +9,13 @@ sealed class NationalFarmingAiAssistantEvent extends Equatable {
 
 class NationalFarmingAiAssistantStarted
     extends NationalFarmingAiAssistantEvent {
-  const NationalFarmingAiAssistantStarted();
+  const NationalFarmingAiAssistantStarted({this.crop});
+
+  /// The slug of the crop the questions are about.
+  final String? crop;
+
+  @override
+  List<Object?> get props => [crop];
 }
 
 sealed class NationalFarmingAiAssistantChatEvent

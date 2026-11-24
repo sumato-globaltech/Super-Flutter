@@ -7,6 +7,7 @@ import 'package:super_flutter/core/network/dio_client.dart';
 import 'package:super_flutter/core/network/network_exception_mapper.dart';
 import 'package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_answer_model.dart';
 import 'package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_language_model.dart';
+import 'package:super_flutter/data/national_farming_ai_assistant/model/national_farming_ai_assistant_question_model.dart';
 
 @lazySingleton
 class NationalFarmingAiAssistantRemoteDataSource {
@@ -99,6 +100,46 @@ class NationalFarmingAiAssistantRemoteDataSource {
       rethrow;
     } catch (e) {
       return null;
+    }
+  }
+
+  /// GET http://dam.test/api/v1/national-farming-ai-assistant/crops/{crop}/questions
+  Future<List<NationalFarmingAiAssistantQuestionModel>>
+  getNationalFarmingAiAssistantQuestions({
+    required String crop,
+    required String language,
+  }) async {
+    try {
+      final response = await _dioClient.dio.get<dynamic>(
+        ApiEndpoints.nationalFarmingAiAssistantQuestions(crop),
+        queryParameters: <String, dynamic>{'language': language},
+      );
+      final body = response.data;
+      if (response.statusCode == 200 && body is Map) {
+        final data = body['data'];
+        final items = data is List
+            ? data
+            : (data is Map && data['data'] is List
+                  ? data['data'] as List
+                  : null);
+        if (items != null) {
+          return items
+              .whereType<Map>()
+              .map(
+                (item) => NationalFarmingAiAssistantQuestionModel.fromJson(
+                  Map<String, dynamic>.from(item),
+                ),
+              )
+              .toList();
+        }
+      }
+      return const [];
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on NetworkException {
+      rethrow;
+    } catch (e) {
+      return const [];
     }
   }
 }

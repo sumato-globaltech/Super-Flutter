@@ -117,7 +117,9 @@ class CropRecommendationItemModel extends Equatable {
       suitabilityScore: json['suitability_score'] is num
           ? json['suitability_score'] as num
           : num.tryParse('${json['suitability_score']}'),
-      sowingWindow: json['sowing_window']?.toString(),
+      sowingWindow: json['sowing_window'] is Map
+          ? (json['sowing_window'] as Map)['label']?.toString()
+          : json['sowing_window']?.toString(),
       expected: json['expected'] is Map
           ? Map<String, dynamic>.from(json['expected'] as Map)
           : null,

@@ -4111,6 +4111,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sends your farm\'s or district\'s rough location for nearby mandi prices'**
   String get nationalFarmingAiAssistantNearMeHelp;
+
+  /// No description provided for @cropAskAi.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask AI about this crop'**
+  String get cropAskAi;
 }
 
 class _AppLocalizationsDelegate

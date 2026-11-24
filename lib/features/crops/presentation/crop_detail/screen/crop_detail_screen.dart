@@ -1,10 +1,13 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:super_flutter/app/access/app_features.dart';
 import 'package:super_flutter/core/di/injection.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
 import 'package:super_flutter/core/ui/theme/app_spacing.dart';
 import 'package:super_flutter/core/ui/theme/design_colors.dart';
+import 'package:super_flutter/core/ui/widgets/ai_sparkle.dart';
 import 'package:super_flutter/core/ui/widgets/app_empty_view.dart';
 import 'package:super_flutter/core/ui/widgets/app_error_view.dart';
 import 'package:super_flutter/core/ui/widgets/app_top_bar.dart';
@@ -16,6 +19,8 @@ import 'package:super_flutter/data/crops/model/crop_calendar_model.dart';
 import 'package:super_flutter/data/crops/model/crop_fertilizers_model.dart';
 import 'package:super_flutter/data/crops/model/crop_model.dart';
 import 'package:super_flutter/data/market/model/market_price_model.dart';
+import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
+import 'package:super_flutter/features/national_farming_ai_assistant/routes/national_farming_ai_assistant_route_names.dart';
 
 import '../bloc/crop_detail_bloc.dart';
 import '../bloc/crop_detail_event.dart';
@@ -186,6 +191,13 @@ class _OverviewHeaderCard extends StatelessWidget {
 
     if (crop == null) return const SizedBox.shrink();
 
+    final canAsk = context.select(
+      (AuthCubit cubit) => appFeatures.canOpen(
+        NationalFarmingAiAssistantRouteNames.root,
+        cubit.state.access,
+      ),
+    );
+
     return DesignCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -243,6 +255,15 @@ class _OverviewHeaderCard extends StatelessWidget {
                   ],
                 ),
               ),
+              if (canAsk && crop!.slug != null)
+                IconButton(
+                  tooltip: l10n.cropAskAi,
+                  padding: EdgeInsets.zero,
+                  onPressed: () => context.push(
+                    NationalFarmingAiAssistantRouteNames.forCrop(crop!.slug!),
+                  ),
+                  icon: const AiSparkle(animate: true),
+                ),
             ],
           ),
           const SizedBox(height: AppSpacing.sm),

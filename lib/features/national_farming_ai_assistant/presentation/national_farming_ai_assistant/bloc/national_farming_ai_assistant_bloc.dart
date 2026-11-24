@@ -18,9 +18,10 @@ class NationalFarmingAiAssistantBloc
   ) : super(const NationalFarmingAiAssistantState()) {
     on<NationalFarmingAiAssistantStarted>(_onStarted);
     on<NationalFarmingAiAssistantChatEvent>(_onChat, transformer: droppable());
-    on<NationalFarmingAiAssistantLanguageChosen>(
-      (event, emit) => emit(state.copyWith(language: event.language)),
-    );
+    on<NationalFarmingAiAssistantLanguageChosen>((event, emit) async {
+      emit(state.copyWith(language: event.language));
+      await _loadQuestions(emit);
+    });
     on<NationalFarmingAiAssistantLocationToggled>(
       (event, emit) => emit(state.copyWith(useLocation: event.useLocation)),
     );
@@ -35,8 +36,17 @@ class NationalFarmingAiAssistantBloc
   /// The assistant remembers a chat by this id.
   String _sessionId = const Uuid().v4();
 
+  String? _crop;
+
   Future<void> _onStarted(
     NationalFarmingAiAssistantStarted event,
+    Emitter<NationalFarmingAiAssistantState> emit,
+  ) async {
+    _crop = event.crop;
+    await Future.wait([_loadQuestions(emit), _loadLanguages(emit)]);
+  }
+
+  Future<void> _loadLanguages(
     Emitter<NationalFarmingAiAssistantState> emit,
   ) async {
     try {
@@ -45,6 +55,34 @@ class NationalFarmingAiAssistantBloc
       emit(state.copyWith(languages: languages));
     } catch (_) {
       // The chat still works in English.
+    }
+  }
+
+  Future<void> _loadQuestions(
+    Emitter<NationalFarmingAiAssistantState> emit,
+  ) async {
+    final crop = _crop;
+    final language = state.language;
+    if (crop == null) return emit(state.copyWith(questions: const []));
+    try {
+      final questions = await _nationalFarmingAiAssistantRemoteDataSource
+          .getNationalFarmingAiAssistantQuestions(
+            crop: crop,
+            language: language,
+          );
+      if (state.language != language) return;
+      emit(
+        state.copyWith(
+          questions: [for (final item in questions) ?item.question],
+          prefill: () => questions
+              .where((item) => item.prefill ?? false)
+              .firstOrNull
+              ?.question,
+        ),
+      );
+    } catch (_) {
+      // The usual suggestions show instead.
+      if (state.questions == null) emit(state.copyWith(questions: const []));
     }
   }
 

@@ -7,6 +7,20 @@ sealed class CropRecommendationsEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class RecommendationsStarted extends CropRecommendationsEvent {
+  const RecommendationsStarted();
+}
+
+class RecommendationsCropChanged extends CropRecommendationsEvent {
+  /// Empty for all crops.
+  final String cropSlug;
+
+  const RecommendationsCropChanged(this.cropSlug);
+
+  @override
+  List<Object?> get props => [cropSlug];
+}
+
 class RecommendationsDistrictChanged extends CropRecommendationsEvent {
   final String districtId;
 

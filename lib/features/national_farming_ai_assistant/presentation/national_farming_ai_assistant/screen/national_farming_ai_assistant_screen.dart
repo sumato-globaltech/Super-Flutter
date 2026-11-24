@@ -15,14 +15,16 @@ import 'package:super_flutter/features/national_farming_ai_assistant/presentatio
 import 'package:super_flutter/features/national_farming_ai_assistant/presentation/national_farming_ai_assistant/bloc/national_farming_ai_assistant_state.dart';
 
 class NationalFarmingAiAssistantScreen extends StatelessWidget {
-  const NationalFarmingAiAssistantScreen({super.key});
+  const NationalFarmingAiAssistantScreen({this.crop, super.key});
+
+  final String? crop;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) =>
           getIt<NationalFarmingAiAssistantBloc>()
-            ..add(const NationalFarmingAiAssistantStarted()),
+            ..add(NationalFarmingAiAssistantStarted(crop: crop)),
       child: const _NationalFarmingAiAssistantView(),
     );
   }
@@ -104,10 +106,15 @@ class _NationalFarmingAiAssistantView extends StatelessWidget {
         title: l10n.nationalFarmingAiAssistantTitle,
         greeting: l10n.nationalFarmingAiAssistantHello,
         intro: l10n.nationalFarmingAiAssistantIntro,
-        prompts: [
-          l10n.nationalFarmingAiAssistantPromptPest,
-          l10n.nationalFarmingAiAssistantPromptPrice,
-        ],
+        prompts: switch (state.questions) {
+          null => const [],
+          [] => [
+            l10n.nationalFarmingAiAssistantPromptPest,
+            l10n.nationalFarmingAiAssistantPromptPrice,
+          ],
+          final questions => questions,
+        },
+        prefill: state.prefill,
         hint: l10n.nationalFarmingAiAssistantHint,
         messages: state.messages,
         thinking: state.isThinking,

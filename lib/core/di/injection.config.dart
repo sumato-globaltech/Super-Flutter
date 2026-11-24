@@ -445,7 +445,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i213.CropDetailBloc(gh<_i444.CropRemoteDataSource>()),
     );
     gh.factory<_i977.CropRecommendationsBloc>(
-      () => _i977.CropRecommendationsBloc(gh<_i444.CropRemoteDataSource>()),
+      () => _i977.CropRecommendationsBloc(
+        gh<_i444.CropRemoteDataSource>(),
+        gh<_i133.MeetingsRemoteDataSource>(),
+      ),
     );
     gh.factory<_i64.CropsListBloc>(
       () => _i64.CropsListBloc(gh<_i444.CropRemoteDataSource>()),

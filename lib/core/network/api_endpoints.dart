@@ -186,4 +186,7 @@ abstract final class ApiEndpoints {
 
   static const nationalFarmingAiAssistantAnswer =
       '/api/v1/national-farming-ai-assistant/chat';
+
+  static String nationalFarmingAiAssistantQuestions(String crop) =>
+      '/api/v1/national-farming-ai-assistant/crops/$crop/questions';
 }

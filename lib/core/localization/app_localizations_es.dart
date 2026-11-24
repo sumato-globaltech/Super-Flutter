@@ -2155,4 +2155,7 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get nationalFarmingAiAssistantNearMeHelp =>
       'Envía la ubicación aproximada de tu finca o distrito para precios cercanos';
+
+  @override
+  String get cropAskAi => 'Preguntar a la IA sobre este cultivo';
 }
