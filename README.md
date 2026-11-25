@@ -51,6 +51,7 @@ flutter run -t lib/main_development.dart --flavor development
 flutter run -t lib/main_staging.dart     --flavor staging
 flutter run -t lib/main_production.dart  --flavor production
 flutter build appbundle --release --flavor production -t lib/main_production.dart
+flutter build apk --release --flavor production -t lib/main_production.dart
 flutter test
 flutter analyze
 ```
