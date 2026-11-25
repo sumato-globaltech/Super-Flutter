@@ -101,7 +101,7 @@ abstract class AppLocalizations {
   /// Application name shown in the task switcher
   ///
   /// In en, this message translates to:
-  /// **'Flutter Kit'**
+  /// **'Kheti Manu'**
   String get appTitle;
 
   /// No description provided for @signIn.

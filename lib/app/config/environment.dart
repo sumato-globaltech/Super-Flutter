@@ -18,7 +18,7 @@ class Environment {
 
   factory Environment.development() => const Environment(
     flavor: Flavor.development,
-    appName: 'Flutter Kit Dev',
+    appName: 'Kheti Manu Dev',
     apiBaseUrl: 'http://dam.test',
     databaseName: 'flutter_kit_dev',
     apiKey: String.fromEnvironment(
@@ -36,7 +36,7 @@ class Environment {
 
   factory Environment.staging() => const Environment(
     flavor: Flavor.staging,
-    appName: 'Flutter Kit Staging',
+    appName: 'Kheti Manu Staging',
     apiBaseUrl: 'https://agri-erp.sumato.tech',
     databaseName: 'flutter_kit_staging',
     enableHttpLogging: true,
@@ -46,7 +46,7 @@ class Environment {
 
   factory Environment.production() => const Environment(
     flavor: Flavor.production,
-    appName: 'Flutter Kit',
+    appName: 'Kheti Manu',
     apiBaseUrl: 'https://agri-erp.sumato.tech',
     databaseName: 'flutter_kit',
   );

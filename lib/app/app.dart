@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'
@@ -30,6 +31,18 @@ Future<void> bootstrap(AppConfig config) async {
       WidgetsFlutterBinding.ensureInitialized();
       await configureDependencies(config);
       getIt.get<AppErrorHandler>().initialize();
+      // Only the production package is registered in Firebase.
+      if (config.isProduction) {
+        try {
+          await Firebase.initializeApp();
+        } catch (error, stack) {
+          getIt.get<ErrorReporter>().report(
+            error,
+            stack,
+            reason: 'Firebase did not start',
+          );
+        }
+      }
       final appLogger = getIt.get<AppLogger>();
       if (!config.isProduction) {
         Bloc.observer = LoggingBlocObserver(appLogger);

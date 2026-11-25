@@ -49,3 +49,12 @@ app.*.map.json
 # Local dart-define values (dev credentials)
 dart_defines/*.json
 !dart_defines/*.example.json
+
+# Signing keys and Firebase config: copy them in locally, never commit them
+*.jks
+*.keystore
+**/key.properties
+**/google-services.json
+**/GoogleService-Info.plist
+dart_defines/*.json
+!dart_defines/*.example.json

@@ -10,7 +10,7 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get appTitle => 'Flutter Kit';
+  String get appTitle => 'Kheti Manu';
 
   @override
   String get signIn => 'Iniciar sesión';

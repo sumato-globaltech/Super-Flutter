@@ -1,4 +1,4 @@
-package tech.sumato.superflutter
+package tech.sumato.agrierp
 
 import io.flutter.embedding.android.FlutterActivity
 

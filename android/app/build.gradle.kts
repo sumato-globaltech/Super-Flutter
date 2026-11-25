@@ -1,8 +1,10 @@
+import com.google.gms.googleservices.GoogleServicesPlugin.MissingGoogleServicesStrategy
 import java.util.Properties
 import java.io.FileInputStream
 
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
@@ -14,7 +16,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "tech.sumato.superflutter"
+    namespace = "tech.sumato.agrierp"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -25,8 +27,7 @@ android {
 
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "tech.sumato.superflutter"
+        applicationId = "tech.sumato.agrierp"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
@@ -61,25 +62,23 @@ android {
         create("production") {
             dimension = "default"
             applicationIdSuffix = ""
-            manifestPlaceholders["appName"] = "Super Flutter"
+            manifestPlaceholders["appName"] = "Kheti Manu"
         }
         create("staging") {
             dimension = "default"
             applicationIdSuffix = ".stg"
-            manifestPlaceholders["appName"] = "[STG] Super Flutter"
+            manifestPlaceholders["appName"] = "[STG] Kheti Manu"
         }
         create("development") {
             dimension = "default"
             applicationIdSuffix = ".dev"
-            manifestPlaceholders["appName"] = "[DEV] Super Flutter"
+            manifestPlaceholders["appName"] = "[DEV] Kheti Manu"
         }
     }
 
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
             proguardFiles(
@@ -97,6 +96,11 @@ kotlin {
     compilerOptions {
         jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
     }
+}
+
+// Only the production package is registered in Firebase.
+googleServices {
+    missingGoogleServicesStrategy = MissingGoogleServicesStrategy.WARN
 }
 
 flutter {

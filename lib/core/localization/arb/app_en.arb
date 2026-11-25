@@ -1,7 +1,7 @@
 {
   "@@locale": "en",
 
-  "appTitle": "Flutter Kit",
+  "appTitle": "Kheti Manu",
   "@appTitle": { "description": "Application name shown in the task switcher" },
 
   "signIn": "Sign in",
