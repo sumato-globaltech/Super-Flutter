@@ -21,6 +21,7 @@ import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 import 'package:super_flutter/features/super_awesome/presentation/super_awesome/bloc/super_awesome_bloc.dart';
 
 // sf:app-bloc-imports:end
+import 'package:super_flutter/firebase_options.dart';
 import '../core/di/injection.dart';
 import '../core/localization/app_localizations.dart';
 import '../core/ui/theme/app_theme.dart';
@@ -34,7 +35,9 @@ Future<void> bootstrap(AppConfig config) async {
       // Only the production package is registered in Firebase.
       if (config.isProduction) {
         try {
-          await Firebase.initializeApp();
+          await Firebase.initializeApp(
+            options: DefaultFirebaseOptions.currentPlatform,
+          );
         } catch (error, stack) {
           getIt.get<ErrorReporter>().report(
             error,

@@ -56,5 +56,6 @@ dart_defines/*.json
 **/key.properties
 **/google-services.json
 **/GoogleService-Info.plist
+lib/firebase_options.dart
 dart_defines/*.json
 !dart_defines/*.example.json
