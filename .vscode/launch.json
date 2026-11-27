@@ -19,7 +19,8 @@
       "program": "lib/main_staging.dart",
       "args": [
         "--flavor",
-        "staging"
+        "staging",
+        "--dart-define-from-file=dart_defines/dev.json"
       ]
     },
     {
@@ -29,7 +30,8 @@
       "program": "lib/main_production.dart",
       "args": [
         "--flavor",
-        "production"
+        "production",
+        "--dart-define-from-file=dart_defines/dev.json"
       ]
     }
   ]
