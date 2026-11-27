@@ -189,4 +189,6 @@ abstract final class ApiEndpoints {
 
   static String nationalFarmingAiAssistantQuestions(String crop) =>
       '/api/v1/national-farming-ai-assistant/crops/$crop/questions';
+
+  static const device = '/api/v1/devices';
 }

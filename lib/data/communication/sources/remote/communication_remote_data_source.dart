@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:super_flutter/core/error/app_exception.dart';
+import 'package:super_flutter/core/error/exceptions/validation_exception.dart';
 import 'package:super_flutter/core/network/api_endpoints.dart';
 import 'package:super_flutter/core/network/dio_client.dart';
 import 'package:super_flutter/core/network/network_exception_mapper.dart';
@@ -120,6 +122,68 @@ class CommunicationRemoteDataSource {
       rethrow;
     } catch (e) {
       return const [];
+    }
+  }
+
+  /// POST http://dam.test/api/v1/devices
+  Future<bool> createDevice({
+    required String token,
+    required String platform,
+    String? deviceName,
+  }) async {
+    try {
+      final response = await _dioClient.dio.post<dynamic>(
+        ApiEndpoints.device,
+        data: <String, dynamic>{
+          'token': token,
+          'platform': platform,
+          'device_name': ?deviceName,
+        },
+      );
+      final body = response.data;
+      if (body is Map && body['success'] == false) {
+        final message =
+            (body['message'] as String?) ?? 'The device request failed.';
+        final fieldErrors = NetworkException.fieldErrorsFrom(body);
+        if (fieldErrors.isNotEmpty) {
+          throw ValidationException(message, fieldErrors: fieldErrors);
+        }
+        throw BadRequestException(message, statusCode: response.statusCode);
+      }
+      return response.statusCode == 200 || response.statusCode == 201;
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on AppException {
+      rethrow;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// DELETE http://dam.test/api/v1/devices
+  Future<bool> deleteDevice({required String token}) async {
+    try {
+      final response = await _dioClient.dio.delete<dynamic>(
+        ApiEndpoints.device,
+        data: <String, dynamic>{'token': token},
+      );
+      final body = response.data;
+      if (body is Map && body['success'] == false) {
+        final message =
+            (body['message'] as String?) ?? 'The device request failed.';
+        final fieldErrors = NetworkException.fieldErrorsFrom(body);
+        if (fieldErrors.isNotEmpty) {
+          throw ValidationException(message, fieldErrors: fieldErrors);
+        }
+        throw BadRequestException(message, statusCode: response.statusCode);
+      }
+      return true;
+    } on DioException catch (e) {
+      throw NetworkException.fromDioException(e);
+    } on AppException {
+      rethrow;
+    } catch (e) {
+      return false;
     }
   }
 }

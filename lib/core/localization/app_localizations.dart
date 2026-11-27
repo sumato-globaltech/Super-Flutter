@@ -4117,6 +4117,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ask AI about this crop'**
   String get cropAskAi;
+
+  /// No description provided for @pushView.
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get pushView;
 }
 
 class _AppLocalizationsDelegate

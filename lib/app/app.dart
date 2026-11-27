@@ -9,6 +9,7 @@ import 'package:flutter_localizations/flutter_localizations.dart'
 import 'package:material_ui/material_ui.dart';
 import 'package:super_flutter/app/config/app_config.dart';
 import 'package:super_flutter/app/router/app_router.dart';
+import 'package:super_flutter/app/router/navigator_keys.dart';
 import 'package:super_flutter/app/router/router_refresh.dart';
 import 'package:super_flutter/app/startup/app_startup.dart';
 import 'package:super_flutter/app/startup/startup_images.dart';
@@ -16,12 +17,16 @@ import 'package:super_flutter/core/error/app_error_handler.dart';
 import 'package:super_flutter/core/error/error_reporter.dart';
 import 'package:super_flutter/core/logging/app_logger.dart';
 import 'package:super_flutter/core/logging/logging_bloc_observer.dart';
+import 'package:super_flutter/core/service/push_messaging.dart';
+import 'package:super_flutter/core/service/push_service.dart';
+import 'package:super_flutter/core/ui/widgets/confirm_sheet.dart';
 import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
 // sf:app-bloc-imports:begin
 import 'package:super_flutter/features/super_awesome/presentation/super_awesome/bloc/super_awesome_bloc.dart';
 
 // sf:app-bloc-imports:end
 import 'package:super_flutter/firebase_options.dart';
+
 import '../core/di/injection.dart';
 import '../core/localization/app_localizations.dart';
 import '../core/ui/theme/app_theme.dart';
@@ -76,6 +81,8 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   late final AppConfig _config = getIt.get<AppConfig>();
+  late final PushMessaging _push = getIt.get<PushMessaging>();
+  final _pushSubscriptions = <StreamSubscription<PushNote>>[];
   late final GoRouterRefreshStream _authRefresh;
   late final GoRouter _router;
 
@@ -90,10 +97,51 @@ class _AppState extends State<App> {
       config: _config,
       refreshListenable: _authRefresh,
     );
+    WidgetsBinding.instance.addPostFrameCallback((_) => _startPush());
+  }
+
+  Future<void> _startPush() async {
+    if (_push.platform == null) return;
+    _pushSubscriptions
+      ..add(_push.received.listen(_announce))
+      ..add(_push.opened.listen(_openNote));
+    getIt.get<PushService>().start();
+    final note = await _push.openedWith();
+    if (note != null) _openNote(note);
+  }
+
+  void _announce(PushNote note) {
+    final context = rootNavigatorKey.currentContext;
+    if (context == null) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        persist: false,
+        duration: const Duration(seconds: 8),
+        content: Text(note.title.isEmpty ? note.body : note.title),
+        action: SnackBarAction(
+          label: AppLocalizations.of(context).pushView,
+          onPressed: () => _openNote(note),
+        ),
+      ),
+    );
+  }
+
+  void _openNote(PushNote note) {
+    final context = rootNavigatorKey.currentContext;
+    if (context == null || !getIt.get<AuthCubit>().state.isAuthenticated) {
+      return;
+    }
+    ConfirmSheet.show<void>(
+      context,
+      ConfirmSheet(title: note.title, description: note.body),
+    );
   }
 
   @override
   void dispose() {
+    for (final subscription in _pushSubscriptions) {
+      subscription.cancel();
+    }
     _router.dispose();
     _authRefresh.dispose();
     super.dispose();

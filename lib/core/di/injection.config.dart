@@ -24,6 +24,8 @@ import 'package:super_flutter/core/network/dio_client.dart' as _i42;
 import 'package:super_flutter/core/network/network_module.dart' as _i469;
 import 'package:super_flutter/core/network/session_manager.dart' as _i827;
 import 'package:super_flutter/core/service/device_info_service.dart' as _i686;
+import 'package:super_flutter/core/service/push_messaging.dart' as _i83;
+import 'package:super_flutter/core/service/push_service.dart' as _i549;
 import 'package:super_flutter/core/storage/local_storage.dart' as _i635;
 import 'package:super_flutter/core/storage/secure_storage.dart' as _i491;
 import 'package:super_flutter/core/storage/storage_service.dart' as _i407;
@@ -155,7 +157,7 @@ import 'package:super_flutter/features/admin_communication/presentation/edit_ale
 import 'package:super_flutter/features/admin_communication/presentation/edit_notice/bloc/edit_notice_bloc.dart'
     as _i294;
 import 'package:super_flutter/features/auth/presentation/change_password/bloc/change_password_bloc.dart'
-    as _i930;
+    as _i932;
 import 'package:super_flutter/features/auth/presentation/login/bloc/login_bloc.dart'
     as _i386;
 import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart'
@@ -175,7 +177,7 @@ import 'package:super_flutter/features/crops/presentation/crop_recommendations/b
 import 'package:super_flutter/features/crops/presentation/crops_list/bloc/crops_list_bloc.dart'
     as _i64;
 import 'package:super_flutter/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart'
-    as _i932;
+    as _i930;
 import 'package:super_flutter/features/facilities/presentation/facilities/bloc/facilities_bloc.dart'
     as _i28;
 import 'package:super_flutter/features/facilities/presentation/facility_stats/bloc/facility_stats_bloc.dart'
@@ -279,6 +281,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i363.SupportLocalDataSource>(
       () => _i363.SupportLocalDataSource(),
     );
+    gh.lazySingleton<_i83.PushMessaging>(() => _i83.FirebasePushMessaging());
     gh.lazySingleton<_i1067.Environment>(
       () => coreModule.appEnvironment(gh<_i65.AppConfig>()),
     );
@@ -444,12 +447,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i213.CropDetailBloc>(
       () => _i213.CropDetailBloc(gh<_i444.CropRemoteDataSource>()),
     );
-    gh.factory<_i977.CropRecommendationsBloc>(
-      () => _i977.CropRecommendationsBloc(
-        gh<_i444.CropRemoteDataSource>(),
-        gh<_i133.MeetingsRemoteDataSource>(),
-      ),
-    );
     gh.factory<_i64.CropsListBloc>(
       () => _i64.CropsListBloc(gh<_i444.CropRemoteDataSource>()),
     );
@@ -459,6 +456,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i28.FacilitiesBloc>(
       () => _i28.FacilitiesBloc(
         gh<_i610.FacilitiesRemoteDataSource>(),
+        gh<_i133.MeetingsRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i977.CropRecommendationsBloc>(
+      () => _i977.CropRecommendationsBloc(
+        gh<_i444.CropRemoteDataSource>(),
         gh<_i133.MeetingsRemoteDataSource>(),
       ),
     );
@@ -616,7 +619,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i309.GetCurrentUser(gh<_i631.AuthRepository>()),
     );
     gh.factory<_i489.Login>(() => _i489.Login(gh<_i631.AuthRepository>()));
-    gh.factory<_i239.Logout>(() => _i239.Logout(gh<_i631.AuthRepository>()));
     gh.factory<_i275.PasswordChanged>(
       () => _i275.PasswordChanged(gh<_i631.AuthRepository>()),
     );
@@ -631,13 +633,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i729.WatchAuthStatus>(
       () => _i729.WatchAuthStatus(gh<_i631.AuthRepository>()),
-    );
-    gh.factory<_i930.ChangePasswordBloc>(
-      () => _i930.ChangePasswordBloc(
-        gh<_i234.AuthRemoteDataSource>(),
-        gh<_i275.PasswordChanged>(),
-        gh<_i239.Logout>(),
-      ),
     );
     gh.lazySingleton<_i828.AuthCubit>(
       () => _i828.AuthCubit(
@@ -662,10 +657,29 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i451.AppLogger>(),
       ),
     );
-    gh.factory<_i932.DashboardBloc>(
-      () => _i932.DashboardBloc(
+    gh.lazySingleton<_i549.PushService>(
+      () => _i549.PushService(
+        gh<_i83.PushMessaging>(),
+        gh<_i828.AuthCubit>(),
+        gh<_i390.CommunicationRemoteDataSource>(),
+        gh<_i686.DeviceInfoService>(),
+        gh<_i451.AppLogger>(),
+      ),
+    );
+    gh.factory<_i239.Logout>(
+      () => _i239.Logout(gh<_i631.AuthRepository>(), gh<_i549.PushService>()),
+    );
+    gh.factory<_i930.DashboardBloc>(
+      () => _i930.DashboardBloc(
         gh<_i239.Logout>(),
         gh<_i390.CommunicationRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i932.ChangePasswordBloc>(
+      () => _i932.ChangePasswordBloc(
+        gh<_i234.AuthRemoteDataSource>(),
+        gh<_i275.PasswordChanged>(),
+        gh<_i239.Logout>(),
       ),
     );
     return this;

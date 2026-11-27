@@ -2158,4 +2158,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get cropAskAi => 'Preguntar a la IA sobre este cultivo';
+
+  @override
+  String get pushView => 'Ver';
 }

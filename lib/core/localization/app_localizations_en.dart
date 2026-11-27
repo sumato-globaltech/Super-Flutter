@@ -2149,4 +2149,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cropAskAi => 'Ask AI about this crop';
+
+  @override
+  String get pushView => 'View';
 }
