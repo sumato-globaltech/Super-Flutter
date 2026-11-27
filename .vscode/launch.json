@@ -31,7 +31,7 @@
       "args": [
         "--flavor",
         "production",
-        "--dart-define-from-file=dart_defines/dev.json"
+        "--dart-define-from-file=dart_defines/prod.json"
       ]
     }
   ]
