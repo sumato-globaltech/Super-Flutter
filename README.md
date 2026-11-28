@@ -53,6 +53,8 @@ flutter run -t lib/main_production.dart  --flavor production
  flutter build apk --release --flavor production -t lib/main_production.dart
   --dart-define-from-file=dart_defines/prod.json
 flutter build apk --release --flavor production --dart-define-from-file=dart_defines/prod.json
+
+flutter build appbundle --release --flavor production --dart-define-from-file=dart_defines/prod.json
 flutter test
 flutter analyze
 ```

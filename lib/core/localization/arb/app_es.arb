@@ -487,4 +487,18 @@
   "cropAskAi": "Preguntar a la IA sobre este cultivo",
   "pushView": "Ver",
   "geoMap": "Mapa geográfico"
+  "pushView": "Ver",
+
+  "homePromoAssistantTitle": "Pregunta al asistente agrícola",
+  "homePromoAssistantSubtitle": "Respuestas al instante sobre cultivos, plagas y clima.",
+  "homePromoAssistantCta": "Preguntar",
+  "homePromoDetectorTitle": "Detecta enfermedades a tiempo",
+  "homePromoDetectorSubtitle": "Toma una foto de la hoja y obtén un diagnóstico en segundos.",
+  "homePromoDetectorCta": "Escanear",
+  "homePromoSchemesTitle": "Programas para ti",
+  "homePromoSchemesSubtitle": "Encuentra subsidios y beneficios a los que puedes aplicar hoy.",
+  "homePromoSchemesCta": "Explorar",
+  "homePromoMarketTitle": "Precios del mercado de hoy",
+  "homePromoMarketSubtitle": "Sigue los precios en vivo y vende en el mejor momento.",
+  "homePromoMarketCta": "Ver precios"
 }
