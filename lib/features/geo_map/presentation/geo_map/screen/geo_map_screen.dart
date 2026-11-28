@@ -74,38 +74,35 @@ class _GeoMapScreenState extends State<GeoMapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<GeoMapBloc>()..add(const GeoMapStarted()),
-      child: BlocConsumer<GeoMapBloc, GeoMapState>(
-        listenWhen: (previous, current) =>
-            previous.message != current.message ||
-            previous.visibleLayers != current.visibleLayers ||
-            previous.visibleCrops != current.visibleCrops ||
-            previous.offices != current.offices ||
-            previous.marker != current.marker ||
-            previous.area != current.area ||
-            previous.selection != current.selection,
-        listener: _onStateChanged,
-        builder: (context, state) {
-          if (_styleError != null) {
-            return _StyleError(
-              onRetry: () {
-                setState(() => _styleError = null);
-                unawaited(_loadStyle());
-              },
-            );
-          }
-          if (_style == null) {
-            return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            );
-          }
-          return Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: _buildMap(context, state),
+    return BlocConsumer<GeoMapBloc, GeoMapState>(
+      listenWhen: (previous, current) =>
+          previous.message != current.message ||
+          previous.visibleLayers != current.visibleLayers ||
+          previous.visibleCrops != current.visibleCrops ||
+          previous.offices != current.offices ||
+          previous.marker != current.marker ||
+          previous.area != current.area ||
+          previous.selection != current.selection,
+      listener: _onStateChanged,
+      builder: (context, state) {
+        if (_styleError != null) {
+          return _StyleError(
+            onRetry: () {
+              setState(() => _styleError = null);
+              unawaited(_loadStyle());
+            },
           );
-        },
-      ),
+        }
+        if (_style == null) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+        return Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: _buildMap(context, state),
+        );
+      },
     );
   }
 
