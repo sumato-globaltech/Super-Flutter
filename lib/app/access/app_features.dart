@@ -133,7 +133,7 @@ final appFeatures = FeatureRegistry([
   const AppFeature(
     id: 'geo_map',
     path: GeoMapRouteNames.root,
-    rule: AccessRule.permission(Permissions.noticesManage),
+    rule: AccessRule.permission(Permissions.geoMapView),
     title: _geoMap,
     icon: PhosphorIconsRegular.mapTrifold,
   ),

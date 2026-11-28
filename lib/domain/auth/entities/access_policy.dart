@@ -30,6 +30,7 @@ abstract final class Permissions {
   static const shipmentsRequest = 'shipments.request';
   static const shipmentsHandle = 'shipments.handle';
   static const shipmentsDrive = 'shipments.drive';
+  static const geoMapView = 'geo_map.view';
 }
 
 /// What the signed-in user may do, as the API reported it on login or `/me`.
