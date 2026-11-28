@@ -108,17 +108,15 @@ String? resolveRedirect({
       return location == RouteNames.splash ? null : RouteNames.splash;
     case AuthStatus.unauthenticated:
       if (isAuthRoute) return null;
-      if (isEntryRoute) return GeoMapRouteNames.root;
       return AuthRouteNames.login;
     case AuthStatus.authenticated:
-      // The server refuses everything else until the password is changed.
       const changePassword = AuthRouteNames.changePassword;
       if (passwordChangeRequired) {
         return location == changePassword ? null : changePassword;
       }
       if (location == changePassword) return null;
       const home = DashboardRouteNames.dashboard;
-      if (isEntryRoute || isAuthRoute) return GeoMapRouteNames.root;
+      if (isEntryRoute || isAuthRoute) return home;
       if (location == home) return null;
       final allowed = (registry ?? appFeatures).canOpen(
         location,
