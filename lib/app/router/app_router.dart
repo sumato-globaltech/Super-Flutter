@@ -102,14 +102,13 @@ String? resolveRedirect({
   final isEntryRoute =
       location == RouteNames.splash || location == RouteNames.forceUpdate;
   final isAuthRoute = location == AuthRouteNames.login;
-  // final isGeoMap = location == GeoMapRouteNames.root;
   switch (status) {
     case AuthStatus.unknown:
       return location == RouteNames.splash ? null : RouteNames.splash;
     case AuthStatus.unauthenticated:
-      if (isAuthRoute) return null;
-      return AuthRouteNames.login;
+      return isAuthRoute ? null : AuthRouteNames.login;
     case AuthStatus.authenticated:
+      // The server refuses everything else until the password is changed.
       const changePassword = AuthRouteNames.changePassword;
       if (passwordChangeRequired) {
         return location == changePassword ? null : changePassword;
