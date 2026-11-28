@@ -2164,44 +2164,4 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get geoMap => 'Mapa geográfico';
-
-  @override
-  String get homePromoAssistantTitle => 'Pregunta al asistente agrícola';
-
-  @override
-  String get homePromoAssistantSubtitle =>
-      'Respuestas al instante sobre cultivos, plagas y clima.';
-
-  @override
-  String get homePromoAssistantCta => 'Preguntar';
-
-  @override
-  String get homePromoDetectorTitle => 'Detecta enfermedades a tiempo';
-
-  @override
-  String get homePromoDetectorSubtitle =>
-      'Toma una foto de la hoja y obtén un diagnóstico en segundos.';
-
-  @override
-  String get homePromoDetectorCta => 'Escanear';
-
-  @override
-  String get homePromoSchemesTitle => 'Programas para ti';
-
-  @override
-  String get homePromoSchemesSubtitle =>
-      'Encuentra subsidios y beneficios a los que puedes aplicar hoy.';
-
-  @override
-  String get homePromoSchemesCta => 'Explorar';
-
-  @override
-  String get homePromoMarketTitle => 'Precios del mercado de hoy';
-
-  @override
-  String get homePromoMarketSubtitle =>
-      'Sigue los precios en vivo y vende en el mejor momento.';
-
-  @override
-  String get homePromoMarketCta => 'Ver precios';
 }

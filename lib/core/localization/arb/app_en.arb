@@ -1206,18 +1206,4 @@
   "cropAskAi": "Ask AI about this crop",
   "pushView": "View",
   "geoMap": "Geo Map"
-  "pushView": "View",
-
-  "homePromoAssistantTitle": "Ask the farming assistant",
-  "homePromoAssistantSubtitle": "Instant answers on crops, pests and weather.",
-  "homePromoAssistantCta": "Ask now",
-  "homePromoDetectorTitle": "Spot crop disease early",
-  "homePromoDetectorSubtitle": "Snap a leaf photo and get a diagnosis in seconds.",
-  "homePromoDetectorCta": "Scan a crop",
-  "homePromoSchemesTitle": "Schemes made for you",
-  "homePromoSchemesSubtitle": "Find subsidies and benefits you can apply for today.",
-  "homePromoSchemesCta": "Explore",
-  "homePromoMarketTitle": "Today's mandi prices",
-  "homePromoMarketSubtitle": "Track live rates and sell at the right time.",
-  "homePromoMarketCta": "Check prices"
 }
