@@ -21,6 +21,7 @@ import 'package:super_flutter/core/service/push_messaging.dart';
 import 'package:super_flutter/core/service/push_service.dart';
 import 'package:super_flutter/core/ui/widgets/confirm_sheet.dart';
 import 'package:super_flutter/features/auth/session/bloc/auth_cubit.dart';
+import 'package:super_flutter/features/geo_map/presentation/geo_map/bloc/geo_map_bloc.dart';
 // sf:app-bloc-imports:begin
 import 'package:super_flutter/features/super_awesome/presentation/super_awesome/bloc/super_awesome_bloc.dart';
 
@@ -153,7 +154,7 @@ class _AppState extends State<App> {
       providers: [
         BlocProvider<AuthCubit>.value(value: getIt.get<AuthCubit>()),
         // sf:app-blocs:begin
-        // BlocProvider(create: (_) => GeoMapBloc()),
+        BlocProvider(create: (_) => getIt.get<GeoMapBloc>()),
         // sf:app-blocs:end
       ],
       child: MaterialApp.router(
