@@ -13,7 +13,6 @@ import 'package:super_flutter/features/crop_detector/routes/crop_detector_routes
 import 'package:super_flutter/features/crops/routes/crops_routes.dart';
 import 'package:super_flutter/features/facilities/routes/facilities_routes.dart';
 import 'package:super_flutter/features/farming_assistant/routes/farming_assistant_routes.dart';
-import 'package:super_flutter/features/geo_map/routes/geo_map_route_names.dart';
 import 'package:super_flutter/features/geo_map/routes/geo_map_routes.dart';
 import 'package:super_flutter/features/iot/routes/iot_routes.dart';
 import 'package:super_flutter/features/meetings/routes/meetings_routes.dart';

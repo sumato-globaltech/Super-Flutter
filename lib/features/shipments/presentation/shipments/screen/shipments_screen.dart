@@ -158,7 +158,6 @@ class _ShipmentsView extends StatelessWidget {
                             ],
                           )
                         : NotificationListener<ScrollUpdateNotification>(
-                            // Past 80% of the list, the next page is asked for.
                             onNotification: (notification) {
                               final metrics = notification.metrics;
                               if (metrics.axis == Axis.vertical &&
