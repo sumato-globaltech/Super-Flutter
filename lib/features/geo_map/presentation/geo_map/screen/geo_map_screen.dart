@@ -7,7 +7,6 @@ import 'package:map_forge/map_forge.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:super_flutter/core/constants/asset_constants.dart';
-import 'package:super_flutter/core/di/injection.dart';
 import 'package:super_flutter/data/geo_map/model/district_info_model.dart';
 import 'package:super_flutter/data/geo_map/model/office_location_model.dart';
 import 'package:super_flutter/data/geo_map/model/village_model.dart';
