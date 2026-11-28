@@ -153,7 +153,7 @@ class _AppState extends State<App> {
       providers: [
         BlocProvider<AuthCubit>.value(value: getIt.get<AuthCubit>()),
         // sf:app-blocs:begin
-        BlocProvider(create: (_) => SuperAwesomeBloc()),
+        // BlocProvider(create: (_) => GeoMapBloc()),
         // sf:app-blocs:end
       ],
       child: MaterialApp.router(
