@@ -24,6 +24,9 @@ import 'package:super_flutter/core/ui/widgets/progress_circle.dart';
 import 'package:super_flutter/core/ui/widgets/title_details_card.dart';
 import 'package:super_flutter/core/utils/utils.dart';
 import 'package:super_flutter/features/farming_assistant/routes/farming_assistant_route_names.dart';
+import 'package:super_flutter/features/crop_detector/routes/crop_detector_route_names.dart';
+import 'package:super_flutter/features/market/routes/market_route_names.dart';
+import 'package:super_flutter/features/schemes/routes/schemes_route_names.dart';
 import 'package:super_flutter/features/ui_gallery/routes/ui_gallery_route_names.dart';
 
 import '../bloc/dashboard_bloc.dart';
@@ -133,8 +136,11 @@ class _DashboardView extends StatelessWidget {
           final bloc = context.read<DashboardBloc>();
           final theme = Theme.of(context);
           final registry = appFeatures;
+          final access = context.select(
+            (AuthCubit cubit) => cubit.state.access,
+          );
           final actions = registry.quickActions(
-            context.select((AuthCubit cubit) => cubit.state.access),
+            access,
             home: DashboardRouteNames.dashboard,
           );
           final tabPaths = registry.tabPaths.toSet();
@@ -146,6 +152,40 @@ class _DashboardView extends StatelessWidget {
             DesignColor.accentType,
             DesignColor.accentLocation,
           ];
+          final promos = [
+            (
+              path: FarmingAssistantRouteNames.root,
+              title: l10n.homePromoAssistantTitle,
+              subtitle: l10n.homePromoAssistantSubtitle,
+              cta: l10n.homePromoAssistantCta,
+              icon: PhosphorIconsFill.sparkle,
+              colors: const [Color(0xFF5B3FD9), Color(0xFF9B6BFF)],
+            ),
+            (
+              path: CropDetectorRouteNames.root,
+              title: l10n.homePromoDetectorTitle,
+              subtitle: l10n.homePromoDetectorSubtitle,
+              cta: l10n.homePromoDetectorCta,
+              icon: PhosphorIconsFill.scan,
+              colors: const [Color(0xFF006D37), Color(0xFF20C2B3)],
+            ),
+            (
+              path: SchemesRouteNames.root,
+              title: l10n.homePromoSchemesTitle,
+              subtitle: l10n.homePromoSchemesSubtitle,
+              cta: l10n.homePromoSchemesCta,
+              icon: PhosphorIconsFill.scroll,
+              colors: const [Color(0xFFE2620B), Color(0xFFFFB547)],
+            ),
+            (
+              path: MarketRouteNames.market,
+              title: l10n.homePromoMarketTitle,
+              subtitle: l10n.homePromoMarketSubtitle,
+              cta: l10n.homePromoMarketCta,
+              icon: PhosphorIconsFill.chartLineUp,
+              colors: const [Color(0xFF0B3D91), Color(0xFF2D8DD6)],
+            ),
+          ].where((p) => registry.canOpen(p.path, access)).toList();
           return RefreshIndicator(
             onRefresh: () async {
               bloc.add(const DashboardStarted());
@@ -227,6 +267,195 @@ class _DashboardView extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 12),
+                      ],
+                      if (promos.isNotEmpty) ...[
+                        SizedBox(
+                          height: 160,
+                          child: CarouselView(
+                            itemExtent: MediaQuery.sizeOf(context).width * 0.86,
+                            shrinkExtent: 200,
+                            itemSnapping: true,
+                            padding: const EdgeInsets.only(right: 8),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            onTap: (index) {
+                              final path = promos[index].path;
+                              tabPaths.contains(path)
+                                  ? context.go(path)
+                                  : context.push(path);
+                            },
+                            children: [
+                              for (final promo in promos)
+                                DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: promo.colors,
+                                    ),
+                                  ),
+                                  child: OverflowBox(
+                                    alignment: Alignment.centerLeft,
+                                    minWidth:
+                                        MediaQuery.sizeOf(context).width *
+                                            0.86 -
+                                        8,
+                                    maxWidth:
+                                        MediaQuery.sizeOf(context).width *
+                                            0.86 -
+                                        8,
+                                    child: Stack(
+                                      children: [
+                                        Positioned(
+                                          right: -30,
+                                          top: -30,
+                                          child: Container(
+                                            width: 140,
+                                            height: 140,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Colors.white.withValues(
+                                                alpha: 0.12,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          right: 40,
+                                          bottom: -50,
+                                          child: Container(
+                                            width: 110,
+                                            height: 110,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Colors.white.withValues(
+                                                alpha: 0.08,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          right: 18,
+                                          top: 0,
+                                          bottom: 0,
+                                          child: Center(
+                                            child: Container(
+                                              width: 64,
+                                              height: 64,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white.withValues(
+                                                  alpha: 0.2,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(18),
+                                                border: Border.all(
+                                                  color: Colors.white
+                                                      .withValues(alpha: 0.35),
+                                                ),
+                                              ),
+                                              child: Icon(
+                                                promo.icon,
+                                                size: 32,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                            18,
+                                            14,
+                                            100,
+                                            14,
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                promo.title,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: theme
+                                                    .textTheme
+                                                    .titleMedium
+                                                    ?.copyWith(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                    ),
+                                              ),
+                                              const SizedBox(height: 4),
+                                              Flexible(
+                                                child: Text(
+                                                  promo.subtitle,
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: theme
+                                                      .textTheme
+                                                      .bodySmall
+                                                      ?.copyWith(
+                                                        color: Colors.white
+                                                            .withValues(
+                                                              alpha: 0.85,
+                                                            ),
+                                                      ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 10),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 12,
+                                                      vertical: 6,
+                                                    ),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                ),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    Text(
+                                                      promo.cta,
+                                                      style: theme
+                                                          .textTheme
+                                                          .labelMedium
+                                                          ?.copyWith(
+                                                            color: promo
+                                                                .colors
+                                                                .first,
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                          ),
+                                                    ),
+                                                    const SizedBox(width: 4),
+                                                    Icon(
+                                                      PhosphorIconsBold
+                                                          .arrowRight,
+                                                      size: 14,
+                                                      color: promo.colors.first,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 16),
                       ],
                       if (actions.isNotEmpty) ...[
                         // Text(
@@ -321,9 +550,8 @@ class _DashboardView extends StatelessWidget {
                               style: theme.textTheme.titleMedium,
                             ),
                             TextButton(
-                              onPressed: () => context.push(
-                                CommunicationRouteNames.alerts,
-                              ),
+                              onPressed: () =>
+                                  context.push(CommunicationRouteNames.alerts),
                               child: Text(l10n.homeViewAllAlerts),
                             ),
                           ],
@@ -388,9 +616,8 @@ class _DashboardView extends StatelessWidget {
                               style: theme.textTheme.titleMedium,
                             ),
                             TextButton(
-                              onPressed: () => context.push(
-                                CommunicationRouteNames.notices,
-                              ),
+                              onPressed: () =>
+                                  context.push(CommunicationRouteNames.notices),
                               child: Text(l10n.homeViewAllNotices),
                             ),
                           ],
@@ -419,9 +646,10 @@ class _DashboardView extends StatelessWidget {
                                     title: [
                                       notice.category?.name,
                                       switch (notice.publishedAt) {
-                                        final date? => DateFormat.yMMMd().format(
-                                          date.toLocal(),
-                                        ),
+                                        final date? =>
+                                          DateFormat.yMMMd().format(
+                                            date.toLocal(),
+                                          ),
                                         null => null,
                                       },
                                     ].whereType<String>().join(' · '),
@@ -429,7 +657,8 @@ class _DashboardView extends StatelessWidget {
                                     isFirstItem: index == 0,
                                     showNavigateIcon: true,
                                     iconData: PhosphorIconsRegular.megaphone,
-                                    accentColor: notice.priority?.value == 'high'
+                                    accentColor:
+                                        notice.priority?.value == 'high'
                                         ? DesignColor.orange
                                         : DesignColor.accentName,
                                   ),

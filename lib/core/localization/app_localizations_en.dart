@@ -2152,4 +2152,44 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pushView => 'View';
+
+  @override
+  String get homePromoAssistantTitle => 'Ask the farming assistant';
+
+  @override
+  String get homePromoAssistantSubtitle =>
+      'Instant answers on crops, pests and weather.';
+
+  @override
+  String get homePromoAssistantCta => 'Ask now';
+
+  @override
+  String get homePromoDetectorTitle => 'Spot crop disease early';
+
+  @override
+  String get homePromoDetectorSubtitle =>
+      'Snap a leaf photo and get a diagnosis in seconds.';
+
+  @override
+  String get homePromoDetectorCta => 'Scan a crop';
+
+  @override
+  String get homePromoSchemesTitle => 'Schemes made for you';
+
+  @override
+  String get homePromoSchemesSubtitle =>
+      'Find subsidies and benefits you can apply for today.';
+
+  @override
+  String get homePromoSchemesCta => 'Explore';
+
+  @override
+  String get homePromoMarketTitle => 'Today\'s mandi prices';
+
+  @override
+  String get homePromoMarketSubtitle =>
+      'Track live rates and sell at the right time.';
+
+  @override
+  String get homePromoMarketCta => 'Check prices';
 }
