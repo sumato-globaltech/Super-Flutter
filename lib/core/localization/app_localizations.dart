@@ -662,6 +662,78 @@ abstract class AppLocalizations {
   /// **'Quick actions'**
   String get homeQuickActions;
 
+  /// No description provided for @homePromoAssistantTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask the AI farming assistant'**
+  String get homePromoAssistantTitle;
+
+  /// No description provided for @homePromoAssistantSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Get instant answers on crops, pests and weather.'**
+  String get homePromoAssistantSubtitle;
+
+  /// No description provided for @homePromoAssistantCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask now'**
+  String get homePromoAssistantCta;
+
+  /// No description provided for @homePromoDetectorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your crop\'s health'**
+  String get homePromoDetectorTitle;
+
+  /// No description provided for @homePromoDetectorSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Snap a photo to spot diseases early.'**
+  String get homePromoDetectorSubtitle;
+
+  /// No description provided for @homePromoDetectorCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan a crop'**
+  String get homePromoDetectorCta;
+
+  /// No description provided for @homePromoSchemesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Find government schemes'**
+  String get homePromoSchemesTitle;
+
+  /// No description provided for @homePromoSchemesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'See subsidies and benefits you qualify for.'**
+  String get homePromoSchemesSubtitle;
+
+  /// No description provided for @homePromoSchemesCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore schemes'**
+  String get homePromoSchemesCta;
+
+  /// No description provided for @homePromoMarketTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s market prices'**
+  String get homePromoMarketTitle;
+
+  /// No description provided for @homePromoMarketSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Track mandi rates before you sell.'**
+  String get homePromoMarketSubtitle;
+
+  /// No description provided for @homePromoMarketCta.
+  ///
+  /// In en, this message translates to:
+  /// **'View prices'**
+  String get homePromoMarketCta;
+
   /// App bar title of the all-notices list screen
   ///
   /// In en, this message translates to:

@@ -323,6 +323,46 @@ class AppLocalizationsEs extends AppLocalizations {
   String get homeQuickActions => 'Quick actions';
 
   @override
+  String get homePromoAssistantTitle => 'Pregunta al asistente agrícola IA';
+
+  @override
+  String get homePromoAssistantSubtitle =>
+      'Respuestas al instante sobre cultivos, plagas y clima.';
+
+  @override
+  String get homePromoAssistantCta => 'Preguntar';
+
+  @override
+  String get homePromoDetectorTitle => 'Revisa la salud de tu cultivo';
+
+  @override
+  String get homePromoDetectorSubtitle =>
+      'Toma una foto para detectar enfermedades a tiempo.';
+
+  @override
+  String get homePromoDetectorCta => 'Escanear cultivo';
+
+  @override
+  String get homePromoSchemesTitle => 'Encuentra programas del gobierno';
+
+  @override
+  String get homePromoSchemesSubtitle =>
+      'Consulta subsidios y beneficios para los que calificas.';
+
+  @override
+  String get homePromoSchemesCta => 'Ver programas';
+
+  @override
+  String get homePromoMarketTitle => 'Precios del mercado de hoy';
+
+  @override
+  String get homePromoMarketSubtitle =>
+      'Sigue los precios del mercado antes de vender.';
+
+  @override
+  String get homePromoMarketCta => 'Ver precios';
+
+  @override
   String get noticesTitle => 'Avisos';
 
   @override

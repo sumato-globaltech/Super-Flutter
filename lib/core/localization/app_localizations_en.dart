@@ -322,6 +322,45 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeQuickActions => 'Quick actions';
 
   @override
+  String get homePromoAssistantTitle => 'Ask the AI farming assistant';
+
+  @override
+  String get homePromoAssistantSubtitle =>
+      'Get instant answers on crops, pests and weather.';
+
+  @override
+  String get homePromoAssistantCta => 'Ask now';
+
+  @override
+  String get homePromoDetectorTitle => 'Check your crop\'s health';
+
+  @override
+  String get homePromoDetectorSubtitle =>
+      'Snap a photo to spot diseases early.';
+
+  @override
+  String get homePromoDetectorCta => 'Scan a crop';
+
+  @override
+  String get homePromoSchemesTitle => 'Find government schemes';
+
+  @override
+  String get homePromoSchemesSubtitle =>
+      'See subsidies and benefits you qualify for.';
+
+  @override
+  String get homePromoSchemesCta => 'Explore schemes';
+
+  @override
+  String get homePromoMarketTitle => 'Today\'s market prices';
+
+  @override
+  String get homePromoMarketSubtitle => 'Track mandi rates before you sell.';
+
+  @override
+  String get homePromoMarketCta => 'View prices';
+
+  @override
   String get noticesTitle => 'Notices';
 
   @override
