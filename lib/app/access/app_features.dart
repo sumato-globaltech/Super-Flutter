@@ -1,5 +1,6 @@
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:super_flutter/core/localization/app_localizations.dart';
+import 'package:super_flutter/data/geo_map/sources/remote/geo_map_endpoints.dart';
 import 'package:super_flutter/domain/auth/entities/access_policy.dart';
 import 'package:super_flutter/domain/auth/entities/access_rule.dart';
 import 'package:super_flutter/features/crop_detector/routes/crop_detector_route_names.dart';
