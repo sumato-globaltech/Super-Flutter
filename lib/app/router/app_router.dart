@@ -102,14 +102,12 @@ String? resolveRedirect({
   final isEntryRoute =
       location == RouteNames.splash || location == RouteNames.forceUpdate;
   final isAuthRoute = location == AuthRouteNames.login;
-  // Temporary: the geo map is the first destination after splash while the
-  // feature is being reviewed. Restore the dashboard/login landing later.
-  final isGeoMap = location == GeoMapRouteNames.root;
+  // final isGeoMap = location == GeoMapRouteNames.root;
   switch (status) {
     case AuthStatus.unknown:
       return location == RouteNames.splash ? null : RouteNames.splash;
     case AuthStatus.unauthenticated:
-      if (isAuthRoute || isGeoMap) return null;
+      if (isAuthRoute) return null;
       if (isEntryRoute) return GeoMapRouteNames.root;
       return AuthRouteNames.login;
     case AuthStatus.authenticated:
