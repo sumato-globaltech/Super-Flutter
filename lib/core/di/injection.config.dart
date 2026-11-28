@@ -25,7 +25,7 @@ import 'package:super_flutter/core/network/network_module.dart' as _i469;
 import 'package:super_flutter/core/network/session_manager.dart' as _i827;
 import 'package:super_flutter/core/service/device_info_service.dart' as _i686;
 import 'package:super_flutter/core/service/push_messaging.dart' as _i83;
-import 'package:super_flutter/core/service/push_service.dart' as _i549;
+import 'package:super_flutter/core/service/push_service.dart' as _i550;
 import 'package:super_flutter/core/storage/local_storage.dart' as _i635;
 import 'package:super_flutter/core/storage/secure_storage.dart' as _i491;
 import 'package:super_flutter/core/storage/storage_service.dart' as _i407;
@@ -73,6 +73,8 @@ import 'package:super_flutter/data/farming_assistant/sources/local/farming_assis
     as _i214;
 import 'package:super_flutter/data/farming_assistant/sources/remote/farming_assistant_remote_data_source.dart'
     as _i254;
+import 'package:super_flutter/data/geo_map/sources/remote/geo_map_remote_data_source.dart'
+    as _i549;
 import 'package:super_flutter/data/help_desk/repositories/help_desk_repository_impl.dart'
     as _i588;
 import 'package:super_flutter/data/help_desk/sources/local/help_desk_local_data_source.dart'
@@ -192,6 +194,8 @@ import 'package:super_flutter/features/farm/presentation/farms_list/bloc/farms_b
     as _i664;
 import 'package:super_flutter/features/farming_assistant/presentation/farming_assistant/bloc/farming_assistant_bloc.dart'
     as _i784;
+import 'package:super_flutter/features/geo_map/presentation/geo_map/bloc/geo_map_bloc.dart'
+    as _i121;
 import 'package:super_flutter/features/help_desk/presentation/queue_summary/bloc/queue_summary_bloc.dart'
     as _i621;
 import 'package:super_flutter/features/iot/presentation/device_detail/bloc/device_detail_bloc.dart'
@@ -257,6 +261,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i214.FarmingAssistantLocalDataSource>(
       () => _i214.FarmingAssistantLocalDataSource(),
     );
+    gh.lazySingleton<_i549.GeoMapRemoteDataSource>(
+      () => _i549.GeoMapRemoteDataSource(),
+    );
     gh.lazySingleton<_i772.HelpDeskLocalDataSource>(
       () => _i772.HelpDeskLocalDataSource(),
     );
@@ -287,6 +294,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i635.LocalDatabase>(
       () => storageModule.localDatabase(gh<_i1067.Environment>()),
+    );
+    gh.factory<_i121.GeoMapBloc>(
+      () => _i121.GeoMapBloc(gh<_i549.GeoMapRemoteDataSource>()),
     );
     gh.lazySingleton<_i246.ErrorReporter>(
       () => coreModule.errorReporter(gh<_i451.AppLogger>()),
@@ -657,8 +667,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i451.AppLogger>(),
       ),
     );
-    gh.lazySingleton<_i549.PushService>(
-      () => _i549.PushService(
+    gh.lazySingleton<_i550.PushService>(
+      () => _i550.PushService(
         gh<_i83.PushMessaging>(),
         gh<_i828.AuthCubit>(),
         gh<_i390.CommunicationRemoteDataSource>(),
@@ -667,7 +677,7 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
     gh.factory<_i239.Logout>(
-      () => _i239.Logout(gh<_i631.AuthRepository>(), gh<_i549.PushService>()),
+      () => _i239.Logout(gh<_i631.AuthRepository>(), gh<_i550.PushService>()),
     );
     gh.factory<_i930.DashboardBloc>(
       () => _i930.DashboardBloc(

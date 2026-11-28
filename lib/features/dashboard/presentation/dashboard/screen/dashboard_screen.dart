@@ -229,11 +229,11 @@ class _DashboardView extends StatelessWidget {
                         const SizedBox(height: 12),
                       ],
                       if (actions.isNotEmpty) ...[
-                        // Text(
-                        //   l10n.homeQuickActions,
-                        //   style: theme.textTheme.titleMedium,
-                        // ),
-                        // const SizedBox(height: 8),
+                        Text(
+                          l10n.homeQuickActions,
+                          style: theme.textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 8),
                         GridView.count(
                           crossAxisCount: 4,
                           shrinkWrap: true,

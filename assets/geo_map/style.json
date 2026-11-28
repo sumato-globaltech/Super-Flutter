@@ -1,0 +1,38 @@
+{
+  "version": 8,
+  "name": "Kheti Manu Geo Map",
+  "glyphs": "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
+  "sources": {
+    "osm": {
+      "type": "raster",
+      "tiles": ["https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"],
+      "tileSize": 256,
+      "attribution": "&copy; OpenStreetMap Contributors",
+      "maxzoom": 19
+    },
+    "satellite": {
+      "type": "raster",
+      "tiles": ["https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"],
+      "tileSize": 256
+    }
+  },
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": { "background-color": "#1e2939" }
+    },
+    {
+      "id": "osmLayer",
+      "type": "raster",
+      "source": "osm",
+      "layout": { "visibility": "visible" }
+    },
+    {
+      "id": "satelliteLayer",
+      "type": "raster",
+      "source": "satellite",
+      "layout": { "visibility": "visible" }
+    }
+  ]
+}

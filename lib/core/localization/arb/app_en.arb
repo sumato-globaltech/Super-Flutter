@@ -1204,5 +1204,6 @@
   "nationalFarmingAiAssistantNearMe": "Near me",
   "nationalFarmingAiAssistantNearMeHelp": "Sends your farm's or district's rough location for nearby mandi prices",
   "cropAskAi": "Ask AI about this crop",
-  "pushView": "View"
+  "pushView": "View",
+  "geoMap": "Geo Map"
 }

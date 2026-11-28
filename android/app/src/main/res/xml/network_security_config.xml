@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The geo map's GIS host still serves PMTiles, districts and crop tiles
+     over plain HTTP. Keep cleartext scoped to that host only. -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false" />
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">64.227.134.64</domain>
+    </domain-config>
+</network-security-config>

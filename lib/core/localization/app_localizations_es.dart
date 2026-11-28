@@ -2161,4 +2161,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get pushView => 'Ver';
+
+  @override
+  String get geoMap => 'Mapa geográfico';
 }

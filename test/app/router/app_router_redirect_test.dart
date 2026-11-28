@@ -5,10 +5,12 @@ import 'package:super_flutter/domain/auth/entities/access_policy.dart';
 import 'package:super_flutter/features/auth/routes/auth_route_names.dart';
 import 'package:super_flutter/features/auth/session/bloc/auth_state.dart';
 import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.dart';
+import 'package:super_flutter/features/geo_map/routes/geo_map_route_names.dart';
 
 void main() {
   const login = AuthRouteNames.login;
   const dashboard = DashboardRouteNames.dashboard;
+  const geoMap = GeoMapRouteNames.root;
 
   String? redirect(String location, AuthStatus status, {bool update = false}) =>
       resolveRedirect(
@@ -33,7 +35,7 @@ void main() {
 
       // Changed, the screen lets go; it can still be opened on purpose.
       expect(redirect(change, AuthStatus.authenticated), isNull);
-      expect(redirect(login, AuthStatus.authenticated), dashboard);
+      expect(redirect(login, AuthStatus.authenticated), geoMap);
       // Signed out from it, the user goes to login.
       expect(redirect(change, AuthStatus.unauthenticated), login);
     });
@@ -53,9 +55,9 @@ void main() {
       );
     });
 
-    test('app launch opens login or dashboard directly', () {
-      expect(redirect(RouteNames.splash, AuthStatus.unauthenticated), login);
-      expect(redirect(RouteNames.splash, AuthStatus.authenticated), dashboard);
+    test('app launch opens the geo map directly for now', () {
+      expect(redirect(RouteNames.splash, AuthStatus.unauthenticated), geoMap);
+      expect(redirect(RouteNames.splash, AuthStatus.authenticated), geoMap);
     });
 
     test('unauthenticated users are kept on login', () {
@@ -64,7 +66,7 @@ void main() {
     });
 
     test('authenticated users leave login and can browse freely', () {
-      expect(redirect(login, AuthStatus.authenticated), dashboard);
+      expect(redirect(login, AuthStatus.authenticated), geoMap);
       expect(redirect(dashboard, AuthStatus.authenticated), isNull);
       expect(redirect('/anything', AuthStatus.authenticated), isNull);
     });

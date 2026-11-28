@@ -1,0 +1,653 @@
+{
+  "version": 1,
+  "variables": {
+    "mapHost": "http://64.227.134.64"
+  },
+  "shared": {
+    "sources": {
+      "villages_source": {
+        "type": "geojson",
+        "data": "http://64.227.134.64/nagaland_vill.geojson"
+      },
+      "weather_source": {
+        "type": "geojson",
+        "data": "http://64.227.134.64/weathr_statn.geojson"
+      },
+      "rivers_source": {
+        "type": "vectorUrl",
+        "url": "pmtiles://http://64.227.134.64/pmtiles.php?file=river.pmtiles"
+      },
+      "other_roads_source": {
+        "type": "vectorUrl",
+        "url": "pmtiles://http://64.227.134.64/pmtiles.php?file=other_roads.pmtiles"
+      },
+      "nh_source": {
+        "type": "vectorUrl",
+        "url": "pmtiles://http://64.227.134.64/pmtiles.php?file=nagaland_NH.pmtiles"
+      },
+      "drainage_source": {
+        "type": "vectorUrl",
+        "url": "pmtiles://http://64.227.134.64/pmtiles.php?file=drainage.pmtiles"
+      },
+      "hill_peaks_source": {
+        "type": "vectorUrl",
+        "url": "pmtiles://http://64.227.134.64/pmtiles.php?file=hill_peaks.pmtiles"
+      },
+      "admin_hq_source": {
+        "type": "vectorUrl",
+        "url": "pmtiles://http://64.227.134.64/pmtiles.php?file=admin_hq2.pmtiles"
+      },
+      "crop_avocado": {
+        "type": "rasterTiles",
+        "tiles": [
+          "http://64.227.134.64/tiles/Avocado/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+        "scheme": "tms"
+      },
+      "crop_dragonfruit": {
+        "type": "rasterTiles",
+        "tiles": [
+          "http://64.227.134.64/tiles/DragonFruit/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+        "scheme": "tms"
+      },
+      "crop_maize": {
+        "type": "rasterTiles",
+        "tiles": [
+          "http://64.227.134.64/tiles/Maize/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+        "scheme": "tms"
+      },
+      "crop_nagamircha": {
+        "type": "rasterTiles",
+        "tiles": [
+          "http://64.227.134.64/tiles/NagaMircha/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+        "scheme": "tms"
+      },
+      "crop_palmoil": {
+        "type": "rasterTiles",
+        "tiles": [
+          "http://64.227.134.64/tiles/PalmOil/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+        "scheme": "tms"
+      },
+      "crop_pineapple": {
+        "type": "rasterTiles",
+        "tiles": [
+          "http://64.227.134.64/tiles/Pineapple/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+        "scheme": "tms"
+      },
+      "crop_soyabean": {
+        "type": "rasterTiles",
+        "tiles": [
+          "http://64.227.134.64/tiles/Soyabean/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+        "scheme": "tms"
+      },
+      "crop_sugarcane": {
+        "type": "rasterTiles",
+        "tiles": [
+          "http://64.227.134.64/tiles/Sugarcane/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+        "scheme": "tms"
+      },
+      "crop_turmeric": {
+        "type": "rasterTiles",
+        "tiles": [
+          "http://64.227.134.64/tiles/Turmeric/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+        "scheme": "tms"
+      },
+      "crop_banana": {
+        "type": "rasterTiles",
+        "tiles": [
+          "http://64.227.134.64/tiles/Banana/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+        "scheme": "tms"
+      },
+      "crop_coffee": {
+        "type": "rasterTiles",
+        "tiles": [
+          "http://64.227.134.64/tiles/Coffee/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+        "scheme": "tms"
+      },
+      "crop_potato": {
+        "type": "rasterTiles",
+        "tiles": [
+          "http://64.227.134.64/tiles/Potato/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+        "scheme": "tms"
+      },
+      "crop_rajma": {
+        "type": "rasterTiles",
+        "tiles": [
+          "http://64.227.134.64/tiles/Rajma/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+        "scheme": "tms"
+      },
+      "crop_rubber": {
+        "type": "rasterTiles",
+        "tiles": [
+          "http://64.227.134.64/tiles/Rubber/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+        "scheme": "tms"
+      },
+      "crop_lemon": {
+        "type": "rasterTiles",
+        "tiles": [
+          "http://64.227.134.64/tiles/Lemon/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+        "scheme": "tms"
+      },
+      "crop_stevia": {
+        "type": "rasterTiles",
+        "tiles": [
+          "http://64.227.134.64/tiles/Stevia/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+        "scheme": "tms"
+      },
+      "districts_source": {
+        "type": "geojsonAsset",
+        "asset": "assets/geo_map/files/districts.geojson"
+      }
+    }
+  },
+  "features": {
+    "geo_map": {
+      "layers": [
+        {
+          "id": "districts_tap",
+          "sourceId": "districts_source",
+          "group": "overlays",
+          "kind": "fill",
+          "eager": true,
+          "visible": true,
+          "tappable": true,
+          "paint": {
+            "fillColor": "rgba(0,0,0,0.01)",
+            "fillOpacity": 1.0
+          }
+        },
+        {
+          "id": "rivers",
+          "sourceId": "rivers_source",
+          "group": "overlays",
+          "kind": "fill",
+          "sourceLayer": "river",
+          "eager": true,
+          "visible": true,
+          "tappable": false,
+          "paint": {
+            "fillColor": "#854BB8FA",
+            "fillOpacity": 1.0
+          }
+        },
+        {
+          "id": "other_roads",
+          "sourceId": "other_roads_source",
+          "group": "overlays",
+          "kind": "line",
+          "sourceLayer": "nagaland",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "paint": {
+            "lineColor": "#995F2F",
+            "lineWidth": 2.0,
+            "lineOpacity": 1.0
+          }
+        },
+        {
+          "id": "national_highways",
+          "sourceId": "nh_source",
+          "group": "overlays",
+          "kind": "line",
+          "sourceLayer": "nagaland",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "paint": {
+            "lineColor": "#E03F4F",
+            "lineWidth": 3.0,
+            "lineOpacity": 1.0
+          }
+        },
+        {
+          "id": "drainage",
+          "sourceId": "drainage_source",
+          "group": "overlays",
+          "kind": "line",
+          "sourceLayer": "drainage",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "paint": {
+            "lineColor": "#2C5EAD",
+            "lineWidth": 1.0,
+            "lineOpacity": 1.0
+          }
+        },
+        {
+          "id": "crop_avocado",
+          "sourceId": "crop_avocado",
+          "group": "crops",
+          "kind": "raster",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "label": "Avocado",
+          "paint": {
+            "rasterOpacity": 0.85
+          },
+          "belowLayerId": "districts_fill"
+        },
+        {
+          "id": "crop_dragonfruit",
+          "sourceId": "crop_dragonfruit",
+          "group": "crops",
+          "kind": "raster",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "label": "Dragon Fruit",
+          "paint": {
+            "rasterOpacity": 0.85
+          },
+          "belowLayerId": "districts_fill"
+        },
+        {
+          "id": "crop_maize",
+          "sourceId": "crop_maize",
+          "group": "crops",
+          "kind": "raster",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "label": "Maize",
+          "paint": {
+            "rasterOpacity": 0.85
+          },
+          "belowLayerId": "districts_fill"
+        },
+        {
+          "id": "crop_nagamircha",
+          "sourceId": "crop_nagamircha",
+          "group": "crops",
+          "kind": "raster",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "label": "Naga Mircha",
+          "paint": {
+            "rasterOpacity": 0.85
+          },
+          "belowLayerId": "districts_fill"
+        },
+        {
+          "id": "crop_palmoil",
+          "sourceId": "crop_palmoil",
+          "group": "crops",
+          "kind": "raster",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "label": "Palm Oil",
+          "paint": {
+            "rasterOpacity": 0.85
+          },
+          "belowLayerId": "districts_fill"
+        },
+        {
+          "id": "crop_pineapple",
+          "sourceId": "crop_pineapple",
+          "group": "crops",
+          "kind": "raster",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "label": "Pineapple",
+          "paint": {
+            "rasterOpacity": 0.85
+          },
+          "belowLayerId": "districts_fill"
+        },
+        {
+          "id": "crop_soyabean",
+          "sourceId": "crop_soyabean",
+          "group": "crops",
+          "kind": "raster",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "label": "Soyabean",
+          "paint": {
+            "rasterOpacity": 0.85
+          },
+          "belowLayerId": "districts_fill"
+        },
+        {
+          "id": "crop_sugarcane",
+          "sourceId": "crop_sugarcane",
+          "group": "crops",
+          "kind": "raster",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "label": "Sugarcane",
+          "paint": {
+            "rasterOpacity": 0.85
+          },
+          "belowLayerId": "districts_fill"
+        },
+        {
+          "id": "crop_turmeric",
+          "sourceId": "crop_turmeric",
+          "group": "crops",
+          "kind": "raster",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "label": "Turmeric",
+          "paint": {
+            "rasterOpacity": 0.85
+          },
+          "belowLayerId": "districts_fill"
+        },
+        {
+          "id": "crop_banana",
+          "sourceId": "crop_banana",
+          "group": "crops",
+          "kind": "raster",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "label": "Banana",
+          "paint": {
+            "rasterOpacity": 0.85
+          },
+          "belowLayerId": "districts_fill"
+        },
+        {
+          "id": "crop_coffee",
+          "sourceId": "crop_coffee",
+          "group": "crops",
+          "kind": "raster",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "label": "Coffee",
+          "paint": {
+            "rasterOpacity": 0.85
+          },
+          "belowLayerId": "districts_fill"
+        },
+        {
+          "id": "crop_potato",
+          "sourceId": "crop_potato",
+          "group": "crops",
+          "kind": "raster",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "label": "Potato",
+          "paint": {
+            "rasterOpacity": 0.85
+          },
+          "belowLayerId": "districts_fill"
+        },
+        {
+          "id": "crop_rajma",
+          "sourceId": "crop_rajma",
+          "group": "crops",
+          "kind": "raster",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "label": "Rajma",
+          "paint": {
+            "rasterOpacity": 0.85
+          },
+          "belowLayerId": "districts_fill"
+        },
+        {
+          "id": "crop_rubber",
+          "sourceId": "crop_rubber",
+          "group": "crops",
+          "kind": "raster",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "label": "Rubber",
+          "paint": {
+            "rasterOpacity": 0.85
+          },
+          "belowLayerId": "districts_fill"
+        },
+        {
+          "id": "crop_lemon",
+          "sourceId": "crop_lemon",
+          "group": "crops",
+          "kind": "raster",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "label": "Lemon",
+          "paint": {
+            "rasterOpacity": 0.85
+          },
+          "belowLayerId": "districts_fill"
+        },
+        {
+          "id": "crop_stevia",
+          "sourceId": "crop_stevia",
+          "group": "crops",
+          "kind": "raster",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "label": "Stevia",
+          "paint": {
+            "rasterOpacity": 0.85
+          },
+          "belowLayerId": "districts_fill"
+        },
+        {
+          "id": "districts_fill",
+          "sourceId": "districts_source",
+          "group": "overlays",
+          "kind": "fill",
+          "eager": true,
+          "visible": true,
+          "tappable": false,
+          "paint": {
+            "fillColor": "rgba(0,0,0,0)",
+            "fillOpacity": 1.0
+          }
+        },
+        {
+          "id": "districts_line",
+          "sourceId": "districts_source",
+          "group": "overlays",
+          "kind": "line",
+          "eager": true,
+          "visible": true,
+          "tappable": false,
+          "paint": {
+            "lineColor": "#800080",
+            "lineWidth": 3.0,
+            "lineOpacity": 1.0
+          }
+        },
+        {
+          "id": "districts_labels",
+          "sourceId": "districts_source",
+          "group": "overlays",
+          "kind": "symbol",
+          "eager": true,
+          "visible": true,
+          "tappable": false,
+          "minzoom": 6.0,
+          "paint": {
+            "textField": [
+              "get",
+              "District_N"
+            ],
+            "textSize": 12.0,
+            "textColor": "#ffffff",
+            "textHaloColor": "#000000",
+            "textHaloWidth": 2.0,
+            "textAllowOverlap": true,
+            "textIgnorePlacement": true,
+            "textOpacity": 1.0
+          }
+        },
+        {
+          "id": "villages_labels",
+          "sourceId": "villages_source",
+          "group": "villages",
+          "kind": "symbol",
+          "eager": true,
+          "visible": true,
+          "tappable": false,
+          "paint": {
+            "textField": [
+              "get",
+              "Vill_Name"
+            ],
+            "textSize": 11.0,
+            "textColor": "#ffffff",
+            "textHaloColor": "#000000",
+            "textHaloWidth": 2.0,
+            "textAnchor": "bottom",
+            "textOffset": [
+              0,
+              -6
+            ],
+            "textAllowOverlap": false,
+            "textIgnorePlacement": false,
+            "textOpacity": 1.0
+          },
+          "minzoom": 10.0
+        },
+        {
+          "id": "villages",
+          "sourceId": "villages_source",
+          "group": "villages",
+          "kind": "circle",
+          "eager": true,
+          "visible": true,
+          "tappable": true,
+          "paint": {
+            "circleRadius": 4.0,
+            "circleColor": "#FB923C",
+            "circleStrokeColor": "#ffffff",
+            "circleStrokeWidth": 1.0,
+            "circleOpacity": 1.0
+          }
+        },
+        {
+          "id": "weather_stations",
+          "sourceId": "weather_source",
+          "group": "overlays",
+          "kind": "symbol",
+          "eager": false,
+          "visible": false,
+          "tappable": true,
+          "paint": {
+            "iconImage": "geo_weather_station",
+            "iconAsset": "assets/geo_map/icons/weather_station.png",
+            "iconSize": 0.12,
+            "iconOffset": [
+              0,
+              -20
+            ],
+            "iconAllowOverlap": true,
+            "iconIgnorePlacement": true,
+            "iconOpacity": 1.0
+          }
+        },
+        {
+          "id": "hill_peaks",
+          "sourceId": "hill_peaks_source",
+          "group": "overlays",
+          "kind": "symbol",
+          "sourceLayer": "hill_peaks",
+          "minzoom": 4.0,
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "paint": {
+            "iconImage": "geo_peak",
+            "iconAsset": "assets/geo_map/icons/mountain_peak_new.png",
+            "iconSize": 1.28,
+            "iconOffset": [
+              0,
+              -18
+            ],
+            "iconAllowOverlap": true,
+            "iconIgnorePlacement": true
+          }
+        },
+        {
+          "id": "admin_hq",
+          "sourceId": "admin_hq_source",
+          "group": "overlays",
+          "kind": "symbol",
+          "sourceLayer": "admin_hq",
+          "eager": false,
+          "visible": false,
+          "tappable": false,
+          "paint": {
+            "iconImage": "geo_admin_hq",
+            "iconAsset": "assets/geo_map/icons/admin_hq.png",
+            "iconSize": 0.12,
+            "iconOffset": [
+              0,
+              -20
+            ],
+            "iconAllowOverlap": true,
+            "iconIgnorePlacement": true
+          }
+        }
+      ]
+    }
+  },
+  "screens": {
+    "geo_map": {
+      "camera": {
+        "center": [
+          94.1086,
+          25.6751
+        ],
+        "zoom": 7.0,
+        "tilt": 0.0,
+        "bearing": 0.0
+      },
+      "minZoom": 4.0,
+      "maxZoom": 18.0,
+      "features": [
+        "geo_map"
+      ],
+      "groups": []
+    }
+  }
+}

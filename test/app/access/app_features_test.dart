@@ -168,6 +168,7 @@ void main() {
       expect(ids, [
         'support',
         'crops',
+        'geo_map',
         'notices',
         'profile',
         'farm_add_farm',

@@ -16,4 +16,14 @@ abstract final class AssetConstants {
 
   static const loadingAnimation = '$_animations/loading.json';
   static const errorAnimation = '$_animations/error.json';
+
+  static const _geoMap = 'assets/geo_map';
+  static const geoMapStyle = '$_geoMap/style.json';
+  static const geoMapCatalog = '$_geoMap/catalog.v1.json';
+  static const geoMapDistricts = '$_geoMap/files/districts.geojson';
+  static const geoMapMarkerIcon = '$_geoMap/icons/map_marker.png';
+  static const geoMapOfficeIcon = '$_geoMap/icons/office.png';
+  static const geoMapWeatherIcon = '$_geoMap/icons/weather_station.png';
+  static const geoMapAdminIcon = '$_geoMap/icons/admin_hq.png';
+  static const geoMapPeakIcon = '$_geoMap/icons/mountain_peak_new.png';
 }

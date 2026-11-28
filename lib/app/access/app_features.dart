@@ -7,6 +7,7 @@ import 'package:super_flutter/features/dashboard/routes/dashboard_route_names.da
 import 'package:super_flutter/features/facilities/routes/facilities_route_names.dart';
 import 'package:super_flutter/features/farm/routes/farm_route_names.dart';
 import 'package:super_flutter/features/farming_assistant/routes/farming_assistant_route_names.dart';
+import 'package:super_flutter/features/geo_map/routes/geo_map_route_names.dart';
 import 'package:super_flutter/features/meetings/routes/meetings_route_names.dart';
 import 'package:super_flutter/features/schemes/routes/schemes_route_names.dart';
 import 'package:super_flutter/features/shipments/routes/shipments_route_names.dart';
@@ -127,6 +128,13 @@ final appFeatures = FeatureRegistry([
     rule: AccessRule.public(),
     title: _crops,
     icon: PhosphorIconsRegular.plant,
+  ),
+  const AppFeature(
+    id: 'geo_map',
+    path: GeoMapRouteNames.root,
+    rule: AccessRule.public(),
+    title: _geoMap,
+    icon: PhosphorIconsRegular.mapTrifold,
   ),
   const AppFeature(
     id: 'notices',
@@ -280,14 +288,13 @@ String _helpDesk(AppLocalizations l10n) => l10n.helpDesk;
 String _market(AppLocalizations l10n) => l10n.market;
 String _schemes(AppLocalizations l10n) => l10n.schemes;
 String _crops(AppLocalizations l10n) => l10n.crops;
+String _geoMap(AppLocalizations l10n) => l10n.geoMap;
 String _notices(AppLocalizations l10n) => l10n.notices;
 String _manageNotices(AppLocalizations l10n) => l10n.manageNotices;
 String _manageAlerts(AppLocalizations l10n) => l10n.manageAlerts;
 String _profile(AppLocalizations l10n) => l10n.profile;
 
 String _farmAddFarm(AppLocalizations l10n) => l10n.farmAddFarmTitle;
-
-String _farmEditFarm(AppLocalizations l10n) => l10n.farmEditFarmTitle;
 
 String _shipmentsShipmentDetail(AppLocalizations l10n) =>
     l10n.shipmentsShipmentDetailTitle;

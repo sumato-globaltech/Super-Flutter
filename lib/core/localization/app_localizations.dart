@@ -4123,6 +4123,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View'**
   String get pushView;
+
+  /// No description provided for @geoMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Geo Map'**
+  String get geoMap;
 }
 
 class _AppLocalizationsDelegate

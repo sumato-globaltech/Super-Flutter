@@ -70,6 +70,8 @@ dependencies:
   file_picker: ^13.4.1
   image_picker: ^1.2.4
   firebase_core: ^5.2.0
+  map_forge:
+    path: ../map_forge
 
 dev_dependencies:
   flutter_test:
@@ -109,6 +111,10 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/animations/
+    - assets/geo_map/
+    - assets/geo_map/files/
+    - assets/geo_map/icons/
+    - assets/geo_map/crops/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
